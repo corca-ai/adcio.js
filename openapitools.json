@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "6.6.0",
+    "generators": {
+      "controller-v1": {
+        "packageName": "controller",
+        "generatorName": "typescript-axios",
+        "output": "#{cwd}/src/api/controller/v1",
+        "inputSpec": "https://api.adcio.ai/api-json/v1"
+      },
+      "receiver-v1": {
+        "packageName": "receiver",
+        "generatorName": "typescript-axios",
+        "output": "#{cwd}/src/api/receiver/v1",
+        "inputSpec": "https://receiver.adcio.ai/api-json/v1"
+      }
+    }
+  }
+}
