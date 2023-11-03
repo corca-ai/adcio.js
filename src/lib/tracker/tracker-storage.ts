@@ -1,4 +1,4 @@
-import { CartInfo } from "../front-api/api.interface";
+import { CartInfo } from "../client-api/api.interface";
 import { createStorage } from "../storage/storage.factory";
 import { Storage } from "../storage/storage.interface";
 
