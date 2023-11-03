@@ -1,5 +1,5 @@
-import { LocalStorageConfig } from './local.storage';
-import { SessionStorageConfig } from './session.storage';
+import { LocalStorageConfig } from "./local.storage";
+import { SessionStorageConfig } from "./session.storage";
 
 export interface StorageConfig {
   local?: LocalStorageConfig;

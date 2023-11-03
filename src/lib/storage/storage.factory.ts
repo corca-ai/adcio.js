@@ -1,6 +1,6 @@
-import { LocalStorage } from './local.storage';
-import { SessionStorage } from './session.storage';
-import { Storage, StorageConfig } from './storage.interface';
+import { LocalStorage } from "./local.storage";
+import { SessionStorage } from "./session.storage";
+import { Storage, StorageConfig } from "./storage.interface";
 
 export function createStorage(config: StorageConfig): Storage {
   if (config.local) {
@@ -8,6 +8,6 @@ export function createStorage(config: StorageConfig): Storage {
   } else if (config.session) {
     return new SessionStorage(config.session);
   } else {
-    throw new Error('Invalid StorageConfig');
+    throw new Error("Invalid StorageConfig");
   }
 }

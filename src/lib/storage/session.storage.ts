@@ -1,13 +1,12 @@
-import { v4 as uuidv4 } from 'uuid';
-
-import { Storage } from './storage.interface';
+import { v4 as uuidv4 } from "uuid";
+import { Storage } from "./storage.interface";
 
 export interface SessionStorageConfig {
   key: string;
 }
 
 export class SessionStorage implements Storage {
-  private key: string = '';
+  private key: string = "";
 
   constructor(config: SessionStorageConfig) {
     const { key } = config;
@@ -29,9 +28,9 @@ export class SessionStorage implements Storage {
   }
 
   get(): string {
-    if (!sessionStorage) return '';
+    if (!sessionStorage) return "";
     const value = sessionStorage.getItem(this.key);
-    if (!value) return '';
+    if (!value) return "";
 
     return value;
   }

@@ -12,7 +12,7 @@
 // import { TrackerStorage } from "./tracker-storage";
 // import { SessionDto } from "@lib/nest/dto/session.dto";
 
-// import { CartInfo } from "../front-api/api.interface";
+// import { CartInfo } from "../client-api/api.interface";
 
 // type OmitSessionFields<T> = Omit<
 //   T,

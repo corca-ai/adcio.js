@@ -1,13 +1,12 @@
-import { v4 as uuidv4 } from 'uuid';
-
-import { Storage } from './storage.interface';
+import { v4 as uuidv4 } from "uuid";
+import { Storage } from "./storage.interface";
 
 export interface LocalStorageConfig {
   key: string;
 }
 
 export class LocalStorage implements Storage {
-  private key: string = '';
+  private key: string = "";
 
   constructor(config: LocalStorageConfig) {
     const { key } = config;
@@ -29,9 +28,9 @@ export class LocalStorage implements Storage {
   }
 
   get(): string {
-    if (!localStorage) return '';
+    if (!localStorage) return "";
     const value = localStorage.getItem(this.key);
-    if (!value) return '';
+    if (!value) return "";
 
     return value;
   }
