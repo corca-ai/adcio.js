@@ -4,17 +4,17 @@
   "generator-cli": {
     "version": "6.6.0",
     "generators": {
-      "controller-v1": {
+      "controller": {
         "packageName": "controller",
         "generatorName": "typescript-axios",
         "output": "#{cwd}/src/api/controller/v1",
-        "inputSpec": "https://api.adcio.ai/api-json/v1"
+        "inputSpec": "https://api.adcio.ai/api-json"
       },
-      "receiver-v1": {
+      "receiver": {
         "packageName": "receiver",
         "generatorName": "typescript-axios",
         "output": "#{cwd}/src/api/receiver/v1",
-        "inputSpec": "https://receiver.adcio.ai/api-json/v1"
+        "inputSpec": "https://receiver.adcio.ai/api-json"
       }
     }
   }

@@ -30,6 +30,7 @@
   ],
   "scripts": {
     "start:dev": "tsc -w",
+    "gen-api": "openapi-generator-cli generate",
     "build": "tsc",
     "prepare": "yarn build",
     "format": "prettier --write \"src/**/*.ts\"",
