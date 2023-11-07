@@ -10,8 +10,8 @@
     "experimentalDecorators": true,
     "lib": ["es2017", "dom"],
     "outDir": "./dist",
-    "rootDir": "./src",
-    "baseUrl": "./",
+    "rootDir": ".",
+    "baseUrl": "./src",
     "paths": {}
   },
   "include": ["src/**/*.ts"],

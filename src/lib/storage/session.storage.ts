@@ -3,6 +3,7 @@ import { Storage } from "./storage.interface";
 
 export interface SessionStorageConfig {
   key: string;
+  expiration?: number;
 }
 
 export class SessionStorage implements Storage {
