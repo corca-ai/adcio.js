@@ -1,6 +1,11 @@
 import { AdcioMetaTagProps } from "./meta-tag.interface";
 
-// for cafe24
+/**
+ * This class is making for cafe24 client.
+ *
+ * @description
+ * It is used to obtain the productIOn Store of a shopping mall created with cafe24.
+ */
 export class AdcioMetaTag {
   property?: string;
   name?: string;
