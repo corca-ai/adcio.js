@@ -3,11 +3,11 @@ import { EventsApi, PerformanceApi } from "api/receiver/v1";
 import { AdcioCore } from "lib/core";
 import {
   AdcioAnalyticsProps,
-  AdcioOnAddToCartFunction,
-  AdcioOnClickFunction,
-  AdcioOnImpressionFunction,
-  AdcioOnPageViewFunction,
-  AdcioOnPurchaseFunction,
+  AdcioAnalyticsOnPageViewArgs,
+  AdcioAnalyticsOnImpressionArgs,
+  AdcioAnalyticsOnClickArgs,
+  AdcioAnalyticsOnAddToCartArgs,
+  AdcioAnalyticsOnPurchaseArgs,
 } from "./analytics.interface";
 
 export class AdcioAnalytics {
@@ -26,33 +26,33 @@ export class AdcioAnalytics {
     });
   }
 
-  async onPageView(params: AdcioOnPageViewFunction) {
+  async onPageView(params: AdcioAnalyticsOnPageViewArgs) {
     await new EventsApi(this.apiConfig).eventsControllerOnPageView({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });
   }
 
-  async onImpression(params: AdcioOnImpressionFunction) {
+  async onImpression(params: AdcioAnalyticsOnImpressionArgs) {
     await new PerformanceApi(this.apiConfig).performanceControllerOnImpression({
       ...params,
     });
   }
 
-  async onClick(params: AdcioOnClickFunction) {
+  async onClick(params: AdcioAnalyticsOnClickArgs) {
     await new PerformanceApi(this.apiConfig).performanceControllerOnClick({
       ...params,
     });
   }
 
-  async onAddToCart(params: AdcioOnAddToCartFunction) {
+  async onAddToCart(params: AdcioAnalyticsOnAddToCartArgs) {
     await new EventsApi(this.apiConfig).eventsControllerOnAddToCart({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });
   }
 
-  async onPurchase(params: AdcioOnPurchaseFunction) {
+  async onPurchase(params: AdcioAnalyticsOnPurchaseArgs) {
     await new EventsApi(this.apiConfig).eventsControllerOnPurchase({
       ...params,
       ...this.adcioCore.getSessionDto(),

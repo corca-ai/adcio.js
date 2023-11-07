@@ -1,5 +1,6 @@
 import { AdcioMetaTagProps } from "./meta-tag.interface";
 
+// for cafe24
 export class AdcioMetaTag {
   property?: string;
   name?: string;

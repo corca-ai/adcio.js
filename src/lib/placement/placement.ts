@@ -1,7 +1,9 @@
-import { AdcioCreateSuggestionArgs } from "adcio/adcio.interface";
 import { Configuration, SuggestionApi } from "api/controller/v1";
 import { AdcioCore } from "lib/core";
-import { AdcioPlacementArgs } from "./placement.interface";
+import {
+  AdcioPlacementArgs,
+  AdcioPlacementCreateSuggestionArgs,
+} from "./placement.interface";
 
 export class AdcioPlacement {
   private apiConfig: Configuration;
@@ -12,7 +14,7 @@ export class AdcioPlacement {
     this.apiConfig = apiConfig;
   }
 
-  public async createSuggestion(params: AdcioCreateSuggestionArgs) {
+  public async createSuggestion(params: AdcioPlacementCreateSuggestionArgs) {
     const { data } = await new SuggestionApi(
       this.apiConfig,
     ).suggestionControllerSuggest({

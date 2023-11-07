@@ -1,9 +1,11 @@
 import {
-  TrackAddToCartRequestDto,
-  TrackClickRequestDto,
+  AdcioOnAddToCartArgs,
+  AdcioOnClickArgs,
+  AdcioOnPurchaseArgs,
+} from "adcio/adcio.interface";
+import {
   TrackImpressionRequestDto,
   TrackPageViewRequestDto,
-  TrackPurchaseRequestDto,
 } from "api/receiver/v1";
 import { AdcioCore } from "lib/core";
 
@@ -17,19 +19,13 @@ type OmitSessionFields<T> = Omit<
   "storeId" | "sessionId" | "deviceId" | "customerId"
 >;
 
-export type AdcioOnPageViewFunction =
+export type AdcioAnalyticsOnPageViewArgs =
   OmitSessionFields<TrackPageViewRequestDto>;
 
-export type AdcioOnImpressionFunction = TrackImpressionRequestDto;
+export type AdcioAnalyticsOnImpressionArgs = TrackImpressionRequestDto;
 
-export type AdcioOnClickFunction = TrackClickRequestDto;
+export type AdcioAnalyticsOnClickArgs = AdcioOnClickArgs;
 
-export type AdcioOnAddToCartFunction = Omit<
-  OmitSessionFields<TrackAddToCartRequestDto>,
-  "requestId" | "adsetId"
->;
+export type AdcioAnalyticsOnAddToCartArgs = AdcioOnAddToCartArgs;
 
-export type AdcioOnPurchaseFunction = Omit<
-  OmitSessionFields<TrackPurchaseRequestDto>,
-  "requestId" | "adsetId"
->;
+export type AdcioAnalyticsOnPurchaseArgs = AdcioOnPurchaseArgs;

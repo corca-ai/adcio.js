@@ -1,6 +1,5 @@
 import { Configuration, LogOptionsDto } from "api/controller/v1";
 import { AdcioAnalytics } from "lib/analytics/analytics";
-import { CartInfo } from "lib/client-api/api.interface";
 import { AdcioCore } from "lib/core";
 import { AdcioImpressionDetector } from "lib/impression-detector/impression-detector";
 import { AdcioPlacement } from "lib/placement/placement";
@@ -8,6 +7,11 @@ import {
   AdcioConfig,
   AdcioArgs,
   AdcioCreateSuggestionArgs,
+  AdcioOnPageViewArgs,
+  AdcioOnAddToCartArgs,
+  AdcioOnClickArgs,
+  AdcioOnPurchaseArgs,
+  AdcioOnDetectImpressionArgs,
 } from "./adcio.interface";
 
 export class Adcio {
@@ -40,43 +44,34 @@ export class Adcio {
   }
 
   // AdcioAnalytics
-  // public onPageView() {
-  //   this.adcioAnalytics.onPageView({
-  //     path: window.location.pathname,
-  //     title: document.title,
-  //     referrer: document.referrer || undefined,
-  //     productIdOnStore:
-  //       new MetaTag(this.frontApi.metaKeys.productIdOnStore).getContent() ||
-  //       undefined,
-  //   });
-  // }
-
-  public onClick(logOptions: LogOptionsDto) {
-    return this.adcioAnalytics.onClick(logOptions);
-  }
-
-  public onAddToCart(cart: CartInfo) {
-    return this.adcioAnalytics.onAddToCart({
-      cartId: cart.id,
-      productIdOnStore: cart.productIdOnStore,
+  public onPageView(productIdOnStore?: AdcioOnPageViewArgs) {
+    this.adcioAnalytics.onPageView({
+      path: window.location.pathname,
+      title: document.title,
+      referrer: document.referrer || undefined,
+      productIdOnStore,
     });
   }
 
-  // public onPurchase(logOptions) {
-  //   return this.adcioAnalytics.onPurchase(logOptions);
-  // }
+  public onClick(logOptions: AdcioOnClickArgs) {
+    return this.adcioAnalytics.onClick(logOptions);
+  }
+
+  public onAddToCart(args: AdcioOnAddToCartArgs) {
+    return this.adcioAnalytics.onAddToCart(args);
+  }
+
+  public onPurchase(args: AdcioOnPurchaseArgs) {
+    return this.adcioAnalytics.onPurchase(args);
+  }
 
   // AdcioImpressionDetector
-  public onDetectImpression(params: {
-    logOption: LogOptionsDto;
-    selector: string;
-    detector: (element: Element) => boolean;
-  }) {
+  public onDetectImpression(args: AdcioOnDetectImpressionArgs) {
     const onImpression = (logOptions: LogOptionsDto) => {
       this.adcioAnalytics.onImpression(logOptions);
     };
 
-    return new AdcioImpressionDetector(params).detect(onImpression);
+    return new AdcioImpressionDetector(args).detect(onImpression);
   }
 
   // AdcioPlacement
