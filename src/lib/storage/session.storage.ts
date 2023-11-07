@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import { Storage } from "./storage.interface";
 
 export interface SessionStorageConfig {
@@ -22,7 +21,7 @@ export class SessionStorage implements Storage {
   getOrSet(): string {
     let id = this.get();
     if (!id) {
-      id = uuidv4();
+      id = crypto.randomUUID();
       this.set(id);
     }
     return id;
