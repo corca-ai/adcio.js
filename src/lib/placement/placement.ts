@@ -6,12 +6,12 @@ import {
 } from "./placement.interface";
 
 export class AdcioPlacement {
-  private apiConfig: Configuration;
   private adcioCore: AdcioCore;
+  private apiConfig: Configuration;
 
-  constructor({ adcioCore, apiConfig }: AdcioPlacementParams) {
+  constructor({ adcioCore, apiEndpoint }: AdcioPlacementParams) {
     this.adcioCore = adcioCore;
-    this.apiConfig = apiConfig;
+    this.apiConfig = new Configuration({ basePath: apiEndpoint });
   }
 
   public async createSuggestion(params: AdcioPlacementCreateSuggestionParams) {

@@ -1,4 +1,4 @@
-import { Configuration, LogOptionsDto } from "api/controller/v1";
+import { LogOptionsDto } from "api/controller/v1";
 import { AdcioAnalytics } from "lib/analytics/analytics";
 import { AdcioCore } from "lib/core";
 import { AdcioImpressionDetector } from "lib/impression-detector/impression-detector";
@@ -16,7 +16,6 @@ import {
 
 export class Adcio {
   private readonly config: AdcioConfig;
-  private apiConfig: Configuration;
   private adcioCore: AdcioCore;
   private adcioPlacement: AdcioPlacement;
   private adcioAnalytics: AdcioAnalytics;
@@ -27,15 +26,14 @@ export class Adcio {
       receiverEndpoint: "https://receiver.adcio.ai",
       ...config,
     };
-
-    this.apiConfig = new Configuration({ basePath: this.config.apiEndpoint });
     this.adcioCore = new AdcioCore({
       clientId: this.config.clientId,
       customerId: this.config.customerId,
     });
+
     this.adcioPlacement = new AdcioPlacement({
       adcioCore: this.adcioCore,
-      apiConfig: this.apiConfig,
+      apiEndpoint: this.config.apiEndpoint,
     });
     this.adcioAnalytics = new AdcioAnalytics({
       adcioCore: this.adcioCore,

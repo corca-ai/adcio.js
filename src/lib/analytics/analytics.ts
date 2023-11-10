@@ -11,8 +11,8 @@ import {
 } from "./analytics.interface";
 
 export class AdcioAnalytics {
-  private apiConfig: Configuration;
   private adcioCore: AdcioCore;
+  private apiConfig: Configuration;
 
   constructor(params: AdcioAnalyticsParams) {
     this.adcioCore = params.adcioCore;
