@@ -7,7 +7,7 @@ import {
 } from "api/dto/session.dto";
 import { createStorage } from "lib/storage/storage.factory";
 import { Storage } from "lib/storage/storage.interface";
-import { AdcioCoreProps } from "./core.interface";
+import { AdcioCoreParams } from "./core.interface";
 
 export class AdcioCore {
   private clientId: string;
@@ -15,7 +15,7 @@ export class AdcioCore {
   private deviceId: string;
   private customerId: string;
 
-  constructor({ clientId, customerId }: AdcioCoreProps) {
+  constructor({ clientId, customerId }: AdcioCoreParams) {
     this.sessionStorage = createStorage({
       session: {
         key: `adcio-session-${clientId}`,

@@ -2,22 +2,22 @@ import { Configuration } from "api/controller/v1";
 import { EventsApi, PerformanceApi } from "api/receiver/v1";
 import { AdcioCore } from "lib/core";
 import {
-  AdcioAnalyticsProps,
-  AdcioAnalyticsOnPageViewArgs,
-  AdcioAnalyticsOnImpressionArgs,
-  AdcioAnalyticsOnClickArgs,
-  AdcioAnalyticsOnAddToCartArgs,
-  AdcioAnalyticsOnPurchaseArgs,
+  AdcioAnalyticsParams,
+  AdcioAnalyticsOnPageViewParams,
+  AdcioAnalyticsOnImpressionParams,
+  AdcioAnalyticsOnClickParams,
+  AdcioAnalyticsOnAddToCartParams,
+  AdcioAnalyticsOnPurchaseParams,
 } from "./analytics.interface";
 
 export class AdcioAnalytics {
   private apiConfig: Configuration;
   private adcioCore: AdcioCore;
 
-  constructor(config: AdcioAnalyticsProps) {
-    this.adcioCore = config.adcioCore;
+  constructor(params: AdcioAnalyticsParams) {
+    this.adcioCore = params.adcioCore;
     this.apiConfig = new Configuration({
-      basePath: config.receiverEndpoint,
+      basePath: params.receiverEndpoint,
       baseOptions: {
         headers: {
           Authorization: "",
@@ -26,33 +26,33 @@ export class AdcioAnalytics {
     });
   }
 
-  async onPageView(params: AdcioAnalyticsOnPageViewArgs) {
+  async onPageView(params: AdcioAnalyticsOnPageViewParams) {
     await new EventsApi(this.apiConfig).eventsControllerOnPageView({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });
   }
 
-  async onImpression(params: AdcioAnalyticsOnImpressionArgs) {
+  async onImpression(params: AdcioAnalyticsOnImpressionParams) {
     await new PerformanceApi(this.apiConfig).performanceControllerOnImpression({
       ...params,
     });
   }
 
-  async onClick(params: AdcioAnalyticsOnClickArgs) {
+  async onClick(params: AdcioAnalyticsOnClickParams) {
     await new PerformanceApi(this.apiConfig).performanceControllerOnClick({
       ...params,
     });
   }
 
-  async onAddToCart(params: AdcioAnalyticsOnAddToCartArgs) {
+  async onAddToCart(params: AdcioAnalyticsOnAddToCartParams) {
     await new EventsApi(this.apiConfig).eventsControllerOnAddToCart({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });
   }
 
-  async onPurchase(params: AdcioAnalyticsOnPurchaseArgs) {
+  async onPurchase(params: AdcioAnalyticsOnPurchaseParams) {
     await new EventsApi(this.apiConfig).eventsControllerOnPurchase({
       ...params,
       ...this.adcioCore.getSessionDto(),

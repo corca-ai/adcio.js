@@ -1,9 +1,9 @@
 export { AdcioAnalytics } from "./analytics";
 export {
-  AdcioAnalyticsProps,
-  AdcioAnalyticsOnPageViewArgs,
-  AdcioAnalyticsOnImpressionArgs,
-  AdcioAnalyticsOnClickArgs,
-  AdcioAnalyticsOnAddToCartArgs,
-  AdcioAnalyticsOnPurchaseArgs,
+  AdcioAnalyticsParams,
+  AdcioAnalyticsOnPageViewParams,
+  AdcioAnalyticsOnImpressionParams,
+  AdcioAnalyticsOnClickParams,
+  AdcioAnalyticsOnAddToCartParams,
+  AdcioAnalyticsOnPurchaseParams,
 } from "./analytics.interface";

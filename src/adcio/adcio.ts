@@ -5,13 +5,13 @@ import { AdcioImpressionDetector } from "lib/impression-detector/impression-dete
 import { AdcioPlacement } from "lib/placement/placement";
 import {
   AdcioConfig,
-  AdcioArgs,
-  AdcioCreateSuggestionArgs,
-  AdcioOnPageViewArgs,
-  AdcioOnAddToCartArgs,
-  AdcioOnClickArgs,
-  AdcioOnPurchaseArgs,
-  AdcioOnDetectImpressionArgs,
+  AdcioParams,
+  AdcioCreateSuggestionParams,
+  AdcioOnPageViewParams,
+  AdcioOnAddToCartParams,
+  AdcioOnClickParams,
+  AdcioOnPurchaseParams,
+  AdcioOnDetectImpressionParams,
 } from "./adcio.interface";
 
 export class Adcio {
@@ -21,7 +21,7 @@ export class Adcio {
   private adcioPlacement: AdcioPlacement;
   private adcioAnalytics: AdcioAnalytics;
 
-  constructor(config: AdcioArgs) {
+  constructor(config: AdcioParams) {
     this.config = {
       apiEndpoint: "https://api.adcio.ai",
       receiverEndpoint: "https://receiver.adcio.ai",
@@ -44,7 +44,7 @@ export class Adcio {
   }
 
   // AdcioAnalytics
-  public onPageView(productIdOnStore?: AdcioOnPageViewArgs) {
+  public onPageView(productIdOnStore?: AdcioOnPageViewParams) {
     this.adcioAnalytics.onPageView({
       path: window.location.pathname,
       title: document.title,
@@ -53,29 +53,29 @@ export class Adcio {
     });
   }
 
-  public onClick(logOptions: AdcioOnClickArgs) {
+  public onClick(logOptions: AdcioOnClickParams) {
     return this.adcioAnalytics.onClick(logOptions);
   }
 
-  public onAddToCart(args: AdcioOnAddToCartArgs) {
-    return this.adcioAnalytics.onAddToCart(args);
+  public onAddToCart(params: AdcioOnAddToCartParams) {
+    return this.adcioAnalytics.onAddToCart(params);
   }
 
-  public onPurchase(args: AdcioOnPurchaseArgs) {
-    return this.adcioAnalytics.onPurchase(args);
+  public onPurchase(params: AdcioOnPurchaseParams) {
+    return this.adcioAnalytics.onPurchase(params);
   }
 
   // AdcioImpressionDetector
-  public onDetectImpression(args: AdcioOnDetectImpressionArgs) {
+  public onDetectImpression(params: AdcioOnDetectImpressionParams) {
     const onImpression = (logOptions: LogOptionsDto) => {
       this.adcioAnalytics.onImpression(logOptions);
     };
 
-    return new AdcioImpressionDetector(args).detect(onImpression);
+    return new AdcioImpressionDetector(params).detect(onImpression);
   }
 
   // AdcioPlacement
-  public async createSuggestion(params: AdcioCreateSuggestionArgs) {
+  public async createSuggestion(params: AdcioCreateSuggestionParams) {
     return this.adcioPlacement.createSuggestion(params);
   }
 }

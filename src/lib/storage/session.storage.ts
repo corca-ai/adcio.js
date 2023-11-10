@@ -1,14 +1,9 @@
-import { Storage } from "./storage.interface";
-
-export interface SessionStorageConfig {
-  key: string;
-  expiration?: number;
-}
+import { SessionStorageParams, Storage } from "./storage.interface";
 
 export class SessionStorage implements Storage {
   private key: string = "";
 
-  constructor(config: SessionStorageConfig) {
+  constructor(config: SessionStorageParams) {
     const { key } = config;
     this.key = key;
   }

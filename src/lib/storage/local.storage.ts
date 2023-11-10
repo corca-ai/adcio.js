@@ -1,13 +1,9 @@
-import { Storage } from "./storage.interface";
-
-export interface LocalStorageConfig {
-  key: string;
-}
+import { LocalStorageParams, Storage } from "./storage.interface";
 
 export class LocalStorage implements Storage {
   private key: string = "";
 
-  constructor(config: LocalStorageConfig) {
+  constructor(config: LocalStorageParams) {
     const { key } = config;
     this.key = key;
   }

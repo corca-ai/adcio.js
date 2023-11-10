@@ -1,7 +1,7 @@
 import {
-  AdcioOnAddToCartArgs,
-  AdcioOnClickArgs,
-  AdcioOnPurchaseArgs,
+  AdcioOnAddToCartParams,
+  AdcioOnClickParams,
+  AdcioOnPurchaseParams,
 } from "adcio/adcio.interface";
 import {
   TrackImpressionRequestDto,
@@ -9,7 +9,7 @@ import {
 } from "api/receiver/v1";
 import { AdcioCore } from "lib/core";
 
-export interface AdcioAnalyticsProps {
+export interface AdcioAnalyticsParams {
   adcioCore: AdcioCore;
   receiverEndpoint: string;
 }
@@ -19,13 +19,13 @@ type OmitSessionFields<T> = Omit<
   "storeId" | "sessionId" | "deviceId" | "customerId"
 >;
 
-export type AdcioAnalyticsOnPageViewArgs =
+export type AdcioAnalyticsOnPageViewParams =
   OmitSessionFields<TrackPageViewRequestDto>;
 
-export type AdcioAnalyticsOnImpressionArgs = TrackImpressionRequestDto;
+export type AdcioAnalyticsOnImpressionParams = TrackImpressionRequestDto;
 
-export type AdcioAnalyticsOnClickArgs = AdcioOnClickArgs;
+export type AdcioAnalyticsOnClickParams = AdcioOnClickParams;
 
-export type AdcioAnalyticsOnAddToCartArgs = AdcioOnAddToCartArgs;
+export type AdcioAnalyticsOnAddToCartParams = AdcioOnAddToCartParams;
 
-export type AdcioAnalyticsOnPurchaseArgs = AdcioOnPurchaseArgs;
+export type AdcioAnalyticsOnPurchaseParams = AdcioOnPurchaseParams;

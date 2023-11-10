@@ -1,2 +1,2 @@
 export { AdcioCore } from "./core";
-export { AdcioCoreProps } from "./core.interface";
+export { AdcioCoreParams } from "./core.interface";

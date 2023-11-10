@@ -5,12 +5,12 @@ import {
   TrackPurchaseRequestDto,
 } from "api/receiver/v1";
 
-export interface AdcioArgs {
+export interface AdcioParams {
   clientId: string;
   customerId: string;
 }
 
-export interface AdcioConfig extends AdcioArgs {
+export interface AdcioConfig extends AdcioParams {
   apiEndpoint: string;
   receiverEndpoint: string;
 }
@@ -20,27 +20,27 @@ type OmitSessionFields<T> = Omit<
   "storeId" | "sessionId" | "deviceId" | "customerId"
 >;
 
-export type AdcioOnPageViewArgs = string;
+export type AdcioOnPageViewParams = string;
 
-export type AdcioOnClickArgs = TrackClickRequestDto;
+export type AdcioOnClickParams = TrackClickRequestDto;
 
-export type AdcioOnAddToCartArgs = Omit<
+export type AdcioOnAddToCartParams = Omit<
   OmitSessionFields<TrackAddToCartRequestDto>,
   "requestId" | "adsetId"
 >;
 
-export type AdcioOnPurchaseArgs = Omit<
+export type AdcioOnPurchaseParams = Omit<
   OmitSessionFields<TrackPurchaseRequestDto>,
   "requestId" | "adsetId"
 >;
 
-export type AdcioOnDetectImpressionArgs = {
+export type AdcioOnDetectImpressionParams = {
   logOption: LogOptionsDto;
   selector: string;
   detector: (element: Element) => boolean;
 };
 
-export type AdcioCreateSuggestionArgs = Pick<
+export type AdcioCreateSuggestionParams = Pick<
   SuggestionRequestDto,
   | "placementId"
   | "placementPositionX"

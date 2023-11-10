@@ -1,8 +1,8 @@
 import { LogOptionsDto } from "api/controller/v1";
 import { AdcioObserver } from "lib/observer";
 import {
-  AdcioImpressionDetectorArgs,
-  AdcioImpressionDetectorDetectArgs,
+  AdcioImpressionDetectorParams,
+  AdcioImpressionDetectorDetectParams,
 } from "./impression-detector.interface";
 
 export class AdcioImpressionDetector {
@@ -11,7 +11,11 @@ export class AdcioImpressionDetector {
   private selector: string;
   private detector?: (element: Element) => boolean;
 
-  constructor({ logOption, selector, detector }: AdcioImpressionDetectorArgs) {
+  constructor({
+    logOption,
+    selector,
+    detector,
+  }: AdcioImpressionDetectorParams) {
     this.logOption = logOption;
     this.selector = selector;
 
@@ -20,7 +24,7 @@ export class AdcioImpressionDetector {
     }
   }
 
-  public async detect(onImpression: AdcioImpressionDetectorDetectArgs) {
+  public async detect(onImpression: AdcioImpressionDetectorDetectParams) {
     await AdcioObserver.readyDOM();
 
     const element = document.querySelector(this.selector);

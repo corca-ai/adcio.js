@@ -1,11 +1,11 @@
 export { Adcio } from "./adcio";
 export {
-  AdcioArgs,
+  AdcioParams,
   AdcioConfig,
-  AdcioOnPageViewArgs,
-  AdcioOnClickArgs,
-  AdcioOnAddToCartArgs,
-  AdcioOnPurchaseArgs,
-  AdcioOnDetectImpressionArgs,
-  AdcioCreateSuggestionArgs,
+  AdcioOnPageViewParams,
+  AdcioOnClickParams,
+  AdcioOnAddToCartParams,
+  AdcioOnPurchaseParams,
+  AdcioOnDetectImpressionParams,
+  AdcioCreateSuggestionParams,
 } from "./adcio.interface";

@@ -1,10 +1,10 @@
-import { AdcioCreateSuggestionArgs } from "adcio/adcio.interface";
+import { AdcioCreateSuggestionParams } from "adcio/adcio.interface";
 import { Configuration } from "api/controller/v1";
 import { AdcioCore } from "lib/core";
 
-export type AdcioPlacementArgs = {
+export type AdcioPlacementParams = {
   adcioCore: AdcioCore;
   apiConfig: Configuration;
 };
 
-export type AdcioPlacementCreateSuggestionArgs = AdcioCreateSuggestionArgs;
+export type AdcioPlacementCreateSuggestionParams = AdcioCreateSuggestionParams;

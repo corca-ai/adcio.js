@@ -1,4 +1,4 @@
-export interface AdcioMetaTagProps {
+export interface AdcioMetaTagParams {
   property?: string;
   name?: string;
 }

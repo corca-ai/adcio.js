@@ -1,4 +1,4 @@
-import { AdcioMetaTagProps } from "./meta-tag.interface";
+import { AdcioMetaTagParams } from "./meta-tag.interface";
 
 /**
  * This class is making for cafe24 client.
@@ -10,7 +10,7 @@ export class AdcioMetaTag {
   property?: string;
   name?: string;
 
-  constructor({ property, name }: AdcioMetaTagProps) {
+  constructor({ property, name }: AdcioMetaTagParams) {
     this.property = property;
     this.name = name;
   }

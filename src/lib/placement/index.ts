@@ -1,5 +1,5 @@
 export { AdcioPlacement } from "./placement";
 export {
-  AdcioPlacementArgs,
-  AdcioPlacementCreateSuggestionArgs,
+  AdcioPlacementParams,
+  AdcioPlacementCreateSuggestionParams,
 } from "./placement.interface";

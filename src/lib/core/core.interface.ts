@@ -1,4 +1,4 @@
-export type AdcioCoreProps = {
+export type AdcioCoreParams = {
   clientId: string;
   customerId: string;
 };

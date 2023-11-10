@@ -1,5 +1,5 @@
 export { AdcioImpressionDetector } from "./impression-detector";
 export {
-  AdcioImpressionDetectorArgs,
-  AdcioImpressionDetectorDetectArgs,
+  AdcioImpressionDetectorParams,
+  AdcioImpressionDetectorDetectParams,
 } from "./impression-detector.interface";
