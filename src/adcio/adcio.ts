@@ -28,7 +28,7 @@ export class Adcio {
     };
     this.adcioCore = new AdcioCore({
       clientId: this.config.clientId,
-      customerId: this.config.customerId,
+      customerId: this.config.customerId || "",
     });
 
     this.adcioPlacement = new AdcioPlacement({

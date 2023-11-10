@@ -1,4 +1,6 @@
+import { CustomerId, StoreId } from "api/dto/session.dto";
+
 export type AdcioCoreParams = {
-  clientId: string;
-  customerId: string;
+  clientId: StoreId;
+  customerId: CustomerId;
 };

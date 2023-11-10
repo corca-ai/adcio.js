@@ -1,4 +1,5 @@
 import { LogOptionsDto, SuggestionRequestDto } from "api/controller/v1";
+import { CustomerId, StoreId } from "api/dto/session.dto";
 import {
   TrackAddToCartRequestDto,
   TrackClickRequestDto,
@@ -6,8 +7,8 @@ import {
 } from "api/receiver/v1";
 
 export interface AdcioParams {
-  clientId: string;
-  customerId: string;
+  clientId: StoreId;
+  customerId?: CustomerId;
 }
 
 export interface AdcioConfig extends AdcioParams {
