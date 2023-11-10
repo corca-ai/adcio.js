@@ -70,6 +70,5 @@
       "gaxios": "gaxios",
       "src/(.*)": "<rootDir>/src/$1"
     }
-  },
-  "dependencies": {}
+  }
 }
