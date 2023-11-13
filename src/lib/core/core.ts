@@ -13,7 +13,7 @@ export class AdcioCore {
   private clientId: StoreId;
   private sessionStorage: Storage;
   private deviceId: DeviceId;
-  private customerId: CustomerId;
+  private customerId: CustomerId | undefined;
 
   constructor({ clientId, customerId }: AdcioCoreParams) {
     this.sessionStorage = createStorage({
@@ -57,7 +57,7 @@ export class AdcioCore {
     return this.deviceId;
   }
 
-  public getCustomerId(): CustomerId {
+  public getCustomerId(): CustomerId | undefined {
     return this.customerId;
   }
 }
