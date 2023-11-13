@@ -10,10 +10,10 @@ import { Storage } from "lib/storage/storage.interface";
 import { AdcioCoreParams } from "./core.interface";
 
 export class AdcioCore {
-  private clientId: string;
+  private clientId: StoreId;
   private sessionStorage: Storage;
-  private deviceId: string;
-  private customerId: string;
+  private deviceId: DeviceId;
+  private customerId?: CustomerId;
 
   constructor({ clientId, customerId }: AdcioCoreParams) {
     this.sessionStorage = createStorage({
@@ -41,6 +41,10 @@ export class AdcioCore {
     };
   }
 
+  public getClientId(): StoreId {
+    return this.clientId;
+  }
+
   public getSessionId(): SessionId {
     return this.sessionStorage.get();
   }
@@ -53,7 +57,7 @@ export class AdcioCore {
     return this.deviceId;
   }
 
-  public getCustomerId(): CustomerId {
+  public getCustomerId(): CustomerId | undefined {
     return this.customerId;
   }
 }
