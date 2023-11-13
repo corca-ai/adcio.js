@@ -398,6 +398,30 @@ export interface Client {
      * @type {string}
      * @memberof Client
      */
+    'paymentCardId': string | null;
+    /**
+     * 
+     * @type {Store}
+     * @memberof Client
+     */
+    'store'?: Store | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Client
+     */
+    'storeId': string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Client
+     */
+    'isSeller': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Client
+     */
     'createdAt': string;
 }
 
@@ -861,6 +885,12 @@ export interface FetchManyBannersResponseDto {
     'creatives': Array<Creative>;
     /**
      * 
+     * @type {Array<Placement>}
+     * @memberof FetchManyBannersResponseDto
+     */
+    'placements': Array<Placement>;
+    /**
+     * 
      * @type {string}
      * @memberof FetchManyBannersResponseDto
      */
@@ -996,10 +1026,34 @@ export interface FetchManyPlacementsResponseDto {
     'suggestionType': FetchManyPlacementsResponseDtoSuggestionTypeEnum;
     /**
      * 
+     * @type {string}
+     * @memberof FetchManyPlacementsResponseDto
+     */
+    'supportEnvironment': FetchManyPlacementsResponseDtoSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyPlacementsResponseDto
+     */
+    'developEnvironment': FetchManyPlacementsResponseDtoDevelopEnvironmentEnum;
+    /**
+     * 
      * @type {number}
      * @memberof FetchManyPlacementsResponseDto
      */
-    'displayCount': number;
+    'displayCount': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchManyPlacementsResponseDto
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchManyPlacementsResponseDto
+     */
+    'maxDisplayCount': number;
     /**
      * 
      * @type {boolean}
@@ -1086,6 +1140,20 @@ export const FetchManyPlacementsResponseDtoSuggestionTypeEnum = {
 } as const;
 
 export type FetchManyPlacementsResponseDtoSuggestionTypeEnum = typeof FetchManyPlacementsResponseDtoSuggestionTypeEnum[keyof typeof FetchManyPlacementsResponseDtoSuggestionTypeEnum];
+export const FetchManyPlacementsResponseDtoSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
+} as const;
+
+export type FetchManyPlacementsResponseDtoSupportEnvironmentEnum = typeof FetchManyPlacementsResponseDtoSupportEnvironmentEnum[keyof typeof FetchManyPlacementsResponseDtoSupportEnvironmentEnum];
+export const FetchManyPlacementsResponseDtoDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
+
+export type FetchManyPlacementsResponseDtoDevelopEnvironmentEnum = typeof FetchManyPlacementsResponseDtoDevelopEnvironmentEnum[keyof typeof FetchManyPlacementsResponseDtoDevelopEnvironmentEnum];
 export const FetchManyPlacementsResponseDtoPropertyEnum = {
     New: 'NEW',
     Hot: 'HOT',
@@ -1455,10 +1523,34 @@ export interface Placement {
     'suggestionType': PlacementSuggestionTypeEnum;
     /**
      * 
+     * @type {string}
+     * @memberof Placement
+     */
+    'supportEnvironment': PlacementSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Placement
+     */
+    'developEnvironment': PlacementDevelopEnvironmentEnum;
+    /**
+     * 
      * @type {number}
      * @memberof Placement
      */
-    'displayCount': number;
+    'displayCount': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Placement
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Placement
+     */
+    'maxDisplayCount': number;
     /**
      * 
      * @type {boolean}
@@ -1545,6 +1637,20 @@ export const PlacementSuggestionTypeEnum = {
 } as const;
 
 export type PlacementSuggestionTypeEnum = typeof PlacementSuggestionTypeEnum[keyof typeof PlacementSuggestionTypeEnum];
+export const PlacementSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
+} as const;
+
+export type PlacementSupportEnvironmentEnum = typeof PlacementSupportEnvironmentEnum[keyof typeof PlacementSupportEnvironmentEnum];
+export const PlacementDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
+
+export type PlacementDevelopEnvironmentEnum = typeof PlacementDevelopEnvironmentEnum[keyof typeof PlacementDevelopEnvironmentEnum];
 export const PlacementPropertyEnum = {
     New: 'NEW',
     Hot: 'HOT',
@@ -1772,6 +1878,57 @@ export type RetrieverMatcherEnum = typeof RetrieverMatcherEnum[keyof typeof Retr
 /**
  * 
  * @export
+ * @interface Store
+ */
+export interface Store {
+    /**
+     * 
+     * @type {string}
+     * @memberof Store
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Store
+     */
+    'type': StoreTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Store
+     */
+    'solutionType': StoreSolutionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Store
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Store
+     */
+    'deletedAt': string | null;
+}
+
+export const StoreTypeEnum = {
+    Platform: 'PLATFORM',
+    InHouse: 'IN_HOUSE'
+} as const;
+
+export type StoreTypeEnum = typeof StoreTypeEnum[keyof typeof StoreTypeEnum];
+export const StoreSolutionTypeEnum = {
+    SelfDeveloped: 'SELF_DEVELOPED',
+    Cafe24: 'CAFE24'
+} as const;
+
+export type StoreSolutionTypeEnum = typeof StoreSolutionTypeEnum[keyof typeof StoreSolutionTypeEnum];
+
+/**
+ * 
+ * @export
  * @interface SuggestionDto
  */
 export interface SuggestionDto {
@@ -1934,10 +2091,34 @@ export interface SuggestionResponsePlacementType {
     'suggestionType': SuggestionResponsePlacementTypeSuggestionTypeEnum;
     /**
      * 
+     * @type {string}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'supportEnvironment': SuggestionResponsePlacementTypeSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'developEnvironment': SuggestionResponsePlacementTypeDevelopEnvironmentEnum;
+    /**
+     * 
      * @type {number}
      * @memberof SuggestionResponsePlacementType
      */
-    'displayCount': number;
+    'displayCount': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'maxDisplayCount': number;
     /**
      * 
      * @type {boolean}
@@ -2030,6 +2211,20 @@ export const SuggestionResponsePlacementTypeSuggestionTypeEnum = {
 } as const;
 
 export type SuggestionResponsePlacementTypeSuggestionTypeEnum = typeof SuggestionResponsePlacementTypeSuggestionTypeEnum[keyof typeof SuggestionResponsePlacementTypeSuggestionTypeEnum];
+export const SuggestionResponsePlacementTypeSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
+} as const;
+
+export type SuggestionResponsePlacementTypeSupportEnvironmentEnum = typeof SuggestionResponsePlacementTypeSupportEnvironmentEnum[keyof typeof SuggestionResponsePlacementTypeSupportEnvironmentEnum];
+export const SuggestionResponsePlacementTypeDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
+
+export type SuggestionResponsePlacementTypeDevelopEnvironmentEnum = typeof SuggestionResponsePlacementTypeDevelopEnvironmentEnum[keyof typeof SuggestionResponsePlacementTypeDevelopEnvironmentEnum];
 export const SuggestionResponsePlacementTypePropertyEnum = {
     New: 'NEW',
     Hot: 'HOT',
