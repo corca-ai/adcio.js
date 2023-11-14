@@ -1,4 +1,4 @@
-import { AdcioCreateSuggestionParams } from "adcio/adcio.interface";
+import { SuggestionRequestDto } from "api/controller/v1";
 import { AdcioCore } from "lib/core";
 
 export type AdcioPlacementParams = {
@@ -6,4 +6,12 @@ export type AdcioPlacementParams = {
   apiEndpoint: string;
 };
 
-export type AdcioPlacementCreateSuggestionParams = AdcioCreateSuggestionParams;
+export type AdcioPlacementCreateSuggestionParams = Pick<
+  SuggestionRequestDto,
+  | "placementId"
+  | "placementPositionX"
+  | "placementPositionY"
+  | "age"
+  | "gender"
+  | "area"
+>;
