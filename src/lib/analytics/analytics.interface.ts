@@ -22,9 +22,10 @@ type OmitSessionFields<T> = Omit<
 export type AdcioAnalyticsOnPageViewParams =
   OmitSessionFields<TrackPageViewRequestDto>;
 
-export type AdcioAnalyticsOnImpressionParams = TrackImpressionRequestDto;
+export type AdcioAnalyticsOnImpressionParams =
+  OmitSessionFields<TrackImpressionRequestDto>;
 
-export type AdcioAnalyticsOnClickParams = AdcioOnClickParams;
+export type AdcioAnalyticsOnClickParams = OmitSessionFields<AdcioOnClickParams>;
 
 export type AdcioAnalyticsOnAddToCartParams = AdcioOnAddToCartParams;
 
