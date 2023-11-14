@@ -7,7 +7,6 @@
   "license": "Apache-2.0",
   "private": false,
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^2.7.0",
     "@types/jest": "^29.5.7",
     "@types/node": "^20.8.10",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
@@ -70,5 +69,8 @@
       "gaxios": "gaxios",
       "src/(.*)": "<rootDir>/src/$1"
     }
+  },
+  "dependencies": {
+    "axios": "^1.6.1"
   }
 }
