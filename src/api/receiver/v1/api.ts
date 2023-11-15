@@ -98,6 +98,30 @@ export interface TrackAddToCartRequestDto {
  */
 export interface TrackClickRequestDto {
     /**
+     * The session starts when the customer visits the store. It persists until the customer closes the tab, browser or app.
+     * @type {string}
+     * @memberof TrackClickRequestDto
+     */
+    'sessionId': string;
+    /**
+     * The device identifier should be unique for each device. A customer can have multiple devices.
+     * @type {string}
+     * @memberof TrackClickRequestDto
+     */
+    'deviceId': string;
+    /**
+     * The customer identifier which is generated and managed by the store. The store should configure `frontApi` parameter of ADCIO SDK so that the `customerId` can be sent to ADCIO API.
+     * @type {string}
+     * @memberof TrackClickRequestDto
+     */
+    'customerId'?: string;
+    /**
+     * ADCIO Client ID
+     * @type {string}
+     * @memberof TrackClickRequestDto
+     */
+    'storeId': string;
+    /**
      * Identifier for the suggestion request
      * @type {string}
      * @memberof TrackClickRequestDto
@@ -116,6 +140,30 @@ export interface TrackClickRequestDto {
  * @interface TrackImpressionRequestDto
  */
 export interface TrackImpressionRequestDto {
+    /**
+     * The session starts when the customer visits the store. It persists until the customer closes the tab, browser or app.
+     * @type {string}
+     * @memberof TrackImpressionRequestDto
+     */
+    'sessionId': string;
+    /**
+     * The device identifier should be unique for each device. A customer can have multiple devices.
+     * @type {string}
+     * @memberof TrackImpressionRequestDto
+     */
+    'deviceId': string;
+    /**
+     * The customer identifier which is generated and managed by the store. The store should configure `frontApi` parameter of ADCIO SDK so that the `customerId` can be sent to ADCIO API.
+     * @type {string}
+     * @memberof TrackImpressionRequestDto
+     */
+    'customerId'?: string;
+    /**
+     * ADCIO Client ID
+     * @type {string}
+     * @memberof TrackImpressionRequestDto
+     */
+    'storeId': string;
     /**
      * Identifier for the suggestion request
      * @type {string}

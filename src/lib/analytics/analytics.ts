@@ -36,12 +36,14 @@ export class AdcioAnalytics {
   async onImpression(params: AdcioAnalyticsOnImpressionParams) {
     await new PerformanceApi(this.apiConfig).performanceControllerOnImpression({
       ...params,
+      ...this.adcioCore.getSessionDto(),
     });
   }
 
   async onClick(params: AdcioAnalyticsOnClickParams) {
     await new PerformanceApi(this.apiConfig).performanceControllerOnClick({
       ...params,
+      ...this.adcioCore.getSessionDto(),
     });
   }
 
