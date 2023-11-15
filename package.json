@@ -21,6 +21,7 @@
     "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.4",
     "tsconfig-paths": "^4.2.0",
+    "tscpaths": "^0.0.9",
     "typescript": "^5.2.2"
   },
   "files": [
@@ -30,7 +31,7 @@
   "scripts": {
     "start:dev": "tsc -w",
     "gen-api": "openapi-generator-cli generate",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist/src",
     "prepare": "yarn build",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"{src,test,__tests__}/**/*.ts\" --fix",

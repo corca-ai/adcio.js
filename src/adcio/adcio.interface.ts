@@ -1,10 +1,12 @@
-import { LogOptionsDto, SuggestionRequestDto } from "api/controller/v1";
+import { LogOptionsDto } from "api/controller/v1";
 import { CustomerId, StoreId } from "api/dto/session.dto";
 import {
-  TrackAddToCartRequestDto,
-  TrackClickRequestDto,
-  TrackPurchaseRequestDto,
-} from "api/receiver/v1";
+  AdcioAnalyticsOnPageViewParams,
+  AdcioAnalyticsOnAddToCartParams,
+  AdcioAnalyticsOnClickParams,
+  AdcioAnalyticsOnPurchaseParams,
+} from "lib/analytics";
+import { AdcioPlacementCreateSuggestionParams } from "lib/placement";
 
 export interface AdcioParams {
   clientId: StoreId;
@@ -16,24 +18,16 @@ export interface AdcioConfig extends AdcioParams {
   receiverEndpoint: string;
 }
 
-type OmitSessionFields<T> = Omit<
-  T,
-  "storeId" | "sessionId" | "deviceId" | "customerId"
+export type AdcioOnPageViewParams = Pick<
+  AdcioAnalyticsOnPageViewParams,
+  "productIdOnStore"
 >;
 
-export type AdcioOnPageViewParams = string;
+export type AdcioOnClickParams = AdcioAnalyticsOnClickParams;
 
-export type AdcioOnClickParams = TrackClickRequestDto;
+export type AdcioOnAddToCartParams = AdcioAnalyticsOnAddToCartParams;
 
-export type AdcioOnAddToCartParams = Omit<
-  OmitSessionFields<TrackAddToCartRequestDto>,
-  "requestId" | "adsetId"
->;
-
-export type AdcioOnPurchaseParams = Omit<
-  OmitSessionFields<TrackPurchaseRequestDto>,
-  "requestId" | "adsetId"
->;
+export type AdcioOnPurchaseParams = AdcioAnalyticsOnPurchaseParams;
 
 export type AdcioOnDetectImpressionParams = {
   logOption: LogOptionsDto;
@@ -41,12 +35,4 @@ export type AdcioOnDetectImpressionParams = {
   detector: (element: Element) => boolean;
 };
 
-export type AdcioCreateSuggestionParams = Pick<
-  SuggestionRequestDto,
-  | "placementId"
-  | "placementPositionX"
-  | "placementPositionY"
-  | "age"
-  | "gender"
-  | "area"
->;
+export type AdcioCreateSuggestionParams = AdcioPlacementCreateSuggestionParams;

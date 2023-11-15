@@ -12,7 +12,10 @@
     "outDir": "./dist",
     "rootDir": ".",
     "baseUrl": "./src",
-    "paths": {}
+    "paths": {
+      "api/*": ["api/*"],
+      "lib/*": ["lib/*"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
