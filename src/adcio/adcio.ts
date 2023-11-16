@@ -12,6 +12,7 @@ import {
   AdcioOnClickParams,
   AdcioOnPurchaseParams,
   AdcioOnDetectImpressionParams,
+  AdcioOnImpressionParams,
 } from "./adcio.interface";
 
 export class Adcio {
@@ -49,6 +50,10 @@ export class Adcio {
       referrer: document.referrer || undefined,
       ...params,
     });
+  }
+
+  public onImpression(logOptions: AdcioOnImpressionParams) {
+    return this.adcioAnalytics.onImpression(logOptions);
   }
 
   public onClick(logOptions: AdcioOnClickParams) {

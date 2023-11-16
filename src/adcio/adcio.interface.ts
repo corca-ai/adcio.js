@@ -5,6 +5,7 @@ import {
   AdcioAnalyticsOnAddToCartParams,
   AdcioAnalyticsOnClickParams,
   AdcioAnalyticsOnPurchaseParams,
+  AdcioAnalyticsOnImpressionParams,
 } from "lib/analytics";
 import { AdcioPlacementCreateSuggestionParams } from "lib/placement";
 
@@ -22,6 +23,8 @@ export type AdcioOnPageViewParams = Pick<
   AdcioAnalyticsOnPageViewParams,
   "productIdOnStore"
 >;
+
+export type AdcioOnImpressionParams = AdcioAnalyticsOnImpressionParams;
 
 export type AdcioOnClickParams = AdcioAnalyticsOnClickParams;
 
