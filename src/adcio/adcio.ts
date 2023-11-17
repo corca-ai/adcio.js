@@ -1,4 +1,3 @@
-import { LogOptionsDto } from "api/controller/v1";
 import { AdcioAnalytics } from "lib/analytics/analytics";
 import { AdcioCore } from "lib/core";
 import { AdcioImpressionDetector } from "lib/impression-detector/impression-detector";
@@ -12,6 +11,7 @@ import {
   AdcioOnClickParams,
   AdcioOnPurchaseParams,
   AdcioOnDetectImpressionParams,
+  AdcioOnImpressionParams,
 } from "./adcio.interface";
 
 export class Adcio {
@@ -51,6 +51,10 @@ export class Adcio {
     });
   }
 
+  public onImpression(logOptions: AdcioOnImpressionParams) {
+    return this.adcioAnalytics.onImpression(logOptions);
+  }
+
   public onClick(logOptions: AdcioOnClickParams) {
     return this.adcioAnalytics.onClick(logOptions);
   }
@@ -65,11 +69,9 @@ export class Adcio {
 
   // AdcioImpressionDetector
   public onDetectImpression(params: AdcioOnDetectImpressionParams) {
-    const onImpression = (logOptions: LogOptionsDto) => {
-      this.adcioAnalytics.onImpression(logOptions);
-    };
-
-    return new AdcioImpressionDetector(params).detect(onImpression);
+    return new AdcioImpressionDetector(params).detect((logOption) =>
+      this.onImpression(logOption),
+    );
   }
 
   // AdcioPlacement
