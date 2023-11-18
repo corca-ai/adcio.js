@@ -1,11 +1,12 @@
 import { AdcioCore } from "lib/core";
 
 beforeEach(() => {
-  jest.restoreAllMocks();
   jest.useFakeTimers();
+  jest.restoreAllMocks();
+  jest.resetModules();
 });
 
-describe("test Adcio module", () => {
+describe("test AdcioCore module", () => {
   beforeEach(() => {
     window.sessionStorage.clear();
   });
@@ -35,5 +36,23 @@ describe("test Adcio module", () => {
     // AdcioCore should reset the session ID after 30m
     // Verify that the session ID has changed after 30m
     expect(adcioCore.getSessionId()).not.toBe(initialSessionId);
+  });
+
+  it("should call AdcioCore constructor once when Adcio is created", async () => {
+    jest.doMock("../lib/core", () => {
+      return {
+        AdcioCore: jest.fn().mockImplementation(),
+      };
+    });
+
+    const { AdcioCore } = await import("../lib/core");
+    const { Adcio } = await import("../adcio");
+
+    new Adcio({
+      clientId: "your-client-id",
+      customerId: "your-customer-id",
+    });
+
+    expect(AdcioCore).toHaveBeenCalledTimes(1);
   });
 });
