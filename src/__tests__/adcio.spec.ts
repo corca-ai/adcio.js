@@ -2,8 +2,35 @@ import { AdcioCore } from "lib/core";
 
 beforeEach(() => {
   jest.useFakeTimers();
+});
+
+afterEach(() => {
   jest.restoreAllMocks();
   jest.resetModules();
+  // unmock Adcio and AdcioCore modules
+  jest.dontMock("../adcio");
+  jest.dontMock("../lib/core");
+});
+
+describe("test Adcio module", () => {
+  it("should match client ID and customer ID", async () => {
+    jest.doMock("../adcio", () => {
+      return {
+        Adcio: jest.fn().mockImplementation((params) => {
+          expect(params.clientId).toBe("your-client-id");
+          expect(params.customerId).toBe("your-customer-id");
+        }),
+      };
+    });
+
+    const { Adcio } = await require("../adcio");
+
+    // Pass the client ID and customer ID as params when creating the AdcioCore instance
+    new Adcio({
+      clientId: "your-client-id",
+      customerId: "your-customer-id",
+    });
+  });
 });
 
 describe("test AdcioCore module", () => {
