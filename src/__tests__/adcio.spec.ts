@@ -13,7 +13,7 @@ afterEach(() => {
 });
 
 describe("test Adcio module", () => {
-  it("should match client ID and customer ID", async () => {
+  it("should create Adcio instance with correct parameters", async () => {
     jest.doMock("../adcio", () => {
       return {
         Adcio: jest.fn().mockImplementation((params) => {
