@@ -4,8 +4,17 @@ export class SessionStorage implements Storage {
   private key: string = "";
 
   constructor(config: SessionStorageParams) {
-    const { key } = config;
+    const { key, expiration } = config;
     this.key = key;
+    if (expiration) {
+      const timer = setTimeout(() => this.reset(), expiration);
+      window.addEventListener("unload", () => clearTimeout(timer));
+    }
+  }
+
+  reset(): string {
+    this.set("");
+    return this.getOrSet();
   }
 
   set(id: string): void {
