@@ -1,4 +1,5 @@
 import { AdcioCore } from "lib/core";
+import { Adcio } from "../adcio";
 
 beforeEach(() => {
   jest.useFakeTimers();
@@ -7,29 +8,17 @@ beforeEach(() => {
 afterEach(() => {
   jest.restoreAllMocks();
   jest.resetModules();
-  // unmock Adcio and AdcioCore modules
-  jest.dontMock("../adcio");
-  jest.dontMock("../lib/core");
 });
 
 describe("test Adcio module", () => {
-  it("should create Adcio instance with correct parameters", async () => {
-    jest.doMock("../adcio", () => {
-      return {
-        Adcio: jest.fn().mockImplementation((params) => {
-          expect(params.clientId).toBe("your-client-id");
-          expect(params.customerId).toBe("your-customer-id");
-        }),
-      };
-    });
+  it("should have matching client and customer IDs", () => {
+    const clientId = "your-client-id";
+    const customerId = "your-customer-id";
 
-    const { Adcio } = await require("../adcio");
+    const adcio = new Adcio({ clientId, customerId });
 
-    // Pass the client ID and customer ID as params when creating the AdcioCore instance
-    new Adcio({
-      clientId: "your-client-id",
-      customerId: "your-customer-id",
-    });
+    expect(adcio["config"].clientId).toBe(clientId);
+    expect(adcio["config"].customerId).toBe(customerId);
   });
 });
 
@@ -81,5 +70,7 @@ describe("test AdcioCore module", () => {
     });
 
     expect(AdcioCore).toHaveBeenCalledTimes(1);
+
+    jest.dontMock("../lib/core");
   });
 });
