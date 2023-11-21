@@ -27,35 +27,39 @@ export class AdcioAnalytics {
   }
 
   async onPageView(params: AdcioAnalyticsOnPageViewParams) {
-    await new EventsApi(this.apiConfig).eventsControllerOnPageView({
+    return await new EventsApi(this.apiConfig).eventsControllerOnPageView({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });
   }
 
   async onImpression(params: AdcioAnalyticsOnImpressionParams) {
-    await new PerformanceApi(this.apiConfig).performanceControllerOnImpression({
+    return await new PerformanceApi(
+      this.apiConfig,
+    ).performanceControllerOnImpression({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });
   }
 
   async onClick(params: AdcioAnalyticsOnClickParams) {
-    await new PerformanceApi(this.apiConfig).performanceControllerOnClick({
+    return await new PerformanceApi(
+      this.apiConfig,
+    ).performanceControllerOnClick({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });
   }
 
   async onAddToCart(params: AdcioAnalyticsOnAddToCartParams) {
-    await new EventsApi(this.apiConfig).eventsControllerOnAddToCart({
+    return await new EventsApi(this.apiConfig).eventsControllerOnAddToCart({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });
   }
 
   async onPurchase(params: AdcioAnalyticsOnPurchaseParams) {
-    await new EventsApi(this.apiConfig).eventsControllerOnPurchase({
+    return await new EventsApi(this.apiConfig).eventsControllerOnPurchase({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });

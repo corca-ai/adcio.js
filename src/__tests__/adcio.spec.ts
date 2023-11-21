@@ -1,4 +1,5 @@
 import { AdcioCore } from "lib/core";
+import { StatusCode } from "server/constants";
 import { Adcio } from "../adcio";
 
 beforeEach(() => {
@@ -72,5 +73,23 @@ describe("test AdcioCore module", () => {
     expect(AdcioCore).toHaveBeenCalledTimes(1);
 
     jest.dontMock("../lib/core");
+  });
+});
+
+describe("test", () => {
+  it("should have matching", async () => {
+    const clientId = "your-client-id";
+    const customerId = "your-customer-id";
+
+    const adcio = new Adcio({ clientId, customerId });
+
+    await adcio
+      .onImpression({
+        requestId: "test",
+        adsetId: "test",
+      })
+      .then((res) => {
+        expect(res.status).toBe(StatusCode.SUCCESS);
+      });
   });
 });
