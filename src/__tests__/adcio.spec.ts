@@ -1,14 +1,21 @@
 import { AdcioCore } from "lib/core";
 import { StatusCode } from "server/constants";
 import { Adcio } from "../adcio";
+import { server } from "../server";
 
-beforeEach(() => {
+beforeAll(() => {
+  server.listen();
   jest.useFakeTimers();
 });
 
 afterEach(() => {
+  server.resetHandlers();
   jest.restoreAllMocks();
   jest.resetModules();
+});
+
+afterAll(() => {
+  server.close();
 });
 
 describe("test Adcio module", () => {
@@ -29,6 +36,8 @@ describe("test AdcioCore module", () => {
   });
 
   it("should have the same session ID before expiration", async () => {
+    jest.useFakeTimers();
+
     const adcioCore = new AdcioCore({
       clientId: "your-client-id",
     });
@@ -76,20 +85,19 @@ describe("test AdcioCore module", () => {
   });
 });
 
-describe("test", () => {
-  it("should have matching", async () => {
-    const clientId = "your-client-id";
-    const customerId = "your-customer-id";
+// example of mocking api test code
+describe("test Adcio Analytics module", () => {
+  const clientId = "your-client-id";
+  const customerId = "your-customer-id";
 
+  it("should match onImpression params", async () => {
     const adcio = new Adcio({ clientId, customerId });
 
-    await adcio
-      .onImpression({
-        requestId: "test",
-        adsetId: "test",
-      })
-      .then((res) => {
-        expect(res.status).toBe(StatusCode.SUCCESS);
-      });
+    const response = await adcio.onImpression({
+      requestId: "your-client-requestId",
+      adsetId: "your-client-adsetId",
+    });
+
+    expect(response.status).toBe(StatusCode.SUCCESS);
   });
 });

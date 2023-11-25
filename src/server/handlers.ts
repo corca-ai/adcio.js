@@ -36,8 +36,10 @@ function checkRequiredFields<U extends { name: string; isRequired: boolean }>(
   }
 }
 
+const API_BASE_URL = 'https://receiver.adcio.ai';
+
 export function handlers() {
-  return [rest.post("/performance/impression", onImpression)];
+  return [rest.post(`${API_BASE_URL}/performance/impression`, onImpression)];
 }
 
 const onImpression: Parameters<typeof rest.post>[1] = async (req, res, ctx) => {
