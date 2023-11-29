@@ -11,7 +11,7 @@ export type AdcioPlacementCreateSuggestionParams = Pick<
   | "placementId"
   | "placementPositionX"
   | "placementPositionY"
-  | "age"
+  | "birthYear"
   | "gender"
   | "area"
 >;

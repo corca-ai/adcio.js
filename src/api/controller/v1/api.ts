@@ -26,6 +26,77 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 /**
  * 
  * @export
+ * @interface AccessToken
+ */
+export interface AccessToken {
+    /**
+     * 
+     * @type {string}
+     * @memberof AccessToken
+     */
+    'accessToken': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof AccessToken
+     */
+    'user': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccessToken
+     */
+    'clientType': AccessTokenClientTypeEnum;
+}
+
+export const AccessTokenClientTypeEnum = {
+    Store: 'STORE',
+    Seller: 'SELLER'
+} as const;
+
+export type AccessTokenClientTypeEnum = typeof AccessTokenClientTypeEnum[keyof typeof AccessTokenClientTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface AdminControllerFetchClients200Response
+ */
+export interface AdminControllerFetchClients200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof AdminControllerFetchClients200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchClientAdminResponseDto>}
+     * @memberof AdminControllerFetchClients200Response
+     */
+    'items'?: Array<FetchClientAdminResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface AdminControllerFetchPlacements200Response
+ */
+export interface AdminControllerFetchPlacements200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof AdminControllerFetchPlacements200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<Placement>}
+     * @memberof AdminControllerFetchPlacements200Response
+     */
+    'items'?: Array<Placement>;
+}
+/**
+ * 
+ * @export
  * @interface AppendInjector
  */
 export interface AppendInjector {
@@ -60,6 +131,213 @@ export interface AppendInjector {
      */
     'videoTemplate'?: string;
 }
+/**
+ * 
+ * @export
+ * @interface Audience
+ */
+export interface Audience {
+    /**
+     * 
+     * @type {string}
+     * @memberof Audience
+     */
+    'id': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Audience
+     */
+    'age': Array<AudienceAgeEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Audience
+     */
+    'gender': Array<AudienceGenderEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Audience
+     */
+    'area': Array<AudienceAreaEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Audience
+     */
+    'regularCustomer': Array<AudienceRegularCustomerEnum>;
+    /**
+     * 
+     * @type {string}
+     * @memberof Audience
+     */
+    'campaignId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Audience
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Audience
+     */
+    'updatedAt': string;
+}
+
+export const AudienceAgeEnum = {
+    _10: '10',
+    _20: '20',
+    _30: '30',
+    _40: '40'
+} as const;
+
+export type AudienceAgeEnum = typeof AudienceAgeEnum[keyof typeof AudienceAgeEnum];
+export const AudienceGenderEnum = {
+    Male: 'male',
+    Female: 'female'
+} as const;
+
+export type AudienceGenderEnum = typeof AudienceGenderEnum[keyof typeof AudienceGenderEnum];
+export const AudienceAreaEnum = {
+    NorthernVietnam: 'NorthernVietnam',
+    SouthernVietnam: 'SouthernVietnam'
+} as const;
+
+export type AudienceAreaEnum = typeof AudienceAreaEnum[keyof typeof AudienceAreaEnum];
+export const AudienceRegularCustomerEnum = {
+    _1: '1',
+    _3: '3'
+} as const;
+
+export type AudienceRegularCustomerEnum = typeof AudienceRegularCustomerEnum[keyof typeof AudienceRegularCustomerEnum];
+
+/**
+ * 
+ * @export
+ * @interface AudienceResponseDto
+ */
+export interface AudienceResponseDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AudienceResponseDto
+     */
+    'age': Array<AudienceResponseDtoAgeEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AudienceResponseDto
+     */
+    'gender': Array<AudienceResponseDtoGenderEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AudienceResponseDto
+     */
+    'area': Array<AudienceResponseDtoAreaEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AudienceResponseDto
+     */
+    'regularCustomer': Array<AudienceResponseDtoRegularCustomerEnum>;
+}
+
+export const AudienceResponseDtoAgeEnum = {
+    _10: '10',
+    _20: '20',
+    _30: '30',
+    _40: '40'
+} as const;
+
+export type AudienceResponseDtoAgeEnum = typeof AudienceResponseDtoAgeEnum[keyof typeof AudienceResponseDtoAgeEnum];
+export const AudienceResponseDtoGenderEnum = {
+    Male: 'male',
+    Female: 'female'
+} as const;
+
+export type AudienceResponseDtoGenderEnum = typeof AudienceResponseDtoGenderEnum[keyof typeof AudienceResponseDtoGenderEnum];
+export const AudienceResponseDtoAreaEnum = {
+    NorthernVietnam: 'NorthernVietnam',
+    SouthernVietnam: 'SouthernVietnam'
+} as const;
+
+export type AudienceResponseDtoAreaEnum = typeof AudienceResponseDtoAreaEnum[keyof typeof AudienceResponseDtoAreaEnum];
+export const AudienceResponseDtoRegularCustomerEnum = {
+    _1: '1',
+    _3: '3'
+} as const;
+
+export type AudienceResponseDtoRegularCustomerEnum = typeof AudienceResponseDtoRegularCustomerEnum[keyof typeof AudienceResponseDtoRegularCustomerEnum];
+
+/**
+ * 
+ * @export
+ * @interface AutoCharge
+ */
+export interface AutoCharge {
+    /**
+     * 
+     * @type {string}
+     * @memberof AutoCharge
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AutoCharge
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AutoCharge
+     */
+    'balance': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AutoCharge
+     */
+    'date': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AutoCharge
+     */
+    'paymentMethod': AutoChargePaymentMethodEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AutoCharge
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof AutoCharge
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AutoCharge
+     */
+    'updatedAt': string;
+}
+
+export const AutoChargePaymentMethodEnum = {
+    Card: 'Card',
+    DirectBank: 'DirectBank',
+    VBank: 'VBank',
+    Hpp: 'HPP'
+} as const;
+
+export type AutoChargePaymentMethodEnum = typeof AutoChargePaymentMethodEnum[keyof typeof AutoChargePaymentMethodEnum];
+
 /**
  * 
  * @export
@@ -206,6 +484,105 @@ export interface BannerInjector {
 /**
  * 
  * @export
+ * @interface BannerWithCreative
+ */
+export interface BannerWithCreative {
+    /**
+     * 
+     * @type {Array<Creative>}
+     * @memberof BannerWithCreative
+     */
+    'creatives': Array<Creative>;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'type': BannerWithCreativeTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'url': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'name': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof BannerWithCreative
+     */
+    'data': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'categoryId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'productId': string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BannerWithCreative
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'deletedAt': string | null;
+}
+
+export const BannerWithCreativeTypeEnum = {
+    Video: 'video',
+    Image: 'image'
+} as const;
+
+export type BannerWithCreativeTypeEnum = typeof BannerWithCreativeTypeEnum[keyof typeof BannerWithCreativeTypeEnum];
+
+/**
+ * 
+ * @export
  * @interface BannerWithCreativeDto
  */
 export interface BannerWithCreativeDto {
@@ -305,6 +682,351 @@ export type BannerWithCreativeDtoTypeEnum = typeof BannerWithCreativeDtoTypeEnum
 /**
  * 
  * @export
+ * @interface BusinessLicense
+ */
+export interface BusinessLicense {
+    /**
+     * 
+     * @type {string}
+     * @memberof BusinessLicense
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BusinessLicense
+     */
+    'companyName': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BusinessLicense
+     */
+    'licenseNumber': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BusinessLicense
+     */
+    'fileUrl': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BusinessLicense
+     */
+    'inspectionStatus': BusinessLicenseInspectionStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof BusinessLicense
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BusinessLicense
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BusinessLicense
+     */
+    'deletedAt': string | null;
+}
+
+export const BusinessLicenseInspectionStatusEnum = {
+    Pending: 'PENDING',
+    Approved: 'APPROVED',
+    Rejected: 'REJECTED'
+} as const;
+
+export type BusinessLicenseInspectionStatusEnum = typeof BusinessLicenseInspectionStatusEnum[keyof typeof BusinessLicenseInspectionStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface Campaign
+ */
+export interface Campaign {
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Campaign
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Campaign
+     */
+    'usedBudget': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Campaign
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'deletedAt': string | null;
+}
+/**
+ * 
+ * @export
+ * @interface CampaignControllerFetchMany200Response
+ */
+export interface CampaignControllerFetchMany200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignControllerFetchMany200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchManyCampaignsResponseDto>}
+     * @memberof CampaignControllerFetchMany200Response
+     */
+    'items'?: Array<FetchManyCampaignsResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface CampaignWithClientAndAudience
+ */
+export interface CampaignWithClientAndAudience {
+    /**
+     * 
+     * @type {Client}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'client': Client;
+    /**
+     * 
+     * @type {Audience}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'audience': Audience;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'usedBudget': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'deletedAt': string | null;
+}
+/**
+ * 
+ * @export
+ * @interface Category
+ */
+export interface Category {
+    /**
+     * 
+     * @type {string}
+     * @memberof Category
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Category
+     */
+    'idOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Category
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Category
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Category
+     */
+    'parentId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Category
+     */
+    'deletedAt': string | null;
+}
+/**
+ * 
+ * @export
+ * @interface CategoryColumnMappingDto
+ */
+export interface CategoryColumnMappingDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryColumnMappingDto
+     */
+    'idOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryColumnMappingDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryColumnMappingDto
+     */
+    'depth0Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryColumnMappingDto
+     */
+    'depth1Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryColumnMappingDto
+     */
+    'depth2Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryColumnMappingDto
+     */
+    'depth3Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryColumnMappingDto
+     */
+    'depth4Id'?: string;
+}
+/**
+ * 
+ * @export
  * @interface CategoryWithPath
  */
 export interface CategoryWithPath {
@@ -337,6 +1059,12 @@ export interface CategoryWithPath {
      * @type {string}
      * @memberof CategoryWithPath
      */
+    'parentId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryWithPath
+     */
     'deletedAt': string | null;
     /**
      * 
@@ -344,6 +1072,274 @@ export interface CategoryWithPath {
      * @memberof CategoryWithPath
      */
     'path': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface ChatControllerFetchCustomer200Response
+ */
+export interface ChatControllerFetchCustomer200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatControllerFetchCustomer200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<CustomerChatGroupDto>}
+     * @memberof ChatControllerFetchCustomer200Response
+     */
+    'items'?: Array<CustomerChatGroupDto>;
+}
+/**
+ * 
+ * @export
+ * @interface ChatDashboardControllerFetchDialogue200Response
+ */
+export interface ChatDashboardControllerFetchDialogue200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatDashboardControllerFetchDialogue200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchChatDashboardDialogueResponseDto>}
+     * @memberof ChatDashboardControllerFetchDialogue200Response
+     */
+    'items'?: Array<FetchChatDashboardDialogueResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface ChatDialogueResponseDto
+ */
+export interface ChatDialogueResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatDialogueResponseDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatDialogueResponseDto
+     */
+    'role': ChatDialogueResponseDtoRoleEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatDialogueResponseDto
+     */
+    'groupId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatDialogueResponseDto
+     */
+    'content': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatDialogueResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof ChatDialogueResponseDto
+     */
+    'parsedContent': object;
+}
+
+export const ChatDialogueResponseDtoRoleEnum = {
+    User: 'user',
+    Assistant: 'assistant'
+} as const;
+
+export type ChatDialogueResponseDtoRoleEnum = typeof ChatDialogueResponseDtoRoleEnum[keyof typeof ChatDialogueResponseDtoRoleEnum];
+
+/**
+ * 
+ * @export
+ * @interface ChatPlugin
+ */
+export interface ChatPlugin {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatPlugin
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatPlugin
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatPlugin
+     */
+    'displayName': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof ChatPlugin
+     */
+    'manifest': object;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ChatPlugin
+     */
+    'builtIn': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatPlugin
+     */
+    'createdAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface ChatPluginControllerFetchChatPlugins200Response
+ */
+export interface ChatPluginControllerFetchChatPlugins200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatPluginControllerFetchChatPlugins200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<ChatPlugin>}
+     * @memberof ChatPluginControllerFetchChatPlugins200Response
+     */
+    'items'?: Array<ChatPlugin>;
+}
+/**
+ * 
+ * @export
+ * @interface ChatProfile
+ */
+export interface ChatProfile {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatProfile
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatProfile
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatProfile
+     */
+    'imageUrl': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatProfile
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatProfile
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatProfile
+     */
+    'domain': ChatProfileDomainEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatProfile
+     */
+    'theme': ChatProfileThemeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatProfile
+     */
+    'language': ChatProfileLanguageEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ChatProfile
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatProfile
+     */
+    'greetingMessage': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChatProfile
+     */
+    'bottomMargin': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChatProfile
+     */
+    'createdAt': string;
+}
+
+export const ChatProfileDomainEnum = {
+    Outfit: 'outfit',
+    Travel: 'travel',
+    Healthcare: 'healthcare'
+} as const;
+
+export type ChatProfileDomainEnum = typeof ChatProfileDomainEnum[keyof typeof ChatProfileDomainEnum];
+export const ChatProfileThemeEnum = {
+    Lovely: 'lovely',
+    Warm: 'warm',
+    Cool: 'cool',
+    Greenish: 'greenish',
+    Modern: 'modern',
+    Simple: 'simple'
+} as const;
+
+export type ChatProfileThemeEnum = typeof ChatProfileThemeEnum[keyof typeof ChatProfileThemeEnum];
+export const ChatProfileLanguageEnum = {
+    Ko: 'ko',
+    En: 'en'
+} as const;
+
+export type ChatProfileLanguageEnum = typeof ChatProfileLanguageEnum[keyof typeof ChatProfileLanguageEnum];
+
+/**
+ * 
+ * @export
+ * @interface CheckEmailExistsResponseDto
+ */
+export interface CheckEmailExistsResponseDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CheckEmailExistsResponseDto
+     */
+    'emailExists': boolean;
 }
 /**
  * 
@@ -401,16 +1397,16 @@ export interface Client {
     'paymentCardId': string | null;
     /**
      * 
-     * @type {Store}
+     * @type {string}
      * @memberof Client
      */
-    'store'?: Store | null;
+    'storeId': string | null;
     /**
      * 
      * @type {string}
      * @memberof Client
      */
-    'storeId': string | null;
+    'businessLicenseId': string | null;
     /**
      * 
      * @type {boolean}
@@ -454,6 +1450,594 @@ export const ClientTypeEnum = {
 } as const;
 
 export type ClientTypeEnum = typeof ClientTypeEnum[keyof typeof ClientTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface ClientControllerFetchSellers200Response
+ */
+export interface ClientControllerFetchSellers200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof ClientControllerFetchSellers200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchSellerResponseDto>}
+     * @memberof ClientControllerFetchSellers200Response
+     */
+    'items'?: Array<FetchSellerResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface ClientWithBusinessLicenseDto
+ */
+export interface ClientWithBusinessLicenseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'currency': ClientWithBusinessLicenseDtoCurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'timezone': ClientWithBusinessLicenseDtoTimezoneEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'credit': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'type': ClientWithBusinessLicenseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'paymentCardId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'storeId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'businessLicenseId': string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'isSeller': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {BusinessLicense}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'businessLicense'?: BusinessLicense;
+}
+
+export const ClientWithBusinessLicenseDtoCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type ClientWithBusinessLicenseDtoCurrencyEnum = typeof ClientWithBusinessLicenseDtoCurrencyEnum[keyof typeof ClientWithBusinessLicenseDtoCurrencyEnum];
+export const ClientWithBusinessLicenseDtoTimezoneEnum = {
+    Kst: 'KST',
+    Ict: 'ICT',
+    Est: 'EST',
+    Cst: 'CST',
+    Mst: 'MST',
+    Pst: 'PST',
+    Akst: 'AKST',
+    Hst: 'HST'
+} as const;
+
+export type ClientWithBusinessLicenseDtoTimezoneEnum = typeof ClientWithBusinessLicenseDtoTimezoneEnum[keyof typeof ClientWithBusinessLicenseDtoTimezoneEnum];
+export const ClientWithBusinessLicenseDtoTypeEnum = {
+    PlatformAndSeller: 'PLATFORM_AND_SELLER',
+    OwnWebsiteAndSeller: 'OWN_WEBSITE_AND_SELLER',
+    Platform: 'PLATFORM',
+    OwnWebsite: 'OWN_WEBSITE',
+    Seller: 'SELLER',
+    Admin: 'ADMIN'
+} as const;
+
+export type ClientWithBusinessLicenseDtoTypeEnum = typeof ClientWithBusinessLicenseDtoTypeEnum[keyof typeof ClientWithBusinessLicenseDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface ColumnMapping
+ */
+export interface ColumnMapping {
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMapping
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMapping
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMapping
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMapping
+     */
+    'type': ColumnMappingTypeEnum;
+    /**
+     * 
+     * @type {ColumnMappingData}
+     * @memberof ColumnMapping
+     */
+    'mapping': ColumnMappingData;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMapping
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMapping
+     */
+    'updatedAt': string;
+}
+
+export const ColumnMappingTypeEnum = {
+    Category: 'category',
+    Product: 'product'
+} as const;
+
+export type ColumnMappingTypeEnum = typeof ColumnMappingTypeEnum[keyof typeof ColumnMappingTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface ColumnMappingData
+ */
+export interface ColumnMappingData {
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'idOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'price'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'includeInRecommendation'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'image'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'sellerIdOnStore'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'deepLink'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'depth0Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'depth1Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'depth2Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'depth3Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ColumnMappingData
+     */
+    'depth4Id'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ConnectProductsToPlacementDto
+ */
+export interface ConnectProductsToPlacementDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ConnectProductsToPlacementDto
+     */
+    'productIds': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface ConnectProductsToPlacementResponseDto
+ */
+export interface ConnectProductsToPlacementResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'placementFormatRatio': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'type': ConnectProductsToPlacementResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'suggestionType': ConnectProductsToPlacementResponseDtoSuggestionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'supportEnvironment': ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'developEnvironment': ConnectProductsToPlacementResponseDtoDevelopEnvironmentEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'displayCount': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'maxDisplayCount': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'pageName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {Injector}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'injector': Injector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'screenShot': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'displayFormatWidth': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'displayFormatHeight': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'property': ConnectProductsToPlacementResponseDtoPropertyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {Array<Product>}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'products': Array<Product>;
+}
+
+export const ConnectProductsToPlacementResponseDtoTypeEnum = {
+    Grid: 'GRID',
+    Banner: 'BANNER'
+} as const;
+
+export type ConnectProductsToPlacementResponseDtoTypeEnum = typeof ConnectProductsToPlacementResponseDtoTypeEnum[keyof typeof ConnectProductsToPlacementResponseDtoTypeEnum];
+export const ConnectProductsToPlacementResponseDtoSuggestionTypeEnum = {
+    Recommend: 'RECOMMEND',
+    Advertise: 'ADVERTISE'
+} as const;
+
+export type ConnectProductsToPlacementResponseDtoSuggestionTypeEnum = typeof ConnectProductsToPlacementResponseDtoSuggestionTypeEnum[keyof typeof ConnectProductsToPlacementResponseDtoSuggestionTypeEnum];
+export const ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
+} as const;
+
+export type ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum = typeof ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum[keyof typeof ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum];
+export const ConnectProductsToPlacementResponseDtoDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
+
+export type ConnectProductsToPlacementResponseDtoDevelopEnvironmentEnum = typeof ConnectProductsToPlacementResponseDtoDevelopEnvironmentEnum[keyof typeof ConnectProductsToPlacementResponseDtoDevelopEnvironmentEnum];
+export const ConnectProductsToPlacementResponseDtoPropertyEnum = {
+    New: 'NEW',
+    Hot: 'HOT',
+    Personal: 'PERSONAL',
+    SameGoods: 'SAME_GOODS',
+    DiffGoods: 'DIFF_GOODS'
+} as const;
+
+export type ConnectProductsToPlacementResponseDtoPropertyEnum = typeof ConnectProductsToPlacementResponseDtoPropertyEnum[keyof typeof ConnectProductsToPlacementResponseDtoPropertyEnum];
+
+/**
+ * 
+ * @export
+ * @interface Count
+ */
+export interface Count {
+    /**
+     * 
+     * @type {number}
+     * @memberof Count
+     */
+    'store'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Count
+     */
+    'seller'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Count
+     */
+    'campaign'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface CountCost
+ */
+export interface CountCost {
+    /**
+     * 
+     * @type {number}
+     * @memberof CountCost
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CountCost
+     */
+    'cost'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface CountCostAmount
+ */
+export interface CountCostAmount {
+    /**
+     * 
+     * @type {number}
+     * @memberof CountCostAmount
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CountCostAmount
+     */
+    'cost'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CountCostAmount
+     */
+    'amount'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface CreateAutoChargeDto
+ */
+export interface CreateAutoChargeDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateAutoChargeDto
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateAutoChargeDto
+     */
+    'date': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateAutoChargeDto
+     */
+    'balance': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAutoChargeDto
+     */
+    'paymentMethod': CreateAutoChargeDtoPaymentMethodEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateAutoChargeDto
+     */
+    'activated': boolean;
+}
+
+export const CreateAutoChargeDtoPaymentMethodEnum = {
+    Card: 'Card',
+    DirectBank: 'DirectBank',
+    VBank: 'VBank',
+    Hpp: 'HPP'
+} as const;
+
+export type CreateAutoChargeDtoPaymentMethodEnum = typeof CreateAutoChargeDtoPaymentMethodEnum[keyof typeof CreateAutoChargeDtoPaymentMethodEnum];
 
 /**
  * 
@@ -533,6 +2117,467 @@ export type CreateBannerDtoTypeEnum = typeof CreateBannerDtoTypeEnum[keyof typeo
 /**
  * 
  * @export
+ * @interface CreateBusinessLicenseDto
+ */
+export interface CreateBusinessLicenseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBusinessLicenseDto
+     */
+    'businessLicenseFileUrl': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateBusinessLicenseResponseDto
+ */
+export interface CreateBusinessLicenseResponseDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateBusinessLicenseResponseDto
+     */
+    'success': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface CreateCampaignDto
+ */
+export interface CreateCampaignDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignDto
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateCampaignDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {Array<Product>}
+     * @memberof CreateCampaignDto
+     */
+    'products': Array<Product>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignDto
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignDto
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateCampaignDto
+     */
+    'maxBudgetPerDay'?: number;
+    /**
+     * 
+     * @type {object}
+     * @memberof CreateCampaignDto
+     */
+    'audience': object;
+}
+/**
+ * 
+ * @export
+ * @interface CreateCampaignResponseDto
+ */
+export interface CreateCampaignResponseDto {
+    /**
+     * 
+     * @type {Audience}
+     * @memberof CreateCampaignResponseDto
+     */
+    'audience': Audience;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignResponseDto
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateCampaignResponseDto
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateCampaignResponseDto
+     */
+    'usedBudget': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateCampaignResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignResponseDto
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignResponseDto
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCampaignResponseDto
+     */
+    'deletedAt': string | null;
+}
+/**
+ * 
+ * @export
+ * @interface CreateCategoryColumnMappingDto
+ */
+export interface CreateCategoryColumnMappingDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateCategoryColumnMappingDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {CategoryColumnMappingDto}
+     * @memberof CreateCategoryColumnMappingDto
+     */
+    'mapping': CategoryColumnMappingDto;
+}
+/**
+ * 
+ * @export
+ * @interface CreateChatDialogueDto
+ */
+export interface CreateChatDialogueDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatDialogueDto
+     */
+    'role': CreateChatDialogueDtoRoleEnum;
+    /**
+     * 
+     * @type {object}
+     * @memberof CreateChatDialogueDto
+     */
+    'parsedContent'?: object;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatDialogueDto
+     */
+    'content': string;
+}
+
+export const CreateChatDialogueDtoRoleEnum = {
+    User: 'user',
+    Assistant: 'assistant'
+} as const;
+
+export type CreateChatDialogueDtoRoleEnum = typeof CreateChatDialogueDtoRoleEnum[keyof typeof CreateChatDialogueDtoRoleEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateChatDialogueResponseDto
+ */
+export interface CreateChatDialogueResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateChatDialogueResponseDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatDialogueResponseDto
+     */
+    'role': CreateChatDialogueResponseDtoRoleEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatDialogueResponseDto
+     */
+    'groupId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatDialogueResponseDto
+     */
+    'content': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatDialogueResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof CreateChatDialogueResponseDto
+     */
+    'parsedContent': object;
+}
+
+export const CreateChatDialogueResponseDtoRoleEnum = {
+    User: 'user',
+    Assistant: 'assistant'
+} as const;
+
+export type CreateChatDialogueResponseDtoRoleEnum = typeof CreateChatDialogueResponseDtoRoleEnum[keyof typeof CreateChatDialogueResponseDtoRoleEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateChatGroupDto
+ */
+export interface CreateChatGroupDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatGroupDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatGroupDto
+     */
+    'customerId': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateChatGroupDto
+     */
+    'isAnonymous': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatGroupDto
+     */
+    'clientId': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateChatGroupResponseDto
+ */
+export interface CreateChatGroupResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatGroupResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatGroupResponseDto
+     */
+    'customerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatGroupResponseDto
+     */
+    'createdAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateChatProfileDto
+ */
+export interface CreateChatProfileDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatProfileDto
+     */
+    'imageUrl'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatProfileDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatProfileDto
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatProfileDto
+     */
+    'domain'?: CreateChatProfileDtoDomainEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatProfileDto
+     */
+    'theme': CreateChatProfileDtoThemeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatProfileDto
+     */
+    'language': CreateChatProfileDtoLanguageEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatProfileDto
+     */
+    'greetingMessage': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateChatProfileDto
+     */
+    'bottomMargin'?: number;
+}
+
+export const CreateChatProfileDtoDomainEnum = {
+    Outfit: 'outfit',
+    Travel: 'travel',
+    Healthcare: 'healthcare'
+} as const;
+
+export type CreateChatProfileDtoDomainEnum = typeof CreateChatProfileDtoDomainEnum[keyof typeof CreateChatProfileDtoDomainEnum];
+export const CreateChatProfileDtoThemeEnum = {
+    Lovely: 'lovely',
+    Warm: 'warm',
+    Cool: 'cool',
+    Greenish: 'greenish',
+    Modern: 'modern',
+    Simple: 'simple'
+} as const;
+
+export type CreateChatProfileDtoThemeEnum = typeof CreateChatProfileDtoThemeEnum[keyof typeof CreateChatProfileDtoThemeEnum];
+export const CreateChatProfileDtoLanguageEnum = {
+    Ko: 'ko',
+    En: 'en'
+} as const;
+
+export type CreateChatProfileDtoLanguageEnum = typeof CreateChatProfileDtoLanguageEnum[keyof typeof CreateChatProfileDtoLanguageEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateChatRecommendationDto
+ */
+export interface CreateChatRecommendationDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatRecommendationDto
+     */
+    'explanation': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateChatRecommendationDto
+     */
+    'productIds': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface CreateChatRecommendationResponseDto
+ */
+export interface CreateChatRecommendationResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatRecommendationResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatRecommendationResponseDto
+     */
+    'explanation': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateChatRecommendationResponseDto
+     */
+    'dialogueId': number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateChatRecommendationResponseDto
+     */
+    'productIds': Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateChatRecommendationResponseDto
+     */
+    'createdAt': string;
+}
+/**
+ * 
+ * @export
  * @interface CreatePlacementDto
  */
 export interface CreatePlacementDto {
@@ -565,19 +2610,43 @@ export interface CreatePlacementDto {
      * @type {string}
      * @memberof CreatePlacementDto
      */
-    'property': CreatePlacementDtoPropertyEnum;
+    'supportEnvironment': CreatePlacementDtoSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePlacementDto
+     */
+    'developEnvironment': CreatePlacementDtoDevelopEnvironmentEnum;
     /**
      * 
      * @type {number}
      * @memberof CreatePlacementDto
      */
-    'displayCount': number;
+    'displayFormatWidth': number | null;
     /**
      * 
-     * @type {boolean}
+     * @type {number}
      * @memberof CreatePlacementDto
      */
-    'activated': boolean;
+    'displayFormatHeight': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePlacementDto
+     */
+    'placementFormatRatio': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreatePlacementDto
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreatePlacementDto
+     */
+    'maxDisplayCount': number;
     /**
      * 
      * @type {PlacementInjectorDto}
@@ -598,16 +2667,40 @@ export const CreatePlacementDtoSuggestionTypeEnum = {
 } as const;
 
 export type CreatePlacementDtoSuggestionTypeEnum = typeof CreatePlacementDtoSuggestionTypeEnum[keyof typeof CreatePlacementDtoSuggestionTypeEnum];
-export const CreatePlacementDtoPropertyEnum = {
-    New: 'NEW',
-    Hot: 'HOT',
-    Personal: 'PERSONAL',
-    SameGoods: 'SAME_GOODS',
-    DiffGoods: 'DIFF_GOODS'
+export const CreatePlacementDtoSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
 } as const;
 
-export type CreatePlacementDtoPropertyEnum = typeof CreatePlacementDtoPropertyEnum[keyof typeof CreatePlacementDtoPropertyEnum];
+export type CreatePlacementDtoSupportEnvironmentEnum = typeof CreatePlacementDtoSupportEnvironmentEnum[keyof typeof CreatePlacementDtoSupportEnvironmentEnum];
+export const CreatePlacementDtoDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
 
+export type CreatePlacementDtoDevelopEnvironmentEnum = typeof CreatePlacementDtoDevelopEnvironmentEnum[keyof typeof CreatePlacementDtoDevelopEnvironmentEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateProductColumnMappingDto
+ */
+export interface CreateProductColumnMappingDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateProductColumnMappingDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {ProductColumnMappingDto}
+     * @memberof CreateProductColumnMappingDto
+     */
+    'mapping': ProductColumnMappingDto;
+}
 /**
  * 
  * @export
@@ -684,9 +2777,289 @@ export interface CreateProductDto {
 /**
  * 
  * @export
+ * @interface CreateProductIndex
+ */
+export interface CreateProductIndex {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateProductIndex
+     */
+    'store_id': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof CreateProductIndex
+     */
+    'where'?: object;
+}
+/**
+ * 
+ * @export
+ * @interface CreateProductIndicesRequestDto
+ */
+export interface CreateProductIndicesRequestDto {
+    /**
+     * 
+     * @type {Array<CreateProductIndex>}
+     * @memberof CreateProductIndicesRequestDto
+     */
+    'stores': Array<CreateProductIndex>;
+}
+/**
+ * 
+ * @export
+ * @interface CreateSellerDto
+ */
+export interface CreateSellerDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerDto
+     */
+    'userEmail': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerDto
+     */
+    'sellerIdOnStore'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateSellerResponseDto
+ */
+export interface CreateSellerResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerResponseDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerResponseDto
+     */
+    'currency': CreateSellerResponseDtoCurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerResponseDto
+     */
+    'timezone': CreateSellerResponseDtoTimezoneEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateSellerResponseDto
+     */
+    'credit': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerResponseDto
+     */
+    'type': CreateSellerResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerResponseDto
+     */
+    'paymentCardId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerResponseDto
+     */
+    'storeId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerResponseDto
+     */
+    'businessLicenseId': string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateSellerResponseDto
+     */
+    'isSeller': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {Array<User>}
+     * @memberof CreateSellerResponseDto
+     */
+    'users': Array<User>;
+}
+
+export const CreateSellerResponseDtoCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type CreateSellerResponseDtoCurrencyEnum = typeof CreateSellerResponseDtoCurrencyEnum[keyof typeof CreateSellerResponseDtoCurrencyEnum];
+export const CreateSellerResponseDtoTimezoneEnum = {
+    Kst: 'KST',
+    Ict: 'ICT',
+    Est: 'EST',
+    Cst: 'CST',
+    Mst: 'MST',
+    Pst: 'PST',
+    Akst: 'AKST',
+    Hst: 'HST'
+} as const;
+
+export type CreateSellerResponseDtoTimezoneEnum = typeof CreateSellerResponseDtoTimezoneEnum[keyof typeof CreateSellerResponseDtoTimezoneEnum];
+export const CreateSellerResponseDtoTypeEnum = {
+    PlatformAndSeller: 'PLATFORM_AND_SELLER',
+    OwnWebsiteAndSeller: 'OWN_WEBSITE_AND_SELLER',
+    Platform: 'PLATFORM',
+    OwnWebsite: 'OWN_WEBSITE',
+    Seller: 'SELLER',
+    Admin: 'ADMIN'
+} as const;
+
+export type CreateSellerResponseDtoTypeEnum = typeof CreateSellerResponseDtoTypeEnum[keyof typeof CreateSellerResponseDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateTransactionDto
+ */
+export interface CreateTransactionDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateTransactionDto
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateTransactionDto
+     */
+    'paymentMethod': CreateTransactionDtoPaymentMethodEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateTransactionDto
+     */
+    'currency': CreateTransactionDtoCurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateTransactionDto
+     */
+    'pg': CreateTransactionDtoPgEnum;
+}
+
+export const CreateTransactionDtoPaymentMethodEnum = {
+    Card: 'Card',
+    DirectBank: 'DirectBank',
+    VBank: 'VBank',
+    Hpp: 'HPP'
+} as const;
+
+export type CreateTransactionDtoPaymentMethodEnum = typeof CreateTransactionDtoPaymentMethodEnum[keyof typeof CreateTransactionDtoPaymentMethodEnum];
+export const CreateTransactionDtoCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type CreateTransactionDtoCurrencyEnum = typeof CreateTransactionDtoCurrencyEnum[keyof typeof CreateTransactionDtoCurrencyEnum];
+export const CreateTransactionDtoPgEnum = {
+    Inicis: 'INICIS',
+    Toss: 'TOSS'
+} as const;
+
+export type CreateTransactionDtoPgEnum = typeof CreateTransactionDtoPgEnum[keyof typeof CreateTransactionDtoPgEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateTransactionResponseDto
+ */
+export interface CreateTransactionResponseDto {
+    /**
+     * 
+     * @type {IamportPaymentParams}
+     * @memberof CreateTransactionResponseDto
+     */
+    'params': IamportPaymentParams;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateTransactionResponseDto
+     */
+    'iamportId': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateUserDto
+ */
+export interface CreateUserDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateUserDto
+     */
+    'role': CreateUserDtoRoleEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    'email': string;
+}
+
+export const CreateUserDtoRoleEnum = {
+    NUMBER_0: 0,
+    NUMBER_1: 1,
+    NUMBER_2: 2
+} as const;
+
+export type CreateUserDtoRoleEnum = typeof CreateUserDtoRoleEnum[keyof typeof CreateUserDtoRoleEnum];
+
+/**
+ * 
+ * @export
  * @interface Creative
  */
 export interface Creative {
+    /**
+     * 
+     * @type {string}
+     * @memberof Creative
+     */
+    'placementFormatRatio': string | null;
     /**
      * 
      * @type {string}
@@ -713,24 +3086,6 @@ export interface Creative {
     'height': number | null;
     /**
      * 
-     * @type {PlacementFormat}
-     * @memberof Creative
-     */
-    'placementFormat': PlacementFormat | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Creative
-     */
-    'placementFormatRatio': string | null;
-    /**
-     * 
-     * @type {Banner}
-     * @memberof Creative
-     */
-    'banner': Banner | null;
-    /**
-     * 
      * @type {string}
      * @memberof Creative
      */
@@ -753,6 +3108,298 @@ export interface Creative {
      * @memberof Creative
      */
     'deletedAt': string | null;
+}
+/**
+ * 
+ * @export
+ * @interface Credit
+ */
+export interface Credit {
+    /**
+     * 
+     * @type {number}
+     * @memberof Credit
+     */
+    'expense'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Credit
+     */
+    'budget'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Credit
+     */
+    'dailyBudget'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Credit
+     */
+    'accumulatedBudget'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface CustomerChatGroupDto
+ */
+export interface CustomerChatGroupDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomerChatGroupDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomerChatGroupDto
+     */
+    'customerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomerChatGroupDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomerChatGroupDto
+     */
+    'lastChatAt'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof CustomerChatGroupDto
+     */
+    'parsedContent': object;
+}
+/**
+ * 
+ * @export
+ * @interface DailyMetric
+ */
+export interface DailyMetric {
+    /**
+     * 
+     * @type {CountCost}
+     * @memberof DailyMetric
+     */
+    'totalVisitor'?: CountCost;
+    /**
+     * 
+     * @type {CountCost}
+     * @memberof DailyMetric
+     */
+    'impressedVisitor'?: CountCost;
+    /**
+     * 
+     * @type {CountCostAmount}
+     * @memberof DailyMetric
+     */
+    'purchase': CountCostAmount;
+    /**
+     * 
+     * @type {CountCost}
+     * @memberof DailyMetric
+     */
+    'click': CountCost;
+    /**
+     * 
+     * @type {CountCost}
+     * @memberof DailyMetric
+     */
+    'impression'?: CountCost;
+    /**
+     * 
+     * @type {CountCost}
+     * @memberof DailyMetric
+     */
+    'addToCart'?: CountCost;
+    /**
+     * 
+     * @type {Figure}
+     * @memberof DailyMetric
+     */
+    'figure'?: Figure;
+    /**
+     * 
+     * @type {Credit}
+     * @memberof DailyMetric
+     */
+    'credit'?: Credit;
+    /**
+     * 
+     * @type {Count}
+     * @memberof DailyMetric
+     */
+    'count'?: Count;
+    /**
+     * 
+     * @type {string}
+     * @memberof DailyMetric
+     */
+    'date': string;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardBanner
+ */
+export interface DashboardBanner {
+    /**
+     * 
+     * @type {Metric}
+     * @memberof DashboardBanner
+     */
+    'metric': Metric;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardBanner
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardBanner
+     */
+    'name': string;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardCampaign
+ */
+export interface DashboardCampaign {
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardCampaign
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardCampaign
+     */
+    'title': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DashboardCampaign
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardCampaign
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardCampaign
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardCampaign
+     */
+    'maxBudgetPerDay': number;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardControllerFetchListOnBannerDashboard200Response
+ */
+export interface DashboardControllerFetchListOnBannerDashboard200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardControllerFetchListOnBannerDashboard200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<DashboardBanner>}
+     * @memberof DashboardControllerFetchListOnBannerDashboard200Response
+     */
+    'items'?: Array<DashboardBanner>;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardControllerFetchManyCampaign200Response
+ */
+export interface DashboardControllerFetchManyCampaign200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardControllerFetchManyCampaign200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchDashboardCampaignResponseDto>}
+     * @memberof DashboardControllerFetchManyCampaign200Response
+     */
+    'items'?: Array<FetchDashboardCampaignResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardControllerFetchManySeller200Response
+ */
+export interface DashboardControllerFetchManySeller200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardControllerFetchManySeller200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchDashboardSellerResponseDto>}
+     * @memberof DashboardControllerFetchManySeller200Response
+     */
+    'items'?: Array<FetchDashboardSellerResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardSeller
+ */
+export interface DashboardSeller {
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardSeller
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardSeller
+     */
+    'name': string;
+}
+/**
+ * 
+ * @export
+ * @interface FetchActivePlacementsResponseDto
+ */
+export interface FetchActivePlacementsResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchActivePlacementsResponseDto
+     */
+    'id': string;
 }
 /**
  * 
@@ -874,6 +3521,1068 @@ export type FetchBannerResponseDtoTypeEnum = typeof FetchBannerResponseDtoTypeEn
 /**
  * 
  * @export
+ * @interface FetchBudgetUsageResponseDto
+ */
+export interface FetchBudgetUsageResponseDto {
+    /**
+     * 
+     * @type {Campaign}
+     * @memberof FetchBudgetUsageResponseDto
+     */
+    'campaign': Campaign;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchBudgetUsageResponseDto
+     */
+    'endsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchBudgetUsageResponseDto
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchBudgetUsageResponseDto
+     */
+    'amount': number;
+}
+/**
+ * 
+ * @export
+ * @interface FetchCampaignPlacementDto
+ */
+export interface FetchCampaignPlacementDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'placementFormatRatio': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'type': FetchCampaignPlacementDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'suggestionType': FetchCampaignPlacementDtoSuggestionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'supportEnvironment': FetchCampaignPlacementDtoSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'developEnvironment': FetchCampaignPlacementDtoDevelopEnvironmentEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'displayCount': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'maxDisplayCount': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'pageName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {Injector}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'injector': Injector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'screenShot': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'displayFormatWidth': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'displayFormatHeight': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'property': FetchCampaignPlacementDtoPropertyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {FetchPageClientDto}
+     * @memberof FetchCampaignPlacementDto
+     */
+    'page': FetchPageClientDto;
+}
+
+export const FetchCampaignPlacementDtoTypeEnum = {
+    Grid: 'GRID',
+    Banner: 'BANNER'
+} as const;
+
+export type FetchCampaignPlacementDtoTypeEnum = typeof FetchCampaignPlacementDtoTypeEnum[keyof typeof FetchCampaignPlacementDtoTypeEnum];
+export const FetchCampaignPlacementDtoSuggestionTypeEnum = {
+    Recommend: 'RECOMMEND',
+    Advertise: 'ADVERTISE'
+} as const;
+
+export type FetchCampaignPlacementDtoSuggestionTypeEnum = typeof FetchCampaignPlacementDtoSuggestionTypeEnum[keyof typeof FetchCampaignPlacementDtoSuggestionTypeEnum];
+export const FetchCampaignPlacementDtoSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
+} as const;
+
+export type FetchCampaignPlacementDtoSupportEnvironmentEnum = typeof FetchCampaignPlacementDtoSupportEnvironmentEnum[keyof typeof FetchCampaignPlacementDtoSupportEnvironmentEnum];
+export const FetchCampaignPlacementDtoDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
+
+export type FetchCampaignPlacementDtoDevelopEnvironmentEnum = typeof FetchCampaignPlacementDtoDevelopEnvironmentEnum[keyof typeof FetchCampaignPlacementDtoDevelopEnvironmentEnum];
+export const FetchCampaignPlacementDtoPropertyEnum = {
+    New: 'NEW',
+    Hot: 'HOT',
+    Personal: 'PERSONAL',
+    SameGoods: 'SAME_GOODS',
+    DiffGoods: 'DIFF_GOODS'
+} as const;
+
+export type FetchCampaignPlacementDtoPropertyEnum = typeof FetchCampaignPlacementDtoPropertyEnum[keyof typeof FetchCampaignPlacementDtoPropertyEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchCampaignResponseDto
+ */
+export interface FetchCampaignResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignResponseDto
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchCampaignResponseDto
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchCampaignResponseDto
+     */
+    'usedBudget': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FetchCampaignResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignResponseDto
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignResponseDto
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCampaignResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {FetchCampaignPlacementDto}
+     * @memberof FetchCampaignResponseDto
+     */
+    'placement': FetchCampaignPlacementDto;
+    /**
+     * 
+     * @type {Audience}
+     * @memberof FetchCampaignResponseDto
+     */
+    'audience': Audience;
+    /**
+     * 
+     * @type {Array<Product>}
+     * @memberof FetchCampaignResponseDto
+     */
+    'products': Array<Product>;
+}
+/**
+ * 
+ * @export
+ * @interface FetchCartResponseDto
+ */
+export interface FetchCartResponseDto {
+    /**
+     * 
+     * @type {object}
+     * @memberof FetchCartResponseDto
+     */
+    'data': object;
+    /**
+     * 
+     * @type {Product}
+     * @memberof FetchCartResponseDto
+     */
+    'product': Product;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCartResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCartResponseDto
+     */
+    'cartId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCartResponseDto
+     */
+    'productIdOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCartResponseDto
+     */
+    'customerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCartResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCartResponseDto
+     */
+    'cartDate': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchCartResponseDto
+     */
+    'createdAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface FetchChatDashboardDialogueResponseDto
+ */
+export interface FetchChatDashboardDialogueResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchChatDashboardDialogueResponseDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatDashboardDialogueResponseDto
+     */
+    'role': FetchChatDashboardDialogueResponseDtoRoleEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatDashboardDialogueResponseDto
+     */
+    'content': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatDashboardDialogueResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatDashboardDialogueResponseDto
+     */
+    'groupId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatDashboardDialogueResponseDto
+     */
+    'customerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatDashboardDialogueResponseDto
+     */
+    'type'?: FetchChatDashboardDialogueResponseDtoTypeEnum;
+}
+
+export const FetchChatDashboardDialogueResponseDtoRoleEnum = {
+    User: 'user',
+    Assistant: 'assistant'
+} as const;
+
+export type FetchChatDashboardDialogueResponseDtoRoleEnum = typeof FetchChatDashboardDialogueResponseDtoRoleEnum[keyof typeof FetchChatDashboardDialogueResponseDtoRoleEnum];
+export const FetchChatDashboardDialogueResponseDtoTypeEnum = {
+    Talk: 'talk',
+    Recommend: 'recommend',
+    Error: 'error'
+} as const;
+
+export type FetchChatDashboardDialogueResponseDtoTypeEnum = typeof FetchChatDashboardDialogueResponseDtoTypeEnum[keyof typeof FetchChatDashboardDialogueResponseDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchChatGroupResponseDto
+ */
+export interface FetchChatGroupResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatGroupResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatGroupResponseDto
+     */
+    'customerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatGroupResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {Array<ChatDialogueResponseDto>}
+     * @memberof FetchChatGroupResponseDto
+     */
+    'dialogue': Array<ChatDialogueResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface FetchChatProfileResponseDto
+ */
+export interface FetchChatProfileResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'imageUrl': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'domain': FetchChatProfileResponseDtoDomainEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'theme': FetchChatProfileResponseDtoThemeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'language': FetchChatProfileResponseDtoLanguageEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'greetingMessage': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'bottomMargin': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {Client}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'client': Client;
+    /**
+     * 
+     * @type {Array<ChatPlugin>}
+     * @memberof FetchChatProfileResponseDto
+     */
+    'plugins': Array<ChatPlugin>;
+}
+
+export const FetchChatProfileResponseDtoDomainEnum = {
+    Outfit: 'outfit',
+    Travel: 'travel',
+    Healthcare: 'healthcare'
+} as const;
+
+export type FetchChatProfileResponseDtoDomainEnum = typeof FetchChatProfileResponseDtoDomainEnum[keyof typeof FetchChatProfileResponseDtoDomainEnum];
+export const FetchChatProfileResponseDtoThemeEnum = {
+    Lovely: 'lovely',
+    Warm: 'warm',
+    Cool: 'cool',
+    Greenish: 'greenish',
+    Modern: 'modern',
+    Simple: 'simple'
+} as const;
+
+export type FetchChatProfileResponseDtoThemeEnum = typeof FetchChatProfileResponseDtoThemeEnum[keyof typeof FetchChatProfileResponseDtoThemeEnum];
+export const FetchChatProfileResponseDtoLanguageEnum = {
+    Ko: 'ko',
+    En: 'en'
+} as const;
+
+export type FetchChatProfileResponseDtoLanguageEnum = typeof FetchChatProfileResponseDtoLanguageEnum[keyof typeof FetchChatProfileResponseDtoLanguageEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchClientAdminResponseDto
+ */
+export interface FetchClientAdminResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'currency': FetchClientAdminResponseDtoCurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'timezone': FetchClientAdminResponseDtoTimezoneEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'credit': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'type': FetchClientAdminResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'paymentCardId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'storeId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'businessLicenseId': string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'isSeller': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {Array<User>}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'users': Array<User>;
+    /**
+     * 
+     * @type {Array<FetchClientRelationsAsStoreDto>}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'relationsAsStore': Array<FetchClientRelationsAsStoreDto>;
+    /**
+     * 
+     * @type {Array<FetchClientRelationsAsSellerDto>}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'relationsAsSeller': Array<FetchClientRelationsAsSellerDto>;
+    /**
+     * 
+     * @type {AutoCharge}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'autoCharge': AutoCharge;
+    /**
+     * 
+     * @type {Array<FetchPageResponseDto>}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'pages': Array<FetchPageResponseDto>;
+}
+
+export const FetchClientAdminResponseDtoCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type FetchClientAdminResponseDtoCurrencyEnum = typeof FetchClientAdminResponseDtoCurrencyEnum[keyof typeof FetchClientAdminResponseDtoCurrencyEnum];
+export const FetchClientAdminResponseDtoTimezoneEnum = {
+    Kst: 'KST',
+    Ict: 'ICT',
+    Est: 'EST',
+    Cst: 'CST',
+    Mst: 'MST',
+    Pst: 'PST',
+    Akst: 'AKST',
+    Hst: 'HST'
+} as const;
+
+export type FetchClientAdminResponseDtoTimezoneEnum = typeof FetchClientAdminResponseDtoTimezoneEnum[keyof typeof FetchClientAdminResponseDtoTimezoneEnum];
+export const FetchClientAdminResponseDtoTypeEnum = {
+    PlatformAndSeller: 'PLATFORM_AND_SELLER',
+    OwnWebsiteAndSeller: 'OWN_WEBSITE_AND_SELLER',
+    Platform: 'PLATFORM',
+    OwnWebsite: 'OWN_WEBSITE',
+    Seller: 'SELLER',
+    Admin: 'ADMIN'
+} as const;
+
+export type FetchClientAdminResponseDtoTypeEnum = typeof FetchClientAdminResponseDtoTypeEnum[keyof typeof FetchClientAdminResponseDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchClientRelationsAsSellerDto
+ */
+export interface FetchClientRelationsAsSellerDto {
+    /**
+     * 
+     * @type {Client}
+     * @memberof FetchClientRelationsAsSellerDto
+     */
+    'store': Client;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsSellerDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsSellerDto
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsSellerDto
+     */
+    'sellerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsSellerDto
+     */
+    'sellerIdOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsSellerDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsSellerDto
+     */
+    'deletedAt': string | null;
+}
+/**
+ * 
+ * @export
+ * @interface FetchClientRelationsAsStoreDto
+ */
+export interface FetchClientRelationsAsStoreDto {
+    /**
+     * 
+     * @type {Client}
+     * @memberof FetchClientRelationsAsStoreDto
+     */
+    'seller': Client;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsStoreDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsStoreDto
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsStoreDto
+     */
+    'sellerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsStoreDto
+     */
+    'sellerIdOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsStoreDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientRelationsAsStoreDto
+     */
+    'deletedAt': string | null;
+}
+/**
+ * 
+ * @export
+ * @interface FetchClientResponseDto
+ */
+export interface FetchClientResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientResponseDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientResponseDto
+     */
+    'currency': FetchClientResponseDtoCurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientResponseDto
+     */
+    'timezone': FetchClientResponseDtoTimezoneEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchClientResponseDto
+     */
+    'credit': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientResponseDto
+     */
+    'type': FetchClientResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientResponseDto
+     */
+    'paymentCardId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientResponseDto
+     */
+    'storeId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientResponseDto
+     */
+    'businessLicenseId': string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FetchClientResponseDto
+     */
+    'isSeller': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchClientResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {Array<User>}
+     * @memberof FetchClientResponseDto
+     */
+    'users': Array<User>;
+    /**
+     * 
+     * @type {Array<Token>}
+     * @memberof FetchClientResponseDto
+     */
+    'tokens': Array<Token>;
+    /**
+     * 
+     * @type {Array<Page>}
+     * @memberof FetchClientResponseDto
+     */
+    'pages': Array<Page>;
+    /**
+     * 
+     * @type {PaymentCard}
+     * @memberof FetchClientResponseDto
+     */
+    'paymentCard': PaymentCard | null;
+    /**
+     * 
+     * @type {Array<FetchClientRelationsAsSellerDto>}
+     * @memberof FetchClientResponseDto
+     */
+    'relationsAsSeller'?: Array<FetchClientRelationsAsSellerDto>;
+    /**
+     * 
+     * @type {BusinessLicense}
+     * @memberof FetchClientResponseDto
+     */
+    'businessLicense'?: BusinessLicense | null;
+}
+
+export const FetchClientResponseDtoCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type FetchClientResponseDtoCurrencyEnum = typeof FetchClientResponseDtoCurrencyEnum[keyof typeof FetchClientResponseDtoCurrencyEnum];
+export const FetchClientResponseDtoTimezoneEnum = {
+    Kst: 'KST',
+    Ict: 'ICT',
+    Est: 'EST',
+    Cst: 'CST',
+    Mst: 'MST',
+    Pst: 'PST',
+    Akst: 'AKST',
+    Hst: 'HST'
+} as const;
+
+export type FetchClientResponseDtoTimezoneEnum = typeof FetchClientResponseDtoTimezoneEnum[keyof typeof FetchClientResponseDtoTimezoneEnum];
+export const FetchClientResponseDtoTypeEnum = {
+    PlatformAndSeller: 'PLATFORM_AND_SELLER',
+    OwnWebsiteAndSeller: 'OWN_WEBSITE_AND_SELLER',
+    Platform: 'PLATFORM',
+    OwnWebsite: 'OWN_WEBSITE',
+    Seller: 'SELLER',
+    Admin: 'ADMIN'
+} as const;
+
+export type FetchClientResponseDtoTypeEnum = typeof FetchClientResponseDtoTypeEnum[keyof typeof FetchClientResponseDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchCustomerDialogueCountResponseDto
+ */
+export interface FetchCustomerDialogueCountResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchCustomerDialogueCountResponseDto
+     */
+    'count': number;
+}
+/**
+ * 
+ * @export
+ * @interface FetchDashboardCampaignResponseDto
+ */
+export interface FetchDashboardCampaignResponseDto {
+    /**
+     * 
+     * @type {DashboardCampaign}
+     * @memberof FetchDashboardCampaignResponseDto
+     */
+    'campaign': DashboardCampaign;
+    /**
+     * 
+     * @type {Metric}
+     * @memberof FetchDashboardCampaignResponseDto
+     */
+    'metric': Metric;
+}
+/**
+ * 
+ * @export
+ * @interface FetchDashboardCampaignSummaryResponseDto
+ */
+export interface FetchDashboardCampaignSummaryResponseDto {
+    /**
+     * 
+     * @type {DailyMetric}
+     * @memberof FetchDashboardCampaignSummaryResponseDto
+     */
+    'base': DailyMetric;
+    /**
+     * 
+     * @type {DailyMetric}
+     * @memberof FetchDashboardCampaignSummaryResponseDto
+     */
+    'reference': DailyMetric;
+}
+/**
+ * 
+ * @export
+ * @interface FetchDashboardSellerResponseDto
+ */
+export interface FetchDashboardSellerResponseDto {
+    /**
+     * 
+     * @type {DashboardSeller}
+     * @memberof FetchDashboardSellerResponseDto
+     */
+    'seller': DashboardSeller;
+    /**
+     * 
+     * @type {Metric}
+     * @memberof FetchDashboardSellerResponseDto
+     */
+    'metric': Metric;
+}
+/**
+ * 
+ * @export
+ * @interface FetchDashboardSellerSummaryResponseDto
+ */
+export interface FetchDashboardSellerSummaryResponseDto {
+    /**
+     * 
+     * @type {DailyMetric}
+     * @memberof FetchDashboardSellerSummaryResponseDto
+     */
+    'base': DailyMetric;
+    /**
+     * 
+     * @type {DailyMetric}
+     * @memberof FetchDashboardSellerSummaryResponseDto
+     */
+    'reference': DailyMetric;
+}
+/**
+ * 
+ * @export
+ * @interface FetchGraphResponseDto
+ */
+export interface FetchGraphResponseDto {
+    /**
+     * 
+     * @type {Array<DailyMetric>}
+     * @memberof FetchGraphResponseDto
+     */
+    'metrics': Array<DailyMetric>;
+}
+/**
+ * 
+ * @export
  * @interface FetchManyBannersResponseDto
  */
 export interface FetchManyBannersResponseDto {
@@ -979,9 +4688,100 @@ export type FetchManyBannersResponseDtoTypeEnum = typeof FetchManyBannersRespons
 /**
  * 
  * @export
+ * @interface FetchManyCampaignsResponseDto
+ */
+export interface FetchManyCampaignsResponseDto {
+    /**
+     * 
+     * @type {Placement}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'placement': Placement;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'usedBudget': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyCampaignsResponseDto
+     */
+    'deletedAt': string | null;
+}
+/**
+ * 
+ * @export
  * @interface FetchManyPlacementsResponseDto
  */
 export interface FetchManyPlacementsResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyPlacementsResponseDto
+     */
+    'placementFormatRatio': string | null;
     /**
      * 
      * @type {FetchPageClientDto}
@@ -1107,12 +4907,6 @@ export interface FetchManyPlacementsResponseDto {
      * @type {string}
      * @memberof FetchManyPlacementsResponseDto
      */
-    'placementFormatRatio': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchManyPlacementsResponseDto
-     */
     'createdAt': string;
     /**
      * 
@@ -1167,6 +4961,25 @@ export type FetchManyPlacementsResponseDtoPropertyEnum = typeof FetchManyPlaceme
 /**
  * 
  * @export
+ * @interface FetchMetricsOnBannerDashboardResponseDto
+ */
+export interface FetchMetricsOnBannerDashboardResponseDto {
+    /**
+     * 
+     * @type {Metric}
+     * @memberof FetchMetricsOnBannerDashboardResponseDto
+     */
+    'summary': Metric;
+    /**
+     * 
+     * @type {Array<DailyMetric>}
+     * @memberof FetchMetricsOnBannerDashboardResponseDto
+     */
+    'graph': Array<DailyMetric>;
+}
+/**
+ * 
+ * @export
  * @interface FetchPageClientDto
  */
 export interface FetchPageClientDto {
@@ -1200,6 +5013,250 @@ export interface FetchPageClientDto {
      * @memberof FetchPageClientDto
      */
     'client': Client;
+}
+/**
+ * 
+ * @export
+ * @interface FetchPageResponseDto
+ */
+export interface FetchPageResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPageResponseDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPageResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPageResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPageResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {Array<Placement>}
+     * @memberof FetchPageResponseDto
+     */
+    'placements': Array<Placement>;
+}
+/**
+ * 
+ * @export
+ * @interface FetchPlacementResponseDto
+ */
+export interface FetchPlacementResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'placementFormatRatio': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'type': FetchPlacementResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'suggestionType': FetchPlacementResponseDtoSuggestionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'supportEnvironment': FetchPlacementResponseDtoSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'developEnvironment': FetchPlacementResponseDtoDevelopEnvironmentEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchPlacementResponseDto
+     */
+    'displayCount': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchPlacementResponseDto
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchPlacementResponseDto
+     */
+    'maxDisplayCount': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FetchPlacementResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'pageName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {Injector}
+     * @memberof FetchPlacementResponseDto
+     */
+    'injector': Injector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'screenShot': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchPlacementResponseDto
+     */
+    'displayFormatWidth': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchPlacementResponseDto
+     */
+    'displayFormatHeight': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'property': FetchPlacementResponseDtoPropertyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {FetchPageClientDto}
+     * @memberof FetchPlacementResponseDto
+     */
+    'page': FetchPageClientDto;
+    /**
+     * 
+     * @type {Array<ProductWithSeller>}
+     * @memberof FetchPlacementResponseDto
+     */
+    'products': Array<ProductWithSeller>;
+    /**
+     * 
+     * @type {Array<BannerWithCreative>}
+     * @memberof FetchPlacementResponseDto
+     */
+    'banners': Array<BannerWithCreative>;
+    /**
+     * 
+     * @type {Array<CampaignWithClientAndAudience>}
+     * @memberof FetchPlacementResponseDto
+     */
+    'campaigns': Array<CampaignWithClientAndAudience>;
+}
+
+export const FetchPlacementResponseDtoTypeEnum = {
+    Grid: 'GRID',
+    Banner: 'BANNER'
+} as const;
+
+export type FetchPlacementResponseDtoTypeEnum = typeof FetchPlacementResponseDtoTypeEnum[keyof typeof FetchPlacementResponseDtoTypeEnum];
+export const FetchPlacementResponseDtoSuggestionTypeEnum = {
+    Recommend: 'RECOMMEND',
+    Advertise: 'ADVERTISE'
+} as const;
+
+export type FetchPlacementResponseDtoSuggestionTypeEnum = typeof FetchPlacementResponseDtoSuggestionTypeEnum[keyof typeof FetchPlacementResponseDtoSuggestionTypeEnum];
+export const FetchPlacementResponseDtoSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
+} as const;
+
+export type FetchPlacementResponseDtoSupportEnvironmentEnum = typeof FetchPlacementResponseDtoSupportEnvironmentEnum[keyof typeof FetchPlacementResponseDtoSupportEnvironmentEnum];
+export const FetchPlacementResponseDtoDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
+
+export type FetchPlacementResponseDtoDevelopEnvironmentEnum = typeof FetchPlacementResponseDtoDevelopEnvironmentEnum[keyof typeof FetchPlacementResponseDtoDevelopEnvironmentEnum];
+export const FetchPlacementResponseDtoPropertyEnum = {
+    New: 'NEW',
+    Hot: 'HOT',
+    Personal: 'PERSONAL',
+    SameGoods: 'SAME_GOODS',
+    DiffGoods: 'DIFF_GOODS'
+} as const;
+
+export type FetchPlacementResponseDtoPropertyEnum = typeof FetchPlacementResponseDtoPropertyEnum[keyof typeof FetchPlacementResponseDtoPropertyEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchProductAvailablePropertyResponseDto
+ */
+export interface FetchProductAvailablePropertyResponseDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FetchProductAvailablePropertyResponseDto
+     */
+    'available': Array<string>;
 }
 /**
  * 
@@ -1287,12 +5344,6 @@ export interface FetchProductResponseDto {
     'caption': string | null;
     /**
      * 
-     * @type {Array<Placement>}
-     * @memberof FetchProductResponseDto
-     */
-    'placements': Array<Placement>;
-    /**
-     * 
      * @type {string}
      * @memberof FetchProductResponseDto
      */
@@ -1315,6 +5366,486 @@ export interface FetchProductResponseDto {
      * @memberof FetchProductResponseDto
      */
     'seller': Client;
+}
+/**
+ * 
+ * @export
+ * @interface FetchSellerResponseDto
+ */
+export interface FetchSellerResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerResponseDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerResponseDto
+     */
+    'currency': FetchSellerResponseDtoCurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerResponseDto
+     */
+    'timezone': FetchSellerResponseDtoTimezoneEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchSellerResponseDto
+     */
+    'credit': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerResponseDto
+     */
+    'type': FetchSellerResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerResponseDto
+     */
+    'paymentCardId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerResponseDto
+     */
+    'storeId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerResponseDto
+     */
+    'businessLicenseId': string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FetchSellerResponseDto
+     */
+    'isSeller': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {Array<User>}
+     * @memberof FetchSellerResponseDto
+     */
+    'users': Array<User>;
+}
+
+export const FetchSellerResponseDtoCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type FetchSellerResponseDtoCurrencyEnum = typeof FetchSellerResponseDtoCurrencyEnum[keyof typeof FetchSellerResponseDtoCurrencyEnum];
+export const FetchSellerResponseDtoTimezoneEnum = {
+    Kst: 'KST',
+    Ict: 'ICT',
+    Est: 'EST',
+    Cst: 'CST',
+    Mst: 'MST',
+    Pst: 'PST',
+    Akst: 'AKST',
+    Hst: 'HST'
+} as const;
+
+export type FetchSellerResponseDtoTimezoneEnum = typeof FetchSellerResponseDtoTimezoneEnum[keyof typeof FetchSellerResponseDtoTimezoneEnum];
+export const FetchSellerResponseDtoTypeEnum = {
+    PlatformAndSeller: 'PLATFORM_AND_SELLER',
+    OwnWebsiteAndSeller: 'OWN_WEBSITE_AND_SELLER',
+    Platform: 'PLATFORM',
+    OwnWebsite: 'OWN_WEBSITE',
+    Seller: 'SELLER',
+    Admin: 'ADMIN'
+} as const;
+
+export type FetchSellerResponseDtoTypeEnum = typeof FetchSellerResponseDtoTypeEnum[keyof typeof FetchSellerResponseDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchTransactionResponseDto
+ */
+export interface FetchTransactionResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchTransactionResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchTransactionResponseDto
+     */
+    'impUid': string | null;
+    /**
+     * 
+     * @type {IamportPaymentVBank}
+     * @memberof FetchTransactionResponseDto
+     */
+    'impVBank': IamportPaymentVBank | null;
+    /**
+     * 
+     * @type {TransactionPaymentCard}
+     * @memberof FetchTransactionResponseDto
+     */
+    'paymentCard': TransactionPaymentCard;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchTransactionResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchTransactionResponseDto
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchTransactionResponseDto
+     */
+    'currency': FetchTransactionResponseDtoCurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchTransactionResponseDto
+     */
+    'paymentMethod': FetchTransactionResponseDtoPaymentMethodEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchTransactionResponseDto
+     */
+    'status': FetchTransactionResponseDtoStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchTransactionResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchTransactionResponseDto
+     */
+    'paidAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchTransactionResponseDto
+     */
+    'category': FetchTransactionResponseDtoCategoryEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchTransactionResponseDto
+     */
+    'failedReason': FetchTransactionResponseDtoFailedReasonEnum;
+    /**
+     * 
+     * @type {Client}
+     * @memberof FetchTransactionResponseDto
+     */
+    'client': Client;
+}
+
+export const FetchTransactionResponseDtoCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type FetchTransactionResponseDtoCurrencyEnum = typeof FetchTransactionResponseDtoCurrencyEnum[keyof typeof FetchTransactionResponseDtoCurrencyEnum];
+export const FetchTransactionResponseDtoPaymentMethodEnum = {
+    Card: 'Card',
+    DirectBank: 'DirectBank',
+    VBank: 'VBank',
+    Hpp: 'HPP'
+} as const;
+
+export type FetchTransactionResponseDtoPaymentMethodEnum = typeof FetchTransactionResponseDtoPaymentMethodEnum[keyof typeof FetchTransactionResponseDtoPaymentMethodEnum];
+export const FetchTransactionResponseDtoStatusEnum = {
+    Pending: 'Pending',
+    Ready: 'Ready',
+    Completed: 'Completed',
+    Unauthorized: 'Unauthorized',
+    Failed: 'Failed',
+    Closed: 'Closed'
+} as const;
+
+export type FetchTransactionResponseDtoStatusEnum = typeof FetchTransactionResponseDtoStatusEnum[keyof typeof FetchTransactionResponseDtoStatusEnum];
+export const FetchTransactionResponseDtoCategoryEnum = {
+    AutoCharge: 'AUTO_CHARGE',
+    Subscription: 'SUBSCRIPTION'
+} as const;
+
+export type FetchTransactionResponseDtoCategoryEnum = typeof FetchTransactionResponseDtoCategoryEnum[keyof typeof FetchTransactionResponseDtoCategoryEnum];
+export const FetchTransactionResponseDtoFailedReasonEnum = {
+    ClosedCard: 'CLOSED_CARD',
+    BalanceInsufficient: 'BALANCE_INSUFFICIENT',
+    Etc: 'ETC'
+} as const;
+
+export type FetchTransactionResponseDtoFailedReasonEnum = typeof FetchTransactionResponseDtoFailedReasonEnum[keyof typeof FetchTransactionResponseDtoFailedReasonEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchWishlistResponseDto
+ */
+export interface FetchWishlistResponseDto {
+    /**
+     * 
+     * @type {object}
+     * @memberof FetchWishlistResponseDto
+     */
+    'data': object;
+    /**
+     * 
+     * @type {Product}
+     * @memberof FetchWishlistResponseDto
+     */
+    'product': Product;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchWishlistResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchWishlistResponseDto
+     */
+    'wishlistId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchWishlistResponseDto
+     */
+    'productIdOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchWishlistResponseDto
+     */
+    'customerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchWishlistResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchWishlistResponseDto
+     */
+    'wishlistDate': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchWishlistResponseDto
+     */
+    'createdAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface Figure
+ */
+export interface Figure {
+    /**
+     * 
+     * @type {number}
+     * @memberof Figure
+     */
+    'roas'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Figure
+     */
+    'click'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Figure
+     */
+    'purchase'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Figure
+     */
+    'addToCart'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Figure
+     */
+    'conversion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Figure
+     */
+    'impressedVisitor'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface GenerateUploadLinkResponseDto
+ */
+export interface GenerateUploadLinkResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof GenerateUploadLinkResponseDto
+     */
+    'url': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof GenerateUploadLinkResponseDto
+     */
+    'fields': object;
+}
+/**
+ * 
+ * @export
+ * @interface GetMeResponseDto
+ */
+export interface GetMeResponseDto {
+    /**
+     * 
+     * @type {GetMeUserDto}
+     * @memberof GetMeResponseDto
+     */
+    'user': GetMeUserDto;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMeResponseDto
+     */
+    'clientType': GetMeResponseDtoClientTypeEnum;
+}
+
+export const GetMeResponseDtoClientTypeEnum = {
+    Store: 'STORE',
+    Seller: 'SELLER'
+} as const;
+
+export type GetMeResponseDtoClientTypeEnum = typeof GetMeResponseDtoClientTypeEnum[keyof typeof GetMeResponseDtoClientTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface GetMeUserDto
+ */
+export interface GetMeUserDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMeUserDto
+     */
+    'clientId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMeUserDto
+     */
+    'email': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetMeUserDto
+     */
+    'emailVerified': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetMeUserDto
+     */
+    'emailReceiptAgreed': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMeUserDto
+     */
+    'password': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMeUserDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GetMeUserDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetMeUserDto
+     */
+    'role': GetMeUserDtoRoleEnum;
+    /**
+     * 
+     * @type {ClientWithBusinessLicenseDto}
+     * @memberof GetMeUserDto
+     */
+    'client': ClientWithBusinessLicenseDto;
+}
+
+export const GetMeUserDtoRoleEnum = {
+    NUMBER_0: 0,
+    NUMBER_1: 1,
+    NUMBER_2: 2
+} as const;
+
+export type GetMeUserDtoRoleEnum = typeof GetMeUserDtoRoleEnum[keyof typeof GetMeUserDtoRoleEnum];
+
+/**
+ * 
+ * @export
+ * @interface GetRedirectResponseDto
+ */
+export interface GetRedirectResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof GetRedirectResponseDto
+     */
+    'redirect': string;
 }
 /**
  * 
@@ -1353,6 +5884,292 @@ export interface GridInjectorDto {
      * @memberof GridInjectorDto
      */
     'template': string;
+}
+/**
+ * 
+ * @export
+ * @interface IamportPaymentParams
+ */
+export interface IamportPaymentParams {
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentParams
+     */
+    'pg': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentParams
+     */
+    'pay_method': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentParams
+     */
+    'merchant_uid': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentParams
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof IamportPaymentParams
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentParams
+     */
+    'buyer_email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentParams
+     */
+    'buyer_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentParams
+     */
+    'buyer_tel': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentParams
+     */
+    'buyer_addr': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentParams
+     */
+    'buyer_postcode': string;
+}
+/**
+ * 
+ * @export
+ * @interface IamportPaymentResult
+ */
+export interface IamportPaymentResult {
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'apply_num': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'bank_name': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'buyer_addr': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'buyer_email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'buyer_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'buyer_postcode': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'buyer_tel': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'card_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'card_number': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof IamportPaymentResult
+     */
+    'card_quota': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'currency': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'custom_data': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'imp_uid': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'merchant_uid': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof IamportPaymentResult
+     */
+    'paid_amount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof IamportPaymentResult
+     */
+    'paid_at': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'pay_method': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'pg_provider': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'pg_tid': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'pg_type': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'receipt_url': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentResult
+     */
+    'status': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof IamportPaymentResult
+     */
+    'success': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface IamportPaymentVBank
+ */
+export interface IamportPaymentVBank {
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_code': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_date': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_holder': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_issued_at': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_num': string;
+}
+/**
+ * 
+ * @export
+ * @interface IdentifyDto
+ */
+export interface IdentifyDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof IdentifyDto
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IdentifyDto
+     */
+    'code': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IdentifyDto
+     */
+    'password': string;
 }
 /**
  * 
@@ -1450,6 +6267,86 @@ export interface LogOptionsDto {
 /**
  * 
  * @export
+ * @interface LoginDto
+ */
+export interface LoginDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginDto
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginDto
+     */
+    'password': string;
+}
+/**
+ * 
+ * @export
+ * @interface Metric
+ */
+export interface Metric {
+    /**
+     * 
+     * @type {CountCost}
+     * @memberof Metric
+     */
+    'totalVisitor'?: CountCost;
+    /**
+     * 
+     * @type {CountCost}
+     * @memberof Metric
+     */
+    'impressedVisitor'?: CountCost;
+    /**
+     * 
+     * @type {CountCostAmount}
+     * @memberof Metric
+     */
+    'purchase': CountCostAmount;
+    /**
+     * 
+     * @type {CountCost}
+     * @memberof Metric
+     */
+    'click': CountCost;
+    /**
+     * 
+     * @type {CountCost}
+     * @memberof Metric
+     */
+    'impression'?: CountCost;
+    /**
+     * 
+     * @type {CountCost}
+     * @memberof Metric
+     */
+    'addToCart'?: CountCost;
+    /**
+     * 
+     * @type {Figure}
+     * @memberof Metric
+     */
+    'figure'?: Figure;
+    /**
+     * 
+     * @type {Credit}
+     * @memberof Metric
+     */
+    'credit'?: Credit;
+    /**
+     * 
+     * @type {Count}
+     * @memberof Metric
+     */
+    'count'?: Count;
+}
+/**
+ * 
+ * @export
  * @interface NestJSErrorSchema
  */
 export interface NestJSErrorSchema {
@@ -1475,6 +6372,44 @@ export interface NestJSErrorSchema {
 /**
  * 
  * @export
+ * @interface NotionNotice
+ */
+export interface NotionNotice {
+    /**
+     * 
+     * @type {string}
+     * @memberof NotionNotice
+     */
+    'url': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NotionNotice
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NotionNotice
+     */
+    'releasedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface NotionNoticeListDto
+ */
+export interface NotionNoticeListDto {
+    /**
+     * 
+     * @type {Array<NotionNotice>}
+     * @memberof NotionNoticeListDto
+     */
+    'items': Array<NotionNotice>;
+}
+/**
+ * 
+ * @export
  * @interface Observer
  */
 export interface Observer {
@@ -1494,9 +6429,145 @@ export interface Observer {
 /**
  * 
  * @export
+ * @interface Order
+ */
+export interface Order {
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof Order
+     */
+    'products': Array<object>;
+    /**
+     * 
+     * @type {object}
+     * @memberof Order
+     */
+    'data': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof Order
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Order
+     */
+    'orderId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Order
+     */
+    'customerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Order
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Order
+     */
+    'orderDate': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Order
+     */
+    'createdAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface Page
+ */
+export interface Page {
+    /**
+     * 
+     * @type {string}
+     * @memberof Page
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Page
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Page
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Page
+     */
+    'deletedAt': string | null;
+}
+/**
+ * 
+ * @export
+ * @interface PageControllerFetchManyPage200Response
+ */
+export interface PageControllerFetchManyPage200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof PageControllerFetchManyPage200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchPageResponseDto>}
+     * @memberof PageControllerFetchManyPage200Response
+     */
+    'items'?: Array<FetchPageResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface PaymentCard
+ */
+export interface PaymentCard {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentCard
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentCard
+     */
+    'cardCompany': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentCard
+     */
+    'cardNumber': string;
+}
+/**
+ * 
+ * @export
  * @interface Placement
  */
 export interface Placement {
+    /**
+     * 
+     * @type {string}
+     * @memberof Placement
+     */
+    'placementFormatRatio': string | null;
     /**
      * 
      * @type {string}
@@ -1599,12 +6670,6 @@ export interface Placement {
      * @memberof Placement
      */
     'property': PlacementPropertyEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof Placement
-     */
-    'placementFormatRatio': string | null;
     /**
      * 
      * @type {string}
@@ -1804,12 +6869,6 @@ export interface Product {
     'caption': string | null;
     /**
      * 
-     * @type {Array<Placement>}
-     * @memberof Product
-     */
-    'placements': Array<Placement>;
-    /**
-     * 
      * @type {string}
      * @memberof Product
      */
@@ -1820,6 +6879,67 @@ export interface Product {
      * @memberof Product
      */
     'updatedAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface ProductColumnMappingDto
+ */
+export interface ProductColumnMappingDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductColumnMappingDto
+     */
+    'idOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductColumnMappingDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductColumnMappingDto
+     */
+    'price': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductColumnMappingDto
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductColumnMappingDto
+     */
+    'includeInRecommendation'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductColumnMappingDto
+     */
+    'image': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductColumnMappingDto
+     */
+    'sellerIdOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductColumnMappingDto
+     */
+    'url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductColumnMappingDto
+     */
+    'deepLink'?: string;
 }
 /**
  * 
@@ -1839,6 +6959,159 @@ export interface ProductControllerFetchMany200Response {
      * @memberof ProductControllerFetchMany200Response
      */
     'items'?: Array<FetchProductResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface ProductWithSeller
+ */
+export interface ProductWithSeller {
+    /**
+     * 
+     * @type {object}
+     * @memberof ProductWithSeller
+     */
+    'data': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'idOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'sellerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductWithSeller
+     */
+    'price': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'image': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ProductWithSeller
+     */
+    'includeInRecommendation': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'url': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'deepLink': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'caption': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {Client}
+     * @memberof ProductWithSeller
+     */
+    'seller': Client;
+}
+/**
+ * 
+ * @export
+ * @interface RegisterDto
+ */
+export interface RegisterDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof RegisterDto
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RegisterDto
+     */
+    'code': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RegisterDto
+     */
+    'password': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RegisterDto
+     */
+    'emailReceiptAgreed': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface RemoveProductFromPlacementResponseDto
+ */
+export interface RemoveProductFromPlacementResponseDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RemoveProductFromPlacementResponseDto
+     */
+    'removed': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RemoveProductFromPlacementResponseDto
+     */
+    'placementDeactivated': boolean;
 }
 /**
  * 
@@ -1878,53 +7151,569 @@ export type RetrieverMatcherEnum = typeof RetrieverMatcherEnum[keyof typeof Retr
 /**
  * 
  * @export
- * @interface Store
+ * @interface SearchProductsRequestDto
  */
-export interface Store {
+export interface SearchProductsRequestDto {
+    /**
+     * 
+     * @type {SearchProductsRequestDtoQuery}
+     * @memberof SearchProductsRequestDto
+     */
+    'query': SearchProductsRequestDtoQuery;
+    /**
+     * 
+     * @type {Array<{ [key: string]: string; }>}
+     * @memberof SearchProductsRequestDto
+     */
+    'wheres'?: Array<{ [key: string]: string; }>;
+    /**
+     * 
+     * @type {SearchProductsRequestDtoQuery}
+     * @memberof SearchProductsRequestDto
+     */
+    'moveTo'?: SearchProductsRequestDtoQuery;
     /**
      * 
      * @type {string}
-     * @memberof Store
+     * @memberof SearchProductsRequestDto
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof SearchProductsRequestDto
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SearchProductsRequestDto
+     */
+    'force'?: number;
+}
+/**
+ * @type SearchProductsRequestDtoQuery
+ * @export
+ */
+export type SearchProductsRequestDtoQuery = Array<string> | string;
+
+/**
+ * 
+ * @export
+ * @interface SearchProductsResponseDto
+ */
+export interface SearchProductsResponseDto {
+    /**
+     * 
+     * @type {Array<SearchedProductDto>}
+     * @memberof SearchProductsResponseDto
+     */
+    'products': Array<SearchedProductDto>;
+}
+/**
+ * 
+ * @export
+ * @interface SearchedProductDto
+ */
+export interface SearchedProductDto {
+    /**
+     * 
+     * @type {object}
+     * @memberof SearchedProductDto
+     */
+    'data': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof SearchedProductDto
      */
     'id': string;
     /**
      * 
      * @type {string}
-     * @memberof Store
+     * @memberof SearchedProductDto
      */
-    'type': StoreTypeEnum;
+    'idOnStore': string;
     /**
      * 
      * @type {string}
-     * @memberof Store
+     * @memberof SearchedProductDto
      */
-    'solutionType': StoreSolutionTypeEnum;
+    'storeId': string;
     /**
      * 
      * @type {string}
-     * @memberof Store
+     * @memberof SearchedProductDto
+     */
+    'sellerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SearchedProductDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof SearchedProductDto
+     */
+    'price': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SearchedProductDto
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SearchedProductDto
+     */
+    'image': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SearchedProductDto
+     */
+    'includeInRecommendation': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof SearchedProductDto
+     */
+    'url': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SearchedProductDto
+     */
+    'deepLink': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SearchedProductDto
+     */
+    'caption': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SearchedProductDto
      */
     'createdAt': string;
     /**
      * 
      * @type {string}
-     * @memberof Store
+     * @memberof SearchedProductDto
      */
-    'deletedAt': string | null;
+    'updatedAt': string;
+    /**
+     * 
+     * @type {Client}
+     * @memberof SearchedProductDto
+     */
+    'store': Client;
+    /**
+     * 
+     * @type {Client}
+     * @memberof SearchedProductDto
+     */
+    'seller': Client;
+}
+/**
+ * 
+ * @export
+ * @interface SetupDto
+ */
+export interface SetupDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof SetupDto
+     */
+    'clientName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SetupDto
+     */
+    'currency': SetupDtoCurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SetupDto
+     */
+    'timezone': SetupDtoTimezoneEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SetupDto
+     */
+    'state'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SetupDto
+     */
+    'storeType': SetupDtoStoreTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SetupDto
+     */
+    'storeSolutionType'?: SetupDtoStoreSolutionTypeEnum;
+    /**
+     * 
+     * @type {object}
+     * @memberof SetupDto
+     */
+    'params'?: object;
+    /**
+     * 
+     * @type {string}
+     * @memberof SetupDto
+     */
+    'businessLicenseFileUrl': string;
 }
 
-export const StoreTypeEnum = {
+export const SetupDtoCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type SetupDtoCurrencyEnum = typeof SetupDtoCurrencyEnum[keyof typeof SetupDtoCurrencyEnum];
+export const SetupDtoTimezoneEnum = {
+    Kst: 'KST',
+    Ict: 'ICT',
+    Est: 'EST',
+    Cst: 'CST',
+    Mst: 'MST',
+    Pst: 'PST',
+    Akst: 'AKST',
+    Hst: 'HST'
+} as const;
+
+export type SetupDtoTimezoneEnum = typeof SetupDtoTimezoneEnum[keyof typeof SetupDtoTimezoneEnum];
+export const SetupDtoStoreTypeEnum = {
     Platform: 'PLATFORM',
     InHouse: 'IN_HOUSE'
 } as const;
 
-export type StoreTypeEnum = typeof StoreTypeEnum[keyof typeof StoreTypeEnum];
-export const StoreSolutionTypeEnum = {
+export type SetupDtoStoreTypeEnum = typeof SetupDtoStoreTypeEnum[keyof typeof SetupDtoStoreTypeEnum];
+export const SetupDtoStoreSolutionTypeEnum = {
     SelfDeveloped: 'SELF_DEVELOPED',
     Cafe24: 'CAFE24'
 } as const;
 
-export type StoreSolutionTypeEnum = typeof StoreSolutionTypeEnum[keyof typeof StoreSolutionTypeEnum];
+export type SetupDtoStoreSolutionTypeEnum = typeof SetupDtoStoreSolutionTypeEnum[keyof typeof SetupDtoStoreSolutionTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface StartVerificationDto
+ */
+export interface StartVerificationDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof StartVerificationDto
+     */
+    'email': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof StartVerificationDto
+     */
+    'userShouldExist'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface StoreResponseDto
+ */
+export interface StoreResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof StoreResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StoreResponseDto
+     */
+    'type': StoreResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {Client}
+     * @memberof StoreResponseDto
+     */
+    'client': Client;
+    /**
+     * 
+     * @type {string}
+     * @memberof StoreResponseDto
+     */
+    'solutionType': StoreResponseDtoSolutionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof StoreResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StoreResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {SubscriptionPlanResponseDto}
+     * @memberof StoreResponseDto
+     */
+    'subscriptionPlan': SubscriptionPlanResponseDto;
+}
+
+export const StoreResponseDtoTypeEnum = {
+    Platform: 'PLATFORM',
+    InHouse: 'IN_HOUSE'
+} as const;
+
+export type StoreResponseDtoTypeEnum = typeof StoreResponseDtoTypeEnum[keyof typeof StoreResponseDtoTypeEnum];
+export const StoreResponseDtoSolutionTypeEnum = {
+    SelfDeveloped: 'SELF_DEVELOPED',
+    Cafe24: 'CAFE24'
+} as const;
+
+export type StoreResponseDtoSolutionTypeEnum = typeof StoreResponseDtoSolutionTypeEnum[keyof typeof StoreResponseDtoSolutionTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface SubscriptionPlan
+ */
+export interface SubscriptionPlan {
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlan
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlan
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlan
+     */
+    'type': SubscriptionPlanTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlan
+     */
+    'currency': SubscriptionPlanCurrencyEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof SubscriptionPlan
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlan
+     */
+    'nextSchedulePaymentDate': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlan
+     */
+    'recentPaymentDate': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof SubscriptionPlan
+     */
+    'recentTransactionRetriedCount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlan
+     */
+    'recentTransactionId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlan
+     */
+    'recentTransactionStatus': SubscriptionPlanRecentTransactionStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlan
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlan
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlan
+     */
+    'deletedAt': string | null;
+}
+
+export const SubscriptionPlanTypeEnum = {
+    Basic: 'BASIC',
+    Standard: 'STANDARD'
+} as const;
+
+export type SubscriptionPlanTypeEnum = typeof SubscriptionPlanTypeEnum[keyof typeof SubscriptionPlanTypeEnum];
+export const SubscriptionPlanCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type SubscriptionPlanCurrencyEnum = typeof SubscriptionPlanCurrencyEnum[keyof typeof SubscriptionPlanCurrencyEnum];
+export const SubscriptionPlanRecentTransactionStatusEnum = {
+    None: 'NONE',
+    Requested: 'REQUESTED',
+    ResultWaiting: 'RESULT_WAITING',
+    Succeeded: 'SUCCEEDED',
+    RetryRequired: 'RETRY_REQUIRED',
+    FinallyFailed: 'FINALLY_FAILED'
+} as const;
+
+export type SubscriptionPlanRecentTransactionStatusEnum = typeof SubscriptionPlanRecentTransactionStatusEnum[keyof typeof SubscriptionPlanRecentTransactionStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface SubscriptionPlanResponseDto
+ */
+export interface SubscriptionPlanResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'type': SubscriptionPlanResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'currency': SubscriptionPlanResponseDtoCurrencyEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'nextSchedulePaymentDate': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'recentPaymentDate': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'recentTransactionRetriedCount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'recentTransactionId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'recentTransactionStatus': SubscriptionPlanResponseDtoRecentTransactionStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {Transaction}
+     * @memberof SubscriptionPlanResponseDto
+     */
+    'recentTransaction'?: Transaction;
+}
+
+export const SubscriptionPlanResponseDtoTypeEnum = {
+    Basic: 'BASIC',
+    Standard: 'STANDARD'
+} as const;
+
+export type SubscriptionPlanResponseDtoTypeEnum = typeof SubscriptionPlanResponseDtoTypeEnum[keyof typeof SubscriptionPlanResponseDtoTypeEnum];
+export const SubscriptionPlanResponseDtoCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type SubscriptionPlanResponseDtoCurrencyEnum = typeof SubscriptionPlanResponseDtoCurrencyEnum[keyof typeof SubscriptionPlanResponseDtoCurrencyEnum];
+export const SubscriptionPlanResponseDtoRecentTransactionStatusEnum = {
+    None: 'NONE',
+    Requested: 'REQUESTED',
+    ResultWaiting: 'RESULT_WAITING',
+    Succeeded: 'SUCCEEDED',
+    RetryRequired: 'RETRY_REQUIRED',
+    FinallyFailed: 'FINALLY_FAILED'
+} as const;
+
+export type SubscriptionPlanResponseDtoRecentTransactionStatusEnum = typeof SubscriptionPlanResponseDtoRecentTransactionStatusEnum[keyof typeof SubscriptionPlanResponseDtoRecentTransactionStatusEnum];
 
 /**
  * 
@@ -2000,11 +7789,11 @@ export interface SuggestionRequestDto {
      */
     'fromAgent'?: boolean;
     /**
-     * The age of the customer.
-     * @type {string}
+     * The birth year of the customer.
+     * @type {number}
      * @memberof SuggestionRequestDto
      */
-    'age'?: SuggestionRequestDtoAgeEnum;
+    'birthYear'?: number;
     /**
      * The gender of the customer.
      * @type {string}
@@ -2016,29 +7805,15 @@ export interface SuggestionRequestDto {
      * @type {string}
      * @memberof SuggestionRequestDto
      */
-    'area'?: SuggestionRequestDtoAreaEnum;
+    'area'?: string;
 }
 
-export const SuggestionRequestDtoAgeEnum = {
-    _10: '10',
-    _20: '20',
-    _30: '30',
-    _40: '40'
-} as const;
-
-export type SuggestionRequestDtoAgeEnum = typeof SuggestionRequestDtoAgeEnum[keyof typeof SuggestionRequestDtoAgeEnum];
 export const SuggestionRequestDtoGenderEnum = {
     Male: 'male',
     Female: 'female'
 } as const;
 
 export type SuggestionRequestDtoGenderEnum = typeof SuggestionRequestDtoGenderEnum[keyof typeof SuggestionRequestDtoGenderEnum];
-export const SuggestionRequestDtoAreaEnum = {
-    NorthernVietnam: 'NorthernVietnam',
-    SouthernVietnam: 'SouthernVietnam'
-} as const;
-
-export type SuggestionRequestDtoAreaEnum = typeof SuggestionRequestDtoAreaEnum[keyof typeof SuggestionRequestDtoAreaEnum];
 
 /**
  * 
@@ -2065,6 +7840,12 @@ export interface SuggestionResponseDto {
  * @interface SuggestionResponsePlacementType
  */
 export interface SuggestionResponsePlacementType {
+    /**
+     * 
+     * @type {string}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'placementFormatRatio': string | null;
     /**
      * 
      * @type {string}
@@ -2178,12 +7959,6 @@ export interface SuggestionResponsePlacementType {
      * @type {string}
      * @memberof SuggestionResponsePlacementType
      */
-    'placementFormatRatio': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SuggestionResponsePlacementType
-     */
     'createdAt': string;
     /**
      * 
@@ -2234,6 +8009,394 @@ export const SuggestionResponsePlacementTypePropertyEnum = {
 } as const;
 
 export type SuggestionResponsePlacementTypePropertyEnum = typeof SuggestionResponsePlacementTypePropertyEnum[keyof typeof SuggestionResponsePlacementTypePropertyEnum];
+
+/**
+ * 
+ * @export
+ * @interface SystemSetting
+ */
+export interface SystemSetting {
+    /**
+     * 
+     * @type {number}
+     * @memberof SystemSetting
+     */
+    'version': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemSetting
+     */
+    'corcaClientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemSetting
+     */
+    'createdAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface Token
+ */
+export interface Token {
+    /**
+     * 
+     * @type {string}
+     * @memberof Token
+     */
+    'webBuilder': TokenWebBuilderEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Token
+     */
+    'mallId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Token
+     */
+    'clientId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Token
+     */
+    'refreshToken': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Token
+     */
+    'refreshTokenExpiresAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Token
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Token
+     */
+    'updatedAt': string;
+}
+
+export const TokenWebBuilderEnum = {
+    Cafe24: 'cafe24',
+    Godo: 'godo'
+} as const;
+
+export type TokenWebBuilderEnum = typeof TokenWebBuilderEnum[keyof typeof TokenWebBuilderEnum];
+
+/**
+ * 
+ * @export
+ * @interface Transaction
+ */
+export interface Transaction {
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'impUid': string | null;
+    /**
+     * 
+     * @type {IamportPaymentVBank}
+     * @memberof Transaction
+     */
+    'impVBank': IamportPaymentVBank | null;
+    /**
+     * 
+     * @type {TransactionPaymentCard}
+     * @memberof Transaction
+     */
+    'paymentCard': TransactionPaymentCard;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Transaction
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'currency': TransactionCurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'paymentMethod': TransactionPaymentMethodEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'status': TransactionStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'paidAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'category': TransactionCategoryEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'failedReason': TransactionFailedReasonEnum;
+}
+
+export const TransactionCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type TransactionCurrencyEnum = typeof TransactionCurrencyEnum[keyof typeof TransactionCurrencyEnum];
+export const TransactionPaymentMethodEnum = {
+    Card: 'Card',
+    DirectBank: 'DirectBank',
+    VBank: 'VBank',
+    Hpp: 'HPP'
+} as const;
+
+export type TransactionPaymentMethodEnum = typeof TransactionPaymentMethodEnum[keyof typeof TransactionPaymentMethodEnum];
+export const TransactionStatusEnum = {
+    Pending: 'Pending',
+    Ready: 'Ready',
+    Completed: 'Completed',
+    Unauthorized: 'Unauthorized',
+    Failed: 'Failed',
+    Closed: 'Closed'
+} as const;
+
+export type TransactionStatusEnum = typeof TransactionStatusEnum[keyof typeof TransactionStatusEnum];
+export const TransactionCategoryEnum = {
+    AutoCharge: 'AUTO_CHARGE',
+    Subscription: 'SUBSCRIPTION'
+} as const;
+
+export type TransactionCategoryEnum = typeof TransactionCategoryEnum[keyof typeof TransactionCategoryEnum];
+export const TransactionFailedReasonEnum = {
+    ClosedCard: 'CLOSED_CARD',
+    BalanceInsufficient: 'BALANCE_INSUFFICIENT',
+    Etc: 'ETC'
+} as const;
+
+export type TransactionFailedReasonEnum = typeof TransactionFailedReasonEnum[keyof typeof TransactionFailedReasonEnum];
+
+/**
+ * 
+ * @export
+ * @interface TransactionControllerFetchMany200Response
+ */
+export interface TransactionControllerFetchMany200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof TransactionControllerFetchMany200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchTransactionResponseDto>}
+     * @memberof TransactionControllerFetchMany200Response
+     */
+    'items'?: Array<FetchTransactionResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface TransactionPaymentCard
+ */
+export interface TransactionPaymentCard {
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionPaymentCard
+     */
+    'cardCompany': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionPaymentCard
+     */
+    'cardNumber': string;
+}
+/**
+ * 
+ * @export
+ * @interface Tutorial
+ */
+export interface Tutorial {
+    /**
+     * 
+     * @type {string}
+     * @memberof Tutorial
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Tutorial
+     */
+    'category': TutorialCategoryEnum;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof Tutorial
+     */
+    'stage': Array<number>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Tutorial
+     */
+    'isFinished': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Tutorial
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Tutorial
+     */
+    'updatedAt': string;
+}
+
+export const TutorialCategoryEnum = {
+    Seller: 'seller',
+    Store: 'store'
+} as const;
+
+export type TutorialCategoryEnum = typeof TutorialCategoryEnum[keyof typeof TutorialCategoryEnum];
+
+/**
+ * 
+ * @export
+ * @interface TutorialRequestDto
+ */
+export interface TutorialRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof TutorialRequestDto
+     */
+    'category': TutorialRequestDtoCategoryEnum;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof TutorialRequestDto
+     */
+    'stage'?: Array<number>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TutorialRequestDto
+     */
+    'isFinished'?: boolean;
+}
+
+export const TutorialRequestDtoCategoryEnum = {
+    Seller: 'seller',
+    Store: 'store'
+} as const;
+
+export type TutorialRequestDtoCategoryEnum = typeof TutorialRequestDtoCategoryEnum[keyof typeof TutorialRequestDtoCategoryEnum];
+
+/**
+ * 
+ * @export
+ * @interface UpdateAudienceDto
+ */
+export interface UpdateAudienceDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdateAudienceDto
+     */
+    'age': Array<UpdateAudienceDtoAgeEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdateAudienceDto
+     */
+    'gender': Array<UpdateAudienceDtoGenderEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdateAudienceDto
+     */
+    'area': Array<UpdateAudienceDtoAreaEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdateAudienceDto
+     */
+    'regularCustomer': Array<UpdateAudienceDtoRegularCustomerEnum>;
+}
+
+export const UpdateAudienceDtoAgeEnum = {
+    _10: '10',
+    _20: '20',
+    _30: '30',
+    _40: '40'
+} as const;
+
+export type UpdateAudienceDtoAgeEnum = typeof UpdateAudienceDtoAgeEnum[keyof typeof UpdateAudienceDtoAgeEnum];
+export const UpdateAudienceDtoGenderEnum = {
+    Male: 'male',
+    Female: 'female'
+} as const;
+
+export type UpdateAudienceDtoGenderEnum = typeof UpdateAudienceDtoGenderEnum[keyof typeof UpdateAudienceDtoGenderEnum];
+export const UpdateAudienceDtoAreaEnum = {
+    NorthernVietnam: 'NorthernVietnam',
+    SouthernVietnam: 'SouthernVietnam'
+} as const;
+
+export type UpdateAudienceDtoAreaEnum = typeof UpdateAudienceDtoAreaEnum[keyof typeof UpdateAudienceDtoAreaEnum];
+export const UpdateAudienceDtoRegularCustomerEnum = {
+    _1: '1',
+    _3: '3'
+} as const;
+
+export type UpdateAudienceDtoRegularCustomerEnum = typeof UpdateAudienceDtoRegularCustomerEnum[keyof typeof UpdateAudienceDtoRegularCustomerEnum];
 
 /**
  * 
@@ -2305,6 +8468,245 @@ export interface UpdateBannerDto {
 /**
  * 
  * @export
+ * @interface UpdateCampaignBudgetUsageDto
+ */
+export interface UpdateCampaignBudgetUsageDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateCampaignBudgetUsageDto
+     */
+    'usedBudget': number;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateCampaignDto
+ */
+export interface UpdateCampaignDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateCampaignDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateCampaignDto
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateCampaignDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {Array<Product>}
+     * @memberof UpdateCampaignDto
+     */
+    'products': Array<Product>;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateCampaignDto
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateCampaignDto
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateCampaignDto
+     */
+    'maxBudgetPerDay'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateCategoryColumnMappingDto
+ */
+export interface UpdateCategoryColumnMappingDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateCategoryColumnMappingDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {CategoryColumnMappingDto}
+     * @memberof UpdateCategoryColumnMappingDto
+     */
+    'mapping': CategoryColumnMappingDto;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateChatProfileDto
+ */
+export interface UpdateChatProfileDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateChatProfileDto
+     */
+    'imageUrl'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateChatProfileDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateChatProfileDto
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateChatProfileDto
+     */
+    'domain'?: UpdateChatProfileDtoDomainEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateChatProfileDto
+     */
+    'theme': UpdateChatProfileDtoThemeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateChatProfileDto
+     */
+    'language'?: UpdateChatProfileDtoLanguageEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateChatProfileDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateChatProfileDto
+     */
+    'greetingMessage'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateChatProfileDto
+     */
+    'bottomMargin'?: number;
+}
+
+export const UpdateChatProfileDtoDomainEnum = {
+    Outfit: 'outfit',
+    Travel: 'travel',
+    Healthcare: 'healthcare'
+} as const;
+
+export type UpdateChatProfileDtoDomainEnum = typeof UpdateChatProfileDtoDomainEnum[keyof typeof UpdateChatProfileDtoDomainEnum];
+export const UpdateChatProfileDtoThemeEnum = {
+    Lovely: 'lovely',
+    Warm: 'warm',
+    Cool: 'cool',
+    Greenish: 'greenish',
+    Modern: 'modern',
+    Simple: 'simple'
+} as const;
+
+export type UpdateChatProfileDtoThemeEnum = typeof UpdateChatProfileDtoThemeEnum[keyof typeof UpdateChatProfileDtoThemeEnum];
+export const UpdateChatProfileDtoLanguageEnum = {
+    Ko: 'ko',
+    En: 'en'
+} as const;
+
+export type UpdateChatProfileDtoLanguageEnum = typeof UpdateChatProfileDtoLanguageEnum[keyof typeof UpdateChatProfileDtoLanguageEnum];
+
+/**
+ * 
+ * @export
+ * @interface UpdateClientDto
+ */
+export interface UpdateClientDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateClientDto
+     */
+    'currency'?: UpdateClientDtoCurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateClientDto
+     */
+    'timezone'?: UpdateClientDtoTimezoneEnum;
+}
+
+export const UpdateClientDtoCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type UpdateClientDtoCurrencyEnum = typeof UpdateClientDtoCurrencyEnum[keyof typeof UpdateClientDtoCurrencyEnum];
+export const UpdateClientDtoTimezoneEnum = {
+    Kst: 'KST',
+    Ict: 'ICT',
+    Est: 'EST',
+    Cst: 'CST',
+    Mst: 'MST',
+    Pst: 'PST',
+    Akst: 'AKST',
+    Hst: 'HST'
+} as const;
+
+export type UpdateClientDtoTimezoneEnum = typeof UpdateClientDtoTimezoneEnum[keyof typeof UpdateClientDtoTimezoneEnum];
+
+/**
+ * 
+ * @export
+ * @interface UpdateMeDto
+ */
+export interface UpdateMeDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateMeDto
+     */
+    'emailReceiptAgreed': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface UpdatePasswordDto
+ */
+export interface UpdatePasswordDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePasswordDto
+     */
+    'password': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePasswordDto
+     */
+    'newPassword': string;
+}
+/**
+ * 
+ * @export
  * @interface UpdatePlacementDto
  */
 export interface UpdatePlacementDto {
@@ -2316,16 +8718,223 @@ export interface UpdatePlacementDto {
     'title'?: string;
     /**
      * 
-     * @type {Array<string>}
-     * @memberof UpdatePlacementDto
-     */
-    'adsetIds'?: Array<string>;
-    /**
-     * 
      * @type {boolean}
      * @memberof UpdatePlacementDto
      */
     'activated'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementDto
+     */
+    'minDisplayCount'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementDto
+     */
+    'maxDisplayCount'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface UpdatePlacementResponseDto
+ */
+export interface UpdatePlacementResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'placementFormatRatio': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'type': UpdatePlacementResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'suggestionType': UpdatePlacementResponseDtoSuggestionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'supportEnvironment': UpdatePlacementResponseDtoSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'developEnvironment': UpdatePlacementResponseDtoDevelopEnvironmentEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'displayCount': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'maxDisplayCount': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'pageName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {Injector}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'injector': Injector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'screenShot': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'displayFormatWidth': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'displayFormatHeight': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'property': UpdatePlacementResponseDtoPropertyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {Array<Campaign>}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'campaigns': Array<Campaign>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'placementDeactivated': boolean;
+}
+
+export const UpdatePlacementResponseDtoTypeEnum = {
+    Grid: 'GRID',
+    Banner: 'BANNER'
+} as const;
+
+export type UpdatePlacementResponseDtoTypeEnum = typeof UpdatePlacementResponseDtoTypeEnum[keyof typeof UpdatePlacementResponseDtoTypeEnum];
+export const UpdatePlacementResponseDtoSuggestionTypeEnum = {
+    Recommend: 'RECOMMEND',
+    Advertise: 'ADVERTISE'
+} as const;
+
+export type UpdatePlacementResponseDtoSuggestionTypeEnum = typeof UpdatePlacementResponseDtoSuggestionTypeEnum[keyof typeof UpdatePlacementResponseDtoSuggestionTypeEnum];
+export const UpdatePlacementResponseDtoSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
+} as const;
+
+export type UpdatePlacementResponseDtoSupportEnvironmentEnum = typeof UpdatePlacementResponseDtoSupportEnvironmentEnum[keyof typeof UpdatePlacementResponseDtoSupportEnvironmentEnum];
+export const UpdatePlacementResponseDtoDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
+
+export type UpdatePlacementResponseDtoDevelopEnvironmentEnum = typeof UpdatePlacementResponseDtoDevelopEnvironmentEnum[keyof typeof UpdatePlacementResponseDtoDevelopEnvironmentEnum];
+export const UpdatePlacementResponseDtoPropertyEnum = {
+    New: 'NEW',
+    Hot: 'HOT',
+    Personal: 'PERSONAL',
+    SameGoods: 'SAME_GOODS',
+    DiffGoods: 'DIFF_GOODS'
+} as const;
+
+export type UpdatePlacementResponseDtoPropertyEnum = typeof UpdatePlacementResponseDtoPropertyEnum[keyof typeof UpdatePlacementResponseDtoPropertyEnum];
+
+/**
+ * 
+ * @export
+ * @interface UpdateProductColumnMappingDto
+ */
+export interface UpdateProductColumnMappingDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateProductColumnMappingDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {ProductColumnMappingDto}
+     * @memberof UpdateProductColumnMappingDto
+     */
+    'mapping': ProductColumnMappingDto;
 }
 /**
  * 
@@ -2397,6 +9006,127 @@ export interface UpdateProductDto {
 /**
  * 
  * @export
+ * @interface UpdateUserDto
+ */
+export interface UpdateUserDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateUserDto
+     */
+    'role': UpdateUserDtoRoleEnum;
+}
+
+export const UpdateUserDtoRoleEnum = {
+    NUMBER_0: 0,
+    NUMBER_1: 1,
+    NUMBER_2: 2
+} as const;
+
+export type UpdateUserDtoRoleEnum = typeof UpdateUserDtoRoleEnum[keyof typeof UpdateUserDtoRoleEnum];
+
+/**
+ * 
+ * @export
+ * @interface UploadImageResponseDto
+ */
+export interface UploadImageResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadImageResponseDto
+     */
+    'imageUrl': string;
+}
+/**
+ * 
+ * @export
+ * @interface UpsertCategoryDto
+ */
+export interface UpsertCategoryDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertCategoryDto
+     */
+    'idOnStore'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertCategoryDto
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertCategoryDto
+     */
+    'depth0Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertCategoryDto
+     */
+    'depth1Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertCategoryDto
+     */
+    'depth2Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertCategoryDto
+     */
+    'depth3Id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertCategoryDto
+     */
+    'depth4Id'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UpsertCategoryFailedRow
+ */
+export interface UpsertCategoryFailedRow {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertCategoryFailedRow
+     */
+    'idOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertCategoryFailedRow
+     */
+    'name': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpsertCategoryFailedRow
+     */
+    'reasons': Array<UpsertCategoryFailedRowReasonsEnum>;
+}
+
+export const UpsertCategoryFailedRowReasonsEnum = {
+    UpsertCategoryFailedAncestorIsEmpty: 'upsertCategoryFailedAncestorIsEmpty',
+    UpsertCategoryFailedAncestorIsNotExist: 'upsertCategoryFailedAncestorIsNotExist',
+    UpsertCategoryDuplicatedRow: 'upsertCategoryDuplicatedRow',
+    UpsertCategoryNameIsEmpty: 'upsertCategoryNameIsEmpty',
+    UpsertCategoryIdIsEmpty: 'upsertCategoryIdIsEmpty',
+    UpsertCategoryUnknown: 'upsertCategoryUnknown'
+} as const;
+
+export type UpsertCategoryFailedRowReasonsEnum = typeof UpsertCategoryFailedRowReasonsEnum[keyof typeof UpsertCategoryFailedRowReasonsEnum];
+
+/**
+ * 
+ * @export
  * @interface UpsertCreativeDto
  */
 export interface UpsertCreativeDto {
@@ -2434,6 +9164,38 @@ export interface UpsertCreativeDto {
 /**
  * 
  * @export
+ * @interface UpsertManyCategoriesResponseDto
+ */
+export interface UpsertManyCategoriesResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof UpsertManyCategoriesResponseDto
+     */
+    'insertedCount': number;
+    /**
+     * 
+     * @type {Array<UpsertCategoryFailedRow>}
+     * @memberof UpsertManyCategoriesResponseDto
+     */
+    'failedRows': Array<UpsertCategoryFailedRow>;
+}
+/**
+ * 
+ * @export
+ * @interface UpsertManyCategoryDto
+ */
+export interface UpsertManyCategoryDto {
+    /**
+     * 
+     * @type {Array<UpsertCategoryDto>}
+     * @memberof UpsertManyCategoryDto
+     */
+    'data': Array<UpsertCategoryDto>;
+}
+/**
+ * 
+ * @export
  * @interface UpsertManyProductDto
  */
 export interface UpsertManyProductDto {
@@ -2452,22 +9214,47 @@ export interface UpsertManyProductDto {
 export interface UpsertManyProductResponseDto {
     /**
      * 
-     * @type {Array<string>}
+     * @type {number}
      * @memberof UpsertManyProductResponseDto
      */
-    'inserted': Array<string>;
+    'insertedCount': number;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<UpsertProductFailedRow>}
      * @memberof UpsertManyProductResponseDto
      */
-    'nonRelated': Array<string>;
+    'failedRows': Array<UpsertProductFailedRow>;
+}
+/**
+ * 
+ * @export
+ * @interface UpsertPaymentCardDto
+ */
+export interface UpsertPaymentCardDto {
     /**
-     * 
-     * @type {Array<string>}
-     * @memberof UpsertManyProductResponseDto
+     * 카드번호
+     * @type {string}
+     * @memberof UpsertPaymentCardDto
      */
-    'duplicatedIds': Array<string>;
+    'cardNumber': string;
+    /**
+     * 카드 유효일자
+     * @type {string}
+     * @memberof UpsertPaymentCardDto
+     */
+    'expiry': string;
+    /**
+     * 생년월일 6자리
+     * @type {string}
+     * @memberof UpsertPaymentCardDto
+     */
+    'birthday': string;
+    /**
+     * 카드번호 앞 2자리
+     * @type {string}
+     * @memberof UpsertPaymentCardDto
+     */
+    'pwd2Digit': string;
 }
 /**
  * 
@@ -2480,37 +9267,31 @@ export interface UpsertProductDto {
      * @type {string}
      * @memberof UpsertProductDto
      */
-    'id'?: string;
+    'idOnStore'?: string;
     /**
      * 
      * @type {string}
      * @memberof UpsertProductDto
      */
-    'idOnStore': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpsertProductDto
-     */
-    'name': string;
+    'name'?: string;
     /**
      * 
      * @type {number}
      * @memberof UpsertProductDto
      */
-    'price': number;
+    'price'?: number;
     /**
      * 
      * @type {string}
      * @memberof UpsertProductDto
      */
-    'description': string;
+    'description'?: string;
     /**
      * 
      * @type {string}
      * @memberof UpsertProductDto
      */
-    'image': string;
+    'image'?: string;
     /**
      * 
      * @type {boolean}
@@ -2547,6 +9328,204 @@ export interface UpsertProductDto {
      * @memberof UpsertProductDto
      */
     'caption'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UpsertProductFailedRow
+ */
+export interface UpsertProductFailedRow {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertProductFailedRow
+     */
+    'idOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertProductFailedRow
+     */
+    'name': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpsertProductFailedRow
+     */
+    'reasons': Array<UpsertProductFailedRowReasonsEnum>;
+}
+
+export const UpsertProductFailedRowReasonsEnum = {
+    UpsertProductFailedDeuplicatedRow: 'upsertProductFailedDeuplicatedRow',
+    UpsertProductFailedSellerIsNotExist: 'upsertProductFailedSellerIsNotExist',
+    UpsertProductFailedIdIsEmpty: 'upsertProductFailedIdIsEmpty',
+    UpsertProductFailedNameIsEmpty: 'upsertProductFailedNameIsEmpty',
+    UpsertProductFailedPriceIsEmpty: 'upsertProductFailedPriceIsEmpty',
+    UpsertProductFailedImageIsEmpty: 'upsertProductFailedImageIsEmpty'
+} as const;
+
+export type UpsertProductFailedRowReasonsEnum = typeof UpsertProductFailedRowReasonsEnum[keyof typeof UpsertProductFailedRowReasonsEnum];
+
+/**
+ * 
+ * @export
+ * @interface UpsertSubscripionPlanDto
+ */
+export interface UpsertSubscripionPlanDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertSubscripionPlanDto
+     */
+    'type': UpsertSubscripionPlanDtoTypeEnum;
+}
+
+export const UpsertSubscripionPlanDtoTypeEnum = {
+    Basic: 'BASIC',
+    Standard: 'STANDARD'
+} as const;
+
+export type UpsertSubscripionPlanDtoTypeEnum = typeof UpsertSubscripionPlanDtoTypeEnum[keyof typeof UpsertSubscripionPlanDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface User
+ */
+export interface User {
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'clientId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'email': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof User
+     */
+    'emailVerified': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof User
+     */
+    'emailReceiptAgreed': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'password': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof User
+     */
+    'role': UserRoleEnum;
+}
+
+export const UserRoleEnum = {
+    NUMBER_0: 0,
+    NUMBER_1: 1,
+    NUMBER_2: 2
+} as const;
+
+export type UserRoleEnum = typeof UserRoleEnum[keyof typeof UserRoleEnum];
+
+/**
+ * 
+ * @export
+ * @interface Verification
+ */
+export interface Verification {
+    /**
+     * 
+     * @type {string}
+     * @memberof Verification
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Verification
+     */
+    'code': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Verification
+     */
+    'expiresAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Verification
+     */
+    'createdAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface VerifyCodeDto
+ */
+export interface VerifyCodeDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof VerifyCodeDto
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VerifyCodeDto
+     */
+    'code': string;
+}
+/**
+ * 
+ * @export
+ * @interface VerifyUserDto
+ */
+export interface VerifyUserDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof VerifyUserDto
+     */
+    'email': string;
+}
+/**
+ * 
+ * @export
+ * @interface VerifyUserResponseDto
+ */
+export interface VerifyUserResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof VerifyUserResponseDto
+     */
+    'clientName': string;
 }
 /**
  * 
@@ -2591,6 +9570,557 @@ export interface WidgetInjector {
      */
     'swiper'?: object;
 }
+/**
+ * 
+ * @export
+ * @interface WithdrawClientDto
+ */
+export interface WithdrawClientDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof WithdrawClientDto
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WithdrawClientDto
+     */
+    'password': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof WithdrawClientDto
+     */
+    'reason': string;
+}
+
+/**
+ * AdminApi - axios parameter creator
+ * @export
+ */
+export const AdminApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} id 
+         * @param {'STORE' | 'SELLER'} clientType 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerDeleteClient: async (id: string, clientType: 'STORE' | 'SELLER', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('adminControllerDeleteClient', 'id', id)
+            // verify required parameter 'clientType' is not null or undefined
+            assertParamExists('adminControllerDeleteClient', 'clientType', clientType)
+            const localVarPath = `/admin/clients/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (clientType !== undefined) {
+                localVarQueryParameter['clientType'] = clientType;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {boolean} [isDeleted] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerFetchClient: async (id: string, isDeleted?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('adminControllerFetchClient', 'id', id)
+            const localVarPath = `/admin/clients/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (isDeleted !== undefined) {
+                localVarQueryParameter['isDeleted'] = isDeleted;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {boolean} [isStore] 
+         * @param {boolean} [isSeller] 
+         * @param {string} [storeId] 
+         * @param {string} [name] 
+         * @param {boolean} [isDeleted] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerFetchClients: async (limit?: number, offset?: number, isStore?: boolean, isSeller?: boolean, storeId?: string, name?: string, isDeleted?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/admin/clients`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (isStore !== undefined) {
+                localVarQueryParameter['isStore'] = isStore;
+            }
+
+            if (isSeller !== undefined) {
+                localVarQueryParameter['isSeller'] = isSeller;
+            }
+
+            if (storeId !== undefined) {
+                localVarQueryParameter['storeId'] = storeId;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (isDeleted !== undefined) {
+                localVarQueryParameter['isDeleted'] = isDeleted;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>} [select] 
+         * @param {string} [clientId] 
+         * @param {string} [title] 
+         * @param {'GRID' | 'BANNER'} [type] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerFetchPlacements: async (limit?: number, offset?: number, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, clientId?: string, title?: string, type?: 'GRID' | 'BANNER', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/admin/placements`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (select) {
+                localVarQueryParameter['select'] = select;
+            }
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+
+            if (title !== undefined) {
+                localVarQueryParameter['title'] = title;
+            }
+
+            if (type !== undefined) {
+                localVarQueryParameter['type'] = type;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerFetchSystemSetting: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/admin`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateClientDto} updateClientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerUpdateClient: async (id: string, updateClientDto: UpdateClientDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('adminControllerUpdateClient', 'id', id)
+            // verify required parameter 'updateClientDto' is not null or undefined
+            assertParamExists('adminControllerUpdateClient', 'updateClientDto', updateClientDto)
+            const localVarPath = `/admin/clients/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateClientDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AdminApi - functional programming interface
+ * @export
+ */
+export const AdminApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AdminApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} id 
+         * @param {'STORE' | 'SELLER'} clientType 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adminControllerDeleteClient(id: string, clientType: 'STORE' | 'SELLER', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Client>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adminControllerDeleteClient(id, clientType, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {boolean} [isDeleted] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adminControllerFetchClient(id: string, isDeleted?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchClientAdminResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adminControllerFetchClient(id, isDeleted, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {boolean} [isStore] 
+         * @param {boolean} [isSeller] 
+         * @param {string} [storeId] 
+         * @param {string} [name] 
+         * @param {boolean} [isDeleted] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adminControllerFetchClients(limit?: number, offset?: number, isStore?: boolean, isSeller?: boolean, storeId?: string, name?: string, isDeleted?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdminControllerFetchClients200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adminControllerFetchClients(limit, offset, isStore, isSeller, storeId, name, isDeleted, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>} [select] 
+         * @param {string} [clientId] 
+         * @param {string} [title] 
+         * @param {'GRID' | 'BANNER'} [type] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adminControllerFetchPlacements(limit?: number, offset?: number, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, clientId?: string, title?: string, type?: 'GRID' | 'BANNER', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdminControllerFetchPlacements200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adminControllerFetchPlacements(limit, offset, select, clientId, title, type, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adminControllerFetchSystemSetting(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemSetting>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adminControllerFetchSystemSetting(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateClientDto} updateClientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adminControllerUpdateClient(id: string, updateClientDto: UpdateClientDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adminControllerUpdateClient(id, updateClientDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * AdminApi - factory interface
+ * @export
+ */
+export const AdminApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AdminApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} id 
+         * @param {'STORE' | 'SELLER'} clientType 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerDeleteClient(id: string, clientType: 'STORE' | 'SELLER', options?: any): AxiosPromise<Client> {
+            return localVarFp.adminControllerDeleteClient(id, clientType, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {boolean} [isDeleted] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerFetchClient(id: string, isDeleted?: boolean, options?: any): AxiosPromise<FetchClientAdminResponseDto> {
+            return localVarFp.adminControllerFetchClient(id, isDeleted, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {boolean} [isStore] 
+         * @param {boolean} [isSeller] 
+         * @param {string} [storeId] 
+         * @param {string} [name] 
+         * @param {boolean} [isDeleted] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerFetchClients(limit?: number, offset?: number, isStore?: boolean, isSeller?: boolean, storeId?: string, name?: string, isDeleted?: boolean, options?: any): AxiosPromise<AdminControllerFetchClients200Response> {
+            return localVarFp.adminControllerFetchClients(limit, offset, isStore, isSeller, storeId, name, isDeleted, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>} [select] 
+         * @param {string} [clientId] 
+         * @param {string} [title] 
+         * @param {'GRID' | 'BANNER'} [type] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerFetchPlacements(limit?: number, offset?: number, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, clientId?: string, title?: string, type?: 'GRID' | 'BANNER', options?: any): AxiosPromise<AdminControllerFetchPlacements200Response> {
+            return localVarFp.adminControllerFetchPlacements(limit, offset, select, clientId, title, type, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerFetchSystemSetting(options?: any): AxiosPromise<SystemSetting> {
+            return localVarFp.adminControllerFetchSystemSetting(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateClientDto} updateClientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminControllerUpdateClient(id: string, updateClientDto: UpdateClientDto, options?: any): AxiosPromise<void> {
+            return localVarFp.adminControllerUpdateClient(id, updateClientDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AdminApi - object-oriented interface
+ * @export
+ * @class AdminApi
+ * @extends {BaseAPI}
+ */
+export class AdminApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} id 
+     * @param {'STORE' | 'SELLER'} clientType 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public adminControllerDeleteClient(id: string, clientType: 'STORE' | 'SELLER', options?: AxiosRequestConfig) {
+        return AdminApiFp(this.configuration).adminControllerDeleteClient(id, clientType, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {boolean} [isDeleted] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public adminControllerFetchClient(id: string, isDeleted?: boolean, options?: AxiosRequestConfig) {
+        return AdminApiFp(this.configuration).adminControllerFetchClient(id, isDeleted, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {boolean} [isStore] 
+     * @param {boolean} [isSeller] 
+     * @param {string} [storeId] 
+     * @param {string} [name] 
+     * @param {boolean} [isDeleted] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public adminControllerFetchClients(limit?: number, offset?: number, isStore?: boolean, isSeller?: boolean, storeId?: string, name?: string, isDeleted?: boolean, options?: AxiosRequestConfig) {
+        return AdminApiFp(this.configuration).adminControllerFetchClients(limit, offset, isStore, isSeller, storeId, name, isDeleted, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>} [select] 
+     * @param {string} [clientId] 
+     * @param {string} [title] 
+     * @param {'GRID' | 'BANNER'} [type] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public adminControllerFetchPlacements(limit?: number, offset?: number, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, clientId?: string, title?: string, type?: 'GRID' | 'BANNER', options?: AxiosRequestConfig) {
+        return AdminApiFp(this.configuration).adminControllerFetchPlacements(limit, offset, select, clientId, title, type, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public adminControllerFetchSystemSetting(options?: AxiosRequestConfig) {
+        return AdminApiFp(this.configuration).adminControllerFetchSystemSetting(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateClientDto} updateClientDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public adminControllerUpdateClient(id: string, updateClientDto: UpdateClientDto, options?: AxiosRequestConfig) {
+        return AdminApiFp(this.configuration).adminControllerUpdateClient(id, updateClientDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
 
 /**
  * BannerApi - axios parameter creator
@@ -2792,6 +10322,39 @@ export const BannerApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bannerControllerRestore: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('bannerControllerRestore', 'id', id)
+            const localVarPath = `/banners/{id}/restore`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
          * @param {UpdateBannerDto} updateBannerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2825,6 +10388,46 @@ export const BannerApiAxiosParamCreator = function (configuration?: Configuratio
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(updateBannerDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {File} image 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bannerControllerUploadImage: async (image: File, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'image' is not null or undefined
+            assertParamExists('bannerControllerUploadImage', 'image', image)
+            const localVarPath = `/banners/image`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+
+            if (image !== undefined) { 
+                localVarFormParams.append('image', image as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2892,12 +10495,32 @@ export const BannerApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bannerControllerRestore(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Banner>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bannerControllerRestore(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
          * @param {UpdateBannerDto} updateBannerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async bannerControllerUpdate(id: string, updateBannerDto: UpdateBannerDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Banner>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.bannerControllerUpdate(id, updateBannerDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {File} image 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bannerControllerUploadImage(image: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadImageResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bannerControllerUploadImage(image, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -2957,12 +10580,30 @@ export const BannerApiFactory = function (configuration?: Configuration, basePat
         /**
          * 
          * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bannerControllerRestore(id: string, options?: any): AxiosPromise<Banner> {
+            return localVarFp.bannerControllerRestore(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
          * @param {UpdateBannerDto} updateBannerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         bannerControllerUpdate(id: string, updateBannerDto: UpdateBannerDto, options?: any): AxiosPromise<Banner> {
             return localVarFp.bannerControllerUpdate(id, updateBannerDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {File} image 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bannerControllerUploadImage(image: File, options?: any): AxiosPromise<UploadImageResponseDto> {
+            return localVarFp.bannerControllerUploadImage(image, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3029,6 +10670,17 @@ export class BannerApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BannerApi
+     */
+    public bannerControllerRestore(id: string, options?: AxiosRequestConfig) {
+        return BannerApiFp(this.configuration).bannerControllerRestore(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
      * @param {UpdateBannerDto} updateBannerDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3036,6 +10688,5134 @@ export class BannerApi extends BaseAPI {
      */
     public bannerControllerUpdate(id: string, updateBannerDto: UpdateBannerDto, options?: AxiosRequestConfig) {
         return BannerApiFp(this.configuration).bannerControllerUpdate(id, updateBannerDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {File} image 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BannerApi
+     */
+    public bannerControllerUploadImage(image: File, options?: AxiosRequestConfig) {
+        return BannerApiFp(this.configuration).bannerControllerUploadImage(image, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * BootstrapApi - axios parameter creator
+ * @export
+ */
+export const BootstrapApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} clientId Client ID.
+         * @param {string} [frontApi] 
+         * @param {string} [page] 
+         * @param {string} [placements] 
+         * @param {boolean} [disableAgent] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bootstrapControllerBootstrap: async (clientId: string, frontApi?: string, page?: string, placements?: string, disableAgent?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('bootstrapControllerBootstrap', 'clientId', clientId)
+            const localVarPath = `/bootstrap`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+
+            if (frontApi !== undefined) {
+                localVarQueryParameter['frontApi'] = frontApi;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (placements !== undefined) {
+                localVarQueryParameter['placements'] = placements;
+            }
+
+            if (disableAgent !== undefined) {
+                localVarQueryParameter['disableAgent'] = disableAgent;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BootstrapApi - functional programming interface
+ * @export
+ */
+export const BootstrapApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BootstrapApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} clientId Client ID.
+         * @param {string} [frontApi] 
+         * @param {string} [page] 
+         * @param {string} [placements] 
+         * @param {boolean} [disableAgent] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bootstrapControllerBootstrap(clientId: string, frontApi?: string, page?: string, placements?: string, disableAgent?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bootstrapControllerBootstrap(clientId, frontApi, page, placements, disableAgent, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * BootstrapApi - factory interface
+ * @export
+ */
+export const BootstrapApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BootstrapApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} clientId Client ID.
+         * @param {string} [frontApi] 
+         * @param {string} [page] 
+         * @param {string} [placements] 
+         * @param {boolean} [disableAgent] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bootstrapControllerBootstrap(clientId: string, frontApi?: string, page?: string, placements?: string, disableAgent?: boolean, options?: any): AxiosPromise<string> {
+            return localVarFp.bootstrapControllerBootstrap(clientId, frontApi, page, placements, disableAgent, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BootstrapApi - object-oriented interface
+ * @export
+ * @class BootstrapApi
+ * @extends {BaseAPI}
+ */
+export class BootstrapApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} clientId Client ID.
+     * @param {string} [frontApi] 
+     * @param {string} [page] 
+     * @param {string} [placements] 
+     * @param {boolean} [disableAgent] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BootstrapApi
+     */
+    public bootstrapControllerBootstrap(clientId: string, frontApi?: string, page?: string, placements?: string, disableAgent?: boolean, options?: AxiosRequestConfig) {
+        return BootstrapApiFp(this.configuration).bootstrapControllerBootstrap(clientId, frontApi, page, placements, disableAgent, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * CampaignApi - axios parameter creator
+ * @export
+ */
+export const CampaignApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        budgetUsageControllerFetchMany: async (limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/budget-usage`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateCampaignDto} createCampaignDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerCreate: async (createCampaignDto: CreateCampaignDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createCampaignDto' is not null or undefined
+            assertParamExists('campaignControllerCreate', 'createCampaignDto', createCampaignDto)
+            const localVarPath = `/campaign`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createCampaignDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerFetchBudget: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/campaign/budget`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerFetchMany: async (limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/campaign`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerFetchOne: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('campaignControllerFetchOne', 'id', id)
+            const localVarPath = `/campaign/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} audienceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerFetchOneAudience: async (id: string, audienceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('campaignControllerFetchOneAudience', 'id', id)
+            // verify required parameter 'audienceId' is not null or undefined
+            assertParamExists('campaignControllerFetchOneAudience', 'audienceId', audienceId)
+            const localVarPath = `/campaign/{id}/audiences/{audienceId}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"audienceId"}}`, encodeURIComponent(String(audienceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerRemove: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('campaignControllerRemove', 'id', id)
+            const localVarPath = `/campaign/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateCampaignDto} updateCampaignDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerUpdate: async (id: string, updateCampaignDto: UpdateCampaignDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('campaignControllerUpdate', 'id', id)
+            // verify required parameter 'updateCampaignDto' is not null or undefined
+            assertParamExists('campaignControllerUpdate', 'updateCampaignDto', updateCampaignDto)
+            const localVarPath = `/campaign/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateCampaignDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} audienceId 
+         * @param {UpdateAudienceDto} updateAudienceDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerUpdateAudience: async (id: string, audienceId: string, updateAudienceDto: UpdateAudienceDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('campaignControllerUpdateAudience', 'id', id)
+            // verify required parameter 'audienceId' is not null or undefined
+            assertParamExists('campaignControllerUpdateAudience', 'audienceId', audienceId)
+            // verify required parameter 'updateAudienceDto' is not null or undefined
+            assertParamExists('campaignControllerUpdateAudience', 'updateAudienceDto', updateAudienceDto)
+            const localVarPath = `/campaign/{id}/audiences/{audienceId}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"audienceId"}}`, encodeURIComponent(String(audienceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateAudienceDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateCampaignBudgetUsageDto} updateCampaignBudgetUsageDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerUpdateBudgetUsage: async (id: string, updateCampaignBudgetUsageDto: UpdateCampaignBudgetUsageDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('campaignControllerUpdateBudgetUsage', 'id', id)
+            // verify required parameter 'updateCampaignBudgetUsageDto' is not null or undefined
+            assertParamExists('campaignControllerUpdateBudgetUsage', 'updateCampaignBudgetUsageDto', updateCampaignBudgetUsageDto)
+            const localVarPath = `/campaign/{id}/budget/usage`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateCampaignBudgetUsageDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * CampaignApi - functional programming interface
+ * @export
+ */
+export const CampaignApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CampaignApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async budgetUsageControllerFetchMany(limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchBudgetUsageResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.budgetUsageControllerFetchMany(limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {CreateCampaignDto} createCampaignDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async campaignControllerCreate(createCampaignDto: CreateCampaignDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaignResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerCreate(createCampaignDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async campaignControllerFetchBudget(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Campaign>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerFetchBudget(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async campaignControllerFetchMany(limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CampaignControllerFetchMany200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerFetchMany(limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async campaignControllerFetchOne(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchCampaignResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerFetchOne(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} audienceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async campaignControllerFetchOneAudience(id: string, audienceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AudienceResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerFetchOneAudience(id, audienceId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async campaignControllerRemove(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerRemove(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateCampaignDto} updateCampaignDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async campaignControllerUpdate(id: string, updateCampaignDto: UpdateCampaignDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerUpdate(id, updateCampaignDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} audienceId 
+         * @param {UpdateAudienceDto} updateAudienceDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async campaignControllerUpdateAudience(id: string, audienceId: string, updateAudienceDto: UpdateAudienceDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AudienceResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerUpdateAudience(id, audienceId, updateAudienceDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateCampaignBudgetUsageDto} updateCampaignBudgetUsageDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async campaignControllerUpdateBudgetUsage(id: string, updateCampaignBudgetUsageDto: UpdateCampaignBudgetUsageDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerUpdateBudgetUsage(id, updateCampaignBudgetUsageDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * CampaignApi - factory interface
+ * @export
+ */
+export const CampaignApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CampaignApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        budgetUsageControllerFetchMany(limit?: number, offset?: number, options?: any): AxiosPromise<Array<FetchBudgetUsageResponseDto>> {
+            return localVarFp.budgetUsageControllerFetchMany(limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateCampaignDto} createCampaignDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerCreate(createCampaignDto: CreateCampaignDto, options?: any): AxiosPromise<CreateCampaignResponseDto> {
+            return localVarFp.campaignControllerCreate(createCampaignDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerFetchBudget(options?: any): AxiosPromise<Array<Campaign>> {
+            return localVarFp.campaignControllerFetchBudget(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerFetchMany(limit?: number, offset?: number, options?: any): AxiosPromise<CampaignControllerFetchMany200Response> {
+            return localVarFp.campaignControllerFetchMany(limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerFetchOne(id: string, options?: any): AxiosPromise<FetchCampaignResponseDto> {
+            return localVarFp.campaignControllerFetchOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} audienceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerFetchOneAudience(id: string, audienceId: string, options?: any): AxiosPromise<AudienceResponseDto> {
+            return localVarFp.campaignControllerFetchOneAudience(id, audienceId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerRemove(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.campaignControllerRemove(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateCampaignDto} updateCampaignDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerUpdate(id: string, updateCampaignDto: UpdateCampaignDto, options?: any): AxiosPromise<void> {
+            return localVarFp.campaignControllerUpdate(id, updateCampaignDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} audienceId 
+         * @param {UpdateAudienceDto} updateAudienceDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerUpdateAudience(id: string, audienceId: string, updateAudienceDto: UpdateAudienceDto, options?: any): AxiosPromise<AudienceResponseDto> {
+            return localVarFp.campaignControllerUpdateAudience(id, audienceId, updateAudienceDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateCampaignBudgetUsageDto} updateCampaignBudgetUsageDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignControllerUpdateBudgetUsage(id: string, updateCampaignBudgetUsageDto: UpdateCampaignBudgetUsageDto, options?: any): AxiosPromise<void> {
+            return localVarFp.campaignControllerUpdateBudgetUsage(id, updateCampaignBudgetUsageDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * CampaignApi - object-oriented interface
+ * @export
+ * @class CampaignApi
+ * @extends {BaseAPI}
+ */
+export class CampaignApi extends BaseAPI {
+    /**
+     * 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CampaignApi
+     */
+    public budgetUsageControllerFetchMany(limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return CampaignApiFp(this.configuration).budgetUsageControllerFetchMany(limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateCampaignDto} createCampaignDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CampaignApi
+     */
+    public campaignControllerCreate(createCampaignDto: CreateCampaignDto, options?: AxiosRequestConfig) {
+        return CampaignApiFp(this.configuration).campaignControllerCreate(createCampaignDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CampaignApi
+     */
+    public campaignControllerFetchBudget(options?: AxiosRequestConfig) {
+        return CampaignApiFp(this.configuration).campaignControllerFetchBudget(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CampaignApi
+     */
+    public campaignControllerFetchMany(limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return CampaignApiFp(this.configuration).campaignControllerFetchMany(limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CampaignApi
+     */
+    public campaignControllerFetchOne(id: string, options?: AxiosRequestConfig) {
+        return CampaignApiFp(this.configuration).campaignControllerFetchOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} audienceId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CampaignApi
+     */
+    public campaignControllerFetchOneAudience(id: string, audienceId: string, options?: AxiosRequestConfig) {
+        return CampaignApiFp(this.configuration).campaignControllerFetchOneAudience(id, audienceId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CampaignApi
+     */
+    public campaignControllerRemove(id: string, options?: AxiosRequestConfig) {
+        return CampaignApiFp(this.configuration).campaignControllerRemove(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateCampaignDto} updateCampaignDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CampaignApi
+     */
+    public campaignControllerUpdate(id: string, updateCampaignDto: UpdateCampaignDto, options?: AxiosRequestConfig) {
+        return CampaignApiFp(this.configuration).campaignControllerUpdate(id, updateCampaignDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} audienceId 
+     * @param {UpdateAudienceDto} updateAudienceDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CampaignApi
+     */
+    public campaignControllerUpdateAudience(id: string, audienceId: string, updateAudienceDto: UpdateAudienceDto, options?: AxiosRequestConfig) {
+        return CampaignApiFp(this.configuration).campaignControllerUpdateAudience(id, audienceId, updateAudienceDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateCampaignBudgetUsageDto} updateCampaignBudgetUsageDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CampaignApi
+     */
+    public campaignControllerUpdateBudgetUsage(id: string, updateCampaignBudgetUsageDto: UpdateCampaignBudgetUsageDto, options?: AxiosRequestConfig) {
+        return CampaignApiFp(this.configuration).campaignControllerUpdateBudgetUsage(id, updateCampaignBudgetUsageDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * CategoryApi - axios parameter creator
+ * @export
+ */
+export const CategoryApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} [parentId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        categoryControllerFetchMany: async (parentId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/categories`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api-key required
+            await setApiKeyToObject(localVarHeaderParameter, "X-Api-Key", configuration)
+
+            if (parentId !== undefined) {
+                localVarQueryParameter['parentId'] = parentId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UpsertManyCategoryDto} upsertManyCategoryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        categoryControllerUpsertMany: async (upsertManyCategoryDto: UpsertManyCategoryDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'upsertManyCategoryDto' is not null or undefined
+            assertParamExists('categoryControllerUpsertMany', 'upsertManyCategoryDto', upsertManyCategoryDto)
+            const localVarPath = `/categories/bulk`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api-key required
+            await setApiKeyToObject(localVarHeaderParameter, "X-Api-Key", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(upsertManyCategoryDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * CategoryApi - functional programming interface
+ * @export
+ */
+export const CategoryApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CategoryApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} [parentId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async categoryControllerFetchMany(parentId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Category>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.categoryControllerFetchMany(parentId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {UpsertManyCategoryDto} upsertManyCategoryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async categoryControllerUpsertMany(upsertManyCategoryDto: UpsertManyCategoryDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpsertManyCategoriesResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.categoryControllerUpsertMany(upsertManyCategoryDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * CategoryApi - factory interface
+ * @export
+ */
+export const CategoryApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CategoryApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} [parentId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        categoryControllerFetchMany(parentId?: string, options?: any): AxiosPromise<Array<Category>> {
+            return localVarFp.categoryControllerFetchMany(parentId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UpsertManyCategoryDto} upsertManyCategoryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        categoryControllerUpsertMany(upsertManyCategoryDto: UpsertManyCategoryDto, options?: any): AxiosPromise<UpsertManyCategoriesResponseDto> {
+            return localVarFp.categoryControllerUpsertMany(upsertManyCategoryDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * CategoryApi - object-oriented interface
+ * @export
+ * @class CategoryApi
+ * @extends {BaseAPI}
+ */
+export class CategoryApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} [parentId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CategoryApi
+     */
+    public categoryControllerFetchMany(parentId?: string, options?: AxiosRequestConfig) {
+        return CategoryApiFp(this.configuration).categoryControllerFetchMany(parentId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UpsertManyCategoryDto} upsertManyCategoryDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CategoryApi
+     */
+    public categoryControllerUpsertMany(upsertManyCategoryDto: UpsertManyCategoryDto, options?: AxiosRequestConfig) {
+        return CategoryApiFp(this.configuration).categoryControllerUpsertMany(upsertManyCategoryDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ChatApi - axios parameter creator
+ * @export
+ */
+export const ChatApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} groupId 
+         * @param {CreateChatDialogueDto} createChatDialogueDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerCreateChatDialogue: async (groupId: string, createChatDialogueDto: CreateChatDialogueDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('chatControllerCreateChatDialogue', 'groupId', groupId)
+            // verify required parameter 'createChatDialogueDto' is not null or undefined
+            assertParamExists('chatControllerCreateChatDialogue', 'createChatDialogueDto', createChatDialogueDto)
+            const localVarPath = `/chat/groups/{groupId}/dialogue`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createChatDialogueDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateChatGroupDto} createChatGroupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerCreateChatGroup: async (createChatGroupDto: CreateChatGroupDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createChatGroupDto' is not null or undefined
+            assertParamExists('chatControllerCreateChatGroup', 'createChatGroupDto', createChatGroupDto)
+            const localVarPath = `/chat/groups`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createChatGroupDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateChatProfileDto} createChatProfileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerCreateChatProfile: async (createChatProfileDto: CreateChatProfileDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createChatProfileDto' is not null or undefined
+            assertParamExists('chatControllerCreateChatProfile', 'createChatProfileDto', createChatProfileDto)
+            const localVarPath = `/chat/profile`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createChatProfileDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} groupId 
+         * @param {number} dialogId 
+         * @param {CreateChatRecommendationDto} createChatRecommendationDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerCreateChatRecommendation: async (groupId: string, dialogId: number, createChatRecommendationDto: CreateChatRecommendationDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('chatControllerCreateChatRecommendation', 'groupId', groupId)
+            // verify required parameter 'dialogId' is not null or undefined
+            assertParamExists('chatControllerCreateChatRecommendation', 'dialogId', dialogId)
+            // verify required parameter 'createChatRecommendationDto' is not null or undefined
+            assertParamExists('chatControllerCreateChatRecommendation', 'createChatRecommendationDto', createChatRecommendationDto)
+            const localVarPath = `/chat/groups/{groupId}/dialogue/{dialogId}/recommendation`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)))
+                .replace(`{${"dialogId"}}`, encodeURIComponent(String(dialogId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createChatRecommendationDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerFetchChatGroup: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('chatControllerFetchChatGroup', 'id', id)
+            const localVarPath = `/chat/groups/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} clientId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerFetchChatProfile: async (clientId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('chatControllerFetchChatProfile', 'clientId', clientId)
+            const localVarPath = `/chat/profile`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} clientId 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerFetchCustomer: async (id: string, clientId: string, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('chatControllerFetchCustomer', 'id', id)
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('chatControllerFetchCustomer', 'clientId', clientId)
+            const localVarPath = `/chat/users/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} clientId 
+         * @param {string} content 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerFetchCustomerDialogueCount: async (id: string, clientId: string, content: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('chatControllerFetchCustomerDialogueCount', 'id', id)
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('chatControllerFetchCustomerDialogueCount', 'clientId', clientId)
+            // verify required parameter 'content' is not null or undefined
+            assertParamExists('chatControllerFetchCustomerDialogueCount', 'content', content)
+            const localVarPath = `/chat/users/{id}/dialogue/count`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+
+            if (content !== undefined) {
+                localVarQueryParameter['content'] = content;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UpdateChatProfileDto} updateChatProfileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerUpdateChatProfile: async (updateChatProfileDto: UpdateChatProfileDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'updateChatProfileDto' is not null or undefined
+            assertParamExists('chatControllerUpdateChatProfile', 'updateChatProfileDto', updateChatProfileDto)
+            const localVarPath = `/chat/profile`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateChatProfileDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {File} image 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerUpdateChatProfileImage: async (image: File, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'image' is not null or undefined
+            assertParamExists('chatControllerUpdateChatProfileImage', 'image', image)
+            const localVarPath = `/chat/profile/image`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+
+            if (image !== undefined) { 
+                localVarFormParams.append('image', image as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatPluginControllerFetchChatPlugins: async (limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/chat/plugins`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ChatApi - functional programming interface
+ * @export
+ */
+export const ChatApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ChatApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} groupId 
+         * @param {CreateChatDialogueDto} createChatDialogueDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatControllerCreateChatDialogue(groupId: string, createChatDialogueDto: CreateChatDialogueDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateChatDialogueResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatControllerCreateChatDialogue(groupId, createChatDialogueDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {CreateChatGroupDto} createChatGroupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatControllerCreateChatGroup(createChatGroupDto: CreateChatGroupDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateChatGroupResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatControllerCreateChatGroup(createChatGroupDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {CreateChatProfileDto} createChatProfileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatControllerCreateChatProfile(createChatProfileDto: CreateChatProfileDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatProfile>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatControllerCreateChatProfile(createChatProfileDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} groupId 
+         * @param {number} dialogId 
+         * @param {CreateChatRecommendationDto} createChatRecommendationDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatControllerCreateChatRecommendation(groupId: string, dialogId: number, createChatRecommendationDto: CreateChatRecommendationDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateChatRecommendationResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatControllerCreateChatRecommendation(groupId, dialogId, createChatRecommendationDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatControllerFetchChatGroup(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchChatGroupResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatControllerFetchChatGroup(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} clientId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatControllerFetchChatProfile(clientId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchChatProfileResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatControllerFetchChatProfile(clientId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} clientId 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatControllerFetchCustomer(id: string, clientId: string, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatControllerFetchCustomer200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatControllerFetchCustomer(id, clientId, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} clientId 
+         * @param {string} content 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatControllerFetchCustomerDialogueCount(id: string, clientId: string, content: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchCustomerDialogueCountResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatControllerFetchCustomerDialogueCount(id, clientId, content, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {UpdateChatProfileDto} updateChatProfileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatControllerUpdateChatProfile(updateChatProfileDto: UpdateChatProfileDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatControllerUpdateChatProfile(updateChatProfileDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {File} image 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatControllerUpdateChatProfileImage(image: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatProfile>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatControllerUpdateChatProfileImage(image, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatPluginControllerFetchChatPlugins(limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatPluginControllerFetchChatPlugins200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatPluginControllerFetchChatPlugins(limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ChatApi - factory interface
+ * @export
+ */
+export const ChatApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ChatApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} groupId 
+         * @param {CreateChatDialogueDto} createChatDialogueDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerCreateChatDialogue(groupId: string, createChatDialogueDto: CreateChatDialogueDto, options?: any): AxiosPromise<CreateChatDialogueResponseDto> {
+            return localVarFp.chatControllerCreateChatDialogue(groupId, createChatDialogueDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateChatGroupDto} createChatGroupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerCreateChatGroup(createChatGroupDto: CreateChatGroupDto, options?: any): AxiosPromise<CreateChatGroupResponseDto> {
+            return localVarFp.chatControllerCreateChatGroup(createChatGroupDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateChatProfileDto} createChatProfileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerCreateChatProfile(createChatProfileDto: CreateChatProfileDto, options?: any): AxiosPromise<ChatProfile> {
+            return localVarFp.chatControllerCreateChatProfile(createChatProfileDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} groupId 
+         * @param {number} dialogId 
+         * @param {CreateChatRecommendationDto} createChatRecommendationDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerCreateChatRecommendation(groupId: string, dialogId: number, createChatRecommendationDto: CreateChatRecommendationDto, options?: any): AxiosPromise<CreateChatRecommendationResponseDto> {
+            return localVarFp.chatControllerCreateChatRecommendation(groupId, dialogId, createChatRecommendationDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerFetchChatGroup(id: string, options?: any): AxiosPromise<FetchChatGroupResponseDto> {
+            return localVarFp.chatControllerFetchChatGroup(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} clientId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerFetchChatProfile(clientId: string, options?: any): AxiosPromise<FetchChatProfileResponseDto> {
+            return localVarFp.chatControllerFetchChatProfile(clientId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} clientId 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerFetchCustomer(id: string, clientId: string, limit?: number, offset?: number, options?: any): AxiosPromise<ChatControllerFetchCustomer200Response> {
+            return localVarFp.chatControllerFetchCustomer(id, clientId, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} clientId 
+         * @param {string} content 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerFetchCustomerDialogueCount(id: string, clientId: string, content: string, options?: any): AxiosPromise<FetchCustomerDialogueCountResponseDto> {
+            return localVarFp.chatControllerFetchCustomerDialogueCount(id, clientId, content, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UpdateChatProfileDto} updateChatProfileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerUpdateChatProfile(updateChatProfileDto: UpdateChatProfileDto, options?: any): AxiosPromise<void> {
+            return localVarFp.chatControllerUpdateChatProfile(updateChatProfileDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {File} image 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatControllerUpdateChatProfileImage(image: File, options?: any): AxiosPromise<ChatProfile> {
+            return localVarFp.chatControllerUpdateChatProfileImage(image, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatPluginControllerFetchChatPlugins(limit?: number, offset?: number, options?: any): AxiosPromise<ChatPluginControllerFetchChatPlugins200Response> {
+            return localVarFp.chatPluginControllerFetchChatPlugins(limit, offset, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ChatApi - object-oriented interface
+ * @export
+ * @class ChatApi
+ * @extends {BaseAPI}
+ */
+export class ChatApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} groupId 
+     * @param {CreateChatDialogueDto} createChatDialogueDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public chatControllerCreateChatDialogue(groupId: string, createChatDialogueDto: CreateChatDialogueDto, options?: AxiosRequestConfig) {
+        return ChatApiFp(this.configuration).chatControllerCreateChatDialogue(groupId, createChatDialogueDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateChatGroupDto} createChatGroupDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public chatControllerCreateChatGroup(createChatGroupDto: CreateChatGroupDto, options?: AxiosRequestConfig) {
+        return ChatApiFp(this.configuration).chatControllerCreateChatGroup(createChatGroupDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateChatProfileDto} createChatProfileDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public chatControllerCreateChatProfile(createChatProfileDto: CreateChatProfileDto, options?: AxiosRequestConfig) {
+        return ChatApiFp(this.configuration).chatControllerCreateChatProfile(createChatProfileDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} groupId 
+     * @param {number} dialogId 
+     * @param {CreateChatRecommendationDto} createChatRecommendationDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public chatControllerCreateChatRecommendation(groupId: string, dialogId: number, createChatRecommendationDto: CreateChatRecommendationDto, options?: AxiosRequestConfig) {
+        return ChatApiFp(this.configuration).chatControllerCreateChatRecommendation(groupId, dialogId, createChatRecommendationDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public chatControllerFetchChatGroup(id: string, options?: AxiosRequestConfig) {
+        return ChatApiFp(this.configuration).chatControllerFetchChatGroup(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} clientId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public chatControllerFetchChatProfile(clientId: string, options?: AxiosRequestConfig) {
+        return ChatApiFp(this.configuration).chatControllerFetchChatProfile(clientId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} clientId 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public chatControllerFetchCustomer(id: string, clientId: string, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return ChatApiFp(this.configuration).chatControllerFetchCustomer(id, clientId, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} clientId 
+     * @param {string} content 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public chatControllerFetchCustomerDialogueCount(id: string, clientId: string, content: string, options?: AxiosRequestConfig) {
+        return ChatApiFp(this.configuration).chatControllerFetchCustomerDialogueCount(id, clientId, content, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UpdateChatProfileDto} updateChatProfileDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public chatControllerUpdateChatProfile(updateChatProfileDto: UpdateChatProfileDto, options?: AxiosRequestConfig) {
+        return ChatApiFp(this.configuration).chatControllerUpdateChatProfile(updateChatProfileDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {File} image 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public chatControllerUpdateChatProfileImage(image: File, options?: AxiosRequestConfig) {
+        return ChatApiFp(this.configuration).chatControllerUpdateChatProfileImage(image, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatApi
+     */
+    public chatPluginControllerFetchChatPlugins(limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return ChatApiFp(this.configuration).chatPluginControllerFetchChatPlugins(limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ChatDashboardApi - axios parameter creator
+ * @export
+ */
+export const ChatDashboardApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {string} [query] 
+         * @param {string} [date] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatDashboardControllerFetchDialogue: async (limit?: number, offset?: number, query?: string, date?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/chat-dashboard/dialogue`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (query !== undefined) {
+                localVarQueryParameter['query'] = query;
+            }
+
+            if (date !== undefined) {
+                localVarQueryParameter['date'] = (date as any instanceof Date) ?
+                    (date as any).toISOString() :
+                    date;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ChatDashboardApi - functional programming interface
+ * @export
+ */
+export const ChatDashboardApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ChatDashboardApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {string} [query] 
+         * @param {string} [date] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async chatDashboardControllerFetchDialogue(limit?: number, offset?: number, query?: string, date?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatDashboardControllerFetchDialogue200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.chatDashboardControllerFetchDialogue(limit, offset, query, date, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ChatDashboardApi - factory interface
+ * @export
+ */
+export const ChatDashboardApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ChatDashboardApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {string} [query] 
+         * @param {string} [date] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        chatDashboardControllerFetchDialogue(limit?: number, offset?: number, query?: string, date?: string, options?: any): AxiosPromise<ChatDashboardControllerFetchDialogue200Response> {
+            return localVarFp.chatDashboardControllerFetchDialogue(limit, offset, query, date, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ChatDashboardApi - object-oriented interface
+ * @export
+ * @class ChatDashboardApi
+ * @extends {BaseAPI}
+ */
+export class ChatDashboardApi extends BaseAPI {
+    /**
+     * 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {string} [query] 
+     * @param {string} [date] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatDashboardApi
+     */
+    public chatDashboardControllerFetchDialogue(limit?: number, offset?: number, query?: string, date?: string, options?: AxiosRequestConfig) {
+        return ChatDashboardApiFp(this.configuration).chatDashboardControllerFetchDialogue(limit, offset, query, date, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ClientApi - axios parameter creator
+ * @export
+ */
+export const ClientApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        businessLicenseControllerGenerateUploadLink: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/business-licenses/license-upload-link`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateBusinessLicenseDto} createBusinessLicenseDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerCreateBusinessLicense: async (createBusinessLicenseDto: CreateBusinessLicenseDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createBusinessLicenseDto' is not null or undefined
+            assertParamExists('clientControllerCreateBusinessLicense', 'createBusinessLicenseDto', createBusinessLicenseDto)
+            const localVarPath = `/clients/me/business-licenses`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createBusinessLicenseDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateSellerDto} createSellerDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerCreateSeller: async (createSellerDto: CreateSellerDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createSellerDto' is not null or undefined
+            assertParamExists('clientControllerCreateSeller', 'createSellerDto', createSellerDto)
+            const localVarPath = `/clients/sellers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createSellerDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateUserDto} createUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerCreateUser: async (createUserDto: CreateUserDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createUserDto' is not null or undefined
+            assertParamExists('clientControllerCreateUser', 'createUserDto', createUserDto)
+            const localVarPath = `/clients/me/users`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createUserDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerFetchClient: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/clients/me`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerFetchSeller: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('clientControllerFetchSeller', 'id', id)
+            const localVarPath = `/clients/sellers/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerFetchSellers: async (limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/clients/sellers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} email 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerRemoveUser: async (email: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            assertParamExists('clientControllerRemoveUser', 'email', email)
+            const localVarPath = `/clients/me/users/{email}`
+                .replace(`{${"email"}}`, encodeURIComponent(String(email)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SetupDto} setupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerSetup: async (setupDto: SetupDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'setupDto' is not null or undefined
+            assertParamExists('clientControllerSetup', 'setupDto', setupDto)
+            const localVarPath = `/clients`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(setupDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerUpdateClientIsStore: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/clients/me/store`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} email 
+         * @param {UpdateUserDto} updateUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerUpdateUser: async (email: string, updateUserDto: UpdateUserDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            assertParamExists('clientControllerUpdateUser', 'email', email)
+            // verify required parameter 'updateUserDto' is not null or undefined
+            assertParamExists('clientControllerUpdateUser', 'updateUserDto', updateUserDto)
+            const localVarPath = `/clients/me/users/{email}`
+                .replace(`{${"email"}}`, encodeURIComponent(String(email)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateUserDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {VerifyUserDto} verifyUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerVerifyUser: async (verifyUserDto: VerifyUserDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'verifyUserDto' is not null or undefined
+            assertParamExists('clientControllerVerifyUser', 'verifyUserDto', verifyUserDto)
+            const localVarPath = `/clients/users/verify`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(verifyUserDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {WithdrawClientDto} withdrawClientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerWithdrawClient: async (withdrawClientDto: WithdrawClientDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'withdrawClientDto' is not null or undefined
+            assertParamExists('clientControllerWithdrawClient', 'withdrawClientDto', withdrawClientDto)
+            const localVarPath = `/clients/me/withdrawal`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(withdrawClientDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UpsertPaymentCardDto} upsertPaymentCardDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paymentCardControllerUpsert: async (upsertPaymentCardDto: UpsertPaymentCardDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'upsertPaymentCardDto' is not null or undefined
+            assertParamExists('paymentCardControllerUpsert', 'upsertPaymentCardDto', upsertPaymentCardDto)
+            const localVarPath = `/payment-cards`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(upsertPaymentCardDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ClientApi - functional programming interface
+ * @export
+ */
+export const ClientApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ClientApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async businessLicenseControllerGenerateUploadLink(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GenerateUploadLinkResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.businessLicenseControllerGenerateUploadLink(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {CreateBusinessLicenseDto} createBusinessLicenseDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerCreateBusinessLicense(createBusinessLicenseDto: CreateBusinessLicenseDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateBusinessLicenseResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerCreateBusinessLicense(createBusinessLicenseDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {CreateSellerDto} createSellerDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerCreateSeller(createSellerDto: CreateSellerDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateSellerResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerCreateSeller(createSellerDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {CreateUserDto} createUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerCreateUser(createUserDto: CreateUserDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerCreateUser(createUserDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerFetchClient(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchClientResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerFetchClient(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerFetchSeller(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchSellerResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerFetchSeller(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerFetchSellers(limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientControllerFetchSellers200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerFetchSellers(limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} email 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerRemoveUser(email: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerRemoveUser(email, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {SetupDto} setupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerSetup(setupDto: SetupDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Client>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerSetup(setupDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerUpdateClientIsStore(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerUpdateClientIsStore(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} email 
+         * @param {UpdateUserDto} updateUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerUpdateUser(email: string, updateUserDto: UpdateUserDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerUpdateUser(email, updateUserDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {VerifyUserDto} verifyUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerVerifyUser(verifyUserDto: VerifyUserDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VerifyUserResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerVerifyUser(verifyUserDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {WithdrawClientDto} withdrawClientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerWithdrawClient(withdrawClientDto: WithdrawClientDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Client>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerWithdrawClient(withdrawClientDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {UpsertPaymentCardDto} upsertPaymentCardDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paymentCardControllerUpsert(upsertPaymentCardDto: UpsertPaymentCardDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentCard>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paymentCardControllerUpsert(upsertPaymentCardDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ClientApi - factory interface
+ * @export
+ */
+export const ClientApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ClientApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        businessLicenseControllerGenerateUploadLink(options?: any): AxiosPromise<GenerateUploadLinkResponseDto> {
+            return localVarFp.businessLicenseControllerGenerateUploadLink(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateBusinessLicenseDto} createBusinessLicenseDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerCreateBusinessLicense(createBusinessLicenseDto: CreateBusinessLicenseDto, options?: any): AxiosPromise<CreateBusinessLicenseResponseDto> {
+            return localVarFp.clientControllerCreateBusinessLicense(createBusinessLicenseDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateSellerDto} createSellerDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerCreateSeller(createSellerDto: CreateSellerDto, options?: any): AxiosPromise<CreateSellerResponseDto> {
+            return localVarFp.clientControllerCreateSeller(createSellerDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateUserDto} createUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerCreateUser(createUserDto: CreateUserDto, options?: any): AxiosPromise<User> {
+            return localVarFp.clientControllerCreateUser(createUserDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerFetchClient(options?: any): AxiosPromise<FetchClientResponseDto> {
+            return localVarFp.clientControllerFetchClient(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerFetchSeller(id: string, options?: any): AxiosPromise<FetchSellerResponseDto> {
+            return localVarFp.clientControllerFetchSeller(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerFetchSellers(limit?: number, offset?: number, options?: any): AxiosPromise<ClientControllerFetchSellers200Response> {
+            return localVarFp.clientControllerFetchSellers(limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} email 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerRemoveUser(email: string, options?: any): AxiosPromise<void> {
+            return localVarFp.clientControllerRemoveUser(email, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SetupDto} setupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerSetup(setupDto: SetupDto, options?: any): AxiosPromise<Client> {
+            return localVarFp.clientControllerSetup(setupDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerUpdateClientIsStore(options?: any): AxiosPromise<void> {
+            return localVarFp.clientControllerUpdateClientIsStore(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} email 
+         * @param {UpdateUserDto} updateUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerUpdateUser(email: string, updateUserDto: UpdateUserDto, options?: any): AxiosPromise<void> {
+            return localVarFp.clientControllerUpdateUser(email, updateUserDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {VerifyUserDto} verifyUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerVerifyUser(verifyUserDto: VerifyUserDto, options?: any): AxiosPromise<VerifyUserResponseDto> {
+            return localVarFp.clientControllerVerifyUser(verifyUserDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {WithdrawClientDto} withdrawClientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerWithdrawClient(withdrawClientDto: WithdrawClientDto, options?: any): AxiosPromise<Client> {
+            return localVarFp.clientControllerWithdrawClient(withdrawClientDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UpsertPaymentCardDto} upsertPaymentCardDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paymentCardControllerUpsert(upsertPaymentCardDto: UpsertPaymentCardDto, options?: any): AxiosPromise<PaymentCard> {
+            return localVarFp.paymentCardControllerUpsert(upsertPaymentCardDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ClientApi - object-oriented interface
+ * @export
+ * @class ClientApi
+ * @extends {BaseAPI}
+ */
+export class ClientApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public businessLicenseControllerGenerateUploadLink(options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).businessLicenseControllerGenerateUploadLink(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateBusinessLicenseDto} createBusinessLicenseDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerCreateBusinessLicense(createBusinessLicenseDto: CreateBusinessLicenseDto, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerCreateBusinessLicense(createBusinessLicenseDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateSellerDto} createSellerDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerCreateSeller(createSellerDto: CreateSellerDto, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerCreateSeller(createSellerDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateUserDto} createUserDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerCreateUser(createUserDto: CreateUserDto, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerCreateUser(createUserDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerFetchClient(options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerFetchClient(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerFetchSeller(id: string, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerFetchSeller(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerFetchSellers(limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerFetchSellers(limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} email 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerRemoveUser(email: string, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerRemoveUser(email, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SetupDto} setupDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerSetup(setupDto: SetupDto, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerSetup(setupDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerUpdateClientIsStore(options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerUpdateClientIsStore(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} email 
+     * @param {UpdateUserDto} updateUserDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerUpdateUser(email: string, updateUserDto: UpdateUserDto, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerUpdateUser(email, updateUserDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {VerifyUserDto} verifyUserDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerVerifyUser(verifyUserDto: VerifyUserDto, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerVerifyUser(verifyUserDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {WithdrawClientDto} withdrawClientDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerWithdrawClient(withdrawClientDto: WithdrawClientDto, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerWithdrawClient(withdrawClientDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UpsertPaymentCardDto} upsertPaymentCardDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public paymentCardControllerUpsert(upsertPaymentCardDto: UpsertPaymentCardDto, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).paymentCardControllerUpsert(upsertPaymentCardDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ColumnMappingApi - axios parameter creator
+ * @export
+ */
+export const ColumnMappingApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CreateCategoryColumnMappingDto} createCategoryColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerCreateCategoryColumnMapping: async (createCategoryColumnMappingDto: CreateCategoryColumnMappingDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createCategoryColumnMappingDto' is not null or undefined
+            assertParamExists('columnMappingControllerCreateCategoryColumnMapping', 'createCategoryColumnMappingDto', createCategoryColumnMappingDto)
+            const localVarPath = `/column-mappings/categories`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createCategoryColumnMappingDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateProductColumnMappingDto} createProductColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerCreateProductColumnMapping: async (createProductColumnMappingDto: CreateProductColumnMappingDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createProductColumnMappingDto' is not null or undefined
+            assertParamExists('columnMappingControllerCreateProductColumnMapping', 'createProductColumnMappingDto', createProductColumnMappingDto)
+            const localVarPath = `/column-mappings/products`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createProductColumnMappingDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerDeleteColumnMapping: async (type: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('columnMappingControllerDeleteColumnMapping', 'type', type)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('columnMappingControllerDeleteColumnMapping', 'id', id)
+            const localVarPath = `/column-mappings/{type}/{id}`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)))
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerFetchMany: async (type: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('columnMappingControllerFetchMany', 'type', type)
+            const localVarPath = `/column-mappings/{type}`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateCategoryColumnMappingDto} updateCategoryColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerUpdateCategoryColumnMapping: async (id: string, updateCategoryColumnMappingDto: UpdateCategoryColumnMappingDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('columnMappingControllerUpdateCategoryColumnMapping', 'id', id)
+            // verify required parameter 'updateCategoryColumnMappingDto' is not null or undefined
+            assertParamExists('columnMappingControllerUpdateCategoryColumnMapping', 'updateCategoryColumnMappingDto', updateCategoryColumnMappingDto)
+            const localVarPath = `/column-mappings/categories/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateCategoryColumnMappingDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateProductColumnMappingDto} updateProductColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerUpdateProductColumnMapping: async (id: string, updateProductColumnMappingDto: UpdateProductColumnMappingDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('columnMappingControllerUpdateProductColumnMapping', 'id', id)
+            // verify required parameter 'updateProductColumnMappingDto' is not null or undefined
+            assertParamExists('columnMappingControllerUpdateProductColumnMapping', 'updateProductColumnMappingDto', updateProductColumnMappingDto)
+            const localVarPath = `/column-mappings/products/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateProductColumnMappingDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ColumnMappingApi - functional programming interface
+ * @export
+ */
+export const ColumnMappingApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ColumnMappingApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateCategoryColumnMappingDto} createCategoryColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async columnMappingControllerCreateCategoryColumnMapping(createCategoryColumnMappingDto: CreateCategoryColumnMappingDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ColumnMapping>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.columnMappingControllerCreateCategoryColumnMapping(createCategoryColumnMappingDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {CreateProductColumnMappingDto} createProductColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async columnMappingControllerCreateProductColumnMapping(createProductColumnMappingDto: CreateProductColumnMappingDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ColumnMapping>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.columnMappingControllerCreateProductColumnMapping(createProductColumnMappingDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async columnMappingControllerDeleteColumnMapping(type: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.columnMappingControllerDeleteColumnMapping(type, id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async columnMappingControllerFetchMany(type: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ColumnMapping>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.columnMappingControllerFetchMany(type, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateCategoryColumnMappingDto} updateCategoryColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async columnMappingControllerUpdateCategoryColumnMapping(id: string, updateCategoryColumnMappingDto: UpdateCategoryColumnMappingDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ColumnMapping>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.columnMappingControllerUpdateCategoryColumnMapping(id, updateCategoryColumnMappingDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateProductColumnMappingDto} updateProductColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async columnMappingControllerUpdateProductColumnMapping(id: string, updateProductColumnMappingDto: UpdateProductColumnMappingDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ColumnMapping>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.columnMappingControllerUpdateProductColumnMapping(id, updateProductColumnMappingDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ColumnMappingApi - factory interface
+ * @export
+ */
+export const ColumnMappingApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ColumnMappingApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateCategoryColumnMappingDto} createCategoryColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerCreateCategoryColumnMapping(createCategoryColumnMappingDto: CreateCategoryColumnMappingDto, options?: any): AxiosPromise<ColumnMapping> {
+            return localVarFp.columnMappingControllerCreateCategoryColumnMapping(createCategoryColumnMappingDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateProductColumnMappingDto} createProductColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerCreateProductColumnMapping(createProductColumnMappingDto: CreateProductColumnMappingDto, options?: any): AxiosPromise<ColumnMapping> {
+            return localVarFp.columnMappingControllerCreateProductColumnMapping(createProductColumnMappingDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerDeleteColumnMapping(type: string, id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.columnMappingControllerDeleteColumnMapping(type, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerFetchMany(type: string, options?: any): AxiosPromise<Array<ColumnMapping>> {
+            return localVarFp.columnMappingControllerFetchMany(type, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateCategoryColumnMappingDto} updateCategoryColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerUpdateCategoryColumnMapping(id: string, updateCategoryColumnMappingDto: UpdateCategoryColumnMappingDto, options?: any): AxiosPromise<ColumnMapping> {
+            return localVarFp.columnMappingControllerUpdateCategoryColumnMapping(id, updateCategoryColumnMappingDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateProductColumnMappingDto} updateProductColumnMappingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        columnMappingControllerUpdateProductColumnMapping(id: string, updateProductColumnMappingDto: UpdateProductColumnMappingDto, options?: any): AxiosPromise<ColumnMapping> {
+            return localVarFp.columnMappingControllerUpdateProductColumnMapping(id, updateProductColumnMappingDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ColumnMappingApi - object-oriented interface
+ * @export
+ * @class ColumnMappingApi
+ * @extends {BaseAPI}
+ */
+export class ColumnMappingApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateCategoryColumnMappingDto} createCategoryColumnMappingDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ColumnMappingApi
+     */
+    public columnMappingControllerCreateCategoryColumnMapping(createCategoryColumnMappingDto: CreateCategoryColumnMappingDto, options?: AxiosRequestConfig) {
+        return ColumnMappingApiFp(this.configuration).columnMappingControllerCreateCategoryColumnMapping(createCategoryColumnMappingDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateProductColumnMappingDto} createProductColumnMappingDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ColumnMappingApi
+     */
+    public columnMappingControllerCreateProductColumnMapping(createProductColumnMappingDto: CreateProductColumnMappingDto, options?: AxiosRequestConfig) {
+        return ColumnMappingApiFp(this.configuration).columnMappingControllerCreateProductColumnMapping(createProductColumnMappingDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} type 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ColumnMappingApi
+     */
+    public columnMappingControllerDeleteColumnMapping(type: string, id: string, options?: AxiosRequestConfig) {
+        return ColumnMappingApiFp(this.configuration).columnMappingControllerDeleteColumnMapping(type, id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} type 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ColumnMappingApi
+     */
+    public columnMappingControllerFetchMany(type: string, options?: AxiosRequestConfig) {
+        return ColumnMappingApiFp(this.configuration).columnMappingControllerFetchMany(type, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateCategoryColumnMappingDto} updateCategoryColumnMappingDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ColumnMappingApi
+     */
+    public columnMappingControllerUpdateCategoryColumnMapping(id: string, updateCategoryColumnMappingDto: UpdateCategoryColumnMappingDto, options?: AxiosRequestConfig) {
+        return ColumnMappingApiFp(this.configuration).columnMappingControllerUpdateCategoryColumnMapping(id, updateCategoryColumnMappingDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateProductColumnMappingDto} updateProductColumnMappingDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ColumnMappingApi
+     */
+    public columnMappingControllerUpdateProductColumnMapping(id: string, updateProductColumnMappingDto: UpdateProductColumnMappingDto, options?: AxiosRequestConfig) {
+        return ColumnMappingApiFp(this.configuration).columnMappingControllerUpdateProductColumnMapping(id, updateProductColumnMappingDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * CustomerApi - axios parameter creator
+ * @export
+ */
+export const CustomerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {string} clientId 
+         * @param {'1' | '7' | '30'} within 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customerControllerFetchCarts: async (customerId: string, clientId: string, within: '1' | '7' | '30', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('customerControllerFetchCarts', 'customerId', customerId)
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('customerControllerFetchCarts', 'clientId', clientId)
+            // verify required parameter 'within' is not null or undefined
+            assertParamExists('customerControllerFetchCarts', 'within', within)
+            const localVarPath = `/customer/carts`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (customerId !== undefined) {
+                localVarQueryParameter['customerId'] = customerId;
+            }
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+
+            if (within !== undefined) {
+                localVarQueryParameter['within'] = within;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {string} clientId 
+         * @param {'1' | '7' | '30'} within 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customerControllerFetchOrders: async (customerId: string, clientId: string, within: '1' | '7' | '30', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('customerControllerFetchOrders', 'customerId', customerId)
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('customerControllerFetchOrders', 'clientId', clientId)
+            // verify required parameter 'within' is not null or undefined
+            assertParamExists('customerControllerFetchOrders', 'within', within)
+            const localVarPath = `/customer/orders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (customerId !== undefined) {
+                localVarQueryParameter['customerId'] = customerId;
+            }
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+
+            if (within !== undefined) {
+                localVarQueryParameter['within'] = within;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {string} clientId 
+         * @param {'1' | '7' | '30'} within 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customerControllerFetchWishlist: async (customerId: string, clientId: string, within: '1' | '7' | '30', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('customerControllerFetchWishlist', 'customerId', customerId)
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('customerControllerFetchWishlist', 'clientId', clientId)
+            // verify required parameter 'within' is not null or undefined
+            assertParamExists('customerControllerFetchWishlist', 'within', within)
+            const localVarPath = `/customer/wishlist`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (customerId !== undefined) {
+                localVarQueryParameter['customerId'] = customerId;
+            }
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+
+            if (within !== undefined) {
+                localVarQueryParameter['within'] = within;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * CustomerApi - functional programming interface
+ * @export
+ */
+export const CustomerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CustomerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {string} clientId 
+         * @param {'1' | '7' | '30'} within 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async customerControllerFetchCarts(customerId: string, clientId: string, within: '1' | '7' | '30', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchCartResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.customerControllerFetchCarts(customerId, clientId, within, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {string} clientId 
+         * @param {'1' | '7' | '30'} within 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async customerControllerFetchOrders(customerId: string, clientId: string, within: '1' | '7' | '30', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Order>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.customerControllerFetchOrders(customerId, clientId, within, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {string} clientId 
+         * @param {'1' | '7' | '30'} within 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async customerControllerFetchWishlist(customerId: string, clientId: string, within: '1' | '7' | '30', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchWishlistResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.customerControllerFetchWishlist(customerId, clientId, within, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * CustomerApi - factory interface
+ * @export
+ */
+export const CustomerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CustomerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {string} clientId 
+         * @param {'1' | '7' | '30'} within 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customerControllerFetchCarts(customerId: string, clientId: string, within: '1' | '7' | '30', options?: any): AxiosPromise<Array<FetchCartResponseDto>> {
+            return localVarFp.customerControllerFetchCarts(customerId, clientId, within, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {string} clientId 
+         * @param {'1' | '7' | '30'} within 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customerControllerFetchOrders(customerId: string, clientId: string, within: '1' | '7' | '30', options?: any): AxiosPromise<Array<Order>> {
+            return localVarFp.customerControllerFetchOrders(customerId, clientId, within, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {string} clientId 
+         * @param {'1' | '7' | '30'} within 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customerControllerFetchWishlist(customerId: string, clientId: string, within: '1' | '7' | '30', options?: any): AxiosPromise<Array<FetchWishlistResponseDto>> {
+            return localVarFp.customerControllerFetchWishlist(customerId, clientId, within, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * CustomerApi - object-oriented interface
+ * @export
+ * @class CustomerApi
+ * @extends {BaseAPI}
+ */
+export class CustomerApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} customerId 
+     * @param {string} clientId 
+     * @param {'1' | '7' | '30'} within 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CustomerApi
+     */
+    public customerControllerFetchCarts(customerId: string, clientId: string, within: '1' | '7' | '30', options?: AxiosRequestConfig) {
+        return CustomerApiFp(this.configuration).customerControllerFetchCarts(customerId, clientId, within, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId 
+     * @param {string} clientId 
+     * @param {'1' | '7' | '30'} within 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CustomerApi
+     */
+    public customerControllerFetchOrders(customerId: string, clientId: string, within: '1' | '7' | '30', options?: AxiosRequestConfig) {
+        return CustomerApiFp(this.configuration).customerControllerFetchOrders(customerId, clientId, within, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId 
+     * @param {string} clientId 
+     * @param {'1' | '7' | '30'} within 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CustomerApi
+     */
+    public customerControllerFetchWishlist(customerId: string, clientId: string, within: '1' | '7' | '30', options?: AxiosRequestConfig) {
+        return CustomerApiFp(this.configuration).customerControllerFetchWishlist(customerId, clientId, within, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * DashboardApi - axios parameter creator
+ * @export
+ */
+export const DashboardApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} id 
+         * @param {'STORE' | 'SELLER'} requestClientType 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchCampaign: async (id: string, requestClientType: 'STORE' | 'SELLER', from: string, to: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaign', 'id', id)
+            // verify required parameter 'requestClientType' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaign', 'requestClientType', requestClientType)
+            // verify required parameter 'from' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaign', 'from', from)
+            // verify required parameter 'to' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaign', 'to', to)
+            const localVarPath = `/dashboard/campaigns/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (requestClientType !== undefined) {
+                localVarQueryParameter['requestClientType'] = requestClientType;
+            }
+
+            if (from !== undefined) {
+                localVarQueryParameter['from'] = from;
+            }
+
+            if (to !== undefined) {
+                localVarQueryParameter['to'] = to;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchCampaignGraph: async (id: string, from: string, to: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaignGraph', 'id', id)
+            // verify required parameter 'from' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaignGraph', 'from', from)
+            // verify required parameter 'to' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaignGraph', 'to', to)
+            const localVarPath = `/dashboard/graph/campaigns/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (from !== undefined) {
+                localVarQueryParameter['from'] = from;
+            }
+
+            if (to !== undefined) {
+                localVarQueryParameter['to'] = to;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {'STORE' | 'SELLER'} clientType 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {string} [sellerId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchCampaignsGraph: async (clientType: 'STORE' | 'SELLER', from: string, to: string, sellerId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'clientType' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaignsGraph', 'clientType', clientType)
+            // verify required parameter 'from' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaignsGraph', 'from', from)
+            // verify required parameter 'to' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaignsGraph', 'to', to)
+            const localVarPath = `/dashboard/graph/campaigns`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (clientType !== undefined) {
+                localVarQueryParameter['clientType'] = clientType;
+            }
+
+            if (sellerId !== undefined) {
+                localVarQueryParameter['sellerId'] = sellerId;
+            }
+
+            if (from !== undefined) {
+                localVarQueryParameter['from'] = from;
+            }
+
+            if (to !== undefined) {
+                localVarQueryParameter['to'] = to;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} date 
+         * @param {string} referenceDate 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchCampaignsSummary: async (date: string, referenceDate: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'date' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaignsSummary', 'date', date)
+            // verify required parameter 'referenceDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchCampaignsSummary', 'referenceDate', referenceDate)
+            const localVarPath = `/dashboard/summary/campaigns`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (date !== undefined) {
+                localVarQueryParameter['date'] = date;
+            }
+
+            if (referenceDate !== undefined) {
+                localVarQueryParameter['referenceDate'] = referenceDate;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Array<string>} placementIds 
+         * @param {Array<string>} bannerIds 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {Array<string>} [orderBy] BannerDashboardSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchListOnBannerDashboard: async (placementIds: Array<string>, bannerIds: Array<string>, startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'placementIds' is not null or undefined
+            assertParamExists('dashboardControllerFetchListOnBannerDashboard', 'placementIds', placementIds)
+            // verify required parameter 'bannerIds' is not null or undefined
+            assertParamExists('dashboardControllerFetchListOnBannerDashboard', 'bannerIds', bannerIds)
+            // verify required parameter 'startDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchListOnBannerDashboard', 'startDate', startDate)
+            // verify required parameter 'endDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchListOnBannerDashboard', 'endDate', endDate)
+            const localVarPath = `/dashboard/banners`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (orderBy) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (placementIds) {
+                localVarQueryParameter['placementIds'] = placementIds;
+            }
+
+            if (bannerIds) {
+                localVarQueryParameter['bannerIds'] = bannerIds;
+            }
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString() :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString() :
+                    endDate;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count'} [orderBy] 
+         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchManyCampaign: async (limit?: number, offset?: number, orderBy?: 'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count', orderDir?: 'ASC' | 'DESC', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/dashboard/campaigns`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (orderBy !== undefined) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (orderDir !== undefined) {
+                localVarQueryParameter['orderDir'] = orderDir;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count'} [orderBy] 
+         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchManySeller: async (limit?: number, offset?: number, orderBy?: 'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count', orderDir?: 'ASC' | 'DESC', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/dashboard/sellers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (orderBy !== undefined) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (orderDir !== undefined) {
+                localVarQueryParameter['orderDir'] = orderDir;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Array<string>} placementIds 
+         * @param {Array<string>} bannerIds 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchMetricsOnBannerDashboard: async (placementIds: Array<string>, bannerIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'placementIds' is not null or undefined
+            assertParamExists('dashboardControllerFetchMetricsOnBannerDashboard', 'placementIds', placementIds)
+            // verify required parameter 'bannerIds' is not null or undefined
+            assertParamExists('dashboardControllerFetchMetricsOnBannerDashboard', 'bannerIds', bannerIds)
+            // verify required parameter 'startDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchMetricsOnBannerDashboard', 'startDate', startDate)
+            // verify required parameter 'endDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchMetricsOnBannerDashboard', 'endDate', endDate)
+            // verify required parameter 'timezone' is not null or undefined
+            assertParamExists('dashboardControllerFetchMetricsOnBannerDashboard', 'timezone', timezone)
+            const localVarPath = `/dashboard/metric/banners`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (placementIds) {
+                localVarQueryParameter['placementIds'] = placementIds;
+            }
+
+            if (bannerIds) {
+                localVarQueryParameter['bannerIds'] = bannerIds;
+            }
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString() :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString() :
+                    endDate;
+            }
+
+            if (timezone !== undefined) {
+                localVarQueryParameter['timezone'] = timezone;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {'STORE' | 'SELLER'} requestClientType 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchSeller: async (id: string, requestClientType: 'STORE' | 'SELLER', from: string, to: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('dashboardControllerFetchSeller', 'id', id)
+            // verify required parameter 'requestClientType' is not null or undefined
+            assertParamExists('dashboardControllerFetchSeller', 'requestClientType', requestClientType)
+            // verify required parameter 'from' is not null or undefined
+            assertParamExists('dashboardControllerFetchSeller', 'from', from)
+            // verify required parameter 'to' is not null or undefined
+            assertParamExists('dashboardControllerFetchSeller', 'to', to)
+            const localVarPath = `/dashboard/sellers/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (requestClientType !== undefined) {
+                localVarQueryParameter['requestClientType'] = requestClientType;
+            }
+
+            if (from !== undefined) {
+                localVarQueryParameter['from'] = from;
+            }
+
+            if (to !== undefined) {
+                localVarQueryParameter['to'] = to;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchSellersGraph: async (from: string, to: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'from' is not null or undefined
+            assertParamExists('dashboardControllerFetchSellersGraph', 'from', from)
+            // verify required parameter 'to' is not null or undefined
+            assertParamExists('dashboardControllerFetchSellersGraph', 'to', to)
+            const localVarPath = `/dashboard/graph/sellers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (from !== undefined) {
+                localVarQueryParameter['from'] = from;
+            }
+
+            if (to !== undefined) {
+                localVarQueryParameter['to'] = to;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} date 
+         * @param {string} referenceDate 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchSellersSummary: async (date: string, referenceDate: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'date' is not null or undefined
+            assertParamExists('dashboardControllerFetchSellersSummary', 'date', date)
+            // verify required parameter 'referenceDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchSellersSummary', 'referenceDate', referenceDate)
+            const localVarPath = `/dashboard/summary/sellers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (date !== undefined) {
+                localVarQueryParameter['date'] = date;
+            }
+
+            if (referenceDate !== undefined) {
+                localVarQueryParameter['referenceDate'] = referenceDate;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * DashboardApi - functional programming interface
+ * @export
+ */
+export const DashboardApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = DashboardApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} id 
+         * @param {'STORE' | 'SELLER'} requestClientType 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchCampaign(id: string, requestClientType: 'STORE' | 'SELLER', from: string, to: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchDashboardCampaignResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchCampaign(id, requestClientType, from, to, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchCampaignGraph(id: string, from: string, to: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchGraphResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchCampaignGraph(id, from, to, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {'STORE' | 'SELLER'} clientType 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {string} [sellerId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchCampaignsGraph(clientType: 'STORE' | 'SELLER', from: string, to: string, sellerId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchGraphResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchCampaignsGraph(clientType, from, to, sellerId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} date 
+         * @param {string} referenceDate 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchCampaignsSummary(date: string, referenceDate: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchDashboardCampaignSummaryResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchCampaignsSummary(date, referenceDate, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Array<string>} placementIds 
+         * @param {Array<string>} bannerIds 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {Array<string>} [orderBy] BannerDashboardSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchListOnBannerDashboard(placementIds: Array<string>, bannerIds: Array<string>, startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DashboardControllerFetchListOnBannerDashboard200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchListOnBannerDashboard(placementIds, bannerIds, startDate, endDate, orderBy, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count'} [orderBy] 
+         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchManyCampaign(limit?: number, offset?: number, orderBy?: 'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count', orderDir?: 'ASC' | 'DESC', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DashboardControllerFetchManyCampaign200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchManyCampaign(limit, offset, orderBy, orderDir, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count'} [orderBy] 
+         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchManySeller(limit?: number, offset?: number, orderBy?: 'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count', orderDir?: 'ASC' | 'DESC', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DashboardControllerFetchManySeller200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchManySeller(limit, offset, orderBy, orderDir, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Array<string>} placementIds 
+         * @param {Array<string>} bannerIds 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchMetricsOnBannerDashboard(placementIds: Array<string>, bannerIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchMetricsOnBannerDashboardResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchMetricsOnBannerDashboard(placementIds, bannerIds, startDate, endDate, timezone, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {'STORE' | 'SELLER'} requestClientType 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchSeller(id: string, requestClientType: 'STORE' | 'SELLER', from: string, to: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchDashboardSellerResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchSeller(id, requestClientType, from, to, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchSellersGraph(from: string, to: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchGraphResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchSellersGraph(from, to, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} date 
+         * @param {string} referenceDate 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchSellersSummary(date: string, referenceDate: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchDashboardSellerSummaryResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchSellersSummary(date, referenceDate, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * DashboardApi - factory interface
+ * @export
+ */
+export const DashboardApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = DashboardApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} id 
+         * @param {'STORE' | 'SELLER'} requestClientType 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchCampaign(id: string, requestClientType: 'STORE' | 'SELLER', from: string, to: string, options?: any): AxiosPromise<FetchDashboardCampaignResponseDto> {
+            return localVarFp.dashboardControllerFetchCampaign(id, requestClientType, from, to, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchCampaignGraph(id: string, from: string, to: string, options?: any): AxiosPromise<FetchGraphResponseDto> {
+            return localVarFp.dashboardControllerFetchCampaignGraph(id, from, to, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {'STORE' | 'SELLER'} clientType 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {string} [sellerId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchCampaignsGraph(clientType: 'STORE' | 'SELLER', from: string, to: string, sellerId?: string, options?: any): AxiosPromise<FetchGraphResponseDto> {
+            return localVarFp.dashboardControllerFetchCampaignsGraph(clientType, from, to, sellerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} date 
+         * @param {string} referenceDate 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchCampaignsSummary(date: string, referenceDate: string, options?: any): AxiosPromise<FetchDashboardCampaignSummaryResponseDto> {
+            return localVarFp.dashboardControllerFetchCampaignsSummary(date, referenceDate, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<string>} placementIds 
+         * @param {Array<string>} bannerIds 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {Array<string>} [orderBy] BannerDashboardSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchListOnBannerDashboard(placementIds: Array<string>, bannerIds: Array<string>, startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: any): AxiosPromise<DashboardControllerFetchListOnBannerDashboard200Response> {
+            return localVarFp.dashboardControllerFetchListOnBannerDashboard(placementIds, bannerIds, startDate, endDate, orderBy, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count'} [orderBy] 
+         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchManyCampaign(limit?: number, offset?: number, orderBy?: 'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count', orderDir?: 'ASC' | 'DESC', options?: any): AxiosPromise<DashboardControllerFetchManyCampaign200Response> {
+            return localVarFp.dashboardControllerFetchManyCampaign(limit, offset, orderBy, orderDir, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count'} [orderBy] 
+         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchManySeller(limit?: number, offset?: number, orderBy?: 'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count', orderDir?: 'ASC' | 'DESC', options?: any): AxiosPromise<DashboardControllerFetchManySeller200Response> {
+            return localVarFp.dashboardControllerFetchManySeller(limit, offset, orderBy, orderDir, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<string>} placementIds 
+         * @param {Array<string>} bannerIds 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchMetricsOnBannerDashboard(placementIds: Array<string>, bannerIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options?: any): AxiosPromise<FetchMetricsOnBannerDashboardResponseDto> {
+            return localVarFp.dashboardControllerFetchMetricsOnBannerDashboard(placementIds, bannerIds, startDate, endDate, timezone, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {'STORE' | 'SELLER'} requestClientType 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchSeller(id: string, requestClientType: 'STORE' | 'SELLER', from: string, to: string, options?: any): AxiosPromise<FetchDashboardSellerResponseDto> {
+            return localVarFp.dashboardControllerFetchSeller(id, requestClientType, from, to, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} from 
+         * @param {string} to 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchSellersGraph(from: string, to: string, options?: any): AxiosPromise<FetchGraphResponseDto> {
+            return localVarFp.dashboardControllerFetchSellersGraph(from, to, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} date 
+         * @param {string} referenceDate 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchSellersSummary(date: string, referenceDate: string, options?: any): AxiosPromise<FetchDashboardSellerSummaryResponseDto> {
+            return localVarFp.dashboardControllerFetchSellersSummary(date, referenceDate, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * DashboardApi - object-oriented interface
+ * @export
+ * @class DashboardApi
+ * @extends {BaseAPI}
+ */
+export class DashboardApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} id 
+     * @param {'STORE' | 'SELLER'} requestClientType 
+     * @param {string} from 
+     * @param {string} to 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchCampaign(id: string, requestClientType: 'STORE' | 'SELLER', from: string, to: string, options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchCampaign(id, requestClientType, from, to, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} from 
+     * @param {string} to 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchCampaignGraph(id: string, from: string, to: string, options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchCampaignGraph(id, from, to, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {'STORE' | 'SELLER'} clientType 
+     * @param {string} from 
+     * @param {string} to 
+     * @param {string} [sellerId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchCampaignsGraph(clientType: 'STORE' | 'SELLER', from: string, to: string, sellerId?: string, options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchCampaignsGraph(clientType, from, to, sellerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} date 
+     * @param {string} referenceDate 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchCampaignsSummary(date: string, referenceDate: string, options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchCampaignsSummary(date, referenceDate, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<string>} placementIds 
+     * @param {Array<string>} bannerIds 
+     * @param {string} startDate 
+     * @param {string} endDate 
+     * @param {Array<string>} [orderBy] BannerDashboardSortOption
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchListOnBannerDashboard(placementIds: Array<string>, bannerIds: Array<string>, startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchListOnBannerDashboard(placementIds, bannerIds, startDate, endDate, orderBy, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count'} [orderBy] 
+     * @param {'ASC' | 'DESC'} [orderDir] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchManyCampaign(limit?: number, offset?: number, orderBy?: 'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count', orderDir?: 'ASC' | 'DESC', options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchManyCampaign(limit, offset, orderBy, orderDir, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count'} [orderBy] 
+     * @param {'ASC' | 'DESC'} [orderDir] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchManySeller(limit?: number, offset?: number, orderBy?: 'name' | 'title' | 'status' | 'daily_budget' | 'starts_at' | 'ends_at' | 'expense' | 'conversion' | 'click_rate' | 'click_count' | 'impression_count' | 'purchase_amount' | 'purchase_count' | 'campaign_count', orderDir?: 'ASC' | 'DESC', options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchManySeller(limit, offset, orderBy, orderDir, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<string>} placementIds 
+     * @param {Array<string>} bannerIds 
+     * @param {string} startDate 
+     * @param {string} endDate 
+     * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchMetricsOnBannerDashboard(placementIds: Array<string>, bannerIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchMetricsOnBannerDashboard(placementIds, bannerIds, startDate, endDate, timezone, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {'STORE' | 'SELLER'} requestClientType 
+     * @param {string} from 
+     * @param {string} to 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchSeller(id: string, requestClientType: 'STORE' | 'SELLER', from: string, to: string, options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchSeller(id, requestClientType, from, to, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} from 
+     * @param {string} to 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchSellersGraph(from: string, to: string, options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchSellersGraph(from, to, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} date 
+     * @param {string} referenceDate 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchSellersSummary(date: string, referenceDate: string, options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchSellersSummary(date, referenceDate, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * NoticeApi - axios parameter creator
+ * @export
+ */
+export const NoticeApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        notionNoticeControllerFetctList: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/notion-notices`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * NoticeApi - functional programming interface
+ * @export
+ */
+export const NoticeApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = NoticeApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async notionNoticeControllerFetctList(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NotionNoticeListDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.notionNoticeControllerFetctList(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * NoticeApi - factory interface
+ * @export
+ */
+export const NoticeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = NoticeApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        notionNoticeControllerFetctList(options?: any): AxiosPromise<NotionNoticeListDto> {
+            return localVarFp.notionNoticeControllerFetctList(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * NoticeApi - object-oriented interface
+ * @export
+ * @class NoticeApi
+ * @extends {BaseAPI}
+ */
+export class NoticeApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof NoticeApi
+     */
+    public notionNoticeControllerFetctList(options?: AxiosRequestConfig) {
+        return NoticeApiFp(this.configuration).notionNoticeControllerFetctList(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PageApi - axios parameter creator
+ * @export
+ */
+export const PageApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Fetch active placements of the page.
+         * @summary 
+         * @param {string} name 
+         * @param {string} clientId The client ID of the placement owner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pageControllerFetchActivePlacements: async (name: string, clientId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pageControllerFetchActivePlacements', 'name', name)
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('pageControllerFetchActivePlacements', 'clientId', clientId)
+            const localVarPath = `/pages/{name}/placements`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pageControllerFetchManyPage: async (limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/pages`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pageControllerRemovePage: async (name: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pageControllerRemovePage', 'name', name)
+            const localVarPath = `/pages/{name}`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} name 
+         * @param {Page} page 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pageControllerUpdatePage: async (name: string, page: Page, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pageControllerUpdatePage', 'name', name)
+            // verify required parameter 'page' is not null or undefined
+            assertParamExists('pageControllerUpdatePage', 'page', page)
+            const localVarPath = `/pages/{name}`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(page, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PageApi - functional programming interface
+ * @export
+ */
+export const PageApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PageApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Fetch active placements of the page.
+         * @summary 
+         * @param {string} name 
+         * @param {string} clientId The client ID of the placement owner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pageControllerFetchActivePlacements(name: string, clientId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchActivePlacementsResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pageControllerFetchActivePlacements(name, clientId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pageControllerFetchManyPage(limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PageControllerFetchManyPage200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pageControllerFetchManyPage(limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pageControllerRemovePage(name: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pageControllerRemovePage(name, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} name 
+         * @param {Page} page 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pageControllerUpdatePage(name: string, page: Page, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pageControllerUpdatePage(name, page, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PageApi - factory interface
+ * @export
+ */
+export const PageApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PageApiFp(configuration)
+    return {
+        /**
+         * Fetch active placements of the page.
+         * @summary 
+         * @param {string} name 
+         * @param {string} clientId The client ID of the placement owner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pageControllerFetchActivePlacements(name: string, clientId: string, options?: any): AxiosPromise<Array<FetchActivePlacementsResponseDto>> {
+            return localVarFp.pageControllerFetchActivePlacements(name, clientId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pageControllerFetchManyPage(limit?: number, offset?: number, options?: any): AxiosPromise<PageControllerFetchManyPage200Response> {
+            return localVarFp.pageControllerFetchManyPage(limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pageControllerRemovePage(name: string, options?: any): AxiosPromise<void> {
+            return localVarFp.pageControllerRemovePage(name, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} name 
+         * @param {Page} page 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pageControllerUpdatePage(name: string, page: Page, options?: any): AxiosPromise<void> {
+            return localVarFp.pageControllerUpdatePage(name, page, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PageApi - object-oriented interface
+ * @export
+ * @class PageApi
+ * @extends {BaseAPI}
+ */
+export class PageApi extends BaseAPI {
+    /**
+     * Fetch active placements of the page.
+     * @summary 
+     * @param {string} name 
+     * @param {string} clientId The client ID of the placement owner.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PageApi
+     */
+    public pageControllerFetchActivePlacements(name: string, clientId: string, options?: AxiosRequestConfig) {
+        return PageApiFp(this.configuration).pageControllerFetchActivePlacements(name, clientId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PageApi
+     */
+    public pageControllerFetchManyPage(limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return PageApiFp(this.configuration).pageControllerFetchManyPage(limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} name 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PageApi
+     */
+    public pageControllerRemovePage(name: string, options?: AxiosRequestConfig) {
+        return PageApiFp(this.configuration).pageControllerRemovePage(name, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} name 
+     * @param {Page} page 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PageApi
+     */
+    public pageControllerUpdatePage(name: string, page: Page, options?: AxiosRequestConfig) {
+        return PageApiFp(this.configuration).pageControllerUpdatePage(name, page, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -3046,6 +15826,45 @@ export class BannerApi extends BaseAPI {
  */
 export const PlacementApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @param {string} id 
+         * @param {ConnectProductsToPlacementDto} connectProductsToPlacementDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placementControllerConnectProducts: async (id: string, connectProductsToPlacementDto: ConnectProductsToPlacementDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('placementControllerConnectProducts', 'id', id)
+            // verify required parameter 'connectProductsToPlacementDto' is not null or undefined
+            assertParamExists('placementControllerConnectProducts', 'connectProductsToPlacementDto', connectProductsToPlacementDto)
+            const localVarPath = `/placements/{id}/products`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(connectProductsToPlacementDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @param {CreatePlacementDto} createPlacementDto 
@@ -3086,20 +15905,20 @@ export const PlacementApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
+         * @param {Array<string>} [orderBy] PlacementSortOption
          * @param {Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>} [select] 
          * @param {string} [title] 
          * @param {string} [startDate] 
          * @param {string} [endDate] 
          * @param {'GRID' | 'BANNER'} [type] 
+         * @param {'RECOMMEND' | 'ADVERTISE'} [suggestionType] 
          * @param {boolean} [activated] 
-         * @param {'title' | 'createdAt'} [orderBy] 
-         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placementControllerFetchMany: async (limit?: number, offset?: number, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', activated?: boolean, orderBy?: 'title' | 'createdAt', orderDir?: 'ASC' | 'DESC', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placementControllerFetchMany: async (orderBy?: Array<string>, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', suggestionType?: 'RECOMMEND' | 'ADVERTISE', activated?: boolean, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/placements`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3115,12 +15934,8 @@ export const PlacementApiAxiosParamCreator = function (configuration?: Configura
             // authentication api-key required
             await setApiKeyToObject(localVarHeaderParameter, "X-Api-Key", configuration)
 
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            if (offset !== undefined) {
-                localVarQueryParameter['offset'] = offset;
+            if (orderBy) {
+                localVarQueryParameter['orderBy'] = orderBy;
             }
 
             if (select) {
@@ -3147,16 +15962,20 @@ export const PlacementApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['type'] = type;
             }
 
+            if (suggestionType !== undefined) {
+                localVarQueryParameter['suggestionType'] = suggestionType;
+            }
+
             if (activated !== undefined) {
                 localVarQueryParameter['activated'] = activated;
             }
 
-            if (orderBy !== undefined) {
-                localVarQueryParameter['orderBy'] = orderBy;
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
-            if (orderDir !== undefined) {
-                localVarQueryParameter['orderDir'] = orderDir;
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
             }
 
 
@@ -3230,6 +16049,43 @@ export const PlacementApiAxiosParamCreator = function (configuration?: Configura
 
             // authentication api-key required
             await setApiKeyToObject(localVarHeaderParameter, "X-Api-Key", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} productId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placementControllerRemoveProduct: async (id: string, productId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('placementControllerRemoveProduct', 'id', id)
+            // verify required parameter 'productId' is not null or undefined
+            assertParamExists('placementControllerRemoveProduct', 'productId', productId)
+            const localVarPath = `/placements/{id}/products/{productId}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"productId"}}`, encodeURIComponent(String(productId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
 
     
@@ -3343,6 +16199,17 @@ export const PlacementApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} id 
+         * @param {ConnectProductsToPlacementDto} connectProductsToPlacementDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async placementControllerConnectProducts(id: string, connectProductsToPlacementDto: ConnectProductsToPlacementDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConnectProductsToPlacementResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerConnectProducts(id, connectProductsToPlacementDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {CreatePlacementDto} createPlacementDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3353,21 +16220,21 @@ export const PlacementApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
+         * @param {Array<string>} [orderBy] PlacementSortOption
          * @param {Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>} [select] 
          * @param {string} [title] 
          * @param {string} [startDate] 
          * @param {string} [endDate] 
          * @param {'GRID' | 'BANNER'} [type] 
+         * @param {'RECOMMEND' | 'ADVERTISE'} [suggestionType] 
          * @param {boolean} [activated] 
-         * @param {'title' | 'createdAt'} [orderBy] 
-         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placementControllerFetchMany(limit?: number, offset?: number, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', activated?: boolean, orderBy?: 'title' | 'createdAt', orderDir?: 'ASC' | 'DESC', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlacementControllerFetchMany200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerFetchMany(limit, offset, select, title, startDate, endDate, type, activated, orderBy, orderDir, options);
+        async placementControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', suggestionType?: 'RECOMMEND' | 'ADVERTISE', activated?: boolean, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlacementControllerFetchMany200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerFetchMany(orderBy, select, title, startDate, endDate, type, suggestionType, activated, limit, offset, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3376,7 +16243,7 @@ export const PlacementApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placementControllerFetchOne(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Placement>> {
+        async placementControllerFetchOne(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchPlacementResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerFetchOne(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3393,11 +16260,22 @@ export const PlacementApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
+         * @param {string} productId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async placementControllerRemoveProduct(id: string, productId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RemoveProductFromPlacementResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerRemoveProduct(id, productId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
          * @param {UpdatePlacementDto} updatePlacementDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placementControllerUpdate(id: string, updatePlacementDto: UpdatePlacementDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Placement>> {
+        async placementControllerUpdate(id: string, updatePlacementDto: UpdatePlacementDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdatePlacementResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerUpdate(id, updatePlacementDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3424,6 +16302,16 @@ export const PlacementApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
+         * @param {string} id 
+         * @param {ConnectProductsToPlacementDto} connectProductsToPlacementDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placementControllerConnectProducts(id: string, connectProductsToPlacementDto: ConnectProductsToPlacementDto, options?: any): AxiosPromise<ConnectProductsToPlacementResponseDto> {
+            return localVarFp.placementControllerConnectProducts(id, connectProductsToPlacementDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {CreatePlacementDto} createPlacementDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3433,21 +16321,21 @@ export const PlacementApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
+         * @param {Array<string>} [orderBy] PlacementSortOption
          * @param {Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>} [select] 
          * @param {string} [title] 
          * @param {string} [startDate] 
          * @param {string} [endDate] 
          * @param {'GRID' | 'BANNER'} [type] 
+         * @param {'RECOMMEND' | 'ADVERTISE'} [suggestionType] 
          * @param {boolean} [activated] 
-         * @param {'title' | 'createdAt'} [orderBy] 
-         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placementControllerFetchMany(limit?: number, offset?: number, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', activated?: boolean, orderBy?: 'title' | 'createdAt', orderDir?: 'ASC' | 'DESC', options?: any): AxiosPromise<PlacementControllerFetchMany200Response> {
-            return localVarFp.placementControllerFetchMany(limit, offset, select, title, startDate, endDate, type, activated, orderBy, orderDir, options).then((request) => request(axios, basePath));
+        placementControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', suggestionType?: 'RECOMMEND' | 'ADVERTISE', activated?: boolean, limit?: number, offset?: number, options?: any): AxiosPromise<PlacementControllerFetchMany200Response> {
+            return localVarFp.placementControllerFetchMany(orderBy, select, title, startDate, endDate, type, suggestionType, activated, limit, offset, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3455,7 +16343,7 @@ export const PlacementApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placementControllerFetchOne(id: string, options?: any): AxiosPromise<Placement> {
+        placementControllerFetchOne(id: string, options?: any): AxiosPromise<FetchPlacementResponseDto> {
             return localVarFp.placementControllerFetchOne(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3470,11 +16358,21 @@ export const PlacementApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @param {string} id 
+         * @param {string} productId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placementControllerRemoveProduct(id: string, productId: string, options?: any): AxiosPromise<RemoveProductFromPlacementResponseDto> {
+            return localVarFp.placementControllerRemoveProduct(id, productId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
          * @param {UpdatePlacementDto} updatePlacementDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placementControllerUpdate(id: string, updatePlacementDto: UpdatePlacementDto, options?: any): AxiosPromise<Placement> {
+        placementControllerUpdate(id: string, updatePlacementDto: UpdatePlacementDto, options?: any): AxiosPromise<UpdatePlacementResponseDto> {
             return localVarFp.placementControllerUpdate(id, updatePlacementDto, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3499,6 +16397,18 @@ export const PlacementApiFactory = function (configuration?: Configuration, base
 export class PlacementApi extends BaseAPI {
     /**
      * 
+     * @param {string} id 
+     * @param {ConnectProductsToPlacementDto} connectProductsToPlacementDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlacementApi
+     */
+    public placementControllerConnectProducts(id: string, connectProductsToPlacementDto: ConnectProductsToPlacementDto, options?: AxiosRequestConfig) {
+        return PlacementApiFp(this.configuration).placementControllerConnectProducts(id, connectProductsToPlacementDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {CreatePlacementDto} createPlacementDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3510,22 +16420,22 @@ export class PlacementApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} [limit] 
-     * @param {number} [offset] 
+     * @param {Array<string>} [orderBy] PlacementSortOption
      * @param {Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>} [select] 
      * @param {string} [title] 
      * @param {string} [startDate] 
      * @param {string} [endDate] 
      * @param {'GRID' | 'BANNER'} [type] 
+     * @param {'RECOMMEND' | 'ADVERTISE'} [suggestionType] 
      * @param {boolean} [activated] 
-     * @param {'title' | 'createdAt'} [orderBy] 
-     * @param {'ASC' | 'DESC'} [orderDir] 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlacementApi
      */
-    public placementControllerFetchMany(limit?: number, offset?: number, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', activated?: boolean, orderBy?: 'title' | 'createdAt', orderDir?: 'ASC' | 'DESC', options?: AxiosRequestConfig) {
-        return PlacementApiFp(this.configuration).placementControllerFetchMany(limit, offset, select, title, startDate, endDate, type, activated, orderBy, orderDir, options).then((request) => request(this.axios, this.basePath));
+    public placementControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', suggestionType?: 'RECOMMEND' | 'ADVERTISE', activated?: boolean, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return PlacementApiFp(this.configuration).placementControllerFetchMany(orderBy, select, title, startDate, endDate, type, suggestionType, activated, limit, offset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3548,6 +16458,18 @@ export class PlacementApi extends BaseAPI {
      */
     public placementControllerRemove(id: string, options?: AxiosRequestConfig) {
         return PlacementApiFp(this.configuration).placementControllerRemove(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} productId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlacementApi
+     */
+    public placementControllerRemoveProduct(id: string, productId: string, options?: AxiosRequestConfig) {
+        return PlacementApiFp(this.configuration).placementControllerRemoveProduct(id, productId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3718,6 +16640,88 @@ export const ProductApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * 
+         * @param {Array<string>} ids 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productControllerFetchManyPublic: async (ids: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('productControllerFetchManyPublic', 'ids', ids)
+            const localVarPath = `/products/public`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} storeId 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productControllerFetchManyWithWhere: async (storeId: string, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'storeId' is not null or undefined
+            assertParamExists('productControllerFetchManyWithWhere', 'storeId', storeId)
+            const localVarPath = `/products/with-where`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (storeId !== undefined) {
+                localVarQueryParameter['storeId'] = storeId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Fetch one product.
          * @summary 
          * @param {string} id 
@@ -3790,6 +16794,45 @@ export const ProductApiAxiosParamCreator = function (configuration?: Configurati
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(updateProductDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} storeId 
+         * @param {UpsertManyProductDto} upsertManyProductDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productControllerUpdateMany: async (storeId: string, upsertManyProductDto: UpsertManyProductDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'storeId' is not null or undefined
+            assertParamExists('productControllerUpdateMany', 'storeId', storeId)
+            // verify required parameter 'upsertManyProductDto' is not null or undefined
+            assertParamExists('productControllerUpdateMany', 'upsertManyProductDto', upsertManyProductDto)
+            const localVarPath = `/products/bulk/store/{storeId}`
+                .replace(`{${"storeId"}}`, encodeURIComponent(String(storeId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(upsertManyProductDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -3878,6 +16921,28 @@ export const ProductApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * 
+         * @param {Array<string>} ids 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productControllerFetchManyPublic(ids: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchProductResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productControllerFetchManyPublic(ids, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} storeId 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productControllerFetchManyWithWhere(storeId: string, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductControllerFetchMany200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productControllerFetchManyWithWhere(storeId, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Fetch one product.
          * @summary 
          * @param {string} id 
@@ -3897,6 +16962,17 @@ export const ProductApiFp = function(configuration?: Configuration) {
          */
         async productControllerUpdate(id: string, updateProductDto: UpdateProductDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.productControllerUpdate(id, updateProductDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} storeId 
+         * @param {UpsertManyProductDto} upsertManyProductDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productControllerUpdateMany(storeId: string, upsertManyProductDto: UpsertManyProductDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpsertManyProductResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productControllerUpdateMany(storeId, upsertManyProductDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3951,6 +17027,26 @@ export const ProductApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.productControllerFetchMany(orderBy, sellerId, storeId, startDate, endDate, placementId, categoryId, activated, name, idOnStore, limit, offset, options).then((request) => request(axios, basePath));
         },
         /**
+         * 
+         * @param {Array<string>} ids 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productControllerFetchManyPublic(ids: Array<string>, options?: any): AxiosPromise<Array<FetchProductResponseDto>> {
+            return localVarFp.productControllerFetchManyPublic(ids, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} storeId 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productControllerFetchManyWithWhere(storeId: string, limit?: number, offset?: number, options?: any): AxiosPromise<ProductControllerFetchMany200Response> {
+            return localVarFp.productControllerFetchManyWithWhere(storeId, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Fetch one product.
          * @summary 
          * @param {string} id 
@@ -3969,6 +17065,16 @@ export const ProductApiFactory = function (configuration?: Configuration, basePa
          */
         productControllerUpdate(id: string, updateProductDto: UpdateProductDto, options?: any): AxiosPromise<void> {
             return localVarFp.productControllerUpdate(id, updateProductDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} storeId 
+         * @param {UpsertManyProductDto} upsertManyProductDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productControllerUpdateMany(storeId: string, upsertManyProductDto: UpsertManyProductDto, options?: any): AxiosPromise<UpsertManyProductResponseDto> {
+            return localVarFp.productControllerUpdateMany(storeId, upsertManyProductDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Bulk upsert products.
@@ -4025,6 +17131,30 @@ export class ProductApi extends BaseAPI {
     }
 
     /**
+     * 
+     * @param {Array<string>} ids 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductApi
+     */
+    public productControllerFetchManyPublic(ids: Array<string>, options?: AxiosRequestConfig) {
+        return ProductApiFp(this.configuration).productControllerFetchManyPublic(ids, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} storeId 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductApi
+     */
+    public productControllerFetchManyWithWhere(storeId: string, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return ProductApiFp(this.configuration).productControllerFetchManyWithWhere(storeId, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Fetch one product.
      * @summary 
      * @param {string} id 
@@ -4049,6 +17179,18 @@ export class ProductApi extends BaseAPI {
     }
 
     /**
+     * 
+     * @param {string} storeId 
+     * @param {UpsertManyProductDto} upsertManyProductDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductApi
+     */
+    public productControllerUpdateMany(storeId: string, upsertManyProductDto: UpsertManyProductDto, options?: AxiosRequestConfig) {
+        return ProductApiFp(this.configuration).productControllerUpdateMany(storeId, upsertManyProductDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Bulk upsert products.
      * @summary 
      * @param {UpsertManyProductDto} upsertManyProductDto 
@@ -4058,6 +17200,417 @@ export class ProductApi extends BaseAPI {
      */
     public productControllerUpsertMany(upsertManyProductDto: UpsertManyProductDto, options?: AxiosRequestConfig) {
         return ProductApiFp(this.configuration).productControllerUpsertMany(upsertManyProductDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * RecommendApi - axios parameter creator
+ * @export
+ */
+export const RecommendApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CreateProductIndicesRequestDto} createProductIndicesRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recommendControllerCreateProductsIndices: async (createProductIndicesRequestDto: CreateProductIndicesRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createProductIndicesRequestDto' is not null or undefined
+            assertParamExists('recommendControllerCreateProductsIndices', 'createProductIndicesRequestDto', createProductIndicesRequestDto)
+            const localVarPath = `/recommend/products/indices`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createProductIndicesRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} clientId 
+         * @param {'color' | 'tags' | 'category'} propertyName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recommendControllerFetchProductsAvailableProperty: async (clientId: string, propertyName: 'color' | 'tags' | 'category', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('recommendControllerFetchProductsAvailableProperty', 'clientId', clientId)
+            // verify required parameter 'propertyName' is not null or undefined
+            assertParamExists('recommendControllerFetchProductsAvailableProperty', 'propertyName', propertyName)
+            const localVarPath = `/recommend/products/available`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+
+            if (propertyName !== undefined) {
+                localVarQueryParameter['propertyName'] = propertyName;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SearchProductsRequestDto} searchProductsRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recommendControllerSearchProducts: async (searchProductsRequestDto: SearchProductsRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'searchProductsRequestDto' is not null or undefined
+            assertParamExists('recommendControllerSearchProducts', 'searchProductsRequestDto', searchProductsRequestDto)
+            const localVarPath = `/recommend/products/search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(searchProductsRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * RecommendApi - functional programming interface
+ * @export
+ */
+export const RecommendApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RecommendApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateProductIndicesRequestDto} createProductIndicesRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async recommendControllerCreateProductsIndices(createProductIndicesRequestDto: CreateProductIndicesRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.recommendControllerCreateProductsIndices(createProductIndicesRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} clientId 
+         * @param {'color' | 'tags' | 'category'} propertyName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async recommendControllerFetchProductsAvailableProperty(clientId: string, propertyName: 'color' | 'tags' | 'category', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchProductAvailablePropertyResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.recommendControllerFetchProductsAvailableProperty(clientId, propertyName, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {SearchProductsRequestDto} searchProductsRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async recommendControllerSearchProducts(searchProductsRequestDto: SearchProductsRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchProductsResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.recommendControllerSearchProducts(searchProductsRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * RecommendApi - factory interface
+ * @export
+ */
+export const RecommendApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RecommendApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateProductIndicesRequestDto} createProductIndicesRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recommendControllerCreateProductsIndices(createProductIndicesRequestDto: CreateProductIndicesRequestDto, options?: any): AxiosPromise<object> {
+            return localVarFp.recommendControllerCreateProductsIndices(createProductIndicesRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} clientId 
+         * @param {'color' | 'tags' | 'category'} propertyName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recommendControllerFetchProductsAvailableProperty(clientId: string, propertyName: 'color' | 'tags' | 'category', options?: any): AxiosPromise<FetchProductAvailablePropertyResponseDto> {
+            return localVarFp.recommendControllerFetchProductsAvailableProperty(clientId, propertyName, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SearchProductsRequestDto} searchProductsRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recommendControllerSearchProducts(searchProductsRequestDto: SearchProductsRequestDto, options?: any): AxiosPromise<SearchProductsResponseDto> {
+            return localVarFp.recommendControllerSearchProducts(searchProductsRequestDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * RecommendApi - object-oriented interface
+ * @export
+ * @class RecommendApi
+ * @extends {BaseAPI}
+ */
+export class RecommendApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateProductIndicesRequestDto} createProductIndicesRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RecommendApi
+     */
+    public recommendControllerCreateProductsIndices(createProductIndicesRequestDto: CreateProductIndicesRequestDto, options?: AxiosRequestConfig) {
+        return RecommendApiFp(this.configuration).recommendControllerCreateProductsIndices(createProductIndicesRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} clientId 
+     * @param {'color' | 'tags' | 'category'} propertyName 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RecommendApi
+     */
+    public recommendControllerFetchProductsAvailableProperty(clientId: string, propertyName: 'color' | 'tags' | 'category', options?: AxiosRequestConfig) {
+        return RecommendApiFp(this.configuration).recommendControllerFetchProductsAvailableProperty(clientId, propertyName, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SearchProductsRequestDto} searchProductsRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RecommendApi
+     */
+    public recommendControllerSearchProducts(searchProductsRequestDto: SearchProductsRequestDto, options?: AxiosRequestConfig) {
+        return RecommendApiFp(this.configuration).recommendControllerSearchProducts(searchProductsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * StoreApi - axios parameter creator
+ * @export
+ */
+export const StoreApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        storeControllerGetMe: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/stores/me`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UpsertSubscripionPlanDto} upsertSubscripionPlanDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        subscriptionPlanControllerUpsert: async (upsertSubscripionPlanDto: UpsertSubscripionPlanDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'upsertSubscripionPlanDto' is not null or undefined
+            assertParamExists('subscriptionPlanControllerUpsert', 'upsertSubscripionPlanDto', upsertSubscripionPlanDto)
+            const localVarPath = `/subscription-plans`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(upsertSubscripionPlanDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * StoreApi - functional programming interface
+ * @export
+ */
+export const StoreApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = StoreApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async storeControllerGetMe(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StoreResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.storeControllerGetMe(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {UpsertSubscripionPlanDto} upsertSubscripionPlanDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subscriptionPlanControllerUpsert(upsertSubscripionPlanDto: UpsertSubscripionPlanDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionPlan>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionPlanControllerUpsert(upsertSubscripionPlanDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * StoreApi - factory interface
+ * @export
+ */
+export const StoreApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = StoreApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        storeControllerGetMe(options?: any): AxiosPromise<StoreResponseDto> {
+            return localVarFp.storeControllerGetMe(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UpsertSubscripionPlanDto} upsertSubscripionPlanDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        subscriptionPlanControllerUpsert(upsertSubscripionPlanDto: UpsertSubscripionPlanDto, options?: any): AxiosPromise<SubscriptionPlan> {
+            return localVarFp.subscriptionPlanControllerUpsert(upsertSubscripionPlanDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * StoreApi - object-oriented interface
+ * @export
+ * @class StoreApi
+ * @extends {BaseAPI}
+ */
+export class StoreApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StoreApi
+     */
+    public storeControllerGetMe(options?: AxiosRequestConfig) {
+        return StoreApiFp(this.configuration).storeControllerGetMe(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UpsertSubscripionPlanDto} upsertSubscripionPlanDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StoreApi
+     */
+    public subscriptionPlanControllerUpsert(upsertSubscripionPlanDto: UpsertSubscripionPlanDto, options?: AxiosRequestConfig) {
+        return StoreApiFp(this.configuration).subscriptionPlanControllerUpsert(upsertSubscripionPlanDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -4165,6 +17718,1674 @@ export class SuggestionApi extends BaseAPI {
      */
     public suggestionControllerSuggest(suggestionRequestDto: SuggestionRequestDto, options?: AxiosRequestConfig) {
         return SuggestionApiFp(this.configuration).suggestionControllerSuggest(suggestionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TransactionApi - axios parameter creator
+ * @export
+ */
+export const TransactionApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        autoChargeControllerFetchOne: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/auto-charge`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateAutoChargeDto} createAutoChargeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        autoChargeControllerUpsert: async (createAutoChargeDto: CreateAutoChargeDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createAutoChargeDto' is not null or undefined
+            assertParamExists('autoChargeControllerUpsert', 'createAutoChargeDto', createAutoChargeDto)
+            const localVarPath = `/auto-charge`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createAutoChargeDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        transactionControllerCloseTransaction: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('transactionControllerCloseTransaction', 'id', id)
+            const localVarPath = `/transactions/{id}/close`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {IamportPaymentResult} iamportPaymentResult 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        transactionControllerCompleteTransaction: async (id: string, iamportPaymentResult: IamportPaymentResult, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('transactionControllerCompleteTransaction', 'id', id)
+            // verify required parameter 'iamportPaymentResult' is not null or undefined
+            assertParamExists('transactionControllerCompleteTransaction', 'iamportPaymentResult', iamportPaymentResult)
+            const localVarPath = `/transactions/{id}/iamport/complete`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(iamportPaymentResult, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {boolean} isRefund 
+         * @param {'AUTO_CHARGE' | 'SUBSCRIPTION'} category 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        transactionControllerFetchMany: async (isRefund: boolean, category: 'AUTO_CHARGE' | 'SUBSCRIPTION', limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'isRefund' is not null or undefined
+            assertParamExists('transactionControllerFetchMany', 'isRefund', isRefund)
+            // verify required parameter 'category' is not null or undefined
+            assertParamExists('transactionControllerFetchMany', 'category', category)
+            const localVarPath = `/transactions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (isRefund !== undefined) {
+                localVarQueryParameter['isRefund'] = isRefund;
+            }
+
+            if (category !== undefined) {
+                localVarQueryParameter['category'] = category;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        transactionControllerFetchOne: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('transactionControllerFetchOne', 'id', id)
+            const localVarPath = `/transactions/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateTransactionDto} createTransactionDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        transactionControllerStartTransaction: async (createTransactionDto: CreateTransactionDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createTransactionDto' is not null or undefined
+            assertParamExists('transactionControllerStartTransaction', 'createTransactionDto', createTransactionDto)
+            const localVarPath = `/transactions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createTransactionDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TransactionApi - functional programming interface
+ * @export
+ */
+export const TransactionApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TransactionApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async autoChargeControllerFetchOne(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AutoCharge>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.autoChargeControllerFetchOne(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {CreateAutoChargeDto} createAutoChargeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async autoChargeControllerUpsert(createAutoChargeDto: CreateAutoChargeDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AutoCharge>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.autoChargeControllerUpsert(createAutoChargeDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async transactionControllerCloseTransaction(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.transactionControllerCloseTransaction(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {IamportPaymentResult} iamportPaymentResult 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async transactionControllerCompleteTransaction(id: string, iamportPaymentResult: IamportPaymentResult, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Transaction>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.transactionControllerCompleteTransaction(id, iamportPaymentResult, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {boolean} isRefund 
+         * @param {'AUTO_CHARGE' | 'SUBSCRIPTION'} category 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async transactionControllerFetchMany(isRefund: boolean, category: 'AUTO_CHARGE' | 'SUBSCRIPTION', limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionControllerFetchMany200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.transactionControllerFetchMany(isRefund, category, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async transactionControllerFetchOne(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchTransactionResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.transactionControllerFetchOne(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {CreateTransactionDto} createTransactionDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async transactionControllerStartTransaction(createTransactionDto: CreateTransactionDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateTransactionResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.transactionControllerStartTransaction(createTransactionDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TransactionApi - factory interface
+ * @export
+ */
+export const TransactionApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TransactionApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        autoChargeControllerFetchOne(options?: any): AxiosPromise<AutoCharge> {
+            return localVarFp.autoChargeControllerFetchOne(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateAutoChargeDto} createAutoChargeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        autoChargeControllerUpsert(createAutoChargeDto: CreateAutoChargeDto, options?: any): AxiosPromise<AutoCharge> {
+            return localVarFp.autoChargeControllerUpsert(createAutoChargeDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        transactionControllerCloseTransaction(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.transactionControllerCloseTransaction(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {IamportPaymentResult} iamportPaymentResult 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        transactionControllerCompleteTransaction(id: string, iamportPaymentResult: IamportPaymentResult, options?: any): AxiosPromise<Transaction> {
+            return localVarFp.transactionControllerCompleteTransaction(id, iamportPaymentResult, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {boolean} isRefund 
+         * @param {'AUTO_CHARGE' | 'SUBSCRIPTION'} category 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        transactionControllerFetchMany(isRefund: boolean, category: 'AUTO_CHARGE' | 'SUBSCRIPTION', limit?: number, offset?: number, options?: any): AxiosPromise<TransactionControllerFetchMany200Response> {
+            return localVarFp.transactionControllerFetchMany(isRefund, category, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        transactionControllerFetchOne(id: string, options?: any): AxiosPromise<FetchTransactionResponseDto> {
+            return localVarFp.transactionControllerFetchOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateTransactionDto} createTransactionDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        transactionControllerStartTransaction(createTransactionDto: CreateTransactionDto, options?: any): AxiosPromise<CreateTransactionResponseDto> {
+            return localVarFp.transactionControllerStartTransaction(createTransactionDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TransactionApi - object-oriented interface
+ * @export
+ * @class TransactionApi
+ * @extends {BaseAPI}
+ */
+export class TransactionApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TransactionApi
+     */
+    public autoChargeControllerFetchOne(options?: AxiosRequestConfig) {
+        return TransactionApiFp(this.configuration).autoChargeControllerFetchOne(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateAutoChargeDto} createAutoChargeDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TransactionApi
+     */
+    public autoChargeControllerUpsert(createAutoChargeDto: CreateAutoChargeDto, options?: AxiosRequestConfig) {
+        return TransactionApiFp(this.configuration).autoChargeControllerUpsert(createAutoChargeDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TransactionApi
+     */
+    public transactionControllerCloseTransaction(id: string, options?: AxiosRequestConfig) {
+        return TransactionApiFp(this.configuration).transactionControllerCloseTransaction(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {IamportPaymentResult} iamportPaymentResult 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TransactionApi
+     */
+    public transactionControllerCompleteTransaction(id: string, iamportPaymentResult: IamportPaymentResult, options?: AxiosRequestConfig) {
+        return TransactionApiFp(this.configuration).transactionControllerCompleteTransaction(id, iamportPaymentResult, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {boolean} isRefund 
+     * @param {'AUTO_CHARGE' | 'SUBSCRIPTION'} category 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TransactionApi
+     */
+    public transactionControllerFetchMany(isRefund: boolean, category: 'AUTO_CHARGE' | 'SUBSCRIPTION', limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return TransactionApiFp(this.configuration).transactionControllerFetchMany(isRefund, category, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TransactionApi
+     */
+    public transactionControllerFetchOne(id: string, options?: AxiosRequestConfig) {
+        return TransactionApiFp(this.configuration).transactionControllerFetchOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateTransactionDto} createTransactionDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TransactionApi
+     */
+    public transactionControllerStartTransaction(createTransactionDto: CreateTransactionDto, options?: AxiosRequestConfig) {
+        return TransactionApiFp(this.configuration).transactionControllerStartTransaction(createTransactionDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * UserApi - axios parameter creator
+ * @export
+ */
+export const UserApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {TutorialRequestDto} tutorialRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tutorialControllerCreate: async (tutorialRequestDto: TutorialRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tutorialRequestDto' is not null or undefined
+            assertParamExists('tutorialControllerCreate', 'tutorialRequestDto', tutorialRequestDto)
+            const localVarPath = `/users/tutorials`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tutorialRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} category 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tutorialControllerGet: async (category: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'category' is not null or undefined
+            assertParamExists('tutorialControllerGet', 'category', category)
+            const localVarPath = `/users/tutorials/{category}`
+                .replace(`{${"category"}}`, encodeURIComponent(String(category)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tutorialControllerGetAll: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users/tutorials`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} category 
+         * @param {TutorialRequestDto} tutorialRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tutorialControllerUpdate: async (category: string, tutorialRequestDto: TutorialRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'category' is not null or undefined
+            assertParamExists('tutorialControllerUpdate', 'category', category)
+            // verify required parameter 'tutorialRequestDto' is not null or undefined
+            assertParamExists('tutorialControllerUpdate', 'tutorialRequestDto', tutorialRequestDto)
+            const localVarPath = `/users/tutorials/{category}`
+                .replace(`{${"category"}}`, encodeURIComponent(String(category)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tutorialRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} clientType 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerFetchToken: async (clientType: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'clientType' is not null or undefined
+            assertParamExists('userControllerFetchToken', 'clientType', clientType)
+            const localVarPath = `/users/token/{clientType}`
+                .replace(`{${"clientType"}}`, encodeURIComponent(String(clientType)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} email 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerGetEmailExistence: async (email: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            assertParamExists('userControllerGetEmailExistence', 'email', email)
+            const localVarPath = `/users/email/existence`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (email !== undefined) {
+                localVarQueryParameter['email'] = email;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerGetMe: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users/me`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerGetRedirect: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users/redirect`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {IdentifyDto} identifyDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerIdentify: async (identifyDto: IdentifyDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'identifyDto' is not null or undefined
+            assertParamExists('userControllerIdentify', 'identifyDto', identifyDto)
+            const localVarPath = `/users/identify`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(identifyDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {LoginDto} loginDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerLogin: async (loginDto: LoginDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'loginDto' is not null or undefined
+            assertParamExists('userControllerLogin', 'loginDto', loginDto)
+            const localVarPath = `/users/login`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(loginDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {RegisterDto} registerDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerRegister: async (registerDto: RegisterDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'registerDto' is not null or undefined
+            assertParamExists('userControllerRegister', 'registerDto', registerDto)
+            const localVarPath = `/users`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(registerDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UpdateMeDto} updateMeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerUpdateMe: async (updateMeDto: UpdateMeDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'updateMeDto' is not null or undefined
+            assertParamExists('userControllerUpdateMe', 'updateMeDto', updateMeDto)
+            const localVarPath = `/users/me`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateMeDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UpdatePasswordDto} updatePasswordDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerUpdatePassword: async (updatePasswordDto: UpdatePasswordDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'updatePasswordDto' is not null or undefined
+            assertParamExists('userControllerUpdatePassword', 'updatePasswordDto', updatePasswordDto)
+            const localVarPath = `/users/password`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updatePasswordDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {StartVerificationDto} startVerificationDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        verificationControllerStartEmailVerification: async (startVerificationDto: StartVerificationDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'startVerificationDto' is not null or undefined
+            assertParamExists('verificationControllerStartEmailVerification', 'startVerificationDto', startVerificationDto)
+            const localVarPath = `/verifications/email`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(startVerificationDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {VerifyCodeDto} verifyCodeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        verificationControllerVerifyEmailVerification: async (verifyCodeDto: VerifyCodeDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'verifyCodeDto' is not null or undefined
+            assertParamExists('verificationControllerVerifyEmailVerification', 'verifyCodeDto', verifyCodeDto)
+            const localVarPath = `/verifications/email/verify`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(verifyCodeDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * UserApi - functional programming interface
+ * @export
+ */
+export const UserApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = UserApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {TutorialRequestDto} tutorialRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tutorialControllerCreate(tutorialRequestDto: TutorialRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Tutorial>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tutorialControllerCreate(tutorialRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} category 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tutorialControllerGet(category: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Tutorial>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tutorialControllerGet(category, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tutorialControllerGetAll(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Tutorial>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tutorialControllerGetAll(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} category 
+         * @param {TutorialRequestDto} tutorialRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tutorialControllerUpdate(category: string, tutorialRequestDto: TutorialRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Tutorial>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tutorialControllerUpdate(category, tutorialRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} clientType 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userControllerFetchToken(clientType: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccessToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerFetchToken(clientType, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} email 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userControllerGetEmailExistence(email: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckEmailExistsResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerGetEmailExistence(email, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userControllerGetMe(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetMeResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerGetMe(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userControllerGetRedirect(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetRedirectResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerGetRedirect(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {IdentifyDto} identifyDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userControllerIdentify(identifyDto: IdentifyDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccessToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerIdentify(identifyDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {LoginDto} loginDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userControllerLogin(loginDto: LoginDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccessToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerLogin(loginDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {RegisterDto} registerDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userControllerRegister(registerDto: RegisterDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccessToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerRegister(registerDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {UpdateMeDto} updateMeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userControllerUpdateMe(updateMeDto: UpdateMeDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerUpdateMe(updateMeDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {UpdatePasswordDto} updatePasswordDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userControllerUpdatePassword(updatePasswordDto: UpdatePasswordDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccessToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerUpdatePassword(updatePasswordDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {StartVerificationDto} startVerificationDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async verificationControllerStartEmailVerification(startVerificationDto: StartVerificationDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.verificationControllerStartEmailVerification(startVerificationDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {VerifyCodeDto} verifyCodeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async verificationControllerVerifyEmailVerification(verifyCodeDto: VerifyCodeDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Verification>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.verificationControllerVerifyEmailVerification(verifyCodeDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * UserApi - factory interface
+ * @export
+ */
+export const UserApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = UserApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {TutorialRequestDto} tutorialRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tutorialControllerCreate(tutorialRequestDto: TutorialRequestDto, options?: any): AxiosPromise<Tutorial> {
+            return localVarFp.tutorialControllerCreate(tutorialRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} category 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tutorialControllerGet(category: string, options?: any): AxiosPromise<Tutorial> {
+            return localVarFp.tutorialControllerGet(category, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tutorialControllerGetAll(options?: any): AxiosPromise<Array<Tutorial>> {
+            return localVarFp.tutorialControllerGetAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} category 
+         * @param {TutorialRequestDto} tutorialRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tutorialControllerUpdate(category: string, tutorialRequestDto: TutorialRequestDto, options?: any): AxiosPromise<Tutorial> {
+            return localVarFp.tutorialControllerUpdate(category, tutorialRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} clientType 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerFetchToken(clientType: string, options?: any): AxiosPromise<AccessToken> {
+            return localVarFp.userControllerFetchToken(clientType, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} email 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerGetEmailExistence(email: string, options?: any): AxiosPromise<CheckEmailExistsResponseDto> {
+            return localVarFp.userControllerGetEmailExistence(email, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerGetMe(options?: any): AxiosPromise<GetMeResponseDto> {
+            return localVarFp.userControllerGetMe(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerGetRedirect(options?: any): AxiosPromise<GetRedirectResponseDto> {
+            return localVarFp.userControllerGetRedirect(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {IdentifyDto} identifyDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerIdentify(identifyDto: IdentifyDto, options?: any): AxiosPromise<AccessToken> {
+            return localVarFp.userControllerIdentify(identifyDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {LoginDto} loginDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerLogin(loginDto: LoginDto, options?: any): AxiosPromise<AccessToken> {
+            return localVarFp.userControllerLogin(loginDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {RegisterDto} registerDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerRegister(registerDto: RegisterDto, options?: any): AxiosPromise<AccessToken> {
+            return localVarFp.userControllerRegister(registerDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UpdateMeDto} updateMeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerUpdateMe(updateMeDto: UpdateMeDto, options?: any): AxiosPromise<void> {
+            return localVarFp.userControllerUpdateMe(updateMeDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UpdatePasswordDto} updatePasswordDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerUpdatePassword(updatePasswordDto: UpdatePasswordDto, options?: any): AxiosPromise<AccessToken> {
+            return localVarFp.userControllerUpdatePassword(updatePasswordDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {StartVerificationDto} startVerificationDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        verificationControllerStartEmailVerification(startVerificationDto: StartVerificationDto, options?: any): AxiosPromise<void> {
+            return localVarFp.verificationControllerStartEmailVerification(startVerificationDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {VerifyCodeDto} verifyCodeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        verificationControllerVerifyEmailVerification(verifyCodeDto: VerifyCodeDto, options?: any): AxiosPromise<Verification> {
+            return localVarFp.verificationControllerVerifyEmailVerification(verifyCodeDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * UserApi - object-oriented interface
+ * @export
+ * @class UserApi
+ * @extends {BaseAPI}
+ */
+export class UserApi extends BaseAPI {
+    /**
+     * 
+     * @param {TutorialRequestDto} tutorialRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public tutorialControllerCreate(tutorialRequestDto: TutorialRequestDto, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).tutorialControllerCreate(tutorialRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} category 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public tutorialControllerGet(category: string, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).tutorialControllerGet(category, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public tutorialControllerGetAll(options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).tutorialControllerGetAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} category 
+     * @param {TutorialRequestDto} tutorialRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public tutorialControllerUpdate(category: string, tutorialRequestDto: TutorialRequestDto, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).tutorialControllerUpdate(category, tutorialRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} clientType 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public userControllerFetchToken(clientType: string, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).userControllerFetchToken(clientType, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} email 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public userControllerGetEmailExistence(email: string, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).userControllerGetEmailExistence(email, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public userControllerGetMe(options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).userControllerGetMe(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public userControllerGetRedirect(options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).userControllerGetRedirect(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {IdentifyDto} identifyDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public userControllerIdentify(identifyDto: IdentifyDto, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).userControllerIdentify(identifyDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {LoginDto} loginDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public userControllerLogin(loginDto: LoginDto, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).userControllerLogin(loginDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {RegisterDto} registerDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public userControllerRegister(registerDto: RegisterDto, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).userControllerRegister(registerDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UpdateMeDto} updateMeDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public userControllerUpdateMe(updateMeDto: UpdateMeDto, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).userControllerUpdateMe(updateMeDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UpdatePasswordDto} updatePasswordDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public userControllerUpdatePassword(updatePasswordDto: UpdatePasswordDto, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).userControllerUpdatePassword(updatePasswordDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {StartVerificationDto} startVerificationDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public verificationControllerStartEmailVerification(startVerificationDto: StartVerificationDto, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).verificationControllerStartEmailVerification(startVerificationDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {VerifyCodeDto} verifyCodeDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public verificationControllerVerifyEmailVerification(verifyCodeDto: VerifyCodeDto, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).verificationControllerVerifyEmailVerification(verifyCodeDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * WebBuilderApi - axios parameter creator
+ * @export
+ */
+export const WebBuilderApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} webBuilder 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        webBuilderControllerOauth: async (webBuilder: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'webBuilder' is not null or undefined
+            assertParamExists('webBuilderControllerOauth', 'webBuilder', webBuilder)
+            const localVarPath = `/web-builder/{webBuilder}/oauth/callback`
+                .replace(`{${"webBuilder"}}`, encodeURIComponent(String(webBuilder)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} webBuilder 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        webBuilderControllerRedirect: async (webBuilder: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'webBuilder' is not null or undefined
+            assertParamExists('webBuilderControllerRedirect', 'webBuilder', webBuilder)
+            const localVarPath = `/web-builder/{webBuilder}/oauth/redirect`
+                .replace(`{${"webBuilder"}}`, encodeURIComponent(String(webBuilder)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * WebBuilderApi - functional programming interface
+ * @export
+ */
+export const WebBuilderApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = WebBuilderApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} webBuilder 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async webBuilderControllerOauth(webBuilder: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.webBuilderControllerOauth(webBuilder, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} webBuilder 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async webBuilderControllerRedirect(webBuilder: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.webBuilderControllerRedirect(webBuilder, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * WebBuilderApi - factory interface
+ * @export
+ */
+export const WebBuilderApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = WebBuilderApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} webBuilder 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        webBuilderControllerOauth(webBuilder: string, options?: any): AxiosPromise<void> {
+            return localVarFp.webBuilderControllerOauth(webBuilder, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} webBuilder 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        webBuilderControllerRedirect(webBuilder: string, options?: any): AxiosPromise<void> {
+            return localVarFp.webBuilderControllerRedirect(webBuilder, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * WebBuilderApi - object-oriented interface
+ * @export
+ * @class WebBuilderApi
+ * @extends {BaseAPI}
+ */
+export class WebBuilderApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} webBuilder 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WebBuilderApi
+     */
+    public webBuilderControllerOauth(webBuilder: string, options?: AxiosRequestConfig) {
+        return WebBuilderApiFp(this.configuration).webBuilderControllerOauth(webBuilder, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} webBuilder 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WebBuilderApi
+     */
+    public webBuilderControllerRedirect(webBuilder: string, options?: AxiosRequestConfig) {
+        return WebBuilderApiFp(this.configuration).webBuilderControllerRedirect(webBuilder, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
