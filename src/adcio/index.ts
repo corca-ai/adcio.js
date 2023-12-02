@@ -1,5 +1,5 @@
 export { Adcio } from "./adcio";
-export {
+export type {
   AdcioParams,
   AdcioConfig,
   AdcioOnPageViewParams,

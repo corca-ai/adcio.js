@@ -11,10 +11,13 @@ module.exports = {
   ],
   root: true,
   env: {
+    browser: true,
     node: true,
+    jasmine: true,
     jest: true,
+    es6: true,
   },
-  ignorePatterns: [".eslintrc.js", "dist"],
+  ignorePatterns: [".eslintrc.js", "dist", "webpack.config.js"],
   rules: {
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
