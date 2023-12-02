@@ -63,6 +63,89 @@ export interface AppendInjector {
 /**
  * 
  * @export
+ * @interface Audience
+ */
+export interface Audience {
+    /**
+     * 
+     * @type {string}
+     * @memberof Audience
+     */
+    'id': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Audience
+     */
+    'age': Array<AudienceAgeEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Audience
+     */
+    'gender': Array<AudienceGenderEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Audience
+     */
+    'area': Array<AudienceAreaEnum>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Audience
+     */
+    'regularCustomer': Array<AudienceRegularCustomerEnum>;
+    /**
+     * 
+     * @type {string}
+     * @memberof Audience
+     */
+    'campaignId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Audience
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Audience
+     */
+    'updatedAt': string;
+}
+
+export const AudienceAgeEnum = {
+    _10: '10',
+    _20: '20',
+    _30: '30',
+    _40: '40'
+} as const;
+
+export type AudienceAgeEnum = typeof AudienceAgeEnum[keyof typeof AudienceAgeEnum];
+export const AudienceGenderEnum = {
+    Male: 'male',
+    Female: 'female'
+} as const;
+
+export type AudienceGenderEnum = typeof AudienceGenderEnum[keyof typeof AudienceGenderEnum];
+export const AudienceAreaEnum = {
+    NorthernVietnam: 'NorthernVietnam',
+    SouthernVietnam: 'SouthernVietnam'
+} as const;
+
+export type AudienceAreaEnum = typeof AudienceAreaEnum[keyof typeof AudienceAreaEnum];
+export const AudienceRegularCustomerEnum = {
+    _1: '1',
+    _3: '3'
+} as const;
+
+export type AudienceRegularCustomerEnum = typeof AudienceRegularCustomerEnum[keyof typeof AudienceRegularCustomerEnum];
+
+/**
+ * 
+ * @export
  * @interface Banner
  */
 export interface Banner {
@@ -206,6 +289,105 @@ export interface BannerInjector {
 /**
  * 
  * @export
+ * @interface BannerWithCreative
+ */
+export interface BannerWithCreative {
+    /**
+     * 
+     * @type {Array<Creative>}
+     * @memberof BannerWithCreative
+     */
+    'creatives': Array<Creative>;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'type': BannerWithCreativeTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'url': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'name': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof BannerWithCreative
+     */
+    'data': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'categoryId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'productId': string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BannerWithCreative
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'deletedAt': string | null;
+}
+
+export const BannerWithCreativeTypeEnum = {
+    Video: 'video',
+    Image: 'image'
+} as const;
+
+export type BannerWithCreativeTypeEnum = typeof BannerWithCreativeTypeEnum[keyof typeof BannerWithCreativeTypeEnum];
+
+/**
+ * 
+ * @export
  * @interface BannerWithCreativeDto
  */
 export interface BannerWithCreativeDto {
@@ -305,6 +487,176 @@ export type BannerWithCreativeDtoTypeEnum = typeof BannerWithCreativeDtoTypeEnum
 /**
  * 
  * @export
+ * @interface Campaign
+ */
+export interface Campaign {
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Campaign
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Campaign
+     */
+    'usedBudget': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Campaign
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'deletedAt': string | null;
+}
+/**
+ * 
+ * @export
+ * @interface CampaignWithClientAndAudience
+ */
+export interface CampaignWithClientAndAudience {
+    /**
+     * 
+     * @type {Client}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'client': Client;
+    /**
+     * 
+     * @type {Audience}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'audience': Audience;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'usedBudget': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'deletedAt': string | null;
+}
+/**
+ * 
+ * @export
  * @interface CategoryWithPath
  */
 export interface CategoryWithPath {
@@ -332,6 +684,12 @@ export interface CategoryWithPath {
      * @memberof CategoryWithPath
      */
     'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryWithPath
+     */
+    'parentId': string | null;
     /**
      * 
      * @type {string}
@@ -401,16 +759,16 @@ export interface Client {
     'paymentCardId': string | null;
     /**
      * 
-     * @type {Store}
+     * @type {string}
      * @memberof Client
      */
-    'store'?: Store | null;
+    'storeId': string | null;
     /**
      * 
      * @type {string}
      * @memberof Client
      */
-    'storeId': string | null;
+    'businessLicenseId': string | null;
     /**
      * 
      * @type {boolean}
@@ -454,6 +812,195 @@ export const ClientTypeEnum = {
 } as const;
 
 export type ClientTypeEnum = typeof ClientTypeEnum[keyof typeof ClientTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface ConnectProductsToPlacementDto
+ */
+export interface ConnectProductsToPlacementDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ConnectProductsToPlacementDto
+     */
+    'productIds': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface ConnectProductsToPlacementResponseDto
+ */
+export interface ConnectProductsToPlacementResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'placementFormatRatio': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'type': ConnectProductsToPlacementResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'suggestionType': ConnectProductsToPlacementResponseDtoSuggestionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'supportEnvironment': ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'developEnvironment': ConnectProductsToPlacementResponseDtoDevelopEnvironmentEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'displayCount': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'maxDisplayCount': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'pageName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {Injector}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'injector': Injector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'screenShot': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'displayFormatWidth': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'displayFormatHeight': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'property': ConnectProductsToPlacementResponseDtoPropertyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {Array<Product>}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'products': Array<Product>;
+}
+
+export const ConnectProductsToPlacementResponseDtoTypeEnum = {
+    Grid: 'GRID',
+    Banner: 'BANNER'
+} as const;
+
+export type ConnectProductsToPlacementResponseDtoTypeEnum = typeof ConnectProductsToPlacementResponseDtoTypeEnum[keyof typeof ConnectProductsToPlacementResponseDtoTypeEnum];
+export const ConnectProductsToPlacementResponseDtoSuggestionTypeEnum = {
+    Recommend: 'RECOMMEND',
+    Advertise: 'ADVERTISE'
+} as const;
+
+export type ConnectProductsToPlacementResponseDtoSuggestionTypeEnum = typeof ConnectProductsToPlacementResponseDtoSuggestionTypeEnum[keyof typeof ConnectProductsToPlacementResponseDtoSuggestionTypeEnum];
+export const ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
+} as const;
+
+export type ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum = typeof ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum[keyof typeof ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum];
+export const ConnectProductsToPlacementResponseDtoDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
+
+export type ConnectProductsToPlacementResponseDtoDevelopEnvironmentEnum = typeof ConnectProductsToPlacementResponseDtoDevelopEnvironmentEnum[keyof typeof ConnectProductsToPlacementResponseDtoDevelopEnvironmentEnum];
+export const ConnectProductsToPlacementResponseDtoPropertyEnum = {
+    New: 'NEW',
+    Hot: 'HOT',
+    Personal: 'PERSONAL',
+    SameGoods: 'SAME_GOODS',
+    DiffGoods: 'DIFF_GOODS'
+} as const;
+
+export type ConnectProductsToPlacementResponseDtoPropertyEnum = typeof ConnectProductsToPlacementResponseDtoPropertyEnum[keyof typeof ConnectProductsToPlacementResponseDtoPropertyEnum];
 
 /**
  * 
@@ -565,19 +1112,43 @@ export interface CreatePlacementDto {
      * @type {string}
      * @memberof CreatePlacementDto
      */
-    'property': CreatePlacementDtoPropertyEnum;
+    'supportEnvironment': CreatePlacementDtoSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePlacementDto
+     */
+    'developEnvironment': CreatePlacementDtoDevelopEnvironmentEnum;
     /**
      * 
      * @type {number}
      * @memberof CreatePlacementDto
      */
-    'displayCount': number;
+    'displayFormatWidth': number | null;
     /**
      * 
-     * @type {boolean}
+     * @type {number}
      * @memberof CreatePlacementDto
      */
-    'activated': boolean;
+    'displayFormatHeight': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePlacementDto
+     */
+    'placementFormatRatio': string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreatePlacementDto
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreatePlacementDto
+     */
+    'maxDisplayCount': number;
     /**
      * 
      * @type {PlacementInjectorDto}
@@ -598,15 +1169,20 @@ export const CreatePlacementDtoSuggestionTypeEnum = {
 } as const;
 
 export type CreatePlacementDtoSuggestionTypeEnum = typeof CreatePlacementDtoSuggestionTypeEnum[keyof typeof CreatePlacementDtoSuggestionTypeEnum];
-export const CreatePlacementDtoPropertyEnum = {
-    New: 'NEW',
-    Hot: 'HOT',
-    Personal: 'PERSONAL',
-    SameGoods: 'SAME_GOODS',
-    DiffGoods: 'DIFF_GOODS'
+export const CreatePlacementDtoSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
 } as const;
 
-export type CreatePlacementDtoPropertyEnum = typeof CreatePlacementDtoPropertyEnum[keyof typeof CreatePlacementDtoPropertyEnum];
+export type CreatePlacementDtoSupportEnvironmentEnum = typeof CreatePlacementDtoSupportEnvironmentEnum[keyof typeof CreatePlacementDtoSupportEnvironmentEnum];
+export const CreatePlacementDtoDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
+
+export type CreatePlacementDtoDevelopEnvironmentEnum = typeof CreatePlacementDtoDevelopEnvironmentEnum[keyof typeof CreatePlacementDtoDevelopEnvironmentEnum];
 
 /**
  * 
@@ -692,6 +1268,12 @@ export interface Creative {
      * @type {string}
      * @memberof Creative
      */
+    'placementFormatRatio': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Creative
+     */
     'id': string;
     /**
      * 
@@ -711,24 +1293,6 @@ export interface Creative {
      * @memberof Creative
      */
     'height': number | null;
-    /**
-     * 
-     * @type {PlacementFormat}
-     * @memberof Creative
-     */
-    'placementFormat': PlacementFormat | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Creative
-     */
-    'placementFormatRatio': string | null;
-    /**
-     * 
-     * @type {Banner}
-     * @memberof Creative
-     */
-    'banner': Banner | null;
     /**
      * 
      * @type {string}
@@ -984,6 +1548,12 @@ export type FetchManyBannersResponseDtoTypeEnum = typeof FetchManyBannersRespons
 export interface FetchManyPlacementsResponseDto {
     /**
      * 
+     * @type {string}
+     * @memberof FetchManyPlacementsResponseDto
+     */
+    'placementFormatRatio': string | null;
+    /**
+     * 
      * @type {FetchPageClientDto}
      * @memberof FetchManyPlacementsResponseDto
      */
@@ -1107,12 +1677,6 @@ export interface FetchManyPlacementsResponseDto {
      * @type {string}
      * @memberof FetchManyPlacementsResponseDto
      */
-    'placementFormatRatio': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchManyPlacementsResponseDto
-     */
     'createdAt': string;
     /**
      * 
@@ -1204,6 +1768,200 @@ export interface FetchPageClientDto {
 /**
  * 
  * @export
+ * @interface FetchPlacementResponseDto
+ */
+export interface FetchPlacementResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'placementFormatRatio': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'type': FetchPlacementResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'suggestionType': FetchPlacementResponseDtoSuggestionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'supportEnvironment': FetchPlacementResponseDtoSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'developEnvironment': FetchPlacementResponseDtoDevelopEnvironmentEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchPlacementResponseDto
+     */
+    'displayCount': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchPlacementResponseDto
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchPlacementResponseDto
+     */
+    'maxDisplayCount': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FetchPlacementResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'pageName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {Injector}
+     * @memberof FetchPlacementResponseDto
+     */
+    'injector': Injector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'screenShot': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchPlacementResponseDto
+     */
+    'displayFormatWidth': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchPlacementResponseDto
+     */
+    'displayFormatHeight': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'property': FetchPlacementResponseDtoPropertyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {FetchPageClientDto}
+     * @memberof FetchPlacementResponseDto
+     */
+    'page': FetchPageClientDto;
+    /**
+     * 
+     * @type {Array<ProductWithSeller>}
+     * @memberof FetchPlacementResponseDto
+     */
+    'products': Array<ProductWithSeller>;
+    /**
+     * 
+     * @type {Array<BannerWithCreative>}
+     * @memberof FetchPlacementResponseDto
+     */
+    'banners': Array<BannerWithCreative>;
+    /**
+     * 
+     * @type {Array<CampaignWithClientAndAudience>}
+     * @memberof FetchPlacementResponseDto
+     */
+    'campaigns': Array<CampaignWithClientAndAudience>;
+}
+
+export const FetchPlacementResponseDtoTypeEnum = {
+    Grid: 'GRID',
+    Banner: 'BANNER'
+} as const;
+
+export type FetchPlacementResponseDtoTypeEnum = typeof FetchPlacementResponseDtoTypeEnum[keyof typeof FetchPlacementResponseDtoTypeEnum];
+export const FetchPlacementResponseDtoSuggestionTypeEnum = {
+    Recommend: 'RECOMMEND',
+    Advertise: 'ADVERTISE'
+} as const;
+
+export type FetchPlacementResponseDtoSuggestionTypeEnum = typeof FetchPlacementResponseDtoSuggestionTypeEnum[keyof typeof FetchPlacementResponseDtoSuggestionTypeEnum];
+export const FetchPlacementResponseDtoSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
+} as const;
+
+export type FetchPlacementResponseDtoSupportEnvironmentEnum = typeof FetchPlacementResponseDtoSupportEnvironmentEnum[keyof typeof FetchPlacementResponseDtoSupportEnvironmentEnum];
+export const FetchPlacementResponseDtoDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
+
+export type FetchPlacementResponseDtoDevelopEnvironmentEnum = typeof FetchPlacementResponseDtoDevelopEnvironmentEnum[keyof typeof FetchPlacementResponseDtoDevelopEnvironmentEnum];
+export const FetchPlacementResponseDtoPropertyEnum = {
+    New: 'NEW',
+    Hot: 'HOT',
+    Personal: 'PERSONAL',
+    SameGoods: 'SAME_GOODS',
+    DiffGoods: 'DIFF_GOODS'
+} as const;
+
+export type FetchPlacementResponseDtoPropertyEnum = typeof FetchPlacementResponseDtoPropertyEnum[keyof typeof FetchPlacementResponseDtoPropertyEnum];
+
+/**
+ * 
+ * @export
  * @interface FetchProductResponseDto
  */
 export interface FetchProductResponseDto {
@@ -1285,12 +2043,6 @@ export interface FetchProductResponseDto {
      * @memberof FetchProductResponseDto
      */
     'caption': string | null;
-    /**
-     * 
-     * @type {Array<Placement>}
-     * @memberof FetchProductResponseDto
-     */
-    'placements': Array<Placement>;
     /**
      * 
      * @type {string}
@@ -1502,6 +2254,12 @@ export interface Placement {
      * @type {string}
      * @memberof Placement
      */
+    'placementFormatRatio': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Placement
+     */
     'id': string;
     /**
      * 
@@ -1599,12 +2357,6 @@ export interface Placement {
      * @memberof Placement
      */
     'property': PlacementPropertyEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof Placement
-     */
-    'placementFormatRatio': string | null;
     /**
      * 
      * @type {string}
@@ -1804,12 +2556,6 @@ export interface Product {
     'caption': string | null;
     /**
      * 
-     * @type {Array<Placement>}
-     * @memberof Product
-     */
-    'placements': Array<Placement>;
-    /**
-     * 
      * @type {string}
      * @memberof Product
      */
@@ -1839,6 +2585,128 @@ export interface ProductControllerFetchMany200Response {
      * @memberof ProductControllerFetchMany200Response
      */
     'items'?: Array<FetchProductResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface ProductWithSeller
+ */
+export interface ProductWithSeller {
+    /**
+     * 
+     * @type {object}
+     * @memberof ProductWithSeller
+     */
+    'data': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'idOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'sellerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductWithSeller
+     */
+    'price': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'image': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ProductWithSeller
+     */
+    'includeInRecommendation': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'url': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'deepLink': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'caption': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductWithSeller
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {Client}
+     * @memberof ProductWithSeller
+     */
+    'seller': Client;
+}
+/**
+ * 
+ * @export
+ * @interface RemoveProductFromPlacementResponseDto
+ */
+export interface RemoveProductFromPlacementResponseDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RemoveProductFromPlacementResponseDto
+     */
+    'removed': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RemoveProductFromPlacementResponseDto
+     */
+    'placementDeactivated': boolean;
 }
 /**
  * 
@@ -1874,57 +2742,6 @@ export const RetrieverMatcherEnum = {
 } as const;
 
 export type RetrieverMatcherEnum = typeof RetrieverMatcherEnum[keyof typeof RetrieverMatcherEnum];
-
-/**
- * 
- * @export
- * @interface Store
- */
-export interface Store {
-    /**
-     * 
-     * @type {string}
-     * @memberof Store
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Store
-     */
-    'type': StoreTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof Store
-     */
-    'solutionType': StoreSolutionTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof Store
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Store
-     */
-    'deletedAt': string | null;
-}
-
-export const StoreTypeEnum = {
-    Platform: 'PLATFORM',
-    InHouse: 'IN_HOUSE'
-} as const;
-
-export type StoreTypeEnum = typeof StoreTypeEnum[keyof typeof StoreTypeEnum];
-export const StoreSolutionTypeEnum = {
-    SelfDeveloped: 'SELF_DEVELOPED',
-    Cafe24: 'CAFE24'
-} as const;
-
-export type StoreSolutionTypeEnum = typeof StoreSolutionTypeEnum[keyof typeof StoreSolutionTypeEnum];
 
 /**
  * 
@@ -2000,11 +2817,11 @@ export interface SuggestionRequestDto {
      */
     'fromAgent'?: boolean;
     /**
-     * The age of the customer.
-     * @type {string}
+     * The birth year of the customer.
+     * @type {number}
      * @memberof SuggestionRequestDto
      */
-    'age'?: SuggestionRequestDtoAgeEnum;
+    'birthYear'?: number;
     /**
      * The gender of the customer.
      * @type {string}
@@ -2016,29 +2833,15 @@ export interface SuggestionRequestDto {
      * @type {string}
      * @memberof SuggestionRequestDto
      */
-    'area'?: SuggestionRequestDtoAreaEnum;
+    'area'?: string;
 }
 
-export const SuggestionRequestDtoAgeEnum = {
-    _10: '10',
-    _20: '20',
-    _30: '30',
-    _40: '40'
-} as const;
-
-export type SuggestionRequestDtoAgeEnum = typeof SuggestionRequestDtoAgeEnum[keyof typeof SuggestionRequestDtoAgeEnum];
 export const SuggestionRequestDtoGenderEnum = {
     Male: 'male',
     Female: 'female'
 } as const;
 
 export type SuggestionRequestDtoGenderEnum = typeof SuggestionRequestDtoGenderEnum[keyof typeof SuggestionRequestDtoGenderEnum];
-export const SuggestionRequestDtoAreaEnum = {
-    NorthernVietnam: 'NorthernVietnam',
-    SouthernVietnam: 'SouthernVietnam'
-} as const;
-
-export type SuggestionRequestDtoAreaEnum = typeof SuggestionRequestDtoAreaEnum[keyof typeof SuggestionRequestDtoAreaEnum];
 
 /**
  * 
@@ -2065,6 +2868,12 @@ export interface SuggestionResponseDto {
  * @interface SuggestionResponsePlacementType
  */
 export interface SuggestionResponsePlacementType {
+    /**
+     * 
+     * @type {string}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'placementFormatRatio': string | null;
     /**
      * 
      * @type {string}
@@ -2173,12 +2982,6 @@ export interface SuggestionResponsePlacementType {
      * @memberof SuggestionResponsePlacementType
      */
     'placementFormat': PlacementFormat | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SuggestionResponsePlacementType
-     */
-    'placementFormatRatio': string | null;
     /**
      * 
      * @type {string}
@@ -2316,17 +3119,205 @@ export interface UpdatePlacementDto {
     'title'?: string;
     /**
      * 
-     * @type {Array<string>}
-     * @memberof UpdatePlacementDto
-     */
-    'adsetIds'?: Array<string>;
-    /**
-     * 
      * @type {boolean}
      * @memberof UpdatePlacementDto
      */
     'activated'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementDto
+     */
+    'minDisplayCount'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementDto
+     */
+    'maxDisplayCount'?: number;
 }
+/**
+ * 
+ * @export
+ * @interface UpdatePlacementResponseDto
+ */
+export interface UpdatePlacementResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'placementFormatRatio': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'type': UpdatePlacementResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'suggestionType': UpdatePlacementResponseDtoSuggestionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'supportEnvironment': UpdatePlacementResponseDtoSupportEnvironmentEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'developEnvironment': UpdatePlacementResponseDtoDevelopEnvironmentEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'displayCount': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'minDisplayCount': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'maxDisplayCount': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'pageName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {Injector}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'injector': Injector | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'screenShot': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'displayFormatWidth': number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'displayFormatHeight': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'property': UpdatePlacementResponseDtoPropertyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {Array<Campaign>}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'campaigns': Array<Campaign>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'placementDeactivated': boolean;
+}
+
+export const UpdatePlacementResponseDtoTypeEnum = {
+    Grid: 'GRID',
+    Banner: 'BANNER'
+} as const;
+
+export type UpdatePlacementResponseDtoTypeEnum = typeof UpdatePlacementResponseDtoTypeEnum[keyof typeof UpdatePlacementResponseDtoTypeEnum];
+export const UpdatePlacementResponseDtoSuggestionTypeEnum = {
+    Recommend: 'RECOMMEND',
+    Advertise: 'ADVERTISE'
+} as const;
+
+export type UpdatePlacementResponseDtoSuggestionTypeEnum = typeof UpdatePlacementResponseDtoSuggestionTypeEnum[keyof typeof UpdatePlacementResponseDtoSuggestionTypeEnum];
+export const UpdatePlacementResponseDtoSupportEnvironmentEnum = {
+    Web: 'WEB',
+    WebMobile: 'WEB_MOBILE',
+    App: 'APP'
+} as const;
+
+export type UpdatePlacementResponseDtoSupportEnvironmentEnum = typeof UpdatePlacementResponseDtoSupportEnvironmentEnum[keyof typeof UpdatePlacementResponseDtoSupportEnvironmentEnum];
+export const UpdatePlacementResponseDtoDevelopEnvironmentEnum = {
+    Widget: 'WIDGET',
+    SelfDeveloped: 'SELF_DEVELOPED',
+    CodeInjector: 'CODE_INJECTOR'
+} as const;
+
+export type UpdatePlacementResponseDtoDevelopEnvironmentEnum = typeof UpdatePlacementResponseDtoDevelopEnvironmentEnum[keyof typeof UpdatePlacementResponseDtoDevelopEnvironmentEnum];
+export const UpdatePlacementResponseDtoPropertyEnum = {
+    New: 'NEW',
+    Hot: 'HOT',
+    Personal: 'PERSONAL',
+    SameGoods: 'SAME_GOODS',
+    DiffGoods: 'DIFF_GOODS'
+} as const;
+
+export type UpdatePlacementResponseDtoPropertyEnum = typeof UpdatePlacementResponseDtoPropertyEnum[keyof typeof UpdatePlacementResponseDtoPropertyEnum];
+
 /**
  * 
  * @export
@@ -2452,22 +3443,16 @@ export interface UpsertManyProductDto {
 export interface UpsertManyProductResponseDto {
     /**
      * 
-     * @type {Array<string>}
+     * @type {number}
      * @memberof UpsertManyProductResponseDto
      */
-    'inserted': Array<string>;
+    'insertedCount': number;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<UpsertProductFailedRow>}
      * @memberof UpsertManyProductResponseDto
      */
-    'nonRelated': Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof UpsertManyProductResponseDto
-     */
-    'duplicatedIds': Array<string>;
+    'failedRows': Array<UpsertProductFailedRow>;
 }
 /**
  * 
@@ -2480,37 +3465,31 @@ export interface UpsertProductDto {
      * @type {string}
      * @memberof UpsertProductDto
      */
-    'id'?: string;
+    'idOnStore'?: string;
     /**
      * 
      * @type {string}
      * @memberof UpsertProductDto
      */
-    'idOnStore': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpsertProductDto
-     */
-    'name': string;
+    'name'?: string;
     /**
      * 
      * @type {number}
      * @memberof UpsertProductDto
      */
-    'price': number;
+    'price'?: number;
     /**
      * 
      * @type {string}
      * @memberof UpsertProductDto
      */
-    'description': string;
+    'description'?: string;
     /**
      * 
      * @type {string}
      * @memberof UpsertProductDto
      */
-    'image': string;
+    'image'?: string;
     /**
      * 
      * @type {boolean}
@@ -2548,6 +3527,43 @@ export interface UpsertProductDto {
      */
     'caption'?: string;
 }
+/**
+ * 
+ * @export
+ * @interface UpsertProductFailedRow
+ */
+export interface UpsertProductFailedRow {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertProductFailedRow
+     */
+    'idOnStore': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertProductFailedRow
+     */
+    'name': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpsertProductFailedRow
+     */
+    'reasons': Array<UpsertProductFailedRowReasonsEnum>;
+}
+
+export const UpsertProductFailedRowReasonsEnum = {
+    UpsertProductFailedDeuplicatedRow: 'upsertProductFailedDeuplicatedRow',
+    UpsertProductFailedSellerIsNotExist: 'upsertProductFailedSellerIsNotExist',
+    UpsertProductFailedIdIsEmpty: 'upsertProductFailedIdIsEmpty',
+    UpsertProductFailedNameIsEmpty: 'upsertProductFailedNameIsEmpty',
+    UpsertProductFailedPriceIsEmpty: 'upsertProductFailedPriceIsEmpty',
+    UpsertProductFailedImageIsEmpty: 'upsertProductFailedImageIsEmpty'
+} as const;
+
+export type UpsertProductFailedRowReasonsEnum = typeof UpsertProductFailedRowReasonsEnum[keyof typeof UpsertProductFailedRowReasonsEnum];
+
 /**
  * 
  * @export
@@ -3048,6 +4064,45 @@ export const PlacementApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
+         * @param {string} id 
+         * @param {ConnectProductsToPlacementDto} connectProductsToPlacementDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placementControllerConnectProducts: async (id: string, connectProductsToPlacementDto: ConnectProductsToPlacementDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('placementControllerConnectProducts', 'id', id)
+            // verify required parameter 'connectProductsToPlacementDto' is not null or undefined
+            assertParamExists('placementControllerConnectProducts', 'connectProductsToPlacementDto', connectProductsToPlacementDto)
+            const localVarPath = `/placements/{id}/products`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(connectProductsToPlacementDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {CreatePlacementDto} createPlacementDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3086,20 +4141,20 @@ export const PlacementApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
+         * @param {Array<string>} [orderBy] PlacementSortOption
          * @param {Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>} [select] 
          * @param {string} [title] 
          * @param {string} [startDate] 
          * @param {string} [endDate] 
          * @param {'GRID' | 'BANNER'} [type] 
+         * @param {'RECOMMEND' | 'ADVERTISE'} [suggestionType] 
          * @param {boolean} [activated] 
-         * @param {'title' | 'createdAt'} [orderBy] 
-         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placementControllerFetchMany: async (limit?: number, offset?: number, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', activated?: boolean, orderBy?: 'title' | 'createdAt', orderDir?: 'ASC' | 'DESC', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placementControllerFetchMany: async (orderBy?: Array<string>, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', suggestionType?: 'RECOMMEND' | 'ADVERTISE', activated?: boolean, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/placements`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3115,12 +4170,8 @@ export const PlacementApiAxiosParamCreator = function (configuration?: Configura
             // authentication api-key required
             await setApiKeyToObject(localVarHeaderParameter, "X-Api-Key", configuration)
 
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            if (offset !== undefined) {
-                localVarQueryParameter['offset'] = offset;
+            if (orderBy) {
+                localVarQueryParameter['orderBy'] = orderBy;
             }
 
             if (select) {
@@ -3147,16 +4198,20 @@ export const PlacementApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['type'] = type;
             }
 
+            if (suggestionType !== undefined) {
+                localVarQueryParameter['suggestionType'] = suggestionType;
+            }
+
             if (activated !== undefined) {
                 localVarQueryParameter['activated'] = activated;
             }
 
-            if (orderBy !== undefined) {
-                localVarQueryParameter['orderBy'] = orderBy;
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
-            if (orderDir !== undefined) {
-                localVarQueryParameter['orderDir'] = orderDir;
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
             }
 
 
@@ -3245,6 +4300,43 @@ export const PlacementApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @param {string} id 
+         * @param {string} productId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placementControllerRemoveProduct: async (id: string, productId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('placementControllerRemoveProduct', 'id', id)
+            // verify required parameter 'productId' is not null or undefined
+            assertParamExists('placementControllerRemoveProduct', 'productId', productId)
+            const localVarPath = `/placements/{id}/products/{productId}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"productId"}}`, encodeURIComponent(String(productId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
          * @param {UpdatePlacementDto} updatePlacementDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3284,53 +4376,6 @@ export const PlacementApiAxiosParamCreator = function (configuration?: Configura
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @param {string} id 
-         * @param {File} screenShot 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        placementControllerUpdateScreenShot: async (id: string, screenShot: File, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('placementControllerUpdateScreenShot', 'id', id)
-            // verify required parameter 'screenShot' is not null or undefined
-            assertParamExists('placementControllerUpdateScreenShot', 'screenShot', screenShot)
-            const localVarPath = `/placements/{id}/screenShot`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-            // authentication api-key required
-            await setApiKeyToObject(localVarHeaderParameter, "X-Api-Key", configuration)
-
-
-            if (screenShot !== undefined) { 
-                localVarFormParams.append('screenShot', screenShot as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -3343,6 +4388,17 @@ export const PlacementApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} id 
+         * @param {ConnectProductsToPlacementDto} connectProductsToPlacementDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async placementControllerConnectProducts(id: string, connectProductsToPlacementDto: ConnectProductsToPlacementDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConnectProductsToPlacementResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerConnectProducts(id, connectProductsToPlacementDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {CreatePlacementDto} createPlacementDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3353,21 +4409,21 @@ export const PlacementApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
+         * @param {Array<string>} [orderBy] PlacementSortOption
          * @param {Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>} [select] 
          * @param {string} [title] 
          * @param {string} [startDate] 
          * @param {string} [endDate] 
          * @param {'GRID' | 'BANNER'} [type] 
+         * @param {'RECOMMEND' | 'ADVERTISE'} [suggestionType] 
          * @param {boolean} [activated] 
-         * @param {'title' | 'createdAt'} [orderBy] 
-         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placementControllerFetchMany(limit?: number, offset?: number, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', activated?: boolean, orderBy?: 'title' | 'createdAt', orderDir?: 'ASC' | 'DESC', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlacementControllerFetchMany200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerFetchMany(limit, offset, select, title, startDate, endDate, type, activated, orderBy, orderDir, options);
+        async placementControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', suggestionType?: 'RECOMMEND' | 'ADVERTISE', activated?: boolean, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlacementControllerFetchMany200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerFetchMany(orderBy, select, title, startDate, endDate, type, suggestionType, activated, limit, offset, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3376,7 +4432,7 @@ export const PlacementApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placementControllerFetchOne(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Placement>> {
+        async placementControllerFetchOne(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchPlacementResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerFetchOne(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3393,23 +4449,23 @@ export const PlacementApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {UpdatePlacementDto} updatePlacementDto 
+         * @param {string} productId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placementControllerUpdate(id: string, updatePlacementDto: UpdatePlacementDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Placement>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerUpdate(id, updatePlacementDto, options);
+        async placementControllerRemoveProduct(id: string, productId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RemoveProductFromPlacementResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerRemoveProduct(id, productId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} id 
-         * @param {File} screenShot 
+         * @param {UpdatePlacementDto} updatePlacementDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placementControllerUpdateScreenShot(id: string, screenShot: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerUpdateScreenShot(id, screenShot, options);
+        async placementControllerUpdate(id: string, updatePlacementDto: UpdatePlacementDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdatePlacementResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placementControllerUpdate(id, updatePlacementDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -3424,6 +4480,16 @@ export const PlacementApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
+         * @param {string} id 
+         * @param {ConnectProductsToPlacementDto} connectProductsToPlacementDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placementControllerConnectProducts(id: string, connectProductsToPlacementDto: ConnectProductsToPlacementDto, options?: any): AxiosPromise<ConnectProductsToPlacementResponseDto> {
+            return localVarFp.placementControllerConnectProducts(id, connectProductsToPlacementDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {CreatePlacementDto} createPlacementDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3433,21 +4499,21 @@ export const PlacementApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
+         * @param {Array<string>} [orderBy] PlacementSortOption
          * @param {Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>} [select] 
          * @param {string} [title] 
          * @param {string} [startDate] 
          * @param {string} [endDate] 
          * @param {'GRID' | 'BANNER'} [type] 
+         * @param {'RECOMMEND' | 'ADVERTISE'} [suggestionType] 
          * @param {boolean} [activated] 
-         * @param {'title' | 'createdAt'} [orderBy] 
-         * @param {'ASC' | 'DESC'} [orderDir] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placementControllerFetchMany(limit?: number, offset?: number, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', activated?: boolean, orderBy?: 'title' | 'createdAt', orderDir?: 'ASC' | 'DESC', options?: any): AxiosPromise<PlacementControllerFetchMany200Response> {
-            return localVarFp.placementControllerFetchMany(limit, offset, select, title, startDate, endDate, type, activated, orderBy, orderDir, options).then((request) => request(axios, basePath));
+        placementControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', suggestionType?: 'RECOMMEND' | 'ADVERTISE', activated?: boolean, limit?: number, offset?: number, options?: any): AxiosPromise<PlacementControllerFetchMany200Response> {
+            return localVarFp.placementControllerFetchMany(orderBy, select, title, startDate, endDate, type, suggestionType, activated, limit, offset, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3455,7 +4521,7 @@ export const PlacementApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placementControllerFetchOne(id: string, options?: any): AxiosPromise<Placement> {
+        placementControllerFetchOne(id: string, options?: any): AxiosPromise<FetchPlacementResponseDto> {
             return localVarFp.placementControllerFetchOne(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3470,22 +4536,22 @@ export const PlacementApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @param {string} id 
-         * @param {UpdatePlacementDto} updatePlacementDto 
+         * @param {string} productId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placementControllerUpdate(id: string, updatePlacementDto: UpdatePlacementDto, options?: any): AxiosPromise<Placement> {
-            return localVarFp.placementControllerUpdate(id, updatePlacementDto, options).then((request) => request(axios, basePath));
+        placementControllerRemoveProduct(id: string, productId: string, options?: any): AxiosPromise<RemoveProductFromPlacementResponseDto> {
+            return localVarFp.placementControllerRemoveProduct(id, productId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
-         * @param {File} screenShot 
+         * @param {UpdatePlacementDto} updatePlacementDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placementControllerUpdateScreenShot(id: string, screenShot: File, options?: any): AxiosPromise<void> {
-            return localVarFp.placementControllerUpdateScreenShot(id, screenShot, options).then((request) => request(axios, basePath));
+        placementControllerUpdate(id: string, updatePlacementDto: UpdatePlacementDto, options?: any): AxiosPromise<UpdatePlacementResponseDto> {
+            return localVarFp.placementControllerUpdate(id, updatePlacementDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3499,6 +4565,18 @@ export const PlacementApiFactory = function (configuration?: Configuration, base
 export class PlacementApi extends BaseAPI {
     /**
      * 
+     * @param {string} id 
+     * @param {ConnectProductsToPlacementDto} connectProductsToPlacementDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlacementApi
+     */
+    public placementControllerConnectProducts(id: string, connectProductsToPlacementDto: ConnectProductsToPlacementDto, options?: AxiosRequestConfig) {
+        return PlacementApiFp(this.configuration).placementControllerConnectProducts(id, connectProductsToPlacementDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {CreatePlacementDto} createPlacementDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3510,22 +4588,22 @@ export class PlacementApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} [limit] 
-     * @param {number} [offset] 
+     * @param {Array<string>} [orderBy] PlacementSortOption
      * @param {Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>} [select] 
      * @param {string} [title] 
      * @param {string} [startDate] 
      * @param {string} [endDate] 
      * @param {'GRID' | 'BANNER'} [type] 
+     * @param {'RECOMMEND' | 'ADVERTISE'} [suggestionType] 
      * @param {boolean} [activated] 
-     * @param {'title' | 'createdAt'} [orderBy] 
-     * @param {'ASC' | 'DESC'} [orderDir] 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlacementApi
      */
-    public placementControllerFetchMany(limit?: number, offset?: number, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', activated?: boolean, orderBy?: 'title' | 'createdAt', orderDir?: 'ASC' | 'DESC', options?: AxiosRequestConfig) {
-        return PlacementApiFp(this.configuration).placementControllerFetchMany(limit, offset, select, title, startDate, endDate, type, activated, orderBy, orderDir, options).then((request) => request(this.axios, this.basePath));
+    public placementControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'title' | 'type' | 'suggestionType' | 'displayCount' | 'activated' | 'pageName' | 'clientId' | 'injector' | 'screenShot' | 'displayFormatWidth' | 'displayFormatHeight' | 'property' | 'placementFormatRatio' | 'createdAt' | 'updatedAt' | 'deletedAt'>, title?: string, startDate?: string, endDate?: string, type?: 'GRID' | 'BANNER', suggestionType?: 'RECOMMEND' | 'ADVERTISE', activated?: boolean, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return PlacementApiFp(this.configuration).placementControllerFetchMany(orderBy, select, title, startDate, endDate, type, suggestionType, activated, limit, offset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3553,6 +4631,18 @@ export class PlacementApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
+     * @param {string} productId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlacementApi
+     */
+    public placementControllerRemoveProduct(id: string, productId: string, options?: AxiosRequestConfig) {
+        return PlacementApiFp(this.configuration).placementControllerRemoveProduct(id, productId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
      * @param {UpdatePlacementDto} updatePlacementDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3560,18 +4650,6 @@ export class PlacementApi extends BaseAPI {
      */
     public placementControllerUpdate(id: string, updatePlacementDto: UpdatePlacementDto, options?: AxiosRequestConfig) {
         return PlacementApiFp(this.configuration).placementControllerUpdate(id, updatePlacementDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {File} screenShot 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PlacementApi
-     */
-    public placementControllerUpdateScreenShot(id: string, screenShot: File, options?: AxiosRequestConfig) {
-        return PlacementApiFp(this.configuration).placementControllerUpdateScreenShot(id, screenShot, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
