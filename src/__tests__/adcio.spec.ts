@@ -28,8 +28,6 @@ describe("test AdcioCore module", () => {
   });
 
   it("should have the same session ID before expiration", async () => {
-    jest.useFakeTimers();
-
     const adcioCore = new AdcioCore({
       clientId: "your-client-id",
     });
