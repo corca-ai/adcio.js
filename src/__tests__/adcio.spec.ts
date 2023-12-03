@@ -55,23 +55,23 @@ describe("test AdcioCore module", () => {
     expect(adcioCore.getSessionId()).not.toBe(initialSessionId);
   });
 
-  // it("should call AdcioCore constructor once when Adcio is created", async () => {
-  //   vi.doMock("../lib/core", () => {
-  //     return {
-  //       AdcioCore: vi.fn().mockImplementation(),
-  //     };
-  //   });
+  it("should call AdcioCore constructor once when Adcio is created", async () => {
+    vi.doMock("../lib/core", () => {
+      return {
+        AdcioCore: vi.fn().mockImplementation((adcioCore) => adcioCore),
+      };
+    });
 
-  //   const { AdcioCore } = await import("../lib/core");
-  //   const { Adcio } = await import("../adcio");
+    const { AdcioCore } = await import("../lib/core");
+    const { Adcio } = await import("../adcio");
 
-  //   new Adcio({
-  //     clientId: "your-client-id",
-  //     customerId: "your-customer-id",
-  //   });
+    new Adcio({
+      clientId: "your-client-id",
+      customerId: "your-customer-id",
+    });
 
-  //   expect(AdcioCore).toHaveBeenCalledTimes(1);
+    expect(AdcioCore).toHaveBeenCalledTimes(1);
 
-  //   vi.doUnmock("../lib/core");
-  // });
+    vi.doUnmock("../lib/core");
+  });
 });
