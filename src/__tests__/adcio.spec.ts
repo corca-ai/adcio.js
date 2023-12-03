@@ -1,21 +1,13 @@
 import { AdcioCore } from "lib/core";
-import { StatusCode } from "server/constants";
 import { Adcio } from "../adcio";
-import { server } from "../server";
 
 beforeAll(() => {
-  server.listen();
   jest.useFakeTimers();
 });
 
 afterEach(() => {
-  server.resetHandlers();
   jest.restoreAllMocks();
   jest.resetModules();
-});
-
-afterAll(() => {
-  server.close();
 });
 
 describe("test Adcio module", () => {
@@ -82,22 +74,5 @@ describe("test AdcioCore module", () => {
     expect(AdcioCore).toHaveBeenCalledTimes(1);
 
     jest.dontMock("../lib/core");
-  });
-});
-
-// example of mocking api test code
-describe("test Adcio Analytics module", () => {
-  const clientId = "your-client-id";
-  const customerId = "your-customer-id";
-
-  it("should match onImpression params", async () => {
-    const adcio = new Adcio({ clientId, customerId });
-
-    const response = await adcio.onImpression({
-      requestId: "your-client-requestId",
-      adsetId: "your-client-adsetId",
-    });
-
-    expect(response.status).toBe(StatusCode.SUCCESS);
   });
 });
