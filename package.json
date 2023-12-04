@@ -32,7 +32,7 @@
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "tscpaths": "^0.0.9",
     "typescript": "^5.2.2",
-    "msw": "^2.0.9"
+    "msw": "^2.0.9",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   },
