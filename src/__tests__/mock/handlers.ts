@@ -1,4 +1,5 @@
 import { SuggestionRequestDto } from "api/controller/v1";
+import { APIError } from "lib/error";
 import { HttpResponse, http } from "msw";
 import {
   ReceiverAPIField,
@@ -9,7 +10,6 @@ import {
   viewField,
 } from "./constants";
 import { registeredPlacementIds, suggestionResponse } from "./suggestion.demo";
-import { APIError } from "lib/error";
 
 const RECEIVER_API_BASE_URL = "https://receiver.adcio.ai";
 const ADCIO_API_BASE_URL = "https://api.adcio.ai";
@@ -66,7 +66,10 @@ const createSuggestion: Handler = async ({ request }) => {
   });
 };
 
-function checkResponseDtoVaild<T>(obj: unknown, fieldList: ReceiverAPIField<T>) {
+function checkResponseDtoVaild<T>(
+  obj: unknown,
+  fieldList: ReceiverAPIField<T>,
+) {
   if (obj == null || typeof obj !== "object") {
     throw new APIError(400, "Request format is incorrect.");
   }
