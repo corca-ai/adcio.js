@@ -42,6 +42,7 @@ export function handlers() {
 
 type Handler = Parameters<typeof http.post>[1];
 
+// TODO: DeactivatedPlacementException 에러 케이스 추가
 const createSuggestion: Handler = async ({ request }) => {
   const { placementId } = (await request.json()) as SuggestionRequestDto;
   const isPlacementIdRegistered = registeredPlacementIds.find(
