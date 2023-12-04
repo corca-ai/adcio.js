@@ -1,13 +1,14 @@
 import { AdcioCore } from "lib/core";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Adcio } from "../adcio";
 
 beforeEach(() => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
 });
 
 afterEach(() => {
-  jest.restoreAllMocks();
-  jest.resetModules();
+  vi.restoreAllMocks();
+  vi.resetModules();
 });
 
 describe("test Adcio module", () => {
@@ -34,7 +35,7 @@ describe("test AdcioCore module", () => {
 
     const initialSessionId = adcioCore.getSessionId();
 
-    jest.advanceTimersByTime(10000);
+    vi.advanceTimersByTime(10000);
 
     // Verify that the session ID remains the same after 10s
     expect(adcioCore.getSessionId()).toBe(initialSessionId);
@@ -47,7 +48,7 @@ describe("test AdcioCore module", () => {
 
     const initialSessionId = adcioCore.getSessionId();
 
-    jest.advanceTimersByTime(30 * 60 * 1000);
+    vi.advanceTimersByTime(30 * 60 * 1000);
 
     // AdcioCore should reset the session ID after 30m
     // Verify that the session ID has changed after 30m
@@ -55,9 +56,9 @@ describe("test AdcioCore module", () => {
   });
 
   it("should call AdcioCore constructor once when Adcio is created", async () => {
-    jest.doMock("../lib/core", () => {
+    vi.doMock("../lib/core", () => {
       return {
-        AdcioCore: jest.fn().mockImplementation(),
+        AdcioCore: vi.fn().mockImplementation((adcioCore) => adcioCore),
       };
     });
 
@@ -71,6 +72,6 @@ describe("test AdcioCore module", () => {
 
     expect(AdcioCore).toHaveBeenCalledTimes(1);
 
-    jest.dontMock("../lib/core");
+    vi.doUnmock("../lib/core");
   });
 });
