@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 19
+
+      - uses: actions/cache@v3
+        id: deps-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: yarn install
+
+      - run: yarn run lint
+      - run: yarn run build
+      - run: yarn run test
