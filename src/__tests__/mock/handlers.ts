@@ -50,13 +50,9 @@ const createSuggestion: Handler = async ({ request }) => {
   );
 
   if (!isPlacementIdRegistered) {
-    return HttpResponse.json({
-      errors: [
-        {
-          message: `Failed to suggestions: The placement id(${placementId}) does not exist.`,
-          status: 404,
-        },
-      ],
+    return HttpResponse.json(null, {
+      status: 404,
+      statusText: `Failed to suggestions: The placement id(${placementId}) does not exist.`,
     });
   }
 
@@ -102,13 +98,9 @@ function createAnalyticsHandler<T>(fieldList: ReceiverAPIField<T>): Handler {
       });
     } catch (error) {
       if (error instanceof APIError) {
-        return HttpResponse.json({
-          errors: [
-            {
-              message: error.message,
-              status: error.statusCode,
-            },
-          ],
+        return HttpResponse.json(null, {
+          status: error.statusCode,
+          statusText: error.message,
         });
       }
     }
