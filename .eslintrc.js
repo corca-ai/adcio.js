@@ -14,10 +14,14 @@ module.exports = {
     browser: true,
     node: true,
     jasmine: true,
-    jest: true,
     es6: true,
   },
-  ignorePatterns: [".eslintrc.js", "dist", "webpack.config.js"],
+  ignorePatterns: [
+    ".eslintrc.js",
+    "dist",
+    "webpack.config.js",
+    "vitest.config.ts",
+  ],
   rules: {
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
