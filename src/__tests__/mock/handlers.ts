@@ -1,5 +1,4 @@
 import { SuggestionRequestDto } from "api/controller/v1";
-import { APIError } from "lib/utils/error";
 import { HttpResponse, http } from "msw";
 import {
   ReceiverAPIField,
@@ -10,6 +9,7 @@ import {
   viewField,
 } from "./constants";
 import { registeredPlacementIds, suggestionResponse } from "./suggestion.demo";
+import { APIError } from "lib/error";
 
 const RECEIVER_API_BASE_URL = "https://receiver.adcio.ai";
 const ADCIO_API_BASE_URL = "https://api.adcio.ai";
