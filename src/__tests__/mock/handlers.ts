@@ -65,7 +65,7 @@ const createSuggestion: Handler = async ({ request }) => {
   });
 };
 
-function checkRequiredFields<T>(obj: unknown, fieldList: ReceiverAPIField<T>) {
+function checkResponseDtoVaild<T>(obj: unknown, fieldList: ReceiverAPIField<T>) {
   if (obj == null || typeof obj !== "object") {
     throw new APIError(400, "Request format is incorrect.");
   }
@@ -89,7 +89,7 @@ function checkRequiredFields<T>(obj: unknown, fieldList: ReceiverAPIField<T>) {
 function createAnalyticsHandler<T>(fieldList: ReceiverAPIField<T>): Handler {
   return async ({ request }) => {
     try {
-      checkRequiredFields(await request.json(), fieldList);
+      checkResponseDtoVaild(await request.json(), fieldList);
       return HttpResponse.json({
         status: 201,
         body: {
