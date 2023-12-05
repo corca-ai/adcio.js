@@ -102,20 +102,18 @@ describe("test AdcioPlacement module", () => {
 
   const adcio = new Adcio({ clientId, customerId });
 
-  it("When the provided placementId is registered in the ADCIO service.", () => {
+  it("When the provided placementId is registered in the ADCIO service.", async () => {
     const placementId = "df7533ce-f504-41f5-b3e7-4aeb03a861f7";
 
-    // If the placementId exists, no error occurs during createSuggestion.
-    expect(() =>
+    await expect(
       adcio.createSuggestion({
         placementId,
       }),
-    ).not.toThrowError();
+    ).resolves.not.toThrow();
   });
 
   it("When the provided placementId is not registered in the ADCIO service.", async () => {
     const placementId = "not-registered-placement-id";
-
     try {
       await adcio.createSuggestion({
         placementId: placementId,
@@ -124,7 +122,7 @@ describe("test AdcioPlacement module", () => {
       // If the placementId not exists, 404 error occurs during createSuggestion.
       if (isAxiosError(error)) {
         expect(error.response?.status).toBe(404);
-        expect(error.response?.data.error).toBe(
+        expect(error.response?.data.message).toBe(
           `Failed to suggestions: The placement id(${placementId}) does not exist.`,
         );
       }

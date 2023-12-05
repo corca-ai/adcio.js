@@ -52,7 +52,7 @@ const createSuggestion: Handler = async ({ request }) => {
   if (!isPlacementIdRegistered) {
     return HttpResponse.json(
       {
-        error: `Failed to suggestions: The placement id(${placementId}) does not exist.`,
+        message: `Failed to suggestions: The placement id(${placementId}) does not exist.`,
       },
       {
         status: 404,
@@ -110,7 +110,7 @@ function createAnalyticsHandler<T>(fieldList: ReceiverAPIField<T>): Handler {
       if (error instanceof APIError) {
         return HttpResponse.json(
           {
-            error: error.message,
+            message: error.message,
           },
           {
             status: error.statusCode,
