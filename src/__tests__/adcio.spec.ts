@@ -1,4 +1,3 @@
-import { isAxiosError } from "axios";
 import { AdcioCore } from "lib/core";
 import {
   afterAll,
@@ -114,18 +113,18 @@ describe("test AdcioPlacement module", () => {
 
   it("When the provided placementId is not registered in the ADCIO service.", async () => {
     const placementId = "not-registered-placement-id";
-    try {
-      await adcio.createSuggestion({
+
+    await expect(
+      adcio.createSuggestion({
         placementId: placementId,
-      });
-    } catch (error) {
-      // If the placementId not exists, 404 error occurs during createSuggestion.
-      if (isAxiosError(error)) {
-        expect(error.response?.status).toBe(404);
-        expect(error.response?.data.message).toBe(
-          `Failed to suggestions: The placement id(${placementId}) does not exist.`,
-        );
-      }
-    }
+      }),
+    ).rejects.toMatchObject({
+      response: {
+        status: 404,
+        data: {
+          message: `Failed to suggestions: The placement id(${placementId}) does not exist.`,
+        },
+      },
+    });
   });
 });
