@@ -50,16 +50,24 @@ const createSuggestion: Handler = async ({ request }) => {
   );
 
   if (!isPlacementIdRegistered) {
-    return HttpResponse.json(null, {
-      status: 404,
-      statusText: `Failed to suggestions: The placement id(${placementId}) does not exist.`,
-    });
+    return HttpResponse.json(
+      {
+        error: `Failed to suggestions: The placement id(${placementId}) does not exist.`,
+      },
+      {
+        status: 404,
+      },
+    );
   }
 
-  return HttpResponse.json({
-    status: 201,
-    body: suggestionResponse,
-  });
+  return HttpResponse.json(
+    {
+      ...suggestionResponse,
+    },
+    {
+      status: 201,
+    },
+  );
 };
 
 function checkResponseDtoVaild<T>(
@@ -90,18 +98,24 @@ function createAnalyticsHandler<T>(fieldList: ReceiverAPIField<T>): Handler {
   return async ({ request }) => {
     try {
       checkResponseDtoVaild(await request.json(), fieldList);
-      return HttpResponse.json({
-        status: 201,
-        body: {
+      return HttpResponse.json(
+        {
           success: true,
         },
-      });
+        {
+          status: 201,
+        },
+      );
     } catch (error) {
       if (error instanceof APIError) {
-        return HttpResponse.json(null, {
-          status: error.statusCode,
-          statusText: error.message,
-        });
+        return HttpResponse.json(
+          {
+            error: error.message,
+          },
+          {
+            status: error.statusCode,
+          },
+        );
       }
     }
   };

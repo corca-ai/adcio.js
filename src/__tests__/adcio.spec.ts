@@ -124,7 +124,7 @@ describe("test AdcioPlacement module", () => {
       // If the placementId not exists, 404 error occurs during createSuggestion.
       if (isAxiosError(error)) {
         expect(error.response?.status).toBe(404);
-        expect(error.response?.statusText).toBe(
+        expect(error.response?.data.error).toBe(
           `Failed to suggestions: The placement id(${placementId}) does not exist.`,
         );
       }
