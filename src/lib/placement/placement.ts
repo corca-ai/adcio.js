@@ -40,7 +40,7 @@ export class AdcioPlacement {
           default:
             throw new APIError(
               error.response?.status,
-              "An unknown error occurred in Adcio web sdk.",
+              "An unknown error occurred in the web sdk when calling the createSuggestion method",
             );
         }
       }
