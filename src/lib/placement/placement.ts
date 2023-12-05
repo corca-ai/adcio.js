@@ -29,6 +29,7 @@ export class AdcioPlacement {
 
       return data;
     } catch (error) {
+      // TODO: 비활성화 지면(= NO_ACTIVATED_PLACEMENT)에 대한 에러 핸들링 추가
       if (isAxiosError(error) && error.response) {
         switch (error.response.data.message) {
           case ERROR_CODE.SUGGESTION.INVALID_PLACEMENT_TYPE:
