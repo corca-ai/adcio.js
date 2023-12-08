@@ -37,6 +37,11 @@ export class AdcioPlacement {
               error.response?.status,
               `Failed to suggestions: The placement id(${params.placementId}) does not exist`,
             );
+          case ERROR_CODE.SUGGESTION.PLACEMENT_NOT_FOUND:
+            throw new APIError(
+              error.response?.status,
+              "Failed to suggestions: The placement is not activated",
+            );
           default:
             throw new APIError(
               error.response?.status,
