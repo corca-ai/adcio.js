@@ -1,8 +1,3 @@
-export const registeredPlacementIds = [
-  "df7533ce-f504-41f5-b3e7-4aeb03a861f7",
-  "0b6b7885-d952-4d21-86ed-f4d92154f9fc",
-];
-
 export const suggestionResponse = {
   placement: {
     id: "9f9f9b00-dc16-41c7-a5cd-f9a788d3d481",

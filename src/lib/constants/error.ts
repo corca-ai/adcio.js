@@ -5,3 +5,10 @@ export const ERROR_CODE = {
     NO_ACTIVATED_PLACEMENT: 12_004,
   },
 };
+
+export const PLACEMENT_ERROR_MESSAGE = {
+  PLACEMENT_NOT_FOUND:
+    "Failed to suggestions: The placement id is not registered",
+  NO_ACTIVATED_PLACEMENT: "Failed to suggestions: The placement is not active",
+  NOT_UUID: "Failed to suggestions: The placement id must be a UUID",
+};
