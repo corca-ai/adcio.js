@@ -47,15 +47,17 @@ type Handler = Parameters<typeof http.post>[1];
 const createSuggestion: Handler = async ({ request }) => {
   const { placementId } = (await request.json()) as SuggestionRequestDto;
 
-  const isPlacementIdNotUUID = placementId === SuggestionTestId.NOT_UUID;
+  const isPlacementIdNotUUID =
+    placementId === SuggestionTestId.NOT_UUID_PLACEMENT;
   const isPlacementIdDisabled =
     placementId === SuggestionTestId.NO_ACTIVATED_PLACEMENT;
-  const isPlacementIdNotFound = placementId === SuggestionTestId.RANDOM_UUID;
+  const isPlacementIdNotFound =
+    placementId === SuggestionTestId.NOT_FOUND_PLACEMENT;
 
   if (isPlacementIdNotUUID) {
     return HttpResponse.json(
       {
-        message: PLACEMENT_ERROR_MESSAGE.NOT_UUID,
+        message: PLACEMENT_ERROR_MESSAGE.NOT_UUID_PLACEMENT,
       },
       {
         status: 400,
