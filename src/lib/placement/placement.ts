@@ -30,6 +30,13 @@ export class AdcioPlacement {
       return data;
     } catch (error) {
       if (isAxiosError(error) && error.response) {
+        if (error.status === 400) {
+          throw new APIError(
+            error.response?.status,
+            error.response.data.message,
+          );
+        }
+
         switch (error.response.data.message) {
           case ERROR_CODE.SUGGESTION.PLACEMENT_NOT_FOUND:
             throw new APIError(
