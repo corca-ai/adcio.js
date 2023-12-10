@@ -47,31 +47,34 @@ type Handler = Parameters<typeof http.post>[1];
 const createSuggestion: Handler = async ({ request }) => {
   const { placementId } = (await request.json()) as SuggestionRequestDto;
 
+  const isPlacementIdSuccess =
+    placementId === SuggestionTestId.SUCCESS_PLACEMENT;
   const isPlacementIdNotUUID =
     placementId === SuggestionTestId.NOT_UUID_PLACEMENT;
-  const isPlacementIdDisabled =
-    placementId === SuggestionTestId.NO_ACTIVATED_PLACEMENT;
   const isPlacementIdNotFound =
     placementId === SuggestionTestId.NOT_FOUND_PLACEMENT;
+  const isPlacementIdDisabled =
+    placementId === SuggestionTestId.NO_ACTIVATED_PLACEMENT;
+
+  if (isPlacementIdSuccess) {
+    return HttpResponse.json(
+      {
+        ...suggestionResponse,
+      },
+      {
+        status: 201,
+      },
+    );
+  }
 
   if (isPlacementIdNotUUID) {
+    console.log({ placementId });
     return HttpResponse.json(
       {
         message: PLACEMENT_ERROR_MESSAGE.NOT_UUID_PLACEMENT,
       },
       {
         status: 400,
-      },
-    );
-  }
-
-  if (isPlacementIdDisabled) {
-    return HttpResponse.json(
-      {
-        message: PLACEMENT_ERROR_MESSAGE.NO_ACTIVATED_PLACEMENT,
-      },
-      {
-        status: 404,
       },
     );
   }
@@ -87,12 +90,23 @@ const createSuggestion: Handler = async ({ request }) => {
     );
   }
 
+  if (isPlacementIdDisabled) {
+    return HttpResponse.json(
+      {
+        message: PLACEMENT_ERROR_MESSAGE.NO_ACTIVATED_PLACEMENT,
+      },
+      {
+        status: 404,
+      },
+    );
+  }
+
   return HttpResponse.json(
     {
-      ...suggestionResponse,
+      message: PLACEMENT_ERROR_MESSAGE.NO_ACTIVATED_PLACEMENT,
     },
     {
-      status: 201,
+      status: 500,
     },
   );
 };

@@ -44,7 +44,7 @@ export class AdcioPlacement {
           default:
             throw new APIError(
               error.response?.status,
-              "Failed to suggestions: An unknown error occurred",
+              PLACEMENT_ERROR_MESSAGE.UNKNOWN_ERROR,
             );
         }
       }
