@@ -129,11 +129,59 @@ describe("test AdcioPlacement module", () => {
   });
 });
 
-describe("test AdcioAnalytics module", () => {
+describe.only("test AdcioAnalytics module", () => {
   const clientId = "your-client-id";
   const customerId = "your-customer-id";
 
-  const adcio = new Adcio({ clientId, customerId });
+  let adcio: Adcio;
 
-  it("When the provided placementId is registered in the ADCIO service.", async () => {});
+  beforeEach(() => {
+    adcio = new Adcio({ clientId, customerId });
+  });
+
+  it("should call onPageView method successfully", async () => {
+    await expect(
+      adcio.onPageView({
+        productIdOnStore: "your-product-id",
+      }),
+    ).resolves.not.toThrow();
+  });
+
+  it("should call onImpression method successfully", async () => {
+    await expect(
+      adcio.onImpression({
+        requestId: "your-request-id",
+        adsetId: "your-adset-id",
+      }),
+    ).resolves.not.toThrow();
+  });
+
+  it("should call onClick method successfully", async () => {
+    await expect(
+      adcio.onClick({
+        requestId: "your-request-id",
+        adsetId: "your-adset-id",
+      }),
+    ).resolves.not.toThrow();
+  });
+
+  it("should call onAddToCart method successfully", async () => {
+    await expect(
+      adcio.onAddToCart({
+        cartId: "your-cart-id",
+        productIdOnStore: "your-product-id",
+      }),
+    ).resolves.not.toThrow();
+  });
+
+  it("should call onPurchase method successfully", async () => {
+    await expect(
+      adcio.onPurchase({
+        orderId: "your-order-id",
+        productIdOnStore: "your-product-id",
+        quantity: 1,
+        amount: 1,
+      }),
+    ).resolves.not.toThrow();
+  });
 });

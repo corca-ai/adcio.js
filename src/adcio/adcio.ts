@@ -43,7 +43,7 @@ export class Adcio {
 
   // AdcioAnalytics
   public onPageView(params: AdcioOnPageViewParams) {
-    this.adcioAnalytics.onPageView({
+    return this.adcioAnalytics.onPageView({
       path: window.location.pathname,
       title: document.title,
       referrer: document.referrer || undefined,
