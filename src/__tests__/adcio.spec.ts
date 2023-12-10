@@ -128,3 +128,12 @@ describe("test AdcioPlacement module", () => {
     });
   });
 });
+
+describe("test AdcioAnalytics module", () => {
+  const clientId = "your-client-id";
+  const customerId = "your-customer-id";
+
+  const adcio = new Adcio({ clientId, customerId });
+
+  it("When the provided placementId is registered in the ADCIO service.", async () => {});
+});
