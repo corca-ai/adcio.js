@@ -108,48 +108,25 @@ describe("test AdcioPlacement module", () => {
     ).resolves.not.toThrow();
   });
 
-  it.only("When the provided placementId is not uuid in the ADCIO service.", async () => {
+  it("When the provided placementId is not registered in the ADCIO service.", async () => {
     await expect(
       adcio.createSuggestion({
-        placementId: SuggestionTestId.NOT_UUID_PLACEMENT,
+        placementId: SuggestionTestId.NOT_FOUND_PLACEMENT,
       }),
     ).rejects.toMatchObject({
-      response: {
-        status: 400,
-        data: {
-          message: PLACEMENT_ERROR_MESSAGE.NOT_UUID_PLACEMENT,
-        },
-      },
+      statusCode: 404,
+      message: PLACEMENT_ERROR_MESSAGE.PLACEMENT_NOT_FOUND,
     });
   });
 
-  // it("When the provided placementId is not registered in the ADCIO service.", async () => {
-  //   await expect(
-  //     adcio.createSuggestion({
-  //       placementId: SuggestionTestId.NOT_FOUND_PLACEMENT,
-  //     }),
-  //   ).rejects.toMatchObject({
-  //     response: {
-  //       status: 404,
-  //       data: {
-  //         message: PLACEMENT_ERROR_MESSAGE.PLACEMENT_NOT_FOUND,
-  //       },
-  //     },
-  //   });
-  // });
-
-  // it("When the provided placementId is not activated in the ADCIO service.", async () => {
-  //   await expect(
-  //     adcio.createSuggestion({
-  //       placementId: SuggestionTestId.NO_ACTIVATED_PLACEMENT,
-  //     }),
-  //   ).rejects.toMatchObject({
-  //     response: {
-  //       status: 404,
-  //       data: {
-  //         message: PLACEMENT_ERROR_MESSAGE.NO_ACTIVATED_PLACEMENT,
-  //       },
-  //     },
-  //   });
-  // });
+  it("When the provided placementId is not activated in the ADCIO service.", async () => {
+    await expect(
+      adcio.createSuggestion({
+        placementId: SuggestionTestId.NO_ACTIVATED_PLACEMENT,
+      }),
+    ).rejects.toMatchObject({
+      statusCode: 404,
+      message: PLACEMENT_ERROR_MESSAGE.NO_ACTIVATED_PLACEMENT,
+    });
+  });
 });

@@ -1,5 +1,5 @@
 import { SuggestionRequestDto } from "api/controller/v1";
-import { PLACEMENT_ERROR_MESSAGE } from "lib/constants/error";
+import { ERROR_CODE, PLACEMENT_ERROR_MESSAGE } from "lib/constants/error";
 import { APIError } from "lib/error";
 import { HttpResponse, http } from "msw";
 import {
@@ -49,65 +49,32 @@ const createSuggestion: Handler = async ({ request }) => {
 
   const isPlacementIdSuccess =
     placementId === SuggestionTestId.SUCCESS_PLACEMENT;
-  const isPlacementIdNotUUID =
-    placementId === SuggestionTestId.NOT_UUID_PLACEMENT;
   const isPlacementIdNotFound =
     placementId === SuggestionTestId.NOT_FOUND_PLACEMENT;
   const isPlacementIdDisabled =
     placementId === SuggestionTestId.NO_ACTIVATED_PLACEMENT;
 
   if (isPlacementIdSuccess) {
-    return HttpResponse.json(
-      {
-        ...suggestionResponse,
-      },
-      {
-        status: 201,
-      },
-    );
-  }
-
-  if (isPlacementIdNotUUID) {
-    console.log({ placementId });
-    return HttpResponse.json(
-      {
-        message: PLACEMENT_ERROR_MESSAGE.NOT_UUID_PLACEMENT,
-      },
-      {
-        status: 400,
-      },
-    );
+    return HttpResponse.json({ ...suggestionResponse }, { status: 201 });
   }
 
   if (isPlacementIdNotFound) {
     return HttpResponse.json(
-      {
-        message: PLACEMENT_ERROR_MESSAGE.PLACEMENT_NOT_FOUND,
-      },
-      {
-        status: 404,
-      },
+      { message: ERROR_CODE.SUGGESTION.PLACEMENT_NOT_FOUND },
+      { status: 404 },
     );
   }
 
   if (isPlacementIdDisabled) {
     return HttpResponse.json(
-      {
-        message: PLACEMENT_ERROR_MESSAGE.NO_ACTIVATED_PLACEMENT,
-      },
-      {
-        status: 404,
-      },
+      { message: ERROR_CODE.SUGGESTION.NO_ACTIVATED_PLACEMENT },
+      { status: 404 },
     );
   }
 
   return HttpResponse.json(
-    {
-      message: PLACEMENT_ERROR_MESSAGE.NO_ACTIVATED_PLACEMENT,
-    },
-    {
-      status: 500,
-    },
+    { message: PLACEMENT_ERROR_MESSAGE.UNKNOWN_ERROR },
+    { status: 500 },
   );
 };
 
