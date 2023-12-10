@@ -30,7 +30,7 @@ export class AdcioPlacement {
       return data;
     } catch (error) {
       if (isAxiosError(error) && error.response) {
-        if (error.status === 400) {
+        if (error.response?.status === 400) {
           throw new APIError(
             error.response?.status,
             error.response.data.message,

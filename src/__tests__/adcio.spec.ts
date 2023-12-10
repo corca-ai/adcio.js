@@ -108,6 +108,17 @@ describe("test AdcioPlacement module", () => {
     ).resolves.not.toThrow();
   });
 
+  it("When the provided placementId is not uuid in the ADCIO service", async () => {
+    await expect(
+      adcio.createSuggestion({
+        placementId: SuggestionTestId.NOT_UUID_PLACEMENT,
+      }),
+    ).rejects.toMatchObject({
+      statusCode: 400,
+      message: PLACEMENT_ERROR_MESSAGE.NOT_UUID,
+    });
+  });
+
   it("When the provided placementId is not registered in the ADCIO service.", async () => {
     await expect(
       adcio.createSuggestion({
