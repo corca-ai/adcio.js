@@ -1,6 +1,6 @@
 import { Configuration, SuggestionApi } from "api/controller/v1";
 import { isAxiosError } from "axios";
-import { ERROR_CODE } from "lib/constants/error";
+import { ERROR_CODE, PLACEMENT_ERROR_MESSAGE } from "lib/constants/error";
 import { AdcioCore } from "lib/core";
 import { APIError } from "lib/error";
 import {
@@ -29,18 +29,29 @@ export class AdcioPlacement {
 
       return data;
     } catch (error) {
-      // TODO: 비활성화 지면(= NO_ACTIVATED_PLACEMENT)에 대한 에러 핸들링 추가
       if (isAxiosError(error) && error.response) {
+        if (error.response?.status === 400) {
+          throw new APIError(
+            error.response?.status,
+            error.response.data.message,
+          );
+        }
+
         switch (error.response.data.message) {
-          case ERROR_CODE.SUGGESTION.INVALID_PLACEMENT_TYPE:
+          case ERROR_CODE.SUGGESTION.PLACEMENT_NOT_FOUND:
             throw new APIError(
               error.response?.status,
-              `Failed to suggestions: The placement id(${params.placementId}) does not exist`,
+              PLACEMENT_ERROR_MESSAGE.PLACEMENT_NOT_FOUND,
+            );
+          case ERROR_CODE.SUGGESTION.NO_ACTIVATED_PLACEMENT:
+            throw new APIError(
+              error.response?.status,
+              PLACEMENT_ERROR_MESSAGE.NO_ACTIVATED_PLACEMENT,
             );
           default:
             throw new APIError(
               error.response?.status,
-              "An unknown error occurred in the web sdk when calling the createSuggestion method",
+              PLACEMENT_ERROR_MESSAGE.UNKNOWN_ERROR,
             );
         }
       }
