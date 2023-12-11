@@ -10,4 +10,4 @@ export type {
   AdcioCreateSuggestionParams,
 } from "./adcio.interface";
 
-export { waitForDOM, waitForElement } from "lib/utils";
+export { waitForDOM, waitForElement, getMeta } from "lib/utils";

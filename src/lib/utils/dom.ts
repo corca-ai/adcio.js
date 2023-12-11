@@ -36,3 +36,25 @@ export const waitForElement = (
     }
   });
 };
+
+export const getMeta = (query: { name?: string; property?: string }) => {
+  const { property, name } = query;
+
+  let selector = "";
+  if (property) {
+    selector = `meta[property="${property}"]`;
+  } else if (name) {
+    selector = `meta[name="${name}"]`;
+  }
+
+  if (!selector) {
+    return null;
+  }
+
+  const element = document.querySelector(selector);
+  if (!element) {
+    return null;
+  }
+
+  return element.getAttribute("content");
+};
