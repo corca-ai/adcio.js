@@ -142,7 +142,7 @@ describe("test AdcioPlacement module", () => {
   });
 });
 
-describe.only("test AdcioAnalytics module", () => {
+describe("test AdcioAnalytics module", () => {
   const clientId = "your-client-id";
   const customerId = "your-customer-id";
 
