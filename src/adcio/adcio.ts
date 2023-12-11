@@ -1,6 +1,6 @@
 import { AdcioAnalytics } from "lib/analytics/analytics";
 import { AdcioCore } from "lib/core";
-import { AdcioImpressionDetector } from "lib/impression-detector/impression-detector";
+import { AdcioImpressionObserver } from "lib/impression-observer/impression-observer";
 import { AdcioPlacement } from "lib/placement/placement";
 import {
   AdcioConfig,
@@ -10,7 +10,7 @@ import {
   AdcioOnAddToCartParams,
   AdcioOnClickParams,
   AdcioOnPurchaseParams,
-  AdcioOnDetectImpressionParams,
+  AdcioObserveImpressionParams,
   AdcioOnImpressionParams,
 } from "./adcio.interface";
 
@@ -68,9 +68,9 @@ export class Adcio {
   }
 
   // AdcioImpressionDetector
-  public onDetectImpression(params: AdcioOnDetectImpressionParams) {
-    return new AdcioImpressionDetector(params).detect((logOption) =>
-      this.onImpression(logOption),
+  public observeImpression(params: AdcioObserveImpressionParams) {
+    return new AdcioImpressionObserver({ filter: params.filter }).observe(
+      params.element,
     );
   }
 

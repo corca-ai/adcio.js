@@ -1,4 +1,3 @@
-import { LogOptionsDto } from "api/controller/v1";
 import { CustomerId, StoreId } from "api/dto/session.dto";
 import {
   AdcioAnalyticsOnPageViewParams,
@@ -32,10 +31,9 @@ export type AdcioOnAddToCartParams = AdcioAnalyticsOnAddToCartParams;
 
 export type AdcioOnPurchaseParams = AdcioAnalyticsOnPurchaseParams;
 
-export type AdcioOnDetectImpressionParams = {
-  logOption: LogOptionsDto;
-  selector: string;
-  detector: (element: Element) => boolean;
+export type AdcioObserveImpressionParams = {
+  element: Element;
+  filter?: (element: Element) => boolean;
 };
 
 export type AdcioCreateSuggestionParams = AdcioPlacementCreateSuggestionParams;

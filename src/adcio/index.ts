@@ -6,6 +6,8 @@ export type {
   AdcioOnClickParams,
   AdcioOnAddToCartParams,
   AdcioOnPurchaseParams,
-  AdcioOnDetectImpressionParams,
+  AdcioObserveImpressionParams,
   AdcioCreateSuggestionParams,
 } from "./adcio.interface";
+
+export { waitForDOM, waitForElement } from "lib/utils";
