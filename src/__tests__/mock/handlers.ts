@@ -1,15 +1,17 @@
 import { SuggestionRequestDto } from "api/controller/v1";
+import { ERROR_CODE, PLACEMENT_ERROR_MESSAGE } from "lib/constants/error";
 import { APIError } from "lib/error";
 import { HttpResponse, http } from "msw";
 import {
   ReceiverAPIField,
+  SuggestionTestId,
   addToCartField,
   clickField,
   impressionField,
   purchaseField,
   viewField,
 } from "./constants";
-import { registeredPlacementIds, suggestionResponse } from "./suggestion.demo";
+import { suggestionResponse } from "./suggestion.demo";
 
 const RECEIVER_API_BASE_URL = "https://receiver.adcio.ai";
 const ADCIO_API_BASE_URL = "https://api.adcio.ai";
@@ -42,28 +44,47 @@ export function handlers() {
 
 type Handler = Parameters<typeof http.post>[1];
 
-// TODO: DeactivatedPlacementException 에러 케이스 추가
 const createSuggestion: Handler = async ({ request }) => {
   const { placementId } = (await request.json()) as SuggestionRequestDto;
-  const isPlacementIdRegistered = registeredPlacementIds.find(
-    (id) => placementId === id,
-  );
 
-  if (!isPlacementIdRegistered) {
-    return HttpResponse.json({
-      errors: [
-        {
-          message: `Failed to suggestions: The placement id(${placementId}) does not exist.`,
-          status: 404,
-        },
-      ],
-    });
+  const isPlacementIdNotUUID =
+    placementId === SuggestionTestId.NOT_UUID_PLACEMENT;
+  const isPlacementIdSuccess =
+    placementId === SuggestionTestId.SUCCESS_PLACEMENT;
+  const isPlacementIdNotFound =
+    placementId === SuggestionTestId.NOT_FOUND_PLACEMENT;
+  const isPlacementIdDisabled =
+    placementId === SuggestionTestId.NO_ACTIVATED_PLACEMENT;
+
+  if (isPlacementIdSuccess) {
+    return HttpResponse.json({ ...suggestionResponse }, { status: 201 });
   }
 
-  return HttpResponse.json({
-    status: 201,
-    body: suggestionResponse,
-  });
+  if (isPlacementIdNotUUID) {
+    return HttpResponse.json(
+      { message: PLACEMENT_ERROR_MESSAGE.NOT_UUID },
+      { status: 400 },
+    );
+  }
+
+  if (isPlacementIdNotFound) {
+    return HttpResponse.json(
+      { message: ERROR_CODE.SUGGESTION.PLACEMENT_NOT_FOUND },
+      { status: 404 },
+    );
+  }
+
+  if (isPlacementIdDisabled) {
+    return HttpResponse.json(
+      { message: ERROR_CODE.SUGGESTION.NO_ACTIVATED_PLACEMENT },
+      { status: 404 },
+    );
+  }
+
+  return HttpResponse.json(
+    { message: PLACEMENT_ERROR_MESSAGE.UNKNOWN_ERROR },
+    { status: 500 },
+  );
 };
 
 function checkResponseDtoVaild<T>(
@@ -94,22 +115,24 @@ function createAnalyticsHandler<T>(fieldList: ReceiverAPIField<T>): Handler {
   return async ({ request }) => {
     try {
       checkResponseDtoVaild(await request.json(), fieldList);
-      return HttpResponse.json({
-        status: 201,
-        body: {
+      return HttpResponse.json(
+        {
           success: true,
         },
-      });
+        {
+          status: 201,
+        },
+      );
     } catch (error) {
       if (error instanceof APIError) {
-        return HttpResponse.json({
-          errors: [
-            {
-              message: error.message,
-              status: error.statusCode,
-            },
-          ],
-        });
+        return HttpResponse.json(
+          {
+            message: error.message,
+          },
+          {
+            status: error.statusCode,
+          },
+        );
       }
     }
   };

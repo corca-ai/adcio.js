@@ -163,6 +163,12 @@ export interface Banner {
     'clientId': string;
     /**
      * 
+     * @type {Array<Campaign>}
+     * @memberof Banner
+     */
+    'campaigns': Array<Campaign>;
+    /**
+     * 
      * @type {string}
      * @memberof Banner
      */
@@ -203,6 +209,18 @@ export interface Banner {
      * @memberof Banner
      */
     'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Banner
+     */
+    'deepLink': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Banner
+     */
+    'appRoute': string | null;
     /**
      * 
      * @type {string}
@@ -312,6 +330,12 @@ export interface BannerWithCreative {
     'clientId': string;
     /**
      * 
+     * @type {Array<Campaign>}
+     * @memberof BannerWithCreative
+     */
+    'campaigns': Array<Campaign>;
+    /**
+     * 
      * @type {string}
      * @memberof BannerWithCreative
      */
@@ -352,6 +376,18 @@ export interface BannerWithCreative {
      * @memberof BannerWithCreative
      */
     'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'deepLink': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreative
+     */
+    'appRoute': string | null;
     /**
      * 
      * @type {string}
@@ -411,6 +447,12 @@ export interface BannerWithCreativeDto {
     'clientId': string;
     /**
      * 
+     * @type {Array<Campaign>}
+     * @memberof BannerWithCreativeDto
+     */
+    'campaigns': Array<Campaign>;
+    /**
+     * 
      * @type {string}
      * @memberof BannerWithCreativeDto
      */
@@ -451,6 +493,18 @@ export interface BannerWithCreativeDto {
      * @memberof BannerWithCreativeDto
      */
     'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreativeDto
+     */
+    'deepLink': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerWithCreativeDto
+     */
+    'appRoute': string | null;
     /**
      * 
      * @type {string}
@@ -1049,6 +1103,18 @@ export interface CreateBannerDto {
      * @type {string}
      * @memberof CreateBannerDto
      */
+    'deepLink': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBannerDto
+     */
+    'appRoute': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBannerDto
+     */
     'startsAt': string;
     /**
      * 
@@ -1338,6 +1404,12 @@ export interface FetchBannerResponseDto {
     'clientId': string;
     /**
      * 
+     * @type {Array<Campaign>}
+     * @memberof FetchBannerResponseDto
+     */
+    'campaigns': Array<Campaign>;
+    /**
+     * 
      * @type {string}
      * @memberof FetchBannerResponseDto
      */
@@ -1378,6 +1450,18 @@ export interface FetchBannerResponseDto {
      * @memberof FetchBannerResponseDto
      */
     'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchBannerResponseDto
+     */
+    'deepLink': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchBannerResponseDto
+     */
+    'appRoute': string | null;
     /**
      * 
      * @type {string}
@@ -1467,6 +1551,12 @@ export interface FetchManyBannersResponseDto {
     'clientId': string;
     /**
      * 
+     * @type {Array<Campaign>}
+     * @memberof FetchManyBannersResponseDto
+     */
+    'campaigns': Array<Campaign>;
+    /**
+     * 
      * @type {string}
      * @memberof FetchManyBannersResponseDto
      */
@@ -1507,6 +1597,18 @@ export interface FetchManyBannersResponseDto {
      * @memberof FetchManyBannersResponseDto
      */
     'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyBannersResponseDto
+     */
+    'deepLink': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyBannersResponseDto
+     */
+    'appRoute': string | null;
     /**
      * 
      * @type {string}
@@ -3080,6 +3182,18 @@ export interface UpdateBannerDto {
      * @memberof UpdateBannerDto
      */
     'data': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateBannerDto
+     */
+    'deepLink': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateBannerDto
+     */
+    'appRoute': string | null;
     /**
      * 
      * @type {string}
