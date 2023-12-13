@@ -1,5 +1,6 @@
 import { AdcioAnalytics } from "lib/analytics/analytics";
 import { AdcioCore } from "lib/core";
+import { FrontAPI } from "lib/front-api/front-api.interface";
 import { AdcioImpressionObserver } from "lib/impression-observer/impression-observer";
 import { AdcioPlacement } from "lib/placement/placement";
 import {
@@ -77,5 +78,46 @@ export class Adcio {
   // AdcioPlacement
   public async createSuggestion(params: AdcioCreateSuggestionParams) {
     return this.adcioPlacement.createSuggestion(params);
+  }
+
+  public async log(frontApi: FrontAPI) {
+    await frontApi.init();
+
+    const promises: Promise<void>[] = [];
+
+    const product = await frontApi.getProduct();
+    promises.push(this.onPageView({ productIdOnStore: product?.idOnStore }));
+
+    const carts = await frontApi.getCarts();
+    if (carts && carts.length === 0) {
+      // TODO: add to cart
+      // const added = this.tracker.addedToCart(carts);
+      // if (added.length > 0) {
+      //   promises.push(
+      //     ...added.map((cart) =>
+      //       this.onAddToCart({
+      //         cartId: cart.id,
+      //         productIdOnStore: cart.productIdOnStore,
+      //       }),
+      //     ),
+      //   );
+      // }
+    }
+
+    const order = await frontApi.getOrder();
+    if (order) {
+      promises.push(
+        ...order.products.map((product) =>
+          this.onPurchase({
+            orderId: order.id,
+            amount: Number(
+              product.subTotalPrice || product.price * product.quantity,
+            ),
+            quantity: product.quantity,
+            productIdOnStore: product.idOnStore,
+          }),
+        ),
+      );
+    }
   }
 }
