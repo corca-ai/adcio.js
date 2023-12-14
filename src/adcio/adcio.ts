@@ -90,7 +90,7 @@ export class Adcio {
     promises.push(this.onPageView({ productIdOnStore: product?.idOnStore }));
 
     const carts = await frontApi.getCarts();
-    if (carts && carts.length === 0) {
+    if (carts && carts.length > 0) {
       const storage = new CartsStorage({
         key: `adcio-carts-${this.adcioCore.getClientId()}`,
       });
