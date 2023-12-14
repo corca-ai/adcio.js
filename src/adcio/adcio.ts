@@ -81,50 +81,63 @@ export class Adcio {
     return this.adcioPlacement.createSuggestion(params);
   }
 
-  public async log(frontApi: FrontAPI) {
+  public async collectLogs(frontApi: FrontAPI) {
     await frontApi.init();
 
-    const promises: Promise<void>[] = [];
+    return Promise.allSettled([
+      ...(await this.handleProduct(frontApi)),
+      ...(await this.handleCarts(frontApi)),
+      ...(await this.handleOrder(frontApi)),
+    ]);
+  }
 
+  private async handleProduct(frontApi: FrontAPI): Promise<Promise<void>[]> {
     const product = await frontApi.getProduct();
-    promises.push(this.onPageView({ productIdOnStore: product?.idOnStore }));
+    return [this.onPageView({ productIdOnStore: product?.idOnStore })];
+  }
 
+  private async handleCarts(frontApi: FrontAPI): Promise<Promise<void>[]> {
     const carts = await frontApi.getCarts();
-    if (carts) {
-      const storage = new CartsStorage({
-        key: `adcio-carts-${this.adcioCore.getClientId()}`,
-      });
-      const existing = storage.getOrSet();
-      const newCarts = carts.filter(
-        (cart) => !existing.find((c) => c.id === cart.id),
-      );
-      if (newCarts.length > 0) {
-        promises.push(
-          ...newCarts.map((cart) =>
-            this.onAddToCart({
-              cartId: cart.id,
-              productIdOnStore: cart.productIdOnStore,
-            }),
-          ),
-        );
-      }
-      storage.set(carts);
+    if (!carts) {
+      return [];
     }
 
-    const order = await frontApi.getOrder();
-    if (order) {
-      promises.push(
-        ...order.products.map((product) =>
-          this.onPurchase({
-            orderId: order.id,
-            amount: Number(
-              product.subTotalPrice || product.price * product.quantity,
-            ),
-            quantity: product.quantity,
-            productIdOnStore: product.idOnStore,
-          }),
-        ),
-      );
+    const storage = new CartsStorage({
+      key: `adcio-carts-${this.adcioCore.getClientId()}`,
+    });
+    const existing = storage.getOrSet();
+    storage.set(carts);
+
+    const newCarts = carts.filter(
+      (cart) => !existing.find((c) => c.id === cart.id),
+    );
+    if (newCarts.length === 0) {
+      return [];
     }
+
+    return newCarts.map((cart) =>
+      this.onAddToCart({
+        cartId: cart.id,
+        productIdOnStore: cart.productIdOnStore,
+      }),
+    );
+  }
+
+  private async handleOrder(frontApi: FrontAPI): Promise<Promise<void>[]> {
+    const order = await frontApi.getOrder();
+    if (!order) {
+      return [];
+    }
+
+    return order.products.map((product) =>
+      this.onPurchase({
+        orderId: order.id,
+        amount: Number(
+          product.subTotalPrice || product.price * product.quantity,
+        ),
+        quantity: product.quantity,
+        productIdOnStore: product.idOnStore,
+      }),
+    );
   }
 }
