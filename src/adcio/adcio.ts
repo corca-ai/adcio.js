@@ -3,6 +3,7 @@ import { AdcioCore } from "lib/core";
 import { FrontAPI } from "lib/front-api/front-api.interface";
 import { AdcioImpressionObserver } from "lib/impression-observer/impression-observer";
 import { AdcioPlacement } from "lib/placement/placement";
+import { CartsStorage } from "lib/storage/tracker-storage";
 import {
   AdcioConfig,
   AdcioParams,
@@ -90,18 +91,23 @@ export class Adcio {
 
     const carts = await frontApi.getCarts();
     if (carts && carts.length === 0) {
-      // TODO: add to cart
-      // const added = this.tracker.addedToCart(carts);
-      // if (added.length > 0) {
-      //   promises.push(
-      //     ...added.map((cart) =>
-      //       this.onAddToCart({
-      //         cartId: cart.id,
-      //         productIdOnStore: cart.productIdOnStore,
-      //       }),
-      //     ),
-      //   );
-      // }
+      const storage = new CartsStorage({
+        key: `adcio-carts-${this.adcioCore.getClientId()}`,
+      });
+      const existing = storage.getOrSet();
+      const newCarts = carts.filter(
+        (cart) => !existing.find((c) => c.id === cart.id),
+      );
+      if (newCarts.length > 0) {
+        promises.push(
+          ...newCarts.map((cart) =>
+            this.onAddToCart({
+              cartId: cart.id,
+              productIdOnStore: cart.productIdOnStore,
+            }),
+          ),
+        );
+      }
     }
 
     const order = await frontApi.getOrder();

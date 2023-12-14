@@ -1,6 +1,6 @@
 import { SessionStorageParams, Storage } from "./storage.interface";
 
-export class SessionStorage implements Storage {
+export class SessionStorage implements Storage<string> {
   private key: string = "";
 
   constructor(config: SessionStorageParams) {
