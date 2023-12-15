@@ -6,6 +6,10 @@ export type AdcioPlacementParams = {
   apiEndpoint: string;
 };
 
+export type AdcioPlacementFetchPlacementsParams = {
+  pageName: string;
+};
+
 export type AdcioPlacementCreateSuggestionParams = Pick<
   SuggestionRequestDto,
   | "placementId"

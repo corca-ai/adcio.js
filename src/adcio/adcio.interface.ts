@@ -6,7 +6,10 @@ import {
   AdcioAnalyticsOnPurchaseParams,
   AdcioAnalyticsOnImpressionParams,
 } from "lib/analytics";
-import { AdcioPlacementCreateSuggestionParams } from "lib/placement";
+import {
+  AdcioPlacementFetchPlacementsParams,
+  AdcioPlacementCreateSuggestionParams,
+} from "lib/placement";
 
 export interface AdcioParams {
   clientId: StoreId;
@@ -35,5 +38,7 @@ export type AdcioObserveImpressionParams = {
   element: Element;
   filter?: (element: Element) => boolean;
 };
+
+export type AdcioFetchPlacementsParams = AdcioPlacementFetchPlacementsParams;
 
 export type AdcioCreateSuggestionParams = AdcioPlacementCreateSuggestionParams;

@@ -14,6 +14,7 @@ import {
   AdcioOnPurchaseParams,
   AdcioObserveImpressionParams,
   AdcioOnImpressionParams,
+  AdcioFetchPlacementsParams,
 } from "./adcio.interface";
 
 export class Adcio {
@@ -77,6 +78,10 @@ export class Adcio {
   }
 
   // AdcioPlacement
+  public async fetchPlacements(params: AdcioFetchPlacementsParams) {
+    return this.adcioPlacement.fetchPlacements(params);
+  }
+
   public async createSuggestion(params: AdcioCreateSuggestionParams) {
     return this.adcioPlacement.createSuggestion(params);
   }
