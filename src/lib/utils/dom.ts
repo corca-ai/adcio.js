@@ -87,16 +87,15 @@ export const createElement = (
 };
 
 export type CreateNestedElementOptions = CreateElementOptions & {
+  tag: string;
   children?: CreateNestedElementOptions[];
 };
 
-export const createNestedElement = (
-  tag: string,
-  options: CreateNestedElementOptions = {},
-) => {
-  const element = createElement(tag, options);
-  for (const child of options.children || []) {
-    createNestedElement(tag, { ...child, parent: element });
+export const createNestedElement = (options: CreateNestedElementOptions) => {
+  const { tag, children, ...rest } = options;
+  const element = createElement(tag, rest);
+  for (const child of children || []) {
+    createNestedElement({ ...child, parent: element });
   }
   return element;
 };
