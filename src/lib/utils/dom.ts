@@ -58,3 +58,45 @@ export const getMeta = (query: { name?: string; property?: string }) => {
 
   return element.getAttribute("content");
 };
+
+export type CreateElementOptions = {
+  textContent?: string;
+  classList?: string[];
+  attributes?: Record<string, string>;
+  parent?: Element;
+};
+
+export const createElement = (
+  tag: string,
+  options: CreateElementOptions = {},
+) => {
+  const element = document.createElement(tag);
+  for (const className of options.classList || []) {
+    element.classList.add(className);
+  }
+  for (const [key, value] of Object.entries(options.attributes || {})) {
+    element.setAttribute(key, value);
+  }
+  if (options.textContent) {
+    element.textContent = options.textContent;
+  }
+  if (options.parent) {
+    options.parent.appendChild(element);
+  }
+  return element;
+};
+
+export type CreateNestedElementOptions = CreateElementOptions & {
+  children?: CreateNestedElementOptions[];
+};
+
+export const createNestedElement = (
+  tag: string,
+  options: CreateNestedElementOptions = {},
+) => {
+  const element = createElement(tag, options);
+  for (const child of options.children || []) {
+    createNestedElement(tag, { ...child, parent: element });
+  }
+  return element;
+};

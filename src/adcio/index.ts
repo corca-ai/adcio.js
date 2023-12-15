@@ -21,4 +21,10 @@ export const frontApi = {
 };
 
 // utils
-export { waitForDOM, waitForElement, getMeta } from "lib/utils";
+export {
+  waitForDOM,
+  waitForElement,
+  getMeta,
+  createElement,
+  createNestedElement,
+} from "lib/utils";
