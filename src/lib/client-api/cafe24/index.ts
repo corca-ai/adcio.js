@@ -1,11 +1,11 @@
-import { getMeta } from "adcio";
+import { getMeta } from "lib/utils";
 import { ICAFE24, ICAFE24API } from "./cafe24.interface";
-import { Cart, Customer, FrontAPI, Order } from "../front-api.interface";
+import { Cart, Customer, ClientAPI, Order } from "../client-api.interface";
 
 const CORCA_CAFE24_CLIENT_ID = "8HE5BizGD9agkHIObMfXRF";
 const CORCA_CAFE24_API_VERSION = "2023-06-01";
 
-export class Cafe24API implements FrontAPI {
+export class Cafe24API implements ClientAPI {
   private authorized: boolean;
   private api: ICAFE24API;
   private data: ICAFE24;

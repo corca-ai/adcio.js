@@ -1,6 +1,6 @@
 import { AdcioAnalytics } from "lib/analytics/analytics";
+import { ClientAPI } from "lib/client-api/client-api.interface";
 import { AdcioCore } from "lib/core";
-import { FrontAPI } from "lib/front-api/front-api.interface";
 import { AdcioImpressionObserver } from "lib/impression-observer/impression-observer";
 import { AdcioPlacement } from "lib/placement/placement";
 import { CartsStorage } from "lib/storage/tracker-storage";
@@ -86,23 +86,23 @@ export class Adcio {
     return this.adcioPlacement.createSuggestion(params);
   }
 
-  public async collectLogs(frontApi: FrontAPI) {
-    await frontApi.init();
+  public async collectLogs(clientApi: ClientAPI) {
+    await clientApi.init();
 
     return Promise.allSettled([
-      ...(await this.handleProduct(frontApi)),
-      ...(await this.handleCarts(frontApi)),
-      ...(await this.handleOrder(frontApi)),
+      ...(await this.handleProduct(clientApi)),
+      ...(await this.handleCarts(clientApi)),
+      ...(await this.handleOrder(clientApi)),
     ]);
   }
 
-  private async handleProduct(frontApi: FrontAPI): Promise<Promise<void>[]> {
-    const product = await frontApi.getProduct();
+  private async handleProduct(clientApi: ClientAPI): Promise<Promise<void>[]> {
+    const product = await clientApi.getProduct();
     return [this.onPageView({ productIdOnStore: product?.idOnStore })];
   }
 
-  private async handleCarts(frontApi: FrontAPI): Promise<Promise<void>[]> {
-    const carts = await frontApi.getCarts();
+  private async handleCarts(clientApi: ClientAPI): Promise<Promise<void>[]> {
+    const carts = await clientApi.getCarts();
     if (!carts) {
       return [];
     }
@@ -128,8 +128,8 @@ export class Adcio {
     );
   }
 
-  private async handleOrder(frontApi: FrontAPI): Promise<Promise<void>[]> {
-    const order = await frontApi.getOrder();
+  private async handleOrder(clientApi: ClientAPI): Promise<Promise<void>[]> {
+    const order = await clientApi.getOrder();
     if (!order) {
       return [];
     }

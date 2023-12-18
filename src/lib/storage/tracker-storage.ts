@@ -1,4 +1,4 @@
-import { Cart } from "../front-api/front-api.interface";
+import { Cart } from "../client-api/client-api.interface";
 import { CartsStorageParams, Storage } from "../storage/storage.interface";
 
 export class CartsStorage implements Storage<Cart[]> {

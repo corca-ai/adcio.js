@@ -12,10 +12,10 @@ export type {
 } from "./adcio.interface";
 
 // FrontAPI
-export type { FrontAPI } from "lib/front-api";
-export { Cafe24API } from "lib/front-api";
+export type { ClientAPI } from "lib/client-api";
+export { Cafe24API } from "lib/client-api";
 
-import { Cafe24API } from "lib/front-api";
+import { Cafe24API } from "lib/client-api";
 export const frontApi = {
   cafe24: new Cafe24API(),
 };

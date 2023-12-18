@@ -32,7 +32,7 @@ type Nullable<T> = T | null;
 type Awaitable<T> = Promise<T> | T;
 type NullableAwaitable<T> = Awaitable<Nullable<T>>;
 
-export interface FrontAPI {
+export interface ClientAPI {
   init(): Awaitable<void>;
   getCustomer(): NullableAwaitable<Customer>;
   getProduct(): NullableAwaitable<Product>;
