@@ -13,11 +13,11 @@ export class CartsStorage implements Storage<Cart[]> {
 
   getOrSet(): Cart[] {
     try {
-      const data = JSON.parse(localStorage.getItem(this.key) || "{}");
-      if (!data) {
+      const data = JSON.parse(localStorage.getItem(this.key) || "null");
+      if (!data || !Array.isArray(data.carts)) {
         throw new Error("Invalid data");
       }
-      this.carts = data.carts || [];
+      this.carts = data.carts;
     } catch (e) {
       console.warn("Failed to load adcio tracker storage: ", e);
       this.carts = [];

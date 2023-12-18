@@ -16,7 +16,7 @@ export type { ClientAPI } from "lib/client-api";
 export { Cafe24API } from "lib/client-api";
 
 import { Cafe24API } from "lib/client-api";
-export const frontApi = {
+export const clientApi = {
   cafe24: new Cafe24API(),
 };
 
