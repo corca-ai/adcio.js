@@ -27,7 +27,7 @@ export class AdcioPlacement {
       throw new APIError(error.response?.status, error.response.data.message);
     }
 
-    switch (error.response.data.message) {
+    switch (Number(error.response.data.message)) {
       case ERROR_CODE.SUGGESTION.PLACEMENT_NOT_FOUND:
         throw new APIError(
           error.response?.status,
