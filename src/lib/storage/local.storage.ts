@@ -1,6 +1,6 @@
 import { LocalStorageParams, Storage } from "./storage.interface";
 
-export class LocalStorage implements Storage {
+export class LocalStorage implements Storage<string> {
   private key: string = "";
 
   constructor(config: LocalStorageParams) {
