@@ -1387,6 +1387,19 @@ export interface Creative {
 /**
  * 
  * @export
+ * @interface FetchActivePlacementsResponseDto
+ */
+export interface FetchActivePlacementsResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchActivePlacementsResponseDto
+     */
+    'id': string;
+}
+/**
+ * 
+ * @export
  * @interface FetchBannerResponseDto
  */
 export interface FetchBannerResponseDto {
@@ -4166,6 +4179,121 @@ export class BannerApi extends BaseAPI {
      */
     public bannerControllerUpdate(id: string, updateBannerDto: UpdateBannerDto, options?: AxiosRequestConfig) {
         return BannerApiFp(this.configuration).bannerControllerUpdate(id, updateBannerDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PageApi - axios parameter creator
+ * @export
+ */
+export const PageApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Fetch active placements of the page.
+         * @summary 
+         * @param {string} name 
+         * @param {string} clientId The client ID of the placement owner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pageControllerFetchActivePlacements: async (name: string, clientId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pageControllerFetchActivePlacements', 'name', name)
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('pageControllerFetchActivePlacements', 'clientId', clientId)
+            const localVarPath = `/pages/{name}/placements`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (clientId !== undefined) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PageApi - functional programming interface
+ * @export
+ */
+export const PageApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PageApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Fetch active placements of the page.
+         * @summary 
+         * @param {string} name 
+         * @param {string} clientId The client ID of the placement owner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pageControllerFetchActivePlacements(name: string, clientId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchActivePlacementsResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pageControllerFetchActivePlacements(name, clientId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PageApi - factory interface
+ * @export
+ */
+export const PageApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PageApiFp(configuration)
+    return {
+        /**
+         * Fetch active placements of the page.
+         * @summary 
+         * @param {string} name 
+         * @param {string} clientId The client ID of the placement owner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pageControllerFetchActivePlacements(name: string, clientId: string, options?: any): AxiosPromise<Array<FetchActivePlacementsResponseDto>> {
+            return localVarFp.pageControllerFetchActivePlacements(name, clientId, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PageApi - object-oriented interface
+ * @export
+ * @class PageApi
+ * @extends {BaseAPI}
+ */
+export class PageApi extends BaseAPI {
+    /**
+     * Fetch active placements of the page.
+     * @summary 
+     * @param {string} name 
+     * @param {string} clientId The client ID of the placement owner.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PageApi
+     */
+    public pageControllerFetchActivePlacements(name: string, clientId: string, options?: AxiosRequestConfig) {
+        return PageApiFp(this.configuration).pageControllerFetchActivePlacements(name, clientId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -11,7 +11,7 @@ import { AdcioCoreParams } from "./core.interface";
 
 export class AdcioCore {
   private clientId: StoreId;
-  private sessionStorage: Storage;
+  private sessionStorage: Storage<string>;
   private deviceId: DeviceId;
   private customerId?: CustomerId;
 
