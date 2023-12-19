@@ -1,6 +1,6 @@
 {
   "name": "adcio.js",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "dist/src/index.js",
   "repository": "https://github.com/corca-ai/adcio.js",
   "author": "Corca <contact@corca.ai>",
@@ -19,6 +19,7 @@
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-prettier": "^5.0.1",
     "jsdom": "^23.0.1",
+    "msw": "^2.0.10",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "prettier": "^3.0.3",
     "terser-webpack-plugin": "^5.3.9",
@@ -31,8 +32,7 @@
     "vite-tsconfig-paths": "^4.2.1",
     "vitest": "^0.33.0",
     "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4",
-    "msw": "^2.0.10"
+    "webpack-cli": "^5.1.4"
   },
   "files": [
     "dist/**/*",
