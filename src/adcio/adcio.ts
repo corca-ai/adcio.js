@@ -98,7 +98,10 @@ export class Adcio {
 
   private async handleProduct(clientApi: ClientAPI): Promise<Promise<void>[]> {
     const product = await clientApi.getProduct();
-    return [this.onPageView({ productIdOnStore: product?.idOnStore })];
+    if (!product?.idOnStore) {
+      return [];
+    }
+    return [this.onPageView({ productIdOnStore: product.idOnStore })];
   }
 
   private async handleCarts(clientApi: ClientAPI): Promise<Promise<void>[]> {
