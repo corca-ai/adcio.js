@@ -921,6 +921,12 @@ export interface ConnectProductsToPlacementResponseDto {
      * @type {string}
      * @memberof ConnectProductsToPlacementResponseDto
      */
+    'bannerPlacementType': ConnectProductsToPlacementResponseDtoBannerPlacementTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
     'supportEnvironment': ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum;
     /**
      * 
@@ -1032,6 +1038,12 @@ export const ConnectProductsToPlacementResponseDtoSuggestionTypeEnum = {
 } as const;
 
 export type ConnectProductsToPlacementResponseDtoSuggestionTypeEnum = typeof ConnectProductsToPlacementResponseDtoSuggestionTypeEnum[keyof typeof ConnectProductsToPlacementResponseDtoSuggestionTypeEnum];
+export const ConnectProductsToPlacementResponseDtoBannerPlacementTypeEnum = {
+    Static: 'STATIC',
+    Slide: 'SLIDE'
+} as const;
+
+export type ConnectProductsToPlacementResponseDtoBannerPlacementTypeEnum = typeof ConnectProductsToPlacementResponseDtoBannerPlacementTypeEnum[keyof typeof ConnectProductsToPlacementResponseDtoBannerPlacementTypeEnum];
 export const ConnectProductsToPlacementResponseDtoSupportEnvironmentEnum = {
     Web: 'WEB',
     WebMobile: 'WEB_MOBILE',
@@ -1178,6 +1190,12 @@ export interface CreatePlacementDto {
      * @type {string}
      * @memberof CreatePlacementDto
      */
+    'bannerPlacementType'?: CreatePlacementDtoBannerPlacementTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePlacementDto
+     */
     'supportEnvironment': CreatePlacementDtoSupportEnvironmentEnum;
     /**
      * 
@@ -1235,6 +1253,12 @@ export const CreatePlacementDtoSuggestionTypeEnum = {
 } as const;
 
 export type CreatePlacementDtoSuggestionTypeEnum = typeof CreatePlacementDtoSuggestionTypeEnum[keyof typeof CreatePlacementDtoSuggestionTypeEnum];
+export const CreatePlacementDtoBannerPlacementTypeEnum = {
+    Static: 'STATIC',
+    Slide: 'SLIDE'
+} as const;
+
+export type CreatePlacementDtoBannerPlacementTypeEnum = typeof CreatePlacementDtoBannerPlacementTypeEnum[keyof typeof CreatePlacementDtoBannerPlacementTypeEnum];
 export const CreatePlacementDtoSupportEnvironmentEnum = {
     Web: 'WEB',
     WebMobile: 'WEB_MOBILE',
@@ -1714,6 +1738,12 @@ export interface FetchManyPlacementsResponseDto {
      * @type {string}
      * @memberof FetchManyPlacementsResponseDto
      */
+    'bannerPlacementType': FetchManyPlacementsResponseDtoBannerPlacementTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManyPlacementsResponseDto
+     */
     'supportEnvironment': FetchManyPlacementsResponseDtoSupportEnvironmentEnum;
     /**
      * 
@@ -1819,6 +1849,12 @@ export const FetchManyPlacementsResponseDtoSuggestionTypeEnum = {
 } as const;
 
 export type FetchManyPlacementsResponseDtoSuggestionTypeEnum = typeof FetchManyPlacementsResponseDtoSuggestionTypeEnum[keyof typeof FetchManyPlacementsResponseDtoSuggestionTypeEnum];
+export const FetchManyPlacementsResponseDtoBannerPlacementTypeEnum = {
+    Static: 'STATIC',
+    Slide: 'SLIDE'
+} as const;
+
+export type FetchManyPlacementsResponseDtoBannerPlacementTypeEnum = typeof FetchManyPlacementsResponseDtoBannerPlacementTypeEnum[keyof typeof FetchManyPlacementsResponseDtoBannerPlacementTypeEnum];
 export const FetchManyPlacementsResponseDtoSupportEnvironmentEnum = {
     Web: 'WEB',
     WebMobile: 'WEB_MOBILE',
@@ -1916,6 +1952,12 @@ export interface FetchPlacementResponseDto {
      * @memberof FetchPlacementResponseDto
      */
     'suggestionType': FetchPlacementResponseDtoSuggestionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchPlacementResponseDto
+     */
+    'bannerPlacementType': FetchPlacementResponseDtoBannerPlacementTypeEnum;
     /**
      * 
      * @type {string}
@@ -2023,19 +2065,19 @@ export interface FetchPlacementResponseDto {
      * @type {Array<ProductWithSeller>}
      * @memberof FetchPlacementResponseDto
      */
-    'products': Array<ProductWithSeller>;
+    'products'?: Array<ProductWithSeller>;
     /**
      * 
      * @type {Array<BannerWithCreative>}
      * @memberof FetchPlacementResponseDto
      */
-    'banners': Array<BannerWithCreative>;
+    'banners'?: Array<BannerWithCreative>;
     /**
      * 
      * @type {Array<CampaignWithClientAndAudience>}
      * @memberof FetchPlacementResponseDto
      */
-    'campaigns': Array<CampaignWithClientAndAudience>;
+    'campaigns'?: Array<CampaignWithClientAndAudience>;
 }
 
 export const FetchPlacementResponseDtoTypeEnum = {
@@ -2050,6 +2092,12 @@ export const FetchPlacementResponseDtoSuggestionTypeEnum = {
 } as const;
 
 export type FetchPlacementResponseDtoSuggestionTypeEnum = typeof FetchPlacementResponseDtoSuggestionTypeEnum[keyof typeof FetchPlacementResponseDtoSuggestionTypeEnum];
+export const FetchPlacementResponseDtoBannerPlacementTypeEnum = {
+    Static: 'STATIC',
+    Slide: 'SLIDE'
+} as const;
+
+export type FetchPlacementResponseDtoBannerPlacementTypeEnum = typeof FetchPlacementResponseDtoBannerPlacementTypeEnum[keyof typeof FetchPlacementResponseDtoBannerPlacementTypeEnum];
 export const FetchPlacementResponseDtoSupportEnvironmentEnum = {
     Web: 'WEB',
     WebMobile: 'WEB_MOBILE',
@@ -2399,6 +2447,12 @@ export interface Placement {
      * @type {string}
      * @memberof Placement
      */
+    'bannerPlacementType': PlacementBannerPlacementTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Placement
+     */
     'supportEnvironment': PlacementSupportEnvironmentEnum;
     /**
      * 
@@ -2504,6 +2558,12 @@ export const PlacementSuggestionTypeEnum = {
 } as const;
 
 export type PlacementSuggestionTypeEnum = typeof PlacementSuggestionTypeEnum[keyof typeof PlacementSuggestionTypeEnum];
+export const PlacementBannerPlacementTypeEnum = {
+    Static: 'STATIC',
+    Slide: 'SLIDE'
+} as const;
+
+export type PlacementBannerPlacementTypeEnum = typeof PlacementBannerPlacementTypeEnum[keyof typeof PlacementBannerPlacementTypeEnum];
 export const PlacementSupportEnvironmentEnum = {
     Web: 'WEB',
     WebMobile: 'WEB_MOBILE',
@@ -2949,6 +3009,12 @@ export interface SuggestionRequestDto {
      * @memberof SuggestionRequestDto
      */
     'area'?: string;
+    /**
+     * The category id on store for filtering banners.
+     * @type {string}
+     * @memberof SuggestionRequestDto
+     */
+    'categoryIdOnStore'?: string;
 }
 
 export const SuggestionRequestDtoGenderEnum = {
@@ -3013,6 +3079,12 @@ export interface SuggestionResponsePlacementType {
      * @memberof SuggestionResponsePlacementType
      */
     'suggestionType': SuggestionResponsePlacementTypeSuggestionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'bannerPlacementType': SuggestionResponsePlacementTypeBannerPlacementTypeEnum;
     /**
      * 
      * @type {string}
@@ -3129,6 +3201,12 @@ export const SuggestionResponsePlacementTypeSuggestionTypeEnum = {
 } as const;
 
 export type SuggestionResponsePlacementTypeSuggestionTypeEnum = typeof SuggestionResponsePlacementTypeSuggestionTypeEnum[keyof typeof SuggestionResponsePlacementTypeSuggestionTypeEnum];
+export const SuggestionResponsePlacementTypeBannerPlacementTypeEnum = {
+    Static: 'STATIC',
+    Slide: 'SLIDE'
+} as const;
+
+export type SuggestionResponsePlacementTypeBannerPlacementTypeEnum = typeof SuggestionResponsePlacementTypeBannerPlacementTypeEnum[keyof typeof SuggestionResponsePlacementTypeBannerPlacementTypeEnum];
 export const SuggestionResponsePlacementTypeSupportEnvironmentEnum = {
     Web: 'WEB',
     WebMobile: 'WEB_MOBILE',
@@ -3304,6 +3382,12 @@ export interface UpdatePlacementResponseDto {
      * @type {string}
      * @memberof UpdatePlacementResponseDto
      */
+    'bannerPlacementType': UpdatePlacementResponseDtoBannerPlacementTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePlacementResponseDto
+     */
     'supportEnvironment': UpdatePlacementResponseDtoSupportEnvironmentEnum;
     /**
      * 
@@ -3421,6 +3505,12 @@ export const UpdatePlacementResponseDtoSuggestionTypeEnum = {
 } as const;
 
 export type UpdatePlacementResponseDtoSuggestionTypeEnum = typeof UpdatePlacementResponseDtoSuggestionTypeEnum[keyof typeof UpdatePlacementResponseDtoSuggestionTypeEnum];
+export const UpdatePlacementResponseDtoBannerPlacementTypeEnum = {
+    Static: 'STATIC',
+    Slide: 'SLIDE'
+} as const;
+
+export type UpdatePlacementResponseDtoBannerPlacementTypeEnum = typeof UpdatePlacementResponseDtoBannerPlacementTypeEnum[keyof typeof UpdatePlacementResponseDtoBannerPlacementTypeEnum];
 export const UpdatePlacementResponseDtoSupportEnvironmentEnum = {
     Web: 'WEB',
     WebMobile: 'WEB_MOBILE',
@@ -3822,6 +3912,7 @@ export const BannerApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {boolean} [activated] 
          * @param {string} [name] 
          * @param {Array<string>} [placementIds] 
+         * @param {'video' | 'image'} [type] 
          * @param {string} [startsAt] 
          * @param {string} [endsAt] 
          * @param {number} [limit] 
@@ -3829,7 +3920,7 @@ export const BannerApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bannerControllerFetchMany: async (orderBy?: Array<string>, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, activated?: boolean, name?: string, placementIds?: Array<string>, startsAt?: string, endsAt?: string, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bannerControllerFetchMany: async (orderBy?: Array<string>, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, activated?: boolean, name?: string, placementIds?: Array<string>, type?: 'video' | 'image', startsAt?: string, endsAt?: string, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/banners`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3863,6 +3954,10 @@ export const BannerApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (placementIds) {
                 localVarQueryParameter['placementIds'] = placementIds;
+            }
+
+            if (type !== undefined) {
+                localVarQueryParameter['type'] = type;
             }
 
             if (startsAt !== undefined) {
@@ -4011,6 +4106,7 @@ export const BannerApiFp = function(configuration?: Configuration) {
          * @param {boolean} [activated] 
          * @param {string} [name] 
          * @param {Array<string>} [placementIds] 
+         * @param {'video' | 'image'} [type] 
          * @param {string} [startsAt] 
          * @param {string} [endsAt] 
          * @param {number} [limit] 
@@ -4018,8 +4114,8 @@ export const BannerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bannerControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, activated?: boolean, name?: string, placementIds?: Array<string>, startsAt?: string, endsAt?: string, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BannerControllerFetchMany200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bannerControllerFetchMany(orderBy, select, activated, name, placementIds, startsAt, endsAt, limit, offset, options);
+        async bannerControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, activated?: boolean, name?: string, placementIds?: Array<string>, type?: 'video' | 'image', startsAt?: string, endsAt?: string, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BannerControllerFetchMany200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bannerControllerFetchMany(orderBy, select, activated, name, placementIds, type, startsAt, endsAt, limit, offset, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4078,6 +4174,7 @@ export const BannerApiFactory = function (configuration?: Configuration, basePat
          * @param {boolean} [activated] 
          * @param {string} [name] 
          * @param {Array<string>} [placementIds] 
+         * @param {'video' | 'image'} [type] 
          * @param {string} [startsAt] 
          * @param {string} [endsAt] 
          * @param {number} [limit] 
@@ -4085,8 +4182,8 @@ export const BannerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bannerControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, activated?: boolean, name?: string, placementIds?: Array<string>, startsAt?: string, endsAt?: string, limit?: number, offset?: number, options?: any): AxiosPromise<BannerControllerFetchMany200Response> {
-            return localVarFp.bannerControllerFetchMany(orderBy, select, activated, name, placementIds, startsAt, endsAt, limit, offset, options).then((request) => request(axios, basePath));
+        bannerControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, activated?: boolean, name?: string, placementIds?: Array<string>, type?: 'video' | 'image', startsAt?: string, endsAt?: string, limit?: number, offset?: number, options?: any): AxiosPromise<BannerControllerFetchMany200Response> {
+            return localVarFp.bannerControllerFetchMany(orderBy, select, activated, name, placementIds, type, startsAt, endsAt, limit, offset, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4146,6 +4243,7 @@ export class BannerApi extends BaseAPI {
      * @param {boolean} [activated] 
      * @param {string} [name] 
      * @param {Array<string>} [placementIds] 
+     * @param {'video' | 'image'} [type] 
      * @param {string} [startsAt] 
      * @param {string} [endsAt] 
      * @param {number} [limit] 
@@ -4154,8 +4252,8 @@ export class BannerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BannerApi
      */
-    public bannerControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, activated?: boolean, name?: string, placementIds?: Array<string>, startsAt?: string, endsAt?: string, limit?: number, offset?: number, options?: AxiosRequestConfig) {
-        return BannerApiFp(this.configuration).bannerControllerFetchMany(orderBy, select, activated, name, placementIds, startsAt, endsAt, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    public bannerControllerFetchMany(orderBy?: Array<string>, select?: Array<'id' | 'name' | 'imageUrl' | 'url' | 'data' | 'activated' | 'startsAt' | 'endsAt' | 'createdAt'>, activated?: boolean, name?: string, placementIds?: Array<string>, type?: 'video' | 'image', startsAt?: string, endsAt?: string, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return BannerApiFp(this.configuration).bannerControllerFetchMany(orderBy, select, activated, name, placementIds, type, startsAt, endsAt, limit, offset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

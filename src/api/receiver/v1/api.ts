@@ -208,29 +208,17 @@ export interface TrackPageViewRequestDto {
      */
     'storeId': string;
     /**
-     * Product id on store. An identifier that customer can view on a product page
+     * Product id on store. Only specified if the customer is viewing a product page
      * @type {string}
      * @memberof TrackPageViewRequestDto
      */
     'productIdOnStore'?: string;
     /**
-     * Path of the page.
+     * Category id on store. Only specified if the customer is viewing a category page
      * @type {string}
      * @memberof TrackPageViewRequestDto
      */
-    'path': string;
-    /**
-     * Title of the page.
-     * @type {string}
-     * @memberof TrackPageViewRequestDto
-     */
-    'title'?: string;
-    /**
-     * Referrer URL.
-     * @type {string}
-     * @memberof TrackPageViewRequestDto
-     */
-    'referrer'?: string;
+    'categoryIdOnStore'?: string;
 }
 /**
  * 
