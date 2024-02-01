@@ -1,4 +1,4 @@
-import { getMeta } from "lib/utils";
+import { getMeta, getQuery } from "lib/utils";
 import { ICAFE24, ICAFE24API } from "./cafe24.interface";
 import { Cart, Customer, ClientAPI, Order } from "../client-api.interface";
 
@@ -58,6 +58,14 @@ export class Cafe24API implements ClientAPI {
 
   getProduct() {
     const idOnStore = getMeta({ property: "product:productId" });
+    if (!idOnStore) {
+      return null;
+    }
+    return { idOnStore };
+  }
+
+  getCategory() {
+    const idOnStore = getQuery("cate_no");
     if (!idOnStore) {
       return null;
     }
