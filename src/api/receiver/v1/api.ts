@@ -214,7 +214,7 @@ export interface TrackPageViewRequestDto {
      */
     'productIdOnStore'?: string;
     /**
-     * Category id on store. Only specified if the customer is viewing a category page
+     * Category id on store. Only specified if the customer is viewing a category page or a product page
      * @type {string}
      * @memberof TrackPageViewRequestDto
      */
