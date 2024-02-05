@@ -42,9 +42,7 @@ export const viewField: ReceiverAPIField<TrackPageViewRequestDto> = [
   { name: "customerId", isRequired: false },
   { name: "storeId", isRequired: true },
   { name: "productIdOnStore", isRequired: false },
-  { name: "path", isRequired: true },
-  { name: "title", isRequired: false },
-  { name: "referrer", isRequired: false },
+  { name: "categoryIdOnStore", isRequired: false },
 ];
 
 export const addToCartField: ReceiverAPIField<TrackAddToCartRequestDto> = [
