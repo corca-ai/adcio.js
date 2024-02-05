@@ -45,7 +45,7 @@ const MOCK_PRODUCT_SUGGESTED = {
     },
   ],
 };
-const MOCK_SELECTED_GRID_INDEXES = [0, 1];
+const MOCK_SELECTED_GRID_INDEXES = [1];
 
 console.log("sdk 브라우저 테스트!🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸");
 const adcioInstance = new adcio.Adcio({
@@ -71,9 +71,10 @@ const createAllSuggestions = (placements, customer) => {
 
 /**
  * @param {SuggestionDto['product']} product
+ * @param {number} index
  * @returns {HTMLElement}
  */
-const productToElement = (product) => {
+const productToElement = (product, index) => {
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"], //TODO: fix
@@ -124,7 +125,7 @@ const productToElement = (product) => {
               {
                 tag: "span",
                 classList: ["rankBadge"],
-                textContent: "1",
+                textContent: index + 1,
               },
             ],
           },
@@ -546,7 +547,7 @@ const injectProductSuggestions = async (suggestedData, categoryId) => {
   const { suggestions } = suggestedData;
 
   const elements = suggestions.map((suggestion, index) => {
-    const element = productToElement(suggestion.product);
+    const element = productToElement(suggestion.product, index); // TODO: fix index
     element.addEventListener("click", () =>
       adcioInstance.onClick(suggestion.logOptions),
     );
@@ -554,7 +555,7 @@ const injectProductSuggestions = async (suggestedData, categoryId) => {
       adcioInstance.onImpression(suggestion.logOptions),
     );
 
-    // // TODO: product 타입이면
+    // // TODO: observe impression for product 질문! adcio 추천 상품인 경우만 observe 하는 것일까?
     // if (placement.type === "BANNER") {
     //   adcioInstance.observeImpression({
     //     element,
