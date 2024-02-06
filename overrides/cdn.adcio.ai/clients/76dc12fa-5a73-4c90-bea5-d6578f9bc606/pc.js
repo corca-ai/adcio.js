@@ -49,6 +49,17 @@ const MOCK_PRODUCT_SUGGESTED = {
 const MOCK_SELECTED_GRID_INDEXES = [1];
 
 /**
+ * @param {Array<FetchActivePlacementsResponseDto>} placements
+ * @param {CustomerWithId} customer
+ * @returns {Promise<SuggestionResponseDto[]>}
+ */
+const mockCreateSuggestion = async (placements, customer) => {
+  return new Promise((resolve) =>
+    setTimeout(() => resolve(MOCK_PRODUCT_SUGGESTED), 100),
+  );
+};
+
+/**
  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
  */
 
@@ -637,6 +648,7 @@ const run = async () => {
     };
     const mutationCallback = async (mutationsList, observer) => {
       observer.disconnect();
+
       if (mutationsList.find((m) => m.type === "childList")) {
         await injectProductSuggestions(suggested.product, "클릭된 카테고리 id");
       }
