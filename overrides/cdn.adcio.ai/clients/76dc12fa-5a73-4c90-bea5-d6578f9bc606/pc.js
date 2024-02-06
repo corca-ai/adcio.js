@@ -45,16 +45,21 @@ const MOCK_PRODUCT_SUGGESTED = {
     },
   ],
 };
+
 const MOCK_SELECTED_GRID_INDEXES = [1];
 
-console.log("sdk 브라우저 테스트!🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸");
+/**
+ * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
+ */
+
+console.log("sdk 브라우저 테스트!");
 const adcioInstance = new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
 });
 
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
- * @param {Customer} customer
+ * @param {CustomerWithId} customer
  * @returns {Promise<SuggestionResponseDto[]>}
  */
 const createAllSuggestions = (placements, customer) => {
@@ -71,13 +76,12 @@ const createAllSuggestions = (placements, customer) => {
 
 /**
  * @param {SuggestionDto['product']} product
- * @param {number} index
  * @returns {HTMLElement}
  */
-const productToElement = (product, index) => {
+const productToElement = (product) => {
   return adcio.createNestedElement({
     tag: "div",
-    classList: ["common_prd_list", "swiper-slide", "xans-record-"], //TODO: fix
+    classList: ["common_prd_list", "swiper-slide", "xans-record-"],
     attributes: { "vreview-dom-embeded": true },
     children: [
       {
@@ -106,8 +110,7 @@ const productToElement = (product, index) => {
                         classList: ["overimg"],
                         attributes: {
                           src: "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/d55902ba-8d85355a-97d8-4c76-8523-32f3c8b49e8b", // product.creative.mediaUrl, //TODO: fix
-                          // id: "", //TODO
-                          // TODO: add animation???
+                          // id: "", //TODO: 생략가능???
                           alt: product.title,
                         },
                       },
@@ -125,7 +128,6 @@ const productToElement = (product, index) => {
               {
                 tag: "span",
                 classList: ["rankBadge"],
-                textContent: index + 1,
               },
             ],
           },
@@ -161,7 +163,7 @@ const productToElement = (product, index) => {
                       },
                     ],
                   },
-                ], //TODO: fix
+                ],
               },
               {
                 tag: "p",
@@ -453,26 +455,20 @@ const bannerToElement = (banner) => {
  */
 const appendChildForSelected = (elements, selectors) => {
   const wrapper = document.querySelector(selectors);
-
   elements.forEach((e) => wrapper.appendChild(e));
 };
 
 /**
- * @param {Array<HTMLElement>} wrapperElements
+ * @param {NodeListOf<Element>} wrapperElements
  * @param {Array<HTMLElement>} suggestedElement
- * @param {Array<number>} selectedGrids
+ * @param {Array<number>} gridIndexes
  */
-const replaceElementForSelectedGrid = (
-  wrapperElements,
-  suggestedElements,
-  selectedGrids,
-) => {
+const swapGridElements = (wrapperElements, suggestedElements, gridIndexes) => {
   wrapperElements.forEach((element, index) => {
-    if (!selectedGrids.includes(index)) {
+    if (!gridIndexes.includes(index)) {
       //TODO: fix this is tmp solution. Need to be fixed only selected product category placement
       return;
     }
-
     suggestedElements.forEach(
       (suggestedElement) => (element.outerHTML = suggestedElement.outerHTML),
     );
@@ -480,7 +476,7 @@ const replaceElementForSelectedGrid = (
 };
 
 /**
- * @returns {placements : Array<FetchActivePlacementsResponseDto>, customer: Customer}
+ * @returns {placements : Array<FetchActivePlacementsResponseDto>, customer: CustomerWithId}
  */
 const getPlacementsAndCustomer = async () => {
   const pageName = `skin135_${adcio.getMeta({
@@ -503,9 +499,8 @@ const getPlacementsAndCustomer = async () => {
 };
 
 /**
- * @param {SuggestionResponseDto[]} suggestedData
+ * @param {Array<SuggestionResponseDto>} suggestedData
  */
-//REVIEW: 해당 함수 내부에서 배너 상품 분기하지 말고 함수 자체를 분리 필요. 또한 배너는 wait for dom이 필요하지만 상품은 필요없고 이에 대해 유의하여 작업.
 const injectBannerSuggestions = (suggestedData) => {
   const { suggestions } = suggestedData;
 
@@ -543,29 +538,26 @@ const injectBannerSuggestions = (suggestedData) => {
  * @param {string} categoryId // TODO: fix
  */
 //REVIEW: 해당 함수 내부에서 배너 상품 분기하지 말고 함수 자체를 분리 필요. 또한 배너는 wait for dom이 필요하지만 상품은 필요없고 이에 대해 유의하여 작업.
-const injectProductSuggestions = async (suggestedData, categoryId) => {
+const injectProductSuggestions = (suggestedData, categoryId) => {
   const { suggestions } = suggestedData;
 
-  const elements = suggestions.map((suggestion, index) => {
-    const element = productToElement(suggestion.product, index); // TODO: fix index
+  const elements = suggestions.map((suggestion) => {
+    const element = productToElement(suggestion.product);
+
     element.addEventListener("click", () =>
       adcioInstance.onClick(suggestion.logOptions),
     );
     element.addEventListener("impression", () =>
       adcioInstance.onImpression(suggestion.logOptions),
     );
+    adcioInstance.observeImpression({
+      element,
+    });
 
-    // // TODO: observe impression for product 질문! adcio 추천 상품인 경우만 observe 하는 것일까?
-    // if (placement.type === "BANNER") {
-    //   adcioInstance.observeImpression({
-    //     element,
-    //     filter: (e) => e.classList.contains("swiper-slide-active"),
-    //   });
-    // }
     return element;
   });
 
-  replaceElementForSelectedGrid(
+  swapGridElements(
     document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
     elements,
     MOCK_SELECTED_GRID_INDEXES,
@@ -581,14 +573,29 @@ const setCustomPlaceholder = (parentElements, imgSrc) => {
     if (!MOCK_SELECTED_GRID_INDEXES.includes(index)) {
       return;
     }
-    element.querySelectorAll("img").forEach(
-      (imgElement) => (imgElement.src = imgSrc),
-      //"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/c0ec7310-d2fbc70e-7fab-4271-8f9e-e7e536bd3052"), // TODO: fix with 성지 님
-    );
+    element
+      .querySelectorAll("img")
+      .forEach((imgElement) => (imgElement.src = imgSrc));
   });
 };
 
-//REVEIW: stage가 더 잘보였으면 좋겠다. (wait이 어디서 일어나는지 또한 알 수 없음) 기존 코드에서 배너는 waitfordom이 필요하고, 상품은 load 된 이후에 추가적인 fetch가 안 일어남으로 이에 대해 유의하여 작업.
+/**
+ * @param {MutationCallback} mutationCallback
+ * @param {Node} targetElement
+ * @param {MutationObserverInit | undefined} [observeOptions]
+ */
+const observeUntilUnload = (
+  mutationCallback,
+  targetElement,
+  observeOptions,
+) => {
+  const observer = new MutationObserver(mutationCallback);
+  observer.observe(targetElement, observeOptions);
+  window.addEventListener("beforeunload", () => {
+    observer.disconnect();
+  });
+};
+
 const run = async () => {
   await adcio.waitForElement(".prd_basic");
   setCustomPlaceholder(
@@ -602,7 +609,6 @@ const run = async () => {
   }
 
   const suggestionsPromises = await createAllSuggestions(placements, customer);
-
   const MOCK_SUGGEST_PROMISES = [
     ...suggestionsPromises,
     { value: { ...MOCK_PRODUCT_SUGGESTED }, status: "fulfilled" },
@@ -610,36 +616,35 @@ const run = async () => {
 
   const suggested = { banner: null, product: null };
   MOCK_SUGGEST_PROMISES.forEach(
-    //Fix: fix MOCK_SUGGEST_PROMISES to suggestionsPromises
+    //TODO: fix MOCK_SUGGEST_PROMISES to suggestionsPromises
     (p) =>
       p.status === "fulfilled" &&
       Object.assign(suggested, {
-        [p.value.placement.type.toLowerCase()]: { ...p.value },
+        [p.value.placement.type?.toLowerCase()]: { ...p.value },
       }),
   );
+
+  if (suggested.banner) {
+    adcio.waitForDOM().then(() => injectBannerSuggestions(suggested.banner));
+  }
 
   if (suggested.product) {
     injectProductSuggestions(suggested.product, "prdList01");
 
+    // Docs: Observe to inject product grid elements just after new elements reloaded for BEST Category clicked.
     const targetElement = document.querySelector("#monthly-best");
-
-    const observerConfig = {
+    const observeOptions = {
       childList: true,
-      // subtree: true,
     };
-
-    const observer = new MutationObserver(async (mutationsList) => {
+    const mutationCallback = async (mutationsList, observer) => {
       observer.disconnect();
       if (mutationsList.find((m) => m.type === "childList")) {
-        await injectProductSuggestions(suggested.product, ""); // "TODO: 최적화 및 리팩토링 필요!"
+        await injectProductSuggestions(suggested.product, "클릭된 카테고리 id");
       }
+      observer.observe(targetElement, observeOptions);
+    };
 
-      observer.observe(targetElement, observerConfig);
-    });
-    observer.observe(targetElement, observerConfig);
-  }
-  if (suggested.banner) {
-    adcio.waitForDOM().then(() => injectBannerSuggestions(suggested.banner));
+    observeUntilUnload(mutationCallback, targetElement, observeOptions);
   }
 
   //adcioInstance.collectLogs(adcio.clientApi.cafe24);
