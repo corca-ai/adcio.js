@@ -537,7 +537,6 @@ const injectBannerSuggestions = (suggestedData) => {
  * @param {SuggestionResponseDto[]} suggestedData
  * @param {string} categoryId // TODO: fix
  */
-//REVIEW: 해당 함수 내부에서 배너 상품 분기하지 말고 함수 자체를 분리 필요. 또한 배너는 wait for dom이 필요하지만 상품은 필요없고 이에 대해 유의하여 작업.
 const injectProductSuggestions = (suggestedData, categoryId) => {
   const { suggestions } = suggestedData;
 
