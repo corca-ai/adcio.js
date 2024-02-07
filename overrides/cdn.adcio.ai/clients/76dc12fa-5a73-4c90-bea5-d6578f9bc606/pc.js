@@ -610,7 +610,7 @@ const observeUntilUnload = (
 /**
  * @param {(categorySelected:string)=> void} callback
  */
-const addEventListenerToBestCategoryBtn = (callback) => {
+const addEventToBestCategoryBtn = (callback) => {
   const BEST_CATEGORY_DATA = {
     prdlist01: "전체", // TODO: fix value to category name for server
     prdlist02: "우먼즈",
@@ -627,7 +627,7 @@ const addEventListenerToBestCategoryBtn = (callback) => {
 };
 
 const run = async () => {
-  await adcio.waitForElement(".prd_basic"); // 이 코드가 이 위치에 있는 것이 맞을까요? 만약 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
+  await adcio.waitForElement(".prd_basic"); // 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
   setCustomPlaceholder(
     document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
     "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/c0ec7310-d2fbc70e-7fab-4271-8f9e-e7e536bd3052",
@@ -638,38 +638,36 @@ const run = async () => {
     return;
   }
 
-  const suggestPromiseByType = { BANNER: null, PRODUCT: null };
-  const suggestionsPromises = await createAllSuggestions(placements, customer);
-  suggestionsPromises.forEach((p, index) =>
-    Object.assign(suggestPromiseByType, { [placements[index].type]: p }),
+  const suggestionsPromises = {
+    BANNER: null,
+    PRODUCT: {
+      ...MOCK_PRODUCT_SUGGESTED, // TODO: change to null
+    },
+  };
+  const allPromises = await createAllSuggestions(placements, customer);
+  allPromises.forEach((p, index) =>
+    Object.assign(suggestionsPromises, { [placements[index].type]: p }),
   );
 
-  // TODO: delete this line after api updated
-  suggestPromiseByType.PRODUCT = {
-    ...MOCK_PRODUCT_SUGGESTED,
-  };
-
-  if (suggestPromiseByType.BANNER) {
-    adcio
-      .waitForDOM()
-      .then(() =>
-        suggestPromiseByType.BANNER.then((suggestion) =>
-          injectBannerSuggestions(suggestion),
-        ),
-      );
+  if (suggestionsPromises.BANNER) {
+    await adcio.waitForDOM();
+    const bannerSuggestion = await suggestionsPromises.BANNER;
+    injectBannerSuggestions(bannerSuggestion);
   }
 
-  if (suggestPromiseByType.PRODUCT) {
-    let suggestPromise = await suggestPromiseByType.PRODUCT;
+  if (suggestionsPromises.PRODUCT) {
+    let productSuggestPromise = await suggestionsPromises.PRODUCT;
     let bestCategory = "전체";
 
-    injectProductSuggestions(suggestPromise, "prdList01");
-    addEventListenerToBestCategoryBtn((bestCategoryData) => {
-      suggestPromise = mockCreateProductSuggestion(placements, customer);
+    injectProductSuggestions(productSuggestPromise, "prdList01");
+
+    // Add event listener, fetching product suggestion to best category btn click
+    addEventToBestCategoryBtn((bestCategoryData) => {
+      productSuggestPromise = mockCreateProductSuggestion(placements, customer);
       bestCategory = bestCategoryData;
     });
 
-    // Observe best category list items reload
+    // Observe reload of best category list items element
     const targetElement = document.querySelector("#monthly-best");
     const observeOptions = {
       childList: true,
@@ -684,7 +682,8 @@ const run = async () => {
             .querySelectorAll(".common_prd_list"),
           "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/c0ec7310-d2fbc70e-7fab-4271-8f9e-e7e536bd3052",
         );
-        const productSuggestion = await suggestPromise;
+
+        const productSuggestion = await productSuggestPromise;
         await injectProductSuggestions(productSuggestion, bestCategory);
       }
       observer.observe(targetElement, observeOptions);
