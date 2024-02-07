@@ -46,7 +46,7 @@ const MOCK_PRODUCT_SUGGESTED = {
   ],
 };
 
-const MOCK_SELECTED_GRID_INDEXES = [1];
+const MOCK_SELECTED_GRID_INDEXES = [1, 3, 6];
 
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
@@ -59,14 +59,14 @@ const mockCreateProductSuggestion = async (placements, customer) => {
   );
 };
 
-/**
- * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
- */
-
 console.log("sdk 브라우저 테스트!");
 const adcioInstance = new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
 });
+
+/**
+ * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
+ */
 
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
@@ -87,9 +87,10 @@ const createAllSuggestions = (placements, customer) => {
 
 /**
  * @param {SuggestionDto['product']} product
+ * @param {string} index //TODO: fix typing after api dev
  * @returns {HTMLElement}
  */
-const productToElement = (product) => {
+const productToElement = (product, index = "") => {
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
@@ -139,7 +140,7 @@ const productToElement = (product) => {
               {
                 tag: "span",
                 classList: ["rankBadge"],
-                textContent: "0", //TODO: with api dev
+                textContent: index,
               },
             ],
           },
@@ -553,7 +554,7 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
   const { suggestions } = suggestedData;
 
   const elements = suggestions.map((suggestion) => {
-    const element = productToElement(suggestion.product);
+    const element = productToElement(suggestion.product, "0"); //TODO: fix index
 
     element.addEventListener("click", () =>
       adcioInstance.onClick(suggestion.logOptions),
@@ -630,7 +631,7 @@ const run = async () => {
   await adcio.waitForElement(".prd_basic"); // 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
   setCustomPlaceholder(
     document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-    "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/c0ec7310-d2fbc70e-7fab-4271-8f9e-e7e536bd3052",
+    "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/8d62eacd-582ca3ea-c99e-4853-8e6f-3a0ac1dc417c",
   );
 
   const { placements, customer } = await getPlacementsAndCustomer();
@@ -680,7 +681,7 @@ const run = async () => {
           document
             .querySelector(`.prd_basic`)
             .querySelectorAll(".common_prd_list"),
-          "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/c0ec7310-d2fbc70e-7fab-4271-8f9e-e7e536bd3052",
+          "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/8d62eacd-582ca3ea-c99e-4853-8e6f-3a0ac1dc417c",
         );
 
         const productSuggestion = await productSuggestPromise;
