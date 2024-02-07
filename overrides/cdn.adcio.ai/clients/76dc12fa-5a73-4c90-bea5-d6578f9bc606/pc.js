@@ -639,32 +639,33 @@ const run = async () => {
     return;
   }
 
-  const suggestionsPromises = {
+  const allSuggestions = {
     BANNER: null,
     PRODUCT: {
       ...MOCK_PRODUCT_SUGGESTED, // TODO: change to null
     },
   };
   const allPromises = await createAllSuggestions(placements, customer);
-  allPromises.forEach((p, index) =>
-    Object.assign(suggestionsPromises, { [placements[index].type]: p }),
+  allPromises.forEach(
+    (p) =>
+      p.status === "fulfilled" &&
+      Object.assign(allSuggestions, { [p.value.placement.type]: p.value }),
   );
 
-  if (suggestionsPromises.BANNER) {
+  if (allSuggestions.BANNER) {
     await adcio.waitForDOM();
-    const bannerSuggestion = await suggestionsPromises.BANNER;
-    injectBannerSuggestions(bannerSuggestion);
+    injectBannerSuggestions(allSuggestions.BANNER);
   }
 
-  if (suggestionsPromises.PRODUCT) {
-    let productSuggestPromise = await suggestionsPromises.PRODUCT;
+  if (allSuggestions.PRODUCT) {
+    let productSuggestions = allSuggestions.PRODUCT;
     let bestCategory = "전체";
 
-    injectProductSuggestions(productSuggestPromise, "prdList01");
+    injectProductSuggestions(productSuggestions, bestCategory);
 
     // Add event listener, fetching product suggestion to best category btn click
-    addEventToBestCategoryBtn((bestCategoryData) => {
-      productSuggestPromise = mockCreateProductSuggestion(placements, customer);
+    addEventToBestCategoryBtn(async (bestCategoryData) => {
+      productSuggestions = mockCreateProductSuggestion(placements, customer);
       bestCategory = bestCategoryData;
     });
 
@@ -684,8 +685,8 @@ const run = async () => {
           "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/8d62eacd-582ca3ea-c99e-4853-8e6f-3a0ac1dc417c",
         );
 
-        const productSuggestion = await productSuggestPromise;
-        await injectProductSuggestions(productSuggestion, bestCategory);
+        const suggestion = await productSuggestions;
+        await injectProductSuggestions(suggestion, bestCategory);
       }
       observer.observe(targetElement, observeOptions);
     };
