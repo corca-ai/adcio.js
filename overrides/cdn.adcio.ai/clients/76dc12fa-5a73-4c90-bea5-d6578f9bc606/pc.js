@@ -137,11 +137,11 @@ const productToElement = (product, index = "") => {
                   },
                 ],
               },
-              {
-                tag: "span",
-                classList: ["rankBadge"],
-                textContent: index,
-              },
+              // {
+              //   tag: "span", //TODO: rankBadge 생략 여부에 대해 논의가 진행되고 있습니다. 결론을 해당 코드에 반영해야합니다.
+              //   classList: ["rankBadge"],
+              //   textContent: index,
+              // },
             ],
           },
           {
