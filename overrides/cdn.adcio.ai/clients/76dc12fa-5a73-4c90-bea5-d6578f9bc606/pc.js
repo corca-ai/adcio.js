@@ -53,9 +53,9 @@ const MOCK_SELECTED_GRID_INDEXES = [1];
  * @param {CustomerWithId} customer
  * @returns {Promise<SuggestionResponseDto[]>}
  */
-const mockCreateSuggestion = async (placements, customer) => {
+const mockCreateProductSuggestion = async (placements, customer) => {
   return new Promise((resolve) =>
-    setTimeout(() => resolve(MOCK_PRODUCT_SUGGESTED), 100),
+    setTimeout(() => resolve(MOCK_PRODUCT_SUGGESTED), 7000),
   );
 };
 
@@ -71,7 +71,7 @@ const adcioInstance = new adcio.Adcio({
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
  * @param {CustomerWithId} customer
- * @returns {Promise<SuggestionResponseDto[]>}
+ * @returns {Promise<Array<SuggestionResponseDto>>}
  */
 const createAllSuggestions = (placements, customer) => {
   return Promise.allSettled(
@@ -139,6 +139,7 @@ const productToElement = (product) => {
               {
                 tag: "span",
                 classList: ["rankBadge"],
+                textContent: "0", //TODO: with api dev
               },
             ],
           },
@@ -606,8 +607,27 @@ const observeUntilUnload = (
   });
 };
 
+/**
+ * @param {(categorySelected:string)=> void} callback
+ */
+const addEventListenerToBestCategoryBtn = (callback) => {
+  const BEST_CATEGORY_DATA = {
+    prdlist01: "전체", // TODO: fix value to category name for server
+    prdlist02: "우먼즈",
+    prdlist03: "맨즈",
+    prdlist04: "주니어",
+    prdlist05: "홈트용품&ACC",
+  };
+  Object.keys(BEST_CATEGORY_DATA).forEach((moduleName) => {
+    const element = document.querySelector(`[module-name="${moduleName}"]`);
+    element.addEventListener("click", () =>
+      callback(BEST_CATEGORY_DATA[moduleName]),
+    );
+  });
+};
+
 const run = async () => {
-  await adcio.waitForElement(".prd_basic");
+  await adcio.waitForElement(".prd_basic"); // 이 코드가 이 위치에 있는 것이 맞을까요? 만약 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
   setCustomPlaceholder(
     document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
     "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/c0ec7310-d2fbc70e-7fab-4271-8f9e-e7e536bd3052",
@@ -618,30 +638,38 @@ const run = async () => {
     return;
   }
 
+  const suggestPromiseByType = { BANNER: null, PRODUCT: null };
   const suggestionsPromises = await createAllSuggestions(placements, customer);
-  const MOCK_SUGGEST_PROMISES = [
-    ...suggestionsPromises,
-    { value: { ...MOCK_PRODUCT_SUGGESTED }, status: "fulfilled" },
-  ];
-
-  const suggested = { banner: null, product: null };
-  MOCK_SUGGEST_PROMISES.forEach(
-    //TODO: fix MOCK_SUGGEST_PROMISES to suggestionsPromises
-    (p) =>
-      p.status === "fulfilled" &&
-      Object.assign(suggested, {
-        [p.value.placement.type?.toLowerCase()]: { ...p.value },
-      }),
+  suggestionsPromises.forEach((p, index) =>
+    Object.assign(suggestPromiseByType, { [placements[index].type]: p }),
   );
 
-  if (suggested.banner) {
-    adcio.waitForDOM().then(() => injectBannerSuggestions(suggested.banner));
+  // TODO: delete this line after api updated
+  suggestPromiseByType.PRODUCT = {
+    ...MOCK_PRODUCT_SUGGESTED,
+  };
+
+  if (suggestPromiseByType.BANNER) {
+    adcio
+      .waitForDOM()
+      .then(() =>
+        suggestPromiseByType.BANNER.then((suggestion) =>
+          injectBannerSuggestions(suggestion),
+        ),
+      );
   }
 
-  if (suggested.product) {
-    injectProductSuggestions(suggested.product, "prdList01");
+  if (suggestPromiseByType.PRODUCT) {
+    let suggestPromise = await suggestPromiseByType.PRODUCT;
+    let bestCategory = "전체";
 
-    // Docs: Observe to inject product grid elements just after new elements reloaded for BEST Category clicked.
+    injectProductSuggestions(suggestPromise, "prdList01");
+    addEventListenerToBestCategoryBtn((bestCategoryData) => {
+      suggestPromise = mockCreateProductSuggestion(placements, customer);
+      bestCategory = bestCategoryData;
+    });
+
+    // Observe best category list items reload
     const targetElement = document.querySelector("#monthly-best");
     const observeOptions = {
       childList: true,
@@ -650,7 +678,14 @@ const run = async () => {
       observer.disconnect();
 
       if (mutationsList.find((m) => m.type === "childList")) {
-        await injectProductSuggestions(suggested.product, "클릭된 카테고리 id");
+        setCustomPlaceholder(
+          document
+            .querySelector(`.prd_basic`)
+            .querySelectorAll(".common_prd_list"),
+          "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/c0ec7310-d2fbc70e-7fab-4271-8f9e-e7e536bd3052",
+        );
+        const productSuggestion = await suggestPromise;
+        await injectProductSuggestions(productSuggestion, bestCategory);
       }
       observer.observe(targetElement, observeOptions);
     };
