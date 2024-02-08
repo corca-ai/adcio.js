@@ -59,6 +59,11 @@ export const getMeta = (query: { name?: string; property?: string }) => {
   return element.getAttribute("content");
 };
 
+export const getQuery = (key: string) => {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(key);
+};
+
 export type CreateElementOptions = {
   textContent?: string;
   classList?: string[];
