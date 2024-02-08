@@ -84,6 +84,15 @@ export class Adcio {
   public async collectLogs(clientApi: ClientAPI) {
     await clientApi.init();
 
+    try {
+      const client = await clientApi.getCustomer();
+      if (client) {
+        this.adcioCore.setCustomerId(client.id);
+      }
+    } catch (e) {
+      console.warn("Failed to get customer id: ", e);
+    }
+
     return Promise.allSettled([
       ...(await this.handleView(clientApi)),
       ...(await this.handleCarts(clientApi)),
