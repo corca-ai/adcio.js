@@ -10,7 +10,7 @@ import {
   it,
   vi,
 } from "vitest";
-import { server } from "./mock";
+import { server } from "./mock/node";
 import { SuggestionTestId } from "./mock/constants";
 import { Adcio } from "../adcio";
 

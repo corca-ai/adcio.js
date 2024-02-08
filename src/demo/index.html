@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8" />
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Demo styles -->
+  <style>
+    html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      flex-shrink: 0;
+      height: 100%;
+      position: relative;
+      transition-property: -webkit-transform;
+      transition-property: transform;
+      transition-property: transform,-webkit-transform;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .swiper-slide .link_box {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition-duration: 1.5s;
+      transition-delay: .2s;
+      z-index: 2;
+      padding: 80px 40px;
+      display: block;
+      width: calc(100% - 80px);
+    }
+
+    .swiper-slide .link_box .main_title {
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .swiper-slide .link_box .sub_title {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #fff;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 500px;
+      margin: 20px auto;
+    }
+
+    .swiper::before {
+      left: 0;
+      content: '';
+      position: absolute;
+      width: 33.35%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      top: 0;
+      z-index: 3;
+    }
+
+    .swiper::after {
+      right: 0;
+      content: '';
+      position: absolute;
+      width: 33.35%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      top: 0;
+      z-index: 3;
+    }
+
+    .swiper-pagination {
+      color: white;
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Swiper -->
+  <div>
+    <div #swiperRef="" class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide swiper-slide-prev">
+          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+          <a class="link_box" href="/product/list.html?cate_no=2068">
+            <p class="main_title fc_wht">
+              <span class="fontB">운동·여행, 사계절 만능 아이템
+                <br>안다르 와이드 레깅스 팬츠
+              </span>
+            </p>
+            <p class="sub_title fc_wht">
+              기다리던 NEW 컬러 출시, 지금 바로 만나요.
+            </p>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+          <a class="link_box" href="/product/list.html?cate_no=2068">
+            <p class="main_title fc_wht">
+              <span class="fontB">운동·여행, 사계절 만능 아이템
+                <br>안다르 와이드 레깅스 팬츠
+              </span>
+            </p>
+            <p class="sub_title fc_wht">
+              기다리던 NEW 컬러 출시, 지금 바로 만나요.
+            </p>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+          <a class="link_box" href="/product/list.html?cate_no=2068">
+            <p class="main_title fc_wht">
+              <span class="fontB">운동·여행, 사계절 만능 아이템
+                <br>안다르 와이드 레깅스 팬츠
+              </span>
+            </p>
+            <p class="sub_title fc_wht">
+              기다리던 NEW 컬러 출시, 지금 바로 만나요.
+            </p>
+          </a>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    const swiper = new Swiper(".swiper", {
+      slidesPerView: 3,
+      centeredSlides: true,
+      pagination: {
+        el: ".swiper-pagination",
+        type: "fraction",
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      on: {
+        slideChange: function () {
+          const index_currentSlide = this.realIndex;
+          const currentSlide = this.slides[index_currentSlide];
+          currentSlide.classList.add("swiper-slide-active");
+        },
+      }
+    });
+  </script>
+</body>
+
+</html>
