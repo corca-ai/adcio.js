@@ -46,7 +46,7 @@ const MOCK_PRODUCT_SUGGESTED = {
   ],
 };
 
-const MOCK_SELECTED_GRID_INDEXES = [1, 3, 6];
+const MOCK_SELECTED_GRID_INDEXES = [1, 3, 4, 6];
 
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
@@ -83,6 +83,54 @@ const createAllSuggestions = (placements, customer) => {
         }),
     ),
   );
+};
+
+/**
+ * @returns {HTMLElement}
+ */
+const createEmptyProductElement = () => {
+  return adcio.createNestedElement({
+    tag: "div",
+    classList: ["common_prd_list", "swiper-slide", "xans-record-"],
+    attributes: { "vreview-dom-embeded": false, "data-adcio-id": true },
+    children: [
+      {
+        tag: "div",
+        classList: ["box", "dd_box"],
+        children: [
+          {
+            tag: "div",
+            classList: ["img"],
+            children: [
+              {
+                tag: "div",
+                classList: ["prdimg", "thumbnail"],
+                children: [
+                  {
+                    tag: "a",
+                    classList: ["prdimg", "thumbnail"],
+                    attributes: {
+                      style: `display: block;`,
+                      href: "",
+                    },
+                    children: [
+                      {
+                        tag: "img",
+                        attributes: {
+                          src: "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/8d62eacd-582ca3ea-c99e-4853-8e6f-3a0ac1dc417c",
+                          alt: "andar product",
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
 };
 
 /**
@@ -569,11 +617,16 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
     return element;
   });
 
-  swapGridElements(
+  insertElements(
     document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-    elements,
     MOCK_SELECTED_GRID_INDEXES,
+    elements,
   );
+  // swapGridElements(
+  //   document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
+  //   elements,
+  //   MOCK_SELECTED_GRID_INDEXES,
+  // );
 };
 
 /**
@@ -627,13 +680,58 @@ const addEventToBestCategoryBtn = (callback) => {
   });
 };
 
+/**
+ * @param {NodeList<Element>} elements
+ * @param {Array<number>} indexes
+ * @param {Element} newElement
+ */
+const insertElement = (originalElements, indexes, newElement) => {
+  const elements = [...originalElements];
+
+  originalElements.forEach((element, index) => {
+    if (indexes.includes(index)) {
+      element.outerHTML = newElement.cloneNode(true).outerHTML;
+      //TODO: fix rankBadge
+      return;
+    }
+
+    const elementToBeInserted = elements.shift();
+    //TODO: fix rankBadge
+    element.outerHTML = elementToBeInserted.outerHTML;
+  });
+};
+
+/**
+ * @param {Array<Element>} elements
+ * @param {Array<number>} indexes
+ * @param {Array<Element>} elements
+ * @returns {Array<Element>}
+ */
+const insertElements = (elements, indexes, newElements) => {
+  const elementsWithAdcio = new Array(10);
+
+  elementsWithAdcio.forEach((_, index) => {
+    if (indexes.includes(index)) {
+      elementsWithAdcio[index] = newElements[index];
+    }
+    elementsWithAdcio[index] = elements.pop();
+  });
+  return elementsWithAdcio;
+};
+
 const run = async () => {
   await adcio.waitForElement(".prd_basic"); // 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
-  setCustomPlaceholder(
-    document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-    "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/8d62eacd-582ca3ea-c99e-4853-8e6f-3a0ac1dc417c",
-  );
+  // setCustomPlaceholder(
+  //   document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
+  //   "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/8d62eacd-582ca3ea-c99e-4853-8e6f-3a0ac1dc417c",
+  // );
 
+  insertElement(
+    document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
+    MOCK_SELECTED_GRID_INDEXES,
+    createEmptyProductElement(),
+  );
+  return;
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
     return;
