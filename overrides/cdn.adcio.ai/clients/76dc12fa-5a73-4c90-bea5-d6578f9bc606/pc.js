@@ -229,7 +229,7 @@ const productToElement = (product, index = "") => {
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
-    attributes: { "vreview-dom-embeded": true },
+    attributes: { "vreview-dom-embeded": true, "data-adcio-id": true },
     children: [
       {
         tag: "div",
@@ -704,11 +704,24 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
     return element;
   });
 
-  swapElements(
+  if (
+    document.querySelector(`.prd_basic`).querySelectorAll("[data-adcio-id]")
+      .length
+  ) {
+    swapElements(
+      document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
+      MOCK_SELECTED_GRID_INDEXES,
+      elements,
+    );
+    return;
+  }
+
+  insertElements(
     document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
     MOCK_SELECTED_GRID_INDEXES,
     elements,
   );
+
   // swapGridElements(
   //   document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
   //   elements,
@@ -775,8 +788,8 @@ const addEventToBestCategoryBtn = (callback) => {
  */
 const swapElements = (elements, indexes, newElements) => {
   elements.forEach((element, index) => {
-    if (indexes.includes(index) && newElements.length > index) {
-      const newElement = newElements[index];
+    if (indexes.includes(index) && newElements.length) {
+      const newElement = newElements.shift();
       element.outerHTML = newElement.outerHTML;
     }
   });
@@ -796,13 +809,18 @@ const insertElements = (originalElements, indexes, newElements) => {
     if (indexes.includes(index) && newElementsCopy.length) {
       const newElement = newElementsCopy.shift();
       element.outerHTML = newElement.outerHTML;
-      //TODO: fix rankBadge
+      //TODO: delete rankBadge
+      element.querySelector(".rankBadge") &&
+        element.querySelector(".rankBadge").remove();
       return;
     }
 
     const elementToBeInserted = elements.shift();
     //TODO: fix rankBadge
     element.outerHTML = elementToBeInserted.outerHTML;
+
+    element.querySelector(".rankBadge") &&
+      (element.querySelector(".rankBadge").textContent = index + 1);
   });
 };
 
@@ -817,6 +835,9 @@ const insertElement = (originalElements, indexes, newElement) => {
   originalElements.forEach((element, index) => {
     if (indexes.includes(index)) {
       element.outerHTML = newElement.cloneNode(true).outerHTML;
+
+      element.querySelector(".rankBadge") &&
+        element.querySelector(".rankBadge").remove();
       //TODO: fix rankBadge
       return;
     }
@@ -824,13 +845,16 @@ const insertElement = (originalElements, indexes, newElement) => {
     const elementToBeInserted = elements.shift();
     //TODO: fix rankBadge
     element.outerHTML = elementToBeInserted.outerHTML;
+    element.querySelector(".rankBadge") &&
+      (element.querySelector(".rankBadge").textContent = index + 1);
   });
 };
 
 const run = async () => {
-  //await adcio.waitForElement(".prd_basic"); // 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
+  // await adcio.waitForElement(".prd_basic"); // 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
 
-  // insertElement( //injectPlaceholder
+  // //injectPlaceholder
+  // insertElement(
   //   document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
   //   MOCK_SELECTED_GRID_INDEXES,
   //   createEmptyProductElement(),
@@ -880,12 +904,12 @@ const run = async () => {
       observer.disconnect();
 
       if (mutationsList.find((m) => m.type === "childList")) {
-        setCustomPlaceholder(
-          document
-            .querySelector(`.prd_basic`)
-            .querySelectorAll(".common_prd_list"),
-          "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/8d62eacd-582ca3ea-c99e-4853-8e6f-3a0ac1dc417c",
-        );
+        // setCustomPlaceholder(
+        //   document
+        //     .querySelector(`.prd_basic`)
+        //     .querySelectorAll(".common_prd_list"),
+        //   "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/8d62eacd-582ca3ea-c99e-4853-8e6f-3a0ac1dc417c",
+        // );
 
         const suggestion = await productSuggestions;
         await injectProductSuggestions(suggestion, bestCategory);
