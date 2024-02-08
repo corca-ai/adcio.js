@@ -43,10 +43,97 @@ const MOCK_PRODUCT_SUGGESTED = {
         suggestionType: "RECOMMEND",
       },
     },
+    {
+      product: {
+        activated: true,
+        appRoute: null,
+        categoryId: "ce557633-b020-4a98-84c2-263fcd538b26",
+        clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
+        createdAt: "2024-01-22T12:27:10.669Z",
+        creative: {
+          id: "6b57b16c-6179-405c-9b72-fded52ff35ad",
+          mediaUrl:
+            "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
+          width: 1300,
+          height: 1120,
+          placementFormatRatio: "7X6",
+        },
+        data: {},
+        deepLink: null,
+        deletedAt: null,
+        endsAt: null,
+        id: "a7de3e3a-adcf-4698-9f9a-d7ed5dc6518d",
+        name: "프로덕트 테스트",
+        productId: null,
+        startsAt: "2024-01-23T01:10:00.000Z",
+        type: "image",
+        url: "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
+        title: "프로덕트 테스트",
+        suggestionType: "RECOMMEND",
+      },
+    },
+    {
+      product: {
+        activated: true,
+        appRoute: null,
+        categoryId: "ce557633-b020-4a98-84c2-263fcd538b26",
+        clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
+        createdAt: "2024-01-22T12:27:10.669Z",
+        creative: {
+          id: "6b57b16c-6179-405c-9b72-fded52ff35ad",
+          mediaUrl:
+            "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
+          width: 1300,
+          height: 1120,
+          placementFormatRatio: "7X6",
+        },
+        data: {},
+        deepLink: null,
+        deletedAt: null,
+        endsAt: null,
+        id: "a7de3e3a-adcf-4698-9f9a-d7ed5dc6518d",
+        name: "프로덕트 테스트",
+        productId: null,
+        startsAt: "2024-01-23T01:10:00.000Z",
+        type: "image",
+        url: "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
+        title: "프로덕트 테스트",
+        suggestionType: "RECOMMEND",
+      },
+    },
+    {
+      product: {
+        activated: true,
+        appRoute: null,
+        categoryId: "ce557633-b020-4a98-84c2-263fcd538b26",
+        clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
+        createdAt: "2024-01-22T12:27:10.669Z",
+        creative: {
+          id: "6b57b16c-6179-405c-9b72-fded52ff35ad",
+          mediaUrl:
+            "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
+          width: 1300,
+          height: 1120,
+          placementFormatRatio: "7X6",
+        },
+        data: {},
+        deepLink: null,
+        deletedAt: null,
+        endsAt: null,
+        id: "a7de3e3a-adcf-4698-9f9a-d7ed5dc6518d",
+        name: "프로덕트 테스트",
+        productId: null,
+        startsAt: "2024-01-23T01:10:00.000Z",
+        type: "image",
+        url: "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
+        title: "프로덕트 테스트",
+        suggestionType: "RECOMMEND",
+      },
+    },
   ],
 };
 
-const MOCK_SELECTED_GRID_INDEXES = [1, 3, 4, 6];
+const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4, 6];
 
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
@@ -617,7 +704,7 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
     return element;
   });
 
-  insertElements(
+  swapElements(
     document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
     MOCK_SELECTED_GRID_INDEXES,
     elements,
@@ -683,6 +770,45 @@ const addEventToBestCategoryBtn = (callback) => {
 /**
  * @param {NodeList<Element>} elements
  * @param {Array<number>} indexes
+ * @param {Array<Element>} elements
+ * @returns {Array<Element>}
+ */
+const swapElements = (elements, indexes, newElements) => {
+  elements.forEach((element, index) => {
+    if (indexes.includes(index) && newElements.length > index) {
+      const newElement = newElements[index];
+      element.outerHTML = newElement.outerHTML;
+    }
+  });
+};
+
+/**
+ * @param {NodeList<Element>} originalElements
+ * @param {Array<number>} indexes
+ * @param {Array<Element>} newElements
+ * @returns {Array<Element>}
+ */
+const insertElements = (originalElements, indexes, newElements) => {
+  const elements = [...originalElements];
+  const newElementsCopy = [...newElements];
+
+  originalElements.forEach((element, index) => {
+    if (indexes.includes(index) && newElementsCopy.length) {
+      const newElement = newElementsCopy.shift();
+      element.outerHTML = newElement.outerHTML;
+      //TODO: fix rankBadge
+      return;
+    }
+
+    const elementToBeInserted = elements.shift();
+    //TODO: fix rankBadge
+    element.outerHTML = elementToBeInserted.outerHTML;
+  });
+};
+
+/**
+ * @param {NodeList<Element>} elements
+ * @param {Array<number>} indexes
  * @param {Element} newElement
  */
 const insertElement = (originalElements, indexes, newElement) => {
@@ -701,37 +827,15 @@ const insertElement = (originalElements, indexes, newElement) => {
   });
 };
 
-/**
- * @param {Array<Element>} elements
- * @param {Array<number>} indexes
- * @param {Array<Element>} elements
- * @returns {Array<Element>}
- */
-const insertElements = (elements, indexes, newElements) => {
-  const elementsWithAdcio = new Array(10);
-
-  elementsWithAdcio.forEach((_, index) => {
-    if (indexes.includes(index)) {
-      elementsWithAdcio[index] = newElements[index];
-    }
-    elementsWithAdcio[index] = elements.pop();
-  });
-  return elementsWithAdcio;
-};
-
 const run = async () => {
-  await adcio.waitForElement(".prd_basic"); // 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
-  // setCustomPlaceholder(
+  //await adcio.waitForElement(".prd_basic"); // 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
+
+  // insertElement( //injectPlaceholder
   //   document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-  //   "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/8d62eacd-582ca3ea-c99e-4853-8e6f-3a0ac1dc417c",
+  //   MOCK_SELECTED_GRID_INDEXES,
+  //   createEmptyProductElement(),
   // );
 
-  insertElement(
-    document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-    MOCK_SELECTED_GRID_INDEXES,
-    createEmptyProductElement(),
-  );
-  return;
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
     return;
