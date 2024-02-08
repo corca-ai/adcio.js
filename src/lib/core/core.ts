@@ -10,8 +10,9 @@ import { Storage } from "lib/storage/storage.interface";
 import { AdcioCoreParams } from "./core.interface";
 
 export class AdcioCore {
-  private clientId: StoreId;
   private sessionStorage: Storage<string>;
+
+  private clientId: StoreId;
   private deviceId: DeviceId;
   private customerId?: CustomerId;
 
@@ -29,6 +30,10 @@ export class AdcioCore {
     }).getOrSet();
 
     this.clientId = clientId;
+    this.customerId = customerId;
+  }
+
+  public setCustomerId(customerId: CustomerId) {
     this.customerId = customerId;
   }
 

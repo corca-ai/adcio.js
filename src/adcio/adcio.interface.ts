@@ -23,7 +23,7 @@ export interface AdcioConfig extends AdcioParams {
 
 export type AdcioOnPageViewParams = Pick<
   AdcioAnalyticsOnPageViewParams,
-  "productIdOnStore"
+  "productIdOnStore" & "categoryIdsOnStore"
 >;
 
 export type AdcioOnImpressionParams = AdcioAnalyticsOnImpressionParams;
