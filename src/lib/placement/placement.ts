@@ -66,9 +66,10 @@ export class AdcioPlacement {
       const { data } = await new SuggestionApi(
         this.apiConfig,
       ).suggestionControllerSuggest({
-        ...params,
+        customerId: this.adcioCore.getCustomerId(),
         sessionId: this.adcioCore.getSessionId(),
         deviceId: this.adcioCore.getDeviceId(),
+        ...params,
       });
 
       return data;
