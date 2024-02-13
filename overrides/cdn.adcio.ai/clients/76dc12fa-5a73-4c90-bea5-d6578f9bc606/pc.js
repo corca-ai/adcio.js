@@ -811,6 +811,7 @@ const swapElements = (elements, indexes, newElements) => {
 const insertElements = (originalElements, indexes, newElements) => {
   const elements = [...originalElements];
   const newElementsCopy = [...newElements];
+  let rank = 1;
 
   originalElements.forEach((element, index) => {
     if (indexes.includes(index) && newElementsCopy.length) {
@@ -825,9 +826,6 @@ const insertElements = (originalElements, indexes, newElements) => {
     const elementToBeInserted = elements.shift();
     //TODO: fix rankBadge
     element.outerHTML = elementToBeInserted.outerHTML;
-
-    // element.querySelector(".rankBadge") &&
-    //   (element.querySelector(".rankBadge").textContent = index + 1);
   });
 };
 
