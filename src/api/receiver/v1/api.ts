@@ -73,6 +73,12 @@ export interface TrackAddToCartRequestDto {
      */
     'customerId'?: string;
     /**
+     * 
+     * @type {string}
+     * @memberof TrackAddToCartRequestDto
+     */
+    'userAgent'?: string;
+    /**
      * Unique identifier of the cart to prevent duplicate cart tracking.
      * @type {string}
      * @memberof TrackAddToCartRequestDto
@@ -115,6 +121,12 @@ export interface TrackClickRequestDto {
      * @memberof TrackClickRequestDto
      */
     'customerId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackClickRequestDto
+     */
+    'userAgent'?: string;
     /**
      * ADCIO Client ID
      * @type {string}
@@ -159,6 +171,12 @@ export interface TrackImpressionRequestDto {
      */
     'customerId'?: string;
     /**
+     * 
+     * @type {string}
+     * @memberof TrackImpressionRequestDto
+     */
+    'userAgent'?: string;
+    /**
      * ADCIO Client ID
      * @type {string}
      * @memberof TrackImpressionRequestDto
@@ -202,6 +220,12 @@ export interface TrackPageViewRequestDto {
      */
     'customerId'?: string;
     /**
+     * 
+     * @type {string}
+     * @memberof TrackPageViewRequestDto
+     */
+    'userAgent'?: string;
+    /**
      * Store ID. Note that a pair of store ID and product id on store is unique.
      * @type {string}
      * @memberof TrackPageViewRequestDto
@@ -244,6 +268,12 @@ export interface TrackPurchaseRequestDto {
      * @memberof TrackPurchaseRequestDto
      */
     'customerId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackPurchaseRequestDto
+     */
+    'userAgent'?: string;
     /**
      * Unique identifier of the order to prevent duplicate purchase tracking.
      * @type {string}

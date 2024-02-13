@@ -43,6 +43,7 @@ export class AdcioCore {
       sessionId: this.getSessionId(),
       deviceId: this.getDeviceId(),
       customerId: this.getCustomerId(),
+      userAgent: navigator.userAgent,
     };
   }
 
