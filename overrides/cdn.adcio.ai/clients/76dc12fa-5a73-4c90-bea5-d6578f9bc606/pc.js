@@ -787,17 +787,18 @@ const addEventToBestCategoryBtn = (callback) => {
  * @returns {Array<Element>}
  */
 const swapElements = (elements, indexes, newElements) => {
+  let rank = 1;
   elements.forEach((element, index) => {
     if (indexes.includes(index) && newElements.length) {
       const newElement = newElements.shift();
       element.outerHTML = newElement.outerHTML;
+      return;
     }
 
-    // //TODO: fix rankBadge - this is test code
-    // if (element.querySelector(".rankBadge") == null) {
-    //   return;
-    // }
-    // element.querySelector(".rankBadge").textContent = "s";
+    const rankElement = document.createElement("span");
+    rankElement.classList.add("rankBadge");
+    rankElement.textContent = rank++;
+    element.querySelector(".img").appendChild(rankElement);
   });
 };
 
