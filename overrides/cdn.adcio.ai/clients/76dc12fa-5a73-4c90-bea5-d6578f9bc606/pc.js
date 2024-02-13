@@ -792,6 +792,12 @@ const swapElements = (elements, indexes, newElements) => {
       const newElement = newElements.shift();
       element.outerHTML = newElement.outerHTML;
     }
+
+    // //TODO: fix rankBadge - this is test code
+    // if (element.querySelector(".rankBadge") == null) {
+    //   return;
+    // }
+    // element.querySelector(".rankBadge").textContent = "s";
   });
 };
 
@@ -810,8 +816,8 @@ const insertElements = (originalElements, indexes, newElements) => {
       const newElement = newElementsCopy.shift();
       element.outerHTML = newElement.outerHTML;
       //TODO: delete rankBadge
-      element.querySelector(".rankBadge") &&
-        element.querySelector(".rankBadge").remove();
+      // element.querySelector(".rankBadge") &&
+      //   element.querySelector(".rankBadge").remove();
       return;
     }
 
@@ -819,8 +825,8 @@ const insertElements = (originalElements, indexes, newElements) => {
     //TODO: fix rankBadge
     element.outerHTML = elementToBeInserted.outerHTML;
 
-    element.querySelector(".rankBadge") &&
-      (element.querySelector(".rankBadge").textContent = index + 1);
+    // element.querySelector(".rankBadge") &&
+    //   (element.querySelector(".rankBadge").textContent = index + 1);
   });
 };
 
@@ -836,8 +842,8 @@ const insertElement = (originalElements, indexes, newElement) => {
     if (indexes.includes(index)) {
       element.outerHTML = newElement.cloneNode(true).outerHTML;
 
-      element.querySelector(".rankBadge") &&
-        element.querySelector(".rankBadge").remove();
+      // element.querySelector(".rankBadge") &&
+      //   element.querySelector(".rankBadge").remove();
       //TODO: fix rankBadge
       return;
     }
@@ -845,8 +851,8 @@ const insertElement = (originalElements, indexes, newElement) => {
     const elementToBeInserted = elements.shift();
     //TODO: fix rankBadge
     element.outerHTML = elementToBeInserted.outerHTML;
-    element.querySelector(".rankBadge") &&
-      (element.querySelector(".rankBadge").textContent = index + 1);
+    // element.querySelector(".rankBadge") &&
+    //   (element.querySelector(".rankBadge").textContent = index + 1);
   });
 };
 
