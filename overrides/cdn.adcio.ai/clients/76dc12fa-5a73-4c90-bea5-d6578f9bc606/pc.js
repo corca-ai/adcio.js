@@ -850,22 +850,19 @@ const insertElement = (originalElements, indexes, newElement) => {
     }
 
     const elementToBeInserted = elements.shift();
-    //TODO: fix rankBadge
     element.outerHTML = elementToBeInserted.outerHTML;
-    // element.querySelector(".rankBadge") &&
-    //   (element.querySelector(".rankBadge").textContent = index + 1);
   });
 };
 
 const run = async () => {
-  // await adcio.waitForElement(".prd_basic"); // 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
+  await adcio.waitForElement(".prd_basic"); // 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
 
   // //injectPlaceholder
-  // insertElement(
-  //   document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-  //   MOCK_SELECTED_GRID_INDEXES,
-  //   createEmptyProductElement(),
-  // );
+  insertElement(
+    document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
+    MOCK_SELECTED_GRID_INDEXES,
+    createEmptyProductElement(),
+  );
 
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
