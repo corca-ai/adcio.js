@@ -226,7 +226,7 @@ const productToElement = (product) => {
                         tag: "img",
                         classList: ["overimg"],
                         attributes: {
-                          src: "https://cafe24img.poxo.com/andar01/web/product/medium/202309/53b0ab2ed80680436a4f9d615e1e34d8.jpg", //"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260","//"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/d55902ba-8d85355a-97d8-4c76-8523-32f3c8b49e8b", // product.creative.mediaUrl, //TODO: fix
+                          src: product?.data?.small_image, //product.image,
                           // id: "", //TODO: 생략가능???
                           alt: product.title,
                         },
@@ -234,7 +234,7 @@ const productToElement = (product) => {
                       {
                         tag: "img",
                         attributes: {
-                          src: product.image,
+                          src: product?.data?.tiny_image, //product.image,
                           alt: product.title,
                         },
                       },
