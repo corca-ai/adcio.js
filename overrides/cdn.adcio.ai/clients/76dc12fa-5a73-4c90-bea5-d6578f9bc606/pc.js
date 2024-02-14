@@ -196,6 +196,7 @@ const createAllSuggestions = (placements, customer) => {
  * @returns {HTMLElement}
  */
 const productToElement = (product) => {
+  //TODO: fix following res from api
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
@@ -243,7 +244,7 @@ const productToElement = (product) => {
                 ],
               },
               // {
-              //   tag: "span", //TODO: rankBadge 생략 여부에 대해 논의가 진행되고 있습니다. 결론을 해당 코드에 반영해야합니다.
+              //   tag: "span",
               //   classList: ["rankBadge"],
               //   textContent: "00",
               // },
@@ -600,12 +601,12 @@ const getPlacementsAndCustomer = async () => {
 };
 
 /**
- * @param {NodeList<Element>} elements
+ * @param {NodeList<Element>} originalElements
  * @param {Array<number>} adcioGridIndexes
- * @param {Array<Element>} elements
+ * @param {Array<Element>} newElements
  */
-const swapElements = (elements, adcioGridIndexes, newElements) => {
-  elements.forEach((element, index) => {
+const swapElements = (originalElements, adcioGridIndexes, newElements) => {
+  originalElements.forEach((element, index) => {
     if (adcioGridIndexes.includes(index) && newElements.length) {
       const newElement = newElements.shift();
       element.outerHTML = newElement.outerHTML;
@@ -617,20 +618,20 @@ const swapElements = (elements, adcioGridIndexes, newElements) => {
 /**
  * @param {NodeList<Element>} originalElements
  * @param {Array<number>} indexes
- * @param {Array<Element>} newElements
+ * @param {NodeList<Element>} newElements
  */
 const insertElements = (originalElements, indexes, newElements) => {
-  const elements = [...originalElements];
-  const newElementsCopy = [...newElements];
+  const originElementsArr = [...originalElements];
+  const newElementsArr = [...newElements];
 
   originalElements.forEach((element, index) => {
-    if (indexes.includes(index) && newElementsCopy.length) {
-      const newElement = newElementsCopy.shift();
+    if (indexes.includes(index) && newElementsArr.length) {
+      const newElement = newElementsArr.shift();
       element.outerHTML = newElement.outerHTML;
       return;
     }
 
-    const elementToBeInserted = elements.shift();
+    const elementToBeInserted = originElementsArr.shift();
     element.outerHTML = elementToBeInserted.outerHTML;
   });
 };
@@ -672,9 +673,8 @@ const injectBannerSuggestions = (suggestedData) => {
 
 /**
  * @param {SuggestionResponseDto[]} suggestedData
- * @param {string} categoryId // TODO: fix
  */
-const injectProductSuggestions = (suggestedData, categoryId) => {
+const injectProductSuggestions = (suggestedData) => {
   const { suggestions } = suggestedData;
 
   const elements = suggestions.map((suggestion) => {
@@ -769,12 +769,11 @@ const run = async () => {
   if (allSuggestions.GRID) {
     // Product Suggestions success
     let productSuggestions = allSuggestions.GRID;
-    let bestCategory = BEST_CATEGORY_DATA.prdlist01; // category 전체
+    let bestCategory = BEST_CATEGORY_DATA.prdlist01; // category "전체"
 
-    await injectProductSuggestions(productSuggestions, bestCategory);
+    await injectProductSuggestions(productSuggestions);
     document.querySelector(`#mainBest`).style.visibility = "visible";
 
-    // Add event listener, fetching product suggestion to best category btn click
     addEventToBestCategoryBtn(async (bestCategoryData) => {
       productSuggestions = adcioInstance.createSuggestion({
         ...customer,
@@ -799,7 +798,7 @@ const run = async () => {
       ) {
         document.querySelector(`.prd_basic`).style.visibility = "hidden";
         const suggested = await productSuggestions;
-        await injectProductSuggestions(suggested, bestCategory);
+        injectProductSuggestions(suggested, bestCategory);
 
         document.querySelector(".prd_basic").style.visibility = "visible";
       }
