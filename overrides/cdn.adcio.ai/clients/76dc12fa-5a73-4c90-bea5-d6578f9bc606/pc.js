@@ -134,19 +134,23 @@ const MOCK_PRODUCT_SUGGESTED = {
 };
 
 const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4, 6];
+let allGridElements = {
+  0: null,
+  1: null,
+  2: null,
+  3: null,
+  4: null,
+};
 
-const CUSTOM_RANK_STYLE = `
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 32px;
-  height: 30px;
-  line-height: 32px;
-  background-color: #000;
-  color: #fff;
-  font-size: 18px;
-  z-index: 1000;
-`;
+const BEST_CATEGORY_DATA = {
+  prdlist01: "2018", // TODO: fix value to category name for server
+  prdlist02: "2017",
+  prdlist03: "2022",
+  prdlist04: "2578",
+  prdlist05: "2026",
+};
+
+const PRODUCT_PLACEMENT_ID = "d1e900b9-37ee-4fc2-ab03-443b78059fbe"; // TODO: fix to andar id of product placement
 
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
@@ -175,13 +179,22 @@ const adcioInstance = new adcio.Adcio({
  */
 const createAllSuggestions = (placements, customer) => {
   return Promise.allSettled(
-    placements.map(
-      async (placement) =>
-        await adcioInstance.createSuggestion({
-          ...customer,
-          placementId: placement.id,
-        }),
-    ),
+    placements.map(async (placement, index) => {
+      const params = {
+        ...customer,
+        placementId: placement.id,
+      };
+
+      if (placement.id === PRODUCT_PLACEMENT_ID) {
+        Object.assign(params, {
+          categoryIdOnStore: BEST_CATEGORY_DATA.prdlist01,
+        });
+      }
+
+      return await adcioInstance.createSuggestion({
+        ...params,
+      });
+    }),
   );
 };
 
@@ -727,13 +740,6 @@ const observeUntilUnload = (
  * @param {(categorySelected:string)=> void} callback
  */
 const addEventToBestCategoryBtn = (callback) => {
-  const BEST_CATEGORY_DATA = {
-    prdlist01: "전체", // TODO: fix value to category name for server
-    prdlist02: "우먼즈",
-    prdlist03: "맨즈",
-    prdlist04: "주니어",
-    prdlist05: "홈트용품&ACC",
-  };
   Object.keys(BEST_CATEGORY_DATA).forEach((moduleName) => {
     const element = document.querySelector(`[module-name="${moduleName}"]`);
     element.addEventListener("click", () =>
@@ -741,28 +747,6 @@ const addEventToBestCategoryBtn = (callback) => {
     );
   });
 };
-
-/**
- * @param {NodeList<Element>} elements
- */
-// const rearrangeRankElement = (elements) => {
-//   let rank = 1;
-//   elements.forEach((element) => {
-//     if (
-//       !!element.querySelector("[data-adcio-id]") &&
-//       !!element.querySelector(".rankBadge")
-//     ) {
-//       element.querySelector(".rankBadge").style.visibility = "hidden";
-//       return;
-//     }
-
-//     const rankElement = document.createElement("span");
-//     rankElement.classList.add("customRankBadge");
-//     rankElement.style = CUSTOM_RANK_STYLE; // z-index is higher than rankBadge
-//     rankElement.textContent = rank++;
-//     element.querySelector(".img").appendChild(rankElement);
-//   });
-// };
 
 const run = async () => {
   await adcio.waitForElement("#mainBest");
@@ -785,6 +769,9 @@ const run = async () => {
       p.status === "fulfilled" &&
       Object.assign(allSuggestions, { [p.value.placement.type]: p.value }),
   );
+  console.log(placements);
+  console.log(allPromises);
+
   if (allSuggestions.BANNER) {
     await adcio.waitForDOM();
     injectBannerSuggestions(allSuggestions.BANNER);
@@ -793,9 +780,8 @@ const run = async () => {
   if (allSuggestions.PRODUCT) {
     // Product Suggestions success
     let productSuggestions = allSuggestions.PRODUCT;
-    let bestCategory = "전체";
+    let bestCategory = BEST_CATEGORY_DATA.prdlist01; // category 전체
 
-    await adcio.waitForElement(".rankBadge"); // rankBadge element attaches to product img element in different timing
     await injectProductSuggestions(productSuggestions, bestCategory);
     document.querySelector(`#mainBest`).style.visibility = "visible";
 
@@ -820,7 +806,6 @@ const run = async () => {
       ) {
         document.querySelector(`.prd_basic`).style.visibility = "hidden";
         const suggestion = await productSuggestions;
-        await adcio.waitForElement(".prd_basic"); // if not needed delete this line
         await injectProductSuggestions(suggestion, bestCategory);
 
         document.querySelector(".prd_basic").style.visibility = "visible";
