@@ -797,10 +797,16 @@ const run = async () => {
         )
       ) {
         document.querySelector(`.prd_basic`).style.visibility = "hidden";
-        const suggested = await productSuggestions;
-        injectProductSuggestions(suggested, bestCategory);
-
-        document.querySelector(".prd_basic").style.visibility = "visible";
+        productSuggestions
+          .then((suggested) =>
+            injectProductSuggestions(suggested, bestCategory),
+          )
+          .catch((e) => console.error(e))
+          .finally(
+            () =>
+              (document.querySelector(".prd_basic").style.visibility =
+                "visible"),
+          );
       }
       observer.observe(targetElement, observeOptions);
     };
