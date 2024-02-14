@@ -24,7 +24,7 @@ const MOCK_PRODUCT_SUGGESTED = {
         creative: {
           id: "6b57b16c-6179-405c-9b72-fded52ff35ad",
           mediaUrl:
-            "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
+            "https://cafe24img.poxo.com/andar01/web/product/medium/202309/53b0ab2ed80680436a4f9d615e1e34d8.jpg", //"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
           width: 1300,
           height: 1120,
           placementFormatRatio: "7X6",
@@ -53,7 +53,7 @@ const MOCK_PRODUCT_SUGGESTED = {
         creative: {
           id: "6b57b16c-6179-405c-9b72-fded52ff35ad",
           mediaUrl:
-            "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
+            "https://cafe24img.poxo.com/andar01/web/product/medium/202309/53b0ab2ed80680436a4f9d615e1e34d8.jpg", //"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
           width: 1300,
           height: 1120,
           placementFormatRatio: "7X6",
@@ -82,7 +82,7 @@ const MOCK_PRODUCT_SUGGESTED = {
         creative: {
           id: "6b57b16c-6179-405c-9b72-fded52ff35ad",
           mediaUrl:
-            "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
+            "https://cafe24img.poxo.com/andar01/web/product/medium/202309/53b0ab2ed80680436a4f9d615e1e34d8.jpg", //"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
           width: 1300,
           height: 1120,
           placementFormatRatio: "7X6",
@@ -111,7 +111,7 @@ const MOCK_PRODUCT_SUGGESTED = {
         creative: {
           id: "6b57b16c-6179-405c-9b72-fded52ff35ad",
           mediaUrl:
-            "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
+            "https://cafe24img.poxo.com/andar01/web/product/medium/202309/53b0ab2ed80680436a4f9d615e1e34d8.jpg", //"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
           width: 1300,
           height: 1120,
           placementFormatRatio: "7X6",
@@ -135,6 +135,19 @@ const MOCK_PRODUCT_SUGGESTED = {
 
 const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4, 6];
 
+const CUSTOM_RANK_STYLE = `
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 30px;
+  line-height: 32px;
+  background-color: #000;
+  color: #fff;
+  font-size: 18px;
+  z-index: 1000;
+`;
+
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
  * @param {CustomerWithId} customer
@@ -142,13 +155,13 @@ const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4, 6];
  */
 const mockCreateProductSuggestion = async (placements, customer) => {
   return new Promise((resolve) =>
-    setTimeout(() => resolve(MOCK_PRODUCT_SUGGESTED), 7000),
+    setTimeout(() => resolve(MOCK_PRODUCT_SUGGESTED), 500),
   );
 };
 
 console.log("sdk 브라우저 테스트!");
 const adcioInstance = new adcio.Adcio({
-  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
+  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606", // test@test.com
 });
 
 /**
@@ -173,59 +186,10 @@ const createAllSuggestions = (placements, customer) => {
 };
 
 /**
- * @returns {HTMLElement}
- */
-const createEmptyProductElement = () => {
-  return adcio.createNestedElement({
-    tag: "div",
-    classList: ["common_prd_list", "swiper-slide", "xans-record-"],
-    attributes: { "vreview-dom-embeded": false, "data-adcio-id": true },
-    children: [
-      {
-        tag: "div",
-        classList: ["box", "dd_box"],
-        children: [
-          {
-            tag: "div",
-            classList: ["img"],
-            children: [
-              {
-                tag: "div",
-                classList: ["prdimg", "thumbnail"],
-                children: [
-                  {
-                    tag: "a",
-                    classList: ["prdimg", "thumbnail"],
-                    attributes: {
-                      style: `display: block;`,
-                      href: "",
-                    },
-                    children: [
-                      {
-                        tag: "img",
-                        attributes: {
-                          src: "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/8d62eacd-582ca3ea-c99e-4853-8e6f-3a0ac1dc417c",
-                          alt: "andar product",
-                        },
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  });
-};
-
-/**
  * @param {SuggestionDto['product']} product
- * @param {string} index //TODO: fix typing after api dev
  * @returns {HTMLElement}
  */
-const productToElement = (product, index = "") => {
+const productToElement = (product) => {
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
@@ -256,7 +220,7 @@ const productToElement = (product, index = "") => {
                         tag: "img",
                         classList: ["overimg"],
                         attributes: {
-                          src: "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/d55902ba-8d85355a-97d8-4c76-8523-32f3c8b49e8b", // product.creative.mediaUrl, //TODO: fix
+                          src: "https://cafe24img.poxo.com/andar01/web/product/medium/202309/53b0ab2ed80680436a4f9d615e1e34d8.jpg", //"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260","//"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/d55902ba-8d85355a-97d8-4c76-8523-32f3c8b49e8b", // product.creative.mediaUrl, //TODO: fix
                           // id: "", //TODO: 생략가능???
                           alt: product.title,
                         },
@@ -275,7 +239,7 @@ const productToElement = (product, index = "") => {
               // {
               //   tag: "span", //TODO: rankBadge 생략 여부에 대해 논의가 진행되고 있습니다. 결론을 해당 코드에 반영해야합니다.
               //   classList: ["rankBadge"],
-              //   textContent: index,
+              //   textContent: "00",
               // },
             ],
           },
@@ -365,9 +329,9 @@ const productToElement = (product, index = "") => {
                     tag: "span",
                     classList: ["sale_percent"],
                     attributes: {
-                      style: "display: inline;",
+                      style: "display: inline !important;", //added important for the very first of rendering.
                     },
-                    children: [{ tag: "strong", textContent: "00%" }],
+                    children: [{ tag: "strong", textContent: "50%" }],
                   },
                   {
                     tag: "span",
@@ -378,7 +342,7 @@ const productToElement = (product, index = "") => {
                     tag: "span",
                     classList: [
                       "sell",
-                      "product_price75,000원", //TODO: fix to follow prices after api updated
+                      "product_price0,000원", //TODO: fix to follow prices after api updated
                       "displaynone12displaynone",
                     ],
                     children: [{ tag: "strong", textContent: "1,111원" }],
@@ -607,23 +571,6 @@ const appendChildForSelected = (elements, selectors) => {
 };
 
 /**
- * @param {NodeListOf<Element>} wrapperElements
- * @param {Array<HTMLElement>} suggestedElement
- * @param {Array<number>} gridIndexes
- */
-const swapGridElements = (wrapperElements, suggestedElements, gridIndexes) => {
-  wrapperElements.forEach((element, index) => {
-    if (!gridIndexes.includes(index)) {
-      //TODO: fix this is tmp solution. Need to be fixed only selected product category placement
-      return;
-    }
-    suggestedElements.forEach(
-      (suggestedElement) => (element.outerHTML = suggestedElement.outerHTML),
-    );
-  });
-};
-
-/**
  * @returns {placements : Array<FetchActivePlacementsResponseDto>, customer: CustomerWithId}
  */
 const getPlacementsAndCustomer = async () => {
@@ -644,6 +591,42 @@ const getPlacementsAndCustomer = async () => {
     customer = {};
   }
   return { placements, customer };
+};
+
+/**
+ * @param {NodeList<Element>} elements
+ * @param {Array<number>} adcioGridIndexes
+ * @param {Array<Element>} elements
+ */
+const swapElements = (elements, adcioGridIndexes, newElements) => {
+  elements.forEach((element, index) => {
+    if (adcioGridIndexes.includes(index) && newElements.length) {
+      const newElement = newElements.shift();
+      element.outerHTML = newElement.outerHTML;
+      return;
+    }
+  });
+};
+
+/**
+ * @param {NodeList<Element>} originalElements
+ * @param {Array<number>} indexes
+ * @param {Array<Element>} newElements
+ */
+const insertElements = (originalElements, indexes, newElements) => {
+  const elements = [...originalElements];
+  const newElementsCopy = [...newElements];
+
+  originalElements.forEach((element, index) => {
+    if (indexes.includes(index) && newElementsCopy.length) {
+      const newElement = newElementsCopy.shift();
+      element.outerHTML = newElement.outerHTML;
+      return;
+    }
+
+    const elementToBeInserted = elements.shift();
+    element.outerHTML = elementToBeInserted.outerHTML;
+  });
 };
 
 /**
@@ -689,7 +672,7 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
   const { suggestions } = suggestedData;
 
   const elements = suggestions.map((suggestion) => {
-    const element = productToElement(suggestion.product, "0"); //TODO: fix index
+    const element = productToElement(suggestion.product); //TODO: fix index
 
     element.addEventListener("click", () =>
       adcioInstance.onClick(suggestion.logOptions),
@@ -721,27 +704,6 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
     MOCK_SELECTED_GRID_INDEXES,
     elements,
   );
-
-  // swapGridElements(
-  //   document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-  //   elements,
-  //   MOCK_SELECTED_GRID_INDEXES,
-  // );
-};
-
-/**
- * @param {NodeListOf<Element>} parentElements
- * @param {string} imgSrc
- */
-const setCustomPlaceholder = (parentElements, imgSrc) => {
-  parentElements.forEach((element, index) => {
-    if (!MOCK_SELECTED_GRID_INDEXES.includes(index)) {
-      return;
-    }
-    element
-      .querySelectorAll("img")
-      .forEach((imgElement) => (imgElement.src = imgSrc));
-  });
 };
 
 /**
@@ -782,85 +744,29 @@ const addEventToBestCategoryBtn = (callback) => {
 
 /**
  * @param {NodeList<Element>} elements
- * @param {Array<number>} indexes
- * @param {Array<Element>} elements
- * @returns {Array<Element>}
  */
-const swapElements = (elements, indexes, newElements) => {
-  let rank = 1;
-  elements.forEach((element, index) => {
-    if (indexes.includes(index) && newElements.length) {
-      const newElement = newElements.shift();
-      element.outerHTML = newElement.outerHTML;
-      return;
-    }
+// const rearrangeRankElement = (elements) => {
+//   let rank = 1;
+//   elements.forEach((element) => {
+//     if (
+//       !!element.querySelector("[data-adcio-id]") &&
+//       !!element.querySelector(".rankBadge")
+//     ) {
+//       element.querySelector(".rankBadge").style.visibility = "hidden";
+//       return;
+//     }
 
-    const rankElement = document.createElement("span");
-    rankElement.classList.add("rankBadge");
-    rankElement.textContent = rank++;
-    element.querySelector(".img").appendChild(rankElement);
-  });
-};
-
-/**
- * @param {NodeList<Element>} originalElements
- * @param {Array<number>} indexes
- * @param {Array<Element>} newElements
- * @returns {Array<Element>}
- */
-const insertElements = (originalElements, indexes, newElements) => {
-  const elements = [...originalElements];
-  const newElementsCopy = [...newElements];
-  let rank = 1;
-
-  originalElements.forEach((element, index) => {
-    if (indexes.includes(index) && newElementsCopy.length) {
-      const newElement = newElementsCopy.shift();
-      element.outerHTML = newElement.outerHTML;
-      //TODO: delete rankBadge
-      // element.querySelector(".rankBadge") &&
-      //   element.querySelector(".rankBadge").remove();
-      return;
-    }
-
-    const elementToBeInserted = elements.shift();
-    //TODO: fix rankBadge
-    element.outerHTML = elementToBeInserted.outerHTML;
-  });
-};
-
-/**
- * @param {NodeList<Element>} elements
- * @param {Array<number>} indexes
- * @param {Element} newElement
- */
-const insertElement = (originalElements, indexes, newElement) => {
-  const elements = [...originalElements];
-
-  originalElements.forEach((element, index) => {
-    if (indexes.includes(index)) {
-      element.outerHTML = newElement.cloneNode(true).outerHTML;
-
-      // element.querySelector(".rankBadge") &&
-      //   element.querySelector(".rankBadge").remove();
-      //TODO: fix rankBadge
-      return;
-    }
-
-    const elementToBeInserted = elements.shift();
-    element.outerHTML = elementToBeInserted.outerHTML;
-  });
-};
+//     const rankElement = document.createElement("span");
+//     rankElement.classList.add("customRankBadge");
+//     rankElement.style = CUSTOM_RANK_STYLE; // z-index is higher than rankBadge
+//     rankElement.textContent = rank++;
+//     element.querySelector(".img").appendChild(rankElement);
+//   });
+// };
 
 const run = async () => {
-  await adcio.waitForElement(".prd_basic"); // 상품 그리드 추천 fallback 정책에 따라 추가적으로 처리 필요. fallback 정책은 수빈님이 작업
-
-  // //injectPlaceholder
-  insertElement(
-    document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-    MOCK_SELECTED_GRID_INDEXES,
-    createEmptyProductElement(),
-  );
+  await adcio.waitForElement("#mainBest");
+  document.querySelector(`#mainBest`).style.visibility = "hidden";
 
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
@@ -879,17 +785,19 @@ const run = async () => {
       p.status === "fulfilled" &&
       Object.assign(allSuggestions, { [p.value.placement.type]: p.value }),
   );
-
   if (allSuggestions.BANNER) {
     await adcio.waitForDOM();
     injectBannerSuggestions(allSuggestions.BANNER);
   }
 
   if (allSuggestions.PRODUCT) {
+    // Product Suggestions success
     let productSuggestions = allSuggestions.PRODUCT;
     let bestCategory = "전체";
 
-    injectProductSuggestions(productSuggestions, bestCategory);
+    await adcio.waitForElement(".rankBadge"); // rankBadge element attaches to product img element in different timing
+    await injectProductSuggestions(productSuggestions, bestCategory);
+    document.querySelector(`#mainBest`).style.visibility = "visible";
 
     // Add event listener, fetching product suggestion to best category btn click
     addEventToBestCategoryBtn(async (bestCategoryData) => {
@@ -901,27 +809,32 @@ const run = async () => {
     const targetElement = document.querySelector("#monthly-best");
     const observeOptions = {
       childList: true,
+      attributes: true,
     };
     const mutationCallback = async (mutationsList, observer) => {
       observer.disconnect();
-
-      if (mutationsList.find((m) => m.type === "childList")) {
-        // setCustomPlaceholder(
-        //   document
-        //     .querySelector(`.prd_basic`)
-        //     .querySelectorAll(".common_prd_list"),
-        //   "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/8d62eacd-582ca3ea-c99e-4853-8e6f-3a0ac1dc417c",
-        // );
-
+      if (
+        mutationsList.find(
+          (m) => m.type === "childList" || m.type === "attributes",
+        )
+      ) {
+        document.querySelector(`.prd_basic`).style.visibility = "hidden";
         const suggestion = await productSuggestions;
+        await adcio.waitForElement(".prd_basic"); // if not needed delete this line
         await injectProductSuggestions(suggestion, bestCategory);
+
+        document.querySelector(".prd_basic").style.visibility = "visible";
       }
       observer.observe(targetElement, observeOptions);
     };
 
     observeUntilUnload(mutationCallback, targetElement, observeOptions);
+  } else {
+    // Product Suggestions failed
+    document.querySelector(`#mainBest`).style.visibility = "visible";
   }
 
+  //Collect Logs
   //adcioInstance.collectLogs(adcio.clientApi.cafe24);
 };
 
