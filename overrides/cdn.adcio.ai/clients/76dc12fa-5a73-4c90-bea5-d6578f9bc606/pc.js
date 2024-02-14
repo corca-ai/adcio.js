@@ -134,13 +134,6 @@ const MOCK_PRODUCT_SUGGESTED = {
 };
 
 const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4, 6];
-let allGridElements = {
-  0: null,
-  1: null,
-  2: null,
-  3: null,
-  4: null,
-};
 
 const BEST_CATEGORY_DATA = {
   prdlist01: "2018", // TODO: fix value to category name for server
