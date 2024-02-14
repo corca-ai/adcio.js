@@ -143,7 +143,7 @@ const BEST_CATEGORY_DATA = {
   prdlist05: "2026",
 };
 
-const PRODUCT_PLACEMENT_ID = "d1e900b9-37ee-4fc2-ab03-443b78059fbe"; // TODO: fix to andar id of product placement
+const GRID_PLACEMENT_ID = "d1e900b9-37ee-4fc2-ab03-443b78059fbe"; // TODO: fix to andar id of product placement
 
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
@@ -178,7 +178,7 @@ const createAllSuggestions = (placements, customer) => {
         placementId: placement.id,
       };
 
-      if (placement.id === PRODUCT_PLACEMENT_ID) {
+      if (placement.id === GRID_PLACEMENT_ID) {
         Object.assign(params, {
           categoryIdOnStore: BEST_CATEGORY_DATA.prdlist01,
         });
@@ -234,7 +234,7 @@ const productToElement = (product) => {
                       {
                         tag: "img",
                         attributes: {
-                          src: product.creative.mediaUrl, //TODO: fix
+                          src: product.image,
                           alt: product.title,
                         },
                       },
@@ -752,9 +752,7 @@ const run = async () => {
 
   const allSuggestions = {
     BANNER: null,
-    PRODUCT: {
-      ...MOCK_PRODUCT_SUGGESTED, // TODO: change to null
-    },
+    GRID: null,
   };
   const allPromises = await createAllSuggestions(placements, customer);
   allPromises.forEach(
@@ -762,17 +760,15 @@ const run = async () => {
       p.status === "fulfilled" &&
       Object.assign(allSuggestions, { [p.value.placement.type]: p.value }),
   );
-  console.log(placements);
-  console.log(allPromises);
 
   if (allSuggestions.BANNER) {
     await adcio.waitForDOM();
     injectBannerSuggestions(allSuggestions.BANNER);
   }
 
-  if (allSuggestions.PRODUCT) {
+  if (allSuggestions.GRID) {
     // Product Suggestions success
-    let productSuggestions = allSuggestions.PRODUCT;
+    let productSuggestions = allSuggestions.GRID;
     let bestCategory = BEST_CATEGORY_DATA.prdlist01; // category 전체
 
     await injectProductSuggestions(productSuggestions, bestCategory);
@@ -780,7 +776,11 @@ const run = async () => {
 
     // Add event listener, fetching product suggestion to best category btn click
     addEventToBestCategoryBtn(async (bestCategoryData) => {
-      productSuggestions = mockCreateProductSuggestion(placements, customer);
+      productSuggestions = await adcioInstance.createSuggestion({
+        ...customer,
+        categoryIdOnStore: bestCategoryData,
+        placementId: GRID_PLACEMENT_ID,
+      });
       bestCategory = bestCategoryData;
     });
 
@@ -798,8 +798,8 @@ const run = async () => {
         )
       ) {
         document.querySelector(`.prd_basic`).style.visibility = "hidden";
-        const suggestion = await productSuggestions;
-        await injectProductSuggestions(suggestion, bestCategory);
+        const suggested = await productSuggestions;
+        await injectProductSuggestions(suggested, bestCategory);
 
         document.querySelector(".prd_basic").style.visibility = "visible";
       }
