@@ -776,7 +776,7 @@ const run = async () => {
 
     // Add event listener, fetching product suggestion to best category btn click
     addEventToBestCategoryBtn(async (bestCategoryData) => {
-      productSuggestions = await adcioInstance.createSuggestion({
+      productSuggestions = adcioInstance.createSuggestion({
         ...customer,
         categoryIdOnStore: bestCategoryData,
         placementId: GRID_PLACEMENT_ID,
