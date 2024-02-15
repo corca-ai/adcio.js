@@ -46,12 +46,7 @@ export class Adcio {
 
   // AdcioAnalytics
   public onPageView(params: AdcioOnPageViewParams) {
-    return this.adcioAnalytics.onPageView({
-      path: window.location.pathname,
-      title: document.title,
-      referrer: document.referrer || undefined,
-      ...params,
-    });
+    return this.adcioAnalytics.onPageView(params);
   }
 
   public onImpression(logOptions: AdcioOnImpressionParams) {
@@ -89,16 +84,34 @@ export class Adcio {
   public async collectLogs(clientApi: ClientAPI) {
     await clientApi.init();
 
+    try {
+      const client = await clientApi.getCustomer();
+      if (client) {
+        this.adcioCore.setCustomerId(client.id);
+      }
+    } catch (e) {
+      console.warn("Failed to get customer id: ", e);
+    }
+
     return Promise.allSettled([
-      ...(await this.handleProduct(clientApi)),
+      ...(await this.handleView(clientApi)),
       ...(await this.handleCarts(clientApi)),
       ...(await this.handleOrder(clientApi)),
     ]);
   }
 
-  private async handleProduct(clientApi: ClientAPI): Promise<Promise<void>[]> {
+  private async handleView(clientApi: ClientAPI): Promise<Promise<void>[]> {
     const product = await clientApi.getProduct();
-    return [this.onPageView({ productIdOnStore: product?.idOnStore })];
+    const category = await clientApi.getCategory();
+    if (!(product?.idOnStore && category?.idOnStore)) {
+      return [];
+    }
+    return [
+      this.onPageView({
+        productIdOnStore: product.idOnStore,
+        categoryIdOnStore: category.idOnStore,
+      }),
+    ];
   }
 
   private async handleCarts(clientApi: ClientAPI): Promise<Promise<void>[]> {

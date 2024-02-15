@@ -28,6 +28,10 @@ export interface Product {
   idOnStore: string;
 }
 
+export interface Category {
+  idOnStore: string;
+}
+
 type Nullable<T> = T | null;
 type Awaitable<T> = Promise<T> | T;
 type NullableAwaitable<T> = Awaitable<Nullable<T>>;
@@ -36,6 +40,7 @@ export interface ClientAPI {
   init(): Awaitable<void>;
   getCustomer(): NullableAwaitable<Customer>;
   getProduct(): NullableAwaitable<Product>;
+  getCategory(): NullableAwaitable<Category>;
   getOrder(): NullableAwaitable<Order>;
   getCarts(): NullableAwaitable<Cart[]>;
 }
