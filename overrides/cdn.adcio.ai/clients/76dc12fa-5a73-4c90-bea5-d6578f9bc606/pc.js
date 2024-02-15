@@ -262,7 +262,6 @@ const productToElement = (product, categoryNo) => {
                 attributes: {
                   href: product.url,
                   "vreview-product-id": product.idOnStore,
-                  // "vreview-dom-id": "TODO",
                 },
                 children: [
                   {
@@ -275,12 +274,6 @@ const productToElement = (product, categoryNo) => {
                         attributes: {
                           style: "margin-top: 6px;",
                         },
-                        // children: [
-                        //   {
-                        //     tag: "span",
-                        //     textContent: "리뷰 00000", // suggestion에서 review count 없음
-                        //   },
-                        // ],
                       },
                     ],
                   },
@@ -289,7 +282,7 @@ const productToElement = (product, categoryNo) => {
               {
                 tag: "p",
                 classList: ["model"],
-                textContent: product.data.model_name, //TODO: fix
+                textContent: product.data.model_name,
               },
               {
                 tag: "p",
@@ -340,7 +333,7 @@ const productToElement = (product, categoryNo) => {
                     attributes: {
                       style: "display: inline !important;", //added important for the very first of rendering.
                     },
-                    children: [{ tag: "strong", textContent: "50%" }],
+                    children: [{ tag: "strong", textContent: "100%" }], // TODO: fix to follow prices after api updated
                   },
                   {
                     tag: "span",
@@ -359,7 +352,10 @@ const productToElement = (product, categoryNo) => {
                     tag: "span",
                     classList: [
                       "sell",
-                      "product_price0,000원", //TODO: fix to follow prices after api updated
+                      `product_price${Number(
+                        product.data.discountprice.pc_discount_price ||
+                          product.price,
+                      ).toLocaleString()}원`, //TODO: fix to follow prices after api updated
                       "displaynone12displaynone",
                     ],
                     children: [
@@ -463,20 +459,20 @@ const productToElement = (product, categoryNo) => {
                       "xans-record-",
                       "textBox",
                     ],
-                    children: [
-                      {
-                        tag: "strong",
-                        classList: ["title", "displaynone"],
-                      },
-                      {
-                        tag: "div",
-                        classList:
-                          categoryNo === CATEGORY_IDS.prdlist01 // only for category "전체"에서만 노출됨
-                            ? ["add_text"]
-                            : ["add_text", "displaynone"],
-                        textContent: "TODO with api dev",
-                      },
-                    ],
+                    children:
+                      (categoryNo === CATEGORY_IDS.prdlist01 && // 카테고리 전체인 경우만 text box가 존재함
+                        product.data.additional_information
+                          .filter(
+                            (data) => data.name === "텍스트박스" && data.value,
+                          )
+                          ?.map((data) => {
+                            return {
+                              tag: "div",
+                              classList: ["add_text"],
+                              textContent: data.value,
+                            };
+                          })) ||
+                      [],
                   },
                   {
                     tag: "li",
@@ -814,16 +810,16 @@ const run = async () => {
         document.querySelector(`.prd_basic`).style.visibility = "hidden";
         productSuggestions
           .then(async (suggested) => {
-            console.log("suggested", suggested);
-            const unduplicatedSuggestions = suggested; // TODO: filter out the products that are already in the grid
-            injectProductSuggestions(unduplicatedSuggestions, categoryId);
+            const unduplicatedSuggestions = suggested;
+            await injectProductSuggestions(unduplicatedSuggestions, categoryId);
+            document.querySelector(".prd_basic").style.visibility = "visible";
           })
-          .catch((e) => console.error(e))
-          .finally(
-            () =>
-              (document.querySelector(".prd_basic").style.visibility =
-                "visible"),
-          );
+          .catch((e) => console.error(e));
+        // .finally(
+        //   () =>
+        //     (document.querySelector(".prd_basic").style.visibility =
+        //       "visible"),
+        // );
       }
       observer.observe(targetElement, observeOptions);
     };
