@@ -197,7 +197,6 @@ const createAllSuggestions = (placements, customer) => {
  * @returns {HTMLElement}
  */
 const productToElement = (product, categoryNo) => {
-  //TODO: fix following res from api
   const productHref = `${product.data.url}&cate_no=${categoryNo}&display_group=1`;
   return adcio.createNestedElement({
     tag: "div",
@@ -471,12 +470,10 @@ const productToElement = (product, categoryNo) => {
                       },
                       {
                         tag: "div",
-                        classList: ["add_text"],
-                        textContent: "TODO with api dev",
-                      },
-                      {
-                        tag: "div",
-                        classList: ["add_text"],
+                        classList:
+                          categoryNo === CATEGORY_IDS.prdlist01 // only for category "전체"에서만 노출됨
+                            ? ["add_text"]
+                            : ["add_text", "displaynone"],
                         textContent: "TODO with api dev",
                       },
                     ],
