@@ -145,17 +145,6 @@ const CATEGORY_IDS = {
 
 const GRID_PLACEMENT_ID = "d1e900b9-37ee-4fc2-ab03-443b78059fbe"; // TODO: fix to andar id of product placement
 
-/**
- * @param {Array<FetchActivePlacementsResponseDto>} placements
- * @param {CustomerWithId} customer
- * @returns {Promise<SuggestionResponseDto[]>}
- */
-const mockCreateProductSuggestion = async (placements, customer) => {
-  return new Promise((resolve) =>
-    setTimeout(() => resolve(MOCK_PRODUCT_SUGGESTED), 500),
-  );
-};
-
 console.log("sdk 브라우저 테스트!");
 const adcioInstance = new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606", // test@test.com
@@ -198,6 +187,11 @@ const createAllSuggestions = (placements, customer) => {
  */
 const productToElement = (product, categoryNo) => {
   const productHref = `${product.data.url}&cate_no=${categoryNo}&display_group=1`;
+  const salePercent =
+    ((product.price - product.data.discountprice.pc_discount_price) /
+      product.price) *
+    100;
+
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
@@ -333,7 +327,15 @@ const productToElement = (product, categoryNo) => {
                     attributes: {
                       style: "display: inline !important;", //added important for the very first of rendering.
                     },
-                    children: [{ tag: "strong", textContent: "100%" }], // TODO: fix to follow prices after api updated
+                    children:
+                      salePercent < 1
+                        ? []
+                        : [
+                            {
+                              tag: "strong",
+                              textContent: salePercent.toFixed() + "%",
+                            },
+                          ],
                   },
                   {
                     tag: "span",
@@ -355,14 +357,13 @@ const productToElement = (product, categoryNo) => {
                       `product_price${Number(
                         product.data.discountprice.pc_discount_price ||
                           product.price,
-                      ).toLocaleString()}원`, //TODO: fix to follow prices after api updated
+                      ).toLocaleString()}원`,
                       "displaynone12displaynone",
                     ],
                     children: [
                       {
                         tag: "strong",
                         textContent: `${
-                          !!product.data.discountprice.pc_discount_price &&
                           Number(product.price).toLocaleString() + "원"
                         }`,
                       },
@@ -462,7 +463,7 @@ const productToElement = (product, categoryNo) => {
                     children:
                       (categoryNo === CATEGORY_IDS.prdlist01 && // 카테고리 전체인 경우만 text box가 존재함
                         product.data.additional_information
-                          .filter(
+                          ?.filter(
                             (data) => data.name === "텍스트박스" && data.value,
                           )
                           ?.map((data) => {
@@ -743,13 +744,16 @@ const observeUntilUnload = (
 };
 
 /**
- * @param {(categorySelected:string)=> void} callback
+ * @param {string} code
+ * @returns {string | null}
  */
-const addEventToBestCategoryBtn = (callback) => {
-  Object.keys(CATEGORY_IDS).forEach((moduleName) => {
-    const element = document.querySelector(`[module-name="${moduleName}"]`);
-    element.addEventListener("click", () => callback(CATEGORY_IDS[moduleName]));
-  });
+const getCategoryNoFromCode = (code) => {
+  if (!code) {
+    return null;
+  }
+  const regex = /\$cate_no\s*=\s*(\d+)/;
+  const match = code.match(regex);
+  return match.length >= 2 ? match[1] : null;
 };
 
 const run = async () => {
@@ -785,15 +789,6 @@ const run = async () => {
     await injectProductSuggestions(productSuggestions, categoryId);
     document.querySelector(`#mainBest`).style.visibility = "visible";
 
-    addEventToBestCategoryBtn(async (clickedCategoryId) => {
-      productSuggestions = adcioInstance.createSuggestion({
-        ...customer,
-        categoryIdOnStore: clickedCategoryId,
-        placementId: GRID_PLACEMENT_ID,
-      });
-      categoryId = clickedCategoryId;
-    });
-
     // Observe reload of best category list items element
     const targetElement = document.querySelector("#monthly-best");
     const observeOptions = {
@@ -808,18 +803,25 @@ const run = async () => {
         )
       ) {
         document.querySelector(`.prd_basic`).style.visibility = "hidden";
-        productSuggestions
-          .then(async (suggested) => {
-            const unduplicatedSuggestions = suggested;
-            await injectProductSuggestions(unduplicatedSuggestions, categoryId);
-            document.querySelector(".prd_basic").style.visibility = "visible";
+        const categoryNo = getCategoryNoFromCode(
+          document.querySelector("#monthly-best")?.innerHTML,
+        );
+
+        adcioInstance
+          .createSuggestion({
+            ...customer,
+            categoryIdOnStore: categoryNo,
+            placementId: GRID_PLACEMENT_ID,
           })
-          .catch((e) => console.error(e));
-        // .finally(
-        //   () =>
-        //     (document.querySelector(".prd_basic").style.visibility =
-        //       "visible"),
-        // );
+          .then(async (suggested) => {
+            await injectProductSuggestions(suggested, categoryId);
+            // document.querySelector(".prd_basic").style.visibility = "visible";
+          })
+          .finally(
+            () =>
+              (document.querySelector(".prd_basic").style.visibility =
+                "visible"),
+          );
       }
       observer.observe(targetElement, observeOptions);
     };
