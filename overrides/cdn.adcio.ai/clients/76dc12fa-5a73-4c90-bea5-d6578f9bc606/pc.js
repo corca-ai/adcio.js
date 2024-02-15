@@ -5,21 +5,20 @@ const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4, 6];
  */
 
 const CATEGORY_IDS = {
-  total: "2018",
-  women: "2017",
+  total: "2017",
+  women: "2018",
   men: "2022",
   junior: "2578",
   acc: "2026",
 };
 
-const GRID_PLACEMENT_ID = "https://andar01.cafe24.com/skin-skin159";
-// test@test.com "d1e900b9-37ee-4fc2-ab03-443b78059fbe"; // TODO: fix to andar id of product placement
+const GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
 
 console.log("sdk 브라우저 테스트!");
 const adcioInstance = new adcio.Adcio({
-  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606", //andar
+  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
 });
-// "76dc12fa-5a73-4c90-bea5-d6578f9bc606", // test@test.com
+
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
  * @param {CustomerWithId} customer
@@ -460,7 +459,7 @@ const appendChildForSelected = (elements, selectors) => {
  * @returns {placements : Array<FetchActivePlacementsResponseDto>, customer: CustomerWithId}
  */
 const getPlacementsAndCustomer = async () => {
-  const pageName = `skin135_${adcio.getMeta({
+  const pageName = `skin159_${adcio.getMeta({
     name: "path_role",
   })}`;
 
