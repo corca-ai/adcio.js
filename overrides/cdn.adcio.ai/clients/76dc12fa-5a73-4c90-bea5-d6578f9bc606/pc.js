@@ -104,11 +104,6 @@ const productToElement = (product, categoryId) => {
                   },
                 ],
               },
-              // {
-              //   tag: "span",
-              //   classList: ["rankBadge"],
-              //   textContent: "00",
-              // },
             ],
           },
           {
@@ -640,6 +635,29 @@ const getAllIdOnStore = (elements) => {
   return idOnStores;
 };
 
+/**
+ * @param {Element} targetElement
+ * @param {MutationRecord[]} observeOptions
+ * @param {() => void} mutationCallback
+ */
+const observeElemChanges = (
+  targetElement,
+  observeOptions,
+  mutationCallback,
+) => {
+  const mutationTypes = Object.keys(observeOptions).filter(
+    (k) => observeOptions[k],
+  );
+  const callback = async (mutationsList, observer) => {
+    observer.disconnect();
+    if (mutationsList.find((m) => mutationTypes.includes(m.type))) {
+      mutationCallback();
+    }
+    observer.observe(targetElement, observeOptions);
+  };
+  observeUntilUnload(callback, targetElement, observeOptions);
+};
+
 const run = async () => {
   await adcio.waitForElement("#mainBest");
   document.querySelector(`#mainBest`).style.visibility = "hidden";
@@ -669,46 +687,44 @@ const run = async () => {
     // Product Suggestions success
     await injectProductSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
     document.querySelector(`#mainBest`).style.visibility = "visible";
-
-    // Observe reload of best category list items element
-    const targetElement = document.querySelector("#monthly-best");
-    const observeOptions = {
-      childList: true,
-    };
-    const mutationCallback = async (mutationsList, observer) => {
-      observer.disconnect();
-      if (mutationsList.find((m) => m.type === "childList")) {
-        document.querySelector(`.prd_basic`).style.visibility = "hidden";
-
-        const categoryId =
-          getCategoryNoFromCode(
-            document.querySelector("#monthly-best")?.innerHTML,
-          ) || CATEGORY_IDS.total;
-
-        adcioInstance
-          .createSuggestion({
-            ...customer,
-            categoryIdOnStore: categoryId,
-            placementId: GRID_PLACEMENT_ID,
-          })
-          .then(
-            async (suggested) =>
-              await injectProductSuggestions(suggested, categoryId),
-          )
-          .finally(
-            () =>
-              (document.querySelector(".prd_basic").style.visibility =
-                "visible"),
-          );
-      }
-      observer.observe(targetElement, observeOptions);
-    };
-
-    observeUntilUnload(mutationCallback, targetElement, observeOptions);
   } else {
     // Product Suggestions failed
     document.querySelector(`#mainBest`).style.visibility = "visible";
   }
+
+  // Observe reload of best category list items element
+  const targetElement = document.querySelector("#monthly-best");
+  const observeOptions = {
+    childList: true,
+  };
+  const mutationCallback = async (mutationsList, observer) => {
+    observer.disconnect();
+    if (mutationsList.find((m) => m.type === "childList")) {
+      document.querySelector(`.prd_basic`).style.visibility = "hidden";
+
+      const categoryId =
+        getCategoryNoFromCode(
+          document.querySelector("#monthly-best")?.innerHTML,
+        ) || CATEGORY_IDS.total;
+
+      adcioInstance
+        .createSuggestion({
+          ...customer,
+          categoryIdOnStore: categoryId,
+          placementId: GRID_PLACEMENT_ID,
+        })
+        .then(
+          async (suggested) =>
+            await injectProductSuggestions(suggested, categoryId),
+        )
+        .finally(
+          () =>
+            (document.querySelector(".prd_basic").style.visibility = "visible"),
+        );
+    }
+    observer.observe(targetElement, observeOptions);
+  };
+  observeUntilUnload(mutationCallback, targetElement, observeOptions);
 
   //Collect Logs
   //adcioInstance.collectLogs(adcio.clientApi.cafe24);
