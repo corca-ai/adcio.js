@@ -1,142 +1,7 @@
-const MOCK_PRODUCT_SUGGESTED = {
-  placement: {
-    type: "PRODUCT",
-    activated: true,
-    bannerPlacementType: "SLIDE",
-    clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
-    createdAt: "2023-09-12T05:00:05.641Z",
-    deletedAt: null,
-    developEnvironment: "CODE_INJECTOR",
-    displayCount: 15,
-    displayFormatHeight: 1120,
-    displayFormatWidth: 1300,
-    id: "e945a115-c3c5-4575-8d01-b9d8565063fe",
-    updatedAt: "2023-11-13T01:37:32.719Z",
-  },
-  suggestions: [
-    {
-      product: {
-        activated: true,
-        appRoute: null,
-        categoryId: "ce557633-b020-4a98-84c2-263fcd538b26",
-        clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
-        createdAt: "2024-01-22T12:27:10.669Z",
-        creative: {
-          id: "6b57b16c-6179-405c-9b72-fded52ff35ad",
-          mediaUrl:
-            "https://cafe24img.poxo.com/andar01/web/product/medium/202309/53b0ab2ed80680436a4f9d615e1e34d8.jpg", //"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
-          width: 1300,
-          height: 1120,
-          placementFormatRatio: "7X6",
-        },
-        data: {},
-        deepLink: null,
-        deletedAt: null,
-        endsAt: null,
-        id: "a7de3e3a-adcf-4698-9f9a-d7ed5dc6518d",
-        name: "프로덕트 테스트",
-        productId: null,
-        startsAt: "2024-01-23T01:10:00.000Z",
-        type: "image",
-        url: "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
-        title: "프로덕트 테스트",
-        suggestionType: "RECOMMEND",
-      },
-    },
-    {
-      product: {
-        activated: true,
-        appRoute: null,
-        categoryId: "ce557633-b020-4a98-84c2-263fcd538b26",
-        clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
-        createdAt: "2024-01-22T12:27:10.669Z",
-        creative: {
-          id: "6b57b16c-6179-405c-9b72-fded52ff35ad",
-          mediaUrl:
-            "https://cafe24img.poxo.com/andar01/web/product/medium/202309/53b0ab2ed80680436a4f9d615e1e34d8.jpg", //"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
-          width: 1300,
-          height: 1120,
-          placementFormatRatio: "7X6",
-        },
-        data: {},
-        deepLink: null,
-        deletedAt: null,
-        endsAt: null,
-        id: "a7de3e3a-adcf-4698-9f9a-d7ed5dc6518d",
-        name: "프로덕트 테스트",
-        productId: null,
-        startsAt: "2024-01-23T01:10:00.000Z",
-        type: "image",
-        url: "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
-        title: "프로덕트 테스트",
-        suggestionType: "RECOMMEND",
-      },
-    },
-    {
-      product: {
-        activated: true,
-        appRoute: null,
-        categoryId: "ce557633-b020-4a98-84c2-263fcd538b26",
-        clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
-        createdAt: "2024-01-22T12:27:10.669Z",
-        creative: {
-          id: "6b57b16c-6179-405c-9b72-fded52ff35ad",
-          mediaUrl:
-            "https://cafe24img.poxo.com/andar01/web/product/medium/202309/53b0ab2ed80680436a4f9d615e1e34d8.jpg", //"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
-          width: 1300,
-          height: 1120,
-          placementFormatRatio: "7X6",
-        },
-        data: {},
-        deepLink: null,
-        deletedAt: null,
-        endsAt: null,
-        id: "a7de3e3a-adcf-4698-9f9a-d7ed5dc6518d",
-        name: "프로덕트 테스트",
-        productId: null,
-        startsAt: "2024-01-23T01:10:00.000Z",
-        type: "image",
-        url: "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
-        title: "프로덕트 테스트",
-        suggestionType: "RECOMMEND",
-      },
-    },
-    {
-      product: {
-        activated: true,
-        appRoute: null,
-        categoryId: "ce557633-b020-4a98-84c2-263fcd538b26",
-        clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
-        createdAt: "2024-01-22T12:27:10.669Z",
-        creative: {
-          id: "6b57b16c-6179-405c-9b72-fded52ff35ad",
-          mediaUrl:
-            "https://cafe24img.poxo.com/andar01/web/product/medium/202309/53b0ab2ed80680436a4f9d615e1e34d8.jpg", //"https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
-          width: 1300,
-          height: 1120,
-          placementFormatRatio: "7X6",
-        },
-        data: {},
-        deepLink: null,
-        deletedAt: null,
-        endsAt: null,
-        id: "a7de3e3a-adcf-4698-9f9a-d7ed5dc6518d",
-        name: "프로덕트 테스트",
-        productId: null,
-        startsAt: "2024-01-23T01:10:00.000Z",
-        type: "image",
-        url: "https://adcio-bucket-controller-public-dev-123456.s3.ap-northeast-2.amazonaws.com/banners/image/76dc12fa-5a73-4c90-bea5-d6578f9bc606/871f03f8-2c7765b4-5af9-4e32-95b5-af40d609d260",
-        title: "프로덕트 테스트",
-        suggestionType: "RECOMMEND",
-      },
-    },
-  ],
-};
-
 const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4, 6];
 
 const CATEGORY_IDS = {
-  total: "2018", // TODO: fix value to category name for server
+  total: "2018",
   women: "2017",
   men: "2022",
   junior: "2578",
@@ -814,6 +679,7 @@ const run = async () => {
       observer.disconnect();
       if (mutationsList.find((m) => m.type === "childList")) {
         document.querySelector(`.prd_basic`).style.visibility = "hidden";
+
         const categoryId =
           getCategoryNoFromCode(
             document.querySelector("#monthly-best")?.innerHTML,
