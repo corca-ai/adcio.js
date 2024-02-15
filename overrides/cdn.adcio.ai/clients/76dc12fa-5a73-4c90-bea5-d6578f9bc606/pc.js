@@ -193,10 +193,12 @@ const createAllSuggestions = (placements, customer) => {
 
 /**
  * @param {SuggestionDto['product']} product
+ * @param {string} categoryNo
  * @returns {HTMLElement}
  */
-const productToElement = (product) => {
+const productToElement = (product, categoryNo) => {
   //TODO: fix following res from api
+  const productHref = `${product.data.url}&cate_no=${category_no}&display_group=1`;
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
@@ -219,8 +221,8 @@ const productToElement = (product) => {
                     classList: ["prdimg", "thumbnail"],
                     attributes: {
                       style: `display: block;`,
-                      href: product.url,
-                      // name: "anchorBoxName_5752", TODO: 생략가능???
+                      href: productHref,
+                      name: `anchorBoxName_${product.data.idOnStore}`,
                     },
                     children: [
                       {
@@ -673,12 +675,13 @@ const injectBannerSuggestions = (suggestedData) => {
 
 /**
  * @param {SuggestionResponseDto[]} suggestedData
+ * @param {string} categoryNo
  */
-const injectProductSuggestions = (suggestedData) => {
+const injectProductSuggestions = (suggestedData, categoryNo) => {
   const { suggestions } = suggestedData;
 
   const elements = suggestions.map((suggestion) => {
-    const element = productToElement(suggestion.product); //TODO: fix index
+    const element = productToElement(suggestion.product, categoryNo); //TODO: fix index
 
     element.addEventListener("click", () =>
       adcioInstance.onClick(suggestion.logOptions),
@@ -798,9 +801,11 @@ const run = async () => {
       ) {
         document.querySelector(`.prd_basic`).style.visibility = "hidden";
         productSuggestions
-          .then((suggested) =>
-            injectProductSuggestions(suggested, bestCategory),
-          )
+          .then(async (suggested) => {
+            console.log("suggested", suggested);
+            const unduplicatedSuggestions = suggested; // TODO: filter out the products that are already in the grid
+            injectProductSuggestions(unduplicatedSuggestions, bestCategory);
+          })
           .catch((e) => console.error(e))
           .finally(
             () =>
