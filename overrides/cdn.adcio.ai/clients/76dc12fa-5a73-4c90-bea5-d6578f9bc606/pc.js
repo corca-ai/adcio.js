@@ -136,11 +136,11 @@ const MOCK_PRODUCT_SUGGESTED = {
 const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4, 6];
 
 const CATEGORY_IDS = {
-  prdlist01: "2018", // TODO: fix value to category name for server
-  prdlist02: "2017",
-  prdlist03: "2022",
-  prdlist04: "2578",
-  prdlist05: "2026",
+  total: "2018", // TODO: fix value to category name for server
+  women: "2017",
+  men: "2022",
+  junior: "2578",
+  acc: "2026",
 };
 
 const GRID_PLACEMENT_ID = "d1e900b9-37ee-4fc2-ab03-443b78059fbe"; // TODO: fix to andar id of product placement
@@ -169,7 +169,7 @@ const createAllSuggestions = (placements, customer) => {
 
       if (placement.id === GRID_PLACEMENT_ID) {
         Object.assign(params, {
-          categoryIdOnStore: CATEGORY_IDS.prdlist01,
+          categoryIdOnStore: CATEGORY_IDS.total,
         });
       }
 
@@ -182,11 +182,11 @@ const createAllSuggestions = (placements, customer) => {
 
 /**
  * @param {SuggestionDto['product']} product
- * @param {string} categoryNo
+ * @param {string} categoryId
  * @returns {HTMLElement}
  */
-const productToElement = (product, categoryNo) => {
-  const productHref = `${product.data.url}&cate_no=${categoryNo}&display_group=1`;
+const productToElement = (product, categoryId) => {
+  const productHref = `${product.data.url}&cate_no=${categoryId}&display_group=1`;
   const salePercent =
     ((product.price - product.data.discountprice.pc_discount_price) /
       product.price) *
@@ -461,7 +461,7 @@ const productToElement = (product, categoryNo) => {
                       "textBox",
                     ],
                     children:
-                      (categoryNo === CATEGORY_IDS.prdlist01 && // 카테고리 전체인 경우만 text box가 존재함
+                      (categoryId === CATEGORY_IDS.total && // 카테고리 전체인 경우만 text box가 존재함
                         product.data.additional_information
                           ?.filter(
                             (data) => data.name === "텍스트박스" && data.value,
@@ -686,13 +686,13 @@ const injectBannerSuggestions = (suggestedData) => {
 
 /**
  * @param {SuggestionResponseDto[]} suggestedData
- * @param {string} categoryNo
+ * @param {string} categoryId
  */
-const injectProductSuggestions = (suggestedData, categoryNo) => {
+const injectProductSuggestions = (suggestedData, categoryId) => {
   const { suggestions } = suggestedData;
 
   const elements = suggestions.map((suggestion) => {
-    const element = productToElement(suggestion.product, categoryNo); //TODO: fix index
+    const element = productToElement(suggestion.product, categoryId); //TODO: fix index
 
     element.addEventListener("click", () =>
       adcioInstance.onClick(suggestion.logOptions),
@@ -783,40 +783,33 @@ const run = async () => {
 
   if (allSuggestions.GRID) {
     // Product Suggestions success
-    let productSuggestions = allSuggestions.GRID;
-    let categoryId = CATEGORY_IDS.prdlist01; // category "전체"
-
-    await injectProductSuggestions(productSuggestions, categoryId);
+    await injectProductSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
     document.querySelector(`#mainBest`).style.visibility = "visible";
 
     // Observe reload of best category list items element
     const targetElement = document.querySelector("#monthly-best");
     const observeOptions = {
       childList: true,
-      attributes: true,
     };
     const mutationCallback = async (mutationsList, observer) => {
       observer.disconnect();
-      if (
-        mutationsList.find(
-          (m) => m.type === "childList" || m.type === "attributes",
-        )
-      ) {
+      if (mutationsList.find((m) => m.type === "childList")) {
         document.querySelector(`.prd_basic`).style.visibility = "hidden";
-        const categoryNo = getCategoryNoFromCode(
-          document.querySelector("#monthly-best")?.innerHTML,
-        );
-
+        const categoryId =
+          getCategoryNoFromCode(
+            document.querySelector("#monthly-best")?.innerHTML,
+          ) || CATEGORY_IDS.total;
+        console.log("categoryId", categoryId);
         adcioInstance
           .createSuggestion({
             ...customer,
-            categoryIdOnStore: categoryNo,
+            categoryIdOnStore: categoryId,
             placementId: GRID_PLACEMENT_ID,
           })
-          .then(async (suggested) => {
-            await injectProductSuggestions(suggested, categoryId);
-            // document.querySelector(".prd_basic").style.visibility = "visible";
-          })
+          .then(
+            async (suggested) =>
+              await injectProductSuggestions(suggested, categoryId),
+          )
           .finally(
             () =>
               (document.querySelector(".prd_basic").style.visibility =
