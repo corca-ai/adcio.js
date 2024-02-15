@@ -1,5 +1,9 @@
 const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4, 6];
 
+/**
+ * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
+ */
+
 const CATEGORY_IDS = {
   total: "2018",
   women: "2017",
@@ -8,17 +12,14 @@ const CATEGORY_IDS = {
   acc: "2026",
 };
 
-const GRID_PLACEMENT_ID = "d1e900b9-37ee-4fc2-ab03-443b78059fbe"; // TODO: fix to andar id of product placement
+const GRID_PLACEMENT_ID = "https://andar01.cafe24.com/skin-skin159";
+// test@test.com "d1e900b9-37ee-4fc2-ab03-443b78059fbe"; // TODO: fix to andar id of product placement
 
 console.log("sdk 브라우저 테스트!");
 const adcioInstance = new adcio.Adcio({
-  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606", // test@test.com
+  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606", //andar
 });
-
-/**
- * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
- */
-
+// "76dc12fa-5a73-4c90-bea5-d6578f9bc606", // test@test.com
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
  * @param {CustomerWithId} customer

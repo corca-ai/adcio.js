@@ -25,7 +25,7 @@ export class Adcio {
 
   constructor(config: AdcioParams) {
     this.config = {
-      apiEndpoint: "https://api-dev.adcio.ai",
+      apiEndpoint: "https://api.adcio.ai",
       receiverEndpoint: "https://receiver.adcio.ai",
       ...config,
     };
