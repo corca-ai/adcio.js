@@ -186,7 +186,7 @@ const createAllSuggestions = (placements, customer) => {
  * @returns {HTMLElement}
  */
 const productToElement = (product, categoryId) => {
-  const productHref = `${product.data.url}&cate_no=${categoryId}&display_group=1`;
+  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`;
   const salePercent =
     ((product.price - product.data.discountprice.pc_discount_price) /
       product.price) *
@@ -756,6 +756,25 @@ const getCategoryNoFromCode = (code) => {
   return match.length >= 2 ? match[1] : null;
 };
 
+/**
+ * @param {string} elements
+ * @returns {Array<string>}
+ */
+const getAllIdOnStore = (elements) => {
+  const idOnStores = [];
+  elements.forEach((element) => {
+    if (!element.id) {
+      return;
+    }
+    const regex = /anchorBoxId_(\d+)/;
+    const match = element.id.match(regex);
+    if (match.length >= 2) {
+      idOnStores.push(match[1]);
+    }
+  });
+  return idOnStores;
+};
+
 const run = async () => {
   await adcio.waitForElement("#mainBest");
   document.querySelector(`#mainBest`).style.visibility = "hidden";
@@ -799,7 +818,7 @@ const run = async () => {
           getCategoryNoFromCode(
             document.querySelector("#monthly-best")?.innerHTML,
           ) || CATEGORY_IDS.total;
-        console.log("categoryId", categoryId);
+
         adcioInstance
           .createSuggestion({
             ...customer,
