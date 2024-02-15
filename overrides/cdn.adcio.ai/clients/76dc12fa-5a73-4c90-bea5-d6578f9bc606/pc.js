@@ -135,7 +135,7 @@ const MOCK_PRODUCT_SUGGESTED = {
 
 const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4, 6];
 
-const BEST_CATEGORY_DATA = {
+const CATEGORY_IDS = {
   prdlist01: "2018", // TODO: fix value to category name for server
   prdlist02: "2017",
   prdlist03: "2022",
@@ -180,7 +180,7 @@ const createAllSuggestions = (placements, customer) => {
 
       if (placement.id === GRID_PLACEMENT_ID) {
         Object.assign(params, {
-          categoryIdOnStore: BEST_CATEGORY_DATA.prdlist01,
+          categoryIdOnStore: CATEGORY_IDS.prdlist01,
         });
       }
 
@@ -198,7 +198,7 @@ const createAllSuggestions = (placements, customer) => {
  */
 const productToElement = (product, categoryNo) => {
   //TODO: fix following res from api
-  const productHref = `${product.data.url}&cate_no=${category_no}&display_group=1`;
+  const productHref = `${product.data.url}&cate_no=${categoryNo}&display_group=1`;
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
@@ -222,23 +222,24 @@ const productToElement = (product, categoryNo) => {
                     attributes: {
                       style: `display: block;`,
                       href: productHref,
-                      name: `anchorBoxName_${product.data.idOnStore}`,
+                      name: `anchorBoxName_${product.idOnStore}`,
                     },
                     children: [
                       {
                         tag: "img",
                         classList: ["overimg"],
                         attributes: {
-                          src: product?.data?.small_image, //product.image,
-                          // id: "", //TODO: 생략가능???
-                          alt: product.title,
+                          src: product?.data?.small_image,
+                          alt: product.name,
+                          id: `eListPrdImage${product.idOnStore}_1`,
                         },
                       },
                       {
                         tag: "img",
                         attributes: {
-                          src: product?.data?.tiny_image, //product.image,
-                          alt: product.title,
+                          src: product?.data?.tiny_image,
+                          alt: product.name,
+                          id: `eListPrdImage${product.idOnStore}_1`,
                         },
                       },
                     ],
@@ -261,8 +262,8 @@ const productToElement = (product, categoryNo) => {
                 classList: ["detail_review"],
                 attributes: {
                   href: product.url,
-                  "vreview-product-id": "TODO",
-                  "vreview-dom-id": "TODO",
+                  "vreview-product-id": product.idOnStore,
+                  // "vreview-dom-id": "TODO",
                 },
                 children: [
                   {
@@ -275,12 +276,12 @@ const productToElement = (product, categoryNo) => {
                         attributes: {
                           style: "margin-top: 6px;",
                         },
-                        children: [
-                          {
-                            tag: "span",
-                            textContent: "리뷰 00000",
-                          },
-                        ],
+                        // children: [
+                        //   {
+                        //     tag: "span",
+                        //     textContent: "리뷰 00000", // suggestion에서 review count 없음
+                        //   },
+                        // ],
                       },
                     ],
                   },
@@ -289,7 +290,7 @@ const productToElement = (product, categoryNo) => {
               {
                 tag: "p",
                 classList: ["model"],
-                textContent: "AMF8L-06_AMF9L-07", //TODO: fix
+                textContent: product.data.model_name, //TODO: fix
               },
               {
                 tag: "p",
@@ -297,7 +298,7 @@ const productToElement = (product, categoryNo) => {
                 children: [
                   {
                     tag: "a",
-                    attributes: { href: product.url },
+                    attributes: { href: productHref },
                     children: [
                       {
                         tag: "span",
@@ -309,7 +310,7 @@ const productToElement = (product, categoryNo) => {
                             attributes: {
                               style: "font-size:14px;color:#000000;",
                             },
-                            textContent: "상품명",
+                            textContent: product.name,
                           },
                         ],
                       },
@@ -322,7 +323,7 @@ const productToElement = (product, categoryNo) => {
                             attributes: {
                               style: "font-size:14px;color:#000000;",
                             },
-                            textContent: product.title,
+                            textContent: product.name,
                           },
                         ],
                       },
@@ -345,7 +346,15 @@ const productToElement = (product, categoryNo) => {
                   {
                     tag: "span",
                     classList: ["sale"],
-                    children: [{ tag: "strong", textContent: "0,000원" }],
+                    children: [
+                      {
+                        tag: "strong",
+                        textContent: `${Number(
+                          product.data.discountprice.pc_discount_price ||
+                            product.price,
+                        ).toLocaleString()}원`,
+                      },
+                    ],
                   },
                   {
                     tag: "span",
@@ -354,7 +363,15 @@ const productToElement = (product, categoryNo) => {
                       "product_price0,000원", //TODO: fix to follow prices after api updated
                       "displaynone12displaynone",
                     ],
-                    children: [{ tag: "strong", textContent: "1,111원" }],
+                    children: [
+                      {
+                        tag: "strong",
+                        textContent: `${
+                          !!product.data.discountprice.pc_discount_price &&
+                          Number(product.price).toLocaleString() + "원"
+                        }`,
+                      },
+                    ],
                   },
                   {
                     tag: "span",
@@ -736,11 +753,9 @@ const observeUntilUnload = (
  * @param {(categorySelected:string)=> void} callback
  */
 const addEventToBestCategoryBtn = (callback) => {
-  Object.keys(BEST_CATEGORY_DATA).forEach((moduleName) => {
+  Object.keys(CATEGORY_IDS).forEach((moduleName) => {
     const element = document.querySelector(`[module-name="${moduleName}"]`);
-    element.addEventListener("click", () =>
-      callback(BEST_CATEGORY_DATA[moduleName]),
-    );
+    element.addEventListener("click", () => callback(CATEGORY_IDS[moduleName]));
   });
 };
 
@@ -772,18 +787,18 @@ const run = async () => {
   if (allSuggestions.GRID) {
     // Product Suggestions success
     let productSuggestions = allSuggestions.GRID;
-    let bestCategory = BEST_CATEGORY_DATA.prdlist01; // category "전체"
+    let categoryId = CATEGORY_IDS.prdlist01; // category "전체"
 
-    await injectProductSuggestions(productSuggestions);
+    await injectProductSuggestions(productSuggestions, categoryId);
     document.querySelector(`#mainBest`).style.visibility = "visible";
 
-    addEventToBestCategoryBtn(async (bestCategoryData) => {
+    addEventToBestCategoryBtn(async (clickedCategoryId) => {
       productSuggestions = adcioInstance.createSuggestion({
         ...customer,
-        categoryIdOnStore: bestCategoryData,
+        categoryIdOnStore: clickedCategoryId,
         placementId: GRID_PLACEMENT_ID,
       });
-      bestCategory = bestCategoryData;
+      categoryId = clickedCategoryId;
     });
 
     // Observe reload of best category list items element
@@ -804,7 +819,7 @@ const run = async () => {
           .then(async (suggested) => {
             console.log("suggested", suggested);
             const unduplicatedSuggestions = suggested; // TODO: filter out the products that are already in the grid
-            injectProductSuggestions(unduplicatedSuggestions, bestCategory);
+            injectProductSuggestions(unduplicatedSuggestions, categoryId);
           })
           .catch((e) => console.error(e))
           .finally(
