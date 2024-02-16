@@ -1,5 +1,3 @@
-const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4];
-
 /**
  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
  */
@@ -13,6 +11,8 @@ const CATEGORY_IDS = {
 };
 
 const GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
+
+const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4]; // TODO: delete and replace before add script
 
 console.log("sdk 브라우저 테스트!");
 const adcioInstance = new adcio.Adcio({
@@ -60,7 +60,7 @@ const productToElement = (product, categoryId) => {
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
-    attributes: { "vreview-dom-embeded": true, "data-adcio-id": true },
+    attributes: { "vreview-dom-embeded": true, "data-adcio-id": true }, //Adcio attribute to disctinct ADCIO elements from others.
     children: [
       {
         tag: "div",
@@ -69,7 +69,6 @@ const productToElement = (product, categoryId) => {
           {
             tag: "div",
             classList: ["img"],
-            attributes: { "data-adcio-img": true },
             children: [
               {
                 tag: "div",
@@ -473,10 +472,10 @@ const getPlacementsAndCustomer = async () => {
 
 /**
  * @param {NodeList<Element>} originalElements
- * @param {Array<number>} adcioGridIndexes
  * @param {Array<Element>} newElements
+ * @param {Array<number>} adcioGridIndexes
  */
-const swapElements = (originalElements, adcioGridIndexes, newElements) => {
+const swapElements = (originalElements, newElements, adcioGridIndexes) => {
   originalElements.forEach((element, index) => {
     if (adcioGridIndexes.includes(index) && newElements.length) {
       const newElement = newElements.shift();
@@ -488,16 +487,15 @@ const swapElements = (originalElements, adcioGridIndexes, newElements) => {
 
 /**
  * @param {NodeList<Element>} originalElements
- * @param {Array<number>} indexes
- * @param {NodeList<Element>} newElements
+ * @param {Array<Element>} newElements
+ * @param {Array<number>} adcioGridIndexes
  */
-const insertElements = (originalElements, indexes, newElements) => {
+const insertElements = (originalElements, newElements, adcioGridIndexes) => {
   const originElementsArr = [...originalElements];
-  const newElementsArr = [...newElements];
 
   originalElements.forEach((element, index) => {
-    if (indexes.includes(index) && newElementsArr.length) {
-      const newElement = newElementsArr.shift();
+    if (adcioGridIndexes.includes(index) && newElements.length) {
+      const newElement = newElements.shift();
       element.outerHTML = newElement.outerHTML;
       return;
     }
@@ -508,7 +506,7 @@ const insertElements = (originalElements, indexes, newElements) => {
 };
 
 /**
- * @param {Array<SuggestionResponseDto>} suggestedData
+ * @param {SuggestionResponseDto} suggestedData
  */
 const injectBannerSuggestions = (suggestedData) => {
   const { suggestions } = suggestedData;
@@ -543,14 +541,15 @@ const injectBannerSuggestions = (suggestedData) => {
 };
 
 /**
- * @param {SuggestionResponseDto[]} suggestedData
+ * @param {SuggestionResponseDto} suggestedData
  * @param {string} categoryId
+ * @param {Array<number>} adcioGridIndexes
  */
-const injectProductSuggestions = (suggestedData, categoryId) => {
+const injectGridSuggestions = (suggestedData, categoryId, adcioGridIndexes) => {
   const { suggestions } = suggestedData;
 
   const elements = suggestions.map((suggestion) => {
-    const element = productToElement(suggestion.product, categoryId); //TODO: fix index
+    const element = productToElement(suggestion.product, categoryId);
 
     element.addEventListener("click", () =>
       adcioInstance.onClick(suggestion.logOptions),
@@ -571,46 +570,29 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
   ) {
     swapElements(
       document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-      MOCK_SELECTED_GRID_INDEXES,
       elements,
+      adcioGridIndexes,
     );
     return;
   }
 
   insertElements(
     document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-    MOCK_SELECTED_GRID_INDEXES,
     elements,
+    adcioGridIndexes,
   );
 };
 
 /**
- * @param {MutationCallback} mutationCallback
- * @param {Node} targetElement
- * @param {MutationObserverInit | undefined} [observeOptions]
- */
-const observeUntilUnload = (
-  mutationCallback,
-  targetElement,
-  observeOptions,
-) => {
-  const observer = new MutationObserver(mutationCallback);
-  observer.observe(targetElement, observeOptions);
-  window.addEventListener("beforeunload", () => {
-    observer.disconnect();
-  });
-};
-
-/**
- * @param {string} code
+ * @param {string} html
  * @returns {string | null}
  */
-const getCategoryIdFromHTML = (code) => {
-  if (!code) {
+const getCategoryIdFromHTML = (html) => {
+  if (!html) {
     return null;
   }
   const regex = /\$cate_no\s*=\s*(\d+)/;
-  const match = code.match(regex);
+  const match = html.match(regex);
   return match.length >= 2 ? match[1] : null;
 };
 
@@ -674,7 +656,11 @@ const run = async () => {
     injectBannerSuggestions(allSuggestions.BANNER);
   }
   if (allSuggestions.GRID) {
-    await injectProductSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
+    await injectGridSuggestions(
+      allSuggestions.GRID,
+      CATEGORY_IDS.total,
+      MOCK_SELECTED_GRID_INDEXES,
+    );
     await createOrFixRankElement(".img");
   }
   document.querySelector(`#mainBest`).style.visibility = "visible";
@@ -701,7 +687,11 @@ const run = async () => {
           placementId: GRID_PLACEMENT_ID,
         })
         .then(async (suggested) => {
-          await injectProductSuggestions(suggested, categoryId);
+          await injectGridSuggestions(
+            suggested,
+            categoryId,
+            MOCK_SELECTED_GRID_INDEXES,
+          );
           await createOrFixRankElement(".img");
         })
         .finally(
