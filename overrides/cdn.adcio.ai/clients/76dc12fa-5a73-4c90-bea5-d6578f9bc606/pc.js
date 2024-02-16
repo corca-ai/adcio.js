@@ -51,7 +51,7 @@ const createAllSuggestions = (placements, customer) => {
  * @returns {HTMLElement}
  */
 const productToElement = (product, categoryId) => {
-  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`;
+  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
   const salePercent =
     ((product.price - product.data.discountprice.pc_discount_price) /
       product.price) *
@@ -152,20 +152,6 @@ const productToElement = (product, categoryId) => {
                     children: [
                       {
                         tag: "span",
-                        classList: ["title", "displaynone"],
-                        textContent: " :",
-                        children: [
-                          {
-                            tag: "span",
-                            attributes: {
-                              style: "font-size:14px;color:#000000;",
-                            },
-                            textContent: product.name,
-                          },
-                        ],
-                      },
-                      {
-                        tag: "span",
                         classList: ["product_name"],
                         children: [
                           {
@@ -233,18 +219,12 @@ const productToElement = (product, categoryId) => {
                       },
                     ],
                   },
-                  {
-                    tag: "span",
-                    classList: ["customer", "displaynone"],
-                    children: [{ tag: "strong", textContent: "0원" }],
-                  },
                 ],
               },
               {
                 tag: "div",
                 classList: ["color_review"],
                 children: [
-                  { tag: "div", classList: ["colorchip", "displaynone"] },
                   { tag: "div", classList: ["colorchip_count"] },
                   { tag: "div", classList: ["colorchip_box"] },
                 ],
@@ -265,61 +245,12 @@ const productToElement = (product, categoryId) => {
                   {
                     tag: "li",
                     classList: [
-                      "displaynone",
-                      "display_소비자가",
-                      "xans-record-",
-                    ],
-                  },
-                  {
-                    tag: "li",
-                    classList: [
-                      "displaynone",
-                      "display_판매가",
-                      "xans-record-",
-                    ],
-                  },
-                  {
-                    tag: "li",
-                    classList: [
-                      "displaynone",
-                      "display_모델명",
-                      "xans-record-",
-                    ],
-                  },
-                  {
-                    tag: "li",
-                    classList: ["displaynone", "display_소재", "xans-record-"],
-                  },
-                  {
-                    tag: "li",
-                    classList: ["displaynone", "display_색상", "xans-record-"],
-                  },
-                  {
-                    tag: "li",
-                    classList: [
-                      "displaynone",
-                      "display_A/S",
-                      "책임자",
-                      "xans-record-",
-                    ],
-                  },
-                  {
-                    tag: "li",
-                    classList: [
-                      "displaynone",
-                      "display_품질보증기간",
-                      "xans-record-",
-                    ],
-                  },
-                  {
-                    tag: "li",
-                    classList: [
                       "display_텍스트박스",
                       "xans-record-",
                       "textBox",
                     ],
                     children:
-                      (categoryId === CATEGORY_IDS.total && // 카테고리 전체인 경우만 text box가 존재함
+                      (categoryId === CATEGORY_IDS.total && // 카테고리 전체인 경우에만 text box가 존재함
                         product.data.additional_information
                           ?.filter(
                             (data) => data.name === "텍스트박스" && data.value,
@@ -333,19 +264,7 @@ const productToElement = (product, categoryId) => {
                           })) ||
                       [],
                   },
-                  {
-                    tag: "li",
-                    classList: [
-                      "displaynone",
-                      "display_할인노출여부",
-                      "xans-record-",
-                    ],
-                  },
                 ],
-              },
-              {
-                tag: "div",
-                classList: ["displaynone"],
               },
             ],
           },
