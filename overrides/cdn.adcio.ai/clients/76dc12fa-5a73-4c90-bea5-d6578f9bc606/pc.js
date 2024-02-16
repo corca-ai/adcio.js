@@ -696,6 +696,9 @@ const run = async () => {
 
   observeElemChanges(gridListElement, gridListObserveOptions, async () => {
     document.querySelector(`.prd_basic`).style.visibility = "hidden";
+    document
+      .querySelectorAll(".rankBadge")
+      ?.forEach((e) => (e.style.visibility = "hidden")); // hide rank badge for UX
 
     const categoryId =
       getCategoryNoFromCode(
