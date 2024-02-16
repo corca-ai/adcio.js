@@ -640,6 +640,21 @@ const getCategoryNoFromCode = (code) => {
 //   return idOnStores;
 // };
 
+/**
+ * @param {string} selectors
+ */
+const createOrFixRankElement = (selectors) => {
+  const elements = document.querySelectorAll(selectors);
+  elements.forEach((element, index) => {
+    if (element.querySelector(".rankBadge") == null) {
+      const rankBadge = document.createElement("span");
+      rankBadge.classList.add("rankBadge");
+      element.appendChild(rankBadge);
+    }
+    element.querySelector(".rankBadge").textContent = index + 1;
+  });
+};
+
 const run = async () => {
   await adcio.waitForElement("#mainBest");
   document.querySelector(`#mainBest`).style.visibility = "hidden";
@@ -666,9 +681,7 @@ const run = async () => {
   }
   if (allSuggestions.GRID) {
     await injectProductSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
-    await document
-      .querySelectorAll(".rankBadge")
-      .forEach((e, i) => (e.textContent = i + 1));
+    await createOrFixRankElement(".img");
   }
   document.querySelector(`#mainBest`).style.visibility = "visible";
 
@@ -694,9 +707,7 @@ const run = async () => {
         })
         .then(async (suggested) => {
           await injectProductSuggestions(suggested, categoryId);
-          await document
-            .querySelectorAll(".rankBadge")
-            .forEach((e, i) => (e.textContent = i + 1));
+          await createOrFixRankElement(".img");
         })
         .finally(async () => {
           document.querySelector(".prd_basic").style.visibility = "visible";
