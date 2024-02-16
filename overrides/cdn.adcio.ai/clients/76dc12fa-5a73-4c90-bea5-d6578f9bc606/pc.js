@@ -520,7 +520,6 @@ const getCategoryIdFromHTML = (html) => {
   return match.length >= 2 ? match[1] : null;
 };
 
-//TODO: add after api development
 /**
  * @param {string} selector
  * @returns {Array<string>}
