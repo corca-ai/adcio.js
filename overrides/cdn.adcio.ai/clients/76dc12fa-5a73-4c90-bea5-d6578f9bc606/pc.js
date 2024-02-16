@@ -55,10 +55,10 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
  */
 const productToElement = (product, categoryId) => {
   const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
+  const retailPrice = product.data.retail_price || product.price;
   const salePercent =
-    ((product.data.retail_price -
-      product.data.discountprice.pc_discount_price) /
-      product.data.retail_price) *
+    ((retailPrice - product.data.discountprice.pc_discount_price) /
+      retailPrice) *
     100;
 
   return adcio.createNestedElement({
@@ -214,15 +214,17 @@ const productToElement = (product, categoryId) => {
                       ).toLocaleString()}원`,
                       "displaynone12displaynone",
                     ],
-                    children: [
-                      {
-                        tag: "strong",
-                        textContent: `${
-                          Number(product.data.retail_price).toLocaleString() +
-                          "원"
-                        }`,
-                      },
-                    ],
+                    children:
+                      salePercent < 1
+                        ? []
+                        : [
+                            {
+                              tag: "strong",
+                              textContent: `${
+                                Number(retailPrice).toLocaleString() + "원"
+                              }`,
+                            },
+                          ],
                   },
                 ],
               },
@@ -647,3 +649,4 @@ const run = async () => {
 };
 
 run();
+document.querySelector(`#mainBest`).style.visibility = "visible";
