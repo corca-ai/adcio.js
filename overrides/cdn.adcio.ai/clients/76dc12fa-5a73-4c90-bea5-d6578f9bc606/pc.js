@@ -1,4 +1,4 @@
-const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4, 6];
+const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4];
 
 /**
  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
@@ -640,29 +640,6 @@ const getCategoryNoFromCode = (code) => {
 //   return idOnStores;
 // };
 
-/**
- * @param {Element} targetElement
- * @param {MutationRecord[]} observeOptions
- * @param {MutationCallback} mutationCallback
- */
-const observeElemChanges = (
-  targetElement,
-  observeOptions,
-  mutationCallback,
-) => {
-  const mutationTypes = Object.keys(observeOptions).filter(
-    (k) => observeOptions[k],
-  );
-  const callback = async (mutationsList, observer) => {
-    observer.disconnect();
-    if (mutationsList.find((m) => mutationTypes.includes(m.type))) {
-      mutationCallback(mutationsList, observer);
-    }
-    observer.observe(targetElement, observeOptions);
-  };
-  observeUntilUnload(callback, targetElement, observeOptions);
-};
-
 const run = async () => {
   await adcio.waitForElement("#mainBest");
   document.querySelector(`#mainBest`).style.visibility = "hidden";
@@ -696,33 +673,43 @@ const run = async () => {
   document.querySelector(`#mainBest`).style.visibility = "visible";
 
   // Observe Grid List Changes and inject product suggestions
-  const gridListElement = document.querySelector("#monthly-best");
-  const gridListObserveOptions = {
+  const targetElement = document.querySelector("#monthly-best");
+  const observeOptions = {
     childList: true,
   };
+  const mutationCallback = async (mutationsList, observer) => {
+    observer.disconnect();
 
-  observeElemChanges(gridListElement, gridListObserveOptions, async () => {
-    document.querySelector(`.prd_basic`).style.visibility = "hidden";
+    if (mutationsList.find((m) => m.type === "childList")) {
+      document.querySelector(`.prd_basic`).style.visibility = "hidden";
+      const categoryId =
+        getCategoryNoFromCode(
+          document.querySelector("#monthly-best")?.innerHTML,
+        ) || CATEGORY_IDS.total;
+      adcioInstance
+        .createSuggestion({
+          ...customer,
+          categoryIdOnStore: categoryId,
+          placementId: GRID_PLACEMENT_ID,
+        })
+        .then(async (suggested) => {
+          await injectProductSuggestions(suggested, categoryId);
+          document
+            .querySelectorAll(".rankBadge")
+            .forEach((e, i) => (e.textContent = i + 1));
+        })
+        .finally(async () => {
+          document.querySelector(".prd_basic").style.visibility = "visible";
+        });
+    }
 
-    const categoryId =
-      getCategoryNoFromCode(
-        document.querySelector("#monthly-best")?.innerHTML,
-      ) || CATEGORY_IDS.total;
-    adcioInstance
-      .createSuggestion({
-        ...customer,
-        categoryIdOnStore: categoryId,
-        placementId: GRID_PLACEMENT_ID,
-      })
-      .then(async (suggested) => {
-        await injectProductSuggestions(suggested, categoryId);
-        document
-          .querySelectorAll(".rankBadge")
-          .forEach((e, i) => (e.textContent = i + 1));
-      })
-      .finally(async () => {
-        document.querySelector(".prd_basic").style.visibility = "visible";
-      });
+    observer.observe(targetElement, observeOptions);
+  };
+
+  const observer = new MutationObserver(mutationCallback);
+  observer.observe(targetElement, observeOptions);
+  window.addEventListener("beforeunload", () => {
+    observer.disconnect();
   });
 
   //Collect Logs
