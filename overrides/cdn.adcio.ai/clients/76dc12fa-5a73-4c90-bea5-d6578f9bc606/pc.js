@@ -26,7 +26,7 @@ const adcioInstance = new adcio.Adcio({
  */
 const createAllSuggestions = (placements, customer) => {
   return Promise.allSettled(
-    placements.map(async (placement, index) => {
+    placements.map(async (placement) => {
       const params = {
         ...customer,
         placementId: placement.id,
@@ -38,7 +38,7 @@ const createAllSuggestions = (placements, customer) => {
         });
       }
 
-      return await adcioInstance.createSuggestion({
+      return adcioInstance.createSuggestion({
         ...params,
       });
     }),
@@ -270,7 +270,6 @@ const productToElement = (product, categoryId) => {
                       "display_소비자가",
                       "xans-record-",
                     ],
-                    // children: [],//displaynone 되어서 생략함
                   },
                   {
                     tag: "li",
@@ -279,7 +278,6 @@ const productToElement = (product, categoryId) => {
                       "display_판매가",
                       "xans-record-",
                     ],
-                    // children: [],//displaynone 되어서 생략함
                   },
                   {
                     tag: "li",
@@ -288,17 +286,14 @@ const productToElement = (product, categoryId) => {
                       "display_모델명",
                       "xans-record-",
                     ],
-                    // children: [],//displaynone 되어서 생략함
                   },
                   {
                     tag: "li",
                     classList: ["displaynone", "display_소재", "xans-record-"],
-                    // children: [],//displaynone 되어서 생략함
                   },
                   {
                     tag: "li",
                     classList: ["displaynone", "display_색상", "xans-record-"],
-                    // children: [],//displaynone 되어서 생략함
                   },
                   {
                     tag: "li",
@@ -307,7 +302,7 @@ const productToElement = (product, categoryId) => {
                       "display_A/S",
                       "책임자",
                       "xans-record-",
-                    ], // children: [],//displaynone 되어서 생략함
+                    ],
                   },
                   {
                     tag: "li",
@@ -316,7 +311,6 @@ const productToElement = (product, categoryId) => {
                       "display_품질보증기간",
                       "xans-record-",
                     ],
-                    // children: [],//displaynone 되어서 생략함
                   },
                   {
                     tag: "li",
@@ -347,14 +341,12 @@ const productToElement = (product, categoryId) => {
                       "display_할인노출여부",
                       "xans-record-",
                     ],
-                    // children: [],//displaynone 되어서 생략함
                   },
                 ],
               },
               {
                 tag: "div",
                 classList: ["displaynone"],
-                // children: [],//displaynone 되어서 생략함
               },
             ],
           },
@@ -460,6 +452,7 @@ const appendChildForSelected = (elements, selectors) => {
  */
 const getPlacementsAndCustomer = async () => {
   const pageName = `skin159_${adcio.getMeta({
+    //test skin(without banner): 159, production(with banner): 135
     name: "path_role",
   })}`;
 
@@ -612,7 +605,7 @@ const observeUntilUnload = (
  * @param {string} code
  * @returns {string | null}
  */
-const getCategoryNoFromCode = (code) => {
+const getCategoryIdFromHTML = (code) => {
   if (!code) {
     return null;
   }
@@ -621,6 +614,7 @@ const getCategoryNoFromCode = (code) => {
   return match.length >= 2 ? match[1] : null;
 };
 
+//TODO: add after api development
 // /**
 //  * @param {string} elements
 //  * @returns {Array<string>}
@@ -641,10 +635,10 @@ const getCategoryNoFromCode = (code) => {
 // };
 
 /**
- * @param {string} selectors
+ * @param {string} parentElementSelector
  */
-const createOrFixRankElement = (selectors) => {
-  const elements = document.querySelectorAll(selectors);
+const createOrFixRankElement = (parentElementSelector) => {
+  const elements = document.querySelectorAll(parentElementSelector);
   elements.forEach((element, index) => {
     if (element.querySelector(".rankBadge") == null) {
       const rankBadge = document.createElement("span");
@@ -685,7 +679,7 @@ const run = async () => {
   }
   document.querySelector(`#mainBest`).style.visibility = "visible";
 
-  // Observe Grid List Changes and inject product suggestions and fix rank badges
+  // Observe Grid List elements changes and inject product suggestions(+fix rank badges).
   const targetElement = document.querySelector("#monthly-best");
   const observeOptions = {
     childList: true,
@@ -696,9 +690,10 @@ const run = async () => {
     if (mutationsList.find((m) => m.type === "childList")) {
       document.querySelector(`.prd_basic`).style.visibility = "hidden";
       const categoryId =
-        getCategoryNoFromCode(
+        getCategoryIdFromHTML(
           document.querySelector("#monthly-best")?.innerHTML,
         ) || CATEGORY_IDS.total;
+
       adcioInstance
         .createSuggestion({
           ...customer,
@@ -709,9 +704,10 @@ const run = async () => {
           await injectProductSuggestions(suggested, categoryId);
           await createOrFixRankElement(".img");
         })
-        .finally(async () => {
-          document.querySelector(".prd_basic").style.visibility = "visible";
-        });
+        .finally(
+          () =>
+            (document.querySelector(".prd_basic").style.visibility = "visible"),
+        );
     }
 
     observer.observe(targetElement, observeOptions);
