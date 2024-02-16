@@ -163,7 +163,7 @@ const productToElement = (product, categoryId) => {
                             attributes: {
                               style: "font-size:14px;color:#000000;",
                             },
-                            textContent: "[ADCIO]" + product.name,
+                            textContent: product.name,
                           },
                         ],
                       },
