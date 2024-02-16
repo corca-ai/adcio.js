@@ -105,6 +105,10 @@ const productToElement = (product, categoryId) => {
                   },
                 ],
               },
+              {
+                tag: "span",
+                classList: ["rankBadge"],
+              },
             ],
           },
           {
@@ -685,6 +689,9 @@ const run = async () => {
   }
   if (allSuggestions.GRID) {
     await injectProductSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
+    document
+      .querySelectorAll(".rankBadge")
+      .forEach((e, i) => (e.textContent = i + 1));
   }
   document.querySelector(`#mainBest`).style.visibility = "visible";
 
@@ -696,9 +703,6 @@ const run = async () => {
 
   observeElemChanges(gridListElement, gridListObserveOptions, async () => {
     document.querySelector(`.prd_basic`).style.visibility = "hidden";
-    document
-      .querySelectorAll(".rankBadge")
-      ?.forEach((e) => (e.style.visibility = "hidden")); // hide rank badge for UX
 
     const categoryId =
       getCategoryNoFromCode(
@@ -712,38 +716,12 @@ const run = async () => {
       })
       .then(async (suggested) => {
         await injectProductSuggestions(suggested, categoryId);
+        document
+          .querySelectorAll(".rankBadge")
+          .forEach((e, i) => (e.textContent = i + 1));
       })
       .finally(async () => {
         document.querySelector(".prd_basic").style.visibility = "visible";
-      });
-  });
-
-  // reagrrange rank badge after adcio product elements are rendered
-  const rankBadgeTarget = document.querySelector("#monthly-best");
-  const rankBadgeObserveOptions = {
-    childList: true,
-    subtree: true,
-    textContent: true,
-  };
-  observeElemChanges(rankBadgeTarget, rankBadgeObserveOptions, async () => {
-    await adcio.waitForElement("[data-adcio-id]"); // wait for adcio product elements for UX
-    await adcio.waitForElement(".rankBadge");
-    document
-      .querySelectorAll(".rankBadge")
-      .forEach((e) => (e.style.visibility = "hidden"));
-    let rank = 1;
-
-    document
-      .querySelector("#monthly-best")
-      .querySelectorAll(".img")
-      .forEach((e) => {
-        if (
-          e.attributes.getNamedItem("data-adcio-img") == null &&
-          !!e.querySelector(".rankBadge")
-        ) {
-          e.querySelector(".rankBadge").textContent = rank++;
-          e.querySelector(".rankBadge").style.visibility = "visible";
-        }
       });
   });
 
