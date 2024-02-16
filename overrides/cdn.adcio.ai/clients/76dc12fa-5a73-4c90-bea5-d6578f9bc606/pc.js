@@ -666,13 +666,13 @@ const run = async () => {
   }
   if (allSuggestions.GRID) {
     await injectProductSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
-    document
+    await document
       .querySelectorAll(".rankBadge")
       .forEach((e, i) => (e.textContent = i + 1));
   }
   document.querySelector(`#mainBest`).style.visibility = "visible";
 
-  // Observe Grid List Changes and inject product suggestions
+  // Observe Grid List Changes and inject product suggestions and fix rank badges
   const targetElement = document.querySelector("#monthly-best");
   const observeOptions = {
     childList: true,
@@ -694,7 +694,7 @@ const run = async () => {
         })
         .then(async (suggested) => {
           await injectProductSuggestions(suggested, categoryId);
-          document
+          await document
             .querySelectorAll(".rankBadge")
             .forEach((e, i) => (e.textContent = i + 1));
         })
