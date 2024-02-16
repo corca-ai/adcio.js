@@ -14,7 +14,7 @@ import {
 import { suggestionResponse } from "./suggestion.demo";
 
 const RECEIVER_API_BASE_URL = "https://receiver-dev.adcio.ai"; // MUST TODO: fix before merge  "https://receiver.adcio.ai"
-const ADCIO_API_BASE_URL = "https://api.adcio.ai"; // MUST TODO: fix before merge  "https://api.adcio.ai"
+const ADCIO_API_BASE_URL = "https://api-dev.adcio.ai"; // MUST TODO: fix before merge  "https://api.adcio.ai"
 
 export function handlers() {
   return [

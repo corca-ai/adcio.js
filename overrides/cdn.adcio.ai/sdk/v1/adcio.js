@@ -7727,7 +7727,7 @@
           if (!(t instanceof e))
             throw new TypeError("Cannot call a class as a function");
         }
-        var ie = "https://api.adcio.ai".replace(/\/+$/, ""),
+        var ie = "https://api-dev.adcio.ai".replace(/\/+$/, ""),
           ae = ne(function t(e) {
             var r =
                 arguments.length > 1 && void 0 !== arguments[1]
@@ -13031,7 +13031,7 @@
             })(this, t),
               (this.config = eo(
                 {
-                  apiEndpoint: "https://api.adcio.ai",
+                  apiEndpoint: "https://api-dev.adcio.ai",
                   receiverEndpoint: "https://receiver.adcio.ai",
                 },
                 e,
