@@ -562,7 +562,7 @@ const run = async () => {
 
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
-    document.querySelector(".prd_basic").style.visibility = "visible";
+    document.querySelector(`#mainBest`).style.visibility = "visible";
     return;
   }
 
