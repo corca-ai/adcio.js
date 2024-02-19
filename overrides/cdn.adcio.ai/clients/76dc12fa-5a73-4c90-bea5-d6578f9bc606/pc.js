@@ -648,5 +648,9 @@ const run = async () => {
   //adcioInstance.collectLogs(adcio.clientApi.cafe24);
 };
 
-run();
-document.querySelector(`#mainBest`).style.visibility = "visible";
+run()
+  .then(() => console.log("ADCIO done"))
+  .catch((e) => console.log(e))
+  .finally(
+    () => (document.querySelector(`#mainBest`).style.visibility = "visible"),
+  );
