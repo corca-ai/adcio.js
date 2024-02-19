@@ -19,3 +19,10 @@ export type AdcioPlacementCreateSuggestionParams = Pick<
   | "gender"
   | "area"
 >;
+
+export type AdcioPlacementCreateProductSuggestionParams =
+  AdcioPlacementCreateSuggestionParams & {
+    //TODO: fix after API is updated in production
+    categoryIdOnStore: string;
+    excludingProductIds: string[]; // -> composeId e.g) "['871fab52-4db5-41ab-b1d8-ffb16461c246:132']"
+  };

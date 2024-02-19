@@ -7,6 +7,7 @@ import {
   AdcioPlacementParams,
   AdcioPlacementCreateSuggestionParams,
   AdcioPlacementFetchPlacementsParams,
+  AdcioPlacementCreateProductSuggestionParams,
 } from "./placement.interface";
 
 export class AdcioPlacement {
@@ -72,6 +73,25 @@ export class AdcioPlacement {
         ...params,
       });
 
+      return data;
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+  // create unduplicated product suggestion
+  public async createProductSuggestion(
+    params: AdcioPlacementCreateProductSuggestionParams,
+  ) {
+    try {
+      const { data } = await new SuggestionApi(
+        this.apiConfig,
+      ).suggestionControllerSuggest({
+        customerId: this.adcioCore.getCustomerId(),
+        sessionId: this.adcioCore.getSessionId(),
+        deviceId: this.adcioCore.getDeviceId(),
+        ...params,
+      });
       return data;
     } catch (error) {
       this.handleError(error);

@@ -3010,7 +3010,7 @@ export interface SuggestionRequestDto {
      */
     'area'?: string;
     /**
-     * The category id on store for filtering banners.
+     * The category id on store for filtering adsets.
      * @type {string}
      * @memberof SuggestionRequestDto
      */
@@ -3776,7 +3776,9 @@ export const UpsertProductFailedRowReasonsEnum = {
     UpsertProductFailedIdIsEmpty: 'upsertProductFailedIdIsEmpty',
     UpsertProductFailedNameIsEmpty: 'upsertProductFailedNameIsEmpty',
     UpsertProductFailedPriceIsEmpty: 'upsertProductFailedPriceIsEmpty',
-    UpsertProductFailedImageIsEmpty: 'upsertProductFailedImageIsEmpty'
+    UpsertProductFailedImageIsEmpty: 'upsertProductFailedImageIsEmpty',
+    UpsertProductFailedImageIsInvalid: 'upsertProductFailedImageIsInvalid',
+    UpsertProductFailedUrlIsInvalid: 'upsertProductFailedUrlIsInvalid'
 } as const;
 
 export type UpsertProductFailedRowReasonsEnum = typeof UpsertProductFailedRowReasonsEnum[keyof typeof UpsertProductFailedRowReasonsEnum];
