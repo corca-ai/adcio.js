@@ -3,21 +3,21 @@ import { Pagination } from "swiper/modules";
 import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-import "../styles/banner.css";
+import "src/styles/banner.css";
 import { SuggestionDto } from "adcio.js/src/api/controller/v1/api";
 
 interface Props {
   suggestionData: SuggestionDto[];
-  impressionSlide: (currentSlideData: SuggestionDto) => void;
+  impressSlide: (currentSlideData: SuggestionDto) => void;
   clickSlide: (currentSlideData: SuggestionDto) => void;
 }
 
-export function Banner({ suggestionData, impressionSlide, clickSlide }: Props) {
+export function Banner({ suggestionData, impressSlide, clickSlide }: Props) {
   const handleSlideChange = (swiper: SwiperClass) => {
     const activeIndex = swiper.activeIndex;
     const currentSlideData = suggestionData[activeIndex];
     if (currentSlideData) {
-      impressionSlide(currentSlideData);
+      impressSlide(currentSlideData);
     }
   };
 
@@ -39,43 +39,39 @@ export function Banner({ suggestionData, impressionSlide, clickSlide }: Props) {
             key={banner.id}
             onClick={() => clickSlide(currentSlideData)}
           >
-            <SwiperSlide key={banner.id}>
-              <div>
-                <img src={banner.creative.mediaUrl} alt="" />
-                <div className="explain_banner">
-                  {banner.data["title"] && (
-                    <p
-                      className="title"
-                      style={{
-                        color: banner.data["titleColor"],
-                      }}
-                    >
-                      {banner.data["title"]}
-                    </p>
-                  )}
-                  {banner.data["subtitle"] && (
-                    <p
-                      className="subtitle"
-                      style={{
-                        color: banner.data["subtitleColor"],
-                      }}
-                    >
-                      {banner.data["subtitle"]}
-                    </p>
-                  )}
-                  {banner.data["description"] && (
-                    <p
-                      className="description"
-                      style={{
-                        color: banner.data["descriptionColor"],
-                      }}
-                    >
-                      {banner.data["description"]}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </SwiperSlide>
+            <img src={banner.creative.mediaUrl} alt="" />
+            <div className="explain_banner">
+              {banner.data["title"] && (
+                <p
+                  className="title"
+                  style={{
+                    color: banner.data["titleColor"],
+                  }}
+                >
+                  {banner.data["title"]}
+                </p>
+              )}
+              {banner.data["subtitle"] && (
+                <p
+                  className="subtitle"
+                  style={{
+                    color: banner.data["subtitleColor"],
+                  }}
+                >
+                  {banner.data["subtitle"]}
+                </p>
+              )}
+              {banner.data["description"] && (
+                <p
+                  className="description"
+                  style={{
+                    color: banner.data["descriptionColor"],
+                  }}
+                >
+                  {banner.data["description"]}
+                </p>
+              )}
+            </div>
           </SwiperSlide>
         );
       })}
