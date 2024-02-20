@@ -1,6 +1,6 @@
 import "swiper/css";
 import "swiper/css/pagination";
-import "../styles/banner.css";
+import "src/styles/banner.css";
 
 import { useEffect, useState } from "react";
 import { Adcio } from "adcio.js/src/adcio";
@@ -36,7 +36,7 @@ export default function BannerPage({ adcioInstance }: Props) {
       <div className="title">[PC] Banner Test</div>
       <Banner
         suggestionData={suggestionData}
-        impressionSlide={(currentSlideData) => {
+        impressSlide={(currentSlideData) => {
           adcioInstance.onImpression(currentSlideData.logOptions);
         }}
         clickSlide={(currentSlideData) => {
