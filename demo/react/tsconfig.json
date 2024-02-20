@@ -10,7 +10,12 @@
     "isolatedModules": true,
     "incremental": true,
     "types": ["node"],
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "lib/*": ["../src/lib/*"],
+      "api/*": ["../src/api/*"]
+    }
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "jest.config.ts", "translation"]

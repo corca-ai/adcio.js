@@ -1,5 +1,5 @@
 {
-  "name": "react",
+  "name": "demo-react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,11 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "adcio.js": "../../",
+    "mock-api": "../../mock",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1",
-    "swiper": "^11.0.6",
-    "adcio.js": "../../"
+    "swiper": "^11.0.6"
   },
   "devDependencies": {
     "@types/react": "^18.2.55",
@@ -25,8 +26,10 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "msw": "^2.0.10",
     "typescript": "^5.2.2",
-    "vite": "^5.1.0"
+    "vite": "^5.1.0",
+    "vite-tsconfig-paths": "^4.3.1"
   },
   "msw": {
     "workerDirectory": "public"
