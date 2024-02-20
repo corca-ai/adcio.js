@@ -58,6 +58,6 @@
     "axios": "^1.6.1"
   },
   "msw": {
-    "workerDirectory": "demo/react"
+    "workerDirectory": "demo/react/public"
   }
 }
