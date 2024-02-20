@@ -5,14 +5,14 @@ import "../styles/banner.css";
 
 import { Pagination } from "swiper/modules";
 import React from "react";
-// import { Adcio } from "@/adcio";
+import { Adcio } from "adcio.js/src";
 
 export default function Banner() {
   const [data, setData] = React.useState([]) as any[];
-  // const adcio = new Adcio({
-  //   clientId: "your-client-id",
-  //   customerId: "your-customer-id",
-  // });
+  const adcio = new Adcio({
+    clientId: "your-client-id",
+    customerId: "your-customer-id",
+  });
 
   // console.log(adcio);
   // React.useEffect(async () => {
