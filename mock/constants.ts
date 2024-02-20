@@ -4,7 +4,7 @@ import {
   TrackImpressionRequestDto,
   TrackPageViewRequestDto,
   TrackPurchaseRequestDto,
-} from "api/receiver/v1";
+} from "../src/api/receiver/v1";
 
 export type ReceiverAPIField<T> = {
   name: keyof T;

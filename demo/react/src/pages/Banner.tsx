@@ -4,22 +4,27 @@ import "swiper/css/pagination";
 import "../styles/banner.css";
 
 import { Pagination } from "swiper/modules";
-import React from "react";
-import { Adcio } from "adcio.js/src";
+import { useEffect, useState } from "react";
+import { Adcio } from "adcio.js/src/adcio";
+import { SuggestionTestId } from "../../../../mock/constants";
+import { SuggestionResponseDto } from "adcio.js/src/api/controller/v1/api";
 
-export default function Banner() {
-  const [data, setData] = React.useState([]) as any[];
-  const adcio = new Adcio({
-    clientId: "your-client-id",
-    customerId: "your-customer-id",
-  });
+interface Props {
+  adcioInstance: Adcio;
+}
 
-  // console.log(adcio);
-  // React.useEffect(async () => {
-  //   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  //   const data = await response.json();
-  //   setData(data);
-  // }, []);
+export default function Banner({ adcioInstance }: Props) {
+  const [data, setData] = useState<SuggestionResponseDto>(null);
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+      const response = await adcioInstance.createSuggestion({
+        placementId: SuggestionTestId.SUCCESS_PLACEMENT,
+      });
+      setData(response);
+    }
+    fetchMyAPI();
+  }, []);
 
   return (
     <Swiper
