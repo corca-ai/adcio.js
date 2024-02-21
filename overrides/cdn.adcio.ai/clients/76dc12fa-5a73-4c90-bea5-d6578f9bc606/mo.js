@@ -14,6 +14,7 @@ const CATEGORY_IDS = {
 
 const MO_GRID_PLACEMENT_ID = "83126115-6ceb-41a1-b65e-e46ca5afac4c";
 // test@test.com 83126115-6ceb-41a1-b65e-e46ca5afac4c
+// andar MO test skin f77b43c0-6062-4801-950d-104747aa349d
 
 console.log("MO ADCIO sdk start!");
 const adcioInstance = new adcio.Adcio({
@@ -34,8 +35,9 @@ const createAllSuggestions = (placements, customer) => {
       };
 
       if (placement.id === MO_GRID_PLACEMENT_ID) {
-        return await adcioInstance.createProductSuggestion({
-          categoryIdOnStore: CATEGORY_IDS.total,
+        return await adcioInstance.createSuggestion({
+          //categoryIdOnStore: CATEGORY_IDS.total,
+          // TODO: fix newest Suggestion API -- 중요!!! (for duplication)
           ...params,
         });
       }
@@ -77,30 +79,18 @@ const productToElement = (product, categoryId) => {
             children: [
               {
                 tag: "div",
-                classList: ["prdimg", "thumbnail"],
+                classList: ["prdimg"],
                 children: [
                   {
                     tag: "a",
-                    classList: ["prdimg", "thumbnail"],
                     attributes: {
-                      style: `display: block;`,
                       href: productHref,
-                      name: `anchorBoxName_${product.idOnStore}`,
                     },
                     children: [
                       {
                         tag: "img",
-                        classList: ["overimg"],
                         attributes: {
-                          src: product?.data?.small_image,
-                          alt: product.name,
-                          id: `eListPrdImage${product.idOnStore}_1`,
-                        },
-                      },
-                      {
-                        tag: "img",
-                        attributes: {
-                          src: product?.data?.tiny_image,
+                          src: product?.image,
                           alt: product.name,
                           id: `eListPrdImage${product.idOnStore}_1`,
                         },
@@ -120,11 +110,12 @@ const productToElement = (product, categoryId) => {
             classList: ["info"],
             children: [
               {
-                tag: "a",
+                tag: "div",
                 classList: ["detail_review"],
                 attributes: {
-                  href: product.url,
+                  // href: product.url,
                   "vreview-product-id": product.idOnStore,
+                  // "vreview-dom-id": "rank num",
                 },
                 children: [
                   {
@@ -137,6 +128,7 @@ const productToElement = (product, categoryId) => {
                         attributes: {
                           style: "margin-top: 6px;",
                         },
+                        // childList: [{ tag: "span" }], //TODO: 없어도 리뷰 자동으로 붙음
                       },
                     ],
                   },
@@ -153,28 +145,17 @@ const productToElement = (product, categoryId) => {
                 children: [
                   {
                     tag: "a",
-                    attributes: { href: productHref },
-                    children: [
-                      {
-                        tag: "span",
-                        classList: ["product_name"],
-                        children: [
-                          {
-                            tag: "span",
-                            attributes: {
-                              style: "font-size:14px;color:#000000;",
-                            },
-                            textContent: product.name,
-                          },
-                        ],
-                      },
-                    ],
+                    classList: ["text_line2"],
+                    attributes: {
+                      href: productHref,
+                      textContent: product.name,
+                    },
                   },
                 ],
               },
               {
                 tag: "div",
-                classList: ["price", "hassale"],
+                classList: ["price", "font_Gilroy"],
                 children: [
                   {
                     tag: "span",
@@ -182,48 +163,42 @@ const productToElement = (product, categoryId) => {
                     attributes: {
                       style: "display: inline !important;", //added important for the very first of rendering.
                     },
-                    children:
-                      salePercent < 1
-                        ? []
-                        : [
-                            {
-                              tag: "strong",
-                              textContent: salePercent.toFixed() + "%",
-                            },
-                          ],
-                  },
-                  {
-                    tag: "span",
-                    classList: ["sale"],
                     children: [
                       {
                         tag: "strong",
+                        textContent:
+                          salePercent < 1 || salePercent >= 100
+                            ? " "
+                            : salePercent.toFixed() + "%",
+                      },
+                    ],
+                  },
+                  {
+                    tag: "span",
+                    classList: ["sale_prc"],
+                    children: [
+                      {
+                        tag: "span",
+                        attributes: {
+                          style: "font-size:14px; color:#222222;",
+                        },
                         textContent: `${Number(
                           product.discountPrice || product.price,
-                        ).toLocaleString()}��`,
+                        ).toLocaleString()}원`,
                       },
                     ],
                   },
                   {
                     tag: "span",
                     classList: [
-                      "sell",
-                      `product_price${Number(
-                        product.discountPrice || product.price,
-                      ).toLocaleString()}��`,
+                      "sell_prc",
+                      "strike",
+                      "mPriceStrike",
                       "displaynone12displaynone",
                     ],
-                    children:
-                      salePercent < 1
-                        ? []
-                        : [
-                            {
-                              tag: "strong",
-                              textContent: `${
-                                Number(retailPrice).toLocaleString() + "��"
-                              }`,
-                            },
-                          ],
+                    attributes: {
+                      textContent: retailPrice + "원", //TODO: check if retail price is right
+                    },
                   },
                 ],
               },
@@ -251,20 +226,25 @@ const productToElement = (product, categoryId) => {
                   {
                     tag: "li",
                     classList: [
-                      "display_�띿뒪�몃컯��",
+                      "display_텍스트박스",
                       "xans-record-",
                       "textBox",
                     ],
-                    children:
-                      (categoryId === CATEGORY_IDS.total && // 移댄뀒怨좊━ �꾩껜�� 寃쎌슦�먮쭔 text box媛� 議댁옱��
-                        product.additional_information?.map((data) => {
-                          return {
-                            tag: "div",
+                    children: product.additional_information?.map((data) => {
+                      return {
+                        tag: "span",
+                        attributes: {
+                          style: "font-size:12px; color:#8e1f28;",
+                        },
+                        children: [
+                          {
+                            tag: "span",
                             classList: ["add_text"],
                             textContent: data.value,
-                          };
-                        })) ||
-                      [],
+                          },
+                        ],
+                      };
+                    }),
                   },
                 ],
               },
@@ -644,8 +624,8 @@ const run = async () => {
       adcioInstance
         .createSuggestion({
           ...customer,
-          categoryIdOnStore: categoryId,
-          placementId: MO_GRID_PLACEMENT_ID,
+          //categoryIdOnStore: categoryId,
+          //placementId: MO_GRID_PLACEMENT_ID,
         })
         .then(async (suggested) => {
           await injectProductSuggestions(suggested, categoryId);
@@ -667,7 +647,7 @@ const run = async () => {
 };
 
 run()
-  .then(() => console.log("ADCIO sdk end!"))
+  .then(() => console.log("MO ADCIO sdk end!"))
   .finally(() => {
     document.querySelector("#monthly-best").style.visibility = "visible";
   });
