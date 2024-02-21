@@ -643,8 +643,6 @@
 //   //adcioInstance.collectLogs(adcio.clientApi.cafe24);
 // };
 
-// try {
-//   run();
-// } catch (e) {
-//   document.querySelector(`#mainBest`).style.visibility = "visible";
-// }
+// run().finally(
+//   () => (document.querySelector(`#mainBest`).style.visibility = "visible"),
+// );
