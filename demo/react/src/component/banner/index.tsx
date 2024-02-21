@@ -37,7 +37,10 @@ export function Banner({ suggestionData, impressSlide, clickSlide }: Props) {
         return (
           <SwiperSlide
             key={banner.id}
-            onClick={() => clickSlide(currentSlideData)}
+            onClick={() => {
+              clickSlide(currentSlideData);
+              alert(`click slide ${banner.id}`);
+            }}
           >
             <img src={banner.creative.mediaUrl} alt="" />
             <div className="explain_banner">

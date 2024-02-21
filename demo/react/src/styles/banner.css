@@ -27,6 +27,11 @@
   position: relative;
   display: flex;
   align-items: end;
+  opacity: 0.5;
+}
+
+.swiper-slide-active {
+  opacity: 1;
 }
 
 .swiper-slide img {

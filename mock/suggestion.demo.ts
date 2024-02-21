@@ -195,7 +195,7 @@ export const suggestionResponse = {
         creative: {
           id: "1a864ad5-c1a9-4ab4-adb8-fd966180bab4",
           mediaUrl:
-            "https://images.unsplash.com/photo-1707757349249-c812bf8c600f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcwODQzNzg5MQ&ixlib=rb-4.0.3&q=80&w=1080",
+            "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4MTQ2NDIzNA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
           width: 1300,
           height: 1120,
           placementFormatRatio: "7X6",
