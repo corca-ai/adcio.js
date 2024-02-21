@@ -1,5 +1,16 @@
+const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
+const MO_GRID_PLACEMENT_ID = "f77b43c0-6062-4801-950d-104747aa349d"; // [test skin]안다르 모바일 GRID 지면 ID
+const CATEGORY_IDS = {
+  total: "2017",
+  women: "2018",
+  men: "2022",
+  junior: "2578",
+  acc: "2026",
+};
+
+console.log("MO sdk 브라우저 테스트!");
 const adcioInstance = new adcio.Adcio({
-  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
+  clientId: CLIENT_ID,
 });
 
 const bannerToElement = (banner) => {
