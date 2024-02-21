@@ -1002,6 +1002,12 @@ export interface ConnectProductsToPlacementResponseDto {
     'property': ConnectProductsToPlacementResponseDtoPropertyEnum;
     /**
      * 
+     * @type {Array<number>}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'suggestionPosition': Array<number>;
+    /**
+     * 
      * @type {string}
      * @memberof ConnectProductsToPlacementResponseDto
      */
@@ -1239,6 +1245,12 @@ export interface CreatePlacementDto {
      * @memberof CreatePlacementDto
      */
     'injector'?: PlacementInjectorDto;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof CreatePlacementDto
+     */
+    'suggestionPosition': Array<number>;
 }
 
 export const CreatePlacementDtoTypeEnum = {
@@ -1303,7 +1315,7 @@ export interface CreateProductDto {
      * @type {string}
      * @memberof CreateProductDto
      */
-    'description': string;
+    'summary': string;
     /**
      * 
      * @type {string}
@@ -1819,6 +1831,12 @@ export interface FetchManyPlacementsResponseDto {
     'property': FetchManyPlacementsResponseDtoPropertyEnum;
     /**
      * 
+     * @type {Array<number>}
+     * @memberof FetchManyPlacementsResponseDto
+     */
+    'suggestionPosition': Array<number>;
+    /**
+     * 
      * @type {string}
      * @memberof FetchManyPlacementsResponseDto
      */
@@ -2038,6 +2056,12 @@ export interface FetchPlacementResponseDto {
     'property': FetchPlacementResponseDtoPropertyEnum;
     /**
      * 
+     * @type {Array<number>}
+     * @memberof FetchPlacementResponseDto
+     */
+    'suggestionPosition': Array<number>;
+    /**
+     * 
      * @type {string}
      * @memberof FetchPlacementResponseDto
      */
@@ -2130,12 +2154,6 @@ export type FetchPlacementResponseDtoPropertyEnum = typeof FetchPlacementRespons
 export interface FetchProductResponseDto {
     /**
      * 
-     * @type {object}
-     * @memberof FetchProductResponseDto
-     */
-    'data': object;
-    /**
-     * 
      * @type {string}
      * @memberof FetchProductResponseDto
      */
@@ -2172,10 +2190,22 @@ export interface FetchProductResponseDto {
     'price': number;
     /**
      * 
+     * @type {number}
+     * @memberof FetchProductResponseDto
+     */
+    'discountPrice': number | null;
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof FetchProductResponseDto
+     */
+    'additionalInformation': Array<object> | null;
+    /**
+     * 
      * @type {string}
      * @memberof FetchProductResponseDto
      */
-    'description': string;
+    'summary': string;
     /**
      * 
      * @type {string}
@@ -2206,6 +2236,12 @@ export interface FetchProductResponseDto {
      * @memberof FetchProductResponseDto
      */
     'caption': string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FetchProductResponseDto
+     */
+    'additionalImages': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -2528,6 +2564,12 @@ export interface Placement {
     'property': PlacementPropertyEnum;
     /**
      * 
+     * @type {Array<number>}
+     * @memberof Placement
+     */
+    'suggestionPosition': Array<number>;
+    /**
+     * 
      * @type {string}
      * @memberof Placement
      */
@@ -2653,12 +2695,6 @@ export interface PlacementInjectorDto {
 export interface Product {
     /**
      * 
-     * @type {object}
-     * @memberof Product
-     */
-    'data': object;
-    /**
-     * 
      * @type {string}
      * @memberof Product
      */
@@ -2695,10 +2731,22 @@ export interface Product {
     'price': number;
     /**
      * 
+     * @type {number}
+     * @memberof Product
+     */
+    'discountPrice': number | null;
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof Product
+     */
+    'additionalInformation': Array<object> | null;
+    /**
+     * 
      * @type {string}
      * @memberof Product
      */
-    'description': string;
+    'summary': string;
     /**
      * 
      * @type {string}
@@ -2729,6 +2777,12 @@ export interface Product {
      * @memberof Product
      */
     'caption': string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Product
+     */
+    'additionalImages': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -2769,12 +2823,6 @@ export interface ProductControllerFetchMany200Response {
 export interface ProductWithSeller {
     /**
      * 
-     * @type {object}
-     * @memberof ProductWithSeller
-     */
-    'data': object;
-    /**
-     * 
      * @type {string}
      * @memberof ProductWithSeller
      */
@@ -2811,10 +2859,22 @@ export interface ProductWithSeller {
     'price': number;
     /**
      * 
+     * @type {number}
+     * @memberof ProductWithSeller
+     */
+    'discountPrice': number | null;
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof ProductWithSeller
+     */
+    'additionalInformation': Array<object> | null;
+    /**
+     * 
      * @type {string}
      * @memberof ProductWithSeller
      */
-    'description': string;
+    'summary': string;
     /**
      * 
      * @type {string}
@@ -2845,6 +2905,12 @@ export interface ProductWithSeller {
      * @memberof ProductWithSeller
      */
     'caption': string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ProductWithSeller
+     */
+    'additionalImages': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -2926,12 +2992,6 @@ export type RetrieverMatcherEnum = typeof RetrieverMatcherEnum[keyof typeof Retr
 export interface SuggestionDto {
     /**
      * 
-     * @type {LogOptionsDto}
-     * @memberof SuggestionDto
-     */
-    'logOptions': LogOptionsDto;
-    /**
-     * 
      * @type {Product}
      * @memberof SuggestionDto
      */
@@ -2942,6 +3002,12 @@ export interface SuggestionDto {
      * @memberof SuggestionDto
      */
     'banner'?: BannerWithCreativeDto;
+    /**
+     * 
+     * @type {LogOptionsDto}
+     * @memberof SuggestionDto
+     */
+    'logOptions': LogOptionsDto;
 }
 /**
  * 
@@ -3171,6 +3237,12 @@ export interface SuggestionResponsePlacementType {
     'placementFormat': PlacementFormat | null;
     /**
      * 
+     * @type {Array<number>}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'suggestionPosition': Array<number>;
+    /**
+     * 
      * @type {string}
      * @memberof SuggestionResponsePlacementType
      */
@@ -3340,6 +3412,12 @@ export interface UpdatePlacementDto {
      * @memberof UpdatePlacementDto
      */
     'maxDisplayCount'?: number;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof UpdatePlacementDto
+     */
+    'suggestionPosition'?: Array<number>;
 }
 /**
  * 
@@ -3463,6 +3541,12 @@ export interface UpdatePlacementResponseDto {
     'property': UpdatePlacementResponseDtoPropertyEnum;
     /**
      * 
+     * @type {Array<number>}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'suggestionPosition': Array<number>;
+    /**
+     * 
      * @type {string}
      * @memberof UpdatePlacementResponseDto
      */
@@ -3564,7 +3648,7 @@ export interface UpdateProductDto {
      * @type {string}
      * @memberof UpdateProductDto
      */
-    'description'?: string;
+    'summary'?: string;
     /**
      * 
      * @type {string}
@@ -3700,7 +3784,7 @@ export interface UpsertProductDto {
      * @type {string}
      * @memberof UpsertProductDto
      */
-    'description'?: string;
+    'summary'?: string;
     /**
      * 
      * @type {string}

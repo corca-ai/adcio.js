@@ -87,6 +87,7 @@ export class AdcioPlacement {
       const { data } = await new SuggestionApi(
         this.apiConfig,
       ).suggestionControllerSuggest({
+        //TODO: fix after API is updated in RMP
         customerId: this.adcioCore.getCustomerId(),
         sessionId: this.adcioCore.getSessionId(),
         deviceId: this.adcioCore.getDeviceId(),
