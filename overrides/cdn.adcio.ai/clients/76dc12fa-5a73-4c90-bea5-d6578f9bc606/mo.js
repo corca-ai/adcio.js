@@ -58,9 +58,13 @@ const productToElement = (product, categoryId) => {
     ((retailPrice - product.discountPrice) / retailPrice) * 100;
 
   return adcio.createNestedElement({
-    tag: "div",
-    classList: ["common_prd_list", "swiper-slide", "xans-record-"],
-    attributes: { "vreview-dom-embeded": true, "data-adcio-id": true }, //Adcio attribute to disctinct ADCIO elements from others.
+    tag: "li",
+    classList: ["swiper-slide", "common_prd_list", "xans-record-"],
+    attributes: {
+      "vreview-dom-embeded": false,
+      id: `anchorBoxId_${product.idOnStore}`, //TODO: check product idOnStore is right
+      "data-adcio-id": true,
+    }, //Adcio attribute to disctinct ADCIO elements from others.
     children: [
       {
         tag: "div",
