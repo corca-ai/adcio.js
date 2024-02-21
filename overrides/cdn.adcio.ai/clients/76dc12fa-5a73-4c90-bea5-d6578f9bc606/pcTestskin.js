@@ -1,648 +1,680 @@
-// const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4];
+// 2월 21일 수요일 릴리즈 기준(중복 제거 X) PC 테스트 스킨 코드
 
-// /**
-//  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
-//  */
+/**
+ * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
+ */
 
-// const CATEGORY_IDS = {
-//   total: "2017",
-//   women: "2018",
-//   men: "2022",
-//   junior: "2578",
-//   acc: "2026",
-// };
+const CATEGORY_IDS = {
+  total: "2017",
+  women: "2018",
+  men: "2022",
+  junior: "2578",
+  acc: "2026",
+};
 
-// const GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
+const PC_GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
+// PC grid placement Id
+// andar PC test grid placement id - 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
+// andar PC production - ???? 아직 생성 안함
+// test@test.com - bfe21c26-6ccd-4aa5-b8ab-69e3d361c6c1
+const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
+// andar 76dc12fa-5a73-4c90-bea5-d6578f9bc606
+// test@test.com 76dc12fa-5a73-4c90-bea5-d6578f9bc606
 
-// console.log("ADCIO sdk start!");
-// const adcioInstance = new adcio.Adcio({
-//   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
-// });
+const MOCK_SELECTED_GRID_INDEXES = [0, 3]; // TODO: delete and replace before add script
 
-// /**
-//  * @param {Array<FetchActivePlacementsResponseDto>} placements
-//  * @param {CustomerWithId} customer
-//  * @returns {Promise<Array<SuggestionResponseDto>>}
-//  */
-// const createAllSuggestions = (placements, customer) => {
-//   return Promise.allSettled(
-//     placements?.map(async (placement) => {
-//       const params = {
-//         ...customer,
-//         placementId: placement.id,
-//       };
+// PC PRODUCT GRID test skin 정보
+// 페이지 이름 skin159_MAIN
+// 지면 ID 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
 
-//       if (placement.id === GRID_PLACEMENT_ID) {
-//         Object.assign(params, {
-//           categoryIdOnStore: CATEGORY_IDS.total,
-//         });
-//       }
+console.log("PC sdk 브라우저 테스트!");
+const adcioInstance = new adcio.Adcio({
+  clientId: CLIENT_ID,
+});
 
-//       return await adcioInstance.createSuggestion({
-//         ...params,
-//       });
-//     }),
-//   );
-// };
+/**
+ * @param {Array<FetchActivePlacementsResponseDto>} placements
+ * @param {CustomerWithId} customer
+ * @param {Array<string>} allIdOnStore
+ * @returns {Promise<Array<SuggestionResponseDto>>}
+ */
+const createAllSuggestions = (placements, customer, allIdOnStore) => {
+  return Promise.allSettled(
+    placements.map(async (placement) => {
+      const params = {
+        ...customer,
+        placementId: placement.id,
+      };
 
-// /**
-//  * @param {SuggestionDto['product']} product
-//  * @param {string} categoryId
-//  * @returns {HTMLElement}
-//  */
-// const productToElement = (product, categoryId) => {
-//   const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
-//   const retailPrice = product.data.retail_price || product.price;
-//   const salePercent =
-//     ((retailPrice - product.data.discountprice.pc_discount_price) /
-//       retailPrice) *
-//     100;
+      if (placement.id === PC_GRID_PLACEMENT_ID) {
+        return adcioInstance.createSuggestion({
+          categoryIdOnStore: CATEGORY_IDS.total,
+          // excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`), //feat: add product suggestion after api added
+          ...params,
+        });
+      }
 
-//   return adcio.createNestedElement({
-//     tag: "div",
-//     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
-//     attributes: { "vreview-dom-embeded": true, "data-adcio-id": true }, //Adcio attribute to disctinct ADCIO elements from others.
-//     children: [
-//       {
-//         tag: "div",
-//         classList: ["box", "dd_box"],
-//         children: [
-//           {
-//             tag: "div",
-//             classList: ["img"],
-//             children: [
-//               {
-//                 tag: "div",
-//                 classList: ["prdimg", "thumbnail"],
-//                 children: [
-//                   {
-//                     tag: "a",
-//                     classList: ["prdimg", "thumbnail"],
-//                     attributes: {
-//                       style: `display: block;`,
-//                       href: productHref,
-//                       name: `anchorBoxName_${product.idOnStore}`,
-//                     },
-//                     children: [
-//                       {
-//                         tag: "img",
-//                         classList: ["overimg"],
-//                         attributes: {
-//                           src: product?.data?.small_image,
-//                           alt: product.name,
-//                           id: `eListPrdImage${product.idOnStore}_1`,
-//                         },
-//                       },
-//                       {
-//                         tag: "img",
-//                         attributes: {
-//                           src: product?.data?.tiny_image,
-//                           alt: product.name,
-//                           id: `eListPrdImage${product.idOnStore}_1`,
-//                         },
-//                       },
-//                     ],
-//                   },
-//                 ],
-//               },
-//               {
-//                 tag: "span",
-//                 classList: ["rankBadge"],
-//               },
-//             ],
-//           },
-//           {
-//             tag: "div",
-//             classList: ["info"],
-//             children: [
-//               {
-//                 tag: "a",
-//                 classList: ["detail_review"],
-//                 attributes: {
-//                   href: product.url,
-//                   "vreview-product-id": product.idOnStore,
-//                 },
-//                 children: [
-//                   {
-//                     tag: "div",
-//                     classList: ["vreview-review-summary"],
-//                     children: [
-//                       {
-//                         tag: "div",
-//                         classList: ["vreview-row", "vreview-board-popup"],
-//                         attributes: {
-//                           style: "margin-top: 6px;",
-//                         },
-//                       },
-//                     ],
-//                   },
-//                 ],
-//               },
-//               {
-//                 tag: "p",
-//                 classList: ["model"],
-//                 textContent: product.data.model_name,
-//               },
-//               {
-//                 tag: "p",
-//                 classList: ["name"],
-//                 children: [
-//                   {
-//                     tag: "a",
-//                     attributes: { href: productHref },
-//                     children: [
-//                       {
-//                         tag: "span",
-//                         classList: ["product_name"],
-//                         children: [
-//                           {
-//                             tag: "span",
-//                             attributes: {
-//                               style: "font-size:14px;color:#000000;",
-//                             },
-//                             textContent: product.name,
-//                           },
-//                         ],
-//                       },
-//                     ],
-//                   },
-//                 ],
-//               },
-//               {
-//                 tag: "div",
-//                 classList: ["price", "hassale"],
-//                 children: [
-//                   {
-//                     tag: "span",
-//                     classList: ["sale_percent"],
-//                     attributes: {
-//                       style: "display: inline !important;", //added important for the very first of rendering.
-//                     },
-//                     children:
-//                       salePercent < 1
-//                         ? []
-//                         : [
-//                             {
-//                               tag: "strong",
-//                               textContent: salePercent.toFixed() + "%",
-//                             },
-//                           ],
-//                   },
-//                   {
-//                     tag: "span",
-//                     classList: ["sale"],
-//                     children: [
-//                       {
-//                         tag: "strong",
-//                         textContent: `${Number(
-//                           product.data.discountprice.pc_discount_price ||
-//                             product.price,
-//                         ).toLocaleString()}��`,
-//                       },
-//                     ],
-//                   },
-//                   {
-//                     tag: "span",
-//                     classList: [
-//                       "sell",
-//                       `product_price${Number(
-//                         product.data.discountprice.pc_discount_price ||
-//                           product.price,
-//                       ).toLocaleString()}��`,
-//                       "displaynone12displaynone",
-//                     ],
-//                     children:
-//                       salePercent < 1
-//                         ? []
-//                         : [
-//                             {
-//                               tag: "strong",
-//                               textContent: `${
-//                                 Number(retailPrice).toLocaleString() + "��"
-//                               }`,
-//                             },
-//                           ],
-//                   },
-//                 ],
-//               },
-//               {
-//                 tag: "div",
-//                 classList: ["color_review"],
-//                 children: [
-//                   { tag: "div", classList: ["colorchip_count"] },
-//                   { tag: "div", classList: ["colorchip_box"] },
-//                 ],
-//               },
-//               {
-//                 tag: "div",
-//                 classList: ["icon"],
-//               },
-//               {
-//                 tag: "ul",
-//                 classList: [
-//                   "xans-element-",
-//                   "xans-product",
-//                   "xans-product-listitem",
-//                   "item_box",
-//                 ],
-//                 children: [
-//                   {
-//                     tag: "li",
-//                     classList: [
-//                       "display_�띿뒪�몃컯��",
-//                       "xans-record-",
-//                       "textBox",
-//                     ],
-//                     children:
-//                       (categoryId === CATEGORY_IDS.total && // 移댄뀒怨좊━ �꾩껜�� 寃쎌슦�먮쭔 text box媛� 議댁옱��
-//                         product.data.additional_information
-//                           ?.filter(
-//                             (data) =>
-//                               data.name === "�띿뒪�몃컯��" && data.value,
-//                           )
-//                           ?.map((data) => {
-//                             return {
-//                               tag: "div",
-//                               classList: ["add_text"],
-//                               textContent: data.value,
-//                             };
-//                           })) ||
-//                       [],
-//                   },
-//                 ],
-//               },
-//             ],
-//           },
-//         ],
-//       },
-//     ],
-//   });
-// };
+      return adcioInstance.createSuggestion({
+        ...params,
+      });
+    }),
+  );
+};
 
-// /**
-//  * @param {SuggestionDto['banner']} banner
-//  * @returns {HTMLElement}
-//  */
-// const bannerToElement = (banner) => {
-//   return adcio.createNestedElement({
-//     tag: "div",
-//     classList: ["swiper-slide"],
-//     attributes: { "df-banner-clone": "" },
-//     children: [
-//       banner.type === "image"
-//         ? {
-//             tag: "img",
-//             attributes: {
-//               src: banner.creative.mediaUrl,
-//               alt: banner.data.title,
-//             },
-//           }
-//         : {
-//             tag: "iframe",
-//             attributes: {
-//               src: banner.creative.mediaUrl,
-//               width: "100%",
-//               height: "100%",
-//               frameborder: "0",
-//               allow: "autoplay",
-//             },
-//           },
-//       {
-//         tag: "a",
-//         classList: ["link_box"],
-//         attributes: {
-//           href: banner.url,
-//           style: "white-space: pre;",
-//         },
-//         children: [
-//           ...(banner.data.title
-//             ? [
-//                 {
-//                   tag: "p",
-//                   classList: ["main_title", "fc_wht"],
-//                   attributes: { style: `color: ${banner.data.titleColor}` },
-//                   children: [
-//                     {
-//                       tag: "span",
-//                       classList: ["fontB"],
-//                       textContent: banner.data.title,
-//                     },
-//                   ],
-//                 },
-//               ]
-//             : []),
-//           ...(banner.data.subtitle
-//             ? [
-//                 {
-//                   tag: "p",
-//                   classList: ["sub_title", "fc_wht"],
-//                   attributes: {
-//                     style: `color: ${banner.data.subtitleColor}`,
-//                   },
-//                   textContent: banner.data.subtitle,
-//                 },
-//               ]
-//             : []),
-//           ...(banner.data.description
-//             ? [
-//                 {
-//                   tag: "p",
-//                   classList: ["sub_title2", "fc_wht"],
-//                   attributes: {
-//                     style: `color: ${banner.data.descriptionColor}`,
-//                   },
-//                   textContent: banner.data.description,
-//                 },
-//               ]
-//             : []),
-//         ],
-//       },
-//     ],
-//   });
-// };
+/**
+ * @param {SuggestionDto['product']} product
+ * @param {string} categoryId
+ * @returns {HTMLElement}
+ */
+const productToElement = (product, categoryId) => {
+  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
 
-// /**
-//  * @param {Array<HTMLElement>} elements
-//  * @param {string} selectors
-//  */
-// const appendChildForSelected = (elements, selectors) => {
-//   const wrapper = document.querySelector(selectors);
-//   elements.forEach((e) => wrapper.appendChild(e));
-// };
+  const retailPrice = product.data?.retail_price || product.price;
+  const discountPercent = // Fix: fix after api update on 24/02/22
+    !retailPrice || !product.discountPrice
+      ? 0
+      : ((retailPrice - product.discountPrice) / retailPrice) * 100;
 
-// /**
-//  * @returns {placements : Array<FetchActivePlacementsResponseDto>, customer: CustomerWithId}
-//  */
-// const getPlacementsAndCustomer = async () => {
-//   const pageName = `skin159_${adcio.getMeta({
-//     name: "path_role",
-//   })}`;
+  return adcio.createNestedElement({
+    tag: "div",
+    classList: ["common_prd_list", "swiper-slide", "xans-record-"],
+    attributes: { "vreview-dom-embeded": true, "data-adcio-id": true }, //Adcio attribute to disctinct ADCIO elements from others.
+    children: [
+      {
+        tag: "div",
+        classList: ["box", "dd_box"],
+        children: [
+          {
+            tag: "div",
+            classList: ["img"],
+            children: [
+              {
+                tag: "div",
+                classList: ["prdimg", "thumbnail"],
+                children: [
+                  {
+                    tag: "a",
+                    classList: ["prdimg", "thumbnail"],
+                    attributes: {
+                      style: `display: block;`,
+                      href: productHref,
+                      name: `anchorBoxName_${product.idOnStore}`,
+                    },
+                    children: [
+                      {
+                        tag: "img",
+                        classList: ["overimg"],
+                        attributes: {
+                          src: product?.Image || product?.additionalImages?.[1],
+                          alt: product.name,
+                          id: `eListPrdImage${product.idOnStore}_1`,
+                        },
+                      },
+                      {
+                        tag: "img",
+                        attributes: {
+                          src: product?.additionalImages?.[0] || product?.Image,
+                          alt: product.name,
+                          id: `eListPrdImage${product.idOnStore}_1`,
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                tag: "span",
+                classList: ["rankBadge"],
+              },
+            ],
+          },
+          {
+            tag: "div",
+            classList: ["info"],
+            children: [
+              {
+                tag: "a",
+                classList: ["detail_review"],
+                attributes: {
+                  href: product.url,
+                  "vreview-product-id": product.idOnStore,
+                },
+                children: [
+                  {
+                    tag: "div",
+                    classList: ["vreview-review-summary"],
+                    children: [
+                      {
+                        tag: "div",
+                        classList: ["vreview-row", "vreview-board-popup"],
+                        attributes: {
+                          style: "margin-top: 6px;",
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                tag: "p",
+                classList: ["model"],
+                textContent: "product.model_name",
+              },
+              {
+                tag: "p",
+                classList: ["name"],
+                children: [
+                  {
+                    tag: "a",
+                    attributes: { href: productHref },
+                    children: [
+                      {
+                        tag: "span",
+                        classList: ["product_name"],
+                        children: [
+                          {
+                            tag: "span",
+                            attributes: {
+                              style: "font-size:14px;color:#000000;",
+                            },
+                            textContent: product.name,
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                tag: "div",
+                classList: ["price", "hassale"],
+                children: [
+                  {
+                    tag: "span",
+                    classList: ["sale_percent"],
+                    attributes: {
+                      style: "display: inline !important;", //added important for the very first of rendering.
+                    },
+                    children:
+                      discountPercent < 1 || discountPercent >= 100
+                        ? []
+                        : [
+                            {
+                              tag: "strong",
+                              textContent: discountPercent.toFixed() + "%",
+                            },
+                          ],
+                  },
+                  {
+                    tag: "span",
+                    classList: ["sale"],
+                    children: [
+                      {
+                        tag: "strong",
+                        textContent: `${Number(
+                          product.discountPrice || product.price,
+                        ).toLocaleString()}원`,
+                      },
+                    ],
+                  },
+                  {
+                    tag: "span",
+                    classList: [
+                      "sell",
+                      `product_price${Number(
+                        product.discountPrice || product.price,
+                      ).toLocaleString()}원`,
+                      "displaynone12displaynone",
+                    ],
+                    children:
+                      discountPercent < 1 || discountPercent >= 100
+                        ? []
+                        : [
+                            {
+                              tag: "strong",
+                              textContent: `${
+                                Number(retailPrice).toLocaleString() + "원"
+                              }`,
+                            },
+                          ],
+                  },
+                ],
+              },
+              {
+                tag: "div",
+                classList: ["color_review"],
+                children: [
+                  { tag: "div", classList: ["colorchip_count"] },
+                  { tag: "div", classList: ["colorchip_box"] },
+                ],
+              },
+              {
+                tag: "div",
+                classList: ["icon"],
+              },
+              {
+                tag: "ul",
+                classList: [
+                  "xans-element-",
+                  "xans-product",
+                  "xans-product-listitem",
+                  "item_box",
+                ],
+                children: [
+                  {
+                    tag: "li",
+                    classList: [
+                      "display_텍스트박스",
+                      "xans-record-",
+                      "textBox",
+                    ],
+                    children:
+                      (categoryId === CATEGORY_IDS.total && // 카테고리 전체인 경우에만 text box가 존재함
+                        product.additionalInformation
+                          ?.filter(
+                            (data) => data.name === "텍스트박스" && data.value,
+                          )
+                          ?.map((data) => {
+                            return {
+                              tag: "div",
+                              classList: ["add_text"],
+                              textContent: data.value,
+                            };
+                          })) ||
+                      [],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+};
 
-//   const placements = await adcioInstance.fetchPlacements({ pageName });
-//   if (!placements.length) {
-//     return;
-//   }
+/**
+ * @param {SuggestionDto['banner']} banner
+ * @returns {HTMLElement}
+ */
+const bannerToElement = (banner) => {
+  return adcio.createNestedElement({
+    tag: "div",
+    classList: ["swiper-slide"],
+    attributes: { "df-banner-clone": "" },
+    children: [
+      banner.type === "image"
+        ? {
+            tag: "img",
+            attributes: {
+              src: banner.creative.mediaUrl,
+              alt: banner.data.title,
+            },
+          }
+        : {
+            tag: "iframe",
+            attributes: {
+              src: banner.creative.mediaUrl,
+              width: "100%",
+              height: "100%",
+              frameborder: "0",
+              allow: "autoplay",
+            },
+          },
+      {
+        tag: "a",
+        classList: ["link_box"],
+        attributes: {
+          href: banner.url,
+          style: "white-space: pre;",
+        },
+        children: [
+          ...(banner.data.title
+            ? [
+                {
+                  tag: "p",
+                  classList: ["main_title", "fc_wht"],
+                  attributes: { style: `color: ${banner.data.titleColor}` },
+                  children: [
+                    {
+                      tag: "span",
+                      classList: ["fontB"],
+                      textContent: banner.data.title,
+                    },
+                  ],
+                },
+              ]
+            : []),
+          ...(banner.data.subtitle
+            ? [
+                {
+                  tag: "p",
+                  classList: ["sub_title", "fc_wht"],
+                  attributes: {
+                    style: `color: ${banner.data.subtitleColor}`,
+                  },
+                  textContent: banner.data.subtitle,
+                },
+              ]
+            : []),
+          ...(banner.data.description
+            ? [
+                {
+                  tag: "p",
+                  classList: ["sub_title2", "fc_wht"],
+                  attributes: {
+                    style: `color: ${banner.data.descriptionColor}`,
+                  },
+                  textContent: banner.data.description,
+                },
+              ]
+            : []),
+        ],
+      },
+    ],
+  });
+};
 
-//   let customer = {};
-//   try {
-//     const { id, ...rest } = await adcio.clientApi.cafe24.getCustomer();
-//     customer = { ...rest, customerId: id };
-//   } catch (e) {
-//     customer = {};
-//   }
-//   return { placements, customer };
-// };
+/**
+ * @param {Array<HTMLElement>} elements
+ * @param {string} selectors
+ */
+const appendChildForSelected = (elements, selectors) => {
+  const wrapper = document.querySelector(selectors);
+  elements.forEach((e) => wrapper.appendChild(e));
+};
 
-// /**
-//  * @param {NodeList<Element>} originalElements
-//  * @param {Array<number>} adcioGridIndexes
-//  * @param {Array<Element>} newElements
-//  */
-// const swapElements = (originalElements, adcioGridIndexes, newElements) => {
-//   originalElements.forEach((element, index) => {
-//     if (adcioGridIndexes.includes(index) && newElements.length) {
-//       const newElement = newElements.shift();
-//       element.outerHTML = newElement.outerHTML;
-//       return;
-//     }
-//   });
-// };
+/**
+ * @returns {placements : Array<FetchActivePlacementsResponseDto>, customer: CustomerWithId}
+ */
+const getPlacementsAndCustomer = async () => {
+  const pageName = `skin159_${adcio.getMeta({
+    // andar test skin(without banner): skin159
+    // andar production(banner only): 135
+    // test@test.com skin159_MAIN_dev
+    name: "path_role",
+  })}`; // TODO: delete the _dev in production or test skin
 
-// /**
-//  * @param {NodeList<Element>} originalElements
-//  * @param {Array<number>} indexes
-//  * @param {NodeList<Element>} newElements
-//  */
-// const insertElements = (originalElements, indexes, newElements) => {
-//   const originElementsArr = [...originalElements];
-//   const newElementsArr = [...newElements];
+  const placements = await adcioInstance.fetchPlacements({ pageName });
+  if (!placements.length) {
+    return;
+  }
 
-//   originalElements.forEach((element, index) => {
-//     if (indexes.includes(index) && newElementsArr.length) {
-//       const newElement = newElementsArr.shift();
-//       element.outerHTML = newElement.outerHTML;
-//       return;
-//     }
+  let customer = {};
+  try {
+    const { id, ...rest } = await adcio.clientApi.cafe24.getCustomer();
+    customer = { ...rest, customerId: id };
+  } catch (e) {
+    customer = {};
+  }
+  return { placements, customer };
+};
 
-//     const elementToBeInserted = originElementsArr.shift();
-//     element.outerHTML = elementToBeInserted.outerHTML;
-//   });
-// };
+/**
+ * @param {NodeList<Element>} originalElements
+ * @param {Array<Element>} newElements
+ * @param {Array<number>} adcioGridIndexes
+ */
+const swapElements = (originalElements, newElements, adcioGridIndexes) => {
+  originalElements.forEach((element, index) => {
+    if (adcioGridIndexes.includes(index) && newElements.length) {
+      const newElement = newElements.shift();
+      element.outerHTML = newElement.outerHTML;
+      return;
+    }
+  });
+};
 
-// /**
-//  * @param {Array<SuggestionResponseDto>} suggestedData
-//  */
-// const injectBannerSuggestions = (suggestedData) => {
-//   const { suggestions } = suggestedData;
+/**
+ * @param {NodeList<Element>} originalElements
+ * @param {Array<Element>} newElements
+ * @param {Array<number>} adcioGridIndexes
+ */
+const insertElements = (originalElements, newElements, adcioGridIndexes) => {
+  const originElementsArr = [...originalElements];
 
-//   const elements = suggestions.map((suggestion) => {
-//     const element = bannerToElement(suggestion.banner);
+  originalElements.forEach((element, index) => {
+    if (adcioGridIndexes.includes(index) && newElements.length) {
+      const newElement = newElements.shift();
+      element.outerHTML = newElement.outerHTML;
+      return;
+    }
 
-//     element.addEventListener("click", () =>
-//       adcioInstance.onClick(suggestion.logOptions),
-//     );
-//     element.addEventListener("impression", () =>
-//       adcioInstance.onImpression(suggestion.logOptions),
-//     );
-//     adcioInstance.observeImpression({
-//       element,
-//       filter: (e) => e.classList.contains("swiper-slide-active"),
-//     });
+    const elementToBeInserted = originElementsArr.shift();
+    element.outerHTML = elementToBeInserted.outerHTML;
+  });
+};
 
-//     return element;
-//   });
+/**
+ * @param {SuggestionResponseDto} suggestedData
+ */
+const injectBannerSuggestions = (suggestedData) => {
+  const { suggestions } = suggestedData;
 
-//   adcio
-//     .waitForElement(
-//       ".df-bannermanager-main-2023-pc > .swiper-wrapper > .swiper-slide > img",
-//     )
-//     .then(() =>
-//       appendChildForSelected(
-//         elements,
-//         ".df-bannermanager-main-2023-pc > .swiper-wrapper",
-//       ),
-//     );
-// };
+  const elements = suggestions.map((suggestion) => {
+    const element = bannerToElement(suggestion.banner);
 
-// /**
-//  * @param {SuggestionResponseDto[]} suggestedData
-//  * @param {string} categoryId
-//  */
-// const injectProductSuggestions = (suggestedData, categoryId) => {
-//   const { suggestions } = suggestedData;
+    element.addEventListener("click", () =>
+      adcioInstance.onClick(suggestion.logOptions),
+    );
+    element.addEventListener("impression", () =>
+      adcioInstance.onImpression(suggestion.logOptions),
+    );
+    adcioInstance.observeImpression({
+      element,
+      filter: (e) => e.classList.contains("swiper-slide-active"),
+    });
 
-//   const elements = suggestions.map((suggestion) => {
-//     const element = productToElement(suggestion.product, categoryId); //TODO: fix index
+    return element;
+  });
 
-//     element.addEventListener("click", () =>
-//       adcioInstance.onClick(suggestion.logOptions),
-//     );
-//     element.addEventListener("impression", () =>
-//       adcioInstance.onImpression(suggestion.logOptions),
-//     );
-//     adcioInstance.observeImpression({
-//       element,
-//     });
+  adcio
+    .waitForElement(
+      ".df-bannermanager-main-2023-pc > .swiper-wrapper > .swiper-slide > img",
+    )
+    .then(() =>
+      appendChildForSelected(
+        elements,
+        ".df-bannermanager-main-2023-pc > .swiper-wrapper",
+      ),
+    );
+};
 
-//     return element;
-//   });
+/**
+ * @param {SuggestionResponseDto} suggestedData
+ * @param {string} categoryId
+ * @param {Array<number>} adcioGridIndexes
+ */
+const injectGridSuggestions = (suggestedData, categoryId, adcioGridIndexes) => {
+  const { suggestions } = suggestedData;
 
-//   if (
-//     document.querySelector(`.prd_basic`).querySelectorAll("[data-adcio-id]")
-//       .length
-//   ) {
-//     swapElements(
-//       document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-//       MOCK_SELECTED_GRID_INDEXES,
-//       elements,
-//     );
-//     return;
-//   }
+  const elements = suggestions.map((suggestion) => {
+    const element = productToElement(suggestion.product, categoryId);
 
-//   insertElements(
-//     document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-//     MOCK_SELECTED_GRID_INDEXES,
-//     elements,
-//   );
-// };
+    element.addEventListener("click", () =>
+      adcioInstance.onClick(suggestion.logOptions),
+    );
+    element.addEventListener("impression", () =>
+      adcioInstance.onImpression(suggestion.logOptions),
+    );
+    adcioInstance.observeImpression({
+      element,
+    });
 
-// /**
-//  * @param {MutationCallback} mutationCallback
-//  * @param {Node} targetElement
-//  * @param {MutationObserverInit | undefined} [observeOptions]
-//  */
-// const observeUntilUnload = (
-//   mutationCallback,
-//   targetElement,
-//   observeOptions,
-// ) => {
-//   const observer = new MutationObserver(mutationCallback);
-//   observer.observe(targetElement, observeOptions);
-//   window.addEventListener("beforeunload", () => {
-//     observer.disconnect();
-//   });
-// };
+    return element;
+  });
 
-// /**
-//  * @param {string} code
-//  * @returns {string | null}
-//  */
-// const getCategoryNoFromCode = (code) => {
-//   if (!code) {
-//     return null;
-//   }
-//   const regex = /\$cate_no\s*=\s*(\d+)/;
-//   const match = code.match(regex);
-//   return match.length >= 2 ? match[1] : null;
-// };
+  if (
+    document.querySelector(`.prd_basic`).querySelectorAll("[data-adcio-id]")
+      .length
+  ) {
+    swapElements(
+      document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
+      elements,
+      adcioGridIndexes,
+    );
+    return;
+  }
 
-// // /**
-// //  * @param {string} elements
-// //  * @returns {Array<string>}
-// //  */
-// // const getAllIdOnStore = (elements) => {
-// //   const idOnStores = [];
-// //   elements.forEach((element) => {
-// //     if (!element.id) {
-// //       return;
-// //     }
-// //     const regex = /anchorBoxId_(\d+)/;
-// //     const match = element.id.match(regex);
-// //     if (match.length >= 2) {
-// //       idOnStores.push(match[1]);
-// //     }
-// //   });
-// //   return idOnStores;
-// // };
+  insertElements(
+    document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
+    elements,
+    adcioGridIndexes,
+  );
+};
 
-// /**
-//  * @param {string} selectors
-//  */
-// const createOrFixRankElement = (selectors) => {
-//   const elements = document.querySelectorAll(selectors);
-//   elements.forEach((element, index) => {
-//     if (element.querySelector(".rankBadge") == null) {
-//       const rankBadge = document.createElement("span");
-//       rankBadge.classList.add("rankBadge");
-//       element.appendChild(rankBadge);
-//     }
-//     element.querySelector(".rankBadge").textContent = index + 1;
-//   });
-// };
+/**
+ * @param {string} html
+ * @returns {string | null}
+ */
+const getCategoryIdFromHTML = (html) => {
+  if (!html) {
+    return null;
+  }
+  const regex = /\$cate_no\s*=\s*(\d+)/;
+  const match = html.match(regex);
+  return match.length >= 2 ? match[1] : null;
+};
 
-// const run = async () => {
-//   await adcio.waitForElement("#mainBest");
-//   document.querySelector(`#mainBest`).style.visibility = "hidden";
+/**
+ * @param {string} selector
+ * @returns {Array<string>}
+ */
+const getAllIdOnStoreInElement = (selector) => {
+  const idOnStores = [];
+  const elements = document.querySelector(selector);
+  elements.childNodes.forEach((element) => {
+    if (!element.id) {
+      return;
+    }
+    const regex = /anchorBoxId_(\d+)/;
+    const match = element.id.match(regex);
+    if (match.length >= 2) {
+      idOnStores.push(match[1]);
+    }
+  });
+  return idOnStores;
+};
 
-//   const { placements, customer } = await getPlacementsAndCustomer();
-//   if (!placements.length) {
-//     document.querySelector(`#mainBest`).style.visibility = "visible";
-//     return;
-//   }
+/**
+ * @param {string} parentElementSelector
+ */
+const createOrFixRankElement = (parentElementSelector) => {
+  const elements = document.querySelectorAll(parentElementSelector);
+  elements.forEach((element, index) => {
+    if (element.querySelector(".rankBadge") == null) {
+      const rankBadge = document.createElement("span");
+      rankBadge.classList.add("rankBadge");
+      element.appendChild(rankBadge);
+    }
+    element.querySelector(".rankBadge").textContent = index + 1;
+  });
+};
 
-//   const allSuggestions = {
-//     BANNER: null,
-//     GRID: null,
-//   };
-//   const allPromises = await createAllSuggestions(placements, customer);
-//   allPromises.forEach(
-//     (p) =>
-//       p.status === "fulfilled" &&
-//       Object.assign(allSuggestions, { [p.value.placement.type]: p.value }),
-//   );
+const run = async () => {
+  await adcio.waitForElement("#mainBest");
+  document.querySelector(`#mainBest`).style.visibility = "hidden";
+  const allIdOnStore = await getAllIdOnStoreInElement(".prd_basic");
 
-//   if (allSuggestions.BANNER) {
-//     await adcio.waitForDOM();
-//     injectBannerSuggestions(allSuggestions.BANNER);
-//   }
-//   if (allSuggestions.GRID) {
-//     await injectProductSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
-//     await createOrFixRankElement(".img");
-//   }
-//   document.querySelector(`#mainBest`).style.visibility = "visible";
+  const { placements, customer } = await getPlacementsAndCustomer();
+  if (!placements.length) {
+    return;
+  }
 
-//   // Observe Grid List Changes and inject product suggestions and fix rank badges
-//   const targetElement = document.querySelector("#monthly-best");
-//   const observeOptions = {
-//     childList: true,
-//   };
-//   const mutationCallback = async (mutationsList, observer) => {
-//     observer.disconnect();
+  const allSuggestions = {
+    BANNER: null,
+    GRID: null,
+  };
+  const allPromises = await createAllSuggestions(
+    placements,
+    customer,
+    allIdOnStore,
+  );
+  allPromises.forEach(
+    (p) =>
+      p.status === "fulfilled" &&
+      Object.assign(allSuggestions, {
+        [p.value.placement.type]: { ...p.value },
+      }),
+  );
 
-//     if (mutationsList.find((m) => m.type === "childList")) {
-//       document.querySelector(`.prd_basic`).style.visibility = "hidden";
-//       const categoryId =
-//         getCategoryNoFromCode(
-//           document.querySelector("#monthly-best")?.innerHTML,
-//         ) || CATEGORY_IDS.total;
-//       adcioInstance
-//         .createSuggestion({
-//           ...customer,
-//           categoryIdOnStore: categoryId,
-//           placementId: GRID_PLACEMENT_ID,
-//         })
-//         .then(async (suggested) => {
-//           await injectProductSuggestions(suggested, categoryId);
-//           await createOrFixRankElement(".img");
-//         })
-//         .finally(async () => {
-//           document.querySelector(".prd_basic").style.visibility = "visible";
-//         });
-//     }
+  if (allSuggestions.BANNER) {
+    await adcio.waitForDOM();
+    injectBannerSuggestions(allSuggestions.BANNER);
+  }
+  if (allSuggestions.GRID) {
+    const suggestionPosition = [
+      ...allSuggestions.GRID.placement.suggestionPosition,
+    ]; // TODO: fix to use this instead of MOCK_SELECTED_GRID_INDEXES
 
-//     observer.observe(targetElement, observeOptions);
-//   };
+    await injectGridSuggestions(
+      allSuggestions.GRID,
+      CATEGORY_IDS.total,
+      MOCK_SELECTED_GRID_INDEXES,
+    );
+    await createOrFixRankElement(".img");
+  }
+  document.querySelector(`#mainBest`).style.visibility = "visible";
 
-//   const observer = new MutationObserver(mutationCallback);
-//   observer.observe(targetElement, observeOptions);
-//   window.addEventListener("beforeunload", () => {
-//     observer.disconnect();
-//   });
+  // Observe Grid List elements changes and inject product suggestions(+fix rank badges).
+  const targetElement = document.querySelector("#monthly-best");
+  const observeOptions = {
+    childList: true,
+  };
+  const mutationCallback = async (mutationsList, observer) => {
+    observer.disconnect();
 
-//   //Collect Logs
-//   //adcioInstance.collectLogs(adcio.clientApi.cafe24);
-// };
+    if (mutationsList.find((m) => m.type === "childList")) {
+      document.querySelector(`.prd_basic`).style.visibility = "hidden";
 
-// run().finally(
-//   () => (document.querySelector(`#mainBest`).style.visibility = "visible"),
-// );
+      const categoryId =
+        getCategoryIdFromHTML(
+          document.querySelector("#monthly-best")?.innerHTML,
+        ) || CATEGORY_IDS.total;
+      const allIdOnStore = await getAllIdOnStoreInElement(".prd_basic");
+
+      adcioInstance
+        .createSuggestion({
+          //TODO: fix after release,  createProductSuggestion
+          ...customer,
+          categoryIdOnStore: categoryId,
+          placementId: PC_GRID_PLACEMENT_ID,
+          // excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`), //TODO: fix after release
+        })
+        .then(async (suggested) => {
+          const suggestionPosition = [
+            ...suggested.placement.suggestionPosition,
+          ]; // TODO: fix to use this instead of MOCK_SELECTED_GRID_INDEXES
+
+          await injectGridSuggestions(
+            suggested,
+            categoryId,
+            MOCK_SELECTED_GRID_INDEXES,
+          );
+          await createOrFixRankElement(".img");
+        })
+        .finally(
+          () =>
+            (document.querySelector(".prd_basic").style.visibility = "visible"),
+        );
+    }
+
+    observer.observe(targetElement, observeOptions);
+  };
+
+  const observer = new MutationObserver(mutationCallback);
+  observer.observe(targetElement, observeOptions);
+  window.addEventListener("beforeunload", () => {
+    observer.disconnect();
+  });
+};
+
+run()
+  .then(() => console.log("ADCIO done"))
+  .catch((e) => console.log(e))
+  .finally(
+    () => (document.querySelector(`#mainBest`).style.visibility = "visible"),
+  );
+
+//Collect Logs
+//adcioInstance.collectLogs(adcio.clientApi.cafe24);

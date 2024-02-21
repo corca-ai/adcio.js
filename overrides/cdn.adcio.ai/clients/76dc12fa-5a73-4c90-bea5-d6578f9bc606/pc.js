@@ -66,9 +66,9 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
  */
 const productToElement = (product, categoryId) => {
   const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
-  console.log(!!!!!!product.discountPrice);
+
   const retailPrice = product.data?.retail_price || product.price;
-  const salePercent = // Fix: fix after api update on 24/02/22
+  const discountPercent = // Fix: fix after api update on 24/02/22
     !retailPrice || !product.discountPrice
       ? 0
       : ((retailPrice - product.discountPrice) / retailPrice) * 100;
@@ -194,12 +194,12 @@ const productToElement = (product, categoryId) => {
                       style: "display: inline !important;", //added important for the very first of rendering.
                     },
                     children:
-                      salePercent < 1
+                      discountPercent < 1 || discountPercent >= 100
                         ? []
                         : [
                             {
                               tag: "strong",
-                              textContent: salePercent.toFixed() + "%",
+                              textContent: discountPercent.toFixed() + "%",
                             },
                           ],
                   },
@@ -224,14 +224,17 @@ const productToElement = (product, categoryId) => {
                       ).toLocaleString()}원`,
                       "displaynone12displaynone",
                     ],
-                    children: [
-                      {
-                        tag: "strong",
-                        textContent: `${
-                          Number(retailPrice).toLocaleString() + "원"
-                        }`,
-                      },
-                    ],
+                    children:
+                      discountPercent < 1 || discountPercent >= 100
+                        ? []
+                        : [
+                            {
+                              tag: "strong",
+                              textContent: `${
+                                Number(retailPrice).toLocaleString() + "원"
+                              }`,
+                            },
+                          ],
                   },
                 ],
               },
@@ -588,7 +591,9 @@ const run = async () => {
   allPromises.forEach(
     (p) =>
       p.status === "fulfilled" &&
-      Object.assign(allSuggestions, { [p.value.placement.type]: p.value }),
+      Object.assign(allSuggestions, {
+        [p.value.placement.type]: { ...p.value },
+      }),
   );
 
   if (allSuggestions.BANNER) {
@@ -596,6 +601,10 @@ const run = async () => {
     injectBannerSuggestions(allSuggestions.BANNER);
   }
   if (allSuggestions.GRID) {
+    const suggestionPosition = [
+      ...allSuggestions.GRID.placement.suggestionPosition,
+    ]; // TODO: fix to use this instead of MOCK_SELECTED_GRID_INDEXES
+
     await injectGridSuggestions(
       allSuggestions.GRID,
       CATEGORY_IDS.total,
@@ -631,6 +640,10 @@ const run = async () => {
           // excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`), //TODO: fix after release
         })
         .then(async (suggested) => {
+          const suggestionPosition = [
+            ...suggested.placement.suggestionPosition,
+          ]; // TODO: fix to use this instead of MOCK_SELECTED_GRID_INDEXES
+
           await injectGridSuggestions(
             suggested,
             categoryId,
