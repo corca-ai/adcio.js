@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "private": true,
   "workspaces": [
-    "demo/*"
+    "demo/react"
   ],
   "devDependencies": {
     "@babel/core": "^7.23.3",

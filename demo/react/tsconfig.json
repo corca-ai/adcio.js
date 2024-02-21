@@ -13,8 +13,8 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "lib/*": ["../src/lib/*"],
-      "api/*": ["../src/api/*"]
+      "lib/*": ["../lib/*"],
+      "api/*": ["../api/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
