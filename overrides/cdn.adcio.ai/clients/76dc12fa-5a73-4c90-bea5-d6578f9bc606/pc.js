@@ -656,9 +656,6 @@ const run = async () => {
   window.addEventListener("beforeunload", () => {
     observer.disconnect();
   });
-
-  //Collect Logs
-  //adcioInstance.collectLogs(adcio.clientApi.cafe24);
 };
 
 run()
@@ -667,3 +664,6 @@ run()
   .finally(
     () => (document.querySelector(`#mainBest`).style.visibility = "visible"),
   );
+
+//Collect Logs
+//adcioInstance.collectLogs(adcio.clientApi.cafe24);
