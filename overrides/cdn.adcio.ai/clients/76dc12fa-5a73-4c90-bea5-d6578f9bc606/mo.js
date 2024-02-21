@@ -12,9 +12,10 @@ const CATEGORY_IDS = {
   acc: "2026",
 };
 
-const GRID_PLACEMENT_ID = "83126115-6ceb-41a1-b65e-e46ca5afac4c";
+const MO_GRID_PLACEMENT_ID = "83126115-6ceb-41a1-b65e-e46ca5afac4c";
+// test@test.com 83126115-6ceb-41a1-b65e-e46ca5afac4c
 
-console.log("ADCIO sdk start!");
+console.log("MO ADCIO sdk start!");
 const adcioInstance = new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
 });
@@ -32,7 +33,7 @@ const createAllSuggestions = (placements, customer) => {
         placementId: placement.id,
       };
 
-      if (placement.id === GRID_PLACEMENT_ID) {
+      if (placement.id === MO_GRID_PLACEMENT_ID) {
         return await adcioInstance.createProductSuggestion({
           categoryIdOnStore: CATEGORY_IDS.total,
           ...params,
@@ -644,7 +645,7 @@ const run = async () => {
         .createSuggestion({
           ...customer,
           categoryIdOnStore: categoryId,
-          placementId: GRID_PLACEMENT_ID,
+          placementId: MO_GRID_PLACEMENT_ID,
         })
         .then(async (suggested) => {
           await injectProductSuggestions(suggested, categoryId);
