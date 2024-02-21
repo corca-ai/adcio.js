@@ -57,9 +57,11 @@ const productToElement = (product, categoryId) => {
   const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
   const retailPrice = product.data.retail_price || product.price;
   const salePercent =
-    ((retailPrice - product.data.discountprice.pc_discount_price) /
-      retailPrice) *
-    100;
+    !retailPrice || !product.data?.discountprice.pc_discount_price
+      ? 0
+      : ((retailPrice - product.data.discountprice.pc_discount_price) /
+          retailPrice) *
+        100;
 
   return adcio.createNestedElement({
     tag: "div",
