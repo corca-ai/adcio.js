@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "private": true,
   "workspaces": [
-    "demo/react"
+    "demo/*"
   ],
   "devDependencies": {
     "@babel/core": "^7.23.3",
@@ -48,7 +48,7 @@
     "prepare": "yarn build",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "yarn workspaces run lint && eslint \"src/**/*.ts\" --fix",
-    "lint:ci": "yarn workspaces lint run && eslint \"src/**/*.ts\"",
+    "lint:ci": "yarn workspaces run lint run && eslint \"src/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:cov": "vitest run --coverage"
