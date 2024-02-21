@@ -15,9 +15,11 @@ const PC_GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
 // andar PC test grid placement id - 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
 // andar PC production - ???? 아직 생성 안함
 // test@test.com - bfe21c26-6ccd-4aa5-b8ab-69e3d361c6c1
-const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606"; // andar-76dc12fa-5a73-4c90-bea5-d6578f9bc606
+const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
+// andar 76dc12fa-5a73-4c90-bea5-d6578f9bc606
+// test@test.com 76dc12fa-5a73-4c90-bea5-d6578f9bc606
 
-const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4]; // TODO: delete and replace before add script
+const MOCK_SELECTED_GRID_INDEXES = [0, 3]; // TODO: delete and replace before add script
 
 // PC PRODUCT GRID test skin 정보
 // 페이지 이름 skin159_MAIN
@@ -65,14 +67,12 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
  */
 const productToElement = (product, categoryId) => {
   const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
-  console.log(!!!!!!product.discountPrice.pc_discount_price);
-  const retailPrice = product.data.retail_price || product.price;
-  const salePercent =
-    !retailPrice || !product.discountPrice.pc_discount_price
+  console.log(!!!!!!product.discountPrice);
+  const retailPrice = product.data?.retail_price || product.price;
+  const salePercent = // Fix: fix after api update on 24/02/22
+    !retailPrice || !product.discountPrice
       ? 0
-      : ((retailPrice - product.discountPrice.pc_discount_price) /
-          retailPrice) *
-        100;
+      : ((retailPrice - product.discountPrice) / retailPrice) * 100;
 
   return adcio.createNestedElement({
     tag: "div",
@@ -157,7 +157,7 @@ const productToElement = (product, categoryId) => {
               {
                 tag: "p",
                 classList: ["model"],
-                textContent: product.data.model_name,
+                textContent: "product.model_name",
               },
               {
                 tag: "p",
@@ -211,8 +211,7 @@ const productToElement = (product, categoryId) => {
                       {
                         tag: "strong",
                         textContent: `${Number(
-                          product.discountPrice.pc_discount_price ||
-                            product.price,
+                          product.discountPrice || product.price,
                         ).toLocaleString()}원`,
                       },
                     ],
@@ -222,8 +221,7 @@ const productToElement = (product, categoryId) => {
                     classList: [
                       "sell",
                       `product_price${Number(
-                        product.discountPrice.pc_discount_price ||
-                          product.price,
+                        product.discountPrice || product.price,
                       ).toLocaleString()}원`,
                       "displaynone12displaynone",
                     ],
@@ -391,8 +389,9 @@ const appendChildForSelected = (elements, selectors) => {
 const getPlacementsAndCustomer = async () => {
   const pageName = `skin159_${adcio.getMeta({
     //andar test skin(without banner): 159, andar production(banner only): 135
+    // test@test.com skin159
     name: "path_role",
-  })}`;
+  })}_dev`; // TODO: delete the _dev in production or test skin
 
   const placements = await adcioInstance.fetchPlacements({ pageName });
   if (!placements.length) {
@@ -629,10 +628,11 @@ const run = async () => {
 
       adcioInstance
         .createSuggestion({
+          //TODO: fix after release,  createProductSuggestion
           ...customer,
           categoryIdOnStore: categoryId,
           placementId: PC_GRID_PLACEMENT_ID,
-          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
+          // excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`), //TODO: fix after release
         })
         .then(async (suggested) => {
           await injectGridSuggestions(
