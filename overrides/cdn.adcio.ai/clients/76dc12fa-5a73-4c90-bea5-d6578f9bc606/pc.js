@@ -10,10 +10,18 @@ const CATEGORY_IDS = {
   acc: "2026",
 };
 
-const PC_GRID_PLACEMENT_ID = "d1e900b9-37ee-4fc2-ab03-443b78059fbe"; // andar test grid placement id - "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4"
-const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606"; // andar-"76dc12fa-5a73-4c90-bea5-d6578f9bc606"
+const PC_GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
+// PC grid placement Id
+// andar PC test grid placement id - 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
+// andar PC production - ???? 아직 생성 안함
+// test@test.com - bfe21c26-6ccd-4aa5-b8ab-69e3d361c6c1
+const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606"; // andar-76dc12fa-5a73-4c90-bea5-d6578f9bc606
 
 const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4]; // TODO: delete and replace before add script
+
+// PC PRODUCT GRID test skin 정보
+// 페이지 이름 skin159_MAIN
+// 지면 ID 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
 
 console.log("PC sdk 브라우저 테스트!");
 const adcioInstance = new adcio.Adcio({
@@ -55,11 +63,12 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
  */
 const productToElement = (product, categoryId) => {
   const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
+  console.log(!!!!!!product.discountPrice.pc_discount_price);
   const retailPrice = product.data.retail_price || product.price;
   const salePercent =
-    !retailPrice || !product.data?.discountprice.pc_discount_price
+    !retailPrice || !product.discountPrice.pc_discount_price
       ? 0
-      : ((retailPrice - product.data.discountprice.pc_discount_price) /
+      : ((retailPrice - product.discountPrice.pc_discount_price) /
           retailPrice) *
         100;
 
@@ -200,7 +209,7 @@ const productToElement = (product, categoryId) => {
                       {
                         tag: "strong",
                         textContent: `${Number(
-                          product.data.discountprice.pc_discount_price ||
+                          product.discountPrice.pc_discount_price ||
                             product.price,
                         ).toLocaleString()}원`,
                       },
@@ -211,7 +220,7 @@ const productToElement = (product, categoryId) => {
                     classList: [
                       "sell",
                       `product_price${Number(
-                        product.data.discountprice.pc_discount_price ||
+                        product.discountPrice.pc_discount_price ||
                           product.price,
                       ).toLocaleString()}원`,
                       "displaynone12displaynone",
@@ -260,7 +269,7 @@ const productToElement = (product, categoryId) => {
                     ],
                     children:
                       (categoryId === CATEGORY_IDS.total && // 카테고리 전체인 경우에만 text box가 존재함
-                        product.data.additional_information
+                        product.additionalInformation
                           ?.filter(
                             (data) => data.name === "텍스트박스" && data.value,
                           )
@@ -378,8 +387,8 @@ const appendChildForSelected = (elements, selectors) => {
  * @returns {placements : Array<FetchActivePlacementsResponseDto>, customer: CustomerWithId}
  */
 const getPlacementsAndCustomer = async () => {
-  const pageName = `skin135_${adcio.getMeta({
-    //andar test skin(without banner): 159, andar production(with banner): 135
+  const pageName = `skin159_${adcio.getMeta({
+    //andar test skin(without banner): 159, andar production(banner only): 135
     name: "path_role",
   })}`;
 

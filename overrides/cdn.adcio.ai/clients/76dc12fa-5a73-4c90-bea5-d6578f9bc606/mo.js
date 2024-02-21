@@ -1,5 +1,7 @@
 const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
-const MO_GRID_PLACEMENT_ID = "f77b43c0-6062-4801-950d-104747aa349d"; // [test skin]안다르 모바일 GRID 지면 ID
+// andar client id 76dc12fa-5a73-4c90-bea5-d6578f9bc606
+const MO_GRID_PLACEMENT_ID = "f77b43c0-6062-4801-950d-104747aa349d";
+// [test skin]안다르 모바일 GRID 지면 ID - f77b43c0-6062-4801-950d-104747aa349d
 const CATEGORY_IDS = {
   total: "2017",
   women: "2018",
@@ -7,6 +9,10 @@ const CATEGORY_IDS = {
   junior: "2578",
   acc: "2026",
 };
+
+// MO PRODUCT GRID test skin 정보
+// 페이지 이름 mobile156_MAIN
+// 지면 ID f77b43c0-6062-4801-950d-104747aa349d
 
 console.log("MO sdk 브라우저 테스트!");
 const adcioInstance = new adcio.Adcio({
@@ -117,7 +123,7 @@ const bannerToElement = (banner) => {
 };
 
 const injectSuggestions = async () => {
-  const pageName = `mobile147_${adcio.getMeta({
+  const pageName = `mobile156_${adcio.getMeta({
     name: "path_role",
   })}`;
   const [placement] = await adcioInstance.fetchPlacements({ pageName });
