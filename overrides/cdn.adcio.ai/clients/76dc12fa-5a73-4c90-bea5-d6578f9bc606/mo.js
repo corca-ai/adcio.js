@@ -645,9 +645,9 @@ const run = async () => {
       const allIdOnStore = await getAllIdOnStoreInElement("#monthly-best");
       adcioInstance
         .createSuggestion({
+          placementId: MO_GRID_PLACEMENT_ID,
           ...customer,
           //categoryIdOnStore: categoryId,
-          //placementId: MO_GRID_PLACEMENT_ID,
         })
         .then(async (suggested) => {
           await injectProductSuggestions(suggested, categoryId);
