@@ -1,3 +1,5 @@
+// MO Test Skin 기준 코드!
+
 const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4];
 
 /**
@@ -40,7 +42,7 @@ const createAllSuggestions = (placements, customer) => {
 
       if (placement.id === MO_GRID_PLACEMENT_ID) {
         return await adcioInstance.createSuggestion({
-          //categoryIdOnStore: CATEGORY_IDS.total,
+          categoryIdOnStore: CATEGORY_IDS.total,
           // TODO: fix newest Suggestion API -- 중요!!! (for duplication)
           ...params,
         });
@@ -645,9 +647,9 @@ const run = async () => {
       const allIdOnStore = await getAllIdOnStoreInElement("#monthly-best");
       adcioInstance
         .createSuggestion({
+          placementId: MO_GRID_PLACEMENT_ID,
+          categoryIdOnStore: categoryId,
           ...customer,
-          //categoryIdOnStore: categoryId,
-          //placementId: MO_GRID_PLACEMENT_ID,
         })
         .then(async (suggested) => {
           await injectProductSuggestions(suggested, categoryId);

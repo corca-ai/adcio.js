@@ -40,7 +40,7 @@ const createAllSuggestions = (placements, customer) => {
 
       if (placement.id === MO_GRID_PLACEMENT_ID) {
         return await adcioInstance.createSuggestion({
-          //categoryIdOnStore: CATEGORY_IDS.total,
+          categoryIdOnStore: CATEGORY_IDS.total,
           // TODO: fix newest Suggestion API -- 중요!!! (for duplication)
           ...params,
         });
@@ -646,8 +646,8 @@ const run = async () => {
       adcioInstance
         .createSuggestion({
           placementId: MO_GRID_PLACEMENT_ID,
+          categoryIdOnStore: categoryId,
           ...customer,
-          //categoryIdOnStore: categoryId,
         })
         .then(async (suggested) => {
           await injectProductSuggestions(suggested, categoryId);
