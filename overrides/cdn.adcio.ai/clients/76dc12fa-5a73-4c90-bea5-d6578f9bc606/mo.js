@@ -12,7 +12,7 @@ const CATEGORY_IDS = {
   acc: "2026",
 };
 
-const GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
+const GRID_PLACEMENT_ID = "83126115-6ceb-41a1-b65e-e46ca5afac4c";
 
 console.log("ADCIO sdk start!");
 const adcioInstance = new adcio.Adcio({
@@ -33,8 +33,9 @@ const createAllSuggestions = (placements, customer) => {
       };
 
       if (placement.id === GRID_PLACEMENT_ID) {
-        Object.assign(params, {
+        return await adcioInstance.createProductSuggestion({
           categoryIdOnStore: CATEGORY_IDS.total,
+          ...params,
         });
       }
 
@@ -52,11 +53,9 @@ const createAllSuggestions = (placements, customer) => {
  */
 const productToElement = (product, categoryId) => {
   const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
-  const retailPrice = product.data.retail_price || product.price;
+  const retailPrice = product.data?.retail_price || product.price;
   const salePercent =
-    ((retailPrice - product.data.discountprice.pc_discount_price) /
-      retailPrice) *
-    100;
+    ((retailPrice - product.discountPrice) / retailPrice) * 100;
 
   return adcio.createNestedElement({
     tag: "div",
@@ -141,7 +140,7 @@ const productToElement = (product, categoryId) => {
               {
                 tag: "p",
                 classList: ["model"],
-                textContent: product.data.model_name,
+                textContent: "product.data.model_name",
               },
               {
                 tag: "p",
@@ -195,8 +194,7 @@ const productToElement = (product, categoryId) => {
                       {
                         tag: "strong",
                         textContent: `${Number(
-                          product.data.discountprice.pc_discount_price ||
-                            product.price,
+                          product.discountPrice || product.price,
                         ).toLocaleString()}��`,
                       },
                     ],
@@ -206,8 +204,7 @@ const productToElement = (product, categoryId) => {
                     classList: [
                       "sell",
                       `product_price${Number(
-                        product.data.discountprice.pc_discount_price ||
-                          product.price,
+                        product.discountPrice || product.price,
                       ).toLocaleString()}��`,
                       "displaynone12displaynone",
                     ],
@@ -255,18 +252,13 @@ const productToElement = (product, categoryId) => {
                     ],
                     children:
                       (categoryId === CATEGORY_IDS.total && // 移댄뀒怨좊━ �꾩껜�� 寃쎌슦�먮쭔 text box媛� 議댁옱��
-                        product.data.additional_information
-                          ?.filter(
-                            (data) =>
-                              data.name === "�띿뒪�몃컯��" && data.value,
-                          )
-                          ?.map((data) => {
-                            return {
-                              tag: "div",
-                              classList: ["add_text"],
-                              textContent: data.value,
-                            };
-                          })) ||
+                        product.additional_information?.map((data) => {
+                          return {
+                            tag: "div",
+                            classList: ["add_text"],
+                            textContent: data.value,
+                          };
+                        })) ||
                       [],
                   },
                 ],
@@ -399,9 +391,9 @@ const appendChildForSelected = (elements, selectors) => {
  * @returns {placements : Array<FetchActivePlacementsResponseDto>, customer: CustomerWithId}
  */
 const getPlacementsAndCustomer = async () => {
-  const pageName = `skin159_${adcio.getMeta({
+  const pageName = `mobile156_${adcio.getMeta({
     name: "path_role",
-  })}`;
+  })}_dev`; //TODO: fix pageName and delete _dev
 
   const placements = await adcioInstance.fetchPlacements({ pageName });
   if (!placements.length) {
@@ -508,11 +500,16 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
   });
 
   if (
-    document.querySelector(`.prd_basic`).querySelectorAll("[data-adcio-id]")
-      .length
+    document
+      .querySelector(`#monthly-best`)
+      .querySelector(`.prd_basic`)
+      .querySelectorAll("[data-adcio-id]").length
   ) {
     swapElements(
-      document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
+      document
+        .querySelector(`#monthly-best`)
+        .querySelector(`.prd_basic`)
+        .querySelectorAll(".swiper-slide"),
       MOCK_SELECTED_GRID_INDEXES,
       elements,
     );
@@ -520,7 +517,10 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
   }
 
   insertElements(
-    document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
+    document
+      .querySelector(`#monthly-best`)
+      .querySelector(`.prd_basic`)
+      .querySelectorAll(".swiper-slide"),
     MOCK_SELECTED_GRID_INDEXES,
     elements,
   );
@@ -664,6 +664,8 @@ const run = async () => {
   //adcioInstance.collectLogs(adcio.clientApi.cafe24);
 };
 
-run().finally(() => {
-  document.querySelector("#monthly-best").style.visibility = "visible";
-});
+run()
+  .then(() => console.log("ADCIO sdk end!"))
+  .finally(() => {
+    document.querySelector("#monthly-best").style.visibility = "visible";
+  });
