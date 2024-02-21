@@ -1,5 +1,3 @@
-// 2월 21일 수요일 릴리즈 기준(중복 제거 X) PC 테스트 스킨 코드
-
 /**
  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
  */
@@ -177,7 +175,8 @@ const productToElement = (product, categoryId) => {
                             attributes: {
                               style: "font-size:14px;color:#000000;",
                             },
-                            textContent: product.name,
+                            textContent:
+                              "[TEST] 임의의 값들 이용 - " + product.name,
                           },
                         ],
                       },
@@ -271,9 +270,7 @@ const productToElement = (product, categoryId) => {
                     children:
                       (categoryId === CATEGORY_IDS.total && // 카테고리 전체인 경우에만 text box가 존재함
                         product.additionalInformation
-                          ?.filter(
-                            (data) => data.name === "텍스트박스" && data.value,
-                          )
+                          ?.filter((d) => d.name === "텍스트박스")
                           ?.map((data) => {
                             return {
                               tag: "div",

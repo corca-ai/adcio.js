@@ -22,7 +22,7 @@ const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
 
 console.log("MO ADCIO sdk start!");
 const adcioInstance = new adcio.Adcio({
-  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
+  clientId: CLIENT_ID,
 });
 
 /**
@@ -153,7 +153,7 @@ const productToElement = (product, categoryId) => {
                     attributes: {
                       href: productHref,
                     },
-                    textContent: product.name,
+                    textContent: "[TEST] 임의의 값들 이용 - " + product.name,
                   },
                 ],
               },
