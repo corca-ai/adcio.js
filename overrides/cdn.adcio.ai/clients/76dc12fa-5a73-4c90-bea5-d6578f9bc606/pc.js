@@ -43,9 +43,11 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
       };
 
       if (placement.id === PC_GRID_PLACEMENT_ID) {
-        Object.assign(params, {
+        return adcioInstance.createProductSuggestion({
+          //feat: add product suggestion after api added
           categoryIdOnStore: CATEGORY_IDS.total,
           excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
+          ...params,
         });
       }
 
@@ -575,7 +577,7 @@ const run = async () => {
 
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
-    document.querySelector(`#mainBest`).style.visibility = "visible";
+    document.querySelector(`#mainBest`).style.visibility = "visible"; // TODO: delete this line after test
     return;
   }
 
