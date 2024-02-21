@@ -1,5 +1,3 @@
-import { PLACEMENT_ERROR_MESSAGE } from "../lib/constants/error";
-import { AdcioCore } from "../lib/core";
 import {
   afterAll,
   afterEach,
@@ -10,9 +8,11 @@ import {
   it,
   vi,
 } from "vitest";
-import { server } from "../../mock/node";
 import { SuggestionTestId } from "../../mock/constants";
+import { server } from "../../mock/node";
 import { Adcio } from "../adcio";
+import { PLACEMENT_ERROR_MESSAGE } from "../lib/constants/error";
+import { AdcioCore } from "../lib/core";
 
 beforeAll(() => {
   server.listen();

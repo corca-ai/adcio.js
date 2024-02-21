@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "adcio.js": "../../src",
-    "mock-api": "../../mock",
+    "adcio.js": "file:../../src",
+    "mock-api": "file:../../mock",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1",
