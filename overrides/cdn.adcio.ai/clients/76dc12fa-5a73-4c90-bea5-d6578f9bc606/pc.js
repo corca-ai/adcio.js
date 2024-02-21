@@ -10,12 +10,12 @@ const CATEGORY_IDS = {
   acc: "2026",
 };
 
-const GRID_PLACEMENT_ID = "d1e900b9-37ee-4fc2-ab03-443b78059fbe"; // andar test grid placement id - "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4"
+const PC_GRID_PLACEMENT_ID = "d1e900b9-37ee-4fc2-ab03-443b78059fbe"; // andar test grid placement id - "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4"
 const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606"; // andar-"76dc12fa-5a73-4c90-bea5-d6578f9bc606"
 
 const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4]; // TODO: delete and replace before add script
 
-console.log("sdk 브라우저 테스트!");
+console.log("PC sdk 브라우저 테스트!");
 const adcioInstance = new adcio.Adcio({
   clientId: CLIENT_ID,
 });
@@ -34,7 +34,7 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
         placementId: placement.id,
       };
 
-      if (placement.id === GRID_PLACEMENT_ID) {
+      if (placement.id === PC_GRID_PLACEMENT_ID) {
         Object.assign(params, {
           categoryIdOnStore: CATEGORY_IDS.total,
           excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
@@ -620,7 +620,7 @@ const run = async () => {
         .createSuggestion({
           ...customer,
           categoryIdOnStore: categoryId,
-          placementId: GRID_PLACEMENT_ID,
+          placementId: PC_GRID_PLACEMENT_ID,
           excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
         })
         .then(async (suggested) => {
