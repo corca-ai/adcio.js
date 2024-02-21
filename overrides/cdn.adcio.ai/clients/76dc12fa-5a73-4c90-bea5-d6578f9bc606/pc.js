@@ -45,10 +45,9 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
       };
 
       if (placement.id === PC_GRID_PLACEMENT_ID) {
-        return adcioInstance.createProductSuggestion({
-          //feat: add product suggestion after api added
+        return adcioInstance.createSuggestion({
           categoryIdOnStore: CATEGORY_IDS.total,
-          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
+          // excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`), //feat: add product suggestion after api added
           ...params,
         });
       }
@@ -104,7 +103,7 @@ const productToElement = (product, categoryId) => {
                         tag: "img",
                         classList: ["overimg"],
                         attributes: {
-                          src: product?.data?.small_image,
+                          src: product?.Image || product?.additionalImages?.[1],
                           alt: product.name,
                           id: `eListPrdImage${product.idOnStore}_1`,
                         },
@@ -112,7 +111,7 @@ const productToElement = (product, categoryId) => {
                       {
                         tag: "img",
                         attributes: {
-                          src: product?.data?.tiny_image,
+                          src: product?.additionalImages?.[0] || product?.Image,
                           alt: product.name,
                           id: `eListPrdImage${product.idOnStore}_1`,
                         },
@@ -225,17 +224,14 @@ const productToElement = (product, categoryId) => {
                       ).toLocaleString()}원`,
                       "displaynone12displaynone",
                     ],
-                    children:
-                      salePercent < 1
-                        ? []
-                        : [
-                            {
-                              tag: "strong",
-                              textContent: `${
-                                Number(retailPrice).toLocaleString() + "원"
-                              }`,
-                            },
-                          ],
+                    children: [
+                      {
+                        tag: "strong",
+                        textContent: `${
+                          Number(retailPrice).toLocaleString() + "원"
+                        }`,
+                      },
+                    ],
                   },
                 ],
               },
@@ -388,10 +384,11 @@ const appendChildForSelected = (elements, selectors) => {
  */
 const getPlacementsAndCustomer = async () => {
   const pageName = `skin159_${adcio.getMeta({
-    //andar test skin(without banner): 159, andar production(banner only): 135
-    // test@test.com skin159
+    // andar test skin(without banner): skin159
+    // andar production(banner only): 135
+    // test@test.com skin159_MAIN_dev
     name: "path_role",
-  })}_dev`; // TODO: delete the _dev in production or test skin
+  })}`; // TODO: delete the _dev in production or test skin
 
   const placements = await adcioInstance.fetchPlacements({ pageName });
   if (!placements.length) {
@@ -576,7 +573,6 @@ const run = async () => {
 
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
-    document.querySelector(`#mainBest`).style.visibility = "visible"; // TODO: delete this line after test
     return;
   }
 
