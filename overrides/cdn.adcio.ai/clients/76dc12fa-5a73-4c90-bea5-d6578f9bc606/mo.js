@@ -12,9 +12,13 @@ const CATEGORY_IDS = {
   acc: "2026",
 };
 
-const MO_GRID_PLACEMENT_ID = "83126115-6ceb-41a1-b65e-e46ca5afac4c";
+const MO_GRID_PLACEMENT_ID = "f77b43c0-6062-4801-950d-104747aa349d";
 // test@test.com 83126115-6ceb-41a1-b65e-e46ca5afac4c
 // andar MO test skin f77b43c0-6062-4801-950d-104747aa349d
+
+const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
+// Andar 76dc12fa-5a73-4c90-bea5-d6578f9bc606
+// test@test.com 76dc12fa-5a73-4c90-bea5-d6578f9bc606
 
 console.log("MO ADCIO sdk start!");
 const adcioInstance = new adcio.Adcio({
@@ -148,8 +152,8 @@ const productToElement = (product, categoryId) => {
                     classList: ["text_line2"],
                     attributes: {
                       href: productHref,
-                      textContent: product.name,
                     },
+                    textContent: product.name,
                   },
                 ],
               },
@@ -378,7 +382,9 @@ const appendChildForSelected = (elements, selectors) => {
 const getPlacementsAndCustomer = async () => {
   const pageName = `mobile156_${adcio.getMeta({
     name: "path_role",
-  })}_dev`; //TODO: fix pageName and delete _dev
+  })}`; //TODO: fix pageName and delete _dev
+  // Andar MO test skin(Grid Only) mobile156_MAIN
+  // test@test.com mobile156_MAIN_dev
 
   const placements = await adcioInstance.fetchPlacements({ pageName });
   if (!placements.length) {
@@ -532,7 +538,7 @@ const observeUntilUnload = (
  * @param {string} code
  * @returns {string | null}
  */
-const getCategoryNoFromCode = (code) => {
+const getCategoryIdFromCode = (code) => {
   if (!code) {
     return null;
   }
@@ -541,25 +547,38 @@ const getCategoryNoFromCode = (code) => {
   return match.length >= 2 ? match[1] : null;
 };
 
-// /**
-//  * @param {string} selector
-//  * @returns {Array<string>}
-//  */
-// const getAllIdOnStoreInElement = (selector) => {
-//   const idOnStores = [];
-//   const elements = document.querySelector(selector);
-//   elements.childNodes.forEach((element) => {
-//     if (!element.id) {
-//       return;
-//     }
-//     const regex = /anchorBoxId_(\d+)/;
-//     const match = element.id.match(regex);
-//     if (match.length >= 2) {
-//       idOnStores.push(match[1]);
-//     }
-//   });
-//   return idOnStores;
-// };
+/**
+ * @param {string} selector
+ * @returns {Array<string>}
+ */
+const getAllIdOnStoreInElement = (selector) => {
+  const idOnStores = [];
+  const elements = document.querySelector(selector);
+  elements.childNodes.forEach((element) => {
+    if (!element.id) {
+      return;
+    }
+    const regex = /anchorBoxId_(\d+)/;
+    const match = element.id.match(regex);
+    if (match.length >= 2) {
+      idOnStores.push(match[1]);
+    }
+  });
+  return idOnStores;
+};
+
+/**
+ * @param {string} html
+ * @returns {string | null}
+ */
+const getCategoryIdFromHTML = (html) => {
+  if (!html) {
+    return null;
+  }
+  const regex = /\$cate_no\s*=\s*(\d+)/;
+  const match = html.match(regex);
+  return match.length >= 2 ? match[1] : null;
+};
 
 /**
  * @param {string} selectors
@@ -579,10 +598,12 @@ const createOrFixRankElement = (selectors) => {
 const run = async () => {
   await adcio.waitForElement("#monthly-best");
   document.querySelector(`#monthly-best`).style.visibility = "hidden";
+  const allIdOnStore = await getAllIdOnStoreInElement("#monthly-best");
 
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
-    document.querySelector(`#monthly-best`).style.visibility = "visible";
+    console.error("No placements found");
+    //document.querySelector(`#monthly-best`).style.visibility = "visible";
     return;
   }
 
@@ -618,9 +639,10 @@ const run = async () => {
     if (mutationsList.find((m) => m.type === "childList")) {
       document.querySelector("#monthly-best").style.visibility = "hidden";
       const categoryId =
-        getCategoryNoFromCode(
+        getCategoryIdFromCode(
           document.querySelector("#monthly-best")?.innerHTML,
         ) || CATEGORY_IDS.total;
+      const allIdOnStore = await getAllIdOnStoreInElement("#monthly-best");
       adcioInstance
         .createSuggestion({
           ...customer,
