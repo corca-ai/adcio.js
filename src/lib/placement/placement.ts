@@ -79,7 +79,7 @@ export class AdcioPlacement {
     }
   }
 
-  // create unduplicated product suggestion
+  // create unduplicated product suggestion and return suggestionPosition (e.g. [0,1]) for grid placement
   public async createProductSuggestion(
     params: AdcioPlacementCreateProductSuggestionParams,
   ) {
