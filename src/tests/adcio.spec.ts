@@ -1,5 +1,5 @@
-import { PLACEMENT_ERROR_MESSAGE } from "../src/lib/constants/error";
-import { AdcioCore } from "../src/lib/core";
+import { PLACEMENT_ERROR_MESSAGE } from "../lib/constants/error";
+import { AdcioCore } from "../lib/core";
 import {
   afterAll,
   afterEach,
@@ -10,9 +10,9 @@ import {
   it,
   vi,
 } from "vitest";
-import { server } from "../mock/node";
-import { SuggestionTestId } from "../mock/constants";
-import { Adcio } from "../src/adcio";
+import { server } from "../../mock/node";
+import { SuggestionTestId } from "../../mock/constants";
+import { Adcio } from "../adcio";
 
 beforeAll(() => {
   server.listen();
@@ -80,8 +80,8 @@ describe("test AdcioCore module", () => {
       };
     });
 
-    const { AdcioCore } = await import("../src/lib/core");
-    const { Adcio } = await import("../src/adcio");
+    const { AdcioCore } = await import("../lib/core");
+    const { Adcio } = await import("../adcio");
 
     new Adcio({
       clientId: "your-client-id",
