@@ -11,11 +11,7 @@
     "incremental": true,
     "types": ["node"],
     "jsx": "preserve",
-    "baseUrl": ".",
-    "paths": {
-      "lib/*": ["../lib/*"],
-      "api/*": ["../api/*"]
-    }
+    "baseUrl": "."
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
