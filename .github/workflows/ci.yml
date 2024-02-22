@@ -24,8 +24,8 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - if: steps.deps-cache.outputs.cache-hit != 'true'
-        run: yarn install && yarn list --pattern eslint-plugin-react-hooks
+        run: yarn install
 
-      - run: yarn run lint
+      - run: yarn run lint && yarn list --pattern eslint-plugin-react-hooks
       - run: yarn run build
       - run: yarn run test
