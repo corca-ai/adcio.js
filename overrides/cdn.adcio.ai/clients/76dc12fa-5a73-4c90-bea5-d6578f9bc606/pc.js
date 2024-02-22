@@ -19,8 +19,6 @@ const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
 // andar 76dc12fa-5a73-4c90-bea5-d6578f9bc606
 // test@test.com 76dc12fa-5a73-4c90-bea5-d6578f9bc606
 
-const MOCK_SELECTED_GRID_INDEXES = [0, 3]; // TODO: delete and replace before add script
-
 // PC PRODUCT GRID test skin 정보
 // 페이지 이름 skin159_MAIN
 // 지면 ID 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
@@ -193,19 +191,22 @@ const productToElement = (product, categoryId) => {
                     attributes: {
                       style: "display: inline !important;", //added important for the very first of rendering.
                     },
-                    children:
-                      discountPercent < 1 || discountPercent >= 100
-                        ? []
-                        : [
-                            {
-                              tag: "strong",
-                              textContent: discountPercent.toFixed() + "%",
-                            },
-                          ],
+                    children: [
+                      {
+                        tag: "strong",
+                        textContent:
+                          discountPercent < 1 || discountPercent >= 100
+                            ? " "
+                            : discountPercent.toFixed() + "%",
+                      },
+                    ],
                   },
                   {
                     tag: "span",
                     classList: ["sale"],
+                    attributes: {
+                      style: "display:inline !important;",
+                    },
                     children: [
                       {
                         tag: "strong",
@@ -217,22 +218,17 @@ const productToElement = (product, categoryId) => {
                   },
                   {
                     tag: "span",
-                    classList: [
-                      "sell",
-                      `product_price${Number(
-                        product.price,
-                      ).toLocaleString()}원`,
-                      "displaynone12displaynone",
-                    ],
+                    classList: ["customer"],
+                    attributes: {
+                      style: "display: inline;",
+                    },
                     children: [
                       {
                         tag: "strong",
-                        attributes: {
-                          style: "text-decoration: line-through; !important",
-                        },
-                        textContent: `${
-                          Number(product.price).toLocaleString() + "원"
-                        }`,
+                        textContent:
+                          discountPercent < 1
+                            ? "  "
+                            : `${Number(product.price).toLocaleString()}원`,
                       },
                     ],
                   },
@@ -267,17 +263,15 @@ const productToElement = (product, categoryId) => {
                       "textBox",
                     ],
                     children:
-                      (categoryId === CATEGORY_IDS.total && // 카테고리 전체인 경우에만 text box가 존재함
-                        product.additionalInformation
-                          ?.filter((d) => d.name === "텍스트박스")
-                          ?.map((data) => {
-                            return {
-                              tag: "div",
-                              classList: ["add_text"],
-                              textContent: data.value,
-                            };
-                          })) ||
-                      [],
+                      product.additionalInformation
+                        ?.filter((d) => d.name === "텍스트박스")
+                        ?.map((data) => {
+                          return {
+                            tag: "div",
+                            classList: ["add_text"],
+                            textContent: data.value,
+                          };
+                        }) || [],
                   },
                 ],
               },
@@ -599,14 +593,10 @@ const run = async () => {
     injectBannerSuggestions(allSuggestions.BANNER);
   }
   if (allSuggestions.GRID) {
-    const suggestionPosition = [
-      ...allSuggestions.GRID.placement.suggestionPosition,
-    ]; // TODO: fix to use this instead of MOCK_SELECTED_GRID_INDEXES
-
     await injectGridSuggestions(
       allSuggestions.GRID,
       CATEGORY_IDS.total,
-      MOCK_SELECTED_GRID_INDEXES,
+      allSuggestions.GRID.placement.suggestionPosition,
     );
     await createOrFixRankElement(".img");
   }
@@ -637,14 +627,10 @@ const run = async () => {
           excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
         })
         .then(async (suggested) => {
-          const suggestionPosition = [
-            ...suggested.placement.suggestionPosition,
-          ]; // TODO: fix to use this instead of MOCK_SELECTED_GRID_INDEXES
-
           await injectGridSuggestions(
             suggested,
             categoryId,
-            MOCK_SELECTED_GRID_INDEXES,
+            suggested.placement.suggestionPosition,
           );
           await createOrFixRankElement(".img");
         })
