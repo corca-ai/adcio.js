@@ -1,3 +1,5 @@
+// PC Test Skin 코드!
+
 /**
  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
  */
