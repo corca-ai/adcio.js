@@ -51,7 +51,8 @@
     "lint:ci": "yarn workspaces run lint run && eslint \"src/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "test:cov": "vitest run --coverage"
+    "test:cov": "vitest run --coverage",
+    "dev:demo-react": "yarn workspace demo-react run dev"
   },
   "keywords": [],
   "publishConfig": {
