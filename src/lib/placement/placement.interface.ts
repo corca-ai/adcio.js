@@ -1,4 +1,7 @@
-import { SuggestionRequestDto } from "api/controller/v1";
+import {
+  SuggestionProductsRequestDto,
+  SuggestionRequestDto,
+} from "api/controller/v1";
 import { AdcioCore } from "lib/core";
 
 export type AdcioPlacementParams = {
@@ -20,9 +23,14 @@ export type AdcioPlacementCreateSuggestionParams = Pick<
   | "area"
 >;
 
-export type AdcioPlacementCreateProductSuggestionParams =
-  AdcioPlacementCreateSuggestionParams & {
-    //TODO: fix after API is updated in production
-    categoryIdOnStore: string;
-    excludingProductIds: string[]; // -> composeId e.g) "['871fab52-4db5-41ab-b1d8-ffb16461c246:132']"
-  };
+export type AdcioPlacementCreateSuggestionProductsParams = Pick<
+  SuggestionProductsRequestDto,
+  | "placementId"
+  | "placementPositionX"
+  | "placementPositionY"
+  | "birthYear"
+  | "gender"
+  | "area"
+  | "categoryIdOnStore"
+  | "excludingProductIds"
+>;

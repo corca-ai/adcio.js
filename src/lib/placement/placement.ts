@@ -7,7 +7,7 @@ import {
   AdcioPlacementParams,
   AdcioPlacementCreateSuggestionParams,
   AdcioPlacementFetchPlacementsParams,
-  AdcioPlacementCreateProductSuggestionParams,
+  AdcioPlacementCreateSuggestionProductsParams,
 } from "./placement.interface";
 
 export class AdcioPlacement {
@@ -79,15 +79,13 @@ export class AdcioPlacement {
     }
   }
 
-  // create unduplicated product suggestion and return suggestionPosition (e.g. [0,1]) for grid placement
-  public async createProductSuggestion(
-    params: AdcioPlacementCreateProductSuggestionParams,
+  public async createSuggestionProducts(
+    params: AdcioPlacementCreateSuggestionProductsParams,
   ) {
     try {
       const { data } = await new SuggestionApi(
         this.apiConfig,
-      ).suggestionControllerSuggest({
-        //TODO: fix after API is updated in RMP
+      ).suggestionControllerSuggestProducts({
         customerId: this.adcioCore.getCustomerId(),
         sessionId: this.adcioCore.getSessionId(),
         deviceId: this.adcioCore.getDeviceId(),
