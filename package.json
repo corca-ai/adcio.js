@@ -45,7 +45,7 @@
     "build": "tsc -p tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist/src && webpack --config webpack.config.js",
     "prepare": "yarn build",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "yarn workspaces run lint && eslint \"src/**/*.ts\" --fix",
+    "lint": "yarn workspaces run lint --fix && eslint \"src/**/*.ts\" --fix",
     "lint:ci": "yarn workspaces run lint run && eslint \"src/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest watch",
