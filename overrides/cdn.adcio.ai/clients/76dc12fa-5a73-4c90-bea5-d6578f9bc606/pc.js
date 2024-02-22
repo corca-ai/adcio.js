@@ -172,8 +172,7 @@ const productToElement = (product, categoryId) => {
                             attributes: {
                               style: "font-size:14px;color:#000000;",
                             },
-                            textContent:
-                              "[TEST] 임의의 값들 이용 - " + product.name,
+                            textContent: product.name,
                           },
                         ],
                       },
