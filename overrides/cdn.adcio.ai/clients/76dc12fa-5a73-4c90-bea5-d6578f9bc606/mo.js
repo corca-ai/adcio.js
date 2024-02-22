@@ -1,5 +1,3 @@
-const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4];
-
 /**
  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
  */
@@ -28,9 +26,10 @@ const adcioInstance = new adcio.Adcio({
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
  * @param {CustomerWithId} customer
+ * @param {Array<string>} allIdOnStore
  * @returns {Promise<Array<SuggestionResponseDto>>}
  */
-const createAllSuggestions = (placements, customer) => {
+const createAllSuggestions = (placements, customer, allIdOnStore) => {
   return Promise.allSettled(
     placements?.map(async (placement) => {
       const params = {
@@ -39,9 +38,9 @@ const createAllSuggestions = (placements, customer) => {
       };
 
       if (placement.id === MO_GRID_PLACEMENT_ID) {
-        return await adcioInstance.createSuggestion({
+        return adcioInstance.createSuggestionProducts({
           categoryIdOnStore: CATEGORY_IDS.total,
-          // TODO: fix newest Suggestion API -- 중요!!! (for duplication)
+          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
           ...params,
         });
       }
@@ -408,7 +407,7 @@ const getPlacementsAndCustomer = async () => {
  */
 const swapElements = (originalElements, adcioGridIndexes, newElements) => {
   originalElements.forEach((element, index) => {
-    if (adcioGridIndexes.includes(index) && newElements.length) {
+    if (adcioGridIndexes.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
       element.outerHTML = newElement.outerHTML;
       return;
@@ -426,7 +425,7 @@ const insertElements = (originalElements, indexes, newElements) => {
   const newElementsArr = [...newElements];
 
   originalElements.forEach((element, index) => {
-    if (indexes.includes(index) && newElementsArr.length) {
+    if (indexes.includes(index + 1) && newElementsArr.length) {
       const newElement = newElementsArr.shift();
       element.outerHTML = newElement.outerHTML;
       return;
@@ -470,9 +469,10 @@ const injectBannerSuggestions = (suggestedData) => {
 /**
  * @param {SuggestionResponseDto[]} suggestedData
  * @param {string} categoryId
+ 
  */
-const injectProductSuggestions = (suggestedData, categoryId) => {
-  const { suggestions } = suggestedData;
+const injectGridSuggestions = (suggestedData, categoryId) => {
+  const { placement, suggestions } = suggestedData;
 
   const elements = suggestions.map((suggestion) => {
     const element = productToElement(suggestion.product, categoryId); //TODO: fix index
@@ -501,7 +501,7 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
         .querySelector(`#monthly-best`)
         .querySelector(`.prd_basic`)
         .querySelectorAll(".swiper-slide"),
-      MOCK_SELECTED_GRID_INDEXES,
+      placement.suggestionPosition,
       elements,
     );
     return;
@@ -512,7 +512,7 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
       .querySelector(`#monthly-best`)
       .querySelector(`.prd_basic`)
       .querySelectorAll(".swiper-slide"),
-    MOCK_SELECTED_GRID_INDEXES,
+    placement.suggestionPosition,
     elements,
   );
 };
@@ -611,7 +611,11 @@ const run = async () => {
     BANNER: null,
     GRID: null,
   };
-  const allPromises = await createAllSuggestions(placements, customer);
+  const allPromises = await createAllSuggestions(
+    placements,
+    customer,
+    allIdOnStore,
+  );
   allPromises.forEach(
     (p) =>
       p.status === "fulfilled" &&
@@ -623,7 +627,7 @@ const run = async () => {
     injectBannerSuggestions(allSuggestions.BANNER);
   }
   if (allSuggestions.GRID) {
-    await injectProductSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
+    await injectGridSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
     await createOrFixRankElement(".img");
   }
   document.querySelector(`#monthly-best`).style.visibility = "visible";
@@ -644,13 +648,13 @@ const run = async () => {
         ) || CATEGORY_IDS.total;
       const allIdOnStore = await getAllIdOnStoreInElement("#monthly-best");
       adcioInstance
-        .createSuggestion({
-          placementId: MO_GRID_PLACEMENT_ID,
-          categoryIdOnStore: categoryId,
-          ...customer,
+        .createSuggestionProducts({
+          categoryIdOnStore: CATEGORY_IDS.total,
+          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
+          ...params,
         })
         .then(async (suggested) => {
-          await injectProductSuggestions(suggested, categoryId);
+          await injectGridSuggestions(suggested, categoryId);
           await createOrFixRankElement(".img");
         })
         .finally(async () => {
