@@ -6,10 +6,7 @@
   "author": "Corca <contact@corca.ai>",
   "license": "Apache-2.0",
   "private": true,
-  "workspaces": {
-    "packages": ["demo/*"],
-    "nohoist": ["../adcio.js/*"]
-  },
+  "workspaces": ["demo-react", "demo/*"],
   "devDependencies": {
     "@babel/core": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
