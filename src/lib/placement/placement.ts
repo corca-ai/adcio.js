@@ -5,9 +5,9 @@ import { AdcioCore } from "lib/core";
 import { APIError } from "lib/error";
 import {
   AdcioPlacementParams,
-  AdcioPlacementCreateSuggestionParams,
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateSuggestionProductsParams,
+  AdcioPlacementCreateSuggestionParams,
 } from "./placement.interface";
 
 export class AdcioPlacement {

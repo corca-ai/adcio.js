@@ -81,6 +81,10 @@ export class Adcio {
     return this.adcioPlacement.createSuggestion(params);
   }
 
+  public async createSuggestionProducts(params: AdcioCreateSuggestionParams) {
+    return this.adcioPlacement.createSuggestionProducts(params);
+  }
+
   public async collectLogs(clientApi: ClientAPI) {
     await clientApi.init();
 

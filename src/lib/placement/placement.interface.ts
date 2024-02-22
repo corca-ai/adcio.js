@@ -13,6 +13,16 @@ export type AdcioPlacementFetchPlacementsParams = {
   pageName: string;
 };
 
+export type AdcioPlacementCreateSuggestionParams = Pick<
+  SuggestionRequestDto,
+  | "placementId"
+  | "placementPositionX"
+  | "placementPositionY"
+  | "birthYear"
+  | "gender"
+  | "area"
+>;
+
 export type AdcioPlacementCreateSuggestionProductsParams = Pick<
   SuggestionProductsRequestDto,
   | "placementId"

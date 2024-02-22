@@ -45,9 +45,9 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
       };
 
       if (placement.id === PC_GRID_PLACEMENT_ID) {
-        return adcioInstance.createSuggestion({
+        return adcioInstance.createSuggestionProducts({
           categoryIdOnStore: CATEGORY_IDS.total,
-          // excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`), //feat: add product suggestion after api added
+          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
           ...params,
         });
       }
@@ -67,16 +67,15 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
 const productToElement = (product, categoryId) => {
   const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
 
-  const retailPrice = product.data?.retail_price || product.price;
-  const discountPercent = // Fix: fix after api update on 24/02/22
-    !retailPrice || !product.discountPrice
+  const discountPercent =
+    product.price == null || !product.discountPrice == null
       ? 0
-      : ((retailPrice - product.discountPrice) / retailPrice) * 100;
+      : ((product.price - product.discountPrice) / product.price) * 100;
 
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
-    attributes: { "vreview-dom-embeded": true, "data-adcio-id": true }, //Adcio attribute to disctinct ADCIO elements from others.
+    attributes: { "vreview-dom-embeded": false, "data-adcio-id": true }, //Adcio attribute to disctinct ADCIO elements from others.
     children: [
       {
         tag: "div",
@@ -221,21 +220,21 @@ const productToElement = (product, categoryId) => {
                     classList: [
                       "sell",
                       `product_price${Number(
-                        product.discountPrice || product.price,
+                        product.price,
                       ).toLocaleString()}원`,
                       "displaynone12displaynone",
                     ],
-                    children:
-                      discountPercent < 1 || discountPercent >= 100
-                        ? []
-                        : [
-                            {
-                              tag: "strong",
-                              textContent: `${
-                                Number(retailPrice).toLocaleString() + "원"
-                              }`,
-                            },
-                          ],
+                    children: [
+                      {
+                        tag: "strong",
+                        attributes: {
+                          style: "text-decoration: line-through; !important",
+                        },
+                        textContent: `${
+                          Number(product.price).toLocaleString() + "원"
+                        }`,
+                      },
+                    ],
                   },
                 ],
               },
@@ -414,7 +413,7 @@ const getPlacementsAndCustomer = async () => {
  */
 const swapElements = (originalElements, newElements, adcioGridIndexes) => {
   originalElements.forEach((element, index) => {
-    if (adcioGridIndexes.includes(index) && newElements.length) {
+    if (adcioGridIndexes.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
       element.outerHTML = newElement.outerHTML;
       return;
@@ -431,7 +430,7 @@ const insertElements = (originalElements, newElements, adcioGridIndexes) => {
   const originElementsArr = [...originalElements];
 
   originalElements.forEach((element, index) => {
-    if (adcioGridIndexes.includes(index) && newElements.length) {
+    if (adcioGridIndexes.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
       element.outerHTML = newElement.outerHTML;
       return;
@@ -631,12 +630,11 @@ const run = async () => {
       const allIdOnStore = await getAllIdOnStoreInElement(".prd_basic");
 
       adcioInstance
-        .createSuggestion({
-          //TODO: fix after release,  createProductSuggestion
+        .createSuggestionProducts({
           ...customer,
           categoryIdOnStore: categoryId,
           placementId: PC_GRID_PLACEMENT_ID,
-          // excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`), //TODO: fix after release
+          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
         })
         .then(async (suggested) => {
           const suggestionPosition = [
