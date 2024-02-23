@@ -593,11 +593,10 @@ const getCategoryIdFromHTML = (html) => {
   return match.length >= 2 ? match[1] : null;
 };
 
-/**
- * @param {string} selectors
- */
-const createOrFixRankElement = (selectors) => {
-  const elements = document.querySelectorAll(selectors);
+const createOrFixRankElement = () => {
+  const elements = document
+    .querySelector(`#monthly-best`)
+    .querySelectorAll(".img");
   elements.forEach((element, index) => {
     if (element.querySelector(".rankBadge") == null) {
       const rankBadge = document.createElement("span");
@@ -639,7 +638,7 @@ const run = async () => {
   }
   if (allSuggestions.GRID) {
     await injectGridSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
-    await createOrFixRankElement(".img");
+    await createOrFixRankElement();
   }
   document.querySelector(`#monthly-best`).style.visibility = "visible";
 
@@ -669,7 +668,7 @@ const run = async () => {
         })
         .then(async (suggested) => {
           await injectGridSuggestions(suggested, categoryId);
-          await createOrFixRankElement(".img");
+          await createOrFixRankElement();
         })
         .finally(async () => {
           document.querySelector("#monthly-best").style.visibility = "visible";
