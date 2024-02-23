@@ -409,7 +409,7 @@ const swapElements = (originalElements, adcioGridIndexes, newElements) => {
   originalElements.forEach((element, index) => {
     if (adcioGridIndexes.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
-      element.outerHTML = newElement.outerHTML;
+      element.replaceWith(newElement);
       return;
     }
   });
@@ -427,12 +427,15 @@ const insertElements = (originalElements, indexes, newElements) => {
   originalElements.forEach((element, index) => {
     if (indexes.includes(index + 1) && newElementsArr.length) {
       const newElement = newElementsArr.shift();
-      element.outerHTML = newElement.outerHTML;
+      element.replaceWith(newElement);
       return;
     }
 
+    if (!originElementsArr.length) {
+      return;
+    }
     const elementToBeInserted = originElementsArr.shift();
-    element.outerHTML = elementToBeInserted.outerHTML;
+    element.replaceWith(elementToBeInserted);
   });
 };
 
@@ -548,13 +551,13 @@ const getCategoryIdFromCode = (code) => {
 };
 
 /**
- * @param {string} selector
  * @returns {Array<string>}
  */
-const getAllIdOnStoreInElement = (selector) => {
-  //TODO: fix get all id on store
+const getAllIdOnStoreInElement = () => {
   const idOnStores = [];
-  const elements = document.querySelector(selector);
+  const elements = document
+    .querySelector("#monthly-best")
+    .querySelector(".prd_basic");
   elements.childNodes.forEach((element) => {
     if (!element.id) {
       return;
@@ -599,12 +602,10 @@ const createOrFixRankElement = (selectors) => {
 const run = async () => {
   await adcio.waitForElement("#monthly-best");
   document.querySelector(`#monthly-best`).style.visibility = "hidden";
-  const allIdOnStore = await getAllIdOnStoreInElement("#monthly-best");
+  const allIdOnStore = await getAllIdOnStoreInElement();
 
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
-    console.error("No placements found");
-    //document.querySelector(`#monthly-best`).style.visibility = "visible";
     return;
   }
 
@@ -647,7 +648,8 @@ const run = async () => {
         getCategoryIdFromCode(
           document.querySelector("#monthly-best")?.innerHTML,
         ) || CATEGORY_IDS.total;
-      const allIdOnStore = await getAllIdOnStoreInElement("#monthly-best");
+      const allIdOnStore = await getAllIdOnStoreInElement();
+
       adcioInstance
         .createSuggestionProducts({
           categoryIdOnStore: CATEGORY_IDS.total,
