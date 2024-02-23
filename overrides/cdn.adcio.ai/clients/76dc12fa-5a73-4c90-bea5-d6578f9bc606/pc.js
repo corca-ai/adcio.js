@@ -100,11 +100,11 @@ const productToElement = (product, categoryId) => {
                       name: `anchorBoxName_${product.idOnStore}`,
                     },
                     children: [
-                      {
+                      !!product.additionalImages?.[1] && {
                         tag: "img",
                         classList: ["overimg"],
                         attributes: {
-                          src: product?.Image || product?.additionalImages?.[1],
+                          src: product.additionalImages?.[1],
                           alt: product.name,
                           id: `eListPrdImage${product.idOnStore}_1`,
                         },
@@ -112,7 +112,7 @@ const productToElement = (product, categoryId) => {
                       {
                         tag: "img",
                         attributes: {
-                          src: product?.additionalImages?.[0] || product?.Image,
+                          src: product.additionalImages?.[0],
                           alt: product.name,
                           id: `eListPrdImage${product.idOnStore}_1`,
                         },
