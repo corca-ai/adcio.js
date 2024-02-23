@@ -32,7 +32,7 @@ const adcioInstance = new adcio.Adcio({
  * @param {Array<FetchActivePlacementsResponseDto>} placements
  * @param {CustomerWithId} customer
  * @param {Array<string>} allIdOnStore
- * @returns {Promise<Array<SuggestionResponseDto>>}
+ * @returns {Promise<Array<SuggestionResponseDto | SuggestionProductsRequestDto>>}
  */
 const createAllSuggestions = (placements, customer, allIdOnStore) => {
   return Promise.allSettled(
@@ -542,11 +542,10 @@ const getAllIdOnStoreInElement = (selector) => {
   return idOnStores;
 };
 
-/**
- * @param {string} parentElementSelector
- */
-const createOrFixRankElement = (parentElementSelector) => {
-  const elements = document.querySelectorAll(parentElementSelector);
+const createOrFixRankElement = () => {
+  const elements = document
+    .querySelector("#monthly-best")
+    .querySelectorAll(parentElementSelector);
   elements.forEach((element, index) => {
     if (element.querySelector(".rankBadge") == null) {
       const rankBadge = document.createElement("span");
@@ -594,7 +593,7 @@ const run = async () => {
       CATEGORY_IDS.total,
       allSuggestions.GRID.placement.suggestionPosition,
     );
-    await createOrFixRankElement(".img");
+    await createOrFixRankElement();
   }
   document.querySelector(`#mainBest`).style.visibility = "visible";
 
@@ -628,7 +627,7 @@ const run = async () => {
             categoryId,
             suggested.placement.suggestionPosition,
           );
-          await createOrFixRankElement(".img");
+          await createOrFixRankElement();
         })
         .finally(
           () =>
