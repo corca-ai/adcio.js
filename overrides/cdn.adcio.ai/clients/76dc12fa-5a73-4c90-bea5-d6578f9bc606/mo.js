@@ -552,6 +552,7 @@ const getCategoryIdFromCode = (code) => {
  * @returns {Array<string>}
  */
 const getAllIdOnStoreInElement = (selector) => {
+  //TODO: fix get all id on store
   const idOnStores = [];
   const elements = document.querySelector(selector);
   elements.childNodes.forEach((element) => {
