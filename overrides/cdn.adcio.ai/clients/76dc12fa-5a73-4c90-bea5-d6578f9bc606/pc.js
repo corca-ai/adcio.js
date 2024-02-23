@@ -23,7 +23,7 @@ const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
 // 페이지 이름 skin159_MAIN
 // 지면 ID 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
 
-console.log("PC sdk 브라우저 테스트!");
+console.log("PC sdk !");
 const adcioInstance = new adcio.Adcio({
   clientId: CLIENT_ID,
 });
@@ -470,10 +470,9 @@ const injectBannerSuggestions = (suggestedData) => {
 /**
  * @param {SuggestionResponseDto} suggestedData
  * @param {string} categoryId
- * @param {Array<number>} adcioGridIndexes
  */
-const injectGridSuggestions = (suggestedData, categoryId, adcioGridIndexes) => {
-  const { suggestions } = suggestedData;
+const injectGridSuggestions = (suggestedData, categoryId) => {
+  const { placement, suggestions } = suggestedData;
 
   const elements = suggestions.map((suggestion) => {
     const element = productToElement(suggestion.product, categoryId);
@@ -497,7 +496,7 @@ const injectGridSuggestions = (suggestedData, categoryId, adcioGridIndexes) => {
     swapElements(
       document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
       elements,
-      adcioGridIndexes,
+      placement.suggestionPosition,
     );
     return;
   }
@@ -505,7 +504,7 @@ const injectGridSuggestions = (suggestedData, categoryId, adcioGridIndexes) => {
   insertElements(
     document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
     elements,
-    adcioGridIndexes,
+    placement.suggestionPosition,
   );
 };
 
@@ -588,11 +587,7 @@ const run = async () => {
     injectBannerSuggestions(allSuggestions.BANNER);
   }
   if (allSuggestions.GRID) {
-    await injectGridSuggestions(
-      allSuggestions.GRID,
-      CATEGORY_IDS.total,
-      allSuggestions.GRID.placement.suggestionPosition,
-    );
+    await injectGridSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
     await createOrFixRankElement();
   }
   document.querySelector(`#mainBest`).style.visibility = "visible";
@@ -622,11 +617,7 @@ const run = async () => {
           excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
         })
         .then(async (suggested) => {
-          await injectGridSuggestions(
-            suggested,
-            categoryId,
-            suggested.placement.suggestionPosition,
-          );
+          await injectGridSuggestions(suggested, categoryId);
           await createOrFixRankElement();
         })
         .finally(
@@ -650,6 +641,7 @@ run()
   .catch((e) => console.log(e))
   .finally(() => {
     document.querySelector(`#mainBest`).style.visibility = "visible";
+
     //Collect Logs
-    // adcioInstance.collectLogs(adcio.clientApi.cafe24);
+    adcioInstance.collectLogs(adcio.clientApi.cafe24);
   });
