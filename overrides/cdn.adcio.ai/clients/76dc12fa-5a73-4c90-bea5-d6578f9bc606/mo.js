@@ -67,7 +67,6 @@ const productToElement = (product, categoryId) => {
       (info) => info.key === "custom_option9" && info.value != "",
     ) || [];
   console.log(textBoxes, "textBoxes");
-
   return adcio.createNestedElement({
     tag: "li",
     classList: ["swiper-slide", "common_prd_list", "xans-record-"],
@@ -123,9 +122,8 @@ const productToElement = (product, categoryId) => {
                 tag: "div",
                 classList: ["detail_review"],
                 attributes: {
-                  // href: product.url,
+                  href: productHref,
                   "vreview-product-id": product.idOnStore,
-                  // "vreview-dom-id": "rank num",
                 },
                 children: [
                   {
@@ -138,7 +136,6 @@ const productToElement = (product, categoryId) => {
                         attributes: {
                           style: "margin-top: 6px;",
                         },
-                        // childList: [{ tag: "span" }], //TODO: 없어도 리뷰 자동으로 붙음
                       },
                     ],
                   },
@@ -234,12 +231,11 @@ const productToElement = (product, categoryId) => {
                 children: [
                   textBoxes.length > 0 && {
                     tag: "li",
-                    classList: [
-                      "display_텍스트박스",
-                      "xans-record-",
-                      "textBox",
-                    ],
-
+                    classList: ["xans-record-"],
+                    attributes: {
+                      style:
+                        "display: inline-block;border: 1px solid rgba(142,31,41,0.5);box-sizing: border-box;padding: 5px 6px 4px 6px;margin-bottom: 5px;line-height: 1;opacity: 1;",
+                    },
                     children: [
                       {
                         tag: "span",
@@ -248,8 +244,16 @@ const productToElement = (product, categoryId) => {
                         },
                         children: textBoxes.map((data) => ({
                           tag: "div",
-                          classList: ["add_text"],
-                          textContent: data.value,
+                          classList: ["text_box", "add_text"],
+                          attributes: {
+                            style: "font-size:10px;font-weight:500;",
+                          },
+                          children: [
+                            {
+                              tag: "span",
+                              textContent: data.value,
+                            },
+                          ],
                         })),
                       },
                     ],
