@@ -69,9 +69,10 @@ const productToElement = (product, categoryId) => {
     product.price == null || !product.discountPrice == null
       ? 0
       : ((product.price - product.discountPrice) / product.price) * 100;
-  const textBoxes = product.additionalInformation?.filter(
-    (info) => info.key === "custom_option9" && info.value != "",
-  );
+  const textBoxes =
+    product.additionalInformation?.filter(
+      (info) => info.key === "custom_option9" && info.value != "",
+    ) || [];
 
   return adcio.createNestedElement({
     tag: "div",
