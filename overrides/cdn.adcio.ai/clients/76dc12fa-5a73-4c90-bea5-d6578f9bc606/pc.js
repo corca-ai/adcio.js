@@ -521,12 +521,13 @@ const getCategoryIdFromHTML = (html) => {
 };
 
 /**
- * @param {string} selector
  * @returns {Array<string>}
  */
-const getAllIdOnStoreInElement = (selector) => {
+const getAllIdOnStoreInElement = () => {
   const idOnStores = [];
-  const elements = document.querySelector(selector);
+  const elements = document
+    .querySelector("#monthly-best")
+    .querySelector(".prd_basic");
   elements.childNodes.forEach((element) => {
     if (!element.id) {
       return;
@@ -557,7 +558,7 @@ const createOrFixRankElement = () => {
 const run = async () => {
   await adcio.waitForElement("#mainBest");
   document.querySelector(`#mainBest`).style.visibility = "hidden";
-  const allIdOnStore = await getAllIdOnStoreInElement(".prd_basic");
+  const allIdOnStore = await getAllIdOnStoreInElement();
 
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
@@ -606,7 +607,7 @@ const run = async () => {
         getCategoryIdFromHTML(
           document.querySelector("#monthly-best")?.innerHTML,
         ) || CATEGORY_IDS.total;
-      const allIdOnStore = await getAllIdOnStoreInElement(".prd_basic");
+      const allIdOnStore = await getAllIdOnStoreInElement();
 
       adcioInstance
         .createSuggestionProducts({
