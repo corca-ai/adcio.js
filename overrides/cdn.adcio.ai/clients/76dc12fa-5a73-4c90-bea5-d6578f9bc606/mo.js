@@ -172,9 +172,7 @@ const productToElement = (product, categoryId) => {
                       {
                         tag: "strong",
                         textContent:
-                          salePercent < 1 || salePercent >= 100
-                            ? " "
-                            : salePercent.toFixed() + "%",
+                          salePercent < 1 ? " " : salePercent.toFixed() + "%",
                       },
                     ],
                   },
@@ -193,7 +191,7 @@ const productToElement = (product, categoryId) => {
                       },
                     ],
                   },
-                  {
+                  salePercent >= 1 && {
                     tag: "span",
                     classList: [
                       "sell_prc",
@@ -202,8 +200,9 @@ const productToElement = (product, categoryId) => {
                       "displaynone12displaynone",
                     ],
                     attributes: {
-                      textContent: retailPrice + "원", //TODO: check if retail price is right
+                      style: "display: inline;",
                     },
+                    textContent: retailPrice + "원",
                   },
                 ],
               },
