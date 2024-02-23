@@ -1,0 +1,283 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Test SDK Banner > test 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="title"
+    >
+      [PC] Banner Test
+    </div>
+    <div
+      class="swiper swiper-initialized swiper-horizontal mySwiper"
+    >
+      <div
+        class="swiper-wrapper"
+        style="transition-duration: 0ms; transition-delay: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
+      >
+        <div
+          class="swiper-slide"
+        >
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1705918519742-ff6bb5f1d034?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcwODQzNzgzNg&ixlib=rb-4.0.3&q=80&w=1080"
+          />
+          <div
+            class="explain_banner"
+          >
+            <p
+              class="title"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              영화 '리프트'의 배우
+김윤지 X 콜라보
+            </p>
+            <p
+              class="subtitle"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              넷플릭스 85개국 1위 영화 배우의
+스타일리시한 애슬레저룩을 만나보세요.
+            </p>
+          </div>
+        </div>
+        <div
+          class="swiper-slide"
+        >
+          <img
+            alt=""
+            src="https://plus.unsplash.com/premium_photo-1697474429636-d5495b2e12a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcwODQzNzg2Mw&ixlib=rb-4.0.3&q=80&w=1080"
+          />
+          <div
+            class="explain_banner"
+          >
+            <p
+              class="title"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              이번 시즌 대세는, 미니! NEW 반달백 출시
+            </p>
+            <p
+              class="subtitle"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              생활 방수도 되니까, 오염 걱정도 없어요.
+            </p>
+          </div>
+        </div>
+        <div
+          class="swiper-slide"
+        >
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1706486003955-ed67dc1ed5bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcwODQzNzg3OQ&ixlib=rb-4.0.3&q=80&w=1080"
+          />
+          <div
+            class="explain_banner"
+          >
+            <p
+              class="title"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              힙 부담 없는 인생 조거
+이번 주말 등산에 입고 가요
+            </p>
+            <p
+              class="subtitle"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              하산 후에도 무릎 나옴도 걱정 없죠.
+            </p>
+          </div>
+        </div>
+        <div
+          class="swiper-slide"
+        >
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1606041008023-472dfb5e530f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4MTQ2NDIzNA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080"
+          />
+          <div
+            class="explain_banner"
+          >
+            <p
+              class="title"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              풋살부터 여행까지,
+옷장 속 필수템 조거팬츠
+            </p>
+            <p
+              class="subtitle"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              두 가지 기장으로, 내 체형에 딱 맞게 입어요.
+            </p>
+          </div>
+        </div>
+        <div
+          class="swiper-slide"
+        >
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1707757349249-c812bf8c600f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcwODQzNzg5MQ&ixlib=rb-4.0.3&q=80&w=1080"
+          />
+          <div
+            class="explain_banner"
+          >
+            <p
+              class="title"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              "바람은 막고 열기는 빼고"
+일교차 심한 요즘 딱이죠
+            </p>
+            <p
+              class="subtitle"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              심지어 가벼우니까, 등산 · 조깅 만능이네요.
+            </p>
+          </div>
+        </div>
+        <div
+          class="swiper-slide"
+        >
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1706816997326-3d0f825f8f88?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcwODQzNzkwNg&ixlib=rb-4.0.3&q=80&w=1080"
+          />
+          <div
+            class="explain_banner"
+          >
+            <p
+              class="title"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              조깅부터 클라이밍까지,
+"심지어 입고 벗기도 쉽죠"
+            </p>
+            <p
+              class="subtitle"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              고강도 운동엔 하이 서포트를 입어보세요.
+            </p>
+          </div>
+        </div>
+        <div
+          class="swiper-slide"
+        >
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1705667834380-165981167727?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcwODQzNzkyMQ&ixlib=rb-4.0.3&q=80&w=1080"
+          />
+          <div
+            class="explain_banner"
+          >
+            <p
+              class="title"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              "출근 준비 15분 절약해요"
+사계절 링클프리 셔츠
+            </p>
+            <p
+              class="subtitle"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              골프 연습 갔다가 회사 가는 여유가 생기죠.
+            </p>
+          </div>
+        </div>
+        <div
+          class="swiper-slide"
+        >
+          <img
+            alt=""
+            src="https://plus.unsplash.com/premium_photo-1681223965358-af0cb4f398ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcwODQzNzkzMQ&ixlib=rb-4.0.3&q=80&w=1080"
+          />
+          <div
+            class="explain_banner"
+          >
+            <p
+              class="title"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              허리가 쏙- 들어간 실루엣
+"봄 라운딩만 기다려요"
+            </p>
+            <p
+              class="subtitle"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              니트카라 깃을 세우면 목탈 걱정도 없네요.
+            </p>
+          </div>
+        </div>
+        <div
+          class="swiper-slide"
+        >
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1703231528215-739febd25d52?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcwODQzNzkzOQ&ixlib=rb-4.0.3&q=80&w=1080"
+          />
+          <div
+            class="explain_banner"
+          >
+            <p
+              class="title"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              붙지 않는 면 티셔츠,
+어깨가 넓어진 핏으로 만나요
+            </p>
+            <p
+              class="subtitle"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              기능성인지 아무도 모르니까, 색깔별로 쟁였어요.
+            </p>
+          </div>
+        </div>
+        <div
+          class="swiper-slide"
+        >
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1706126218054-a9c83cad2d03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTcwODQzNzk0OA&ixlib=rb-4.0.3&q=80&w=1080"
+          />
+          <div
+            class="explain_banner"
+          >
+            <p
+              class="title"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              스타필드 수원
+Grand Opening
+            </p>
+            <p
+              class="subtitle"
+              style="color: rgba(255, 255, 255, 1);"
+            >
+              감각적인 공간에서 보고 만지며 경험해 보세요.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="swiper-button-prev"
+      />
+      <div
+        class="swiper-button-next"
+      />
+      <div
+        class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
+      />
+    </div>
+  </div>
+</div>
+`;

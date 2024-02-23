@@ -9,7 +9,6 @@ import BannerPage from "../pages/Banner";
 import { afterEach, describe, vi, expect, it } from "vitest";
 
 const setup = () => {
-  console.log(Adcio);
   const adcioInstance = new Adcio({
     clientId: "your-client-id",
     customerId: "your-customer-id",
