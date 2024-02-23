@@ -93,7 +93,9 @@ const productToElement = (product, categoryId) => {
                       {
                         tag: "img",
                         attributes: {
-                          src: product?.image,
+                          src:
+                            product?.additionalImages?.[0] ||
+                            product?.additionalImages?.[1],
                           alt: product.name,
                           id: `eListPrdImage${product.idOnStore}_1`,
                         },
@@ -648,13 +650,15 @@ const run = async () => {
         getCategoryIdFromCode(
           document.querySelector("#monthly-best")?.innerHTML,
         ) || CATEGORY_IDS.total;
+
       const allIdOnStore = await getAllIdOnStoreInElement();
 
       adcioInstance
         .createSuggestionProducts({
-          categoryIdOnStore: CATEGORY_IDS.total,
+          categoryIdOnStore: categoryId,
           excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
-          ...params,
+          placementId: MO_GRID_PLACEMENT_ID,
+          ...customer,
         })
         .then(async (suggested) => {
           await injectGridSuggestions(suggested, categoryId);
