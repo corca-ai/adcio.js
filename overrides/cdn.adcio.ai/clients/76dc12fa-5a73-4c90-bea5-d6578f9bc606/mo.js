@@ -59,9 +59,14 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
  */
 const productToElement = (product, categoryId) => {
   const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
-  const retailPrice = product.data?.retail_price || product.price;
+  const retailPrice = product.price;
   const salePercent =
     ((retailPrice - product.discountPrice) / retailPrice) * 100;
+  const textBoxes =
+    product.additionalInformation?.filter(
+      (info) => info.key === "custom_option9" && info.value != "",
+    ) || [];
+  console.log(textBoxes, "textBoxes");
 
   return adcio.createNestedElement({
     tag: "li",
@@ -227,28 +232,27 @@ const productToElement = (product, categoryId) => {
                   "item_box",
                 ],
                 children: [
-                  {
+                  textBoxes.length > 0 && {
                     tag: "li",
                     classList: [
                       "display_텍스트박스",
                       "xans-record-",
                       "textBox",
                     ],
-                    children: product.additional_information?.map((data) => {
-                      return {
+
+                    children: [
+                      {
                         tag: "span",
                         attributes: {
                           style: "font-size:12px; color:#8e1f28;",
                         },
-                        children: [
-                          {
-                            tag: "span",
-                            classList: ["add_text"],
-                            textContent: data.value,
-                          },
-                        ],
-                      };
-                    }),
+                        children: textBoxes.map((data) => ({
+                          tag: "div",
+                          classList: ["add_text"],
+                          textContent: data.value,
+                        })),
+                      },
+                    ],
                   },
                 ],
               },
