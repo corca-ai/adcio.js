@@ -489,11 +489,16 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
   });
 
   if (
-    document.querySelector(`.prd_basic`).querySelectorAll("[data-adcio-id]")
-      .length
+    document
+      .querySelector("#monthly-best")
+      .querySelector(`.prd_basic`)
+      .querySelectorAll("[data-adcio-id]").length
   ) {
     swapElements(
-      document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
+      document
+        .querySelector("#monthly-best")
+        .querySelector(`.prd_basic`)
+        .querySelectorAll(".common_prd_list"),
       elements,
       placement.suggestionPosition,
     );
@@ -501,7 +506,10 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
   }
 
   insertElements(
-    document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
+    document
+      .querySelector("#monthly-best")
+      .querySelector(`.prd_basic`)
+      .querySelectorAll(".common_prd_list"),
     elements,
     placement.suggestionPosition,
   );
@@ -601,7 +609,9 @@ const run = async () => {
     observer.disconnect();
 
     if (mutationsList.find((m) => m.type === "childList")) {
-      document.querySelector(`.prd_basic`).style.visibility = "hidden";
+      document
+        .querySelector("#monthly-best")
+        .querySelector(`.prd_basic`).style.visibility = "hidden";
 
       const categoryId =
         getCategoryIdFromHTML(
@@ -622,7 +632,9 @@ const run = async () => {
         })
         .finally(
           () =>
-            (document.querySelector(".prd_basic").style.visibility = "visible"),
+            (document
+              .querySelector("#monthly-best")
+              .querySelector(".prd_basic").style.visibility = "visible"),
         );
     }
 
