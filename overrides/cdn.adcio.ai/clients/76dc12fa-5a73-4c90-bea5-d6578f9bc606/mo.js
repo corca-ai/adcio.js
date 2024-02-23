@@ -27,7 +27,7 @@ const adcioInstance = new adcio.Adcio({
  * @param {Array<FetchActivePlacementsResponseDto>} placements
  * @param {CustomerWithId} customer
  * @param {Array<string>} allIdOnStore
- * @returns {Promise<Array<SuggestionResponseDto>>}
+ * @returns {Promise<Array<SuggestionResponseDto | SuggestionProductsRequestDto>>}
  */
 const createAllSuggestions = (placements, customer, allIdOnStore) => {
   return Promise.allSettled(
@@ -690,7 +690,6 @@ run()
   .then(() => console.log("MO ADCIO sdk end!"))
   .finally(() => {
     document.querySelector("#monthly-best").style.visibility = "visible";
+    //Collect Logs
+    adcioInstance.collectLogs(adcio.clientApi.cafe24);
   });
-
-//Collect Logs
-//adcioInstance.collectLogs(adcio.clientApi.cafe24);
