@@ -226,12 +226,11 @@ const productToElement = (product, categoryId) => {
                       style: "display: inline;",
                     },
                     children: [
-                      {
+                      discountPercent >= 1 && {
                         tag: "strong",
-                        textContent:
-                          discountPercent < 1
-                            ? "  "
-                            : `${Number(product.price).toLocaleString()}원`,
+                        textContent: `${Number(
+                          product.price,
+                        ).toLocaleString()}원`,
                       },
                     ],
                   },
@@ -544,7 +543,7 @@ const getAllIdOnStoreInElement = (selector) => {
 const createOrFixRankElement = () => {
   const elements = document
     .querySelector("#monthly-best")
-    .querySelectorAll(parentElementSelector);
+    .querySelectorAll(".img");
   elements.forEach((element, index) => {
     if (element.querySelector(".rankBadge") == null) {
       const rankBadge = document.createElement("span");
