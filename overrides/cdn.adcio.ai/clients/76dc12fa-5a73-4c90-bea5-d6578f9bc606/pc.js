@@ -2,6 +2,8 @@
  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
  */
 
+const { text } = require("stream/consumers");
+
 const CATEGORY_IDS = {
   total: "2017",
   women: "2018",
@@ -69,6 +71,9 @@ const productToElement = (product, categoryId) => {
     product.price == null || !product.discountPrice == null
       ? 0
       : ((product.price - product.discountPrice) / product.price) * 100;
+  const textBoxes = product.additionalInformation?.filter(
+    (d) => d.key === "custom_option9",
+  );
 
   return adcio.createNestedElement({
     tag: "div",
@@ -245,7 +250,7 @@ const productToElement = (product, categoryId) => {
                 tag: "div",
                 classList: ["icon"],
               },
-              {
+              !!textBoxes.length && {
                 tag: "ul",
                 classList: [
                   "xans-element-",
@@ -261,16 +266,11 @@ const productToElement = (product, categoryId) => {
                       "xans-record-",
                       "textBox",
                     ],
-                    children:
-                      product.additionalInformation
-                        ?.filter((d) => d.name === "텍스트박스")
-                        ?.map((data) => {
-                          return {
-                            tag: "div",
-                            classList: ["add_text"],
-                            textContent: data.value,
-                          };
-                        }) || [],
+                    children: textBoxes.map((data) => ({
+                      tag: "div",
+                      classList: ["add_text"],
+                      textContent: data.value,
+                    })),
                   },
                 ],
               },
@@ -408,7 +408,7 @@ const swapElements = (originalElements, newElements, adcioGridIndexes) => {
   originalElements.forEach((element, index) => {
     if (adcioGridIndexes.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
-      element.outerHTML = newElement.outerHTML;
+      element.replaceWith(newElement);
       return;
     }
   });
@@ -425,12 +425,12 @@ const insertElements = (originalElements, newElements, adcioGridIndexes) => {
   originalElements.forEach((element, index) => {
     if (adcioGridIndexes.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
-      element.outerHTML = newElement.outerHTML;
+      element.replaceWith(newElement);
       return;
     }
 
     const elementToBeInserted = originElementsArr.shift();
-    element.outerHTML = elementToBeInserted.outerHTML;
+    element.replaceWith(elementToBeInserted);
   });
 };
 
@@ -453,7 +453,6 @@ const injectBannerSuggestions = (suggestedData) => {
       element,
       filter: (e) => e.classList.contains("swiper-slide-active"),
     });
-
     return element;
   });
 
@@ -489,7 +488,6 @@ const injectGridSuggestions = (suggestedData, categoryId, adcioGridIndexes) => {
     adcioInstance.observeImpression({
       element,
     });
-
     return element;
   });
 
@@ -652,9 +650,8 @@ const run = async () => {
 run()
   .then(() => console.log("ADCIO done"))
   .catch((e) => console.log(e))
-  .finally(
-    () => (document.querySelector(`#mainBest`).style.visibility = "visible"),
-  );
-
-//Collect Logs
-//adcioInstance.collectLogs(adcio.clientApi.cafe24);
+  .finally(() => {
+    document.querySelector(`#mainBest`).style.visibility = "visible";
+    //Collect Logs
+    // adcioInstance.collectLogs(adcio.clientApi.cafe24);
+  });
