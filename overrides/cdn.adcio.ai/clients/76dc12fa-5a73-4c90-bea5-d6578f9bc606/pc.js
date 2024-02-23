@@ -2,8 +2,6 @@
  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
  */
 
-const { text } = require("stream/consumers");
-
 const CATEGORY_IDS = {
   total: "2017",
   women: "2018",
