@@ -22,12 +22,8 @@
     "@vitejs/plugin-react": "^4.2.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "msw": "^2.0.10",
     "typescript": "^5.2.2",
     "vite-tsconfig-paths": "^4.3.1",
     "mock-api": "workspace:*"
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
 }
