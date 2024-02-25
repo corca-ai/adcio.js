@@ -32,9 +32,6 @@ importers:
       lint-staged:
         specifier: ^12.4.1
         version: 12.5.0
-      pnpm:
-        specifier: ^8.15.4
-        version: 8.15.4
       prettier:
         specifier: ^2.6.2
         version: 2.8.8
@@ -5558,12 +5555,6 @@ packages:
       jsonc-parser: 3.2.1
       mlly: 1.6.1
       pathe: 1.1.2
-    dev: true
-
-  /pnpm@8.15.4:
-    resolution: {integrity: sha512-C9Opvp6w6aaSZ23uwAowO6IYuiedmSQUdWFrOY267t0RFG+SwoQ0WPVXsdEn4J1MFx4QW9zWthACs5aFqAFrng==}
-    engines: {node: '>=16.14'}
-    hasBin: true
     dev: true
 
   /posix-character-classes@0.1.1:

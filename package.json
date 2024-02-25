@@ -5,10 +5,12 @@
     "demo/*",
     "mock"
   ],
+  "packageManager": "pnpm@8.15.4",
   "scripts": {
     "build": "pnpm recursive run build",
     "dev": "pnpm recursive run dev --no-cache --parallel --continue",
     "test": "pnpm recursive run test",
+    "lint": "pnpm recursive run lint",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -20,7 +22,6 @@
     "eslint-plugin-prettier": "^5.0.1",
     "husky": "^8.0.1",
     "lint-staged": "^12.4.1",
-    "pnpm": "^8.15.4",
     "prettier": "^2.6.2",
     "typescript": "^5.2.2",
     "vite": "^4.2.1",
