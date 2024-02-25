@@ -12,6 +12,7 @@
     "types": ["node"],
     "jsx": "preserve",
     "baseUrl": ".",
+    "skipLibCheck": true
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

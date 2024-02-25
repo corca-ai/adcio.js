@@ -10,10 +10,12 @@
     "experimentalDecorators": true,
     "lib": ["es2017", "dom"],
     "outDir": "./dist",
+    "baseUrl": ".",
     "paths": {
       "api/*": ["./api/*"],
       "lib/*": ["./lib/*"]
-    }
+    },
+    "skipLibCheck": true
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"]

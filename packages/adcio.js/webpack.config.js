@@ -34,7 +34,7 @@ module.exports = {
   mode: "production",
   devtool: "source-map",
   entry: {
-    adcio: "./src/index.ts",
+    adcio: "./index.ts",
   },
   output: {
     filename: "[name].js",
