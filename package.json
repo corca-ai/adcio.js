@@ -32,6 +32,8 @@
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "tscpaths": "^0.0.9",
     "typescript": "^5.2.2",
+    "vite-plugin-banner": "^0.7.1",
+    "vite-plugin-dts": "^3.7.3",
     "vite-tsconfig-paths": "^4.2.1",
     "vitest": "^0.33.0",
     "webpack": "^5.89.0",
@@ -44,7 +46,7 @@
   "scripts": {
     "start:dev": "tsc -w",
     "gen-api": "openapi-generator-cli generate",
-    "build": "tsc -p tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist/src && webpack --config webpack.config.js",
+    "build": "vite build",
     "prepare": "yarn build",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "yarn workspaces run lint --fix && eslint \"src/**/*.ts\" --fix",
