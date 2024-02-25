@@ -1,9 +1,6 @@
-import { SuggestionRequestDto } from "../src/api/controller/v1";
-import {
-  ERROR_CODE,
-  PLACEMENT_ERROR_MESSAGE,
-} from "../src/lib/constants/error";
-import { APIError } from "../src/lib/error";
+import { SuggestionRequestDto } from "api/controller/v1";
+import { ERROR_CODE, PLACEMENT_ERROR_MESSAGE } from "lib/constants/error";
+import { APIError } from "lib/error";
 import { HttpResponse, http } from "msw";
 import {
   ReceiverAPIField,

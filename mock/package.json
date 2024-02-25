@@ -4,5 +4,8 @@
   "private": true,
   "files": [
     "./"
-  ]
+  ],
+  "dependencies": {
+    "adcio.js": "workspace:*"
+  }
 }

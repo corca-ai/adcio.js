@@ -16,14 +16,15 @@ jobs:
           node-version: 18
 
       - uses: actions/cache@v3
-        id: deps-cache
+        id: pnpm-cache
         with:
-          path: node_modules
+          path: |
+            **/node_modules
           key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      - if: steps.deps-cache.outputs.cache-hit != 'true'
+      - if: steps.pnpm-cache.outputs.cache-hit != 'true'
         run: pnpm install
 
       - run: pnpm run lint
