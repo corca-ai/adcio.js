@@ -5,7 +5,7 @@ import "src/styles/banner.css";
 import { useEffect, useState } from "react";
 import { Adcio } from "adcio.js";
 import { SuggestionDto } from "adcio.js/api/controller/v1/api";
-import { SuggestionTestId } from "../../../../mock/constants";
+import { SuggestionTestId } from "mock-api/constants";
 import { Banner } from "src/component/banner";
 
 interface Props {

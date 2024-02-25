@@ -11,8 +11,24 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 18
-      - run: yarn
-      - run: yarn test
+      - uses: pnpm/action-setup@v2.2.1
+        with:
+          version: 7
+      - uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+      
+      - if: steps.pnpm-cache.outputs.cache-hit != 'true'
+        run: pnpm install
+
+      - run: pnpm
+      - run: pnpm test
+      - run: cd ./adcio.js
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}

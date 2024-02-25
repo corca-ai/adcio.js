@@ -8,8 +8,8 @@ import {
   it,
   vi,
 } from "vitest";
-import { SuggestionTestId } from "../../mock/constants";
-import { server } from "../../mock/node";
+import { SuggestionTestId } from "mock-api/constants";
+import { server } from "mock-api/node";
 import { Adcio } from "../adcio";
 import { PLACEMENT_ERROR_MESSAGE } from "../lib/constants/error";
 import { AdcioCore } from "../lib/core";

@@ -1,0 +1,4 @@
+packages:
+  - "adcio.js"
+  - "demo/*"
+  - "mock"

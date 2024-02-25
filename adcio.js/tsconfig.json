@@ -10,13 +10,11 @@
     "experimentalDecorators": true,
     "lib": ["es2017", "dom"],
     "outDir": "./dist",
-    "rootDir": ".",
-    "baseUrl": "./src",
     "paths": {
-      "api/*": ["api/*"],
-      "lib/*": ["lib/*"]
+      "api/*": ["./api/*"],
+      "lib/*": ["./lib/*"]
     }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }
