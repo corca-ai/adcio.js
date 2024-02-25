@@ -36,7 +36,7 @@
     "build": "tsc -p tsconfig.json && tscpaths -p tsconfig.json -s ./ -o ./dist && webpack --config webpack.config.js",
     "format": "prettier --write \"**/*.ts\"",
     "lint": "eslint \"**/*.ts\" --fix",
-    "lint:ci": "eslint \"**/*.ts\"",
+    "lint:ci": "eslint \"/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:cov": "vitest run --coverage"

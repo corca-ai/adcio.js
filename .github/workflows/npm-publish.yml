@@ -28,7 +28,7 @@ jobs:
 
       - run: pnpm
       - run: pnpm test
-      - run: cd ./adcio.js
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
+          package: "./adcio.js/package.json"
