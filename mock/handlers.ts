@@ -1,6 +1,9 @@
-import { SuggestionRequestDto } from "api/controller/v1";
-import { ERROR_CODE, PLACEMENT_ERROR_MESSAGE } from "lib/constants/error";
-import { APIError } from "lib/error";
+import { SuggestionRequestDto } from "adcio.js/api/controller/v1";
+import {
+  ERROR_CODE,
+  PLACEMENT_ERROR_MESSAGE,
+} from "adcio.js/lib/constants/error";
+import { APIError } from "adcio.js/lib/error";
 import { HttpResponse, http } from "msw";
 import {
   ReceiverAPIField,
