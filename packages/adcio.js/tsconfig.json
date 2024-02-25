@@ -15,7 +15,8 @@
       "api/*": ["./api/*"],
       "lib/*": ["./lib/*"]
     },
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noLib": false
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"]
