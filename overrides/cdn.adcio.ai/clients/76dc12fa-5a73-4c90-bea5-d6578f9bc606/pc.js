@@ -54,7 +54,7 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
  * @returns {HTMLElement}
  */
 const productToElement = (product, categoryId) => {
-  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
+  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`;
 
   const discountPercent =
     product.price == null || !product.discountPrice == null
@@ -386,16 +386,18 @@ const getPlacementsAndCustomer = async () => {
 };
 
 /**
- * @param {NodeList<Element>} originalElements
  * @param {Array<Element>} newElements
  * @param {Array<number>} adcioGridIndexes
  */
-const swapElements = (originalElements, newElements, adcioGridIndexes) => {
+const swapElementsInGrid = (newElements, adcioGridIndexes) => {
+  const originalElements = document
+    .querySelector(`#monthly-best`)
+    .querySelector(`.prd_basic`)
+    .querySelectorAll(".swiper-slide");
   originalElements.forEach((element, index) => {
     if (adcioGridIndexes.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
       element.replaceWith(newElement);
-      return;
     }
   });
 };
@@ -415,6 +417,9 @@ const insertElements = (originalElements, newElements, adcioGridIndexes) => {
       return;
     }
 
+    if (!originElementsArr.length) {
+      return;
+    }
     const elementToBeInserted = originElementsArr.shift();
     element.replaceWith(elementToBeInserted);
   });
@@ -482,14 +487,7 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
       .querySelector(`.prd_basic`)
       .querySelectorAll("[data-adcio-id]").length
   ) {
-    swapElements(
-      document
-        .querySelector("#monthly-best")
-        .querySelector(`.prd_basic`)
-        .querySelectorAll(".common_prd_list"),
-      elements,
-      placement.displayPositions,
-    );
+    swapElementsInGrid(elements, placement.displayPositions);
     return;
   }
 
