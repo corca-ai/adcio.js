@@ -36,7 +36,7 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
         ...customer,
         placementId: placement.id,
       };
-
+      //PRODUCT(GRID)
       if (placement.id === MO_GRID_PLACEMENT_ID) {
         return adcioInstance.createSuggestionProducts({
           categoryIdOnStore: CATEGORY_IDS.total,
@@ -44,8 +44,8 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
           ...params,
         });
       }
-
-      return await adcioInstance.createSuggestion({
+      //BANNER
+      return adcioInstance.createSuggestion({
         ...params,
       });
     }),
@@ -53,28 +53,29 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
 };
 
 /**
- * @param {SuggestionDto['product']} product
+ * @param {SuggestionProductsResponseDto} product
  * @param {string} categoryId
  * @returns {HTMLElement}
  */
 const productToElement = (product, categoryId) => {
-  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
-  const retailPrice = product.price;
+  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`;
   const salePercent =
-    ((retailPrice - product.discountPrice) / retailPrice) * 100;
+    !product.price || !product.discountPrice
+      ? 0
+      : ((product.price - product.discountPrice) / product.price) * 100;
   const textBoxes =
     product.additionalInformation?.filter(
       (info) => info.key === "custom_option9" && info.value != "",
     ) || [];
-  console.log(textBoxes, "textBoxes");
+
   return adcio.createNestedElement({
     tag: "li",
     classList: ["swiper-slide", "common_prd_list", "xans-record-"],
     attributes: {
       "vreview-dom-embeded": false,
-      id: `anchorBoxId_${product.idOnStore}`, //TODO: check product idOnStore is right
-      "data-adcio-id": true,
-    }, //Adcio attribute to disctinct ADCIO elements from others.
+      id: `anchorBoxId_${product.idOnStore}`,
+      "data-adcio-id": true, //Adcio attribute to disctinct ADCIO elements from others.
+    },
     children: [
       {
         tag: "div",
@@ -98,8 +99,8 @@ const productToElement = (product, categoryId) => {
                         tag: "img",
                         attributes: {
                           src:
-                            product?.additionalImages?.[0] ||
-                            product?.additionalImages?.[1],
+                            product.additionalImages[0] ||
+                            product.additionalImages?.[1],
                           alt: product.name,
                           id: `eListPrdImage${product.idOnStore}_1`,
                         },
@@ -156,7 +157,7 @@ const productToElement = (product, categoryId) => {
                     attributes: {
                       href: productHref,
                     },
-                    textContent: "[TEST] 임의의 값들 이용 - " + product.name,
+                    textContent: product.name,
                   },
                 ],
               },
@@ -164,7 +165,7 @@ const productToElement = (product, categoryId) => {
                 tag: "div",
                 classList: ["price", "font_Gilroy"],
                 children: [
-                  {
+                  salePercent >= 1 && {
                     tag: "span",
                     classList: ["sale_percent"],
                     attributes: {
@@ -173,8 +174,7 @@ const productToElement = (product, categoryId) => {
                     children: [
                       {
                         tag: "strong",
-                        textContent:
-                          salePercent < 1 ? " " : salePercent.toFixed() + "%",
+                        textContent: salePercent.toFixed() + "%",
                       },
                     ],
                   },
@@ -204,7 +204,7 @@ const productToElement = (product, categoryId) => {
                     attributes: {
                       style: "display: inline;",
                     },
-                    textContent: retailPrice + "원",
+                    textContent: product.price + "원",
                   },
                 ],
               },
@@ -419,7 +419,6 @@ const swapElements = (originalElements, adcioGridIndexes, newElements) => {
     if (adcioGridIndexes.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
       element.replaceWith(newElement);
-      return;
     }
   });
 };
@@ -449,7 +448,7 @@ const insertElements = (originalElements, indexes, newElements) => {
 };
 
 /**
- * @param {Array<SuggestionResponseDto>} suggestedData
+ * @param {Array<SuggestionResponseDto | SuggestionProductsResponseDto>} suggestedData
  */
 const injectBannerSuggestions = (suggestedData) => {
   const { suggestions } = suggestedData;
@@ -479,9 +478,8 @@ const injectBannerSuggestions = (suggestedData) => {
 };
 
 /**
- * @param {SuggestionResponseDto[]} suggestedData
+ * @param {SuggestionProductsResponseDto} suggestedData
  * @param {string} categoryId
- 
  */
 const injectGridSuggestions = (suggestedData, categoryId) => {
   const { placement, suggestions } = suggestedData;
@@ -513,7 +511,7 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
         .querySelector(`#monthly-best`)
         .querySelector(`.prd_basic`)
         .querySelectorAll(".swiper-slide"),
-      placement.suggestionPosition,
+      placement.displayPositions,
       elements,
     );
     return;
@@ -524,7 +522,7 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
       .querySelector(`#monthly-best`)
       .querySelector(`.prd_basic`)
       .querySelectorAll(".swiper-slide"),
-    placement.suggestionPosition,
+    placement.displayPositions,
     elements,
   );
 };
@@ -541,22 +539,7 @@ const observeUntilUnload = (
 ) => {
   const observer = new MutationObserver(mutationCallback);
   observer.observe(targetElement, observeOptions);
-  window.addEventListener("beforeunload", () => {
-    observer.disconnect();
-  });
-};
-
-/**
- * @param {string} code
- * @returns {string | null}
- */
-const getCategoryIdFromCode = (code) => {
-  if (!code) {
-    return null;
-  }
-  const regex = /\$cate_no\s*=\s*(\d+)/;
-  const match = code.match(regex);
-  return match.length >= 2 ? match[1] : null;
+  window.addEventListener("beforeunload", () => observer.disconnect());
 };
 
 /**
@@ -567,10 +550,12 @@ const getAllIdOnStoreInElement = () => {
   const elements = document
     .querySelector("#monthly-best")
     .querySelector(".prd_basic");
+
   elements.childNodes.forEach((element) => {
     if (!element.id) {
       return;
     }
+
     const regex = /anchorBoxId_(\d+)/;
     const match = element.id.match(regex);
     if (match.length >= 2) {
@@ -642,7 +627,7 @@ const run = async () => {
   }
   document.querySelector(`#monthly-best`).style.visibility = "visible";
 
-  // Observe Grid List Changes and inject product suggestions and fix rank badges
+  // Observe Grid List Changes and inject product suggestions
   const targetElement = document.querySelector("#monthly-best");
   const observeOptions = {
     childList: true,
@@ -652,11 +637,11 @@ const run = async () => {
 
     if (mutationsList.find((m) => m.type === "childList")) {
       document.querySelector("#monthly-best").style.visibility = "hidden";
+
       const categoryId =
-        getCategoryIdFromCode(
+        getCategoryIdFromHTML(
           document.querySelector("#monthly-best")?.innerHTML,
         ) || CATEGORY_IDS.total;
-
       const allIdOnStore = await getAllIdOnStoreInElement();
 
       adcioInstance
@@ -670,9 +655,11 @@ const run = async () => {
           await injectGridSuggestions(suggested, categoryId);
           await createOrFixRankElement();
         })
-        .finally(async () => {
-          document.querySelector("#monthly-best").style.visibility = "visible";
-        });
+        .finally(
+          async () =>
+            (document.querySelector("#monthly-best").style.visibility =
+              "visible"),
+        );
     }
 
     observer.observe(targetElement, observeOptions);
@@ -689,6 +676,7 @@ run()
   .then(() => console.log("MO ADCIO sdk end!"))
   .finally(() => {
     document.querySelector("#monthly-best").style.visibility = "visible";
+
     //Collect Logs
     adcioInstance.collectLogs(adcio.clientApi.cafe24);
   });
