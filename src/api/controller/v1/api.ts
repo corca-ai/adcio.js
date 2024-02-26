@@ -1028,6 +1028,18 @@ export interface ConnectProductsToPlacementResponseDto {
   suggestionPosition: Array<number>;
   /**
    *
+   * @type {Array<number>}
+   * @memberof ConnectProductsToPlacementResponseDto
+   */
+  displayPositions: Array<number>;
+  /**
+   *
+   * @type {Array<number>}
+   * @memberof ConnectProductsToPlacementResponseDto
+   */
+  tableSize: Array<number> | null;
+  /**
+   *
    * @type {string}
    * @memberof ConnectProductsToPlacementResponseDto
    */
@@ -1277,7 +1289,7 @@ export interface CreatePlacementDto {
    * @type {Array<number>}
    * @memberof CreatePlacementDto
    */
-  suggestionPosition: Array<number>;
+  displayPositions?: Array<number>;
 }
 
 export const CreatePlacementDtoTypeEnum = {
@@ -1871,6 +1883,18 @@ export interface FetchManyPlacementsResponseDto {
   suggestionPosition: Array<number>;
   /**
    *
+   * @type {Array<number>}
+   * @memberof FetchManyPlacementsResponseDto
+   */
+  displayPositions: Array<number>;
+  /**
+   *
+   * @type {Array<number>}
+   * @memberof FetchManyPlacementsResponseDto
+   */
+  tableSize: Array<number> | null;
+  /**
+   *
    * @type {string}
    * @memberof FetchManyPlacementsResponseDto
    */
@@ -2100,6 +2124,18 @@ export interface FetchPlacementResponseDto {
    * @memberof FetchPlacementResponseDto
    */
   suggestionPosition: Array<number>;
+  /**
+   *
+   * @type {Array<number>}
+   * @memberof FetchPlacementResponseDto
+   */
+  displayPositions: Array<number>;
+  /**
+   *
+   * @type {Array<number>}
+   * @memberof FetchPlacementResponseDto
+   */
+  tableSize: Array<number> | null;
   /**
    *
    * @type {string}
@@ -2614,6 +2650,18 @@ export interface Placement {
    * @memberof Placement
    */
   suggestionPosition: Array<number>;
+  /**
+   *
+   * @type {Array<number>}
+   * @memberof Placement
+   */
+  displayPositions: Array<number>;
+  /**
+   *
+   * @type {Array<number>}
+   * @memberof Placement
+   */
+  tableSize: Array<number> | null;
   /**
    *
    * @type {string}
@@ -3423,6 +3471,18 @@ export interface SuggestionResponsePlacementType {
   suggestionPosition: Array<number>;
   /**
    *
+   * @type {Array<number>}
+   * @memberof SuggestionResponsePlacementType
+   */
+  displayPositions: Array<number>;
+  /**
+   *
+   * @type {Array<number>}
+   * @memberof SuggestionResponsePlacementType
+   */
+  tableSize: Array<number> | null;
+  /**
+   *
    * @type {string}
    * @memberof SuggestionResponsePlacementType
    */
@@ -3603,7 +3663,7 @@ export interface UpdatePlacementDto {
    * @type {Array<number>}
    * @memberof UpdatePlacementDto
    */
-  suggestionPosition?: Array<number>;
+  displayPositions?: Array<number>;
 }
 /**
  *
@@ -3731,6 +3791,18 @@ export interface UpdatePlacementResponseDto {
    * @memberof UpdatePlacementResponseDto
    */
   suggestionPosition: Array<number>;
+  /**
+   *
+   * @type {Array<number>}
+   * @memberof UpdatePlacementResponseDto
+   */
+  displayPositions: Array<number>;
+  /**
+   *
+   * @type {Array<number>}
+   * @memberof UpdatePlacementResponseDto
+   */
+  tableSize: Array<number> | null;
   /**
    *
    * @type {string}
