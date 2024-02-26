@@ -1,0 +1,42 @@
+// 계정 및 테스트를 위한 정보
+
+// PC.js
+const PC_GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
+// PC grid placement Id
+// andar PC test grid placement id - 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
+// andar PC production - ???? 아직 생성 안함
+// test@test.com - bfe21c26-6ccd-4aa5-b8ab-69e3d361c6c1
+
+const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
+// andar 76dc12fa-5a73-4c90-bea5-d6578f9bc606
+// test@test.com 76dc12fa-5a73-4c90-bea5-d6578f9bc606
+
+const pageName = `skin159_${adcio.getMeta({
+    // andar test skin(without banner): skin159
+    // andar production(banner only): 135
+    // test@test.com skin159_MAIN_dev
+    name: "path_role",
+  })}`; // TODO: delete the _dev in production or test skin
+
+// PC PRODUCT GRID test skin 정보
+// 페이지 이름 skin159_MAIN
+// 지면 ID 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
+
+
+
+
+
+// MO.js
+const MO_GRID_PLACEMENT_ID = "f77b43c0-6062-4801-950d-104747aa349d";
+// test@test.com 83126115-6ceb-41a1-b65e-e46ca5afac4c
+// andar MO test skin f77b43c0-6062-4801-950d-104747aa349d
+
+const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
+// Andar 76dc12fa-5a73-4c90-bea5-d6578f9bc606
+// test@test.com 76dc12fa-5a73-4c90-bea5-d6578f9bc606
+
+const pageName = `mobile156_${adcio.getMeta({
+    name: "path_role",
+  })}`; //TODO: fix pageName and delete _dev
+  // Andar MO test skin(Grid Only) mobile156_MAIN
+  // test@test.com mobile156_MAIN_dev
