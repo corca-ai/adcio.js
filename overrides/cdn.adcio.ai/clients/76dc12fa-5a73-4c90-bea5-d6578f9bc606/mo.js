@@ -516,21 +516,6 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
 };
 
 /**
- * @param {MutationCallback} mutationCallback
- * @param {Node} targetElement
- * @param {MutationObserverInit | undefined} [observeOptions]
- */
-const observeUntilUnload = (
-  mutationCallback,
-  targetElement,
-  observeOptions,
-) => {
-  const observer = new MutationObserver(mutationCallback);
-  observer.observe(targetElement, observeOptions);
-  window.addEventListener("beforeunload", () => observer.disconnect());
-};
-
-/**
  * @returns {Array<string>}
  */
 const getAllIdOnStoreInElement = () => {
