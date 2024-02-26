@@ -23,7 +23,7 @@ const adcioInstance = new adcio.Adcio({
  * @param {Array<FetchActivePlacementsResponseDto>} placements
  * @param {CustomerWithId} customer
  * @param {Array<string>} allIdOnStore
- * @returns {Promise<Array<SuggestionResponseDto | SuggestionProductsRequestDto>>}
+ * @returns {Promise<Array<SuggestionResponseDto | SuggestionProductsResponseDto>>}
  */
 const createAllSuggestions = (placements, customer, allIdOnStore) => {
   return Promise.allSettled(
@@ -49,7 +49,7 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
 };
 
 /**
- * @param {SuggestionDto['product']} product
+ * @param {SuggestionProductsDto} product
  * @param {string} categoryId
  * @returns {HTMLElement}
  */
