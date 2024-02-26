@@ -55,9 +55,8 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
  */
 const productToElement = (product, categoryId) => {
   const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`;
-
   const discountPercent =
-    product.price == null || !product.discountPrice == null
+    !product.price || !product.discountPrice
       ? 0
       : ((product.price - product.discountPrice) / product.price) * 100;
   const textBoxes =
