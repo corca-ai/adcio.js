@@ -404,17 +404,17 @@ const getPlacementsAndCustomer = async () => {
 
 /**
 * @param {Array<Element>} newElements
- * @param {Array<number>} adcioGridIndexes
+ * @param {Array<number>} displayPositions
 
  */
-const swapElementsForGrid = (newElements, adcioGridIndexes) => {
-  const originalElements = document
+const swapElementsForGrid = (newElements, displayPositions) => {
+  const originalGridElements = document
     .querySelector(`#monthly-best`)
     .querySelector(`.prd_basic`)
     .querySelectorAll(".swiper-slide");
 
-  originalElements.forEach((element, index) => {
-    if (adcioGridIndexes.includes(index + 1) && newElements.length) {
+  originalGridElements.forEach((element, index) => {
+    if (displayPositions.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
       element.replaceWith(newElement);
     }
@@ -424,27 +424,27 @@ const swapElementsForGrid = (newElements, adcioGridIndexes) => {
 /**
  
  * @param {Array<Element>} newElements
- * @param {Array<number>} adcioGridIndexes
+ * @param {Array<number>} displayPositions
  */
-const insertElementsForGrid = (newElements, adcioGridIndexes) => {
-  const originalElements = document
+const insertElementsForGrid = (newElements, displayPositions) => {
+  const originalGridElements = document
     .querySelector(`#monthly-best`)
     .querySelector(`.prd_basic`)
     .querySelectorAll(".swiper-slide");
 
-  const originElementsArr = [...originalElements];
+  const gridElemArr = [...originalGridElements];
 
-  originalElements.forEach((element, index) => {
-    if (adcioGridIndexes.includes(index + 1) && newElements.length) {
+  originalGridElements.forEach((element, index) => {
+    if (displayPositions.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
       element.replaceWith(newElement);
       return;
     }
 
-    if (!originElementsArr.length) {
+    if (!gridElemArr.length) {
       return;
     }
-    const elementToBeInserted = originElementsArr.shift();
+    const elementToBeInserted = gridElemArr.shift();
     element.replaceWith(elementToBeInserted);
   });
 };
