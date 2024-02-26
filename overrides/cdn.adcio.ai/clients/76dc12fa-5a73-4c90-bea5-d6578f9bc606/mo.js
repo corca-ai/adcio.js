@@ -22,7 +22,7 @@ const adcioInstance = new adcio.Adcio({
  * @param {Array<FetchActivePlacementsResponseDto>} placements
  * @param {CustomerWithId} customer
  * @param {Array<string>} allIdOnStore
- * @returns {Promise<Array<SuggestionResponseDto | SuggestionProductsRequestDto>>}
+ * @returns {Promise<Array<SuggestionResponseDto | SuggestionProductsResponseDto>>}
  */
 const createAllSuggestions = (placements, customer, allIdOnStore) => {
   return Promise.allSettled(
@@ -48,7 +48,7 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
 };
 
 /**
- * @param {SuggestionProductsResponseDto} product
+ * @param {SuggestionProductsDto} product
  * @param {string} categoryId
  * @returns {HTMLElement}
  */
@@ -403,11 +403,15 @@ const getPlacementsAndCustomer = async () => {
 };
 
 /**
- * @param {NodeList<Element>} originalElements
  * @param {Array<number>} adcioGridIndexes
  * @param {Array<Element>} newElements
  */
-const swapElements = (originalElements, adcioGridIndexes, newElements) => {
+const swapElements = (adcioGridIndexes, newElements) => {
+  const originalElements = document
+    .querySelector(`#monthly-best`)
+    .querySelector(`.prd_basic`)
+    .querySelectorAll(".swiper-slide");
+
   originalElements.forEach((element, index) => {
     if (adcioGridIndexes.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
@@ -417,17 +421,21 @@ const swapElements = (originalElements, adcioGridIndexes, newElements) => {
 };
 
 /**
- * @param {NodeList<Element>} originalElements
- * @param {Array<number>} indexes
- * @param {NodeList<Element>} newElements
+ 
+ * @param {Array<Element>} newElements
+ * @param {Array<number>} adcioGridIndexes
  */
-const insertElements = (originalElements, indexes, newElements) => {
+const insertElementsForGrid = (newElements, adcioGridIndexes) => {
+  const originalElements = document
+    .querySelector(`#monthly-best`)
+    .querySelector(`.prd_basic`)
+    .querySelectorAll(".swiper-slide");
+
   const originElementsArr = [...originalElements];
-  const newElementsArr = [...newElements];
 
   originalElements.forEach((element, index) => {
-    if (indexes.includes(index + 1) && newElementsArr.length) {
-      const newElement = newElementsArr.shift();
+    if (adcioGridIndexes.includes(index + 1) && newElements.length) {
+      const newElement = newElements.shift();
       element.replaceWith(newElement);
       return;
     }
@@ -499,25 +507,11 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
       .querySelector(`.prd_basic`)
       .querySelectorAll("[data-adcio-id]").length
   ) {
-    swapElements(
-      document
-        .querySelector(`#monthly-best`)
-        .querySelector(`.prd_basic`)
-        .querySelectorAll(".swiper-slide"),
-      placement.displayPositions,
-      elements,
-    );
+    swapElements(placement.displayPositions, elements);
     return;
   }
 
-  insertElements(
-    document
-      .querySelector(`#monthly-best`)
-      .querySelector(`.prd_basic`)
-      .querySelectorAll(".swiper-slide"),
-    placement.displayPositions,
-    elements,
-  );
+  insertElementsForGrid(elements, placement.displayPositions);
 };
 
 /**
