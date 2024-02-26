@@ -389,11 +389,12 @@ const getPlacementsAndCustomer = async () => {
  * @param {Array<Element>} newElements
  * @param {Array<number>} adcioGridIndexes
  */
-const swapElementsInGrid = (newElements, adcioGridIndexes) => {
+const swapElementsForGrid = (newElements, adcioGridIndexes) => {
   const originalElements = document
     .querySelector(`#monthly-best`)
     .querySelector(`.prd_basic`)
     .querySelectorAll(".swiper-slide");
+
   originalElements.forEach((element, index) => {
     if (adcioGridIndexes.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
@@ -403,11 +404,14 @@ const swapElementsInGrid = (newElements, adcioGridIndexes) => {
 };
 
 /**
- * @param {NodeList<Element>} originalElements
  * @param {Array<Element>} newElements
  * @param {Array<number>} adcioGridIndexes
  */
-const insertElements = (originalElements, newElements, adcioGridIndexes) => {
+const insertElementsForGrid = (newElements, adcioGridIndexes) => {
+  originalElements = document
+    .querySelector("#monthly-best")
+    .querySelector(`.prd_basic`)
+    .querySelectorAll(".common_prd_list");
   const originElementsArr = [...originalElements];
 
   originalElements.forEach((element, index) => {
@@ -487,18 +491,11 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
       .querySelector(`.prd_basic`)
       .querySelectorAll("[data-adcio-id]").length
   ) {
-    swapElementsInGrid(elements, placement.displayPositions);
+    swapElementsForGrid(elements, placement.displayPositions);
     return;
   }
 
-  insertElements(
-    document
-      .querySelector("#monthly-best")
-      .querySelector(`.prd_basic`)
-      .querySelectorAll(".common_prd_list"),
-    elements,
-    placement.displayPositions,
-  );
+  insertElementsForGrid(elements, placement.displayPositions);
 };
 
 /**
