@@ -387,16 +387,16 @@ const getPlacementsAndCustomer = async () => {
 
 /**
  * @param {Array<Element>} newElements
- * @param {Array<number>} adcioGridIndexes
+ * @param {Array<number>} displayPositions
  */
-const swapElementsForGrid = (newElements, adcioGridIndexes) => {
+const swapElementsForGrid = (newElements, displayPositions) => {
   const originalElements = document
     .querySelector(`#monthly-best`)
     .querySelector(`.prd_basic`)
     .querySelectorAll(".swiper-slide");
 
   originalElements.forEach((element, index) => {
-    if (adcioGridIndexes.includes(index + 1) && newElements.length) {
+    if (displayPositions.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
       element.replaceWith(newElement);
     }
@@ -405,9 +405,9 @@ const swapElementsForGrid = (newElements, adcioGridIndexes) => {
 
 /**
  * @param {Array<Element>} newElements
- * @param {Array<number>} adcioGridIndexes
+ * @param {Array<number>} displayPositions
  */
-const insertElementsForGrid = (newElements, adcioGridIndexes) => {
+const insertElementsForGrid = (newElements, displayPositions) => {
   originalElements = document
     .querySelector("#monthly-best")
     .querySelector(`.prd_basic`)
@@ -415,7 +415,7 @@ const insertElementsForGrid = (newElements, adcioGridIndexes) => {
   const originElementsArr = [...originalElements];
 
   originalElements.forEach((element, index) => {
-    if (adcioGridIndexes.includes(index + 1) && newElements.length) {
+    if (displayPositions.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
       element.replaceWith(newElement);
       return;
