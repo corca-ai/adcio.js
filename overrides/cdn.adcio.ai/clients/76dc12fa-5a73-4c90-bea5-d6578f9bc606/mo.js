@@ -403,10 +403,11 @@ const getPlacementsAndCustomer = async () => {
 };
 
 /**
+* @param {Array<Element>} newElements
  * @param {Array<number>} adcioGridIndexes
- * @param {Array<Element>} newElements
+
  */
-const swapElements = (adcioGridIndexes, newElements) => {
+const swapElementsForGrid = (newElements, adcioGridIndexes) => {
   const originalElements = document
     .querySelector(`#monthly-best`)
     .querySelector(`.prd_basic`)
@@ -507,7 +508,7 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
       .querySelector(`.prd_basic`)
       .querySelectorAll("[data-adcio-id]").length
   ) {
-    swapElements(placement.displayPositions, elements);
+    swapElementsForGrid(elements, placement.displayPositions);
     return;
   }
 
