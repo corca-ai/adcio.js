@@ -10,18 +10,9 @@ const CATEGORY_IDS = {
   acc: "2026",
 };
 
+// Andar test skin
 const PC_GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
-// PC grid placement Id
-// andar PC test grid placement id - 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
-// andar PC production - ???? 아직 생성 안함
-// test@test.com - bfe21c26-6ccd-4aa5-b8ab-69e3d361c6c1
 const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
-// andar 76dc12fa-5a73-4c90-bea5-d6578f9bc606
-// test@test.com 76dc12fa-5a73-4c90-bea5-d6578f9bc606
-
-// PC PRODUCT GRID test skin 정보
-// 페이지 이름 skin159_MAIN
-// 지면 ID 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
 
 console.log("PC sdk !");
 const adcioInstance = new adcio.Adcio({
@@ -376,11 +367,8 @@ const appendChildForSelected = (elements, selectors) => {
  */
 const getPlacementsAndCustomer = async () => {
   const pageName = `skin159_${adcio.getMeta({
-    // andar test skin(without banner): skin159
-    // andar production(banner only): 135
-    // test@test.com skin159_MAIN_dev
     name: "path_role",
-  })}`; // TODO: delete the _dev in production or test skin
+  })}`;
 
   const placements = await adcioInstance.fetchPlacements({ pageName });
   if (!placements.length) {
@@ -650,10 +638,9 @@ const run = async () => {
 
 run()
   .then(() => console.log("ADCIO done"))
-  .catch((e) => console.log(e))
   .finally(() => {
     document.querySelector(`#mainBest`).style.visibility = "visible";
 
     //Collect Logs
-    adcioInstance.collectLogs(adcio.clientApi.cafe24);
+    adcioInstance.collectLogs(adcio.clientApi.cafe24); //error occurs in getCatList
   });

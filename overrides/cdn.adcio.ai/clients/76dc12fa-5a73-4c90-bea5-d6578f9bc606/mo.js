@@ -11,12 +11,7 @@ const CATEGORY_IDS = {
 };
 
 const MO_GRID_PLACEMENT_ID = "f77b43c0-6062-4801-950d-104747aa349d";
-// test@test.com 83126115-6ceb-41a1-b65e-e46ca5afac4c
-// andar MO test skin f77b43c0-6062-4801-950d-104747aa349d
-
 const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
-// Andar 76dc12fa-5a73-4c90-bea5-d6578f9bc606
-// test@test.com 76dc12fa-5a73-4c90-bea5-d6578f9bc606
 
 console.log("MO ADCIO sdk start!");
 const adcioInstance = new adcio.Adcio({
@@ -390,9 +385,7 @@ const appendChildForSelected = (elements, selectors) => {
 const getPlacementsAndCustomer = async () => {
   const pageName = `mobile156_${adcio.getMeta({
     name: "path_role",
-  })}`; //TODO: fix pageName and delete _dev
-  // Andar MO test skin(Grid Only) mobile156_MAIN
-  // test@test.com mobile156_MAIN_dev
+  })}`;
 
   const placements = await adcioInstance.fetchPlacements({ pageName });
   if (!placements.length) {
@@ -678,5 +671,5 @@ run()
     document.querySelector("#monthly-best").style.visibility = "visible";
 
     //Collect Logs
-    adcioInstance.collectLogs(adcio.clientApi.cafe24);
+    adcioInstance.collectLogs(adcio.clientApi.cafe24); //error occurs in getCatList
   });
