@@ -500,7 +500,7 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
         .querySelector(`.prd_basic`)
         .querySelectorAll(".common_prd_list"),
       elements,
-      placement.suggestionPosition,
+      placement.displayPositions,
     );
     return;
   }
@@ -511,7 +511,7 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
       .querySelector(`.prd_basic`)
       .querySelectorAll(".common_prd_list"),
     elements,
-    placement.suggestionPosition,
+    placement.displayPositions,
   );
 };
 
