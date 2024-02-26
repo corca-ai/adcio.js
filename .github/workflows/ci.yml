@@ -23,8 +23,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - uses: actions/cache@v3
+        id: demo-react-deps-cache
+        with:
+          path: demo/react/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('demo/react/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-${{ hashFiles('demo/react/yarn.lock') }}-
+            ${{ runner.os }}-yarn-
+
       - if: steps.deps-cache.outputs.cache-hit != 'true'
         run: yarn install
+        
+      - if: steps.demo-react-deps-cache.outputs.cache-hit != 'true'
+        run: yarn --cwd demo/react install
 
       - run: yarn run lint
       - run: yarn run build

@@ -1,0 +1,63 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+  gap: 50px;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-wrapper {
+  height: 500px;
+}
+
+.swiper-slide {
+  position: relative;
+  display: flex;
+  align-items: end;
+  opacity: 0.5;
+}
+
+.swiper-slide-active {
+  opacity: 1;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-slide .explain_banner {
+  position: absolute;
+  padding: 20px;
+}
+
+.swiper-slide .title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.swiper-slide .subtitle {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.swiper-slide .description {
+  font-size: 12px;
+  font-weight: 400;
+}
