@@ -1,5 +1,4 @@
-// PC Test Skin 코드!
-
+// PC Test Skin 코드! - 2월 26일 최종 업데이트
 /**
  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
  */
@@ -12,22 +11,11 @@ const CATEGORY_IDS = {
   acc: "2026",
 };
 
+// Andar test skin
 const PC_GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
-// PC grid placement Id
-// andar PC test grid placement id - 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
-// andar PC production - ???? 아직 생성 안함
-// test@test.com - bfe21c26-6ccd-4aa5-b8ab-69e3d361c6c1
 const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
-// andar 76dc12fa-5a73-4c90-bea5-d6578f9bc606
-// test@test.com 76dc12fa-5a73-4c90-bea5-d6578f9bc606
 
-const MOCK_SELECTED_GRID_INDEXES = [0, 3]; // TODO: delete and replace before add script
-
-// PC PRODUCT GRID test skin 정보
-// 페이지 이름 skin159_MAIN
-// 지면 ID 5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4
-
-console.log("PC sdk 브라우저 테스트!");
+console.log("PC sdk !");
 const adcioInstance = new adcio.Adcio({
   clientId: CLIENT_ID,
 });
@@ -36,7 +24,7 @@ const adcioInstance = new adcio.Adcio({
  * @param {Array<FetchActivePlacementsResponseDto>} placements
  * @param {CustomerWithId} customer
  * @param {Array<string>} allIdOnStore
- * @returns {Promise<Array<SuggestionResponseDto>>}
+ * @returns {Promise<Array<SuggestionResponseDto | SuggestionProductsResponseDto>>}
  */
 const createAllSuggestions = (placements, customer, allIdOnStore) => {
   return Promise.allSettled(
@@ -47,9 +35,9 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
       };
 
       if (placement.id === PC_GRID_PLACEMENT_ID) {
-        return adcioInstance.createSuggestion({
+        return adcioInstance.createSuggestionProducts({
           categoryIdOnStore: CATEGORY_IDS.total,
-          // excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`), //feat: add product suggestion after api added
+          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
           ...params,
         });
       }
@@ -62,23 +50,25 @@ const createAllSuggestions = (placements, customer, allIdOnStore) => {
 };
 
 /**
- * @param {SuggestionDto['product']} product
+ * @param {SuggestionProductsDto} product
  * @param {string} categoryId
  * @returns {HTMLElement}
  */
 const productToElement = (product, categoryId) => {
-  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
-
-  const retailPrice = product.data?.retail_price || product.price;
-  const discountPercent = // Fix: fix after api update on 24/02/22
-    !retailPrice || !product.discountPrice
+  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`;
+  const discountPercent =
+    !product.price || !product.discountPrice
       ? 0
-      : ((retailPrice - product.discountPrice) / retailPrice) * 100;
+      : ((product.price - product.discountPrice) / product.price) * 100;
+  const textBoxes =
+    product.additionalInformation?.filter(
+      (info) => info.key === "custom_option9" && info.value != "",
+    ) || [];
 
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
-    attributes: { "vreview-dom-embeded": true, "data-adcio-id": true }, //Adcio attribute to disctinct ADCIO elements from others.
+    attributes: { "vreview-dom-embeded": false, "data-adcio-id": true }, //Adcio attribute to disctinct ADCIO elements from others.
     children: [
       {
         tag: "div",
@@ -101,11 +91,11 @@ const productToElement = (product, categoryId) => {
                       name: `anchorBoxName_${product.idOnStore}`,
                     },
                     children: [
-                      {
+                      !!product.additionalImages?.[1] && {
                         tag: "img",
                         classList: ["overimg"],
                         attributes: {
-                          src: product?.Image || product?.additionalImages?.[1],
+                          src: product.additionalImages?.[1],
                           alt: product.name,
                           id: `eListPrdImage${product.idOnStore}_1`,
                         },
@@ -113,7 +103,7 @@ const productToElement = (product, categoryId) => {
                       {
                         tag: "img",
                         attributes: {
-                          src: product?.additionalImages?.[0] || product?.Image,
+                          src: product.additionalImages?.[0],
                           alt: product.name,
                           id: `eListPrdImage${product.idOnStore}_1`,
                         },
@@ -177,8 +167,7 @@ const productToElement = (product, categoryId) => {
                             attributes: {
                               style: "font-size:14px;color:#000000;",
                             },
-                            textContent:
-                              "[TEST] 임의의 값들 이용 - " + product.name,
+                            textContent: product.name,
                           },
                         ],
                       },
@@ -196,19 +185,22 @@ const productToElement = (product, categoryId) => {
                     attributes: {
                       style: "display: inline !important;", //added important for the very first of rendering.
                     },
-                    children:
-                      discountPercent < 1 || discountPercent >= 100
-                        ? []
-                        : [
-                            {
-                              tag: "strong",
-                              textContent: discountPercent.toFixed() + "%",
-                            },
-                          ],
+                    children: [
+                      {
+                        tag: "strong",
+                        textContent:
+                          discountPercent < 1 || discountPercent >= 100
+                            ? " "
+                            : discountPercent.toFixed() + "%",
+                      },
+                    ],
                   },
                   {
                     tag: "span",
                     classList: ["sale"],
+                    attributes: {
+                      style: "display:inline !important;",
+                    },
                     children: [
                       {
                         tag: "strong",
@@ -220,24 +212,18 @@ const productToElement = (product, categoryId) => {
                   },
                   {
                     tag: "span",
-                    classList: [
-                      "sell",
-                      `product_price${Number(
-                        product.discountPrice || product.price,
-                      ).toLocaleString()}원`,
-                      "displaynone12displaynone",
+                    classList: ["customer"],
+                    attributes: {
+                      style: "display: inline;",
+                    },
+                    children: [
+                      discountPercent >= 1 && {
+                        tag: "strong",
+                        textContent: `${Number(
+                          product.price,
+                        ).toLocaleString()}원`,
+                      },
                     ],
-                    children:
-                      discountPercent < 1 || discountPercent >= 100
-                        ? []
-                        : [
-                            {
-                              tag: "strong",
-                              textContent: `${
-                                Number(retailPrice).toLocaleString() + "원"
-                              }`,
-                            },
-                          ],
                   },
                 ],
               },
@@ -253,7 +239,7 @@ const productToElement = (product, categoryId) => {
                 tag: "div",
                 classList: ["icon"],
               },
-              {
+              !!textBoxes.length && {
                 tag: "ul",
                 classList: [
                   "xans-element-",
@@ -269,18 +255,11 @@ const productToElement = (product, categoryId) => {
                       "xans-record-",
                       "textBox",
                     ],
-                    children:
-                      (categoryId === CATEGORY_IDS.total && // 카테고리 전체인 경우에만 text box가 존재함
-                        product.additionalInformation
-                          ?.filter((d) => d.name === "텍스트박스")
-                          ?.map((data) => {
-                            return {
-                              tag: "div",
-                              classList: ["add_text"],
-                              textContent: data.value,
-                            };
-                          })) ||
-                      [],
+                    children: textBoxes.map((data) => ({
+                      tag: "div",
+                      classList: ["add_text"],
+                      textContent: data.value,
+                    })),
                   },
                 ],
               },
@@ -388,11 +367,8 @@ const appendChildForSelected = (elements, selectors) => {
  */
 const getPlacementsAndCustomer = async () => {
   const pageName = `skin159_${adcio.getMeta({
-    // andar test skin(without banner): skin159
-    // andar production(banner only): 135
-    // test@test.com skin159_MAIN_dev
     name: "path_role",
-  })}`; // TODO: delete the _dev in production or test skin
+  })}`;
 
   const placements = await adcioInstance.fetchPlacements({ pageName });
   if (!placements.length) {
@@ -410,37 +386,46 @@ const getPlacementsAndCustomer = async () => {
 };
 
 /**
- * @param {NodeList<Element>} originalElements
  * @param {Array<Element>} newElements
- * @param {Array<number>} adcioGridIndexes
+ * @param {Array<number>} displayPositions
  */
-const swapElements = (originalElements, newElements, adcioGridIndexes) => {
+const swapElementsForGrid = (newElements, displayPositions) => {
+  const originalElements = document
+    .querySelector(`#monthly-best`)
+    .querySelector(`.prd_basic`)
+    .querySelectorAll(".swiper-slide");
+
   originalElements.forEach((element, index) => {
-    if (adcioGridIndexes.includes(index) && newElements.length) {
+    if (displayPositions.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
-      element.outerHTML = newElement.outerHTML;
-      return;
+      element.replaceWith(newElement);
     }
   });
 };
 
 /**
- * @param {NodeList<Element>} originalElements
  * @param {Array<Element>} newElements
- * @param {Array<number>} adcioGridIndexes
+ * @param {Array<number>} displayPositions
  */
-const insertElements = (originalElements, newElements, adcioGridIndexes) => {
+const insertElementsForGrid = (newElements, displayPositions) => {
+  originalElements = document
+    .querySelector("#monthly-best")
+    .querySelector(`.prd_basic`)
+    .querySelectorAll(".common_prd_list");
   const originElementsArr = [...originalElements];
 
   originalElements.forEach((element, index) => {
-    if (adcioGridIndexes.includes(index) && newElements.length) {
+    if (displayPositions.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
-      element.outerHTML = newElement.outerHTML;
+      element.replaceWith(newElement);
       return;
     }
 
+    if (!originElementsArr.length) {
+      return;
+    }
     const elementToBeInserted = originElementsArr.shift();
-    element.outerHTML = elementToBeInserted.outerHTML;
+    element.replaceWith(elementToBeInserted);
   });
 };
 
@@ -463,7 +448,6 @@ const injectBannerSuggestions = (suggestedData) => {
       element,
       filter: (e) => e.classList.contains("swiper-slide-active"),
     });
-
     return element;
   });
 
@@ -482,10 +466,9 @@ const injectBannerSuggestions = (suggestedData) => {
 /**
  * @param {SuggestionResponseDto} suggestedData
  * @param {string} categoryId
- * @param {Array<number>} adcioGridIndexes
  */
-const injectGridSuggestions = (suggestedData, categoryId, adcioGridIndexes) => {
-  const { suggestions } = suggestedData;
+const injectGridSuggestions = (suggestedData, categoryId) => {
+  const { placement, suggestions } = suggestedData;
 
   const elements = suggestions.map((suggestion) => {
     const element = productToElement(suggestion.product, categoryId);
@@ -499,27 +482,20 @@ const injectGridSuggestions = (suggestedData, categoryId, adcioGridIndexes) => {
     adcioInstance.observeImpression({
       element,
     });
-
     return element;
   });
 
   if (
-    document.querySelector(`.prd_basic`).querySelectorAll("[data-adcio-id]")
-      .length
+    document
+      .querySelector("#monthly-best")
+      .querySelector(`.prd_basic`)
+      .querySelectorAll("[data-adcio-id]").length
   ) {
-    swapElements(
-      document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-      elements,
-      adcioGridIndexes,
-    );
+    swapElementsForGrid(elements, placement.displayPositions);
     return;
   }
 
-  insertElements(
-    document.querySelector(`.prd_basic`).querySelectorAll(".common_prd_list"),
-    elements,
-    adcioGridIndexes,
-  );
+  insertElementsForGrid(elements, placement.displayPositions);
 };
 
 /**
@@ -536,12 +512,13 @@ const getCategoryIdFromHTML = (html) => {
 };
 
 /**
- * @param {string} selector
  * @returns {Array<string>}
  */
-const getAllIdOnStoreInElement = (selector) => {
+const getAllIdOnStoreInElement = () => {
   const idOnStores = [];
-  const elements = document.querySelector(selector);
+  const elements = document
+    .querySelector("#monthly-best")
+    .querySelector(".prd_basic");
   elements.childNodes.forEach((element) => {
     if (!element.id) {
       return;
@@ -555,11 +532,10 @@ const getAllIdOnStoreInElement = (selector) => {
   return idOnStores;
 };
 
-/**
- * @param {string} parentElementSelector
- */
-const createOrFixRankElement = (parentElementSelector) => {
-  const elements = document.querySelectorAll(parentElementSelector);
+const createOrFixRankElement = () => {
+  const elements = document
+    .querySelector("#monthly-best")
+    .querySelectorAll(".img");
   elements.forEach((element, index) => {
     if (element.querySelector(".rankBadge") == null) {
       const rankBadge = document.createElement("span");
@@ -573,7 +549,7 @@ const createOrFixRankElement = (parentElementSelector) => {
 const run = async () => {
   await adcio.waitForElement("#mainBest");
   document.querySelector(`#mainBest`).style.visibility = "hidden";
-  const allIdOnStore = await getAllIdOnStoreInElement(".prd_basic");
+  const allIdOnStore = await getAllIdOnStoreInElement();
 
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
@@ -602,16 +578,8 @@ const run = async () => {
     injectBannerSuggestions(allSuggestions.BANNER);
   }
   if (allSuggestions.GRID) {
-    const suggestionPosition = [
-      ...allSuggestions.GRID.placement.suggestionPosition,
-    ]; // TODO: fix to use this instead of MOCK_SELECTED_GRID_INDEXES
-
-    await injectGridSuggestions(
-      allSuggestions.GRID,
-      CATEGORY_IDS.total,
-      MOCK_SELECTED_GRID_INDEXES,
-    );
-    await createOrFixRankElement(".img");
+    await injectGridSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
+    await createOrFixRankElement();
   }
   document.querySelector(`#mainBest`).style.visibility = "visible";
 
@@ -624,37 +592,32 @@ const run = async () => {
     observer.disconnect();
 
     if (mutationsList.find((m) => m.type === "childList")) {
-      document.querySelector(`.prd_basic`).style.visibility = "hidden";
+      document
+        .querySelector("#monthly-best")
+        .querySelector(`.prd_basic`).style.visibility = "hidden";
 
       const categoryId =
         getCategoryIdFromHTML(
           document.querySelector("#monthly-best")?.innerHTML,
         ) || CATEGORY_IDS.total;
-      const allIdOnStore = await getAllIdOnStoreInElement(".prd_basic");
+      const allIdOnStore = await getAllIdOnStoreInElement();
 
       adcioInstance
-        .createSuggestion({
-          //TODO: fix after release,  createProductSuggestion
+        .createSuggestionProducts({
           ...customer,
           categoryIdOnStore: categoryId,
           placementId: PC_GRID_PLACEMENT_ID,
-          // excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`), //TODO: fix after release
+          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
         })
         .then(async (suggested) => {
-          const suggestionPosition = [
-            ...suggested.placement.suggestionPosition,
-          ]; // TODO: fix to use this instead of MOCK_SELECTED_GRID_INDEXES
-
-          await injectGridSuggestions(
-            suggested,
-            categoryId,
-            MOCK_SELECTED_GRID_INDEXES,
-          );
-          await createOrFixRankElement(".img");
+          await injectGridSuggestions(suggested, categoryId);
+          await createOrFixRankElement();
         })
         .finally(
           () =>
-            (document.querySelector(".prd_basic").style.visibility = "visible"),
+            (document
+              .querySelector("#monthly-best")
+              .querySelector(".prd_basic").style.visibility = "visible"),
         );
     }
 
@@ -670,10 +633,9 @@ const run = async () => {
 
 run()
   .then(() => console.log("ADCIO done"))
-  .catch((e) => console.log(e))
-  .finally(
-    () => (document.querySelector(`#mainBest`).style.visibility = "visible"),
-  );
+  .finally(() => {
+    document.querySelector(`#mainBest`).style.visibility = "visible";
 
-//Collect Logs
-//adcioInstance.collectLogs(adcio.clientApi.cafe24);
+    //Collect Logs
+    adcioInstance.collectLogs(adcio.clientApi.cafe24); //error occurs in getCatList
+  });

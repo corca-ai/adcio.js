@@ -1,6 +1,4 @@
-// MO Test Skin 코드!
-
-const MOCK_SELECTED_GRID_INDEXES = [0, 3, 4];
+// MO Test Skin 코드! - 2월 26일 최종 업데이트
 
 /**
  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
@@ -15,12 +13,7 @@ const CATEGORY_IDS = {
 };
 
 const MO_GRID_PLACEMENT_ID = "f77b43c0-6062-4801-950d-104747aa349d";
-// test@test.com 83126115-6ceb-41a1-b65e-e46ca5afac4c
-// andar MO test skin f77b43c0-6062-4801-950d-104747aa349d
-
 const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
-// Andar 76dc12fa-5a73-4c90-bea5-d6578f9bc606
-// test@test.com 76dc12fa-5a73-4c90-bea5-d6578f9bc606
 
 console.log("MO ADCIO sdk start!");
 const adcioInstance = new adcio.Adcio({
@@ -30,25 +23,26 @@ const adcioInstance = new adcio.Adcio({
 /**
  * @param {Array<FetchActivePlacementsResponseDto>} placements
  * @param {CustomerWithId} customer
- * @returns {Promise<Array<SuggestionResponseDto>>}
+ * @param {Array<string>} allIdOnStore
+ * @returns {Promise<Array<SuggestionResponseDto | SuggestionProductsResponseDto>>}
  */
-const createAllSuggestions = (placements, customer) => {
+const createAllSuggestions = (placements, customer, allIdOnStore) => {
   return Promise.allSettled(
     placements?.map(async (placement) => {
       const params = {
         ...customer,
         placementId: placement.id,
       };
-
+      //PRODUCT(GRID)
       if (placement.id === MO_GRID_PLACEMENT_ID) {
-        return await adcioInstance.createSuggestion({
+        return adcioInstance.createSuggestionProducts({
           categoryIdOnStore: CATEGORY_IDS.total,
-          // TODO: fix newest Suggestion API -- 중요!!! (for duplication)
+          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
           ...params,
         });
       }
-
-      return await adcioInstance.createSuggestion({
+      //BANNER
+      return adcioInstance.createSuggestion({
         ...params,
       });
     }),
@@ -56,24 +50,29 @@ const createAllSuggestions = (placements, customer) => {
 };
 
 /**
- * @param {SuggestionDto['product']} product
+ * @param {SuggestionProductsDto} product
  * @param {string} categoryId
  * @returns {HTMLElement}
  */
 const productToElement = (product, categoryId) => {
-  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`; // TODO: double check if there is edge case
-  const retailPrice = product.data?.retail_price || product.price;
+  const productHref = `${product.url}&cate_no=${categoryId}&display_group=1`;
   const salePercent =
-    ((retailPrice - product.discountPrice) / retailPrice) * 100;
+    !product.price || !product.discountPrice
+      ? 0
+      : ((product.price - product.discountPrice) / product.price) * 100;
+  const textBoxes =
+    product.additionalInformation?.filter(
+      (info) => info.key === "custom_option9" && info.value != "",
+    ) || [];
 
   return adcio.createNestedElement({
     tag: "li",
     classList: ["swiper-slide", "common_prd_list", "xans-record-"],
     attributes: {
       "vreview-dom-embeded": false,
-      id: `anchorBoxId_${product.idOnStore}`, //TODO: check product idOnStore is right
-      "data-adcio-id": true,
-    }, //Adcio attribute to disctinct ADCIO elements from others.
+      id: `anchorBoxId_${product.idOnStore}`,
+      "data-adcio-id": true, //Adcio attribute to disctinct ADCIO elements from others.
+    },
     children: [
       {
         tag: "div",
@@ -96,7 +95,9 @@ const productToElement = (product, categoryId) => {
                       {
                         tag: "img",
                         attributes: {
-                          src: product?.image,
+                          src:
+                            product.additionalImages[0] ||
+                            product.additionalImages?.[1],
                           alt: product.name,
                           id: `eListPrdImage${product.idOnStore}_1`,
                         },
@@ -119,9 +120,8 @@ const productToElement = (product, categoryId) => {
                 tag: "div",
                 classList: ["detail_review"],
                 attributes: {
-                  // href: product.url,
+                  href: productHref,
                   "vreview-product-id": product.idOnStore,
-                  // "vreview-dom-id": "rank num",
                 },
                 children: [
                   {
@@ -134,7 +134,6 @@ const productToElement = (product, categoryId) => {
                         attributes: {
                           style: "margin-top: 6px;",
                         },
-                        // childList: [{ tag: "span" }], //TODO: 없어도 리뷰 자동으로 붙음
                       },
                     ],
                   },
@@ -155,7 +154,7 @@ const productToElement = (product, categoryId) => {
                     attributes: {
                       href: productHref,
                     },
-                    textContent: "[TEST] 임의의 값들 이용 - " + product.name,
+                    textContent: product.name,
                   },
                 ],
               },
@@ -163,7 +162,7 @@ const productToElement = (product, categoryId) => {
                 tag: "div",
                 classList: ["price", "font_Gilroy"],
                 children: [
-                  {
+                  salePercent >= 1 && {
                     tag: "span",
                     classList: ["sale_percent"],
                     attributes: {
@@ -172,10 +171,7 @@ const productToElement = (product, categoryId) => {
                     children: [
                       {
                         tag: "strong",
-                        textContent:
-                          salePercent < 1 || salePercent >= 100
-                            ? " "
-                            : salePercent.toFixed() + "%",
+                        textContent: salePercent.toFixed() + "%",
                       },
                     ],
                   },
@@ -194,7 +190,7 @@ const productToElement = (product, categoryId) => {
                       },
                     ],
                   },
-                  {
+                  salePercent >= 1 && {
                     tag: "span",
                     classList: [
                       "sell_prc",
@@ -203,8 +199,9 @@ const productToElement = (product, categoryId) => {
                       "displaynone12displaynone",
                     ],
                     attributes: {
-                      textContent: retailPrice + "원", //TODO: check if retail price is right
+                      style: "display: inline;",
                     },
+                    textContent: product.price + "원",
                   },
                 ],
               },
@@ -229,28 +226,34 @@ const productToElement = (product, categoryId) => {
                   "item_box",
                 ],
                 children: [
-                  {
+                  textBoxes.length > 0 && {
                     tag: "li",
-                    classList: [
-                      "display_텍스트박스",
-                      "xans-record-",
-                      "textBox",
-                    ],
-                    children: product.additional_information?.map((data) => {
-                      return {
+                    classList: ["xans-record-"],
+                    attributes: {
+                      style:
+                        "display: inline-block;border: 1px solid rgba(142,31,41,0.5);box-sizing: border-box;padding: 5px 6px 4px 6px;margin-bottom: 5px;line-height: 1;opacity: 1;",
+                    },
+                    children: [
+                      {
                         tag: "span",
                         attributes: {
                           style: "font-size:12px; color:#8e1f28;",
                         },
-                        children: [
-                          {
-                            tag: "span",
-                            classList: ["add_text"],
-                            textContent: data.value,
+                        children: textBoxes.map((data) => ({
+                          tag: "div",
+                          classList: ["text_box", "add_text"],
+                          attributes: {
+                            style: "font-size:10px;font-weight:500;",
                           },
-                        ],
-                      };
-                    }),
+                          children: [
+                            {
+                              tag: "span",
+                              textContent: data.value,
+                            },
+                          ],
+                        })),
+                      },
+                    ],
                   },
                 ],
               },
@@ -384,9 +387,7 @@ const appendChildForSelected = (elements, selectors) => {
 const getPlacementsAndCustomer = async () => {
   const pageName = `mobile156_${adcio.getMeta({
     name: "path_role",
-  })}`; //TODO: fix pageName and delete _dev
-  // Andar MO test skin(Grid Only) mobile156_MAIN
-  // test@test.com mobile156_MAIN_dev
+  })}`;
 
   const placements = await adcioInstance.fetchPlacements({ pageName });
   if (!placements.length) {
@@ -404,43 +405,54 @@ const getPlacementsAndCustomer = async () => {
 };
 
 /**
- * @param {NodeList<Element>} originalElements
- * @param {Array<number>} adcioGridIndexes
- * @param {Array<Element>} newElements
+* @param {Array<Element>} newElements
+ * @param {Array<number>} displayPositions
+
  */
-const swapElements = (originalElements, adcioGridIndexes, newElements) => {
-  originalElements.forEach((element, index) => {
-    if (adcioGridIndexes.includes(index) && newElements.length) {
+const swapElementsForGrid = (newElements, displayPositions) => {
+  const originalGridElements = document
+    .querySelector(`#monthly-best`)
+    .querySelector(`.prd_basic`)
+    .querySelectorAll(".swiper-slide");
+
+  originalGridElements.forEach((element, index) => {
+    if (displayPositions.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
-      element.outerHTML = newElement.outerHTML;
-      return;
+      element.replaceWith(newElement);
     }
   });
 };
 
 /**
- * @param {NodeList<Element>} originalElements
- * @param {Array<number>} indexes
- * @param {NodeList<Element>} newElements
+ 
+ * @param {Array<Element>} newElements
+ * @param {Array<number>} displayPositions
  */
-const insertElements = (originalElements, indexes, newElements) => {
-  const originElementsArr = [...originalElements];
-  const newElementsArr = [...newElements];
+const insertElementsForGrid = (newElements, displayPositions) => {
+  const originalGridElements = document
+    .querySelector(`#monthly-best`)
+    .querySelector(`.prd_basic`)
+    .querySelectorAll(".swiper-slide");
 
-  originalElements.forEach((element, index) => {
-    if (indexes.includes(index) && newElementsArr.length) {
-      const newElement = newElementsArr.shift();
-      element.outerHTML = newElement.outerHTML;
+  const gridElemArr = [...originalGridElements];
+
+  originalGridElements.forEach((element, index) => {
+    if (displayPositions.includes(index + 1) && newElements.length) {
+      const newElement = newElements.shift();
+      element.replaceWith(newElement);
       return;
     }
 
-    const elementToBeInserted = originElementsArr.shift();
-    element.outerHTML = elementToBeInserted.outerHTML;
+    if (!gridElemArr.length) {
+      return;
+    }
+    const elementToBeInserted = gridElemArr.shift();
+    element.replaceWith(elementToBeInserted);
   });
 };
 
 /**
- * @param {Array<SuggestionResponseDto>} suggestedData
+ * @param {Array<SuggestionResponseDto | SuggestionProductsResponseDto>} suggestedData
  */
 const injectBannerSuggestions = (suggestedData) => {
   const { suggestions } = suggestedData;
@@ -470,11 +482,11 @@ const injectBannerSuggestions = (suggestedData) => {
 };
 
 /**
- * @param {SuggestionResponseDto[]} suggestedData
+ * @param {SuggestionProductsResponseDto} suggestedData
  * @param {string} categoryId
  */
-const injectProductSuggestions = (suggestedData, categoryId) => {
-  const { suggestions } = suggestedData;
+const injectGridSuggestions = (suggestedData, categoryId) => {
+  const { placement, suggestions } = suggestedData;
 
   const elements = suggestions.map((suggestion) => {
     const element = productToElement(suggestion.product, categoryId); //TODO: fix index
@@ -498,68 +510,27 @@ const injectProductSuggestions = (suggestedData, categoryId) => {
       .querySelector(`.prd_basic`)
       .querySelectorAll("[data-adcio-id]").length
   ) {
-    swapElements(
-      document
-        .querySelector(`#monthly-best`)
-        .querySelector(`.prd_basic`)
-        .querySelectorAll(".swiper-slide"),
-      MOCK_SELECTED_GRID_INDEXES,
-      elements,
-    );
+    swapElementsForGrid(elements, placement.displayPositions);
     return;
   }
 
-  insertElements(
-    document
-      .querySelector(`#monthly-best`)
-      .querySelector(`.prd_basic`)
-      .querySelectorAll(".swiper-slide"),
-    MOCK_SELECTED_GRID_INDEXES,
-    elements,
-  );
+  insertElementsForGrid(elements, placement.displayPositions);
 };
 
 /**
- * @param {MutationCallback} mutationCallback
- * @param {Node} targetElement
- * @param {MutationObserverInit | undefined} [observeOptions]
- */
-const observeUntilUnload = (
-  mutationCallback,
-  targetElement,
-  observeOptions,
-) => {
-  const observer = new MutationObserver(mutationCallback);
-  observer.observe(targetElement, observeOptions);
-  window.addEventListener("beforeunload", () => {
-    observer.disconnect();
-  });
-};
-
-/**
- * @param {string} code
- * @returns {string | null}
- */
-const getCategoryIdFromCode = (code) => {
-  if (!code) {
-    return null;
-  }
-  const regex = /\$cate_no\s*=\s*(\d+)/;
-  const match = code.match(regex);
-  return match.length >= 2 ? match[1] : null;
-};
-
-/**
- * @param {string} selector
  * @returns {Array<string>}
  */
-const getAllIdOnStoreInElement = (selector) => {
+const getAllIdOnStoreInElement = () => {
   const idOnStores = [];
-  const elements = document.querySelector(selector);
+  const elements = document
+    .querySelector("#monthly-best")
+    .querySelector(".prd_basic");
+
   elements.childNodes.forEach((element) => {
     if (!element.id) {
       return;
     }
+
     const regex = /anchorBoxId_(\d+)/;
     const match = element.id.match(regex);
     if (match.length >= 2) {
@@ -582,11 +553,10 @@ const getCategoryIdFromHTML = (html) => {
   return match.length >= 2 ? match[1] : null;
 };
 
-/**
- * @param {string} selectors
- */
-const createOrFixRankElement = (selectors) => {
-  const elements = document.querySelectorAll(selectors);
+const createOrFixRankElement = () => {
+  const elements = document
+    .querySelector(`#monthly-best`)
+    .querySelectorAll(".img");
   elements.forEach((element, index) => {
     if (element.querySelector(".rankBadge") == null) {
       const rankBadge = document.createElement("span");
@@ -600,12 +570,10 @@ const createOrFixRankElement = (selectors) => {
 const run = async () => {
   await adcio.waitForElement("#monthly-best");
   document.querySelector(`#monthly-best`).style.visibility = "hidden";
-  const allIdOnStore = await getAllIdOnStoreInElement("#monthly-best");
+  const allIdOnStore = await getAllIdOnStoreInElement();
 
   const { placements, customer } = await getPlacementsAndCustomer();
   if (!placements.length) {
-    console.error("No placements found");
-    //document.querySelector(`#monthly-best`).style.visibility = "visible";
     return;
   }
 
@@ -613,7 +581,11 @@ const run = async () => {
     BANNER: null,
     GRID: null,
   };
-  const allPromises = await createAllSuggestions(placements, customer);
+  const allPromises = await createAllSuggestions(
+    placements,
+    customer,
+    allIdOnStore,
+  );
   allPromises.forEach(
     (p) =>
       p.status === "fulfilled" &&
@@ -625,12 +597,12 @@ const run = async () => {
     injectBannerSuggestions(allSuggestions.BANNER);
   }
   if (allSuggestions.GRID) {
-    await injectProductSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
-    await createOrFixRankElement(".img");
+    await injectGridSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
+    await createOrFixRankElement();
   }
   document.querySelector(`#monthly-best`).style.visibility = "visible";
 
-  // Observe Grid List Changes and inject product suggestions and fix rank badges
+  // Observe Grid List Changes and inject product suggestions
   const targetElement = document.querySelector("#monthly-best");
   const observeOptions = {
     childList: true,
@@ -640,24 +612,29 @@ const run = async () => {
 
     if (mutationsList.find((m) => m.type === "childList")) {
       document.querySelector("#monthly-best").style.visibility = "hidden";
+
       const categoryId =
-        getCategoryIdFromCode(
+        getCategoryIdFromHTML(
           document.querySelector("#monthly-best")?.innerHTML,
         ) || CATEGORY_IDS.total;
-      const allIdOnStore = await getAllIdOnStoreInElement("#monthly-best");
+      const allIdOnStore = await getAllIdOnStoreInElement();
+
       adcioInstance
-        .createSuggestion({
-          placementId: MO_GRID_PLACEMENT_ID,
+        .createSuggestionProducts({
           categoryIdOnStore: categoryId,
+          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
+          placementId: MO_GRID_PLACEMENT_ID,
           ...customer,
         })
         .then(async (suggested) => {
-          await injectProductSuggestions(suggested, categoryId);
-          await createOrFixRankElement(".img");
+          await injectGridSuggestions(suggested, categoryId);
+          await createOrFixRankElement();
         })
-        .finally(async () => {
-          document.querySelector("#monthly-best").style.visibility = "visible";
-        });
+        .finally(
+          async () =>
+            (document.querySelector("#monthly-best").style.visibility =
+              "visible"),
+        );
     }
 
     observer.observe(targetElement, observeOptions);
@@ -674,7 +651,7 @@ run()
   .then(() => console.log("MO ADCIO sdk end!"))
   .finally(() => {
     document.querySelector("#monthly-best").style.visibility = "visible";
-  });
 
-//Collect Logs
-//adcioInstance.collectLogs(adcio.clientApi.cafe24);
+    //Collect Logs
+    // adcioInstance.collectLogs(adcio.clientApi.cafe24); //error occurs in getCatList
+  });
