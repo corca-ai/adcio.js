@@ -651,5 +651,5 @@ run()
     document.querySelector("#monthly-best").style.visibility = "visible";
 
     //Collect Logs
-    adcioInstance.collectLogs(adcio.clientApi.cafe24); //error occurs in getCatList
+    adcioInstance.collectLogs(adcio.clientApi.cafe24);
   });
