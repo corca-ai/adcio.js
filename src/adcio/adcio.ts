@@ -8,6 +8,7 @@ import {
   AdcioConfig,
   AdcioParams,
   AdcioCreateSuggestionParams,
+  AdcioCreateSuggestionProductsParams,
   AdcioOnPageViewParams,
   AdcioOnAddToCartParams,
   AdcioOnClickParams,
@@ -81,7 +82,9 @@ export class Adcio {
     return this.adcioPlacement.createSuggestion(params);
   }
 
-  public async createSuggestionProducts(params: AdcioCreateSuggestionParams) {
+  public async createSuggestionProducts(
+    params: AdcioCreateSuggestionProductsParams,
+  ) {
     return this.adcioPlacement.createSuggestionProducts(params);
   }
 

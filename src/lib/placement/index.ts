@@ -4,4 +4,5 @@ export {
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateSuggestionProductsParams,
   AdcioPlacementCreateSuggestionParams,
+  AdcioPlacementCreateSuggestionProductsParams,
 } from "./placement.interface";
