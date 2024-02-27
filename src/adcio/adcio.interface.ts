@@ -42,3 +42,6 @@ export type AdcioObserveImpressionParams = {
 export type AdcioFetchPlacementsParams = AdcioPlacementFetchPlacementsParams;
 
 export type AdcioCreateSuggestionParams = AdcioPlacementCreateSuggestionParams;
+
+export type AdcioCreateSuggestionProductsParams =
+  AdcioPlacementCreateSuggestionParams;
