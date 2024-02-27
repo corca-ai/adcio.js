@@ -9,6 +9,7 @@ import {
 import {
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateSuggestionParams,
+  AdcioPlacementCreateSuggestionProductsParams,
 } from "lib/placement";
 
 export interface AdcioParams {
@@ -42,3 +43,6 @@ export type AdcioObserveImpressionParams = {
 export type AdcioFetchPlacementsParams = AdcioPlacementFetchPlacementsParams;
 
 export type AdcioCreateSuggestionParams = AdcioPlacementCreateSuggestionParams;
+
+export type AdcioCreateSuggestionProductsParams =
+  AdcioPlacementCreateSuggestionProductsParams;
