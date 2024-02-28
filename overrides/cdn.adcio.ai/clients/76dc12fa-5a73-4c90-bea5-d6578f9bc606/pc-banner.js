@@ -1,4 +1,6 @@
 // 실제 안다르에 사용되고 있는 배너쪽 코드입니다. (테스트 스킨 auth 아님)
+const MO_GRID_PLACEMENT_ID = "e945a115-c3c5-4575-8d01-b9d8565063fe";
+
 const adcioInstanceBanner = new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
 });
@@ -82,14 +84,6 @@ const bannerToElement = (banner) => {
 };
 
 const injectSuggestions = async () => {
-  const pageName = `skin135_${adcio.getMeta({
-    name: "path_role",
-  })}`;
-  const [placement] = await adcioInstanceBanner.fetchPlacements({ pageName });
-  if (!placement) {
-    return;
-  }
-
   let customer = {};
   try {
     const { id, ...rest } = await adcio.clientApi.cafe24.getCustomer();
@@ -100,7 +94,7 @@ const injectSuggestions = async () => {
 
   const { suggestions } = await adcioInstanceBanner.createSuggestion({
     ...customer,
-    placementId: placement.id,
+    placementId: MO_GRID_PLACEMENT_ID,
   });
 
   const elements = suggestions.map((suggestion) => {
