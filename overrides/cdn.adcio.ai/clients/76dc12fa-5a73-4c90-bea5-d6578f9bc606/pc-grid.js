@@ -473,51 +473,6 @@ const productToProductListElement = (suggestion, categoryId) => {
   });
 };
 
-const handleCategory = async (categoryId) => {
-  if (!Object.values(CATEGORY_IDS).includes(categoryId)) {
-    return;
-  }
-
-  const swapped = getSwappedProduct();
-  const wrapper = await adcio.waitForElement(
-    ".xans-product-normalpackage > .xans-product-listnormal > ul.prd_basic",
-  );
-  swapped.forEach(({ suggestion, original }) => {
-    adcio
-      .waitForElement(
-        `#anchorBoxId_${original.idOnStore}:not([adcio-request-id]) > div.box > div.img`,
-        wrapper,
-      )
-      .then(() => {
-        const originalExisting = wrapper.querySelector(
-          `#anchorBoxId_${original.idOnStore}:not([adcio-request-id])`,
-        );
-        swapElement(
-          originalExisting,
-          productToProductListElement(suggestion, categoryId),
-          suggestion.logOptions,
-        );
-      });
-
-    adcio
-      .waitForElement(
-        `#anchorBoxId_${suggestion.product.idOnStore}:not([adcio-request-id]) > div.box > div.img`,
-        wrapper,
-      )
-      .then(() => {
-        const suggestedExisting = wrapper.querySelector(
-          `#anchorBoxId_${suggestion.product.idOnStore}:not([adcio-request-id])`,
-        );
-        suggestedExisting.replaceWith(
-          productToProductListElement(
-            { product: original, logOptions: {} },
-            categoryId,
-          ),
-        );
-      });
-  });
-};
-
 const run = async () => {
   const page = adcio.getMeta({ name: "path_role" });
 
@@ -532,7 +487,11 @@ const run = async () => {
     const categoryId = new URL(window.location.href).searchParams.get(
       "cate_no",
     );
-    handleCategory(categoryId);
+    handleCategory(
+      ".xans-product-normalpackage > .xans-product-listnormal > ul.prd_basic",
+      (id) => `#anchorBoxId_${id}:not([adcio-request-id])`,
+      categoryId,
+    );
   }
 };
 

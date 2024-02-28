@@ -216,3 +216,38 @@ const handleMain = async (wrapperSelector, gridSelector, placementId) => {
     injectGrid(wrapperSelector, gridSelector, placementId, customer),
   );
 };
+
+const handleCategory = async (wrapperSelector, idToSelector, categoryId) => {
+  if (!Object.values(CATEGORY_IDS).includes(categoryId)) {
+    return;
+  }
+
+  const swapped = getSwappedProduct();
+  const wrapper = await adcio.waitForElement(wrapperSelector);
+  swapped.forEach(({ suggestion, original }) => {
+    adcio.waitForElement(idToSelector(original.idOnStore), wrapper).then(() => {
+      const originalExisting = wrapper.querySelector(
+        idToSelector(original.idOnStore),
+      );
+      swapElement(
+        originalExisting,
+        productToProductListElement(suggestion, categoryId),
+        suggestion.logOptions,
+      );
+    });
+
+    adcio
+      .waitForElement(idToSelector(suggestion.product.idOnStore), wrapper)
+      .then(() => {
+        const suggestedExisting = wrapper.querySelector(
+          idToSelector(suggestion.product.idOnStore),
+        );
+        suggestedExisting.replaceWith(
+          productToProductListElement(
+            { product: original, logOptions: {} },
+            categoryId,
+          ),
+        );
+      });
+  });
+};
