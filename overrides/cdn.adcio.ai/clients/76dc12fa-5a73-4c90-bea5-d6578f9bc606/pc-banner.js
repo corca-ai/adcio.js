@@ -1,4 +1,4 @@
-// 실제 안다르에 사용되고 있는 배너쪽 코드입니다.
+// 실제 안다르에 사용되고 있는 배너쪽 코드입니다. (테스트 스킨 auth 아님)
 const adcioInstanceBanner = new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
 });
