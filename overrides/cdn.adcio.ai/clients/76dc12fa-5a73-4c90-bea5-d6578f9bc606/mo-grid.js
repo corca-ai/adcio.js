@@ -1,8 +1,9 @@
-// MO Test Skin 코드! - 2월 26일 최종 업데이트
-
 /**
  * @typedef {(Omit<Customer,'id'>&{customerId:Pick<Customer,'id'>}) | {}} CustomerWithId
  */
+
+const MO_GRID_PLACEMENT_ID = "f77b43c0-6062-4801-950d-104747aa349d";
+const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
 
 const CATEGORY_IDS = {
   total: "2017",
@@ -12,42 +13,10 @@ const CATEGORY_IDS = {
   acc: "2026",
 };
 
-const MO_GRID_PLACEMENT_ID = "f77b43c0-6062-4801-950d-104747aa349d";
-const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
-
-console.log("MO ADCIO sdk start!");
-const adcioInstance = new adcio.Adcio({
+console.log("MO GRID ADCIO sdk start!");
+const adcioInstanceGrid = new adcio.Adcio({
   clientId: CLIENT_ID,
 });
-
-/**
- * @param {Array<FetchActivePlacementsResponseDto>} placements
- * @param {CustomerWithId} customer
- * @param {Array<string>} allIdOnStore
- * @returns {Promise<Array<SuggestionResponseDto | SuggestionProductsResponseDto>>}
- */
-const createAllSuggestions = (placements, customer, allIdOnStore) => {
-  return Promise.allSettled(
-    placements?.map(async (placement) => {
-      const params = {
-        ...customer,
-        placementId: placement.id,
-      };
-      //PRODUCT(GRID)
-      if (placement.id === MO_GRID_PLACEMENT_ID) {
-        return adcioInstance.createSuggestionProducts({
-          categoryIdOnStore: CATEGORY_IDS.total,
-          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
-          ...params,
-        });
-      }
-      //BANNER
-      return adcioInstance.createSuggestion({
-        ...params,
-      });
-    }),
-  );
-};
 
 /**
  * @param {SuggestionProductsDto} product
@@ -266,122 +235,6 @@ const productToElement = (product, categoryId) => {
 };
 
 /**
- * @param {SuggestionDto['banner']} banner
- * @returns {HTMLElement}
- */
-const bannerToElement = (banner) => {
-  return adcio.createNestedElement({
-    tag: "li",
-    classList: ["swiper-slide", "lazyload"],
-    attributes: { "df-banner-clone": "" },
-    children: [
-      {
-        tag: "div",
-        classList: ["banner_item_area"],
-        attributes:
-          banner.type === "video"
-            ? {
-                "data-type": "df-bannermanager-type_iframe",
-                style: "transform: scale(1.099315);",
-              }
-            : {
-                "data-type": "df-bannermanager-type_image",
-              },
-        children: [
-          {
-            tag: "div",
-            classList: ["banner_item_wrap"],
-            children: [
-              banner.type === "image"
-                ? {
-                    tag: "img",
-                    attributes: {
-                      src: banner.creative.mediaUrl,
-                      alt: banner.data.title,
-                    },
-                  }
-                : {
-                    tag: "iframe",
-                    attributes: {
-                      src: banner.creative.mediaUrl,
-                      width: "100%",
-                      height: "100%",
-                      frameborder: "0",
-                      allow: "autoplay",
-                    },
-                  },
-            ],
-          },
-        ],
-      },
-      {
-        tag: "a",
-        classList: ["link_box"],
-        attributes: { href: banner.url },
-        children: [
-          {
-            tag: "div",
-            classList: ["text_box"],
-            attributes: { style: "opacity: 1; white-space: pre;" },
-            children: [
-              ...(banner.data.title
-                ? [
-                    {
-                      tag: "p",
-                      classList: ["main_title", "fc_wht"],
-                      attributes: { style: `color: ${banner.data.titleColor}` },
-                      children: [
-                        {
-                          tag: "span",
-                          classList: ["fontB"],
-                          textContent: banner.data.title,
-                        },
-                      ],
-                    },
-                  ]
-                : []),
-              ...(banner.data.subtitle
-                ? [
-                    {
-                      tag: "p",
-                      classList: ["sub_title", "fc_wht"],
-                      attributes: {
-                        style: `color: ${banner.data.subtitleColor}`,
-                      },
-                      textContent: banner.data.subtitle,
-                    },
-                  ]
-                : []),
-              ...(banner.data.description
-                ? [
-                    {
-                      tag: "p",
-                      classList: ["sub_title2", "fc_wht"],
-                      attributes: {
-                        style: `color: ${banner.data.descriptionColor}`,
-                      },
-                      textContent: banner.data.description,
-                    },
-                  ]
-                : []),
-            ],
-          },
-        ],
-      },
-    ],
-  });
-};
-
-/**
- * @param {Array<HTMLElement>} elements
- * @param {string} selectors
- */
-const appendChildForSelected = (elements, selectors) => {
-  const wrapper = document.querySelector(selectors);
-  elements.forEach((e) => wrapper.appendChild(e));
-};
-
-/**
  * @returns {placements : Array<FetchActivePlacementsResponseDto>, customer: CustomerWithId}
  */
 const getPlacementsAndCustomer = async () => {
@@ -389,7 +242,7 @@ const getPlacementsAndCustomer = async () => {
     name: "path_role",
   })}`;
 
-  const placements = await adcioInstance.fetchPlacements({ pageName });
+  const placements = await adcioInstanceGrid.fetchPlacements({ pageName });
   if (!placements.length) {
     return;
   }
@@ -452,36 +305,6 @@ const insertElementsForGrid = (newElements, displayPositions) => {
 };
 
 /**
- * @param {Array<SuggestionResponseDto | SuggestionProductsResponseDto>} suggestedData
- */
-const injectBannerSuggestions = (suggestedData) => {
-  const { suggestions } = suggestedData;
-
-  const elements = suggestions.map((suggestion) => {
-    const element = bannerToElement(suggestion.banner);
-
-    element.addEventListener("click", () =>
-      adcioInstance.onClick(suggestion.logOptions),
-    );
-    element.addEventListener("impression", () =>
-      adcioInstance.onImpression(suggestion.logOptions),
-    );
-    adcioInstance.observeImpression({
-      element,
-      filter: (e) => e.classList.contains("swiper-slide-active"),
-    });
-
-    return element;
-  });
-
-  adcio
-    .waitForElement(".df-bannermanager-main-visual-mo > ul > li > a")
-    .then(() =>
-      appendChildForSelected(elements, ".df-bannermanager-main-visual-mo > ul"),
-    );
-};
-
-/**
  * @param {SuggestionProductsResponseDto} suggestedData
  * @param {string} categoryId
  */
@@ -492,12 +315,12 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
     const element = productToElement(suggestion.product, categoryId); //TODO: fix index
 
     element.addEventListener("click", () =>
-      adcioInstance.onClick(suggestion.logOptions),
+      adcioInstanceGrid.onClick(suggestion.logOptions),
     );
     element.addEventListener("impression", () =>
-      adcioInstance.onImpression(suggestion.logOptions),
+      adcioInstanceGrid.onImpression(suggestion.logOptions),
     );
-    adcioInstance.observeImpression({
+    adcioInstanceGrid.observeImpression({
       element,
     });
 
@@ -577,30 +400,21 @@ const run = async () => {
     return;
   }
 
-  const allSuggestions = {
-    BANNER: null,
-    GRID: null,
-  };
-  const allPromises = await createAllSuggestions(
-    placements,
-    customer,
-    allIdOnStore,
-  );
-  allPromises.forEach(
-    (p) =>
-      p.status === "fulfilled" &&
-      Object.assign(allSuggestions, { [p.value.placement.type]: p.value }),
-  );
-
-  if (allSuggestions.BANNER) {
-    await adcio.waitForDOM();
-    injectBannerSuggestions(allSuggestions.BANNER);
-  }
-  if (allSuggestions.GRID) {
-    await injectGridSuggestions(allSuggestions.GRID, CATEGORY_IDS.total);
-    await createOrFixRankElement();
-  }
-  document.querySelector(`#monthly-best`).style.visibility = "visible";
+  adcioInstanceGrid
+    .createSuggestionProducts({
+      categoryIdOnStore: CATEGORY_IDS.total,
+      excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
+      placementId: MO_GRID_PLACEMENT_ID,
+      ...customer,
+    })
+    .then(async (suggested) => {
+      await injectGridSuggestions(suggested, CATEGORY_IDS.total);
+      await createOrFixRankElement();
+    })
+    .finally(
+      async () =>
+        (document.querySelector("#monthly-best").style.visibility = "visible"),
+    );
 
   // Observe Grid List Changes and inject product suggestions
   const targetElement = document.querySelector("#monthly-best");
@@ -619,7 +433,7 @@ const run = async () => {
         ) || CATEGORY_IDS.total;
       const allIdOnStore = await getAllIdOnStoreInElement();
 
-      adcioInstance
+      adcioInstanceGrid
         .createSuggestionProducts({
           categoryIdOnStore: categoryId,
           excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
@@ -642,9 +456,7 @@ const run = async () => {
 
   const observer = new MutationObserver(mutationCallback);
   observer.observe(targetElement, observeOptions);
-  window.addEventListener("beforeunload", () => {
-    observer.disconnect();
-  });
+  window.addEventListener("beforeunload", () => observer.disconnect());
 };
 
 run()
@@ -653,5 +465,5 @@ run()
     document.querySelector("#monthly-best").style.visibility = "visible";
 
     //Collect Logs
-    // adcioInstance.collectLogs(adcio.clientApi.cafe24); //error occurs in getCatList
+    adcioInstanceGrid.collectLogs(adcio.clientApi.cafe24);
   });
