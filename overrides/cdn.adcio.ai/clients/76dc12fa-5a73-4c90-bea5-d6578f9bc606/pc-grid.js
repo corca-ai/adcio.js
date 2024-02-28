@@ -36,7 +36,7 @@ const productToElement = (product, categoryId) => {
   return adcio.createNestedElement({
     tag: "div",
     classList: ["common_prd_list", "swiper-slide", "xans-record-"],
-    attributes: { "vreview-dom-embeded": false, "data-adcio-id": true }, //Adcio attribute to disctinct ADCIO elements from others.
+    attributes: { "vreview-dom-embeded": false, "data-adcio-id": product.id }, //Adcio attribute to disctinct ADCIO elements from others.
     children: [
       {
         tag: "div",
@@ -259,39 +259,14 @@ const getCustomer = async () => {
  */
 const swapElementsForGrid = (newElements, displayPositions) => {
   const originalElements = document.querySelectorAll(
-    "#monthly-best > div > .prd_basic > .swiper-slide",
-  );
-
-  originalElements.forEach((element, index) => {
-    if (displayPositions.includes(index + 1) && newElements.length) {
-      const newElement = newElements.shift();
-      element.replaceWith(newElement);
-    }
-  });
-};
-
-/**
- * @param {Array<Element>} newElements
- * @param {Array<number>} displayPositions
- */
-const insertElementsForGrid = (newElements, displayPositions) => {
-  const originalElements = document.querySelectorAll(
     "#monthly-best > div > .prd_basic > .common_prd_list",
   );
-  const originElementsArr = [...originalElements];
 
   originalElements.forEach((element, index) => {
     if (displayPositions.includes(index + 1) && newElements.length) {
       const newElement = newElements.shift();
       element.replaceWith(newElement);
-      return;
     }
-
-    if (!originElementsArr.length) {
-      return;
-    }
-    const elementToBeInserted = originElementsArr.shift();
-    element.replaceWith(elementToBeInserted);
   });
 };
 
@@ -317,16 +292,7 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
     return element;
   });
 
-  if (
-    document.querySelectorAll(
-      "#monthly-best > div > .prd_basic > [data-adcio-id]",
-    ).length > 0
-  ) {
-    swapElementsForGrid(elements, placement.displayPositions);
-    return;
-  }
-
-  insertElementsForGrid(elements, placement.displayPositions);
+  swapElementsForGrid(elements, placement.displayPositions);
 };
 
 /**
@@ -434,12 +400,21 @@ const run = async () => {
   await adcio.waitForElement("#mainBest");
 
   let customer;
-  await withHidden("#mainBest", async () => {
-    customer = await getCustomer();
-    await injectGrid(customer);
-  });
+  const page = adcio.getMeta({ name: "path_role" });
 
-  watchGrid(() => injectGrid(customer));
+  if (page === "MAIN") {
+    // 메인 페이지
+    await withHidden("#mainBest", async () => {
+      customer = await getCustomer();
+      await injectGrid(customer);
+    });
+    watchGrid(() => injectGrid(customer));
+  } else if (
+    page === "PRODUCT_LIST" &&
+    adcio.getMeta({ name: "description" }) === "베스트"
+  ) {
+    // 베스트 카테고리 페이지
+  }
 };
 
 run().then(() => console.log("ADCIO done"));
