@@ -85,7 +85,8 @@ export class AdcioPlacement {
     try {
       const { data } = await new SuggestionApi(
         this.apiConfig,
-      ).suggestionControllerSuggestProducts({
+      ).suggestionControllerRecommendProducts({
+        clientId: this.adcioCore.getClientId(),
         customerId: this.adcioCore.getCustomerId(),
         sessionId: this.adcioCore.getSessionId(),
         deviceId: this.adcioCore.getDeviceId(),
