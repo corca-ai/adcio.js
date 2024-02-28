@@ -204,6 +204,36 @@ const productToElement = (suggestion, categoryId) => {
   });
 };
 
+const elementToProduct = (element) => {
+  const sellPrice = Number(
+    element
+      .querySelector(".price .sell_prc")
+      .textContent.replace(/[^0-9]/g, ""),
+  );
+  const salePrice = Number(
+    element
+      .querySelector(".price .sale_prc")
+      ?.textContent.replace(/[^0-9]/g, "") || 0,
+  );
+  const customerPrice = Number(
+    element
+      .querySelector(".price .customer_prc")
+      ?.textContent.replace(/[^0-9]/g, "") || 0,
+  );
+  return {
+    idOnStore: getProductIdFromElement(element),
+    name: element.querySelector("p.name").textContent.trim(),
+    additionalImages: [element.querySelector(".prdimg > a > img").src],
+    additionalInformation: Array.from(element.querySelectorAll(".textBox")).map(
+      (el) => ({ key: "custom_option9", value: el.textContent.trim() }),
+    ),
+    price: customerPrice ? customerPrice : sellPrice,
+    discountPrice: customerPrice ? sellPrice : salePrice,
+  };
+};
+
+const productToProductListElement = productToElement;
+
 const handleCategory = async (categoryId) => {
   if (!Object.values(CATEGORY_IDS).includes(categoryId)) {
     return;
@@ -211,7 +241,7 @@ const handleCategory = async (categoryId) => {
 
   const swapped = getSwappedProduct();
   const wrapper = await adcio.waitForElement(
-    ".xans-product-normalpackage > .xans-product-listnormal > ul.prd_basic",
+    ".common_prd > .xans-product-listnormal > ul.prd_basic",
   );
   swapped.forEach(({ suggestion, original }) => {
     adcio
