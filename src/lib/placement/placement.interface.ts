@@ -31,6 +31,6 @@ export type AdcioPlacementCreateSuggestionProductsParams = Pick<
   | "birthYear"
   | "gender"
   | "area"
-  | "categoryIdOnStore"
+  | "categoryId"
   | "excludingProductIds"
 >;
