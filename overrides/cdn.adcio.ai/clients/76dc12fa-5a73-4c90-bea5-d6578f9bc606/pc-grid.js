@@ -12,11 +12,9 @@ const CATEGORY_IDS = {
 
 // Andar test skin
 const PC_GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
-const CLIENT_ID = "76dc12fa-5a73-4c90-bea5-d6578f9bc606";
 
-console.log("PC Grid sdk !");
 const adcioInstanceGrid = new adcio.Adcio({
-  clientId: CLIENT_ID,
+  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
 });
 
 /**
@@ -244,16 +242,7 @@ const productToElement = (product, categoryId) => {
 /**
  * @returns {placements : Array<FetchActivePlacementsResponseDto>, customer: CustomerWithId}
  */
-const getPlacementsAndCustomer = async () => {
-  const pageName = `skin159_${adcio.getMeta({
-    name: "path_role",
-  })}`;
-
-  const placements = await adcioInstanceGrid.fetchPlacements({ pageName });
-  if (!placements.length) {
-    return;
-  }
-
+const getCustomer = async () => {
   let customer = {};
   try {
     const { id, ...rest } = await adcio.clientApi.cafe24.getCustomer();
@@ -261,7 +250,7 @@ const getPlacementsAndCustomer = async () => {
   } catch (e) {
     customer = {};
   }
-  return { placements, customer };
+  return customer;
 };
 
 /**
@@ -269,10 +258,9 @@ const getPlacementsAndCustomer = async () => {
  * @param {Array<number>} displayPositions
  */
 const swapElementsForGrid = (newElements, displayPositions) => {
-  const originalElements = document
-    .querySelector(`#monthly-best`)
-    .querySelector(`.prd_basic`)
-    .querySelectorAll(".swiper-slide");
+  const originalElements = document.querySelectorAll(
+    "#monthly-best > div > .prd_basic > .swiper-slide",
+  );
 
   originalElements.forEach((element, index) => {
     if (displayPositions.includes(index + 1) && newElements.length) {
@@ -287,10 +275,9 @@ const swapElementsForGrid = (newElements, displayPositions) => {
  * @param {Array<number>} displayPositions
  */
 const insertElementsForGrid = (newElements, displayPositions) => {
-  originalElements = document
-    .querySelector("#monthly-best")
-    .querySelector(`.prd_basic`)
-    .querySelectorAll(".common_prd_list");
+  const originalElements = document.querySelectorAll(
+    "#monthly-best > div > .prd_basic > .common_prd_list",
+  );
   const originElementsArr = [...originalElements];
 
   originalElements.forEach((element, index) => {
@@ -331,10 +318,9 @@ const injectGridSuggestions = (suggestedData, categoryId) => {
   });
 
   if (
-    document
-      .querySelector("#monthly-best")
-      .querySelector(`.prd_basic`)
-      .querySelectorAll("[data-adcio-id]").length
+    document.querySelectorAll(
+      "#monthly-best > div > .prd_basic > [data-adcio-id]",
+    ).length > 0
   ) {
     swapElementsForGrid(elements, placement.displayPositions);
     return;
@@ -359,11 +345,9 @@ const getCategoryIdFromHTML = (html) => {
 /**
  * @returns {Array<string>}
  */
-const getAllIdOnStoreInElement = () => {
+const getAllProductIds = () => {
   const idOnStores = [];
-  const elements = document
-    .querySelector("#monthly-best")
-    .querySelector(".prd_basic");
+  const elements = document.querySelector("#monthly-best > div > .prd_basic");
   elements.childNodes.forEach((element) => {
     if (!element.id) {
       return;
@@ -377,10 +361,8 @@ const getAllIdOnStoreInElement = () => {
   return idOnStores;
 };
 
-const createOrFixRankElement = () => {
-  const elements = document
-    .querySelector("#monthly-best")
-    .querySelectorAll(".img");
+const createOrFixRankBadge = () => {
+  const elements = document.querySelectorAll("#monthly-best > * .img");
   elements.forEach((element, index) => {
     if (element.querySelector(".rankBadge") == null) {
       const rankBadge = document.createElement("span");
@@ -391,85 +373,73 @@ const createOrFixRankElement = () => {
   });
 };
 
-const run = async () => {
-  await adcio.waitForElement("#mainBest");
-  document.querySelector(`#mainBest`).style.visibility = "hidden";
-  const allIdOnStore = await getAllIdOnStoreInElement();
+const hide = (selector) => {
+  document.querySelector(selector).style.visibility = "hidden";
+};
 
-  const { placements, customer } = await getPlacementsAndCustomer();
-  if (!placements.length) {
-    return;
+const show = (selector) => {
+  document.querySelector(selector).style.visibility = "visible";
+};
+
+const withHidden = async (selector, fn) => {
+  hide(selector);
+  try {
+    await fn();
+  } catch (e) {
+    console.error(e);
+  } finally {
+    show(selector);
   }
+};
 
-  adcioInstanceGrid
-    .createSuggestionProducts({
+const injectGrid = (customer) =>
+  withHidden("#monthly-best > div > .prd_basic", async () => {
+    const categoryId =
+      getCategoryIdFromHTML(
+        document.querySelector("#monthly-best")?.innerHTML,
+      ) || CATEGORY_IDS.total;
+    const allIdOnStore = getAllProductIds();
+
+    const suggested = await adcioInstanceGrid.createSuggestionProducts({
       ...customer,
-      categoryIdOnStore: CATEGORY_IDS.total,
+      categoryIdOnStore: categoryId,
       placementId: PC_GRID_PLACEMENT_ID,
-      excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
-    })
-    .then(async (suggested) => {
-      await injectGridSuggestions(suggested, CATEGORY_IDS.total);
-      await createOrFixRankElement();
-    })
-    .finally(
-      () =>
-        (document
-          .querySelector("#monthly-best")
-          .querySelector(".prd_basic").style.visibility = "visible"),
-    );
+      excludingProductIds: allIdOnStore,
+    });
+    injectGridSuggestions(suggested, categoryId);
+    createOrFixRankBadge();
+  });
 
-  // Observe Grid List elements changes and inject product suggestions(+fix rank badges).
+const watchGrid = (callback) => {
   const targetElement = document.querySelector("#monthly-best");
   const observeOptions = {
     childList: true,
   };
-  const mutationCallback = async (mutationsList, observer) => {
+
+  const observer = new MutationObserver((mutationsList, observer) => {
     observer.disconnect();
 
     if (mutationsList.find((m) => m.type === "childList")) {
-      document
-        .querySelector("#monthly-best")
-        .querySelector(`.prd_basic`).style.visibility = "hidden";
-
-      const categoryId =
-        getCategoryIdFromHTML(
-          document.querySelector("#monthly-best")?.innerHTML,
-        ) || CATEGORY_IDS.total;
-      const allIdOnStore = await getAllIdOnStoreInElement();
-
-      adcioInstanceGrid
-        .createSuggestionProducts({
-          ...customer,
-          categoryIdOnStore: categoryId,
-          placementId: PC_GRID_PLACEMENT_ID,
-          excludingProductIds: allIdOnStore?.map((id) => `${CLIENT_ID}:${id}`),
-        })
-        .then(async (suggested) => {
-          await injectGridSuggestions(suggested, categoryId);
-          await createOrFixRankElement();
-        })
-        .finally(
-          () =>
-            (document
-              .querySelector("#monthly-best")
-              .querySelector(".prd_basic").style.visibility = "visible"),
-        );
+      callback();
     }
 
     observer.observe(targetElement, observeOptions);
-  };
+  });
 
-  const observer = new MutationObserver(mutationCallback);
   observer.observe(targetElement, observeOptions);
   window.addEventListener("beforeunload", () => observer.disconnect());
 };
 
-run()
-  .then(() => console.log("ADCIO done"))
-  .finally(() => {
-    document.querySelector(`#mainBest`).style.visibility = "visible";
+const run = async () => {
+  await adcio.waitForElement("#mainBest");
 
-    //Collect Logs
-    adcioInstanceGrid.collectLogs(adcio.clientApi.cafe24);
+  let customer;
+  await withHidden("#mainBest", async () => {
+    customer = await getCustomer();
+    await injectGrid(customer);
   });
+
+  watchGrid(() => injectGrid(customer));
+};
+
+run().then(() => console.log("ADCIO done"));

@@ -463,7 +463,4 @@ run()
   .then(() => console.log("MO ADCIO sdk end!"))
   .finally(() => {
     document.querySelector("#monthly-best").style.visibility = "visible";
-
-    //Collect Logs
-    adcioInstanceGrid.collectLogs(adcio.clientApi.cafe24);
   });

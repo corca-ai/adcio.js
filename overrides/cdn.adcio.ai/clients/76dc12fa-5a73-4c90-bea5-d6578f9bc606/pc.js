@@ -7,7 +7,6 @@ document.write(
 );
 
 //Collect Logs
-const adcioInstance = new adcio.Adcio({
+new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
-});
-adcioInstance.collectLogs(adcio.clientApi.cafe24);
+}).collectLogs(adcio.clientApi.cafe24);
