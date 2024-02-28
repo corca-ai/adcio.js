@@ -35,7 +35,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "./src/index.ts"),
-      formats: ["es", "cjs", "iife"],
+      formats: ["es", "iife"],
       name: "adcio",
       fileName: "index",
     },
