@@ -534,7 +534,6 @@ const getSwappedProduct = () => {
  * @param {string} categoryId
  */
 const swapElement = (originalElement, newElement, logOptions) => {
-  console.log(originalElement, newElement, logOptions);
   newElement.addEventListener("click", () =>
     adcioInstanceGrid.onClick(logOptions),
   );
