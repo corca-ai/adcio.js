@@ -1,10 +1,3 @@
-// 실제 안다르에 사용되고 있는 배너쪽 코드입니다. (테스트 스킨 auth 아님)
-const MO_GRID_PLACEMENT_ID = "e945a115-c3c5-4575-8d01-b9d8565063fe";
-
-const adcioInstanceBanner = new adcio.Adcio({
-  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
-});
-
 const bannerToElement = (banner) => {
   return adcio.createNestedElement({
     tag: "div",
@@ -84,28 +77,21 @@ const bannerToElement = (banner) => {
 };
 
 const injectSuggestions = async () => {
-  let customer = {};
-  try {
-    const { id, ...rest } = await adcio.clientApi.cafe24.getCustomer();
-    customer = { ...rest, customerId: id };
-  } catch (e) {
-    customer = {};
-  }
-
-  const { suggestions } = await adcioInstanceBanner.createSuggestion({
+  const customer = await getCustomer();
+  const { suggestions } = await adcioInstance.createSuggestion({
     ...customer,
-    placementId: MO_GRID_PLACEMENT_ID,
+    placementId: PC_BANNER_PLACEMENT_ID,
   });
 
   const elements = suggestions.map((suggestion) => {
     const element = bannerToElement(suggestion.banner);
     element.addEventListener("click", () =>
-      adcioInstanceBanner.onClick(suggestion.logOptions),
+      adcioInstance.onClick(suggestion.logOptions),
     );
     element.addEventListener("impression", () =>
-      adcioInstanceBanner.onImpression(suggestion.logOptions),
+      adcioInstance.onImpression(suggestion.logOptions),
     );
-    adcioInstanceBanner.observeImpression({
+    adcioInstance.observeImpression({
       element,
       filter: (e) => e.classList.contains("swiper-slide-active"),
     });
@@ -124,5 +110,4 @@ const injectSuggestions = async () => {
 
 adcio.waitForDOM().then(() => {
   injectSuggestions();
-  adcioInstanceBanner.collectLogs(adcio.clientApi.cafe24);
 });

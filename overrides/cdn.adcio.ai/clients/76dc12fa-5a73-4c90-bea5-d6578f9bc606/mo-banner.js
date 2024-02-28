@@ -1,7 +1,3 @@
-const adcioInstanceBanner = new adcio.Adcio({
-  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
-});
-
 const bannerToElement = (banner) => {
   return adcio.createNestedElement({
     tag: "li",
@@ -106,36 +102,22 @@ const bannerToElement = (banner) => {
 };
 
 const injectSuggestions = async () => {
-  const pageName = `mobile147_${adcio.getMeta({
-    name: "path_role",
-  })}`;
-  const [placement] = await adcioInstanceBanner.fetchPlacements({ pageName });
-  if (!placement) {
-    return;
-  }
+  let customer = await getCustomer();
 
-  let customer = {};
-  try {
-    const { id, ...rest } = await adcio.clientApi.cafe24.getCustomer();
-    customer = { ...rest, customerId: id };
-  } catch (e) {
-    customer = {};
-  }
-
-  const { suggestions } = await adcioInstanceBanner.createSuggestion({
+  const { suggestions } = await adcioInstance.createSuggestion({
     ...customer,
-    placementId: placement.id,
+    placementId: MO_BANNER_PLACEMENT_ID,
   });
 
   const elements = suggestions.map((suggestion) => {
     const element = bannerToElement(suggestion.banner);
     element.addEventListener("click", () =>
-      adcioInstanceBanner.onClick(suggestion.logOptions),
+      adcioInstance.onClick(suggestion.logOptions),
     );
     element.addEventListener("impression", () =>
-      adcioInstanceBanner.onImpression(suggestion.logOptions),
+      adcioInstance.onImpression(suggestion.logOptions),
     );
-    adcioInstanceBanner.observeImpression({
+    adcioInstance.observeImpression({
       element,
       filter: (e) => e.classList.contains("swiper-slide-active"),
     });
