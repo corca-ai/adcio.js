@@ -1244,13 +1244,13 @@ export interface CreatePlacementDto {
      * @type {number}
      * @memberof CreatePlacementDto
      */
-    'minDisplayCount': number;
+    'minDisplayCount': number | null;
     /**
      * 
      * @type {number}
      * @memberof CreatePlacementDto
      */
-    'maxDisplayCount': number;
+    'maxDisplayCount': number | null;
     /**
      * 
      * @type {PlacementInjectorDto}
@@ -1263,6 +1263,12 @@ export interface CreatePlacementDto {
      * @memberof CreatePlacementDto
      */
     'displayPositions'?: Array<number>;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof CreatePlacementDto
+     */
+    'tableSize'?: Array<number> | null;
 }
 
 export const CreatePlacementDtoTypeEnum = {
@@ -3143,13 +3149,19 @@ export interface SuggestionProductsRequestDto {
      */
     'area'?: string;
     /**
-     * The category id on store for filtering adsets.
+     * The category id(on store) for filtering adsets.
      * @type {string}
      * @memberof SuggestionProductsRequestDto
      */
-    'categoryIdOnStore'?: string;
+    'categoryId'?: string;
     /**
-     * Product IDs that should NOT be included in the suggestion.
+     * Identifier for the request client.
+     * @type {string}
+     * @memberof SuggestionProductsRequestDto
+     */
+    'clientId': string;
+    /**
+     * Product IDs(on store) that should NOT be included in the suggestion.
      * @type {Array<string>}
      * @memberof SuggestionProductsRequestDto
      */
@@ -3249,11 +3261,11 @@ export interface SuggestionRequestDto {
      */
     'area'?: string;
     /**
-     * The category id on store for filtering adsets.
+     * The category id(on store) for filtering adsets.
      * @type {string}
      * @memberof SuggestionRequestDto
      */
-    'categoryIdOnStore'?: string;
+    'categoryId'?: string;
 }
 
 export const SuggestionRequestDtoGenderEnum = {
@@ -3603,6 +3615,12 @@ export interface UpdatePlacementDto {
      * @memberof UpdatePlacementDto
      */
     'displayPositions'?: Array<number>;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof UpdatePlacementDto
+     */
+    'tableSize'?: Array<number> | null;
 }
 /**
  * 
@@ -5770,6 +5788,78 @@ export class ProductApi extends BaseAPI {
 export const SuggestionApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Fetch a personalized suggestion banners.
+         * @summary 
+         * @param {SuggestionRequestDto} suggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        suggestionControllerRecommendBanners: async (suggestionRequestDto: SuggestionRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'suggestionRequestDto' is not null or undefined
+            assertParamExists('suggestionControllerRecommendBanners', 'suggestionRequestDto', suggestionRequestDto)
+            const localVarPath = `/recommendations/banners`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(suggestionRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Fetch a personalized suggest product.
+         * @summary 
+         * @param {SuggestionProductsRequestDto} suggestionProductsRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        suggestionControllerRecommendProducts: async (suggestionProductsRequestDto: SuggestionProductsRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'suggestionProductsRequestDto' is not null or undefined
+            assertParamExists('suggestionControllerRecommendProducts', 'suggestionProductsRequestDto', suggestionProductsRequestDto)
+            const localVarPath = `/recommendations/products`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(suggestionProductsRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Fetch a personalized suggestion.
          * @summary 
          * @param {SuggestionRequestDto} suggestionRequestDto 
@@ -5805,42 +5895,6 @@ export const SuggestionApiAxiosParamCreator = function (configuration?: Configur
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * Fetch a personalized suggest product.
-         * @summary 
-         * @param {SuggestionProductsRequestDto} suggestionProductsRequestDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        suggestionControllerSuggestProducts: async (suggestionProductsRequestDto: SuggestionProductsRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'suggestionProductsRequestDto' is not null or undefined
-            assertParamExists('suggestionControllerSuggestProducts', 'suggestionProductsRequestDto', suggestionProductsRequestDto)
-            const localVarPath = `/suggestion-products`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(suggestionProductsRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -5852,14 +5906,14 @@ export const SuggestionApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SuggestionApiAxiosParamCreator(configuration)
     return {
         /**
-         * Fetch a personalized suggestion.
+         * Fetch a personalized suggestion banners.
          * @summary 
          * @param {SuggestionRequestDto} suggestionRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async suggestionControllerSuggest(suggestionRequestDto: SuggestionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SuggestionResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.suggestionControllerSuggest(suggestionRequestDto, options);
+        async suggestionControllerRecommendBanners(suggestionRequestDto: SuggestionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SuggestionResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.suggestionControllerRecommendBanners(suggestionRequestDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5869,8 +5923,19 @@ export const SuggestionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async suggestionControllerSuggestProducts(suggestionProductsRequestDto: SuggestionProductsRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SuggestionProductsResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.suggestionControllerSuggestProducts(suggestionProductsRequestDto, options);
+        async suggestionControllerRecommendProducts(suggestionProductsRequestDto: SuggestionProductsRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SuggestionProductsResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.suggestionControllerRecommendProducts(suggestionProductsRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Fetch a personalized suggestion.
+         * @summary 
+         * @param {SuggestionRequestDto} suggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async suggestionControllerSuggest(suggestionRequestDto: SuggestionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SuggestionResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.suggestionControllerSuggest(suggestionRequestDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -5884,14 +5949,14 @@ export const SuggestionApiFactory = function (configuration?: Configuration, bas
     const localVarFp = SuggestionApiFp(configuration)
     return {
         /**
-         * Fetch a personalized suggestion.
+         * Fetch a personalized suggestion banners.
          * @summary 
          * @param {SuggestionRequestDto} suggestionRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        suggestionControllerSuggest(suggestionRequestDto: SuggestionRequestDto, options?: any): AxiosPromise<SuggestionResponseDto> {
-            return localVarFp.suggestionControllerSuggest(suggestionRequestDto, options).then((request) => request(axios, basePath));
+        suggestionControllerRecommendBanners(suggestionRequestDto: SuggestionRequestDto, options?: any): AxiosPromise<SuggestionResponseDto> {
+            return localVarFp.suggestionControllerRecommendBanners(suggestionRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Fetch a personalized suggest product.
@@ -5900,8 +5965,18 @@ export const SuggestionApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        suggestionControllerSuggestProducts(suggestionProductsRequestDto: SuggestionProductsRequestDto, options?: any): AxiosPromise<SuggestionProductsResponseDto> {
-            return localVarFp.suggestionControllerSuggestProducts(suggestionProductsRequestDto, options).then((request) => request(axios, basePath));
+        suggestionControllerRecommendProducts(suggestionProductsRequestDto: SuggestionProductsRequestDto, options?: any): AxiosPromise<SuggestionProductsResponseDto> {
+            return localVarFp.suggestionControllerRecommendProducts(suggestionProductsRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Fetch a personalized suggestion.
+         * @summary 
+         * @param {SuggestionRequestDto} suggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        suggestionControllerSuggest(suggestionRequestDto: SuggestionRequestDto, options?: any): AxiosPromise<SuggestionResponseDto> {
+            return localVarFp.suggestionControllerSuggest(suggestionRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5914,15 +5989,15 @@ export const SuggestionApiFactory = function (configuration?: Configuration, bas
  */
 export class SuggestionApi extends BaseAPI {
     /**
-     * Fetch a personalized suggestion.
+     * Fetch a personalized suggestion banners.
      * @summary 
      * @param {SuggestionRequestDto} suggestionRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SuggestionApi
      */
-    public suggestionControllerSuggest(suggestionRequestDto: SuggestionRequestDto, options?: AxiosRequestConfig) {
-        return SuggestionApiFp(this.configuration).suggestionControllerSuggest(suggestionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public suggestionControllerRecommendBanners(suggestionRequestDto: SuggestionRequestDto, options?: AxiosRequestConfig) {
+        return SuggestionApiFp(this.configuration).suggestionControllerRecommendBanners(suggestionRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5933,8 +6008,20 @@ export class SuggestionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SuggestionApi
      */
-    public suggestionControllerSuggestProducts(suggestionProductsRequestDto: SuggestionProductsRequestDto, options?: AxiosRequestConfig) {
-        return SuggestionApiFp(this.configuration).suggestionControllerSuggestProducts(suggestionProductsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public suggestionControllerRecommendProducts(suggestionProductsRequestDto: SuggestionProductsRequestDto, options?: AxiosRequestConfig) {
+        return SuggestionApiFp(this.configuration).suggestionControllerRecommendProducts(suggestionProductsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Fetch a personalized suggestion.
+     * @summary 
+     * @param {SuggestionRequestDto} suggestionRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SuggestionApi
+     */
+    public suggestionControllerSuggest(suggestionRequestDto: SuggestionRequestDto, options?: AxiosRequestConfig) {
+        return SuggestionApiFp(this.configuration).suggestionControllerSuggest(suggestionRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
