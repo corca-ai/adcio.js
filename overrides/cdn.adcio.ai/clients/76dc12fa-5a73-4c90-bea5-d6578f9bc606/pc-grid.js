@@ -103,26 +103,11 @@ const productToElement = (suggestion, categoryId) => {
                   href: product.url,
                   "vreview-product-id": product.idOnStore,
                 },
-                children: [
-                  {
-                    tag: "div",
-                    classList: ["vreview-review-summary"],
-                    children: [
-                      {
-                        tag: "div",
-                        classList: ["vreview-row", "vreview-board-popup"],
-                        attributes: {
-                          style: "margin-top: 6px;",
-                        },
-                      },
-                    ],
-                  },
-                ],
               },
               {
                 tag: "p",
                 classList: ["model"],
-                textContent: "product.model_name",
+                textContent: "",
               },
               {
                 tag: "p",
