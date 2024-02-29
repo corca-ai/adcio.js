@@ -16,6 +16,7 @@ const SWAPPED_KEY = "adcio-swapped";
 const adcioInstance = new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
 });
+adcioInstance.collectLogs(adcio.clientApi.cafe24);
 
 const getCustomer = async () => {
   let customer = {};
@@ -217,7 +218,16 @@ const handleMain = async (wrapperSelector, gridSelector, placementId) => {
   );
 };
 
-const handleCategory = async (wrapperSelector, idToSelector, categoryId) => {
+const handleCategory = async (wrapperSelector, idToSelector) => {
+  const url = new URL(window.location.href);
+  const categoryId = url.searchParams.get("cate_no");
+  const sortMethod = url.searchParams.get("sort_method");
+
+  // 정렬이 디폴트가 아닌 경우 무시
+  if (sortMethod) {
+    return;
+  }
+
   if (!Object.values(CATEGORY_IDS).includes(categoryId)) {
     return;
   }

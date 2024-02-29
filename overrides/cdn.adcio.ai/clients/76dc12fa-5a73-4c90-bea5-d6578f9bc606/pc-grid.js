@@ -484,13 +484,10 @@ const run = async () => {
       PC_GRID_PLACEMENT_ID,
     );
   } else if (page === "PRODUCT_LIST") {
-    const categoryId = new URL(window.location.href).searchParams.get(
-      "cate_no",
-    );
-    handleCategory(
+    // 카테고리 페이지
+    await handleCategory(
       ".xans-product-normalpackage > .xans-product-listnormal > ul.prd_basic",
       (id) => `#anchorBoxId_${id}:not([adcio-request-id])`,
-      categoryId,
     );
   }
 };

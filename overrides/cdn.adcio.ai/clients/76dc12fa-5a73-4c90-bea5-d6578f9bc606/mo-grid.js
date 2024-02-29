@@ -245,14 +245,10 @@ const run = async () => {
       MO_GRID_PLACEMENT_ID,
     );
   } else if (page === "PRODUCT_LIST") {
-    const categoryId = new URL(window.location.href).searchParams.get(
-      "cate_no",
-    );
     // 카테고리 페이지
-    handleCategory(
+    await handleCategory(
       ".common_prd > .xans-product-listnormal > ul.prd_basic",
       (id) => `#anchorBoxId_${id}:not([adcio-request-id])`,
-      categoryId,
     );
   }
 };

@@ -19,6 +19,7 @@ module.exports = {
   ignorePatterns: [
     ".eslintrc.js",
     "dist",
+    "overrides",
     "webpack.config.js",
     "vitest.config.ts",
   ],

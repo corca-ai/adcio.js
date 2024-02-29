@@ -8,8 +8,3 @@ document.write(
 document.write(
   '<script src="https://cdn.adcio.ai/clients/76dc12fa-5a73-4c90-bea5-d6578f9bc606/pc-grid.js"></script>',
 );
-
-//Collect Logs
-new adcio.Adcio({
-  clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
-}).collectLogs(adcio.clientApi.cafe24);
