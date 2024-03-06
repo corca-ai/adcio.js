@@ -495,7 +495,7 @@ const run = async () => {
   if (page === "MAIN") {
     // 메인 페이지
     await handleMain(
-      "#mainBest",
+      "#monthly-best",
       "#monthly-best > div > .prd_basic",
       PC_GRID_PLACEMENT_ID,
     );
