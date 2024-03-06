@@ -147,7 +147,15 @@ const productToElement = (suggestion, categoryId) => {
                   },
                   {
                     tag: "span",
-                    classList: ["sell", ...(hasSale ? [] : ["product_price"])],
+                    classList: [
+                      "sell",
+                      ...(hasSale
+                        ? []
+                        : [
+                            "product_price",
+                            "displaynone1displaynone2displaynone",
+                          ]),
+                    ],
                     children: [
                       {
                         tag: "strong",
@@ -405,7 +413,15 @@ const productToProductListElement = (suggestion, categoryId) => {
                   },
                   {
                     tag: "span",
-                    classList: ["sell", ...(hasSale ? [] : ["product_price"])],
+                    classList: [
+                      "sell",
+                      ...(hasSale
+                        ? []
+                        : [
+                            "product_price",
+                            "displaynone1displaynone2displaynone",
+                          ]),
+                    ],
                     children: [
                       {
                         tag: "strong",
