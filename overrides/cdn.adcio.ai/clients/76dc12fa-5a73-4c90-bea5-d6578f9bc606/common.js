@@ -14,6 +14,13 @@ const MO_BANNER_PLACEMENT_ID = "0f9485ac-d132-4d87-803b-e972a884c8b3";
 const SWAPPED_KEY = "adcio-swapped";
 const CATEGORY_CHANGE_EVENT = "adcio-category-change";
 let currentCategoryId = CATEGORY_IDS["전체"];
+const suggestions = {
+  2017: null,
+  2018: null,
+  2022: null,
+  2578: null,
+  2026: null,
+};
 
 const adcioInstance = new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
@@ -75,7 +82,12 @@ const swapElement = (originalElement, newElement, logOptions) => {
  * @param {SuggestionResponseDto} suggestionResponse
  * @param {string} categoryId
  */
-const injectGridSuggestions = (selector, suggestionResponse, categoryId) => {
+const injectGridSuggestions = (
+  selector,
+  suggestionResponse,
+  categoryId,
+  logImpression,
+) => {
   const { placement, suggestions } = suggestionResponse;
 
   const wrapper = document.querySelector(selector);
@@ -90,7 +102,21 @@ const injectGridSuggestions = (selector, suggestionResponse, categoryId) => {
 
     const originalElement = originalElements[displayPosition - 1];
     const newElement = productToElement(suggestion, categoryId);
-    swapElement(originalElement, newElement, suggestion.logOptions);
+
+    newElement.addEventListener("click", () =>
+      adcioInstance.onClick(suggestion.logOptions),
+    );
+
+    if (logImpression) {
+      newElement.addEventListener("impression", () =>
+        adcioInstance.onImpression(suggestion.logOptions),
+      );
+      adcioInstance.observeImpression({
+        element: newElement,
+      });
+    }
+
+    originalElement.replaceWith(newElement);
 
     swapped.push({
       suggestion,
@@ -178,13 +204,22 @@ const withHidden = async (selector, fn) => {
 const injectGrid = (gridSelector, placementId, customer, categoryId) =>
   withHidden(gridSelector, async () => {
     const allIdOnStore = getAllProductIds(gridSelector);
-    const suggested = await adcioInstance.createSuggestionProducts({
-      ...customer,
+    let logImpression = false;
+    if (!suggestions[categoryId]) {
+      suggestions[categoryId] = await adcioInstance.createSuggestionProducts({
+        ...customer,
+        categoryId,
+        placementId,
+        excludingProductIds: allIdOnStore,
+      });
+      logImpression = true;
+    }
+    injectGridSuggestions(
+      gridSelector,
+      suggestions[categoryId],
       categoryId,
-      placementId,
-      excludingProductIds: allIdOnStore,
-    });
-    injectGridSuggestions(gridSelector, suggested, categoryId);
+      logImpression,
+    );
   });
 
 const observeCategoryChangeEvent = (wrapper) => {
@@ -238,11 +273,18 @@ const handleCategory = async (wrapperSelector, idToSelector) => {
       const originalExisting = wrapper.querySelector(
         idToSelector(original.idOnStore),
       );
-      swapElement(
-        originalExisting,
-        productToProductListElement(suggestion, categoryId),
-        suggestion.logOptions,
+      const newElement = productToProductListElement(suggestion, categoryId);
+      newElement.addEventListener("click", () =>
+        adcioInstance.onClick(suggestion.logOptions),
       );
+      newElement.addEventListener("impression", () =>
+        adcioInstance.onImpression(suggestion.logOptions),
+      );
+      adcioInstance.observeImpression({
+        element: newElement,
+      });
+
+      originalExisting.replaceWith(newElement);
     });
 
     adcio
@@ -251,12 +293,11 @@ const handleCategory = async (wrapperSelector, idToSelector) => {
         const suggestedExisting = wrapper.querySelector(
           idToSelector(suggestion.product.idOnStore),
         );
-        suggestedExisting.replaceWith(
-          productToProductListElement(
-            { product: original, logOptions: {} },
-            categoryId,
-          ),
+        const newElement = productToProductListElement(
+          { product: original, logOptions: {} },
+          categoryId,
         );
+        suggestedExisting.replaceWith(newElement);
       });
   });
 };
