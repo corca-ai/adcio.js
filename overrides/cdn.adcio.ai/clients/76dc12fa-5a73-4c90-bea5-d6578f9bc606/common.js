@@ -1,9 +1,9 @@
 const CATEGORY_IDS = {
-  total: "2017",
-  women: "2018",
-  men: "2022",
-  junior: "2578",
-  acc: "2026",
+  전체: "2017",
+  우먼즈: "2018",
+  맨즈: "2022",
+  주니어: "2578",
+  홈트용품: "2026",
 };
 
 // Andar test skin
@@ -12,6 +12,8 @@ const PC_GRID_PLACEMENT_ID = "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4";
 const PC_BANNER_PLACEMENT_ID = "e945a115-c3c5-4575-8d01-b9d8565063fe";
 const MO_BANNER_PLACEMENT_ID = "0f9485ac-d132-4d87-803b-e972a884c8b3";
 const SWAPPED_KEY = "adcio-swapped";
+const CATEGORY_CHANGE_EVENT = "adcio-category-change";
+let currentCategoryId = CATEGORY_IDS["전체"];
 
 const adcioInstance = new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
@@ -97,6 +99,7 @@ const injectGridSuggestions = (selector, suggestionResponse, categoryId) => {
   });
 
   setSwappedProduct(swapped);
+  createOrFixRankBadge();
 };
 
 /**
@@ -172,50 +175,46 @@ const withHidden = async (selector, fn) => {
   }
 };
 
-const injectGrid = (wrapperSelector, gridSelector, placementId, customer) =>
+const injectGrid = (gridSelector, placementId, customer, categoryId) =>
   withHidden(gridSelector, async () => {
-    const categoryId =
-      getCategoryIdFromHTML(
-        document.querySelector(wrapperSelector)?.innerHTML,
-      ) || CATEGORY_IDS.total;
     const allIdOnStore = getAllProductIds(gridSelector);
-
     const suggested = await adcioInstance.createSuggestionProducts({
       ...customer,
-      categoryIdOnStore: categoryId,
+      categoryId,
       placementId,
       excludingProductIds: allIdOnStore,
     });
     injectGridSuggestions(gridSelector, suggested, categoryId);
-    createOrFixRankBadge();
   });
 
-const watchGrid = (selector, callback) => {
-  const targetElement = document.querySelector(selector);
-  const observeOptions = {
-    childList: true,
-  };
-
-  const observer = new MutationObserver((mutationsList, observer) => {
-    if (mutationsList.find((m) => m.type === "childList")) {
-      callback();
+const observeCategoryChangeEvent = (wrapper) => {
+  const observer = new MutationObserver(() => {
+    const categoryId = getCategoryIdFromHTML(wrapper.innerHTML);
+    if (categoryId && categoryId !== currentCategoryId) {
+      currentCategoryId = categoryId;
+      wrapper.dispatchEvent(
+        new CustomEvent(CATEGORY_CHANGE_EVENT, { detail: { categoryId } }),
+      );
     }
   });
 
-  observer.observe(targetElement, observeOptions);
+  observer.observe(wrapper, { childList: true });
   window.addEventListener("beforeunload", () => observer.disconnect());
 };
 
 const handleMain = async (wrapperSelector, gridSelector, placementId) => {
   let customer;
-  await adcio.waitForElement(wrapperSelector);
+  const wrapper = await adcio.waitForElement(wrapperSelector);
+
   await withHidden(wrapperSelector, async () => {
     customer = await getCustomer();
-    await injectGrid(wrapperSelector, gridSelector, placementId, customer);
+    await injectGrid(gridSelector, placementId, customer, CATEGORY_IDS["전체"]);
   });
-  watchGrid(gridSelector, () =>
-    injectGrid(wrapperSelector, gridSelector, placementId, customer),
-  );
+
+  observeCategoryChangeEvent(wrapper);
+  wrapper.addEventListener(CATEGORY_CHANGE_EVENT, async (e) => {
+    await injectGrid(gridSelector, placementId, customer, e.detail.categoryId);
+  });
 };
 
 const handleCategory = async (wrapperSelector, idToSelector) => {
