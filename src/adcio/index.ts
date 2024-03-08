@@ -28,3 +28,12 @@ export {
   createElement,
   createNestedElement,
 } from "lib/utils";
+
+export {
+  ElementSelector,
+  VisualElementSelector,
+  ListedElementSelector,
+  Candidate,
+  getCssSelector,
+  dfs,
+} from "lib/selectors";
