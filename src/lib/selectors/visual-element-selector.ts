@@ -32,6 +32,7 @@ export class VisualElementSelector extends ElementSelector {
         }
 
         if (this.root && !this.root.contains(target)) {
+          this.dispatchSetCurrent(this.root);
           return;
         }
 
