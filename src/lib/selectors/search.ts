@@ -25,9 +25,14 @@ export class SearchedElement {
 
 export const dfs = (
   e: Element,
-  depth: number,
-  maxDepth?: number,
+  depth: number = 0,
+  options: { maxDepth?: number; excludeTags?: string[] } = {},
 ): SearchedElement[] => {
+  const { maxDepth, excludeTags } = options;
+  if (excludeTags && excludeTags.includes(e.tagName.toLowerCase())) {
+    return [];
+  }
+
   const result: SearchedElement[] = [new SearchedElement(e, depth)];
   if (e.children.length === 0) {
     return result;
@@ -36,7 +41,7 @@ export const dfs = (
     return result;
   }
   for (let i = 0; i < e.children.length; i++) {
-    result.push(...dfs(e.children[i], depth + 1, maxDepth));
+    result.push(...dfs(e.children[i], depth + 1, options));
   }
   return result;
 };
@@ -96,4 +101,29 @@ export const doesElementBelongToDevTool = (e: Element): boolean => {
     current = current.parentElement;
   }
   return false;
+};
+
+export const getDepth = (e: Element) => {
+  let current = e.parentElement;
+  let depth = 0;
+  while (current != null) {
+    current = current.parentElement;
+    depth++;
+  }
+  return depth;
+};
+
+export const getElementAtDepth = (leaf: Element, depth: number) => {
+  let current = leaf.parentElement;
+  const parents = [leaf];
+  while (current != null) {
+    parents.push(current);
+    current = current.parentElement;
+  }
+
+  if (parents.length <= depth) {
+    return null;
+  }
+
+  return parents[parents.length - depth - 1];
 };

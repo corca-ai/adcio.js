@@ -1,9 +1,18 @@
 import { ElementSelector } from "./element-selector";
-import { doesElementBelongToDevTool } from "./search";
+import { doesElementBelongToDevTool, getElementAtDepth } from "./search";
 
 export class VisualElementSelector extends ElementSelector {
   private mouseMoveListener: ((e: MouseEvent) => void) | null = null;
   private mouseClickListener: ((e: MouseEvent) => void) | null = null;
+
+  private depth?: number;
+  private root?: Element;
+
+  constructor(options: { depth?: number; root?: Element } = {}) {
+    super();
+    this.depth = options.depth;
+    this.root = options.root;
+  }
 
   stop() {
     if (this.mouseMoveListener) {
@@ -17,10 +26,22 @@ export class VisualElementSelector extends ElementSelector {
     let moved = false;
     return new Promise<Element | null>((resolve) => {
       this.mouseMoveListener = (e) => {
-        const target = document.elementFromPoint(e.clientX, e.clientY);
+        let target = document.elementFromPoint(e.clientX, e.clientY);
         if (!target) {
           return;
         }
+
+        if (this.root && !this.root.contains(target)) {
+          return;
+        }
+
+        if (this.depth) {
+          target = getElementAtDepth(target, this.depth);
+          if (!target) {
+            return;
+          }
+        }
+
         moved = true;
         if (doesElementBelongToDevTool(target)) {
           this.dispatchSetCurrent(null);

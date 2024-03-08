@@ -34,6 +34,8 @@ export {
   VisualElementSelector,
   ListedElementSelector,
   Candidate,
+  getDepth,
+  getElementAtDepth,
   getCssSelector,
   dfs,
 } from "lib/selectors";
