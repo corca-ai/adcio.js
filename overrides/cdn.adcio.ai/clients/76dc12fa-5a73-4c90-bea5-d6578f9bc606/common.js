@@ -25,7 +25,10 @@ const suggestions = {
 const adcioInstance = new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
 });
-adcioInstance.collectLogs(adcio.clientApi.cafe24);
+
+adcio.waitForDOM().then(() => {
+  adcioInstance.collectLogs(adcio.clientApi.cafe24);
+});
 
 const getCustomer = async () => {
   let customer = {};
