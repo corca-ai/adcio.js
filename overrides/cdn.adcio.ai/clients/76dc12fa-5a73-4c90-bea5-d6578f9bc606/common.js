@@ -21,6 +21,7 @@ const suggestions = {
   2578: null,
   2026: null,
 };
+const suggestionSessionKey = `adcio-suggestion-data-`; // suffix - categoryId
 
 const adcioInstance = new adcio.Adcio({
   clientId: "76dc12fa-5a73-4c90-bea5-d6578f9bc606",
@@ -39,6 +40,38 @@ const getCustomer = async () => {
     customer = {};
   }
   return customer;
+};
+
+/**
+ * @param {string} categoryId
+ * @param {SuggestionProductsResponseDto} productSuggestion
+ */
+const setProductSuggestionToStorage = (categoryId, productSuggestion) => {
+  const expiry = new Date();
+  expiry.setHours(expiry.getHours() + 1); //TODO: fix
+  window.sessionStorage.setItem(
+    suggestionSessionKey + categoryId,
+    JSON.stringify({ suggest: { ...productSuggestion }, expiry }),
+  );
+};
+
+/**
+ * @param {string} categoryId
+ */
+const getProductSuggestionFromStorage = (categoryId) => {
+  const unparsed = window.sessionStorage.getItem(
+    suggestionSessionKey + categoryId,
+  );
+  if (unparsed == null) {
+    return null;
+  }
+
+  const parsed = JSON.parse(unparsed);
+  if (new Date(parsed.expiry) >= Date.now()) {
+    window.sessionStorage.removeItem(suggestionSessionKey + categoryId);
+    return null;
+  }
+  return parsed.suggest;
 };
 
 /**
