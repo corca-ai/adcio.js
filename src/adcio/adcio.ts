@@ -110,13 +110,13 @@ export class Adcio {
   private async handleView(clientApi: ClientAPI): Promise<Promise<void>[]> {
     const product = await clientApi.getProduct();
     const category = await clientApi.getCategory();
-    if (!(product?.idOnStore && category?.idOnStore)) {
+    if (!product?.idOnStore && !category?.idOnStore) {
       return [];
     }
     return [
       this.onPageView({
-        productIdOnStore: product.idOnStore,
-        categoryIdOnStore: category.idOnStore,
+        productIdOnStore: product?.idOnStore,
+        categoryIdOnStore: category?.idOnStore,
       }),
     ];
   }
