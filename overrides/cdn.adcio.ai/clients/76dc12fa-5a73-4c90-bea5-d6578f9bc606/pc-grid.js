@@ -315,6 +315,34 @@ const productToProductListElement = (suggestion, categoryId) => {
                       },
                     ],
                   },
+                  ...(product.decorationImages[0]
+                    ? [
+                        {
+                          tag: "span",
+                          classList: [
+                            "xans-element-",
+                            "xans-product",
+                            "xans-product-imagestyle",
+                            "xans-record-",
+                            "left",
+                          ],
+                          children: [
+                            {
+                              tag: "span",
+                              classList: ["prdIcon", "ec-product-bgLT"],
+                              children: [
+                                {
+                                  tag: "img",
+                                  attributes: {
+                                    src: product.decorationImages[0],
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ]
+                    : []),
                 ],
               },
               {
