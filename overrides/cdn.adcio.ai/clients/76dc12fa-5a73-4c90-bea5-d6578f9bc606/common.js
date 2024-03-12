@@ -52,15 +52,22 @@ const setSwappedProduct = (replacements) => {
  * @return {Array<{ suggestion: SuggestionResponseDto; originalId: string }>}
  */
 const getSwappedProduct = () => {
-  const stored = window.sessionStorage.getItem(SWAPPED_KEY);
-  if (!stored) {
-    return [];
+  try {
+    const stored = window.sessionStorage.getItem(SWAPPED_KEY);
+    if (!stored) {
+      return { swapped: [], categoryId: null };
+    }
+    const parsed = JSON.parse(stored);
+    if (
+      parsed?.swapped &&
+      Array.isArray(parsed.swapped) &&
+      parsed?.categoryId
+    ) {
+      return parsed;
+    }
+  } catch (e) {
+    return { swapped: [], categoryId: null };
   }
-  const parsed = JSON.parse(stored);
-  if (!Array.isArray(parsed)) {
-    return [];
-  }
-  return parsed;
 };
 
 /**
@@ -127,7 +134,7 @@ const injectGridSuggestions = (
     });
   });
 
-  setSwappedProduct(swapped);
+  setSwappedProduct({ swapped, categoryId });
   createOrFixRankBadge();
 };
 
@@ -269,7 +276,11 @@ const handleCategory = async (wrapperSelector, idToSelector) => {
     return;
   }
 
-  const swapped = getSwappedProduct();
+  const { categoryId: swappedCategoryId, swapped } = getSwappedProduct();
+  if (swappedCategoryId !== categoryId) {
+    return;
+  }
+
   const wrapper = await adcio.waitForElement(wrapperSelector);
   swapped.forEach(({ suggestion, original }) => {
     adcio.waitForElement(idToSelector(original.idOnStore), wrapper).then(() => {
