@@ -8,6 +8,7 @@ import {
   AdcioConfig,
   AdcioParams,
   AdcioCreateSuggestionParams,
+  AdcioCreateSuggestionProductsParams,
   AdcioOnPageViewParams,
   AdcioOnAddToCartParams,
   AdcioOnClickParams,
@@ -81,6 +82,12 @@ export class Adcio {
     return this.adcioPlacement.createSuggestion(params);
   }
 
+  public async createSuggestionProducts(
+    params: AdcioCreateSuggestionProductsParams,
+  ) {
+    return this.adcioPlacement.createSuggestionProducts(params);
+  }
+
   public async collectLogs(clientApi: ClientAPI) {
     await clientApi.init();
 
@@ -103,13 +110,13 @@ export class Adcio {
   private async handleView(clientApi: ClientAPI): Promise<Promise<void>[]> {
     const product = await clientApi.getProduct();
     const category = await clientApi.getCategory();
-    if (!(product?.idOnStore && category?.idOnStore)) {
+    if (!product?.idOnStore && !category?.idOnStore) {
       return [];
     }
     return [
       this.onPageView({
-        productIdOnStore: product.idOnStore,
-        categoryIdOnStore: category.idOnStore,
+        productIdOnStore: product?.idOnStore,
+        categoryIdOnStore: category?.idOnStore,
       }),
     ];
   }

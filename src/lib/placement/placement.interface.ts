@@ -1,4 +1,7 @@
-import { SuggestionRequestDto } from "api/controller/v1";
+import {
+  SuggestionProductsRequestDto,
+  SuggestionRequestDto,
+} from "api/controller/v1";
 import { AdcioCore } from "lib/core";
 
 export type AdcioPlacementParams = {
@@ -18,4 +21,16 @@ export type AdcioPlacementCreateSuggestionParams = Pick<
   | "birthYear"
   | "gender"
   | "area"
+>;
+
+export type AdcioPlacementCreateSuggestionProductsParams = Pick<
+  SuggestionProductsRequestDto,
+  | "placementId"
+  | "placementPositionX"
+  | "placementPositionY"
+  | "birthYear"
+  | "gender"
+  | "area"
+  | "categoryId"
+  | "excludingProductIds"
 >;
