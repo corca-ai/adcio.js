@@ -57,19 +57,19 @@ export class Cafe24API implements ClientAPI {
   }
 
   getProduct() {
-    const idOnStore = getMeta({ property: "product:productId" });
-    if (!idOnStore) {
+    const id = getMeta({ property: "product:productId" });
+    if (!id) {
       return null;
     }
-    return { idOnStore };
+    return { id };
   }
 
   getCategory() {
-    const idOnStore = getQuery("cate_no");
-    if (!idOnStore) {
+    const id = getQuery("cate_no");
+    if (!id) {
       return null;
     }
-    return { idOnStore };
+    return { id };
   }
 
   getCarts() {
@@ -83,7 +83,8 @@ export class Cafe24API implements ClientAPI {
           resolve(
             res.carts.map((cart) => ({
               id: `${cart.basket_product_no}`,
-              productIdOnStore: `${cart.product_no}`,
+              productId: `${cart.product_no}`,
+              // categoryId: '',
               productPrice: cart.product_price,
               quantity: Number(cart.quantity),
             })),
@@ -101,7 +102,8 @@ export class Cafe24API implements ClientAPI {
         resolve({
           id: order_id,
           products: order_product.map((product) => ({
-            idOnStore: `${product.product_no}`,
+            id: `${product.product_no}`,
+            // categoryId: `${product.category_no_1}`,
             quantity: product.quantity,
             price: product.product_price,
             subTotalPrice: product.sub_total_price,

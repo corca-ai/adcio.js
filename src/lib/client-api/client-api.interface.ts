@@ -8,7 +8,8 @@ export interface Customer
 export interface Order {
   id: string;
   products: {
-    idOnStore: string;
+    id: string;
+    categoryId?: string;
     quantity: number;
     price: number;
     subTotalPrice?: number;
@@ -19,17 +20,18 @@ export interface Order {
 
 export interface Cart {
   id: string;
-  productIdOnStore: string;
+  productId: string;
+  categoryId?: string;
   productPrice: number;
   quantity: number;
 }
 
 export interface Product {
-  idOnStore: string;
+  id: string;
 }
 
 export interface Category {
-  idOnStore: string;
+  id: string;
 }
 
 type Nullable<T> = T | null;
