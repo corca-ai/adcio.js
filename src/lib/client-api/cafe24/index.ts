@@ -1,9 +1,12 @@
+import { AddToCartEvent } from "lib/analytics/events";
 import { getMeta, getQuery } from "lib/utils";
+import { Cafe24ActionBasket } from "./cafe24-action-basket";
 import { ICAFE24, ICAFE24API } from "./cafe24.interface";
-import { Cart, Customer, ClientAPI, Order } from "../client-api.interface";
+import { Customer, ClientAPI, Order } from "../client-api.interface";
 
 const CORCA_CAFE24_CLIENT_ID = "8HE5BizGD9agkHIObMfXRF";
 const CORCA_CAFE24_API_VERSION = "2023-06-01";
+const ACTION_BASKET_NAME = `action_basket_${CORCA_CAFE24_CLIENT_ID}`;
 
 export class Cafe24API implements ClientAPI {
   private authorized: boolean;
@@ -28,6 +31,21 @@ export class Cafe24API implements ClientAPI {
       console.warn("Failed to initialize cafe24 api", e);
       this.authorized = false;
     }
+    this.observeAddToCart();
+  }
+
+  observeAddToCart() {
+    if ((window as any)[ACTION_BASKET_NAME]) {
+      return;
+    }
+    (window as any)[ACTION_BASKET_NAME] = (window as any).action_basket;
+    (window as any).action_basket = (
+      ...args: [number, string, string, string, string, unknown, unknown]
+    ) => {
+      const actionBasket = Cafe24ActionBasket.fromArg(args[3]);
+      new AddToCartEvent(actionBasket.toCart()).dispatch();
+      (window as any)[ACTION_BASKET_NAME](...args);
+    };
   }
 
   getCustomer() {
@@ -70,28 +88,6 @@ export class Cafe24API implements ClientAPI {
       return null;
     }
     return { id };
-  }
-
-  getCarts() {
-    return new Promise<Cart[] | null>((resolve, reject) => {
-      this.api.getCartList((err, res) => {
-        if (err) {
-          reject(err);
-        } else if (!res.carts) {
-          resolve(null);
-        } else {
-          resolve(
-            res.carts.map((cart) => ({
-              id: `${cart.basket_product_no}`,
-              productId: `${cart.product_no}`,
-              // categoryId: '',
-              productPrice: cart.product_price,
-              quantity: Number(cart.quantity),
-            })),
-          );
-        }
-      });
-    });
   }
 
   getOrder() {

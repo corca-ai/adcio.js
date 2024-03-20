@@ -18,14 +18,6 @@ export interface Order {
   amount: number;
 }
 
-export interface Cart {
-  id: string;
-  productId: string;
-  categoryId?: string;
-  productPrice: number;
-  quantity: number;
-}
-
 export interface Product {
   id: string;
 }
@@ -44,5 +36,4 @@ export interface ClientAPI {
   getProduct(): NullableAwaitable<Product>;
   getCategory(): NullableAwaitable<Category>;
   getOrder(): NullableAwaitable<Order>;
-  getCarts(): NullableAwaitable<Cart[]>;
 }

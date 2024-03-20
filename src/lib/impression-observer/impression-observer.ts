@@ -1,4 +1,4 @@
-import { IMPRESSION_EVENT } from "lib/events/names";
+import { ImpressionEvent } from "lib/analytics";
 import { AdcioImpressionObserverParams } from "./impression-observer.interface";
 
 export class AdcioImpressionObserver {
@@ -63,12 +63,14 @@ export class AdcioImpressionObserver {
   }
 
   public observe(element: Element) {
-    return this.observeWithIntersectionObserver(element, (element: Element) =>
-      element.dispatchEvent(
-        new CustomEvent(IMPRESSION_EVENT, {
-          bubbles: true,
-        }),
-      ),
+    return this.observeWithIntersectionObserver(
+      element,
+      (element: Element) =>
+        element.dispatchEvent(
+          new CustomEvent(ImpressionEvent.eventName, {
+            bubbles: true,
+          }),
+        ), // TODO
     );
   }
 

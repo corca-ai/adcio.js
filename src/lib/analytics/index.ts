@@ -7,3 +7,5 @@ export {
   AdcioAnalyticsOnAddToCartParams,
   AdcioAnalyticsOnPurchaseParams,
 } from "./analytics.interface";
+
+export { ImpressionEvent, AddToCartEvent, PurchaseEvent } from "./events";
