@@ -1,7 +1,7 @@
+import { IMPRESSION_EVENT } from "lib/events/names";
 import { AdcioImpressionObserverParams } from "./impression-observer.interface";
 
 export class AdcioImpressionObserver {
-  static IMPRESSION_EVENT = "impression";
   private filter?: (element: Element) => boolean;
   private iObserver?: IntersectionObserver;
   private mObserver?: MutationObserver;
@@ -65,7 +65,7 @@ export class AdcioImpressionObserver {
   public observe(element: Element) {
     return this.observeWithIntersectionObserver(element, (element: Element) =>
       element.dispatchEvent(
-        new CustomEvent(AdcioImpressionObserver.IMPRESSION_EVENT, {
+        new CustomEvent(IMPRESSION_EVENT, {
           bubbles: true,
         }),
       ),

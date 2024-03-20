@@ -1,7 +1,7 @@
 import { Configuration, PageApi, SuggestionApi } from "api/controller/v1";
 import { isAxiosError } from "axios";
-import { ERROR_CODE, PLACEMENT_ERROR_MESSAGE } from "lib/constants/error";
 import { AdcioCore } from "lib/core";
+import { ERROR_CODE, PLACEMENT_ERROR_MESSAGE } from "lib/error";
 import { APIError } from "lib/error";
 import {
   AdcioPlacementParams,
