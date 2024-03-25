@@ -116,13 +116,13 @@ export class Adcio {
   private async handleView(clientApi: ClientAPI): Promise<Promise<void>[]> {
     const product = await clientApi.getProduct();
     const category = await clientApi.getCategory();
-    if (!product?.id && !category?.id) {
+    if (!product?.idOnStore && !category?.idOnStore) {
       return [];
     }
     return [
       this.onPageView({
-        productIdOnStore: product?.id,
-        categoryIdOnStore: category?.id,
+        productIdOnStore: product?.idOnStore,
+        categoryIdOnStore: category?.idOnStore,
       }),
     ];
   }
@@ -140,8 +140,8 @@ export class Adcio {
           product.subTotalPrice || product.price * product.quantity,
         ),
         quantity: product.quantity,
-        productIdOnStore: product.id,
-        categoryIdOnStore: product.categoryId,
+        productIdOnStore: product.idOnStore,
+        categoryIdOnStore: product.categoryIdOnStore,
       }),
     );
   }
