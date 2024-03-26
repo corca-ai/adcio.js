@@ -2,25 +2,29 @@ export abstract class ElementSelector {
   private overlay: Element | null = null;
   private current: Element | null = null;
 
+  protected drawOverlay(e: Element): Element {
+    const overlay = document.createElement("div");
+    const rect = e.getBoundingClientRect();
+    Object.assign(overlay.style, {
+      position: "absolute",
+      top: `${rect.top + window.scrollY}px`,
+      left: `${rect.left + window.scrollX}px`,
+      width: `${rect.width}px`,
+      height: `${rect.height}px`,
+      zIndex: "9999",
+      pointerEvents: "none",
+      backgroundColor: "#046eb8",
+      opacity: "0.3",
+    });
+    document.body.appendChild(overlay);
+    return overlay;
+  }
+
   private onHoverIn(e: Element | null) {
     if (!e) {
       this.overlay?.remove();
     } else if (e !== this.current) {
-      const overlay = document.createElement("div");
-      const rect = e.getBoundingClientRect();
-      Object.assign(overlay.style, {
-        position: "absolute",
-        top: `${rect.top + window.scrollY}px`,
-        left: `${rect.left + window.scrollX}px`,
-        width: `${rect.width}px`,
-        height: `${rect.height}px`,
-        zIndex: "9999",
-        pointerEvents: "none",
-        backgroundColor: "#046eb8",
-        opacity: "0.3",
-      });
-      this.overlay = overlay;
-      document.body.appendChild(overlay);
+      this.overlay = this.drawOverlay(e);
     }
   }
 
