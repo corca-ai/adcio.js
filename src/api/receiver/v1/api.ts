@@ -55,6 +55,12 @@ export interface NestJSErrorSchema {
  */
 export interface TrackAddToCartRequestDto {
     /**
+     * ADCIO Client ID of the store.
+     * @type {string}
+     * @memberof TrackAddToCartRequestDto
+     */
+    'storeId': string;
+    /**
      * The session starts when the customer visits the store. It persists until the customer closes the tab, browser or app.
      * @type {string}
      * @memberof TrackAddToCartRequestDto
@@ -73,23 +79,41 @@ export interface TrackAddToCartRequestDto {
      */
     'customerId'?: string;
     /**
+     * Identifier for the suggestion request
+     * @type {string}
+     * @memberof TrackAddToCartRequestDto
+     */
+    'requestId'?: string;
+    /**
+     * Product ID (on store).
+     * @type {string}
+     * @memberof TrackAddToCartRequestDto
+     */
+    'productIdOnStore'?: string;
+    /**
+     * Product ID / Banner ID
+     * @type {string}
+     * @memberof TrackAddToCartRequestDto
+     */
+    'adsetId'?: string;
+    /**
+     * Category ID (on store).
+     * @type {string}
+     * @memberof TrackAddToCartRequestDto
+     */
+    'categoryIdOnStore'?: string;
+    /**
      * Unique identifier of the cart to prevent duplicate cart tracking.
      * @type {string}
      * @memberof TrackAddToCartRequestDto
      */
     'cartId'?: string;
     /**
-     * Store ID. Note that a pair of store ID and product code is unique.
-     * @type {string}
+     * Quantity of the product.
+     * @type {number}
      * @memberof TrackAddToCartRequestDto
      */
-    'storeId': string;
-    /**
-     * Product ID (on store).
-     * @type {string}
-     * @memberof TrackAddToCartRequestDto
-     */
-    'productIdOnStore': string;
+    'quantity'?: number;
 }
 /**
  * 
@@ -98,6 +122,12 @@ export interface TrackAddToCartRequestDto {
  */
 export interface TrackClickRequestDto {
     /**
+     * ADCIO Client ID of the store.
+     * @type {string}
+     * @memberof TrackClickRequestDto
+     */
+    'storeId': string;
+    /**
      * The session starts when the customer visits the store. It persists until the customer closes the tab, browser or app.
      * @type {string}
      * @memberof TrackClickRequestDto
@@ -116,23 +146,23 @@ export interface TrackClickRequestDto {
      */
     'customerId'?: string;
     /**
-     * ADCIO Client ID
-     * @type {string}
-     * @memberof TrackClickRequestDto
-     */
-    'storeId': string;
-    /**
      * Identifier for the suggestion request
      * @type {string}
      * @memberof TrackClickRequestDto
      */
-    'requestId': string;
+    'requestId'?: string;
+    /**
+     * Product ID (on store).
+     * @type {string}
+     * @memberof TrackClickRequestDto
+     */
+    'productIdOnStore'?: string;
     /**
      * Product ID / Banner ID
      * @type {string}
      * @memberof TrackClickRequestDto
      */
-    'adsetId': string;
+    'adsetId'?: string;
 }
 /**
  * 
@@ -141,6 +171,12 @@ export interface TrackClickRequestDto {
  */
 export interface TrackImpressionRequestDto {
     /**
+     * ADCIO Client ID of the store.
+     * @type {string}
+     * @memberof TrackImpressionRequestDto
+     */
+    'storeId': string;
+    /**
      * The session starts when the customer visits the store. It persists until the customer closes the tab, browser or app.
      * @type {string}
      * @memberof TrackImpressionRequestDto
@@ -159,23 +195,23 @@ export interface TrackImpressionRequestDto {
      */
     'customerId'?: string;
     /**
-     * ADCIO Client ID
-     * @type {string}
-     * @memberof TrackImpressionRequestDto
-     */
-    'storeId': string;
-    /**
      * Identifier for the suggestion request
      * @type {string}
      * @memberof TrackImpressionRequestDto
      */
-    'requestId': string;
+    'requestId'?: string;
+    /**
+     * Product ID (on store).
+     * @type {string}
+     * @memberof TrackImpressionRequestDto
+     */
+    'productIdOnStore'?: string;
     /**
      * Product ID / Banner ID
      * @type {string}
      * @memberof TrackImpressionRequestDto
      */
-    'adsetId': string;
+    'adsetId'?: string;
 }
 /**
  * 
@@ -184,6 +220,12 @@ export interface TrackImpressionRequestDto {
  */
 export interface TrackPageViewRequestDto {
     /**
+     * ADCIO Client ID of the store.
+     * @type {string}
+     * @memberof TrackPageViewRequestDto
+     */
+    'storeId': string;
+    /**
      * The session starts when the customer visits the store. It persists until the customer closes the tab, browser or app.
      * @type {string}
      * @memberof TrackPageViewRequestDto
@@ -202,19 +244,25 @@ export interface TrackPageViewRequestDto {
      */
     'customerId'?: string;
     /**
-     * Store ID. Note that a pair of store ID and product id on store is unique.
+     * Identifier for the suggestion request
      * @type {string}
      * @memberof TrackPageViewRequestDto
      */
-    'storeId': string;
+    'requestId'?: string;
     /**
-     * Product id on store. Only specified if the customer is viewing a product page
+     * Product ID (on store).
      * @type {string}
      * @memberof TrackPageViewRequestDto
      */
     'productIdOnStore'?: string;
     /**
-     * Category id on store. Only specified if the customer is viewing a category page or a product page
+     * Product ID / Banner ID
+     * @type {string}
+     * @memberof TrackPageViewRequestDto
+     */
+    'adsetId'?: string;
+    /**
+     * Category ID (on store).
      * @type {string}
      * @memberof TrackPageViewRequestDto
      */
@@ -227,6 +275,12 @@ export interface TrackPageViewRequestDto {
  */
 export interface TrackPurchaseRequestDto {
     /**
+     * ADCIO Client ID of the store.
+     * @type {string}
+     * @memberof TrackPurchaseRequestDto
+     */
+    'storeId': string;
+    /**
      * The session starts when the customer visits the store. It persists until the customer closes the tab, browser or app.
      * @type {string}
      * @memberof TrackPurchaseRequestDto
@@ -245,23 +299,35 @@ export interface TrackPurchaseRequestDto {
      */
     'customerId'?: string;
     /**
-     * Unique identifier of the order to prevent duplicate purchase tracking.
+     * Identifier for the suggestion request
      * @type {string}
      * @memberof TrackPurchaseRequestDto
      */
-    'orderId': string;
-    /**
-     * Store ID. Note that a pair of store ID and product code is unique.
-     * @type {string}
-     * @memberof TrackPurchaseRequestDto
-     */
-    'storeId': string;
+    'requestId'?: string;
     /**
      * Product ID (on store).
      * @type {string}
      * @memberof TrackPurchaseRequestDto
      */
-    'productIdOnStore': string;
+    'productIdOnStore'?: string;
+    /**
+     * Product ID / Banner ID
+     * @type {string}
+     * @memberof TrackPurchaseRequestDto
+     */
+    'adsetId'?: string;
+    /**
+     * Category ID (on store).
+     * @type {string}
+     * @memberof TrackPurchaseRequestDto
+     */
+    'categoryIdOnStore'?: string;
+    /**
+     * Unique identifier of the order to prevent duplicate purchase tracking.
+     * @type {string}
+     * @memberof TrackPurchaseRequestDto
+     */
+    'orderId': string;
     /**
      * Quantity of the product.
      * @type {number}
@@ -426,7 +492,79 @@ export const EventsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Log when the customer views a page.
+         * Log a click.
+         * @summary 
+         * @param {TrackClickRequestDto} trackClickRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventsControllerOnClick: async (trackClickRequestDto: TrackClickRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'trackClickRequestDto' is not null or undefined
+            assertParamExists('eventsControllerOnClick', 'trackClickRequestDto', trackClickRequestDto)
+            const localVarPath = `/events/click`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(trackClickRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Log an impression.
+         * @summary 
+         * @param {TrackImpressionRequestDto} trackImpressionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventsControllerOnImpression: async (trackImpressionRequestDto: TrackImpressionRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'trackImpressionRequestDto' is not null or undefined
+            assertParamExists('eventsControllerOnImpression', 'trackImpressionRequestDto', trackImpressionRequestDto)
+            const localVarPath = `/events/impression`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(trackImpressionRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Log when the customer views a specific product / category page.
          * @summary 
          * @param {TrackPageViewRequestDto} trackPageViewRequestDto 
          * @param {*} [options] Override http request option.
@@ -519,7 +657,29 @@ export const EventsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Log when the customer views a page.
+         * Log a click.
+         * @summary 
+         * @param {TrackClickRequestDto} trackClickRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async eventsControllerOnClick(trackClickRequestDto: TrackClickRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TrackResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.eventsControllerOnClick(trackClickRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Log an impression.
+         * @summary 
+         * @param {TrackImpressionRequestDto} trackImpressionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async eventsControllerOnImpression(trackImpressionRequestDto: TrackImpressionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TrackResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.eventsControllerOnImpression(trackImpressionRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Log when the customer views a specific product / category page.
          * @summary 
          * @param {TrackPageViewRequestDto} trackPageViewRequestDto 
          * @param {*} [options] Override http request option.
@@ -561,7 +721,27 @@ export const EventsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.eventsControllerOnAddToCart(trackAddToCartRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Log when the customer views a page.
+         * Log a click.
+         * @summary 
+         * @param {TrackClickRequestDto} trackClickRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventsControllerOnClick(trackClickRequestDto: TrackClickRequestDto, options?: any): AxiosPromise<TrackResponseDto> {
+            return localVarFp.eventsControllerOnClick(trackClickRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Log an impression.
+         * @summary 
+         * @param {TrackImpressionRequestDto} trackImpressionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        eventsControllerOnImpression(trackImpressionRequestDto: TrackImpressionRequestDto, options?: any): AxiosPromise<TrackResponseDto> {
+            return localVarFp.eventsControllerOnImpression(trackImpressionRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Log when the customer views a specific product / category page.
          * @summary 
          * @param {TrackPageViewRequestDto} trackPageViewRequestDto 
          * @param {*} [options] Override http request option.
@@ -603,7 +783,31 @@ export class EventsApi extends BaseAPI {
     }
 
     /**
-     * Log when the customer views a page.
+     * Log a click.
+     * @summary 
+     * @param {TrackClickRequestDto} trackClickRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EventsApi
+     */
+    public eventsControllerOnClick(trackClickRequestDto: TrackClickRequestDto, options?: AxiosRequestConfig) {
+        return EventsApiFp(this.configuration).eventsControllerOnClick(trackClickRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Log an impression.
+     * @summary 
+     * @param {TrackImpressionRequestDto} trackImpressionRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EventsApi
+     */
+    public eventsControllerOnImpression(trackImpressionRequestDto: TrackImpressionRequestDto, options?: AxiosRequestConfig) {
+        return EventsApiFp(this.configuration).eventsControllerOnImpression(trackImpressionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Log when the customer views a specific product / category page.
      * @summary 
      * @param {TrackPageViewRequestDto} trackPageViewRequestDto 
      * @param {*} [options] Override http request option.
