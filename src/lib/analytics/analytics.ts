@@ -1,5 +1,5 @@
 import { Configuration } from "api/controller/v1";
-import { EventsApi, PerformanceApi } from "api/receiver/v1";
+import { EventsApi } from "api/receiver/v1";
 import { AdcioCore } from "lib/core";
 import {
   AdcioAnalyticsParams,
@@ -34,14 +34,14 @@ export class AdcioAnalytics {
   }
 
   async onImpression(params: AdcioAnalyticsOnImpressionParams) {
-    await new PerformanceApi(this.apiConfig).performanceControllerOnImpression({
+    await new EventsApi(this.apiConfig).eventsControllerOnImpression({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });
   }
 
   async onClick(params: AdcioAnalyticsOnClickParams) {
-    await new PerformanceApi(this.apiConfig).performanceControllerOnClick({
+    await new EventsApi(this.apiConfig).eventsControllerOnClick({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });

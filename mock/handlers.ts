@@ -1,9 +1,3 @@
-import { SuggestionRequestDto } from "../src/api/controller/v1";
-import {
-  ERROR_CODE,
-  PLACEMENT_ERROR_MESSAGE,
-} from "../src/lib/constants/error";
-import { APIError } from "../src/lib/error";
 import { HttpResponse, http } from "msw";
 import {
   ReceiverAPIField,
@@ -15,6 +9,12 @@ import {
   viewField,
 } from "./constants";
 import { suggestionResponse } from "./suggestion.demo";
+import { SuggestionRequestDto } from "../src/api/controller/v1";
+import {
+  ERROR_CODE,
+  PLACEMENT_ERROR_MESSAGE,
+} from "../src/lib/constants/error";
+import { APIError } from "../src/lib/error";
 
 const RECEIVER_API_BASE_URL = "https://receiver.adcio.ai";
 const ADCIO_API_BASE_URL = "https://api.adcio.ai";
@@ -23,11 +23,11 @@ export function handlers() {
   return [
     http.post(`${ADCIO_API_BASE_URL}/suggestions`, createSuggestion),
     http.post(
-      `${RECEIVER_API_BASE_URL}/performance/impression`,
+      `${RECEIVER_API_BASE_URL}/events/impression`,
       createAnalyticsHandler(impressionField),
     ),
     http.post(
-      `${RECEIVER_API_BASE_URL}/performance/click`,
+      `${RECEIVER_API_BASE_URL}/events/click`,
       createAnalyticsHandler(clickField),
     ),
     http.post(
