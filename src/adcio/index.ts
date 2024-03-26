@@ -32,6 +32,7 @@ export {
 export {
   ElementSelector,
   VisualElementSelector,
+  VisualPositionSelector,
   ListedElementSelector,
   Candidate,
   getDepth,
