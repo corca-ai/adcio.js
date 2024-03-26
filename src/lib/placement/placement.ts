@@ -7,7 +7,8 @@ import {
   AdcioPlacementParams,
   AdcioPlacementCreateSuggestionParams,
   AdcioPlacementFetchPlacementsParams,
-  AdcioPlacementCreateSuggestionProductsParams,
+  AdcioPlacementCreateRecommendationProductsParams,
+  AdcioPlacementCreateRecommendationBannersParams,
 } from "./placement.interface";
 
 export class AdcioPlacement {
@@ -62,6 +63,9 @@ export class AdcioPlacement {
     }
   }
 
+  /**
+   *  @deprecated
+   */
   public async createSuggestion(params: AdcioPlacementCreateSuggestionParams) {
     try {
       const { data } = await new SuggestionApi(
@@ -79,14 +83,32 @@ export class AdcioPlacement {
     }
   }
 
-  public async createSuggestionProducts(
-    params: AdcioPlacementCreateSuggestionProductsParams,
+  public async createRecommendationProducts(
+    params: AdcioPlacementCreateRecommendationProductsParams,
   ) {
     try {
       const { data } = await new SuggestionApi(
         this.apiConfig,
       ).suggestionControllerRecommendProducts({
         clientId: this.adcioCore.getClientId(),
+        customerId: this.adcioCore.getCustomerId(),
+        sessionId: this.adcioCore.getSessionId(),
+        deviceId: this.adcioCore.getDeviceId(),
+        ...params,
+      });
+      return data;
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+  public async createRecommendationBanners(
+    params: AdcioPlacementCreateRecommendationBannersParams,
+  ) {
+    try {
+      const { data } = await new SuggestionApi(
+        this.apiConfig,
+      ).suggestionControllerRecommendBanners({
         customerId: this.adcioCore.getCustomerId(),
         sessionId: this.adcioCore.getSessionId(),
         deviceId: this.adcioCore.getDeviceId(),
