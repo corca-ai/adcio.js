@@ -307,6 +307,125 @@ export interface BannerInjector {
 /**
  * 
  * @export
+ * @interface BannerSuggestionDto
+ */
+export interface BannerSuggestionDto {
+    /**
+     * 
+     * @type {BannerWithCreativeDto}
+     * @memberof BannerSuggestionDto
+     */
+    'banner': BannerWithCreativeDto;
+    /**
+     * 
+     * @type {LogOptionsDto}
+     * @memberof BannerSuggestionDto
+     */
+    'logOptions': LogOptionsDto;
+}
+/**
+ * 
+ * @export
+ * @interface BannerSuggestionRequestDto
+ */
+export interface BannerSuggestionRequestDto {
+    /**
+     * The session starts when the customer visits the store. It persists until the customer closes the tab, browser or app.
+     * @type {string}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'sessionId': string;
+    /**
+     * The device identifier should be unique for each device. A customer can have multiple devices.
+     * @type {string}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'deviceId': string;
+    /**
+     * The customer identifier which is generated and managed by the store. The store should configure `frontApi` parameter of ADCIO SDK so that the `customerId` can be sent to ADCIO API.
+     * @type {string}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'customerId'?: string;
+    /**
+     * Identifier for the placement which the suggestion will be placed.
+     * @type {string}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'placementId': string;
+    /**
+     * The X coordinate of the placement in pixel.
+     * @type {number}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'placementPositionX'?: number;
+    /**
+     * The Y coordinate of the placement in pixel.
+     * @type {number}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'placementPositionY'?: number;
+    /**
+     * Whether the request is from the ADCIO agent or not. Default value is `false`.
+     * @type {boolean}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'fromAgent'?: boolean;
+    /**
+     * The birth year of the customer.
+     * @type {number}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'birthYear'?: number;
+    /**
+     * The gender of the customer.
+     * @type {string}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'gender'?: BannerSuggestionRequestDtoGenderEnum;
+    /**
+     * The geographical area of the customer.
+     * @type {string}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'area'?: string;
+    /**
+     * The category id(on store) for filtering adsets.
+     * @type {string}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'categoryId'?: string;
+}
+
+export const BannerSuggestionRequestDtoGenderEnum = {
+    Male: 'male',
+    Female: 'female'
+} as const;
+
+export type BannerSuggestionRequestDtoGenderEnum = typeof BannerSuggestionRequestDtoGenderEnum[keyof typeof BannerSuggestionRequestDtoGenderEnum];
+
+/**
+ * 
+ * @export
+ * @interface BannerSuggestionResponseDto
+ */
+export interface BannerSuggestionResponseDto {
+    /**
+     * 
+     * @type {Array<BannerSuggestionDto>}
+     * @memberof BannerSuggestionResponseDto
+     */
+    'suggestions': Array<BannerSuggestionDto>;
+    /**
+     * 
+     * @type {SuggestionResponsePlacementType}
+     * @memberof BannerSuggestionResponseDto
+     */
+    'placement': SuggestionResponsePlacementType;
+}
+/**
+ * 
+ * @export
  * @interface BannerWithCreative
  */
 export interface BannerWithCreative {
@@ -1000,12 +1119,6 @@ export interface ConnectProductsToPlacementResponseDto {
      * @memberof ConnectProductsToPlacementResponseDto
      */
     'property': ConnectProductsToPlacementResponseDtoPropertyEnum;
-    /**
-     * 
-     * @type {Array<number>}
-     * @memberof ConnectProductsToPlacementResponseDto
-     */
-    'suggestionPosition': Array<number>;
     /**
      * 
      * @type {Array<number>}
@@ -1852,12 +1965,6 @@ export interface FetchManyPlacementsResponseDto {
      * @type {Array<number>}
      * @memberof FetchManyPlacementsResponseDto
      */
-    'suggestionPosition': Array<number>;
-    /**
-     * 
-     * @type {Array<number>}
-     * @memberof FetchManyPlacementsResponseDto
-     */
     'displayPositions': Array<number>;
     /**
      * 
@@ -2089,12 +2196,6 @@ export interface FetchPlacementResponseDto {
      * @type {Array<number>}
      * @memberof FetchPlacementResponseDto
      */
-    'suggestionPosition': Array<number>;
-    /**
-     * 
-     * @type {Array<number>}
-     * @memberof FetchPlacementResponseDto
-     */
     'displayPositions': Array<number>;
     /**
      * 
@@ -2284,6 +2385,12 @@ export interface FetchProductResponseDto {
      * @memberof FetchProductResponseDto
      */
     'additionalImages': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FetchProductResponseDto
+     */
+    'decorationImages': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -2609,12 +2716,6 @@ export interface Placement {
      * @type {Array<number>}
      * @memberof Placement
      */
-    'suggestionPosition': Array<number>;
-    /**
-     * 
-     * @type {Array<number>}
-     * @memberof Placement
-     */
     'displayPositions': Array<number>;
     /**
      * 
@@ -2839,6 +2940,12 @@ export interface Product {
     'additionalImages': Array<string> | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof Product
+     */
+    'decorationImages': Array<string> | null;
+    /**
+     * 
      * @type {string}
      * @memberof Product
      */
@@ -2868,6 +2975,137 @@ export interface ProductControllerFetchMany200Response {
      * @memberof ProductControllerFetchMany200Response
      */
     'items'?: Array<FetchProductResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface ProductSuggestionDto
+ */
+export interface ProductSuggestionDto {
+    /**
+     * 
+     * @type {Product}
+     * @memberof ProductSuggestionDto
+     */
+    'product': Product;
+    /**
+     * 
+     * @type {LogOptionsDto}
+     * @memberof ProductSuggestionDto
+     */
+    'logOptions': LogOptionsDto;
+}
+/**
+ * 
+ * @export
+ * @interface ProductSuggestionRequestDto
+ */
+export interface ProductSuggestionRequestDto {
+    /**
+     * The session starts when the customer visits the store. It persists until the customer closes the tab, browser or app.
+     * @type {string}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'sessionId': string;
+    /**
+     * The device identifier should be unique for each device. A customer can have multiple devices.
+     * @type {string}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'deviceId': string;
+    /**
+     * The customer identifier which is generated and managed by the store. The store should configure `frontApi` parameter of ADCIO SDK so that the `customerId` can be sent to ADCIO API.
+     * @type {string}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'customerId'?: string;
+    /**
+     * Identifier for the placement which the suggestion will be placed.
+     * @type {string}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'placementId': string;
+    /**
+     * The X coordinate of the placement in pixel.
+     * @type {number}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'placementPositionX'?: number;
+    /**
+     * The Y coordinate of the placement in pixel.
+     * @type {number}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'placementPositionY'?: number;
+    /**
+     * Whether the request is from the ADCIO agent or not. Default value is `false`.
+     * @type {boolean}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'fromAgent'?: boolean;
+    /**
+     * The birth year of the customer.
+     * @type {number}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'birthYear'?: number;
+    /**
+     * The gender of the customer.
+     * @type {string}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'gender'?: ProductSuggestionRequestDtoGenderEnum;
+    /**
+     * The geographical area of the customer.
+     * @type {string}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'area'?: string;
+    /**
+     * The category id(on store) for filtering adsets.
+     * @type {string}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'categoryId'?: string;
+    /**
+     * Identifier for the request client.
+     * @type {string}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'clientId': string;
+    /**
+     * Product IDs(on store) that should NOT be included in the suggestion.
+     * @type {Array<string>}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'excludingProductIds'?: Array<string>;
+}
+
+export const ProductSuggestionRequestDtoGenderEnum = {
+    Male: 'male',
+    Female: 'female'
+} as const;
+
+export type ProductSuggestionRequestDtoGenderEnum = typeof ProductSuggestionRequestDtoGenderEnum[keyof typeof ProductSuggestionRequestDtoGenderEnum];
+
+/**
+ * 
+ * @export
+ * @interface ProductSuggestionResponseDto
+ */
+export interface ProductSuggestionResponseDto {
+    /**
+     * 
+     * @type {Array<ProductSuggestionDto>}
+     * @memberof ProductSuggestionResponseDto
+     */
+    'suggestions': Array<ProductSuggestionDto>;
+    /**
+     * 
+     * @type {SuggestionResponsePlacementType}
+     * @memberof ProductSuggestionResponseDto
+     */
+    'placement': SuggestionResponsePlacementType;
 }
 /**
  * 
@@ -2967,6 +3205,12 @@ export interface ProductWithSeller {
     'additionalImages': Array<string> | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof ProductWithSeller
+     */
+    'decorationImages': Array<string> | null;
+    /**
+     * 
      * @type {string}
      * @memberof ProductWithSeller
      */
@@ -3062,137 +3306,6 @@ export interface SuggestionDto {
      * @memberof SuggestionDto
      */
     'logOptions': LogOptionsDto;
-}
-/**
- * 
- * @export
- * @interface SuggestionProductsDto
- */
-export interface SuggestionProductsDto {
-    /**
-     * 
-     * @type {Product}
-     * @memberof SuggestionProductsDto
-     */
-    'product': Product;
-    /**
-     * 
-     * @type {LogOptionsDto}
-     * @memberof SuggestionProductsDto
-     */
-    'logOptions': LogOptionsDto;
-}
-/**
- * 
- * @export
- * @interface SuggestionProductsRequestDto
- */
-export interface SuggestionProductsRequestDto {
-    /**
-     * The session starts when the customer visits the store. It persists until the customer closes the tab, browser or app.
-     * @type {string}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'sessionId': string;
-    /**
-     * The device identifier should be unique for each device. A customer can have multiple devices.
-     * @type {string}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'deviceId': string;
-    /**
-     * The customer identifier which is generated and managed by the store. The store should configure `frontApi` parameter of ADCIO SDK so that the `customerId` can be sent to ADCIO API.
-     * @type {string}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'customerId'?: string;
-    /**
-     * Identifier for the placement which the suggestion will be placed.
-     * @type {string}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'placementId': string;
-    /**
-     * The X coordinate of the placement in pixel.
-     * @type {number}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'placementPositionX'?: number;
-    /**
-     * The Y coordinate of the placement in pixel.
-     * @type {number}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'placementPositionY'?: number;
-    /**
-     * Whether the request is from the ADCIO agent or not. Default value is `false`.
-     * @type {boolean}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'fromAgent'?: boolean;
-    /**
-     * The birth year of the customer.
-     * @type {number}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'birthYear'?: number;
-    /**
-     * The gender of the customer.
-     * @type {string}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'gender'?: SuggestionProductsRequestDtoGenderEnum;
-    /**
-     * The geographical area of the customer.
-     * @type {string}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'area'?: string;
-    /**
-     * The category id(on store) for filtering adsets.
-     * @type {string}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'categoryId'?: string;
-    /**
-     * Identifier for the request client.
-     * @type {string}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'clientId': string;
-    /**
-     * Product IDs(on store) that should NOT be included in the suggestion.
-     * @type {Array<string>}
-     * @memberof SuggestionProductsRequestDto
-     */
-    'excludingProductIds'?: Array<string>;
-}
-
-export const SuggestionProductsRequestDtoGenderEnum = {
-    Male: 'male',
-    Female: 'female'
-} as const;
-
-export type SuggestionProductsRequestDtoGenderEnum = typeof SuggestionProductsRequestDtoGenderEnum[keyof typeof SuggestionProductsRequestDtoGenderEnum];
-
-/**
- * 
- * @export
- * @interface SuggestionProductsResponseDto
- */
-export interface SuggestionProductsResponseDto {
-    /**
-     * 
-     * @type {Array<SuggestionProductsDto>}
-     * @memberof SuggestionProductsResponseDto
-     */
-    'suggestions': Array<SuggestionProductsDto>;
-    /**
-     * 
-     * @type {SuggestionResponsePlacementType}
-     * @memberof SuggestionProductsResponseDto
-     */
-    'placement': SuggestionResponsePlacementType;
 }
 /**
  * 
@@ -3420,12 +3533,6 @@ export interface SuggestionResponsePlacementType {
      * @memberof SuggestionResponsePlacementType
      */
     'placementFormat': PlacementFormat | null;
-    /**
-     * 
-     * @type {Array<number>}
-     * @memberof SuggestionResponsePlacementType
-     */
-    'suggestionPosition': Array<number>;
     /**
      * 
      * @type {Array<number>}
@@ -3742,12 +3849,6 @@ export interface UpdatePlacementResponseDto {
      * @memberof UpdatePlacementResponseDto
      */
     'property': UpdatePlacementResponseDtoPropertyEnum;
-    /**
-     * 
-     * @type {Array<number>}
-     * @memberof UpdatePlacementResponseDto
-     */
-    'suggestionPosition': Array<number>;
     /**
      * 
      * @type {Array<number>}
@@ -5788,15 +5889,15 @@ export class ProductApi extends BaseAPI {
 export const SuggestionApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Fetch a personalized suggestion banners.
+         * Fetch a personalized suggest banner.
          * @summary 
-         * @param {SuggestionRequestDto} suggestionRequestDto 
+         * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        suggestionControllerRecommendBanners: async (suggestionRequestDto: SuggestionRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'suggestionRequestDto' is not null or undefined
-            assertParamExists('suggestionControllerRecommendBanners', 'suggestionRequestDto', suggestionRequestDto)
+        suggestionControllerRecommendBanners: async (bannerSuggestionRequestDto: BannerSuggestionRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bannerSuggestionRequestDto' is not null or undefined
+            assertParamExists('suggestionControllerRecommendBanners', 'bannerSuggestionRequestDto', bannerSuggestionRequestDto)
             const localVarPath = `/recommendations/banners`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5816,7 +5917,7 @@ export const SuggestionApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(suggestionRequestDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(bannerSuggestionRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5826,13 +5927,13 @@ export const SuggestionApiAxiosParamCreator = function (configuration?: Configur
         /**
          * Fetch a personalized suggest product.
          * @summary 
-         * @param {SuggestionProductsRequestDto} suggestionProductsRequestDto 
+         * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        suggestionControllerRecommendProducts: async (suggestionProductsRequestDto: SuggestionProductsRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'suggestionProductsRequestDto' is not null or undefined
-            assertParamExists('suggestionControllerRecommendProducts', 'suggestionProductsRequestDto', suggestionProductsRequestDto)
+        suggestionControllerRecommendProducts: async (productSuggestionRequestDto: ProductSuggestionRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'productSuggestionRequestDto' is not null or undefined
+            assertParamExists('suggestionControllerRecommendProducts', 'productSuggestionRequestDto', productSuggestionRequestDto)
             const localVarPath = `/recommendations/products`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5852,7 +5953,7 @@ export const SuggestionApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(suggestionProductsRequestDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(productSuggestionRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5906,25 +6007,25 @@ export const SuggestionApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SuggestionApiAxiosParamCreator(configuration)
     return {
         /**
-         * Fetch a personalized suggestion banners.
+         * Fetch a personalized suggest banner.
          * @summary 
-         * @param {SuggestionRequestDto} suggestionRequestDto 
+         * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async suggestionControllerRecommendBanners(suggestionRequestDto: SuggestionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SuggestionResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.suggestionControllerRecommendBanners(suggestionRequestDto, options);
+        async suggestionControllerRecommendBanners(bannerSuggestionRequestDto: BannerSuggestionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BannerSuggestionResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.suggestionControllerRecommendBanners(bannerSuggestionRequestDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Fetch a personalized suggest product.
          * @summary 
-         * @param {SuggestionProductsRequestDto} suggestionProductsRequestDto 
+         * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async suggestionControllerRecommendProducts(suggestionProductsRequestDto: SuggestionProductsRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SuggestionProductsResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.suggestionControllerRecommendProducts(suggestionProductsRequestDto, options);
+        async suggestionControllerRecommendProducts(productSuggestionRequestDto: ProductSuggestionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductSuggestionResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.suggestionControllerRecommendProducts(productSuggestionRequestDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5949,24 +6050,24 @@ export const SuggestionApiFactory = function (configuration?: Configuration, bas
     const localVarFp = SuggestionApiFp(configuration)
     return {
         /**
-         * Fetch a personalized suggestion banners.
+         * Fetch a personalized suggest banner.
          * @summary 
-         * @param {SuggestionRequestDto} suggestionRequestDto 
+         * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        suggestionControllerRecommendBanners(suggestionRequestDto: SuggestionRequestDto, options?: any): AxiosPromise<SuggestionResponseDto> {
-            return localVarFp.suggestionControllerRecommendBanners(suggestionRequestDto, options).then((request) => request(axios, basePath));
+        suggestionControllerRecommendBanners(bannerSuggestionRequestDto: BannerSuggestionRequestDto, options?: any): AxiosPromise<BannerSuggestionResponseDto> {
+            return localVarFp.suggestionControllerRecommendBanners(bannerSuggestionRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Fetch a personalized suggest product.
          * @summary 
-         * @param {SuggestionProductsRequestDto} suggestionProductsRequestDto 
+         * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        suggestionControllerRecommendProducts(suggestionProductsRequestDto: SuggestionProductsRequestDto, options?: any): AxiosPromise<SuggestionProductsResponseDto> {
-            return localVarFp.suggestionControllerRecommendProducts(suggestionProductsRequestDto, options).then((request) => request(axios, basePath));
+        suggestionControllerRecommendProducts(productSuggestionRequestDto: ProductSuggestionRequestDto, options?: any): AxiosPromise<ProductSuggestionResponseDto> {
+            return localVarFp.suggestionControllerRecommendProducts(productSuggestionRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Fetch a personalized suggestion.
@@ -5989,27 +6090,27 @@ export const SuggestionApiFactory = function (configuration?: Configuration, bas
  */
 export class SuggestionApi extends BaseAPI {
     /**
-     * Fetch a personalized suggestion banners.
+     * Fetch a personalized suggest banner.
      * @summary 
-     * @param {SuggestionRequestDto} suggestionRequestDto 
+     * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SuggestionApi
      */
-    public suggestionControllerRecommendBanners(suggestionRequestDto: SuggestionRequestDto, options?: AxiosRequestConfig) {
-        return SuggestionApiFp(this.configuration).suggestionControllerRecommendBanners(suggestionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public suggestionControllerRecommendBanners(bannerSuggestionRequestDto: BannerSuggestionRequestDto, options?: AxiosRequestConfig) {
+        return SuggestionApiFp(this.configuration).suggestionControllerRecommendBanners(bannerSuggestionRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Fetch a personalized suggest product.
      * @summary 
-     * @param {SuggestionProductsRequestDto} suggestionProductsRequestDto 
+     * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SuggestionApi
      */
-    public suggestionControllerRecommendProducts(suggestionProductsRequestDto: SuggestionProductsRequestDto, options?: AxiosRequestConfig) {
-        return SuggestionApiFp(this.configuration).suggestionControllerRecommendProducts(suggestionProductsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public suggestionControllerRecommendProducts(productSuggestionRequestDto: ProductSuggestionRequestDto, options?: AxiosRequestConfig) {
+        return SuggestionApiFp(this.configuration).suggestionControllerRecommendProducts(productSuggestionRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

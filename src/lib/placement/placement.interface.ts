@@ -1,5 +1,6 @@
 import {
-  SuggestionProductsRequestDto,
+  BannerSuggestionRequestDto,
+  ProductSuggestionRequestDto,
   SuggestionRequestDto,
 } from "api/controller/v1";
 import { AdcioCore } from "lib/core";
@@ -13,6 +14,9 @@ export type AdcioPlacementFetchPlacementsParams = {
   pageName: string;
 };
 
+/**
+ *  @deprecated
+ */
 export type AdcioPlacementCreateSuggestionParams = Pick<
   SuggestionRequestDto,
   | "placementId"
@@ -23,8 +27,8 @@ export type AdcioPlacementCreateSuggestionParams = Pick<
   | "area"
 >;
 
-export type AdcioPlacementCreateSuggestionProductsParams = Pick<
-  SuggestionProductsRequestDto,
+export type AdcioPlacementCreateRecommendationProductsParams = Pick<
+  ProductSuggestionRequestDto,
   | "placementId"
   | "placementPositionX"
   | "placementPositionY"
@@ -33,4 +37,15 @@ export type AdcioPlacementCreateSuggestionProductsParams = Pick<
   | "area"
   | "categoryId"
   | "excludingProductIds"
+>;
+
+export type AdcioPlacementCreateRecommendationBannersParams = Pick<
+  BannerSuggestionRequestDto,
+  | "placementId"
+  | "placementPositionX"
+  | "placementPositionY"
+  | "birthYear"
+  | "gender"
+  | "area"
+  | "categoryId"
 >;
