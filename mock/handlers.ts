@@ -20,11 +20,11 @@ export function handlers() {
   return [
     http.post(`${ADCIO_API_BASE_URL}/suggestions`, createSuggestion),
     http.post(
-      `${RECEIVER_API_BASE_URL}/performance/impression`,
+      `${RECEIVER_API_BASE_URL}/events/impression`,
       createAnalyticsHandler(impressionField),
     ),
     http.post(
-      `${RECEIVER_API_BASE_URL}/performance/click`,
+      `${RECEIVER_API_BASE_URL}/events/click`,
       createAnalyticsHandler(clickField),
     ),
     http.post(
