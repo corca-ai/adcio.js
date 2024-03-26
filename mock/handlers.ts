@@ -16,8 +16,8 @@ import {
 } from "./constants";
 import { suggestionResponse } from "./suggestion.demo";
 
-const RECEIVER_API_BASE_URL = "https://receiver.adcio.ai";
-const ADCIO_API_BASE_URL = "https://api.adcio.ai";
+const RECEIVER_API_BASE_URL = "https://receiver-dev.adcio.ai"; //TODO: Change to prod url
+const ADCIO_API_BASE_URL = "https://api-dev.adcio.ai"; //TODO: Change to prod url
 
 export function handlers() {
   return [
