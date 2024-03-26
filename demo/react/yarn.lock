@@ -799,7 +799,7 @@ acorn@^8.9.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.11.3.tgz#71e0b14e13a4ec160724b38fb7b0f233b1b81d7a"
   integrity sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==
 
-adcio.js@^0.1.6:
+adcio.js@latest:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/adcio.js/-/adcio.js-0.1.6.tgz#7a17244fa4caad594504b451b539ee5fb6c0f5d6"
   integrity sha512-sViKUaDvX/3RP5sUpLB6W7HR7ZR1+wNp10RmEtfmogpoFhF5AG3hfy+acl3WlNrZ07wU+e12KP4l0BnIf4x6Og==
