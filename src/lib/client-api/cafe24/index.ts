@@ -40,9 +40,16 @@ export class Cafe24API implements ClientAPI {
     }
     (window as any)[ACTION_BASKET_NAME] = (window as any).action_basket;
     (window as any).action_basket = (
-      ...args: [number, string, string, string, string, unknown, unknown]
+      ...args: [
+        sType: number,
+        sGroup: string,
+        sAction: string,
+        sParam: string,
+        aBasketType: string,
+        bNonDuplicateChk: unknown,
+      ]
     ) => {
-      const actionBasket = Cafe24ActionBasket.fromArg(args[3]);
+      const actionBasket = Cafe24ActionBasket.fromArg(args[3]); // sParam
       new AddToCartEvent(actionBasket.toCart()).dispatch();
       (window as any)[ACTION_BASKET_NAME](...args);
     };
