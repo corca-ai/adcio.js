@@ -3,5 +3,6 @@ export {
   AdcioPlacementParams,
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateSuggestionParams,
-  AdcioPlacementCreateSuggestionProductsParams,
+  AdcioPlacementCreateRecommendationProductsParams,
+  AdcioPlacementCreateRecommendationBannersParams,
 } from "./placement.interface";

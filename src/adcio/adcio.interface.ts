@@ -9,7 +9,8 @@ import {
 import {
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateSuggestionParams,
-  AdcioPlacementCreateSuggestionProductsParams,
+  AdcioPlacementCreateRecommendationProductsParams,
+  AdcioPlacementCreateRecommendationBannersParams,
 } from "lib/placement";
 
 export interface AdcioParams {
@@ -42,7 +43,13 @@ export type AdcioObserveImpressionParams = {
 
 export type AdcioFetchPlacementsParams = AdcioPlacementFetchPlacementsParams;
 
+/**
+ *  @deprecated
+ */
 export type AdcioCreateSuggestionParams = AdcioPlacementCreateSuggestionParams;
 
-export type AdcioCreateSuggestionProductsParams =
-  AdcioPlacementCreateSuggestionProductsParams;
+export type AdcioCreateRecommendationProductsParams =
+  AdcioPlacementCreateRecommendationProductsParams;
+
+export type AdcioCreateRecommendationBannersParams =
+  AdcioPlacementCreateRecommendationBannersParams;

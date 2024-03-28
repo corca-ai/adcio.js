@@ -8,7 +8,8 @@ import {
   AdcioConfig,
   AdcioParams,
   AdcioCreateSuggestionParams,
-  AdcioCreateSuggestionProductsParams,
+  AdcioCreateRecommendationProductsParams,
+  AdcioCreateRecommendationBannersParams,
   AdcioOnPageViewParams,
   AdcioOnAddToCartParams,
   AdcioOnClickParams,
@@ -78,14 +79,32 @@ export class Adcio {
     return this.adcioPlacement.fetchPlacements(params);
   }
 
+  /**
+   *  @deprecated
+   */
   public async createSuggestion(params: AdcioCreateSuggestionParams) {
     return this.adcioPlacement.createSuggestion(params);
   }
 
+  /**
+   *  @deprecated
+   */
   public async createSuggestionProducts(
-    params: AdcioCreateSuggestionProductsParams,
+    params: AdcioCreateRecommendationProductsParams,
   ) {
-    return this.adcioPlacement.createSuggestionProducts(params);
+    return this.adcioPlacement.createRecommendationProducts(params);
+  }
+
+  public async createRecommendationProducts(
+    params: AdcioCreateRecommendationProductsParams,
+  ) {
+    return this.adcioPlacement.createRecommendationProducts(params);
+  }
+
+  public async createRecommendationBanners(
+    params: AdcioCreateRecommendationBannersParams,
+  ) {
+    return this.adcioPlacement.createRecommendationBanners(params);
   }
 
   public async collectLogs(clientApi: ClientAPI) {
