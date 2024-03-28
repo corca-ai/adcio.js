@@ -11,6 +11,9 @@ export type {
   AdcioCreateSuggestionParams,
 } from "./adcio.interface";
 
+// Events
+export { ImpressionEvent, AddToCartEvent, PurchaseEvent } from "lib/analytics";
+
 // FrontAPI
 export type { ClientAPI } from "lib/client-api";
 export { Cafe24API } from "lib/client-api";

@@ -9,19 +9,13 @@ export interface Order {
   id: string;
   products: {
     idOnStore: string;
+    categoryIdOnStore?: string;
     quantity: number;
     price: number;
     subTotalPrice?: number;
     sumTotalOptPrice?: number;
   }[];
   amount: number;
-}
-
-export interface Cart {
-  id: string;
-  productIdOnStore: string;
-  productPrice: number;
-  quantity: number;
 }
 
 export interface Product {
@@ -42,5 +36,4 @@ export interface ClientAPI {
   getProduct(): NullableAwaitable<Product>;
   getCategory(): NullableAwaitable<Category>;
   getOrder(): NullableAwaitable<Order>;
-  getCarts(): NullableAwaitable<Cart[]>;
 }
