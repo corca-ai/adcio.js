@@ -11,8 +11,8 @@ import {
 import { SuggestionTestId } from "../../mock/constants";
 import { server } from "../../mock/node";
 import { Adcio } from "../adcio";
-import { PLACEMENT_ERROR_MESSAGE } from "../lib/constants/error";
 import { AdcioCore } from "../lib/core";
+import { PLACEMENT_ERROR_MESSAGE } from "../lib/error";
 
 beforeAll(() => {
   server.listen();

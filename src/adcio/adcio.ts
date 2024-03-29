@@ -1,9 +1,8 @@
-import { AdcioAnalytics } from "lib/analytics/analytics";
+import { AddToCartEvent, AdcioAnalytics } from "lib/analytics";
 import { ClientAPI } from "lib/client-api/client-api.interface";
 import { AdcioCore } from "lib/core";
 import { AdcioImpressionObserver } from "lib/impression-observer/impression-observer";
 import { AdcioPlacement } from "lib/placement/placement";
-import { CartsStorage } from "lib/storage/tracker-storage";
 import {
   AdcioConfig,
   AdcioParams,
@@ -74,6 +73,12 @@ export class Adcio {
     );
   }
 
+  private listenAddToCart() {
+    AddToCartEvent.listen((event) => {
+      this.onAddToCart(event);
+    });
+  }
+
   // AdcioPlacement
   public async fetchPlacements(params: AdcioFetchPlacementsParams) {
     return this.adcioPlacement.fetchPlacements(params);
@@ -108,6 +113,8 @@ export class Adcio {
   }
 
   public async collectLogs(clientApi: ClientAPI) {
+    this.listenAddToCart();
+
     await clientApi.init();
 
     try {
@@ -121,7 +128,6 @@ export class Adcio {
 
     return Promise.allSettled([
       ...(await this.handleView(clientApi)),
-      ...(await this.handleCarts(clientApi)),
       ...(await this.handleOrder(clientApi)),
     ]);
   }
@@ -140,33 +146,6 @@ export class Adcio {
     ];
   }
 
-  private async handleCarts(clientApi: ClientAPI): Promise<Promise<void>[]> {
-    const carts = await clientApi.getCarts();
-    if (!carts) {
-      return [];
-    }
-
-    const storage = new CartsStorage({
-      key: `adcio-carts-${this.adcioCore.getClientId()}`,
-    });
-    const existing = storage.getOrSet();
-    storage.set(carts);
-
-    const newCarts = carts.filter(
-      (cart) => !existing.find((c) => c.id === cart.id),
-    );
-    if (newCarts.length === 0) {
-      return [];
-    }
-
-    return newCarts.map((cart) =>
-      this.onAddToCart({
-        cartId: cart.id,
-        productIdOnStore: cart.productIdOnStore,
-      }),
-    );
-  }
-
   private async handleOrder(clientApi: ClientAPI): Promise<Promise<void>[]> {
     const order = await clientApi.getOrder();
     if (!order) {
@@ -181,6 +160,7 @@ export class Adcio {
         ),
         quantity: product.quantity,
         productIdOnStore: product.idOnStore,
+        categoryIdOnStore: product.categoryIdOnStore,
       }),
     );
   }
