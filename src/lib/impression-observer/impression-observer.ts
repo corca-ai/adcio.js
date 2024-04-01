@@ -1,10 +1,14 @@
 import { AdcioImpressionObserverParams } from "./impression-observer.interface";
 
+const INTERSECTION_THRESHOLD = 0.5;
+const INTERSECTION_TIMER = 1000;
+
 export class AdcioImpressionObserver {
   static IMPRESSION_EVENT = "impression";
   private filter?: (element: Element) => boolean;
   private iObserver?: IntersectionObserver;
   private mObserver?: MutationObserver;
+  private intersectionTimer?: NodeJS.Timeout;
 
   private isIntersected: boolean = false;
   private isMutated: boolean = false;
@@ -43,10 +47,16 @@ export class AdcioImpressionObserver {
       (entries) =>
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            this.onIntersection(() => callback(element));
+            this.intersectionTimer = setTimeout(
+              () => this.onIntersection(() => callback(element)),
+              INTERSECTION_TIMER,
+            );
+          } else {
+            clearTimeout(this.intersectionTimer);
+            this.isIntersected = false;
           }
         }),
-      { threshold: 0.5 },
+      { threshold: INTERSECTION_THRESHOLD },
     );
     this.iObserver.observe(element);
 

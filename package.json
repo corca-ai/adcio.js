@@ -1,16 +1,11 @@
 {
   "name": "adcio.js",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "main": "dist/src/index.js",
   "repository": "https://github.com/corca-ai/adcio.js",
   "author": "Corca <contact@corca.ai>",
   "license": "Apache-2.0",
-  "private": true,
-  "workspaces": {
-    "packages": [
-      "demo/*"
-    ]
-  },
+  "private": false,
   "devDependencies": {
     "@babel/core": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
@@ -45,12 +40,11 @@
     "build": "vite build",
     "prepare": "yarn build",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "yarn workspaces run lint --fix && eslint \"src/**/*.ts\" --fix",
-    "lint:ci": "yarn workspaces run lint && eslint \"src/**/*.ts\"",
+    "lint": "eslint \"{src,test,__tests__}/**/*.ts\" --fix",
+    "lint:ci": "eslint \"{src,test,__tests__}/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "test:cov": "vitest run --coverage",
-    "dev:demo-react": "yarn workspace demo-react run dev"
+    "test:cov": "vitest run --coverage"
   },
   "keywords": [],
   "publishConfig": {
