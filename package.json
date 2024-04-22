@@ -24,11 +24,11 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2",
-    "vite": "^4.5.2",
+    "vite": "4.5.2",
     "vite-plugin-banner": "^0.7.1",
     "vite-plugin-dts": "^3.7.3",
     "vite-tsconfig-paths": "^4.2.1",
-    "vitest": "^0.34.0"
+    "vitest": "0.34.0"
   },
   "files": [
     "dist/**/*",
@@ -38,7 +38,7 @@
     "start:dev": "tsc -w",
     "gen-api": "openapi-generator-cli generate",
     "build": "vite build",
-    "prepare": "yarn build",
+    "prepare": "pnpm build",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"{src,test,__tests__}/**/*.ts\" --fix",
     "lint:ci": "eslint \"{src,test,__tests__}/**/*.ts\"",
