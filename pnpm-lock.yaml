@@ -83,10 +83,10 @@ importers:
     dependencies:
       '@adcio.js/api':
         specifier: workspace:*
-        version: link:../../src/api
+        version: link:../../packages/api
       '@adcio.js/core':
         specifier: workspace:*
-        version: link:../../src/core
+        version: link:../../packages/core
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -137,9 +137,9 @@ importers:
         specifier: ^4.3.1
         version: 4.3.2(typescript@5.3.3)(vite@4.5.2(@types/node@20.9.3)(terser@5.30.3))
 
-  src/api: {}
+  packages/api: {}
 
-  src/core:
+  packages/core:
     dependencies:
       '@adcio.js/api':
         specifier: workspace:*
@@ -148,7 +148,7 @@ importers:
         specifier: workspace:*
         version: link:../lib
 
-  src/lib:
+  packages/lib:
     dependencies:
       '@adcio.js/api':
         specifier: workspace:*
