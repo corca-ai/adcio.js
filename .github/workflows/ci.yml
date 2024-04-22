@@ -25,20 +25,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      - uses: actions/cache@v3
-        id: demo-react-deps-cache
-        with:
-          path: demo/react/node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('demo/react/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-${{ hashFiles('demo/react/pnpm-lock.yaml') }}-
-            ${{ runner.os }}-pnpm-
-
       - if: steps.deps-cache.outputs.cache-hit != 'true'
         run: pnpm install
-        
-      - if: steps.demo-react-deps-cache.outputs.cache-hit != 'true'
-        run: pnpm --cwd demo/react install
 
       - run: pnpm run lint
       - run: pnpm run build
