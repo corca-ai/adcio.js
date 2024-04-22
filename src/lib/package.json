@@ -1,0 +1,7 @@
+{
+  "name": "@adcio.js/lib",
+  "private": true,
+  "dependencies": {
+    "@adcio.js/api": "workspace:*"
+  }
+}

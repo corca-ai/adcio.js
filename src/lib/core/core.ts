@@ -4,10 +4,10 @@ import {
   DeviceId,
   SessionId,
   StoreId,
-} from "api/dto/session.dto";
-import { createStorage } from "lib/storage/storage.factory";
-import { Storage } from "lib/storage/storage.interface";
+} from "@adcio.js/api/dto/session.dto";
 import { AdcioCoreParams } from "./core.interface";
+import { createStorage } from "../storage/storage.factory";
+import { Storage } from "../storage/storage.interface";
 
 export class AdcioCore {
   private sessionStorage: Storage<string>;
