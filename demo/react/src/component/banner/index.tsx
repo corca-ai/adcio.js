@@ -4,7 +4,7 @@ import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "src/styles/banner.css";
-import { SuggestionDto } from "adcio.js/api/controller/v1/api";
+import { SuggestionDto } from "@adcio.js/api/controller/v1/api";
 
 interface Props {
   suggestionData: SuggestionDto[];

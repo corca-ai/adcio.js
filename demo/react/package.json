@@ -1,5 +1,5 @@
 {
-  "name": "demo-react",
+  "name": "@adcio.js/demo-react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "adcio.js": "latest",
+    "@adcio.js/api": "workspace:*",
+    "@adcio.js/core": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1",
@@ -27,7 +28,7 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "msw": "^2.0.10",
     "typescript": "^5.2.2",
-    "vite": "^5.1.0",
+    "vite": "4.5.2",
     "vite-tsconfig-paths": "^4.3.1"
   },
   "msw": {
