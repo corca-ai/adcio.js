@@ -15,29 +15,23 @@ jobs:
         with:
           node-version: 18
 
+      - run: npm install -g pnpm
+
       - uses: actions/cache@v3
         id: deps-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - uses: actions/cache@v3
-        id: demo-react-deps-cache
-        with:
-          path: demo/react/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('demo/react/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-${{ hashFiles('demo/react/yarn.lock') }}-
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
 
       - if: steps.deps-cache.outputs.cache-hit != 'true'
-        run: yarn install
-        
-      - if: steps.demo-react-deps-cache.outputs.cache-hit != 'true'
-        run: yarn --cwd demo/react install
+        run: pnpm install
 
-      - run: yarn run lint
-      - run: yarn run build
-      - run: yarn run test
+      - run: pnpm run lint
+      - run: pnpm run build
+      - run: pnpm run test
+
+      - name: build demo
+        working-directory: demo/react
+        run: pnpm run build

@@ -1,9 +1,9 @@
-import { AdcioAnalytics } from "lib/analytics/analytics";
-import { ClientAPI } from "lib/client-api/client-api.interface";
-import { AdcioCore } from "lib/core";
-import { AdcioImpressionObserver } from "lib/impression-observer/impression-observer";
-import { AdcioPlacement } from "lib/placement/placement";
-import { CartsStorage } from "lib/storage/tracker-storage";
+import { AdcioAnalytics } from "@adcio.js/lib/analytics/analytics";
+import { ClientAPI } from "@adcio.js/lib/client-api/client-api.interface";
+import { AdcioCore } from "@adcio.js/lib/core";
+import { AdcioImpressionObserver } from "@adcio.js/lib/impression-observer/impression-observer";
+import { AdcioPlacement } from "@adcio.js/lib/placement/placement";
+import { CartsStorage } from "@adcio.js/lib/storage/tracker-storage";
 import {
   AdcioConfig,
   AdcioParams,

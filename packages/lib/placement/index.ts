@@ -1,5 +1,5 @@
 export { AdcioPlacement } from "./placement";
-export {
+export type {
   AdcioPlacementParams,
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateSuggestionParams,

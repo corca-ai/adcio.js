@@ -10,7 +10,7 @@ import {
 } from "vitest";
 import { SuggestionTestId } from "../../mock/constants";
 import { server } from "../../mock/node";
-import { Adcio } from "../adcio";
+import { Adcio } from "../core";
 import { PLACEMENT_ERROR_MESSAGE } from "../lib/constants/error";
 import { AdcioCore } from "../lib/core";
 
@@ -81,7 +81,7 @@ describe("test AdcioCore module", () => {
     });
 
     const { AdcioCore } = await import("../lib/core");
-    const { Adcio } = await import("../adcio");
+    const { Adcio } = await import("../core");
 
     new Adcio({
       clientId: "your-client-id",

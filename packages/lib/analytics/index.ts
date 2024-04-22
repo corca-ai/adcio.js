@@ -1,5 +1,5 @@
 export { AdcioAnalytics } from "./analytics";
-export {
+export type {
   AdcioAnalyticsParams,
   AdcioAnalyticsOnPageViewParams,
   AdcioAnalyticsOnImpressionParams,
