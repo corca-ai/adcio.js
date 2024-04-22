@@ -40,8 +40,8 @@
     "build": "vite build",
     "prepare": "pnpm build",
     "format": "prettier --write \"packages/**/*.ts\"",
-    "lint": "eslint \"{src,test,__tests__}/**/*.ts\" --fix",
-    "lint:ci": "eslint \"{src,test,__tests__}/**/*.ts\"",
+    "lint": "eslint \"{packages,test,__tests__}/**/*.ts\" --fix",
+    "lint:ci": "eslint \"{packages,test,__tests__}/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:cov": "vitest run --coverage"
