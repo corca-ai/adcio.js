@@ -1,1 +1,1 @@
-export * from "./adcio";
+export * from "./core";
