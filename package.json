@@ -55,5 +55,13 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "packageManager": "pnpm@9.0.5",
+  "engineStrict": true,
+  "engines": { 
+    "node": "18",
+    "yarn": "please-use-pnpm",
+    "npm": "please-use-pnpm",
+    "pnpm": "9.0.5"
   }
 }
