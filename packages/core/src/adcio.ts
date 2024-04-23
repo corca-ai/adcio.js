@@ -1,3 +1,9 @@
+import type {
+  BannerSuggestionResponseDto,
+  FetchActivePlacementsResponseDto,
+  ProductSuggestionResponseDto,
+  SuggestionResponseDto,
+} from "@adcio.js/api/controller/v1";
 import { AdcioAnalytics } from "@adcio.js/lib/analytics/analytics";
 import { ClientAPI } from "@adcio.js/lib/client-api/client-api.interface";
 import { AdcioCore } from "@adcio.js/lib/core";
@@ -6,17 +12,17 @@ import { AdcioPlacement } from "@adcio.js/lib/placement/placement";
 import { CartsStorage } from "@adcio.js/lib/storage/tracker-storage";
 import {
   AdcioConfig,
-  AdcioParams,
-  AdcioCreateSuggestionParams,
-  AdcioCreateRecommendationProductsParams,
   AdcioCreateRecommendationBannersParams,
-  AdcioOnPageViewParams,
+  AdcioCreateRecommendationProductsParams,
+  AdcioCreateSuggestionParams,
+  AdcioFetchPlacementsParams,
+  AdcioObserveImpressionParams,
   AdcioOnAddToCartParams,
   AdcioOnClickParams,
-  AdcioOnPurchaseParams,
-  AdcioObserveImpressionParams,
   AdcioOnImpressionParams,
-  AdcioFetchPlacementsParams,
+  AdcioOnPageViewParams,
+  AdcioOnPurchaseParams,
+  AdcioParams,
 } from "./adcio.interface";
 
 export class Adcio {
@@ -75,14 +81,18 @@ export class Adcio {
   }
 
   // AdcioPlacement
-  public async fetchPlacements(params: AdcioFetchPlacementsParams) {
+  public async fetchPlacements(
+    params: AdcioFetchPlacementsParams,
+  ): Promise<FetchActivePlacementsResponseDto[] | undefined> {
     return this.adcioPlacement.fetchPlacements(params);
   }
 
   /**
    *  @deprecated
    */
-  public async createSuggestion(params: AdcioCreateSuggestionParams) {
+  public async createSuggestion(
+    params: AdcioCreateSuggestionParams,
+  ): Promise<SuggestionResponseDto | undefined> {
     return this.adcioPlacement.createSuggestion(params);
   }
 
@@ -91,19 +101,19 @@ export class Adcio {
    */
   public async createSuggestionProducts(
     params: AdcioCreateRecommendationProductsParams,
-  ) {
+  ): Promise<ProductSuggestionResponseDto | undefined> {
     return this.adcioPlacement.createRecommendationProducts(params);
   }
 
   public async createRecommendationProducts(
     params: AdcioCreateRecommendationProductsParams,
-  ) {
+  ): Promise<ProductSuggestionResponseDto | undefined> {
     return this.adcioPlacement.createRecommendationProducts(params);
   }
 
   public async createRecommendationBanners(
     params: AdcioCreateRecommendationBannersParams,
-  ) {
+  ): Promise<BannerSuggestionResponseDto | undefined> {
     return this.adcioPlacement.createRecommendationBanners(params);
   }
 
