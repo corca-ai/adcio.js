@@ -1,3 +1,5 @@
+import { PLACEMENT_ERROR_MESSAGE } from "@adcio.js/lib/constants/error";
+import { AdcioCore } from "@adcio.js/lib/core";
 import {
   afterAll,
   afterEach,
@@ -8,11 +10,9 @@ import {
   it,
   vi,
 } from "vitest";
-import { SuggestionTestId } from "../../mock/constants";
-import { server } from "../../mock/node";
-import { Adcio } from "../core";
-import { PLACEMENT_ERROR_MESSAGE } from "../lib/constants/error";
-import { AdcioCore } from "../lib/core";
+import { SuggestionTestId } from "../../../mock/constants";
+import { server } from "../../../mock/node";
+import { Adcio } from "../dist";
 
 beforeAll(() => {
   server.listen();
@@ -74,14 +74,14 @@ describe("test AdcioCore module", () => {
   });
 
   it("should call AdcioCore constructor once when Adcio is created", async () => {
-    vi.doMock("../lib/core", () => {
+    vi.doMock("@adcio.js/lib/core", () => {
       return {
         AdcioCore: vi.fn().mockImplementation((adcioCore) => adcioCore),
       };
     });
 
-    const { AdcioCore } = await import("../lib/core");
-    const { Adcio } = await import("../core");
+    const { AdcioCore } = await import("@adcio.js/lib/core");
+    const { Adcio } = await import("../src");
 
     new Adcio({
       clientId: "your-client-id",
@@ -90,7 +90,7 @@ describe("test AdcioCore module", () => {
 
     expect(AdcioCore).toHaveBeenCalledTimes(1);
 
-    vi.doUnmock("../lib/core");
+    vi.doUnmock("@adcio.js/lib/core");
   });
 });
 
