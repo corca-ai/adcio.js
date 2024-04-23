@@ -1,8 +1,15 @@
 {
   "name": "@adcio.js/core",
-  "main": "./index.ts",
+  "version": "0.1.8",
+  "author": "Corca <contact@corca.ai>",
+  "main": "dist/index.js",
   "dependencies": {
     "@adcio.js/api": "workspace:*",
     "@adcio.js/lib": "workspace:*"
+  },
+  "scripts": {
+    "start:dev": "tsc -w",
+    "build": "vite build",
+    "prepare": "pnpm build"
   }
 }

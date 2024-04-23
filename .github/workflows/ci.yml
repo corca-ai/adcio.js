@@ -33,7 +33,11 @@ jobs:
         run: pnpm install
 
       - run: pnpm run lint
-      - run: pnpm run build
+      
+      - name: build core
+        working-directory: packages/core
+        run: pnpm run build
+
       - run: pnpm run test
 
       - name: build demo
