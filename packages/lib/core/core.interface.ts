@@ -1,4 +1,4 @@
-import { CustomerId, StoreId } from "@adcio.js/api/dto/session.dto";
+import { CustomerId, StoreId } from "@adcio/api/dto/session.dto";
 
 export type AdcioCoreParams = {
   clientId: StoreId;

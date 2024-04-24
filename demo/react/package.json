@@ -1,5 +1,5 @@
 {
-  "name": "@adcio.js/demo-react",
+  "name": "@adcio/demo-react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@adcio.js/api": "workspace:*",
-    "@adcio.js/core": "workspace:*",
+    "@adcio/api": "workspace:*",
+    "@adcio/core": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1",

@@ -1,7 +1,7 @@
 import { Navigate, Routes as ReactRouterRoutes, Route } from "react-router-dom";
 import BannerPage from "./pages/Banner";
 import StartPage from "./pages";
-import { Adcio } from "@adcio.js/core";
+import { Adcio } from "@adcio/core";
 
 export default function App() {
   const adcioInstance = new Adcio({

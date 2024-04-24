@@ -3,13 +3,13 @@ import type {
   FetchActivePlacementsResponseDto,
   ProductSuggestionResponseDto,
   SuggestionResponseDto,
-} from "@adcio.js/api/controller/v1";
-import { AdcioAnalytics } from "@adcio.js/lib/analytics/analytics";
-import { ClientAPI } from "@adcio.js/lib/client-api/client-api.interface";
-import { AdcioCore } from "@adcio.js/lib/core";
-import { AdcioImpressionObserver } from "@adcio.js/lib/impression-observer/impression-observer";
-import { AdcioPlacement } from "@adcio.js/lib/placement/placement";
-import { CartsStorage } from "@adcio.js/lib/storage/tracker-storage";
+} from "@adcio/api/controller/v1";
+import { AdcioAnalytics } from "@adcio/lib/analytics/analytics";
+import { ClientAPI } from "@adcio/lib/client-api/client-api.interface";
+import { AdcioCore } from "@adcio/lib/core";
+import { AdcioImpressionObserver } from "@adcio/lib/impression-observer/impression-observer";
+import { AdcioPlacement } from "@adcio/lib/placement/placement";
+import { CartsStorage } from "@adcio/lib/storage/tracker-storage";
 import {
   AdcioConfig,
   AdcioCreateRecommendationBannersParams,

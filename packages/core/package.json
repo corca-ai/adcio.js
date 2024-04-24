@@ -1,11 +1,11 @@
 {
-  "name": "@adcio.js/core",
+  "name": "@adcio/core",
   "version": "0.1.8",
   "author": "Corca <contact@corca.ai>",
   "main": "dist/index.js",
   "dependencies": {
-    "@adcio.js/api": "workspace:*",
-    "@adcio.js/lib": "workspace:*"
+    "@adcio/api": "workspace:*",
+    "@adcio/lib": "workspace:*"
   },
   "scripts": {
     "start:dev": "tsc -w",

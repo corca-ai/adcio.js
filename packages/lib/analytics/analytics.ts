@@ -1,5 +1,5 @@
-import { Configuration } from "@adcio.js/api/controller/v1";
-import { EventsApi } from "@adcio.js/api/receiver/v1";
+import { Configuration } from "@adcio/api/controller/v1";
+import { EventsApi } from "@adcio/api/receiver/v1";
 import {
   AdcioAnalyticsParams,
   AdcioAnalyticsOnPageViewParams,

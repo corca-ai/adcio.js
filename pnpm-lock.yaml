@@ -81,10 +81,10 @@ importers:
 
   demo/react:
     dependencies:
-      '@adcio.js/api':
+      '@adcio/api':
         specifier: workspace:*
         version: link:../../packages/api
-      '@adcio.js/core':
+      '@adcio/core':
         specifier: workspace:*
         version: link:../../packages/core
       react:
@@ -141,16 +141,16 @@ importers:
 
   packages/core:
     dependencies:
-      '@adcio.js/api':
+      '@adcio/api':
         specifier: workspace:*
         version: link:../api
-      '@adcio.js/lib':
+      '@adcio/lib':
         specifier: workspace:*
         version: link:../lib
 
   packages/lib:
     dependencies:
-      '@adcio.js/api':
+      '@adcio/api':
         specifier: workspace:*
         version: link:../api
 
