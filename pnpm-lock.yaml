@@ -86,7 +86,7 @@ importers:
         version: link:../../packages/api
       '@adcio/core':
         specifier: workspace:*
-        version: link:../../packages/core
+        version: file:packages/core
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -124,18 +124,9 @@ importers:
       eslint-plugin-react-refresh:
         specifier: ^0.4.5
         version: 0.4.6(eslint@8.57.0)
-      msw:
-        specifier: ^2.0.10
-        version: 2.0.10(typescript@5.3.3)
-      typescript:
-        specifier: ^5.2.2
-        version: 5.3.3
-      vite:
-        specifier: 4.5.2
-        version: 4.5.2(@types/node@20.9.3)(terser@5.30.3)
-      vite-tsconfig-paths:
-        specifier: ^4.3.1
-        version: 4.3.2(typescript@5.3.3)(vite@4.5.2(@types/node@20.9.3)(terser@5.30.3))
+    dependenciesMeta:
+      '@adcio/core':
+        injected: true
 
   packages/api: {}
 
@@ -159,6 +150,9 @@ packages:
   '@aashutoshrathi/word-wrap@1.2.6':
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
+
+  '@adcio/core@file:packages/core':
+    resolution: {directory: packages/core, type: directory}
 
   '@ampproject/remapping@2.2.1':
     resolution: {integrity: sha512-lFMjJTrFL3j7L9yBxwYfCq2k6qqwHyzuUl/XBnif78PWTJYyL/dfowQHWE3sp6U6ZzqWiiIZnpTMO96zhkjwtg==}
@@ -3154,16 +3148,6 @@ packages:
       typescript:
         optional: true
 
-  tsconfck@3.0.3:
-    resolution: {integrity: sha512-4t0noZX9t6GcPTfBAbIbbIU4pfpCwh0ueq3S4O/5qXI1VwK1outmxhe9dOiEWqMz3MW2LKgDTpqWV+37IWuVbA==}
-    engines: {node: ^18 || >=20}
-    hasBin: true
-    peerDependencies:
-      typescript: ^5.0.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-
   tsconfig-paths@3.14.2:
     resolution: {integrity: sha512-o/9iXgCYc5L/JxCHPe3Hvh8Q/2xm5Z+p18PESBU6Ff33695QnCHBEjcytY2q19ua7Mbl/DavtBOLq+oG0RCL+g==}
 
@@ -3293,14 +3277,6 @@ packages:
 
   vite-tsconfig-paths@4.2.1:
     resolution: {integrity: sha512-GNUI6ZgPqT3oervkvzU+qtys83+75N/OuDaQl7HmOqFTb0pjZsuARrRipsyJhJ3enqV8beI1xhGbToR4o78nSQ==}
-    peerDependencies:
-      vite: '*'
-    peerDependenciesMeta:
-      vite:
-        optional: true
-
-  vite-tsconfig-paths@4.3.2:
-    resolution: {integrity: sha512-0Vd/a6po6Q+86rPlntHye7F31zA2URZMbH8M3saAZ/xR9QoGN/L21bxEGfXdWmFdNkqPpRdxFT7nmNe12e9/uA==}
     peerDependencies:
       vite: '*'
     peerDependenciesMeta:
@@ -3502,6 +3478,11 @@ packages:
 snapshots:
 
   '@aashutoshrathi/word-wrap@1.2.6': {}
+
+  '@adcio/core@file:packages/core':
+    dependencies:
+      '@adcio/api': link:packages/api
+      '@adcio/lib': link:packages/lib
 
   '@ampproject/remapping@2.2.1':
     dependencies:
@@ -6856,10 +6837,6 @@ snapshots:
     optionalDependencies:
       typescript: 5.3.3
 
-  tsconfck@3.0.3(typescript@5.3.3):
-    optionalDependencies:
-      typescript: 5.3.3
-
   tsconfig-paths@3.14.2:
     dependencies:
       '@types/json5': 0.0.29
@@ -7006,17 +6983,6 @@ snapshots:
       debug: 4.3.4
       globrex: 0.1.2
       tsconfck: 2.1.2(typescript@5.3.3)
-    optionalDependencies:
-      vite: 4.5.2(@types/node@20.9.3)(terser@5.30.3)
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
-
-  vite-tsconfig-paths@4.3.2(typescript@5.3.3)(vite@4.5.2(@types/node@20.9.3)(terser@5.30.3)):
-    dependencies:
-      debug: 4.3.4
-      globrex: 0.1.2
-      tsconfck: 3.0.3(typescript@5.3.3)
     optionalDependencies:
       vite: 4.5.2(@types/node@20.9.3)(terser@5.30.3)
     transitivePeerDependencies:
