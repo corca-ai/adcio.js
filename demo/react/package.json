@@ -1,8 +1,7 @@
 {
-  "name": "@adcio.js/demo-react",
+  "name": "@adcio/demo-react",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -10,8 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@adcio.js/api": "workspace:*",
-    "@adcio.js/core": "workspace:*",
+    "@adcio/api": "workspace:*",
+    "@adcio/core": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1",
@@ -25,13 +24,14 @@
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "msw": "^2.0.10",
-    "typescript": "^5.2.2",
-    "vite": "4.5.2",
-    "vite-tsconfig-paths": "^4.3.1"
+    "eslint-plugin-react-refresh": "^0.4.5"
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "dependenciesMeta": {
+    "@adcio/core": {
+      "injected": true
+    }
   }
 }

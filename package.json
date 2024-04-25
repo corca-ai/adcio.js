@@ -1,6 +1,5 @@
 {
   "name": "adcio.js",
-  "version": "0.1.8",
   "main": "dist/packages/index.js",
   "repository": "https://github.com/corca-ai/adcio.js",
   "author": "Corca <contact@corca.ai>",
@@ -35,10 +34,7 @@
     "*.md"
   ],
   "scripts": {
-    "start:dev": "tsc -w",
     "gen-api": "openapi-generator-cli generate",
-    "build": "vite build",
-    "prepare": "pnpm build",
     "format": "prettier --write \"packages/**/*.ts\"",
     "lint": "eslint \"{packages,test,__tests__}/**/*.ts\" --fix",
     "lint:ci": "eslint \"{packages,test,__tests__}/**/*.ts\"",
@@ -55,5 +51,13 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "packageManager": "pnpm@9.0.5",
+  "engineStrict": true,
+  "engines": { 
+    "node": "18",
+    "yarn": "please-use-pnpm",
+    "npm": "please-use-pnpm",
+    "pnpm": "9.0.5"
   }
 }
