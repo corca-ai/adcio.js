@@ -173,6 +173,7 @@ export class Adcio {
       this.onAddToCart({
         cartId: cart.id,
         productIdOnStore: cart.productIdOnStore,
+        quantity: cart.quantity,
       }),
     );
   }
