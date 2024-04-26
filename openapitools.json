@@ -7,13 +7,13 @@
       "controller": {
         "packageName": "controller",
         "generatorName": "typescript-axios",
-        "output": "#{cwd}/src/api/controller/v1",
+        "output": "#{cwd}/packages/api/controller/v1",
         "inputSpec": "https://api.adcio.ai/api-json"
       },
       "receiver": {
         "packageName": "receiver",
         "generatorName": "typescript-axios",
-        "output": "#{cwd}/src/api/receiver/v1",
+        "output": "#{cwd}/packages/api/receiver/v1",
         "inputSpec": "https://receiver.adcio.ai/api-json"
       }
     }

@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
@@ -8,11 +9,9 @@
     "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2017", "dom"],
     "outDir": "./dist",
-    "rootDir": ".",
-    "baseUrl": "./packages"
+    "rootDir": "./src"
   },
-  "include": ["packages/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["src/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

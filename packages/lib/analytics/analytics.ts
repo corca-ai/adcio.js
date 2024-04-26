@@ -1,6 +1,5 @@
-import { Configuration } from "api/controller/v1";
-import { EventsApi } from "api/receiver/v1";
-import { AdcioCore } from "lib/core";
+import { Configuration } from "@adcio/api/controller/v1";
+import { EventsApi } from "@adcio/api/receiver/v1";
 import {
   AdcioAnalyticsParams,
   AdcioAnalyticsOnPageViewParams,
@@ -9,6 +8,7 @@ import {
   AdcioAnalyticsOnAddToCartParams,
   AdcioAnalyticsOnPurchaseParams,
 } from "./analytics.interface";
+import { AdcioCore } from "../core";
 
 export class AdcioAnalytics {
   private adcioCore: AdcioCore;

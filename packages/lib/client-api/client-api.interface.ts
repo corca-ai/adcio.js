@@ -1,4 +1,4 @@
-import { SuggestionRequestDto } from "api/controller/v1";
+import { SuggestionRequestDto } from "@adcio/api/controller/v1";
 
 export interface Customer
   extends Pick<SuggestionRequestDto, "birthYear" | "area" | "gender"> {

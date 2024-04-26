@@ -4,8 +4,8 @@ import {
   TrackImpressionRequestDto,
   TrackPageViewRequestDto,
   TrackPurchaseRequestDto,
-} from "api/receiver/v1";
-import { AdcioCore } from "lib/core";
+} from "@adcio/api/receiver/v1";
+import { AdcioCore } from "../core";
 
 export interface AdcioAnalyticsParams {
   adcioCore: AdcioCore;

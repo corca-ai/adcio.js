@@ -1,17 +1,17 @@
-import { CustomerId, StoreId } from "api/dto/session.dto";
+import { CustomerId, StoreId } from "@adcio/api/dto/session.dto";
 import {
   AdcioAnalyticsOnPageViewParams,
   AdcioAnalyticsOnAddToCartParams,
   AdcioAnalyticsOnClickParams,
   AdcioAnalyticsOnPurchaseParams,
   AdcioAnalyticsOnImpressionParams,
-} from "lib/analytics";
+} from "@adcio/lib/analytics";
 import {
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateSuggestionParams,
   AdcioPlacementCreateRecommendationProductsParams,
   AdcioPlacementCreateRecommendationBannersParams,
-} from "lib/placement";
+} from "@adcio/lib/placement";
 
 export interface AdcioParams {
   clientId: StoreId;

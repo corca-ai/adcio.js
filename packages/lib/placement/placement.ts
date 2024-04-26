@@ -1,15 +1,19 @@
-import { Configuration, PageApi, SuggestionApi } from "api/controller/v1";
-import { isAxiosError } from "axios";
-import { ERROR_CODE, PLACEMENT_ERROR_MESSAGE } from "lib/constants/error";
-import { AdcioCore } from "lib/core";
-import { APIError } from "lib/error";
 import {
+  Configuration,
+  PageApi,
+  SuggestionApi,
+} from "@adcio/api/controller/v1";
+import { isAxiosError } from "axios";
+import type {
   AdcioPlacementParams,
   AdcioPlacementCreateSuggestionParams,
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateRecommendationProductsParams,
   AdcioPlacementCreateRecommendationBannersParams,
 } from "./placement.interface";
+import { ERROR_CODE, PLACEMENT_ERROR_MESSAGE } from "../constants/error";
+import { AdcioCore } from "../core";
+import { APIError } from "../error";
 
 export class AdcioPlacement {
   private adcioCore: AdcioCore;

@@ -1,5 +1,5 @@
-import { getMeta, getQuery } from "lib/utils";
 import { ICAFE24, ICAFE24API } from "./cafe24.interface";
+import { getMeta, getQuery } from "../../utils";
 import { Cart, Customer, ClientAPI, Order } from "../client-api.interface";
 
 const CORCA_CAFE24_CLIENT_ID = "8HE5BizGD9agkHIObMfXRF";

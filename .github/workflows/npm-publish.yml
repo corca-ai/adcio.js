@@ -11,8 +11,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 18
-      - run: yarn
-      - run: yarn test
+          cache: 'pnpm'
+
+      - run: pnpm
+      - run: pnpm test
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}

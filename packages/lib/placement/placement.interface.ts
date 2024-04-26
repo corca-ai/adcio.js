@@ -2,8 +2,8 @@ import {
   BannerSuggestionRequestDto,
   ProductSuggestionRequestDto,
   SuggestionRequestDto,
-} from "api/controller/v1";
-import { AdcioCore } from "lib/core";
+} from "@adcio/api/controller/v1";
+import { AdcioCore } from "../core";
 
 export type AdcioPlacementParams = {
   adcioCore: AdcioCore;
