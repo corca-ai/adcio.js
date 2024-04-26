@@ -8,7 +8,7 @@
     "@adcio/lib": "workspace:*"
   },
   "scripts": {
-    "start:dev": "tsc -w",
+    "start:dev": "vite build --watch",
     "build": "vite build",
     "prepare": "pnpm build"
   }

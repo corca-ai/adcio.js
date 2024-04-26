@@ -1,6 +1,6 @@
 export const waitForDOM = () => {
   if (document.readyState === "complete") {
-    return;
+    return Promise.resolve(document);
   }
   return new Promise<Document>((res) =>
     document.addEventListener("DOMContentLoaded", function () {
@@ -103,4 +103,10 @@ export const createNestedElement = (options: CreateNestedElementOptions) => {
     createNestedElement({ ...child, parent: element });
   }
   return element;
+};
+
+export const createElementFromHTML = (html: string) => {
+  const div = document.createElement("div");
+  div.innerHTML = html.trim();
+  return div as Element;
 };
