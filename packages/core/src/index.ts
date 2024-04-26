@@ -28,3 +28,15 @@ export {
   createElement,
   createNestedElement,
 } from "@adcio/lib/utils";
+
+export {
+  ElementSelector,
+  VisualElementSelector,
+  VisualPositionSelector,
+  ListedElementSelector,
+  Candidate,
+  getDepth,
+  getElementAtDepth,
+  getCssSelector,
+  dfs,
+} from "@adcio/lib/selectors";
