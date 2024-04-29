@@ -52,6 +52,10 @@ export class Adcio {
     });
   }
 
+  public setCustomerId(customerId: string) {
+    this.adcioCore.setCustomerId(customerId);
+  }
+
   // AdcioAnalytics
   public onPageView(params: AdcioOnPageViewParams) {
     return this.adcioAnalytics.onPageView(params);

@@ -128,6 +128,21 @@ importers:
       '@adcio/core':
         injected: true
 
+  packages/all-in-one:
+    dependencies:
+      '@adcio/api':
+        specifier: workspace:*
+        version: link:../api
+      '@adcio/core':
+        specifier: workspace:*
+        version: link:../core
+      '@adcio/lib':
+        specifier: workspace:*
+        version: link:../lib
+      '@adcio/widget':
+        specifier: workspace:*
+        version: link:../widget
+
   packages/api: {}
 
   packages/core:
