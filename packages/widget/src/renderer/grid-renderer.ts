@@ -1,5 +1,8 @@
-import { Product, ProductSuggestionDto } from "api/controller/v1";
-import { addCommas, createElementFromHTML } from "lib/utils";
+import {
+  Product,
+  ProductSuggestionResponseDto,
+} from "@adcio/api/controller/v1";
+import { addCommas, createElementFromHTML } from "@adcio/lib/utils";
 import { AbstractRenderer } from "./abstract-renderer";
 
 export abstract class GridRenderer extends AbstractRenderer {
@@ -26,18 +29,21 @@ export abstract class GridRenderer extends AbstractRenderer {
     };
   }
 
-  render(recommendations: ProductSuggestionDto[]): Element {
+  render(recommendation: ProductSuggestionResponseDto): Element {
     return createElementFromHTML(
       this.renderTemplate(this.templateWrapper, {
-        items: recommendations
-          .map((recommendation) =>
+        items: recommendation.suggestions
+          .map((suggestion) =>
             this.renderTemplate(
               this.templateItem,
-              this.refineProduct(recommendation.product),
+              this.refineProduct(suggestion.product),
             ),
           )
           .reduce((acc, item) => acc + item, ""),
-        styles: this.templateStyles,
+        styles: this.renderTemplate(
+          this.templateStyles,
+          recommendation.placement,
+        ),
       }),
     );
   }

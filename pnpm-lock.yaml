@@ -145,6 +145,15 @@ importers:
         specifier: workspace:*
         version: link:../api
 
+  packages/widget:
+    dependencies:
+      '@adcio/api':
+        specifier: workspace:*
+        version: link:../api
+      '@adcio/lib':
+        specifier: workspace:*
+        version: link:../lib
+
 packages:
 
   '@aashutoshrathi/word-wrap@1.2.6':

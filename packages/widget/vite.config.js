@@ -6,7 +6,7 @@ import banner from "vite-plugin-banner";
 import path from "path";
 import fs from "fs";
 
-const getPackageJson = function (...args) {
+const getPackageJson = (...args) => {
   const packageJSON = JSON.parse(
     fs.readFileSync(path.join(__dirname, "package.json")),
   );
@@ -20,8 +20,7 @@ const getPackageJson = function (...args) {
 };
 
 const { version, name, author } = {
-  ...getPackageJson("version", "author"),
-  name: "ADCIO",
+  ...getPackageJson("version", "author", "name"),
   description: "JavaScript SDK for ADCIO",
 };
 
