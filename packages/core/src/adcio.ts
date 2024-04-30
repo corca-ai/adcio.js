@@ -5,7 +5,7 @@ import type {
   SuggestionResponseDto,
 } from "@adcio/api/controller/v1";
 import { AdcioAnalytics } from "@adcio/lib/analytics/analytics";
-import { ClientAPI } from "@adcio/lib/client-api/client-api.interface";
+import { ClientAPI } from "@adcio/lib/client-api";
 import { AdcioCore } from "@adcio/lib/core";
 import { AdcioImpressionObserver } from "@adcio/lib/impression-observer/impression-observer";
 import { AdcioPlacement } from "@adcio/lib/placement/placement";

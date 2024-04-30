@@ -19,6 +19,10 @@ export class AdcioAllInOne {
     this.clientApi = clientApi;
   }
 
+  public static async run() {
+    return new AdcioAllInOne().run();
+  }
+
   public async run() {
     await this.clientApi.init();
 

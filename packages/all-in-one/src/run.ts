@@ -1,4 +1,4 @@
 import { waitForDOM } from "@adcio/lib/utils";
 import { AdcioAllInOne } from "./all-in-one";
 
-waitForDOM().then(() => new AdcioAllInOne().run());
+waitForDOM().then(() => AdcioAllInOne.run());
