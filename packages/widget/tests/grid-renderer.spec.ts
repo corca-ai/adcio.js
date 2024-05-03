@@ -1,0 +1,147 @@
+import { describe, it } from "vitest";
+import { renderers } from "widget/src";
+
+describe("test SimpleGridRenderer", () => {
+  it("", () => {
+    const element = new renderers.SimpleGridRenderer().render({
+      placement: {
+        id: "123",
+        activated: true,
+        bannerPlacementType: "STATIC",
+        clientId: "542b343f-f103-44ff-93a2-174722e0b5f7",
+        deletedAt: null,
+        developEnvironment: "CODE_INJECTOR",
+        displayCount: 5,
+        displayFormatHeight: null,
+        displayFormatWidth: null,
+        displayPositions: [],
+        placementFormat: null,
+        injector: null,
+        maxDisplayCount: 1,
+        minDisplayCount: 1,
+        pageName: "FOR YOU",
+        placementFormatRatio: null,
+        property: "PERSONAL",
+        screenShot: "",
+        suggestionType: "RECOMMEND",
+        supportEnvironment: "WEB",
+        tableSize: null,
+        title: "SimpleGrid",
+        type: "GRID",
+        createdAt: "2024-05-02T06:47:40.435Z",
+        updatedAt: "2024-05-02T06:47:40.435Z",
+      },
+      suggestions: [
+        {
+          product: {
+            id: "1",
+            idOnStore: "123:1",
+            storeId: "123",
+            sellerId: "456",
+            additionalInformation: [],
+            additionalImages: [],
+            decorationImages: [],
+            createdAt: "",
+            updatedAt: "",
+            includeInRecommendation: true,
+            deepLink: "",
+            caption: "",
+            name: "[고른] 춘천식 메밀막국수 밀키트 2인분, 2종",
+            summary: "물막 vs 비막 취향에 맞게",
+            image:
+              "https://thumbnail.wingeat.com/item/main/e68dd7a6ddbf4368b09254c74708cf8e-w600-v2.jpg",
+            url: "/item/goreunmakguksu",
+            price: 12900,
+            discountPrice: 9900,
+          },
+          logOptions: {
+            requestId: "123",
+            adsetId: "123",
+          },
+        },
+        {
+          product: {
+            id: "2",
+            idOnStore: "123:2",
+            storeId: "123",
+            sellerId: "456",
+            additionalInformation: [],
+            additionalImages: [],
+            decorationImages: [],
+            createdAt: "",
+            updatedAt: "",
+            includeInRecommendation: true,
+            deepLink: "",
+            caption: "",
+            name: "[고른] 얼큰 우삼겹 한우대창전골 2인분",
+            summary: "근사한 홈이자카야 전골 요리",
+            image:
+              "https://thumbnail.wingeat.com/item/main/97582c27930348819a5f66c6444fce85-w600-v2.jpg",
+            url: "/item/beefdaechanghotpot",
+            price: 18900,
+            discountPrice: 15980,
+          },
+          logOptions: {
+            requestId: "123",
+            adsetId: "123",
+          },
+        },
+        {
+          product: {
+            id: "3",
+            idOnStore: "123:3",
+            storeId: "123",
+            sellerId: "456",
+            additionalInformation: [],
+            additionalImages: [],
+            decorationImages: [],
+            createdAt: "",
+            updatedAt: "",
+            includeInRecommendation: true,
+            deepLink: "",
+            caption: "",
+            name: "[고른] 프리미엄 양념 LA갈비 750g, 1.5kg",
+            summary: "손수 지방을 제거해 깔끔한",
+            image:
+              "https://thumbnail.wingeat.com/item/main/358105cbbaa9428b91c57c06031f5614-w600-v2.jpg",
+            url: "/item/goreunlagalbi",
+            price: 32900,
+            discountPrice: 25800,
+          },
+          logOptions: {
+            requestId: "123",
+            adsetId: "123",
+          },
+        },
+        {
+          product: {
+            id: "4",
+            idOnStore: "123:4",
+            storeId: "123",
+            sellerId: "456",
+            additionalInformation: [],
+            additionalImages: [],
+            decorationImages: [],
+            createdAt: "",
+            updatedAt: "",
+            includeInRecommendation: true,
+            deepLink: "",
+            caption: "",
+            name: "[랠리] 곤약김밥 10종",
+            summary: "한 줄로 끝내는 식단관리",
+            image:
+              "https://thumbnail.wingeat.com/item/main/b4c786338bfe4069aa3cea47b780ae62-w600-v2.jpg",
+            url: "/item/rallykimbap",
+            price: 5500,
+            discountPrice: 4980,
+          },
+          logOptions: {
+            requestId: "123",
+            adsetId: "123",
+          },
+        },
+      ],
+    });
+    console.log(element.innerHTML);
+  });
+});
