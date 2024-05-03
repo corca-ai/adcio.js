@@ -56,6 +56,10 @@ export class Cafe24API implements ClientAPI {
     });
   }
 
+  getPageName() {
+    return getMeta({ property: "path_role" });
+  }
+
   getProduct() {
     const idOnStore = getMeta({ property: "product:productId" });
     if (!idOnStore) {

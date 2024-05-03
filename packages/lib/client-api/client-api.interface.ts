@@ -38,6 +38,7 @@ type NullableAwaitable<T> = Awaitable<Nullable<T>>;
 
 export interface ClientAPI {
   init(): Awaitable<void>;
+  getPageName(): Nullable<string>;
   getCustomer(): NullableAwaitable<Customer>;
   getProduct(): NullableAwaitable<Product>;
   getCategory(): NullableAwaitable<Category>;
