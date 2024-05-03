@@ -38,6 +38,14 @@ export abstract class AbstractRenderer {
             return (value.trim() + " ").repeat(parseInt(times, 10)).trimEnd();
           },
         )
+        // replace
+        .replace(/\${[A-Za-z0-9_.]*\.replace\(.*,.*\)}/g, (match: string) => {
+          const expression = match.replace("${", "").replace("}", "");
+          const [path, args] = expression.split(".replace");
+          const [from, to] = args.replace("(", "").replace(")", "").split(",");
+          const value = this.resolveValueFromPath(path.trim(), data);
+          return value.replace(from, to);
+        })
     );
   }
 }
