@@ -13,10 +13,31 @@ export abstract class AbstractRenderer {
   }
 
   protected renderTemplate(template: string, data: any): string {
-    return template.replace(/\${[A-Za-z0-9_.]*}/g, (match: string) => {
-      const path = match.replace("${", "").replace("}", "");
-      const value = this.resolveValueFromPath(path, data);
-      return value || "";
-    });
+    return (
+      template
+        // simple variable
+        .replace(/\${[A-Za-z0-9_.]*}/g, (match: string) => {
+          const path = match.replace("${", "").replace("}", "");
+          const value = this.resolveValueFromPath(path, data);
+          return value || "";
+        })
+        // ternary operator
+        .replace(/\${[A-Za-z0-9_.]*\s*\?.*\:.*}/g, (match: string) => {
+          const expression = match.replace("${", "").replace("}", "");
+          const [path, trueValue, falseValue] = expression.split(/\?|:/);
+          const value = this.resolveValueFromPath(path.trim(), data);
+          return value ? trueValue.trim() : falseValue.trim();
+        })
+        // string multiplication
+        .replace(
+          /\${[A-Za-z0-9\-\_]*\s*\*\s*[A-Za-z0-9_.]*}/g,
+          (match: string) => {
+            const expression = match.replace("${", "").replace("}", "");
+            const [value, path] = expression.split("*");
+            const times = this.resolveValueFromPath(path.trim(), data);
+            return (value.trim() + " ").repeat(parseInt(times, 10)).trimEnd();
+          },
+        )
+    );
   }
 }

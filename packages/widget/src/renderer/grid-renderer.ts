@@ -7,8 +7,7 @@ import { AbstractRenderer } from "./abstract-renderer";
 
 export abstract class GridRenderer extends AbstractRenderer {
   abstract templateItem: string;
-  abstract templateWrapper: string;
-  abstract templateStyles: string;
+  abstract templateList: string;
 
   refineProduct(product: Product): Omit<Product, "price" | "discountPrice"> & {
     price: string;
@@ -31,7 +30,7 @@ export abstract class GridRenderer extends AbstractRenderer {
 
   render(recommendation: ProductSuggestionResponseDto): Element {
     return createElementFromHTML(
-      this.renderTemplate(this.templateWrapper, {
+      this.renderTemplate(this.templateList, {
         items: recommendation.suggestions
           .map((suggestion) =>
             this.renderTemplate(
@@ -40,10 +39,44 @@ export abstract class GridRenderer extends AbstractRenderer {
             ),
           )
           .reduce((acc, item) => acc + item, ""),
-        styles: this.renderTemplate(
-          this.templateStyles,
-          recommendation.placement,
-        ),
+        widgetConfig: {
+          widget: { tableSize: { width: 4, height: 1 } },
+          title: {
+            hasTitle: true,
+            text: "Default Grid Widget",
+            fontSize: 12,
+            fontColor: "#cccccc",
+            fontWeight: 400,
+          },
+          product: {
+            image: { borderRadius: 12, ratio: "1:1" },
+            name: { fontSize: 12, fontColor: "#cccccc", fontWeight: 400 },
+            summary: {
+              hasSummary: false,
+              fontSize: 12,
+              fontColor: "#cccccc",
+              fontWeight: 400,
+            },
+            price: {
+              fontSize: 12,
+              fontColor: "#cccccc",
+              fontWeight: 400,
+            },
+            discountPrice: {
+              hasDiscountPrice: true,
+              fontSize: 12,
+              fontColor: "#cccccc",
+              fontWeight: 400,
+            },
+            discountRate: {
+              hasDiscountRate: true,
+              fontSize: 12,
+              fontColor: "#cccccc",
+              fontWeight: 400,
+            },
+          },
+        },
+        // recommendation.placement.widgetConfig,
       }),
     );
   }
