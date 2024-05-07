@@ -4,12 +4,12 @@ import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "src/styles/banner.css";
-import { SuggestionDto } from "@adcio/api/controller/v1/api";
+import { BannerSuggestionDto } from "@adcio/api/controller/v1/api";
 
 interface Props {
-  suggestionData: SuggestionDto[];
-  impressSlide: (currentSlideData: SuggestionDto) => void;
-  clickSlide: (currentSlideData: SuggestionDto) => void;
+  suggestionData: BannerSuggestionDto[];
+  impressSlide: (currentSlideData: BannerSuggestionDto) => void;
+  clickSlide: (currentSlideData: BannerSuggestionDto) => void;
 }
 
 export function Banner({ suggestionData, impressSlide, clickSlide }: Props) {

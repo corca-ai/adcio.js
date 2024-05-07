@@ -67,7 +67,7 @@ const createRecommendationBanners: Handler = async ({ request }) => {
   const isPlacementIdNotUUID =
     placementId === SuggestionTestId.NOT_UUID_PLACEMENT;
   const isPlacementIdSuccess =
-    placementId === SuggestionTestId.SUCCESS_PLACEMENT;
+    placementId === SuggestionTestId.BANNER_PLACEMENT;
   const isPlacementIdNotFound =
     placementId === SuggestionTestId.NOT_FOUND_PLACEMENT;
   const isPlacementIdDisabled =
@@ -112,8 +112,7 @@ const createRecommendationProducts: Handler = async ({ request }) => {
 
   const isPlacementIdNotUUID =
     placementId === SuggestionTestId.NOT_UUID_PLACEMENT;
-  const isPlacementIdSuccess =
-    placementId === SuggestionTestId.SUCCESS_PLACEMENT;
+  const isPlacementIdSuccess = placementId === SuggestionTestId.GRID_PLACEMENT;
   const isPlacementIdNotFound =
     placementId === SuggestionTestId.NOT_FOUND_PLACEMENT;
   const isPlacementIdDisabled =

@@ -103,7 +103,7 @@ describe("test AdcioPlacement module", () => {
   it("When the provided placementId is registered in the ADCIO service.", async () => {
     await expect(
       adcio.createRecommendationBanners({
-        placementId: SuggestionTestId.SUCCESS_PLACEMENT,
+        placementId: SuggestionTestId.BANNER_PLACEMENT,
       }),
     ).resolves.not.toThrow();
   });
