@@ -2,7 +2,6 @@ import type {
   BannerSuggestionResponseDto,
   FetchActivePlacementsResponseDto,
   ProductSuggestionResponseDto,
-  SuggestionResponseDto,
 } from "@adcio/api/controller/v1";
 import { AdcioAnalytics } from "@adcio/lib/analytics/analytics";
 import { ClientAPI } from "@adcio/lib/client-api";
@@ -14,7 +13,6 @@ import {
   AdcioConfig,
   AdcioCreateRecommendationBannersParams,
   AdcioCreateRecommendationProductsParams,
-  AdcioCreateSuggestionParams,
   AdcioFetchPlacementsParams,
   AdcioObserveImpressionParams,
   AdcioOnAddToCartParams,
@@ -89,15 +87,6 @@ export class Adcio {
     params: AdcioFetchPlacementsParams,
   ): Promise<FetchActivePlacementsResponseDto[] | undefined> {
     return this.adcioPlacement.fetchPlacements(params);
-  }
-
-  /**
-   *  @deprecated
-   */
-  public async createSuggestion(
-    params: AdcioCreateSuggestionParams,
-  ): Promise<SuggestionResponseDto | undefined> {
-    return this.adcioPlacement.createSuggestion(params);
   }
 
   /**
