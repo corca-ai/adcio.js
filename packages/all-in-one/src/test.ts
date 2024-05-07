@@ -66,6 +66,45 @@ waitForDOM().then(() => {
         },
       },
     ],
+    placement: {
+      widgetValue: {
+        widget: { tableSize: { columns: 4, rows: 1 } },
+        title: {
+          hasTitle: true,
+          text: "당신을 위한 추천 상품",
+          fontSize: 20,
+          fontColor: "#363636",
+          fontWeight: 400,
+        },
+        product: {
+          image: { borderRadius: 12, ratio: "1:1" },
+          name: { fontSize: 14, fontColor: "#4d4d4d", fontWeight: 500 },
+          summary: {
+            hasSummary: true,
+            fontSize: 12,
+            fontColor: "#999999",
+            fontWeight: 400,
+          },
+          price: {
+            fontSize: 12,
+            fontColor: "#999999",
+            fontWeight: 400,
+          },
+          discountPrice: {
+            hasDiscountPrice: true,
+            fontSize: 14,
+            fontColor: "#363636",
+            fontWeight: 700,
+          },
+          discountRate: {
+            hasDiscountRate: true,
+            fontSize: 14,
+            fontColor: "#f95d5d",
+            fontWeight: 700,
+          },
+        },
+      },
+    },
   });
   const shadowParent = document.createElement("div");
   const shadowRoot = shadowParent.attachShadow({ mode: "open" });

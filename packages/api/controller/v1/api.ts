@@ -3563,6 +3563,8 @@ export interface SuggestionResponsePlacementType {
      * @memberof SuggestionResponsePlacementType
      */
     'deletedAt': string | null;
+
+    widgetValue?: { values: any };
 }
 
 export const SuggestionResponsePlacementTypeTypeEnum = {
