@@ -8,7 +8,6 @@ export type {
   AdcioOnAddToCartParams,
   AdcioOnPurchaseParams,
   AdcioObserveImpressionParams,
-  AdcioCreateSuggestionParams,
 } from "./adcio.interface";
 
 // FrontAPI

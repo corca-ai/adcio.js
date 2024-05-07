@@ -1,7 +1,3 @@
-import {
-  BannerSuggestionRequestDto,
-  ProductSuggestionRequestDto,
-} from "api/controller/v1";
 import { HttpResponse, http } from "msw";
 import {
   ReceiverAPIField,
@@ -17,6 +13,10 @@ import {
   recommendationProductsResponse,
   widgetRecommendationProductsResponse,
 } from "./recommendations.demo";
+import {
+  BannerSuggestionRequestDto,
+  ProductSuggestionRequestDto,
+} from "../packages/api/controller/v1";
 import {
   ERROR_CODE,
   PLACEMENT_ERROR_MESSAGE,
