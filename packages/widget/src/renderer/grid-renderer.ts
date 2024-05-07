@@ -32,15 +32,15 @@ export abstract class GridRenderer extends AbstractRenderer {
     return createElementFromHTML(
       this.renderTemplate(this.templateList, {
         items: recommendation.suggestions
-          .map((suggestion) =>
-            this.renderTemplate(
-              this.templateItem,
-              this.refineProduct(suggestion.product),
-            ),
+          .map(
+            (suggestion) =>
+              this.renderTemplate(
+                this.templateItem,
+                this.refineProduct(suggestion.product),
+              ), // TODO impression / click event
           )
           .reduce((acc, item) => acc + item, ""),
         widgetValue: recommendation.placement.widgetValue?.values,
-        // recommendation.placement.widgetConfig,
       }),
     );
   }
