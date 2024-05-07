@@ -17,6 +17,10 @@
     color: ${widgetConfig.title.fontColor};
   }
 
+  .displaynone {
+    display: none;
+  }
+
   /* list */
   .list {
     box-sizing: border-box;
@@ -47,7 +51,7 @@
     max-width: 100%;
     background-color: rgb(248, 248, 248);
     user-select: none;
-    border-radius: ${product.image.borderRadius};
+    border-radius: ${widgetConfig.product.image.borderRadius};
     display: block;
     object-fit: cover;
     width: 100%;
@@ -62,49 +66,46 @@
     gap: 6px;
     margin-top: 6px;
   }
-  .list .item .info .title-container {
+  .list .item .info .name-container {
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
-  /* title */
-  .list .item .info .title-wrapper {
+  /* name */
+  .list .item .info .name-wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 1px;
   }
-  .list .item .info .title {
+  .list .item .info .name {
     margin: 0px;
     padding: 0px;
-    font-family: Pretendard;
     font-style: normal;
     line-height: 140%;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: ${widgetConfig.product.name.fontSize}px;
+    font-weight: ${widgetConfig.product.name.fontWeight};
+    color: ${widgetConfig.product.name.fontColor};
     text-overflow: ellipsis;
-    display: -webkit-box;
     overflow: hidden;
     white-space: pre-wrap;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    color: rgb(77, 77, 77);
   }
-  .list .item .info .subtitle {
+  .list .item .info .summary {
+    display: ${widgetConfig.product.summary.hasSummary ? block : none};
     margin: 0px;
     padding: 0px;
-    font-family: Pretendard;
     font-style: normal;
     line-height: 140%;
-    font-size: 12px;
-    font-weight: 400;
+    font-size: ${widgetConfig.product.summary.fontSize}px;
+    font-weight: ${widgetConfig.product.summary.fontWeight};
+    color: ${widgetConfig.product.summary.fontColor};
     text-overflow: ellipsis;
-    display: -webkit-box;
     overflow: hidden;
     white-space: pre-wrap;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    color: rgb(153, 153, 153);
   }
   /* price */
   .list .item .info .price-container {
@@ -119,35 +120,34 @@
     gap: 2px;
   }
   .list .item .info .original-price {
+    display: ${widgetConfig.product.discountPrice.hasDiscountPrice ? block : none};
     margin: 0px;
     padding: 0px;
-    font-family: Pretendard;
     font-style: normal;
     line-height: 140%;
-    font-size: 12px;
-    font-weight: 400;
-    color: rgb(153, 153, 153);
+    font-size: ${widgetConfig.product.price.fontSize}px;
+    font-weight: ${widgetConfig.product.price.fontWeight};
+    color: ${widgetConfig.product.price.fontColor};
     text-decoration: line-through;
   }
   .list .item .info .discount-rate {
+    display: ${widgetConfig.product.discountRate.hasDiscountRate ? block : none};
     margin: 0px;
     padding: 0px;
-    font-family: Pretendard;
     font-style: normal;
     line-height: 140%;
-    font-size: 14px;
-    font-weight: 700;
-    color: rgb(249, 94, 94);
+    font-size: ${widgetConfig.product.discountRate.fontSize}px;
+    font-weight: ${widgetConfig.product.discountRate.fontWeight};
+    color: ${widgetConfig.product.discountRate.fontColor};
   }
   .list .item .info .discount-price {
     margin: 0px;
     padding: 0px;
-    font-family: Pretendard;
     font-style: normal;
     line-height: 140%;
-    font-size: 14px;
-    font-weight: 700;
-    color: rgb(54, 54, 54);
+    font-size: ${widgetConfig.product.discountPrice.fontSize}px;
+    font-weight: ${widgetConfig.product.discountPrice.fontWeight};
+    color: ${widgetConfig.product.discountPrice.fontColor};
   }
 </style>
 <div>

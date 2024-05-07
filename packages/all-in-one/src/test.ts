@@ -59,7 +59,6 @@ waitForDOM().then(() => {
             "https://thumbnail.wingeat.com/item/main/b4c786338bfe4069aa3cea47b780ae62-w600-v2.jpg",
           url: "/item/rallykimbap",
           price: 5500,
-          discountPrice: 4980,
         },
         logOptions: {
           requestId: "123",
