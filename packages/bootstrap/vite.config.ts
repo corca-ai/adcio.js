@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { resolve } from "path";
 import * as path from "path";
-import { defineConfig } from "vite";
+import { UserConfig, defineConfig } from "vite";
 import banner from "vite-plugin-banner";
 import dts from "vite-plugin-dts";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -25,13 +25,14 @@ const sdkBanner = `
   Copyright (c) ${author.replace(/ *<[^)]*> */g, "")} and project contributors.
 `;
 
-export default defineConfig({
+export const getConfig = (entry: string, emptyOutDir = false): UserConfig => ({
   build: {
+    emptyOutDir,
     lib: {
-      entry: resolve(__dirname, "./src/index.ts"),
+      entry: resolve(__dirname, `./src/${entry}.ts`),
       formats: ["es", "cjs", "iife"],
-      name: "adcioAllInOne",
-      fileName: "index",
+      name: "AdcioBootstrap",
+      fileName: entry,
     },
   },
   resolve: {
@@ -39,3 +40,5 @@ export default defineConfig({
   },
   plugins: [dts(), tsconfigPaths(), banner(sdkBanner)],
 });
+
+export default defineConfig(getConfig("index", true));
