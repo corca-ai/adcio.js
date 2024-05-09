@@ -128,7 +128,9 @@ importers:
       '@adcio/core':
         injected: true
 
-  packages/all-in-one:
+  packages/api: {}
+
+  packages/bootstrap:
     dependencies:
       '@adcio/api':
         specifier: workspace:*
@@ -142,8 +144,6 @@ importers:
       '@adcio/widget':
         specifier: workspace:*
         version: link:../widget
-
-  packages/api: {}
 
   packages/core:
     dependencies:
