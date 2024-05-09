@@ -4,7 +4,7 @@ import "src/styles/banner.css";
 
 import { useEffect, useState } from "react";
 import { Adcio } from "@adcio/core";
-import { SuggestionDto } from "@adcio/api/controller/v1/api";
+import { BannerSuggestionDto } from "@adcio/api/controller/v1/api";
 import { SuggestionTestId } from "../../../../mock/constants";
 import { Banner } from "src/component/banner";
 
@@ -14,12 +14,14 @@ interface Props {
 
 export default function BannerPage({ adcioInstance }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [suggestionData, setSuggestionData] = useState<SuggestionDto[]>([]);
+  const [suggestionData, setSuggestionData] = useState<BannerSuggestionDto[]>(
+    [],
+  );
 
   useEffect(() => {
     async function fetchMyAPI() {
-      const response = await adcioInstance.createSuggestion({
-        placementId: SuggestionTestId.SUCCESS_PLACEMENT,
+      const response = await adcioInstance.createRecommendationBanners({
+        placementId: SuggestionTestId.BANNER_PLACEMENT,
       });
       setSuggestionData(response.suggestions);
       setIsLoading(false);

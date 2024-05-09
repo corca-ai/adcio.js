@@ -6,7 +6,6 @@ import {
 import { isAxiosError } from "axios";
 import type {
   AdcioPlacementParams,
-  AdcioPlacementCreateSuggestionParams,
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateRecommendationProductsParams,
   AdcioPlacementCreateRecommendationBannersParams,
@@ -60,26 +59,6 @@ export class AdcioPlacement {
         params.pageName,
         this.adcioCore.getClientId(),
       );
-
-      return data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  /**
-   *  @deprecated
-   */
-  public async createSuggestion(params: AdcioPlacementCreateSuggestionParams) {
-    try {
-      const { data } = await new SuggestionApi(
-        this.apiConfig,
-      ).suggestionControllerSuggest({
-        customerId: this.adcioCore.getCustomerId(),
-        sessionId: this.adcioCore.getSessionId(),
-        deviceId: this.adcioCore.getDeviceId(),
-        ...params,
-      });
 
       return data;
     } catch (error) {

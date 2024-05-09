@@ -2,10 +2,9 @@ import type {
   BannerSuggestionResponseDto,
   FetchActivePlacementsResponseDto,
   ProductSuggestionResponseDto,
-  SuggestionResponseDto,
 } from "@adcio/api/controller/v1";
 import { AdcioAnalytics } from "@adcio/lib/analytics/analytics";
-import { ClientAPI } from "@adcio/lib/client-api/client-api.interface";
+import { ClientAPI } from "@adcio/lib/client-api";
 import { AdcioCore } from "@adcio/lib/core";
 import { AdcioImpressionObserver } from "@adcio/lib/impression-observer/impression-observer";
 import { AdcioPlacement } from "@adcio/lib/placement/placement";
@@ -14,7 +13,6 @@ import {
   AdcioConfig,
   AdcioCreateRecommendationBannersParams,
   AdcioCreateRecommendationProductsParams,
-  AdcioCreateSuggestionParams,
   AdcioFetchPlacementsParams,
   AdcioObserveImpressionParams,
   AdcioOnAddToCartParams,
@@ -52,6 +50,10 @@ export class Adcio {
     });
   }
 
+  public setCustomerId(customerId: string) {
+    this.adcioCore.setCustomerId(customerId);
+  }
+
   // AdcioAnalytics
   public onPageView(params: AdcioOnPageViewParams) {
     return this.adcioAnalytics.onPageView(params);
@@ -85,15 +87,6 @@ export class Adcio {
     params: AdcioFetchPlacementsParams,
   ): Promise<FetchActivePlacementsResponseDto[] | undefined> {
     return this.adcioPlacement.fetchPlacements(params);
-  }
-
-  /**
-   *  @deprecated
-   */
-  public async createSuggestion(
-    params: AdcioCreateSuggestionParams,
-  ): Promise<SuggestionResponseDto | undefined> {
-    return this.adcioPlacement.createSuggestion(params);
   }
 
   /**

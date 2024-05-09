@@ -8,7 +8,6 @@ import {
 } from "@adcio/lib/analytics";
 import {
   AdcioPlacementFetchPlacementsParams,
-  AdcioPlacementCreateSuggestionParams,
   AdcioPlacementCreateRecommendationProductsParams,
   AdcioPlacementCreateRecommendationBannersParams,
 } from "@adcio/lib/placement";
@@ -42,11 +41,6 @@ export type AdcioObserveImpressionParams = {
 };
 
 export type AdcioFetchPlacementsParams = AdcioPlacementFetchPlacementsParams;
-
-/**
- *  @deprecated
- */
-export type AdcioCreateSuggestionParams = AdcioPlacementCreateSuggestionParams;
 
 export type AdcioCreateRecommendationProductsParams =
   AdcioPlacementCreateRecommendationProductsParams;

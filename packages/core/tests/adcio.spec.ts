@@ -102,15 +102,15 @@ describe("test AdcioPlacement module", () => {
 
   it("When the provided placementId is registered in the ADCIO service.", async () => {
     await expect(
-      adcio.createSuggestion({
-        placementId: SuggestionTestId.SUCCESS_PLACEMENT,
+      adcio.createRecommendationBanners({
+        placementId: SuggestionTestId.BANNER_PLACEMENT,
       }),
     ).resolves.not.toThrow();
   });
 
   it("When the provided placementId is not uuid in the ADCIO service", async () => {
     await expect(
-      adcio.createSuggestion({
+      adcio.createRecommendationBanners({
         placementId: SuggestionTestId.NOT_UUID_PLACEMENT,
       }),
     ).rejects.toMatchObject({
@@ -121,7 +121,7 @@ describe("test AdcioPlacement module", () => {
 
   it("When the provided placementId is not registered in the ADCIO service.", async () => {
     await expect(
-      adcio.createSuggestion({
+      adcio.createRecommendationBanners({
         placementId: SuggestionTestId.NOT_FOUND_PLACEMENT,
       }),
     ).rejects.toMatchObject({
@@ -132,7 +132,7 @@ describe("test AdcioPlacement module", () => {
 
   it("When the provided placementId is not activated in the ADCIO service.", async () => {
     await expect(
-      adcio.createSuggestion({
+      adcio.createRecommendationBanners({
         placementId: SuggestionTestId.NO_ACTIVATED_PLACEMENT,
       }),
     ).rejects.toMatchObject({

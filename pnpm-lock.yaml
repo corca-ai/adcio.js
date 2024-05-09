@@ -130,6 +130,21 @@ importers:
 
   packages/api: {}
 
+  packages/bootstrap:
+    dependencies:
+      '@adcio/api':
+        specifier: workspace:*
+        version: link:../api
+      '@adcio/core':
+        specifier: workspace:*
+        version: link:../core
+      '@adcio/lib':
+        specifier: workspace:*
+        version: link:../lib
+      '@adcio/widget':
+        specifier: workspace:*
+        version: link:../widget
+
   packages/core:
     dependencies:
       '@adcio/api':
@@ -144,6 +159,15 @@ importers:
       '@adcio/api':
         specifier: workspace:*
         version: link:../api
+
+  packages/widget:
+    dependencies:
+      '@adcio/api':
+        specifier: workspace:*
+        version: link:../api
+      '@adcio/lib':
+        specifier: workspace:*
+        version: link:../lib
 
 packages:
 
