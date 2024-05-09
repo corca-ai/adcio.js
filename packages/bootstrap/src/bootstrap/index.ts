@@ -3,11 +3,6 @@ import { createClientAPI } from "@adcio/lib/client-api";
 import { ClientAPI } from "@adcio/lib/client-api/client-api.interface";
 import { CartsStorage } from "@adcio/lib/storage/tracker-storage";
 import { getMeta } from "@adcio/lib/utils";
-import {
-  FetchActivePlacementsResponseDto,
-  PlacementSuggestionTypeEnum,
-  PlacementTypeEnum,
-} from "api/controller/v1";
 import { AdcioPlacementBootstrap } from "./placement";
 import { AdcioError } from "../errors";
 
@@ -49,9 +44,9 @@ export class AdcioBootstrap {
 
     return Promise.allSettled([
       this.loadPlacements(),
-      ...(await this.handleView()),
-      ...(await this.handleCarts()),
-      ...(await this.handleOrder()),
+      this.handleView(),
+      this.handleCarts(),
+      this.handleOrder(),
     ]);
   }
 
@@ -82,45 +77,22 @@ export class AdcioBootstrap {
     }).loadPlacements(pageName);
   }
 
-  private async loadPlacement(placement: FetchActivePlacementsResponseDto) {
-    switch (placement.suggestionType) {
-      case PlacementSuggestionTypeEnum.Advertise:
-        switch (placement.type) {
-          case PlacementTypeEnum.Grid:
-            break;
-          case PlacementTypeEnum.Banner:
-            break;
-        }
-        break;
-      case PlacementSuggestionTypeEnum.Recommend:
-        switch (placement.type) {
-          case PlacementTypeEnum.Grid:
-            break;
-          case PlacementTypeEnum.Banner:
-            break;
-        }
-        break;
-    }
-  }
-
-  private async handleView(): Promise<Promise<void>[]> {
+  private async handleView(): Promise<void> {
     const product = await this.clientApi.getProduct();
     const category = await this.clientApi.getCategory();
     if (!product?.idOnStore && !category?.idOnStore) {
-      return [];
+      return;
     }
-    return [
-      this.adcioInstance.onPageView({
-        productIdOnStore: product?.idOnStore,
-        categoryIdOnStore: category?.idOnStore,
-      }),
-    ];
+    await this.adcioInstance.onPageView({
+      productIdOnStore: product?.idOnStore,
+      categoryIdOnStore: category?.idOnStore,
+    });
   }
 
-  private async handleCarts(): Promise<Promise<void>[]> {
+  private async handleCarts(): Promise<void> {
     const carts = await this.clientApi.getCarts();
     if (!carts) {
-      return [];
+      return;
     }
 
     const storage = new CartsStorage({
@@ -133,33 +105,37 @@ export class AdcioBootstrap {
       (cart) => !existing.find((c) => c.id === cart.id),
     );
     if (newCarts.length === 0) {
-      return [];
+      return;
     }
 
-    return newCarts.map((cart) =>
-      this.adcioInstance.onAddToCart({
-        cartId: cart.id,
-        productIdOnStore: cart.productIdOnStore,
-        quantity: cart.quantity,
-      }),
+    await Promise.allSettled(
+      newCarts.map((cart) =>
+        this.adcioInstance.onAddToCart({
+          cartId: cart.id,
+          productIdOnStore: cart.productIdOnStore,
+          quantity: cart.quantity,
+        }),
+      ),
     );
   }
 
-  private async handleOrder(): Promise<Promise<void>[]> {
+  private async handleOrder(): Promise<void> {
     const order = await this.clientApi.getOrder();
     if (!order) {
-      return [];
+      return;
     }
 
-    return order.products.map((product) =>
-      this.adcioInstance.onPurchase({
-        orderId: order.id,
-        amount: Number(
-          product.subTotalPrice || product.price * product.quantity,
-        ),
-        quantity: product.quantity,
-        productIdOnStore: product.idOnStore,
-      }),
+    await Promise.allSettled(
+      order.products.map((product) =>
+        this.adcioInstance.onPurchase({
+          orderId: order.id,
+          amount: Number(
+            product.subTotalPrice || product.price * product.quantity,
+          ),
+          quantity: product.quantity,
+          productIdOnStore: product.idOnStore,
+        }),
+      ),
     );
   }
 }
