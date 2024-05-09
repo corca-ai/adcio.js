@@ -4,7 +4,7 @@ import { ClientAPI } from "@adcio/lib/client-api/client-api.interface";
 import { CartsStorage } from "@adcio/lib/storage/tracker-storage";
 import { getMeta } from "@adcio/lib/utils";
 
-export class AdcioAllInOne {
+export class AdcioBootstrap {
   private clientId: string;
   private clientApi: ClientAPI;
   private adcioInstance: Adcio;
@@ -25,7 +25,7 @@ export class AdcioAllInOne {
   }
 
   public static async run() {
-    return new AdcioAllInOne().run();
+    return new AdcioBootstrap().run();
   }
 
   public async run() {
