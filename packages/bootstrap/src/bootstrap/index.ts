@@ -3,6 +3,13 @@ import { createClientAPI } from "@adcio/lib/client-api";
 import { ClientAPI } from "@adcio/lib/client-api/client-api.interface";
 import { CartsStorage } from "@adcio/lib/storage/tracker-storage";
 import { getMeta } from "@adcio/lib/utils";
+import {
+  FetchActivePlacementsResponseDto,
+  PlacementSuggestionTypeEnum,
+  PlacementTypeEnum,
+} from "api/controller/v1";
+import { AdcioPlacementBootstrap } from "./placement";
+import { AdcioError } from "../errors";
 
 export class AdcioBootstrap {
   private clientId: string;
@@ -12,14 +19,14 @@ export class AdcioBootstrap {
   constructor(config: { clientId?: string } = {}) {
     const clientId = config.clientId || this.getClientId();
     if (!clientId) {
-      throw new Error("ADCIO: Client ID is not found");
+      throw new AdcioError("Client ID is not found");
     }
     this.clientId = clientId;
     this.adcioInstance = new Adcio({ clientId });
 
     const clientApi = createClientAPI();
     if (!clientApi) {
-      throw new Error("ADCIO: Client API is not found");
+      throw new AdcioError("Client API is not found");
     }
     this.clientApi = clientApi;
   }
@@ -41,6 +48,7 @@ export class AdcioBootstrap {
     }
 
     return Promise.allSettled([
+      this.loadPlacements(),
       ...(await this.handleView()),
       ...(await this.handleCarts()),
       ...(await this.handleOrder()),
@@ -64,33 +72,34 @@ export class AdcioBootstrap {
     );
   }
 
-  private getPlacementIds(): string[] {
-    return (
-      getMeta({ property: "adcio:placementIds" }) ||
-      (window as unknown as Window & { ADCIO_PLACEMENT_IDS: string })
-        .ADCIO_PLACEMENT_IDS ||
-      ""
-    ).split(",");
-  }
-
   private async loadPlacements() {
-    let placementIds: string[] = [];
-
     const pageName = this.getPageName();
     if (!pageName) {
-      const fetched = await this.adcioInstance.fetchPlacements({
-        pageName: "",
-      });
-      if (!fetched) {
-        throw new Error("ADCIO: no placements fetched");
-      }
-      placementIds = fetched.map((placement) => placement.id);
-    } else {
-      placementIds = this.getPlacementIds();
+      throw new AdcioError("pageName is not found");
     }
+    return new AdcioPlacementBootstrap({
+      adcioInstance: this.adcioInstance,
+    }).loadPlacements(pageName);
+  }
 
-    if (placementIds.length === 0) {
-      throw new Error("ADCIO: no placements found");
+  private async loadPlacement(placement: FetchActivePlacementsResponseDto) {
+    switch (placement.suggestionType) {
+      case PlacementSuggestionTypeEnum.Advertise:
+        switch (placement.type) {
+          case PlacementTypeEnum.Grid:
+            break;
+          case PlacementTypeEnum.Banner:
+            break;
+        }
+        break;
+      case PlacementSuggestionTypeEnum.Recommend:
+        switch (placement.type) {
+          case PlacementTypeEnum.Grid:
+            break;
+          case PlacementTypeEnum.Banner:
+            break;
+        }
+        break;
     }
   }
 
