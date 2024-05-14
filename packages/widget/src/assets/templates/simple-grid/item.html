@@ -1,0 +1,28 @@
+<a class="item" href="${url}">
+  <div class="thumbnail">
+    <img src="${image}" draggable="false" alt="상품이미지" class="image" />
+  </div>
+  <div class="info">
+    <div class="name-container">
+      <div class="name-wrapper">
+        <p class="name">${name}</p>
+        <p class="summary">${summary}</p>
+      </div>
+    </div>
+    <div class="price-container">
+      <div class="price-wrapper">
+        <div class="${discountPrice ? price : displaynone}">
+          <p class="original-price">${price}원</p>
+        </div>
+        <div class="price">
+          <p class="${discountRate ? discount-rate : displaynone}">
+            ${discountRate}%
+          </p>
+          <p class="discount-price">
+            ${discountPrice ? ${discountPrice} : ${price}}원
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
