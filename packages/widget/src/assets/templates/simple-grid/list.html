@@ -5,10 +5,10 @@
   }
   .title {
     padding: 16px;
-    display: ${widgetValue.title.hasTitle ? block : none};
-    font-size: ${widgetValue.title.fontSize}px;
-    font-weight: ${widgetValue.title.fontWeight};
-    color: ${widgetValue.title.fontColor};
+    display: ${widgetValue.title.title.show ? block : none};
+    font-size: ${widgetValue.title.title.fontSize}px;
+    font-weight: ${widgetValue.title.title.fontWeight};
+    color: ${widgetValue.title.title.fontColor};
   }
 
   .displaynone {
@@ -96,7 +96,7 @@
     -webkit-box-orient: vertical;
     font-style: normal;
     line-height: 140%;
-    display: ${widgetValue.product.summary.hasSummary ? block : none};
+    display: ${widgetValue.product.summary.show ? block : none};
     font-size: ${widgetValue.product.summary.fontSize}px;
     font-weight: ${widgetValue.product.summary.fontWeight};
     color: ${widgetValue.product.summary.fontColor};
@@ -119,7 +119,7 @@
     text-decoration: line-through;
     font-style: normal;
     line-height: 140%;
-    display: ${widgetValue.product.discountPrice.hasDiscountPrice ? block : none};
+    display: ${widgetValue.product.discountPrice.show ? block : none};
     font-size: ${widgetValue.product.price.fontSize}px;
     font-weight: ${widgetValue.product.price.fontWeight};
     color: ${widgetValue.product.price.fontColor};
@@ -129,7 +129,7 @@
     padding: 0px;
     font-style: normal;
     line-height: 140%;
-    display: ${widgetValue.product.discountRate.hasDiscountRate ? block : none};
+    display: ${widgetValue.product.discountRate.show ? block : none};
     font-size: ${widgetValue.product.discountRate.fontSize}px;
     font-weight: ${widgetValue.product.discountRate.fontWeight};
     color: ${widgetValue.product.discountRate.fontColor};
@@ -145,6 +145,6 @@
   }
 </style>
 <div>
-  <div class="title">${widgetValue.title.text}</div>
+  <div class="title">${widgetValue.title.title.text}</div>
   <div class="list">${items}</div>
 </div>
