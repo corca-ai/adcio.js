@@ -19,7 +19,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: "pnpm"
 
       - uses: actions/cache@v3
         id: deps-cache
@@ -29,8 +28,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      - if: steps.deps-cache.outputs.cache-hit != 'true'
-        run: pnpm install
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: true
 
       - run: pnpm run lint
 
