@@ -3,8 +3,8 @@ import "swiper/css/pagination";
 import "src/styles/banner.css";
 
 import { useEffect, useState } from "react";
-import { Adcio } from "@adcio/core";
-import { BannerSuggestionDto } from "@adcio/api/controller/v1/api";
+import { Adcio } from "@adcio.js/core";
+import { BannerSuggestionDto } from "@adcio.js/api/controller/v1/api";
 import { SuggestionTestId } from "../../../../mock/constants";
 import { Banner } from "src/component/banner";
 

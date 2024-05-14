@@ -1,5 +1,5 @@
-import { PLACEMENT_ERROR_MESSAGE } from "@adcio/lib/constants/error";
-import { AdcioCore } from "@adcio/lib/core";
+import { PLACEMENT_ERROR_MESSAGE } from "@adcio.js/lib/constants/error";
+import { AdcioCore } from "@adcio.js/lib/core";
 import {
   afterAll,
   afterEach,
@@ -74,13 +74,13 @@ describe("test AdcioCore module", () => {
   });
 
   it("should call AdcioCore constructor once when Adcio is created", async () => {
-    vi.doMock("@adcio/lib/core", () => {
+    vi.doMock("@adcio.js/lib/core", () => {
       return {
         AdcioCore: vi.fn().mockImplementation((adcioCore) => adcioCore),
       };
     });
 
-    const { AdcioCore } = await import("@adcio/lib/core");
+    const { AdcioCore } = await import("@adcio.js/lib/core");
     const { Adcio } = await import("../src");
 
     new Adcio({
@@ -90,7 +90,7 @@ describe("test AdcioCore module", () => {
 
     expect(AdcioCore).toHaveBeenCalledTimes(1);
 
-    vi.doUnmock("@adcio/lib/core");
+    vi.doUnmock("@adcio.js/lib/core");
   });
 });
 

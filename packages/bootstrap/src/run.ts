@@ -1,4 +1,4 @@
-import { waitForDOM } from "@adcio/lib/utils";
+import { waitForDOM } from "@adcio.js/lib/utils";
 import { AdcioBootstrap } from "./bootstrap";
 
 const isBrowser = typeof window !== "undefined";

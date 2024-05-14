@@ -1,8 +1,8 @@
 import {
   Product,
   ProductSuggestionResponseDto,
-} from "@adcio/api/controller/v1";
-import { addCommas, createElementFromHTML } from "@adcio/lib/utils";
+} from "@adcio.js/api/controller/v1";
+import { addCommas, createElementFromHTML } from "@adcio.js/lib/utils";
 import { AbstractRenderer } from "./abstract-renderer";
 
 export abstract class GridRenderer extends AbstractRenderer {

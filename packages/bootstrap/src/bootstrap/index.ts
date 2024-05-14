@@ -1,8 +1,8 @@
-import { Adcio } from "@adcio/core";
-import { createClientAPI } from "@adcio/lib/client-api";
-import { ClientAPI } from "@adcio/lib/client-api/client-api.interface";
-import { CartsStorage } from "@adcio/lib/storage/tracker-storage";
-import { getMeta } from "@adcio/lib/utils";
+import { Adcio } from "@adcio.js/core";
+import { createClientAPI } from "@adcio.js/lib/client-api";
+import { ClientAPI } from "@adcio.js/lib/client-api/client-api.interface";
+import { CartsStorage } from "@adcio.js/lib/storage/tracker-storage";
+import { getMeta } from "@adcio.js/lib/utils";
 import { AdcioPlacementBootstrap } from "./placement";
 import { AdcioError } from "../errors";
 

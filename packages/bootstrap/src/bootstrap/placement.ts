@@ -1,4 +1,4 @@
-import { Adcio } from "@adcio/core";
+import { Adcio } from "@adcio.js/core";
 import {
   FetchActivePlacementsResponseDto,
   PlacementSuggestionTypeEnum,

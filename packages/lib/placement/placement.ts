@@ -2,7 +2,7 @@ import {
   Configuration,
   PageApi,
   SuggestionApi,
-} from "@adcio/api/controller/v1";
+} from "@adcio.js/api/controller/v1";
 import { isAxiosError } from "axios";
 import type {
   AdcioPlacementParams,

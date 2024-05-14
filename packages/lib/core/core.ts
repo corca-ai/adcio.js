@@ -4,7 +4,7 @@ import {
   DeviceId,
   SessionId,
   StoreId,
-} from "@adcio/api/dto/session.dto";
+} from "@adcio.js/api/dto/session.dto";
 import { AdcioCoreParams } from "./core.interface";
 import { createStorage } from "../storage/storage.factory";
 import { Storage } from "../storage/storage.interface";

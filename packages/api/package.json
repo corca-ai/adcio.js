@@ -1,4 +1,14 @@
 {
-  "name": "@adcio/api",
-  "version": "0.2.0"
+  "name": "@adcio.js/api",
+  "version": "0.2.0",
+  "author": "Corca <contact@corca.ai>",
+  "description": "JavaScript SDK for ADCIO",
+  "main": "dist/index.js",
+  "dependencies": {
+    "axios": "^1.6.1"
+  },
+  "scripts": {
+    "build": "vite build",
+    "prepare": "pnpm build"
+  }
 }

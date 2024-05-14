@@ -11,10 +11,10 @@ export type {
 } from "./adcio.interface";
 
 // FrontAPI
-export type { ClientAPI } from "@adcio/lib/client-api";
-export { Cafe24API } from "@adcio/lib/client-api";
+export type { ClientAPI } from "@adcio.js/lib/client-api";
+export { Cafe24API } from "@adcio.js/lib/client-api";
 
-import { Cafe24API } from "@adcio/lib/client-api";
+import { Cafe24API } from "@adcio.js/lib/client-api";
 export const clientApi = {
   cafe24: new Cafe24API(),
 };
@@ -26,7 +26,7 @@ export {
   getMeta,
   createElement,
   createNestedElement,
-} from "@adcio/lib/utils";
+} from "@adcio.js/lib/utils";
 
 export {
   ElementSelector,
@@ -38,4 +38,4 @@ export {
   getElementAtDepth,
   getCssSelector,
   dfs,
-} from "@adcio/lib/selectors";
+} from "@adcio.js/lib/selectors";
