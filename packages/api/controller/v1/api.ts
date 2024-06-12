@@ -383,12 +383,6 @@ export interface BannerSuggestionRequestDto {
      * @memberof BannerSuggestionRequestDto
      */
     'gender'?: BannerSuggestionRequestDtoGenderEnum;
-    /**
-     * The geographical area of the customer.
-     * @type {string}
-     * @memberof BannerSuggestionRequestDto
-     */
-    'area'?: string;
 }
 
 export const BannerSuggestionRequestDtoGenderEnum = {
@@ -686,6 +680,18 @@ export interface Campaign {
      * @type {number}
      * @memberof Campaign
      */
+    'totalBudgetInPeriod': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'budgetType': CampaignBudgetTypeEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof Campaign
+     */
     'usedBudget': number;
     /**
      * 
@@ -730,6 +736,15 @@ export interface Campaign {
      */
     'deletedAt': string | null;
 }
+
+export const CampaignBudgetTypeEnum = {
+    DailyBudget: 'DAILY_BUDGET',
+    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
+    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
+} as const;
+
+export type CampaignBudgetTypeEnum = typeof CampaignBudgetTypeEnum[keyof typeof CampaignBudgetTypeEnum];
+
 /**
  * 
  * @export
@@ -777,6 +792,18 @@ export interface CampaignWithClientAndAudience {
      * @type {number}
      * @memberof CampaignWithClientAndAudience
      */
+    'totalBudgetInPeriod': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'budgetType': CampaignWithClientAndAudienceBudgetTypeEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignWithClientAndAudience
+     */
     'usedBudget': number;
     /**
      * 
@@ -821,6 +848,15 @@ export interface CampaignWithClientAndAudience {
      */
     'deletedAt': string | null;
 }
+
+export const CampaignWithClientAndAudienceBudgetTypeEnum = {
+    DailyBudget: 'DAILY_BUDGET',
+    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
+    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
+} as const;
+
+export type CampaignWithClientAndAudienceBudgetTypeEnum = typeof CampaignWithClientAndAudienceBudgetTypeEnum[keyof typeof CampaignWithClientAndAudienceBudgetTypeEnum];
+
 /**
  * 
  * @export
@@ -1133,6 +1169,12 @@ export interface ConnectProductsToPlacementResponseDto {
     'widgetValueId': string | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'productDetailDataColumns': Array<string> | null;
+    /**
+     * 
      * @type {string}
      * @memberof ConnectProductsToPlacementResponseDto
      */
@@ -1388,6 +1430,12 @@ export interface CreatePlacementDto {
      * @memberof CreatePlacementDto
      */
     'tableSize'?: Array<number> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreatePlacementDto
+     */
+    'productDetailDataColumns'?: Array<string> | null;
 }
 
 export const CreatePlacementDtoTypeEnum = {
@@ -1998,6 +2046,12 @@ export interface FetchManyPlacementsResponseDto {
     'widgetValueId': string | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof FetchManyPlacementsResponseDto
+     */
+    'productDetailDataColumns': Array<string> | null;
+    /**
+     * 
      * @type {string}
      * @memberof FetchManyPlacementsResponseDto
      */
@@ -2233,6 +2287,12 @@ export interface FetchPlacementResponseDto {
      * @memberof FetchPlacementResponseDto
      */
     'widgetValueId': string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FetchPlacementResponseDto
+     */
+    'productDetailDataColumns': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -2767,6 +2827,12 @@ export interface Placement {
     'widgetValueId': string | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof Placement
+     */
+    'productDetailDataColumns': Array<string> | null;
+    /**
+     * 
      * @type {string}
      * @memberof Placement
      */
@@ -3027,6 +3093,56 @@ export interface ProductControllerFetchMany200Response {
 /**
  * 
  * @export
+ * @interface ProductDetailDto
+ */
+export interface ProductDetailDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductDetailDto
+     */
+    'description'?: string | null;
+    /**
+     * 
+     * @type {object}
+     * @memberof ProductDetailDto
+     */
+    'data'?: object;
+}
+/**
+ * 
+ * @export
+ * @interface ProductFilterOperationDto
+ */
+export interface ProductFilterOperationDto {
+    /**
+     * 
+     * @type {object}
+     * @memberof ProductFilterOperationDto
+     */
+    'equalTo'?: object;
+    /**
+     * 
+     * @type {object}
+     * @memberof ProductFilterOperationDto
+     */
+    'not'?: object;
+    /**
+     * 
+     * @type {object}
+     * @memberof ProductFilterOperationDto
+     */
+    'in'?: object;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductFilterOperationDto
+     */
+    'contains'?: string;
+}
+/**
+ * 
+ * @export
  * @interface ProductSuggestionDto
  */
 export interface ProductSuggestionDto {
@@ -3104,12 +3220,6 @@ export interface ProductSuggestionRequestDto {
      */
     'gender'?: ProductSuggestionRequestDtoGenderEnum;
     /**
-     * The geographical area of the customer.
-     * @type {string}
-     * @memberof ProductSuggestionRequestDto
-     */
-    'area'?: string;
-    /**
      * Identifier for the request client.
      * @type {string}
      * @memberof ProductSuggestionRequestDto
@@ -3127,6 +3237,12 @@ export interface ProductSuggestionRequestDto {
      * @memberof ProductSuggestionRequestDto
      */
     'categoryId'?: string;
+    /**
+     * Product filters for filtering adsets.
+     * @type {Array<{ [key: string]: ProductFilterOperationDto; }>}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'filters'?: Array<{ [key: string]: ProductFilterOperationDto; }>;
 }
 
 export const ProductSuggestionRequestDtoGenderEnum = {
@@ -3479,13 +3595,19 @@ export interface SuggestionResponsePlacementType {
      * @type {WidgetValue}
      * @memberof SuggestionResponsePlacementType
      */
-    'widgetValue'?: WidgetValue;
+    'widgetValue'?: WidgetValue | null;
     /**
      * 
      * @type {string}
      * @memberof SuggestionResponsePlacementType
      */
     'widgetValueId': string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'productDetailDataColumns': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -3675,6 +3797,12 @@ export interface UpdatePlacementDto {
      * @memberof UpdatePlacementDto
      */
     'tableSize'?: Array<number> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdatePlacementDto
+     */
+    'productDetailDataColumns'?: Array<string> | null;
 }
 /**
  * 
@@ -3814,6 +3942,12 @@ export interface UpdatePlacementResponseDto {
      * @memberof UpdatePlacementResponseDto
      */
     'widgetValueId': string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'productDetailDataColumns': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -4050,6 +4184,18 @@ export interface UpsertProductDto {
     'price'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof UpsertProductDto
+     */
+    'discountPrice'?: number;
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof UpsertProductDto
+     */
+    'additionalInformation'?: Array<object>;
+    /**
+     * 
      * @type {string}
      * @memberof UpsertProductDto
      */
@@ -4096,6 +4242,24 @@ export interface UpsertProductDto {
      * @memberof UpsertProductDto
      */
     'caption'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpsertProductDto
+     */
+    'additionalImages'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpsertProductDto
+     */
+    'decorationImages'?: Array<string>;
+    /**
+     * 
+     * @type {ProductDetailDto}
+     * @memberof UpsertProductDto
+     */
+    'detail'?: ProductDetailDto;
 }
 /**
  * 
@@ -4131,7 +4295,9 @@ export const UpsertProductFailedRowReasonsEnum = {
     UpsertProductFailedPriceIsEmpty: 'upsertProductFailedPriceIsEmpty',
     UpsertProductFailedImageIsEmpty: 'upsertProductFailedImageIsEmpty',
     UpsertProductFailedImageIsInvalid: 'upsertProductFailedImageIsInvalid',
-    UpsertProductFailedUrlIsInvalid: 'upsertProductFailedUrlIsInvalid'
+    UpsertProductFailedUrlIsInvalid: 'upsertProductFailedUrlIsInvalid',
+    UpsertProductFailedAdditionalImagesIsInvalid: 'upsertProductFailedAdditionalImagesIsInvalid',
+    UpsertProductFailedDecorationImagesIsInvalid: 'upsertProductFailedDecorationImagesIsInvalid'
 } as const;
 
 export type UpsertProductFailedRowReasonsEnum = typeof UpsertProductFailedRowReasonsEnum[keyof typeof UpsertProductFailedRowReasonsEnum];
@@ -4154,6 +4320,12 @@ export interface Widget {
      * @memberof Widget
      */
     'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Widget
+     */
+    'image': string;
     /**
      * 
      * @type {string}

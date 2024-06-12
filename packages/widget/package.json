@@ -11,6 +11,6 @@
   "scripts": {
     "start:dev": "vite build --watch",
     "build": "vite build",
-    "prepare": "pnpm build"
+    "lint": "eslint *.ts*"
   }
 }
