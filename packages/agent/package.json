@@ -4,6 +4,9 @@
   "author": "Corca <contact@corca.ai>",
   "description": "JavaScript SDK for ADCIO",
   "main": "dist/index.js",
+  "scripts": {
+    "lint": "eslint *.ts*"
+  },
   "dependencies": {
     "@adcio.js/api": "workspace:*",
     "@corca-ai/design-system": "latest",
