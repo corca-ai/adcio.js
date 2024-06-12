@@ -1,11 +1,11 @@
-import { useEffect, useRef } from 'react';
-import { isIOS } from 'react-device-detect';
-import TextareaAutosize from 'react-textarea-autosize';
+import { useEffect, useRef } from "react";
+import { isIOS } from "react-device-detect";
+import TextareaAutosize from "react-textarea-autosize";
 
-import { Button, color, typography } from '@corca-ai/design-system';
-import styled from '@emotion/styled';
+import { Button, color, typography } from "@corca-ai/design-system";
+import styled from "@emotion/styled";
 
-import { FlexBox } from '../../styles/layout';
+import { FlexBox } from "../../styles/layout";
 
 interface Props {
   onSend: (value: string) => void;
@@ -19,10 +19,10 @@ export function ChatInput({ onSend, disabled = false, keyboardFocus }: Props) {
 
   const send = (value: string) => {
     if (!isIOS) {
-      inputRef.current.focus();
+      inputRef.current!.focus();
     }
     onSend(value);
-    inputRef.current.value = '';
+    inputRef.current!.value = "";
   };
 
   // mobile hide keyboard
@@ -38,10 +38,15 @@ export function ChatInput({ onSend, disabled = false, keyboardFocus }: Props) {
         placeholder="메세지를 입력해주세요"
         ref={inputRef}
         onKeyDown={(event) => {
-          if (event.key === 'Enter' && !event.shiftKey) {
+          const canSendMessage =
+            event.key === "Enter" &&
+            !event.shiftKey &&
+            event.nativeEvent.isComposing === false;
+
+          if (canSendMessage) {
             event.preventDefault();
             if (!event.metaKey && !disabled) {
-              send(inputRef.current.value);
+              send(inputRef.current!.value);
             }
           }
         }}
@@ -53,7 +58,7 @@ export function ChatInput({ onSend, disabled = false, keyboardFocus }: Props) {
         disabled={disabled}
         onClick={(event) => {
           event.preventDefault();
-          send(inputRef.current.value);
+          send(inputRef.current!.value);
         }}
       >
         전송
@@ -67,7 +72,7 @@ const Container = styled(FlexBox)`
   background-color: ${color.white};
   border-radius: 14px;
   padding: 8px 8px 8px 14px;
-  box-shadow: 0px 0px 10px 0px ${color['grey-30']};
+  box-shadow: 0px 0px 10px 0px ${color["grey-30"]};
 `;
 
 const Textarea = styled(TextareaAutosize)`
@@ -89,7 +94,7 @@ const Textarea = styled(TextareaAutosize)`
     font-style: normal;
     font-weight: ${typography.weight.regular};
     font-size: ${typography.size.xs}px;
-    color: ${color['grey-50']};
+    color: ${color["grey-50"]};
     line-height: 19px;
   }
   &:focus {
