@@ -1,4 +1,4 @@
-import { B1, B4, B5 } from "@corca-ai/design-system";
+import { B1, B4, B5, Text, fontStyle } from "@corca-ai/design-system";
 import styled from "@emotion/styled";
 
 import { Product } from "@adcio.js/api/controller/v1";
@@ -21,8 +21,20 @@ export function ProductInfo({ product, tags }: Props) {
   const hasDiscountPrice = discountRate !== null;
 
   return (
-    <ProductInfoBox direction="column" align="flex-start">
-      <B1 c="main-black">{name}</B1>
+    <ProductInfoBox direction="column" align="flex-start" height="auto">
+      <Text
+        style={{
+          ...fontStyle.b1,
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          wordBreak: "break-all",
+          display: "-webkit-box",
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: "vertical",
+        }}
+      >
+        {name}
+      </Text>
       <PriceInfoWrapper>
         {hasDiscountPrice && <B5 c="grey-50">{price?.toLocaleString()}원</B5>}
         <DiscountInfoWrapper>
@@ -33,8 +45,8 @@ export function ProductInfo({ product, tags }: Props) {
         </DiscountInfoWrapper>
       </PriceInfoWrapper>
       <TagInfoWrapper>
-        {tags.map((tag) => (
-          <Tag>
+        {tags.map((tag, index) => (
+          <Tag key={index}>
             <B4>#{tag}</B4>
           </Tag>
         ))}

@@ -5,7 +5,7 @@ import {
   ChatRole,
   ChatType,
   TalkResponseMessage,
-} from "@adcio.js/api/messenger/v1.0";
+} from "@adcio.js/api/messenger/v1";
 
 import { RecommendChat } from "./RecommendChat";
 import { SearchItemInfoChat } from "./SearchItemInfoChat";

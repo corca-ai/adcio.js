@@ -17,11 +17,20 @@
     "react-textarea-autosize": "^8.5.3",
     "dayjs": "^1.11.10",
     "react-intersection-observer": "^9.10.2",
-    "react-query": "^3.39.3"
+    "react-query": "^3.39.3",
+    "uuid": "^9.0.1",
+    "lodash": "^4.17.21",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "swiper": "8.4.4"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "@types/uuid": "^9.0.6",
+    "@types/lodash": "^4.14.200",
+    "@types/react": "^18.2.33",
+    "@types/react-dom": "^18.2.14"
   }
 }

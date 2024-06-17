@@ -1,13 +1,19 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import { Configuration as ApiConfiguration } from "@adcio.js/api/controller/v1";
-import { Configuration as MessengerConfiguration } from "@adcio.js/api/messenger/v1.0";
+import { Configuration as MessengerConfiguration } from "@adcio.js/api/messenger/v1";
 
 import { App } from "../types/setting.types";
 
 interface AgentSettingProviderProps extends App {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 interface AgentSettingProvider extends App {

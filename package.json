@@ -26,7 +26,8 @@
     "vite-plugin-banner": "^0.7.1",
     "vite-plugin-dts": "^3.7.3",
     "vite-tsconfig-paths": "^4.2.1",
-    "vitest": "0.34.0"
+    "vitest": "0.34.0",
+    "@mantine/core": "^5.8.4"
   },
   "files": [
     "dist/**/*",

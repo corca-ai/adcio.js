@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 
 import { Product } from "@adcio.js/api/controller/v1";
-import { TalkResponseMessage } from "@adcio.js/api/messenger/v1.0";
+import { TalkResponseMessage } from "@adcio.js/api/messenger/v1";
 
 import { ProductListSwiper } from "../productListSwiper";
 import { AgentChatBubble } from "./agentChatBubble";

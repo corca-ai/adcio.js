@@ -5,7 +5,7 @@ import {
   ChatsApiAxiosParamCreator,
   Configuration,
   TalkResponseMessage,
-} from "@adcio.js/api/messenger/v1.0";
+} from "@adcio.js/api/messenger/v1";
 
 export const useFetchChatDialogue = (
   params: {

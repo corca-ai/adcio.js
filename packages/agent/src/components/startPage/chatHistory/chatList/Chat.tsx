@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import dayjs from "dayjs";
 
 import { CustomerChatGroupDto } from "@adcio.js/api/controller/v1";
-import { ChatType } from "@adcio.js/api/messenger/v1.0";
+import { ChatType } from "@adcio.js/api/messenger/v1";
 
 import { Box, FlexBox } from "../../../../styles/layout";
 import { Profile } from "../../../icon/Profile";

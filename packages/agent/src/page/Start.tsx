@@ -1,15 +1,15 @@
-import { Button } from "@corca-ai/design-system";
-import styled from "@emotion/styled";
+import { B1, Icon, color } from '@corca-ai/design-system';
+import styled from '@emotion/styled';
 
-import { StartTop } from "../components/start/StartTop";
-import { IntroductionText } from "../components/startPage/IntroductionText";
-import { ChatHistory } from "../components/startPage/chatHistory";
-import { useAgentSettingState } from "../context/AgentSettingContext";
-import { useFetchChatGroups } from "../hook/query/chat";
-import { FlexBox, PageSection } from "../styles/layout";
-import { PageURL } from "../types/common/url";
-import { AppType } from "../types/setting.types";
-import { getNewChatGroupPath } from "../utils/route";
+import { IntroductionText } from '../components/startPage/IntroductionText';
+import { StartTop } from '../components/startPage/StartTop';
+import { ChatHistory } from '../components/startPage/chatHistory';
+import { useAgentSettingState } from '../context/AgentSettingContext';
+import { useFetchChatGroups } from '../hook/query/chat';
+import { FlexBox, PageSection } from '../styles/layout';
+import { PageURL } from '../types/common/url';
+import { AppType } from '../types/setting.types';
+import { getNewChatGroupPath } from '../utils/route';
 
 interface Props {
   routeTo: (url: string) => void | Promise<boolean>;
@@ -33,10 +33,10 @@ export default function Index({ appType, routeTo, setDisplay }: Props) {
     {
       userId: customerId || deviceId,
       clientId: agentProfile.clientId,
-      locale: "ko",
+      locale: 'ko',
       // locale: setting.language as ChatLanguage,
     },
-    apiConfig,
+    apiConfig
   );
 
   const onCreateNewChat = () => {
@@ -48,9 +48,9 @@ export default function Index({ appType, routeTo, setDisplay }: Props) {
       <FlexBox direction="column" justify="center">
         <section>
           <StartTop
-            showClose={appType === "WebPackage"}
+            showClose={appType === 'WebPackage'}
             onClose={() => {
-              routeTo("entry");
+              routeTo('entry');
               setDisplay(false);
             }}
             p="xs"
@@ -59,10 +59,10 @@ export default function Index({ appType, routeTo, setDisplay }: Props) {
 
         <ContentsWrapper direction="column" justify="center" align="flex-start">
           <IntroductionText agentProfile={agentProfile} />
-          <Button size="large" variant="filled" onClick={onCreateNewChat}>
-            새 대화 시작하기
-          </Button>
-
+          <NewChatButton type="button" onClick={onCreateNewChat}>
+            <Icon.ChatPlus size={20} color={color.white} />
+            <B1 c="white">새 대화 시작하기</B1>
+          </NewChatButton>
           <ChatHistory
             chatList={{
               isLoading,
@@ -85,4 +85,19 @@ const ContentsWrapper = styled(FlexBox)`
   padding: 100px 47px;
   gap: 40px;
   flex-shrink: 0;
+`;
+
+const NewChatButton = styled.button`
+  display: flex;
+  width: 100%;
+  height: 43px;
+  padding: 11px 16px 11px 14px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background-color: ${color['main-black']};
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 `;
