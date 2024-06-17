@@ -1,8 +1,6 @@
-import { useInfiniteQuery } from "react-query";
-
 import { Configuration } from "@adcio/api/controller/v1";
 import { ChatApi } from "@adcio/api/controller/v1";
-
+import { useInfiniteQuery } from "react-query";
 import { ChatLanguage } from "../../types/select.types";
 
 export const useFetchChatGroups = (

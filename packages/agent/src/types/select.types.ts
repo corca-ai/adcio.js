@@ -1,5 +1,5 @@
-export type ChatMode = 'normal' | 'cute';
-export type ChatLanguage = 'ko' | 'en';
+export type ChatMode = "normal" | "cute";
+export type ChatLanguage = "ko" | "en";
 type SelectData<T> = { label: string; value: T };
 
 export type SelectBox<T> = {

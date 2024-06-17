@@ -1,6 +1,5 @@
 import { color } from "@corca-ai/design-system";
 import styled from "@emotion/styled";
-
 import { FlexBox } from "./layout";
 
 export const BaseScrollContentsWrapper = styled(FlexBox)`

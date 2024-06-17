@@ -5,8 +5,8 @@ export const getKoreanWordSegment = (word: string) => {
 
   if (lastLetterUni >= firstKorUni && lastLetterUni <= lastKorUni) {
     const postposition =
-      (lastLetterUni - firstKorUni) % lastConsonantUni !== 0 ? '과' : '와';
+      (lastLetterUni - firstKorUni) % lastConsonantUni !== 0 ? "과" : "와";
     return word + postposition;
   }
-  return word + '와'; // not korean
+  return word + "와"; // not korean
 };

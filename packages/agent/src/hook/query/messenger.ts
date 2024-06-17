@@ -1,11 +1,10 @@
-import { useMutation, useQuery } from "react-query";
-
 import {
   ChatsApi,
   ChatsApiAxiosParamCreator,
   Configuration,
   TalkResponseMessage,
 } from "@adcio/api/messenger/v1";
+import { useMutation, useQuery } from "react-query";
 
 export const useFetchChatDialogue = (
   params: {

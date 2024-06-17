@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-
-import { ChatLanguage, ChatSetting } from '../types/select.types';
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ChatLanguage, ChatSetting } from "../types/select.types";
 
 interface Props {
   onChange?: {
@@ -24,13 +23,13 @@ export const useUserSetting = ({ onChange }: Props) => {
   useEffect(() => {
     try {
       const localSetting: ChatSetting = JSON.parse(
-        localStorage.getItem('chatSetting') as string
+        localStorage.getItem("chatSetting") as string,
       );
       if (localSetting !== null) {
         (Object.keys(localSetting) as Array<keyof ChatSetting>).forEach(
           (key) => {
             onKeyChange(key)(localSetting[key]);
-          }
+          },
         );
       }
     } catch (e) {
@@ -39,7 +38,7 @@ export const useUserSetting = ({ onChange }: Props) => {
   }, []);
 
   const saveSetting = () => {
-    localStorage.setItem('chatSetting', JSON.stringify(setting));
+    localStorage.setItem("chatSetting", JSON.stringify(setting));
   };
 
   return { setting, saveSetting, onKeyChange };
