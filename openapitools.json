@@ -15,6 +15,12 @@
         "generatorName": "typescript-axios",
         "output": "#{cwd}/packages/api/receiver/v1",
         "inputSpec": "https://receiver.adcio.ai/api-json"
+      },
+      "messenger": {
+        "packageName": "receiver",
+        "generatorName": "typescript-axios",
+        "output": "#{cwd}/packages/api/messenger/v1",
+        "inputSpec": "https://messenger.adcio.ai/api/v1/api/apis.json"
       }
     }
   }
