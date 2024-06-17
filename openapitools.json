@@ -17,7 +17,7 @@
         "inputSpec": "https://receiver.adcio.ai/api-json"
       },
       "messenger": {
-        "packageName": "receiver",
+        "packageName": "messenger",
         "generatorName": "typescript-axios",
         "output": "#{cwd}/packages/api/messenger/v1",
         "inputSpec": "https://messenger-dev.adcio.ai/api/v1/api/apis.json"

@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "react-query";
 
 import { Configuration } from "@adcio.js/api/controller/v1";
-import { ChatApi } from "@adcio.js/api/messenger/v1";
+import { ChatApi } from "@adcio.js/api/controller/v1";
 
 import { ChatLanguage } from "../../types/select.types";
 
