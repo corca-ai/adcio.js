@@ -11,6 +11,6 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true
   },
-  "include": ["**/*.ts", "**/*.js", "**/*.tsx", "**/*.jsx"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }
