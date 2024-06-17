@@ -1,0 +1,24 @@
+{
+  "name": "@adcio.js/agent",
+  "version": "0.0.0",
+  "author": "Corca <contact@corca.ai>",
+  "description": "JavaScript SDK for ADCIO",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@adcio.js/api": "workspace:*",
+    "@corca-ai/design-system": "latest",
+    "@emotion/react": "^11.10.5",
+    "react-i18next": "^12.1.4",
+    "@emotion/styled": "^11.11.0",
+    "react-device-detect": "^2.2.3",
+    "react-textarea-autosize": "^8.5.3",
+    "dayjs": "^1.11.10",
+    "react-intersection-observer": "^9.10.2",
+    "react-query": "^3.39.3"
+  },
+  "devDependencies": {
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  }
+}
