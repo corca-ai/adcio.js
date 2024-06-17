@@ -1,4 +1,4 @@
-import { ChatProfileThemeEnum } from "@adcio.js/api/controller/v1";
+import { ChatProfileThemeEnum } from "@adcio/api/controller/v1";
 
 export const HISTORY_BOX = {
   item_h: 85, // item height

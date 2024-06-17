@@ -3,12 +3,12 @@ import { useCallback, useRef, useState } from "react";
 import { Spinner } from "@corca-ai/design-system";
 import styled from "@emotion/styled";
 
-import { Product } from "@lib/api/controller/v1.0";
+import { Product } from "@adcio/api/controller/v1";
 import {
   ChatRole,
   ChatType,
   TalkResponseMessage,
-} from "@adcio.js/api/messenger/v1.0";
+} from "@adcio/api/messenger/v1";
 
 import { ChatInput } from "../components/chatPage/ChatInput";
 import { ChatList } from "../components/chatPage/ChatList";
@@ -23,7 +23,6 @@ import {
 import { useChatDialogue } from "../hook/useChatDialogue";
 import { FlexBox, PageSection } from "../styles/layout";
 import { BaseScrollContentsWrapper } from "../styles/scrollbar";
-import { ChatState } from "../types/chat.types";
 import { AppType } from "../types/setting.types";
 import { getNewChatGroupPath } from "../utils/route";
 
@@ -31,7 +30,6 @@ interface Props {
   appType: AppType;
   routeTo: (url: string) => void | Promise<boolean>;
   id: string;
-  clientId: string;
   keyboardFocus?: boolean;
   setDisplay?: (show: boolean) => void;
   appbar?: boolean;
@@ -54,37 +52,32 @@ export default function Index({
   appType,
   routeTo,
   id,
-  clientId,
   keyboardFocus,
   setDisplay,
   appbar = true,
 }: Props) {
-  const { messengerConfig, deviceId, customerId } = useAgentSettingState();
+  const { messengerConfig, deviceId, customerId, agentProfile } =
+    useAgentSettingState();
   const { chatDialogue, init, append } = useChatDialogue({
     groupId: id,
     appType,
   });
-  const [chatState, setChatState] = useState<ChatState>(
-    id ? "history" : "chatting",
-  );
 
   const [disabled, setDisabled] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const handleScrollToBottom = () => {
+    if (!scrollRef.current) return;
     scrollRef.current.scrollIntoView({
       behavior: "smooth",
     });
   };
 
   const { isLoading } = useFetchChatDialogue(
-    { clientId, groupId: id, deviceId, customerId },
+    { clientId: agentProfile.clientId, groupId: id, deviceId, customerId },
     messengerConfig,
     {
-      onSuccess: (data) => {
-        setChatState("chatting");
-        init(data);
-      },
+      onSuccess: init,
     },
   );
 
@@ -119,7 +112,7 @@ export default function Index({
       try {
         append(stringToTalkMessage(content, id, ChatRole.User));
         const response = await chat({
-          clientId,
+          clientId: agentProfile.clientId,
           groupId: id,
           deviceId,
           customerId,
@@ -140,7 +133,7 @@ export default function Index({
       const content = `"${product.name}"에 대해 더 자세히 설명해주세요.`;
       append(stringToTalkMessage(content, id, ChatRole.User));
       const response = await explainProduct({
-        clientId,
+        clientId: agentProfile.clientId,
         groupId: id,
         deviceId,
         customerId,
@@ -163,7 +156,7 @@ export default function Index({
   };
 
   return (
-    <Container direction="column">
+    <PageSection direction="column">
       {appbar && (
         <ChatTop
           showClose={appType === "WebPackage"}
@@ -178,7 +171,7 @@ export default function Index({
           {...{ pos: appType === "WebPackage" ? "sticky" : "fixed" }}
         />
       )}
-      <ChatContentsWrapper>
+      <BaseScrollContentsWrapper>
         {isLoading ? (
           <FlexBox align="center" justify="center">
             <Spinner size="l" />
@@ -194,7 +187,7 @@ export default function Index({
             }}
           />
         )}
-      </ChatContentsWrapper>
+      </BaseScrollContentsWrapper>
       <ChatInputWrapper>
         <ChatInput
           onSend={onSend}
@@ -202,13 +195,9 @@ export default function Index({
           keyboardFocus={keyboardFocus}
         />
       </ChatInputWrapper>
-    </Container>
+    </PageSection>
   );
 }
-
-const Container = styled(PageSection)``;
-
-const ChatContentsWrapper = styled(BaseScrollContentsWrapper)``;
 
 const ChatInputWrapper = styled.div`
   width: 100%;

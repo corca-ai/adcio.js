@@ -7,10 +7,11 @@ import { color } from "@corca-ai/design-system";
 import styled from "@emotion/styled";
 import _ from "lodash";
 
-import { Product } from "@adcio.js/api/controller/v1";
-import { TalkResponseMessageProduct } from "@adcio.js/api/messenger/v1.0";
+import { Product } from "@adcio/api/controller/v1";
+import { TalkResponseMessageProduct } from "@adcio/api/messenger/v1";
 
 import { ActionButtonList } from "./ActionButtonList";
+import { LazySlideImage } from "./LazySlideImage";
 import { ProductInfo } from "./ProductInfo";
 
 const camelize = (obj) =>
@@ -32,9 +33,15 @@ export function ProductListSwiper({ dialogueProducts, onExplain }: Props) {
         const product = camelize(dialogueProduct.product) as Product;
         return (
           <SwiperSlide key={product.id}>
-            <img src={product.image} alt={product.name} />
-            <ProductInfo product={product} tags={dialogueProduct.tags} />
-            <ActionButtonList product={product} onExplain={onExplain} />
+            <LazySlideImage
+              src={product.image}
+              alt={product.name}
+              size={{ width: "210px", height: "270px" }}
+            />
+            <InfoWrapper>
+              <ProductInfo product={product} tags={dialogueProduct.tags} />
+              <ActionButtonList product={product} onExplain={onExplain} />
+            </InfoWrapper>
           </SwiperSlide>
         );
       })}
@@ -72,13 +79,15 @@ const SwiperSlide = styled(ReactSwiperSlide)`
   width: 210px;
   max-width: 360px;
   height: 513px;
-  gap: 12px;
-  padding: 0 12px 12px;
+  line-height: normal;
+`;
 
-  img {
-    width: 210px;
-    height: 270px;
-    object-fit: cover;
-    border-radius: 14px 14px 0px 0px;
-  }
+const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 12px;
+  flex-grow: 1;
+  justify-content: space-between;
+  width: 100%;
 `;

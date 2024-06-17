@@ -38,7 +38,12 @@ export function ChatInput({ onSend, disabled = false, keyboardFocus }: Props) {
         placeholder="메세지를 입력해주세요"
         ref={inputRef}
         onKeyDown={(event) => {
-          if (event.key === 'Enter' && !event.shiftKey) {
+          const canSendMessage =
+            event.key === 'Enter' &&
+            !event.shiftKey &&
+            event.nativeEvent.isComposing === false;
+
+          if (canSendMessage) {
             event.preventDefault();
             if (!event.metaKey && !disabled) {
               send(inputRef.current.value);

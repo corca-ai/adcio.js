@@ -2,8 +2,8 @@ import { forwardRef, useEffect } from "react";
 
 import styled from "@emotion/styled";
 
-import { Product } from "@lib/api/controller/v1.0";
-import { TalkResponseMessage } from "@adcio.js/api/messenger/v1.0";
+import { Product } from "@adcio/api/controller/v1";
+import { TalkResponseMessage } from "@adcio/api/messenger/v1";
 
 import { FlexBox } from "../../styles/layout";
 import { BaseScrollContentsWrapper, Scrollbar } from "../../styles/scrollbar";
@@ -21,7 +21,7 @@ export const ChatList = forwardRef<HTMLDivElement, Props>(
 
     useEffect(() => {
       if (ref && typeof ref !== "function") {
-        ref.current.scrollIntoView({
+        ref.current!.scrollIntoView({
           behavior: "auto",
         });
       }
@@ -34,6 +34,7 @@ export const ChatList = forwardRef<HTMLDivElement, Props>(
             const id = `${message.key}-${index}`;
             return (
               <ChatBubble
+                key={id}
                 id={id}
                 message={message}
                 onExplainProduct={onExplainProduct}

@@ -1,6 +1,6 @@
 import { InfiniteData } from "react-query";
 
-import { CustomerChatGroupDto } from "@adcio.js/api/controller/v1";
+import { CustomerChatGroupDto } from "@adcio/api/controller/v1";
 
 export interface ChatHistoryProps {
   chatList: {

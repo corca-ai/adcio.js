@@ -1,11 +1,11 @@
 import { Fragment } from "react";
 
-import { Product } from "@adcio.js/api/controller/v1";
+import { Product } from "@adcio/api/controller/v1";
 import {
   ChatRole,
   ChatType,
   TalkResponseMessage,
-} from "@adcio.js/api/messenger/v1.0";
+} from "@adcio/api/messenger/v1";
 
 import { RecommendChat } from "./RecommendChat";
 import { SearchItemInfoChat } from "./SearchItemInfoChat";

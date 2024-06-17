@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-import { B3, Icon, IconButton, color } from "@corca-ai/design-system";
-import styled from "@emotion/styled";
+import { FlexProps } from '@mantine/core';
 
-import { FlexBox } from "../../styles/layout";
+import { B3, Icon, IconButton, color } from '@corca-ai/design-system';
+import styled from '@emotion/styled';
 
-interface Props {
+import { FlexBox } from '../../styles/layout';
+
+interface Props extends FlexProps {
   onBack: () => void;
   onClose: () => void;
   onMenu: { toStart: () => void; newChat: () => void };
@@ -26,9 +28,9 @@ export function ChatTop({ onBack, onClose, onMenu, showClose }: Props) {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -37,8 +39,8 @@ export function ChatTop({ onBack, onClose, onMenu, showClose }: Props) {
   };
 
   const menuList = [
-    { label: "처음으로", onClick: onMenu.toStart },
-    { label: "새로운 대화 시작하기", onClick: onMenu.newChat },
+    { label: '처음으로', onClick: onMenu.toStart },
+    { label: '새로운 대화 시작하기', onClick: onMenu.newChat },
   ];
 
   return (
@@ -103,8 +105,7 @@ const Dropbox = styled.div`
   gap: 4px;
   border-radius: 8px;
   background-color: ${color.white};
-  box-shadow:
-    0px 2px 5px 0px rgba(70, 70, 70, 0.2),
+  box-shadow: 0px 2px 5px 0px rgba(70, 70, 70, 0.2),
     0px 0px 1px 0px rgba(132, 132, 132, 0.31);
 `;
 
@@ -120,6 +121,6 @@ const DropboxItem = styled.button`
   cursor: pointer;
   vertical-align: middle;
   &:hover {
-    background-color: ${color["grey-20"]};
+    background-color: ${color['grey-20']};
   }
 `;

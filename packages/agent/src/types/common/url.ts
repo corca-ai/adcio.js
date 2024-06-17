@@ -1,4 +1,4 @@
 export enum PageURL {
   START = '/',
-  CHAT = '/chat',
+  CHAT = 'chat',
 }

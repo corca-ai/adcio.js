@@ -1,17 +1,15 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "es2017",
     "module": "commonjs",
-    "strict": true,
+    "target": "es2015",
+    "strict": false,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
     "resolveJsonModule": true,
-    "sourceMap": true,
-    "declaration": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "jsx": "react-jsx"
+    "esModuleInterop": true,
+    "types": ["@emotion/react", "node"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

@@ -1,6 +1,6 @@
-import { useCallback, useReducer, useState } from "react";
+import { useCallback, useReducer } from "react";
 
-import { TalkResponseMessage } from "@adcio.js/api/messenger/v1.0";
+import { TalkResponseMessage } from "@adcio/api/messenger/v1";
 
 import { AppType } from "../types/setting.types";
 
