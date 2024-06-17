@@ -5,8 +5,7 @@
   "description": "JavaScript SDK for ADCIO",
   "main": "dist/index.js",
   "scripts": {
-    "build": "vite build",
-    "lint": "eslint *.ts*"
+    "build": "vite build"
   },
   "dependencies": {
     "@adcio/api": "workspace:*",
@@ -32,9 +31,6 @@
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
     "@types/uuid": "^9.0.6",
-    "prettier": "^2.6.2",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "prettier": "^2.6.2"
   }
 }
