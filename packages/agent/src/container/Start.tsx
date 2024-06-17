@@ -1,15 +1,15 @@
-import { B1, Icon, color } from '@corca-ai/design-system';
-import styled from '@emotion/styled';
+import { B1, Icon, color } from "@corca-ai/design-system";
+import styled from "@emotion/styled";
 
-import { IntroductionText } from '../components/startPage/IntroductionText';
-import { StartTop } from '../components/startPage/StartTop';
-import { ChatHistory } from '../components/startPage/chatHistory';
-import { useAgentSettingState } from '../context/AgentSettingContext';
-import { useFetchChatGroups } from '../hook/query/chat';
-import { FlexBox, PageSection } from '../styles/layout';
-import { PageURL } from '../types/common/url';
-import { AppType } from '../types/setting.types';
-import { getNewChatGroupPath } from '../utils/route';
+import { IntroductionText } from "../components/startPage/IntroductionText";
+import { StartTop } from "../components/startPage/StartTop";
+import { ChatHistory } from "../components/startPage/chatHistory";
+import { useAgentSettingState } from "../context/AgentSettingContext";
+import { useFetchChatGroups } from "../hook/query/chat";
+import { FlexBox, PageSection } from "../styles/layout";
+import { AppType } from "../types/setting.types";
+import { getNewChatGroupPath } from "../utils/route";
+import { AgentPath } from "../types/route.types";
 
 interface Props {
   routeTo: (url: string) => void | Promise<boolean>;
@@ -33,10 +33,10 @@ export default function Index({ appType, routeTo, setDisplay }: Props) {
     {
       userId: customerId || deviceId,
       clientId: agentProfile.clientId,
-      locale: 'ko',
+      locale: "ko",
       // locale: setting.language as ChatLanguage,
     },
-    apiConfig
+    apiConfig,
   );
 
   const onCreateNewChat = () => {
@@ -48,9 +48,9 @@ export default function Index({ appType, routeTo, setDisplay }: Props) {
       <FlexBox direction="column" justify="center">
         <section>
           <StartTop
-            showClose={appType === 'WebPackage'}
+            showClose={appType === "WebPackage"}
             onClose={() => {
-              routeTo('entry');
+              routeTo(AgentPath.Start);
               setDisplay(false);
             }}
             p="xs"
@@ -70,7 +70,7 @@ export default function Index({ appType, routeTo, setDisplay }: Props) {
               hasNextPage,
               fetchNextPage,
               onChatItemClick: (chatId: string) => {
-                routeTo(`${PageURL.CHAT}/${chatId}`);
+                routeTo(`${AgentPath.Chat}/${chatId}`);
               },
             }}
           />
@@ -98,6 +98,6 @@ const NewChatButton = styled.button`
   gap: 8px;
   flex-shrink: 0;
   border-radius: 10px;
-  background-color: ${color['main-black']};
+  background-color: ${color["main-black"]};
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 `;

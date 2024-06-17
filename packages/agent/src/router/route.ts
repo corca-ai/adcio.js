@@ -1,4 +1,5 @@
 import { Dispatch, LazyExoticComponent, lazy } from "react";
+import { AgentPath } from "../types/route.types";
 
 const LazyChat = lazy(() => import("../pages/Chat"));
 const LazyEntry = lazy(() => import("../pages/Entry"));
@@ -11,7 +12,6 @@ export interface Page {
 export type PathState = { path: AgentPath; id?: string };
 export type PathAction = { path: AgentPath; id?: string };
 
-export type AgentPath = "entry" | "start" | "chat";
 type AgentPathElement = LazyExoticComponent<
   ({
     routeTo,
@@ -28,7 +28,7 @@ export const AGENT_PATH: {
     element: AgentPathElement;
   };
 } = {
-  entry: { path: "entry", element: LazyEntry },
-  start: { path: "start", element: LazyStart },
-  chat: { path: "chat", element: LazyChat },
+  entry: { path: AgentPath.Entry, element: LazyEntry },
+  start: { path: AgentPath.Start, element: LazyStart },
+  chat: { path: AgentPath.Chat, element: LazyChat },
 };

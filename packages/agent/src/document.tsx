@@ -2,6 +2,7 @@ import { createRoot } from "react-dom/client";
 
 import AdcioAgent from "./app";
 import { App } from "./types/setting.types";
+import { AgentPath } from "./types/route.types";
 
 export function renderAgent({ ...config }: App) {
   const element = document.createElement("div");
@@ -62,7 +63,7 @@ export function renderAgent({ ...config }: App) {
     <AdcioAgent
       emotionRoot={emotionRoot}
       onRoute={(route) => {
-        if (route.path === "entry") {
+        if (route.path === AgentPath.Entry) {
           element.style.setProperty("z-index", `${1_000_000}`, "important");
         } else {
           element.style.setProperty("z-index", `${100_000_000}`, "important");

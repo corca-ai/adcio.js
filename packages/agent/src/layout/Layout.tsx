@@ -1,9 +1,8 @@
-import { Box, createStyles } from '@mantine/core';
-import { Transition } from '@mantine/core';
+import { Box, createStyles } from "@mantine/core";
+import { Transition } from "@mantine/core";
 
-import { useAgentSettingState } from '@client/agent/context/AgentSettingContext';
-
-import { AgentPath } from '../router/route';
+import { AgentPath } from "../types/route.types";
+import { useAgentSettingState } from "../context/AgentSettingContext";
 
 interface Props {
   path: AgentPath;
@@ -25,14 +24,14 @@ const useStyles = ({
 }) =>
   createStyles((theme) => ({
     wrapper: {
-      position: 'relative',
+      position: "relative",
       zIndex: !isEntryPage ? 100_000_000 : 1_000_000,
-      fontFamily: 'Pretendard',
-      padding: '24px',
+      fontFamily: "Pretendard",
+      padding: "24px",
       marginBottom: isEntryPage ? marginBottom : 0,
-      [theme.fn.smallerThan('sm')]: {
-        padding: isEntryPage && mounted ? '10px' : 0,
-        paddingTop: '10px',
+      [theme.fn.smallerThan("sm")]: {
+        padding: isEntryPage && mounted ? "10px" : 0,
+        paddingTop: "10px",
       },
     },
   }));
@@ -40,15 +39,15 @@ const useStyles = ({
 const fade = {
   in: { opacity: 1 },
   out: { opacity: 0.3 },
-  transitionProperty: 'opacity',
+  transitionProperty: "opacity",
 };
 
 export function Layout({ children, animation, path }: Props) {
   const { agentProfile } = useAgentSettingState();
   const { classes } = useStyles({
-    isEntryPage: path === 'entry',
+    isEntryPage: path === AgentPath.Entry,
     mounted: animation.mounted,
-    marginBottom: (agentProfile.bottomMargin || 0) + 'px',
+    marginBottom: (agentProfile.bottomMargin || 0) + "px",
   })();
 
   return (

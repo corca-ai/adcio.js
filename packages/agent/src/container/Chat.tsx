@@ -25,6 +25,7 @@ import { FlexBox, PageSection } from "../styles/layout";
 import { BaseScrollContentsWrapper } from "../styles/scrollbar";
 import { AppType } from "../types/setting.types";
 import { getNewChatGroupPath } from "../utils/route";
+import { AgentPath } from "../types/route.types";
 
 interface Props {
   appType: AppType;
@@ -148,7 +149,7 @@ export default function Index({
 
   const onMenu = {
     toStart: () => {
-      routeTo("start");
+      routeTo(AgentPath.Start);
     },
     newChat: () => {
       routeTo(getNewChatGroupPath()); // new group_id chat
@@ -161,11 +162,11 @@ export default function Index({
         <ChatTop
           showClose={appType === "WebPackage"}
           onBack={() => {
-            routeTo("start");
+            routeTo(AgentPath.Start);
           }}
           onClose={() => {
             setDisplay(false);
-            routeTo("entry");
+            routeTo(AgentPath.Entry);
           }}
           onMenu={onMenu}
           {...{ pos: appType === "WebPackage" ? "sticky" : "fixed" }}

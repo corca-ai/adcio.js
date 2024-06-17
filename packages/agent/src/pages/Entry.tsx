@@ -17,6 +17,7 @@ import { Page } from "../router/route";
 import { useAgentSettingState } from "../context/AgentSettingContext";
 import { EntryContainer } from "../layout/container/EntryContainer";
 import { ChatIcon } from "../components/icon/ChatIcon";
+import { AgentPath } from "../types/route.types";
 
 const show = keyframes({
   // TODO: need to animation
@@ -54,7 +55,7 @@ export default function Index({ routeTo }: Page) {
 
   const routeToStart = useCallback(() => {
     setDisplay(false);
-    routeTo({ path: "start" });
+    routeTo({ path: AgentPath.Start });
   }, []);
 
   return (

@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { PathState } from "../router/route";
+import { AgentPath } from "../types/route.types";
 
 export const getNewChatGroupPath = () => "chat/" + uuidv4();
 
@@ -15,7 +16,7 @@ export const getInitPath = (): PathState => {
   const prevChatGroupId =
     localStorage.getItem(ACTIVE_GROUP_ID_KEY) || undefined;
   return {
-    path: prevChatGroupId ? "chat" : "entry",
+    path: prevChatGroupId ? AgentPath.Chat : AgentPath.Entry,
     id: prevChatGroupId,
   };
 };
