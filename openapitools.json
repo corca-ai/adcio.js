@@ -8,7 +8,7 @@
         "packageName": "controller",
         "generatorName": "typescript-axios",
         "output": "#{cwd}/packages/api/controller/v1",
-        "inputSpec": "https://api.adcio.ai/api-json"
+        "inputSpec": "https://api-dev.adcio.ai/api-json"
       },
       "receiver": {
         "packageName": "receiver",
@@ -20,7 +20,7 @@
         "packageName": "receiver",
         "generatorName": "typescript-axios",
         "output": "#{cwd}/packages/api/messenger/v1",
-        "inputSpec": "https://messenger.adcio.ai/api/v1/api/apis.json"
+        "inputSpec": "https://messenger-dev.adcio.ai/api/v1/api/apis.json"
       }
     }
   }
