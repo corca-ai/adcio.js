@@ -648,6 +648,55 @@ export type BannerWithCreativeDtoTypeEnum = typeof BannerWithCreativeDtoTypeEnum
 /**
  * 
  * @export
+ * @interface BudgetUsage
+ */
+export interface BudgetUsage {
+    /**
+     * 
+     * @type {string}
+     * @memberof BudgetUsage
+     */
+    'id': string;
+    /**
+     * 
+     * @type {Campaign}
+     * @memberof BudgetUsage
+     */
+    'campaign': Campaign;
+    /**
+     * 
+     * @type {string}
+     * @memberof BudgetUsage
+     */
+    'campaignId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof BudgetUsage
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof BudgetUsage
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BudgetUsage
+     */
+    'endsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BudgetUsage
+     */
+    'createdAt': string;
+}
+/**
+ * 
+ * @export
  * @interface Campaign
  */
 export interface Campaign {
@@ -663,6 +712,12 @@ export interface Campaign {
      * @memberof Campaign
      */
     'title': string;
+    /**
+     * 
+     * @type {Placement}
+     * @memberof Campaign
+     */
+    'placement': Placement;
     /**
      * 
      * @type {string}
@@ -701,6 +756,24 @@ export interface Campaign {
     'activated': boolean;
     /**
      * 
+     * @type {Array<Product>}
+     * @memberof Campaign
+     */
+    'products': Array<Product>;
+    /**
+     * 
+     * @type {Array<Banner>}
+     * @memberof Campaign
+     */
+    'banners': Array<Banner>;
+    /**
+     * 
+     * @type {Array<BudgetUsage>}
+     * @memberof Campaign
+     */
+    'budgetUsage': Array<BudgetUsage>;
+    /**
+     * 
      * @type {string}
      * @memberof Campaign
      */
@@ -713,10 +786,34 @@ export interface Campaign {
     'endsAt': string | null;
     /**
      * 
+     * @type {Client}
+     * @memberof Campaign
+     */
+    'client': Client;
+    /**
+     * 
      * @type {string}
      * @memberof Campaign
      */
     'clientId': string;
+    /**
+     * 
+     * @type {Audience}
+     * @memberof Campaign
+     */
+    'audience': Audience;
+    /**
+     * 
+     * @type {number}
+     * @memberof Campaign
+     */
+    'clickLookbackWindowDays': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Campaign
+     */
+    'impressionLookbackWindowDays': number | null;
     /**
      * 
      * @type {string}
@@ -829,6 +926,18 @@ export interface CampaignWithClientAndAudience {
      * @memberof CampaignWithClientAndAudience
      */
     'clientId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'clickLookbackWindowDays': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CampaignWithClientAndAudience
+     */
+    'impressionLookbackWindowDays': number | null;
     /**
      * 
      * @type {string}
@@ -944,6 +1053,18 @@ export interface Client {
     'credit': number;
     /**
      * 
+     * @type {number}
+     * @memberof Client
+     */
+    'paidCredit': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Client
+     */
+    'freeCredit': number;
+    /**
+     * 
      * @type {string}
      * @memberof Client
      */
@@ -978,6 +1099,18 @@ export interface Client {
      * @memberof Client
      */
     'isSeller': boolean;
+    /**
+     * 
+     * @type {Array<CreditHistory>}
+     * @memberof Client
+     */
+    'creditHistoriesAsSeller': Array<CreditHistory>;
+    /**
+     * 
+     * @type {Array<CreditDecreaseRequest>}
+     * @memberof Client
+     */
+    'creditDecreaseRequests': Array<CreditDecreaseRequest>;
     /**
      * 
      * @type {string}
@@ -1605,6 +1738,157 @@ export interface Creative {
      */
     'deletedAt': string | null;
 }
+/**
+ * 
+ * @export
+ * @interface CreditDecreaseRequest
+ */
+export interface CreditDecreaseRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditDecreaseRequest
+     */
+    'id': string;
+    /**
+     * 
+     * @type {Client}
+     * @memberof CreditDecreaseRequest
+     */
+    'seller': Client;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreditDecreaseRequest
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditDecreaseRequest
+     */
+    'requestedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditDecreaseRequest
+     */
+    'reason': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditDecreaseRequest
+     */
+    'rejectionReason': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditDecreaseRequest
+     */
+    'status': CreditDecreaseRequestStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditDecreaseRequest
+     */
+    'processedAt': string | null;
+    /**
+     * 
+     * @type {CreditHistory}
+     * @memberof CreditDecreaseRequest
+     */
+    'creditHistory': CreditHistory | null;
+}
+
+export const CreditDecreaseRequestStatusEnum = {
+    Pending: 'PENDING',
+    Approved: 'APPROVED',
+    Rejected: 'REJECTED'
+} as const;
+
+export type CreditDecreaseRequestStatusEnum = typeof CreditDecreaseRequestStatusEnum[keyof typeof CreditDecreaseRequestStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreditHistory
+ */
+export interface CreditHistory {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditHistory
+     */
+    'id': string;
+    /**
+     * 
+     * @type {Store}
+     * @memberof CreditHistory
+     */
+    'store': Store | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditHistory
+     */
+    'storeId': string | null;
+    /**
+     * 
+     * @type {Client}
+     * @memberof CreditHistory
+     */
+    'seller': Client | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditHistory
+     */
+    'sellerId': string | null;
+    /**
+     * 
+     * @type {object}
+     * @memberof CreditHistory
+     */
+    'creditType': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditHistory
+     */
+    'adjustmentType': CreditHistoryAdjustmentTypeEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreditHistory
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditHistory
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {Transaction}
+     * @memberof CreditHistory
+     */
+    'transaction': Transaction | null;
+    /**
+     * 
+     * @type {CreditDecreaseRequest}
+     * @memberof CreditHistory
+     */
+    'creditDecreaseRequest': CreditDecreaseRequest | null;
+}
+
+export const CreditHistoryAdjustmentTypeEnum = {
+    Increase: 'INCREASE',
+    Decrease: 'DECREASE'
+} as const;
+
+export type CreditHistoryAdjustmentTypeEnum = typeof CreditHistoryAdjustmentTypeEnum[keyof typeof CreditHistoryAdjustmentTypeEnum];
+
 /**
  * 
  * @export
@@ -2553,6 +2837,49 @@ export interface GridInjectorDto {
 /**
  * 
  * @export
+ * @interface IamportPaymentVBank
+ */
+export interface IamportPaymentVBank {
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_code': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_date': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_holder': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_issued_at': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IamportPaymentVBank
+     */
+    'vbank_num': string;
+}
+/**
+ * 
+ * @export
  * @interface ImpressionObserver
  */
 export interface ImpressionObserver {
@@ -3129,12 +3456,6 @@ export interface ProductFilterOperationDto {
     'not'?: object;
     /**
      * 
-     * @type {object}
-     * @memberof ProductFilterOperationDto
-     */
-    'in'?: object;
-    /**
-     * 
      * @type {string}
      * @memberof ProductFilterOperationDto
      */
@@ -3455,6 +3776,69 @@ export type RetrieverMatcherEnum = typeof RetrieverMatcherEnum[keyof typeof Retr
 /**
  * 
  * @export
+ * @interface Store
+ */
+export interface Store {
+    /**
+     * 
+     * @type {string}
+     * @memberof Store
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Store
+     */
+    'type': StoreTypeEnum;
+    /**
+     * 
+     * @type {Client}
+     * @memberof Store
+     */
+    'client': Client;
+    /**
+     * 
+     * @type {string}
+     * @memberof Store
+     */
+    'solutionType': StoreSolutionTypeEnum;
+    /**
+     * 
+     * @type {Array<CreditHistory>}
+     * @memberof Store
+     */
+    'creditHistoriesAsStore': Array<CreditHistory>;
+    /**
+     * 
+     * @type {string}
+     * @memberof Store
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Store
+     */
+    'deletedAt': string | null;
+}
+
+export const StoreTypeEnum = {
+    Platform: 'PLATFORM',
+    InHouse: 'IN_HOUSE'
+} as const;
+
+export type StoreTypeEnum = typeof StoreTypeEnum[keyof typeof StoreTypeEnum];
+export const StoreSolutionTypeEnum = {
+    SelfDeveloped: 'SELF_DEVELOPED',
+    Cafe24: 'CAFE24'
+} as const;
+
+export type StoreSolutionTypeEnum = typeof StoreSolutionTypeEnum[keyof typeof StoreSolutionTypeEnum];
+
+/**
+ * 
+ * @export
  * @interface SuggestionResponsePlacementType
  */
 export interface SuggestionResponsePlacementType {
@@ -3670,6 +4054,169 @@ export const SuggestionResponsePlacementTypePropertyEnum = {
 
 export type SuggestionResponsePlacementTypePropertyEnum = typeof SuggestionResponsePlacementTypePropertyEnum[keyof typeof SuggestionResponsePlacementTypePropertyEnum];
 
+/**
+ * 
+ * @export
+ * @interface Transaction
+ */
+export interface Transaction {
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'impUid': string | null;
+    /**
+     * 
+     * @type {IamportPaymentVBank}
+     * @memberof Transaction
+     */
+    'impVBank': IamportPaymentVBank | null;
+    /**
+     * 
+     * @type {TransactionPaymentCard}
+     * @memberof Transaction
+     */
+    'paymentCard': TransactionPaymentCard;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Transaction
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'currency': TransactionCurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'paymentMethod': TransactionPaymentMethodEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'status': TransactionStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'paidAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'category': TransactionCategoryEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'type': TransactionTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Transaction
+     */
+    'failedReason': TransactionFailedReasonEnum;
+    /**
+     * 
+     * @type {CreditHistory}
+     * @memberof Transaction
+     */
+    'creditHistory': CreditHistory;
+}
+
+export const TransactionCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type TransactionCurrencyEnum = typeof TransactionCurrencyEnum[keyof typeof TransactionCurrencyEnum];
+export const TransactionPaymentMethodEnum = {
+    Card: 'Card',
+    DirectBank: 'DirectBank',
+    VBank: 'VBank',
+    Hpp: 'HPP'
+} as const;
+
+export type TransactionPaymentMethodEnum = typeof TransactionPaymentMethodEnum[keyof typeof TransactionPaymentMethodEnum];
+export const TransactionStatusEnum = {
+    Pending: 'Pending',
+    Ready: 'Ready',
+    Completed: 'Completed',
+    Unauthorized: 'Unauthorized',
+    Failed: 'Failed',
+    Closed: 'Closed',
+    Cancelled: 'Cancelled'
+} as const;
+
+export type TransactionStatusEnum = typeof TransactionStatusEnum[keyof typeof TransactionStatusEnum];
+export const TransactionCategoryEnum = {
+    AutoCharge: 'AUTO_CHARGE',
+    Subscription: 'SUBSCRIPTION'
+} as const;
+
+export type TransactionCategoryEnum = typeof TransactionCategoryEnum[keyof typeof TransactionCategoryEnum];
+export const TransactionTypeEnum = {
+    Pay: 'PAY',
+    Refund: 'REFUND'
+} as const;
+
+export type TransactionTypeEnum = typeof TransactionTypeEnum[keyof typeof TransactionTypeEnum];
+export const TransactionFailedReasonEnum = {
+    ClosedCard: 'CLOSED_CARD',
+    BalanceInsufficient: 'BALANCE_INSUFFICIENT',
+    Etc: 'ETC'
+} as const;
+
+export type TransactionFailedReasonEnum = typeof TransactionFailedReasonEnum[keyof typeof TransactionFailedReasonEnum];
+
+/**
+ * 
+ * @export
+ * @interface TransactionPaymentCard
+ */
+export interface TransactionPaymentCard {
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionPaymentCard
+     */
+    'cardCompany': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransactionPaymentCard
+     */
+    'cardNumber': string;
+}
 /**
  * 
  * @export
@@ -6096,6 +6643,150 @@ export const SuggestionApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        advertisementsControllerAdvertiseBanners: async (bannerSuggestionRequestDto: BannerSuggestionRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bannerSuggestionRequestDto' is not null or undefined
+            assertParamExists('advertisementsControllerAdvertiseBanners', 'bannerSuggestionRequestDto', bannerSuggestionRequestDto)
+            const localVarPath = `/v1/advertisements/banners`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(bannerSuggestionRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Fetch a personalized product for advertisement.
+         * @summary 
+         * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advertisementsControllerAdvertiseProducts: async (productSuggestionRequestDto: ProductSuggestionRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'productSuggestionRequestDto' is not null or undefined
+            assertParamExists('advertisementsControllerAdvertiseProducts', 'productSuggestionRequestDto', productSuggestionRequestDto)
+            const localVarPath = `/v1/advertisements/products`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productSuggestionRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Fetch a personalized banner for recommendation.
+         * @summary 
+         * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recommendationsControllerRecommendBanners: async (bannerSuggestionRequestDto: BannerSuggestionRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bannerSuggestionRequestDto' is not null or undefined
+            assertParamExists('recommendationsControllerRecommendBanners', 'bannerSuggestionRequestDto', bannerSuggestionRequestDto)
+            const localVarPath = `/v1/recommendations/banners`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(bannerSuggestionRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Fetch a personalized product for recommendation.
+         * @summary 
+         * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recommendationsControllerRecommendProducts: async (productSuggestionRequestDto: ProductSuggestionRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'productSuggestionRequestDto' is not null or undefined
+            assertParamExists('recommendationsControllerRecommendProducts', 'productSuggestionRequestDto', productSuggestionRequestDto)
+            const localVarPath = `/v1/recommendations/products`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productSuggestionRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Fetch a personalized banner for advertisement.
+         * @summary 
+         * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         suggestionControllerAdvertiseBanners: async (bannerSuggestionRequestDto: BannerSuggestionRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'bannerSuggestionRequestDto' is not null or undefined
             assertParamExists('suggestionControllerAdvertiseBanners', 'bannerSuggestionRequestDto', bannerSuggestionRequestDto)
@@ -6250,6 +6941,50 @@ export const SuggestionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async advertisementsControllerAdvertiseBanners(bannerSuggestionRequestDto: BannerSuggestionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BannerSuggestionResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advertisementsControllerAdvertiseBanners(bannerSuggestionRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Fetch a personalized product for advertisement.
+         * @summary 
+         * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async advertisementsControllerAdvertiseProducts(productSuggestionRequestDto: ProductSuggestionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductSuggestionResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advertisementsControllerAdvertiseProducts(productSuggestionRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Fetch a personalized banner for recommendation.
+         * @summary 
+         * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async recommendationsControllerRecommendBanners(bannerSuggestionRequestDto: BannerSuggestionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BannerSuggestionResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.recommendationsControllerRecommendBanners(bannerSuggestionRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Fetch a personalized product for recommendation.
+         * @summary 
+         * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async recommendationsControllerRecommendProducts(productSuggestionRequestDto: ProductSuggestionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductSuggestionResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.recommendationsControllerRecommendProducts(productSuggestionRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Fetch a personalized banner for advertisement.
+         * @summary 
+         * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async suggestionControllerAdvertiseBanners(bannerSuggestionRequestDto: BannerSuggestionRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BannerSuggestionResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.suggestionControllerAdvertiseBanners(bannerSuggestionRequestDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
@@ -6304,6 +7039,46 @@ export const SuggestionApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        advertisementsControllerAdvertiseBanners(bannerSuggestionRequestDto: BannerSuggestionRequestDto, options?: any): AxiosPromise<BannerSuggestionResponseDto> {
+            return localVarFp.advertisementsControllerAdvertiseBanners(bannerSuggestionRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Fetch a personalized product for advertisement.
+         * @summary 
+         * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advertisementsControllerAdvertiseProducts(productSuggestionRequestDto: ProductSuggestionRequestDto, options?: any): AxiosPromise<ProductSuggestionResponseDto> {
+            return localVarFp.advertisementsControllerAdvertiseProducts(productSuggestionRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Fetch a personalized banner for recommendation.
+         * @summary 
+         * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recommendationsControllerRecommendBanners(bannerSuggestionRequestDto: BannerSuggestionRequestDto, options?: any): AxiosPromise<BannerSuggestionResponseDto> {
+            return localVarFp.recommendationsControllerRecommendBanners(bannerSuggestionRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Fetch a personalized product for recommendation.
+         * @summary 
+         * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recommendationsControllerRecommendProducts(productSuggestionRequestDto: ProductSuggestionRequestDto, options?: any): AxiosPromise<ProductSuggestionResponseDto> {
+            return localVarFp.recommendationsControllerRecommendProducts(productSuggestionRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Fetch a personalized banner for advertisement.
+         * @summary 
+         * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         suggestionControllerAdvertiseBanners(bannerSuggestionRequestDto: BannerSuggestionRequestDto, options?: any): AxiosPromise<BannerSuggestionResponseDto> {
             return localVarFp.suggestionControllerAdvertiseBanners(bannerSuggestionRequestDto, options).then((request) => request(axios, basePath));
         },
@@ -6347,6 +7122,54 @@ export const SuggestionApiFactory = function (configuration?: Configuration, bas
  * @extends {BaseAPI}
  */
 export class SuggestionApi extends BaseAPI {
+    /**
+     * Fetch a personalized banner for advertisement.
+     * @summary 
+     * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SuggestionApi
+     */
+    public advertisementsControllerAdvertiseBanners(bannerSuggestionRequestDto: BannerSuggestionRequestDto, options?: AxiosRequestConfig) {
+        return SuggestionApiFp(this.configuration).advertisementsControllerAdvertiseBanners(bannerSuggestionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Fetch a personalized product for advertisement.
+     * @summary 
+     * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SuggestionApi
+     */
+    public advertisementsControllerAdvertiseProducts(productSuggestionRequestDto: ProductSuggestionRequestDto, options?: AxiosRequestConfig) {
+        return SuggestionApiFp(this.configuration).advertisementsControllerAdvertiseProducts(productSuggestionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Fetch a personalized banner for recommendation.
+     * @summary 
+     * @param {BannerSuggestionRequestDto} bannerSuggestionRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SuggestionApi
+     */
+    public recommendationsControllerRecommendBanners(bannerSuggestionRequestDto: BannerSuggestionRequestDto, options?: AxiosRequestConfig) {
+        return SuggestionApiFp(this.configuration).recommendationsControllerRecommendBanners(bannerSuggestionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Fetch a personalized product for recommendation.
+     * @summary 
+     * @param {ProductSuggestionRequestDto} productSuggestionRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SuggestionApi
+     */
+    public recommendationsControllerRecommendProducts(productSuggestionRequestDto: ProductSuggestionRequestDto, options?: AxiosRequestConfig) {
+        return SuggestionApiFp(this.configuration).recommendationsControllerRecommendProducts(productSuggestionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Fetch a personalized banner for advertisement.
      * @summary 
