@@ -15,12 +15,16 @@ import { queryClient } from "./hook/query/config";
 import { AgentSettingProvider } from "./context/AgentSettingContext";
 import "./i18n";
 
-interface Props extends App {
+interface AdcioAgentProps extends App {
   emotionRoot: HTMLDivElement;
   onRoute?: (route: PathState) => void;
 }
 
-export default function AdcioAgent({ emotionRoot, onRoute, ...config }: Props) {
+export function AdcioAgent({
+  emotionRoot,
+  onRoute,
+  ...config
+}: AdcioAgentProps) {
   const [emotionCache, setEmotionCache] = useState<null | EmotionCache>(null);
   function setEmotionStyles(ref: HTMLDivElement | null) {
     if (ref && !emotionCache) {
@@ -55,3 +59,5 @@ export default function AdcioAgent({ emotionRoot, onRoute, ...config }: Props) {
     </AgentSettingProvider>
   );
 }
+
+export type { AdcioAgentProps };
