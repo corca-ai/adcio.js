@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@adcio/agent": "workspace:*",
     "@adcio/api": "workspace:*",
     "@adcio/core": "workspace:*",
     "react": "^18.2.0",

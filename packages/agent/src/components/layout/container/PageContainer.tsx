@@ -1,28 +1,29 @@
-import { Box, Paper, createStyles } from '@mantine/core';
+import { Box, Paper, createStyles } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    fontFamily: 'Pretendard',
-    padding: '24px',
-    [theme.fn.smallerThan('sm')]: {
-      padding: '10px',
+    fontFamily: "Pretendard",
+    padding: "24px",
+    [theme.fn.smallerThan("sm")]: {
+      padding: "10px",
     },
   },
   paper: {
-    overflow: 'hidden',
+    overflow: "hidden",
+    position: "relative",
     border: `0.5px solid ${theme.colors.gray[0]}`,
-    boxShadow: '0px 0px 7px rgba(0, 0, 0, 0.25)',
-    [theme.fn.smallerThan('sm')]: {
-      borderRadius: '30px 30px 0 0 ',
-      margin: 'auto',
+    boxShadow: "0px 0px 7px rgba(0, 0, 0, 0.25)",
+    [theme.fn.smallerThan("sm")]: {
+      borderRadius: "30px 30px 0 0 ",
+      margin: "auto",
     },
   },
   pageContainer: {
-    width: '360px',
-    height: '600px',
-    [theme.fn.smallerThan('sm')]: {
-      width: '100vw',
-      height: '80vh',
+    width: "360px",
+    height: "600px",
+    [theme.fn.smallerThan("sm")]: {
+      width: "100vw",
+      height: "80vh",
     },
   },
 }));
