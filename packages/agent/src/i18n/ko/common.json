@@ -1,0 +1,66 @@
+{
+  "entry": {
+    "title": "{{name}} 대화해보세요!",
+    "subtitle": "상품을 추천해드리거나 궁금한 점에 답변해드려요!"
+  },
+  "start": {
+    "title": "안녕하세요\n고객님의 쇼핑을 도와드리는\n {{botName}}의 패션 스타일리스트입니다 :)",
+    "newChatStart": "새 대화 시작하기",
+    "history": {
+      "showSmall": "작게 보기",
+      "showAll": "전체 목록 보기",
+      "notExist1": "이전 대화 내역이 없습니다.",
+      "notExist2": "새 대화 시작하기 버튼을 눌러 대화를 시작해보세요!"
+    },
+    "setup": {
+      "mode": {
+        "title": "대화 모드",
+        "data": {
+          "cute": "귀엽고 친절한",
+          "normal": "진지하고 논리적인"
+        }
+      },
+      "language": {
+        "title": "대화 언어",
+        "data": {
+          "ko": "한국어",
+          "en": "English"
+        }
+      }
+    }
+  },
+  "chat": {
+    "top": {
+      "toStart": "처음으로",
+      "newChat": "새 대화 시작하기",
+      "state": {
+        "chatting": "대화 중",
+        "end": "대화 종료",
+        "history": "대화 내역"
+      }
+    },
+    "input": {
+      "send": "전송",
+      "placeholder": {
+        "chatting": "메시지를 입력하세요",
+        "end": "대화가 종료되었습니다",
+        "history": "대화 내역을 확인하세요"
+      }
+    }
+  },
+  "socket": {
+    "connect": "안녕하세요! 제가 어떤 걸 도와드릴까요?",
+    "close": "이번 대화는 종료되었어요! 🥲 궁금한 내용이 남으셨다면, 더보기에서 대화 다시하기를 선택해주세요!",
+    "recommend1": "말씀하신 상품을 보여드릴게요! 상품을 선택하시면 상세 페이지로 이동합니다.",
+    "recommend2": "다른 상품 추천을 원하시면 말씀해주세요!"
+  },
+  "error": {
+    "NOT_ALLOWED": "제가 답하기 곤란한 내용인 것 같아요.다른 도움을 드리고 싶어요!",
+    "OPENAI_SERVICE_UNAVAILABLE": "손님이 너무 몰리는 바쁜 시간대에요!\n메세지를 다시 보내주세요!",
+    "OUTPUT_NOT_PARSED": "손님이 너무 몰리는 바쁜 시간대에요!\n메세지를 다시 보내주세요!",
+    "CONNECT_FAILED": "서버와 연결이 끊어졌어요. 새로고침 해주세요.",
+    "CHAT_LIMIT_EXCEEDED": "추천에 필요한 정보가 부족해 대화가 종료되었어요. 🥲\n재접속 후 조금 더 구체적으로 말씀해주세요!",
+    "NO_PRODUCT_RECOMMENDED": "딱 맞는 상품이 없는 것 같아요🥲도움이 필요한 다른건 없으신가요?",
+    "INTERNAL_SERVER_ERROR": "일시적인 문제가 있었어요🥲\n메세지를 다시 보내주세요!"
+  }
+}

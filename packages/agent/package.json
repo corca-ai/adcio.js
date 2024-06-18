@@ -1,0 +1,37 @@
+{
+  "name": "@adcio/agent",
+  "version": "0.0.0",
+  "author": "Corca <contact@corca.ai>",
+  "description": "JavaScript SDK for ADCIO",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@adcio/api": "workspace:*",
+    "@corca-ai/design-system": "latest",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.11.0",
+    "@tabler/icons-react": "^3.6.0",
+    "@mantine/core": "^5.8.4",
+    "dayjs": "^1.11.10",
+    "lodash": "^4.17.21",
+    "react": "18.2.0",
+    "react-device-detect": "^2.2.3",
+    "react-dom": "18.2.0",
+    "react-i18next": "^12.1.4",
+    "react-intersection-observer": "^9.10.2",
+    "react-query": "^3.39.3",
+    "react-textarea-autosize": "^8.5.3",
+    "swiper": "8.4.4",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.200",
+    "@types/react": "^18.2.33",
+    "@types/react-dom": "^18.2.14",
+    "@types/uuid": "^9.0.6",
+    "prettier": "^2.6.2"
+  }
+}

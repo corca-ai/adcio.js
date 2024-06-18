@@ -1,0 +1,65 @@
+{
+  "entry": {
+    "title": "Chat with {{name}}!",
+    "subtitle": "I can recommend products or answer any questions you have!"
+  },
+  "start": {
+    "title": "Hello\nI am a fashion stylist at {{botName}} who helps you with your shopping :)",
+    "newChatStart": "Start New Chat",
+    "history": {
+      "showSmall": "Show less",
+      "showAll": "Show Full History",
+      "notExist1": "No chat history",
+      "notExist2": "Please press the 'Start New Chat' button to begin the conversation!"
+    },
+    "setup": {
+      "mode": {
+        "title": "Mode",
+        "data": {
+          "cute": "Friendly",
+          "normal": "Professional"
+        }
+      },
+      "language": {
+        "title": "Language",
+        "data": {
+          "ko": "한국어",
+          "en": "English"
+        }
+      }
+    }
+  },
+  "chat": {
+    "top": {
+      "toStart": "Go back",
+      "newChat": "Start a new chat",
+      "state": {
+        "chatting": "Chatting",
+        "end": "Chat Ended",
+        "history": "Chat History"
+      }
+    },
+    "input": {
+      "send": "Send",
+      "placeholder": {
+        "chatting": "Enter your message",
+        "end": "Chat has ended",
+        "history": "Check chat history"
+      }
+    }
+  },
+  "socket": {
+    "connect": "Hello! How can I assist you?",
+    "close": "This chat has ended! 🥲 If you have any remaining questions, please select 'Restart Chat' from the menu!",
+    "recommend1": "I will show you the requested product! Select a product to view the details.",
+    "recommend2": "Please let me know if you would like a recommendation for a different product!"
+  },
+  "error": {
+    "NOT_ALLOWED": "I'm sorry, but it seems difficult for me to answer that. Can you provide another input?",
+    "OPENAI_SERVICE_UNAVAILABLE": "Oops! It's a busy time with many customers right now!\nPlease send your message again!",
+    "OUTPUT_NOT_PARSED": "Oops! It's a busy time with many customers right now!\nPlease send your message again!",
+    "CONNECT_FAILED": "Connection to the server failed. Please refresh.",
+    "CHAT_LIMIT_EXCEEDED": "The conversation ended due to insufficient information for recommendations. 🥲\nPlease reconnect and provide more specific details!",
+    "NO_PRODUCT_RECOMMENDED": "It seems like there isn't a perfect product for you🥲. Do you have any other help you need? "
+  }
+}
