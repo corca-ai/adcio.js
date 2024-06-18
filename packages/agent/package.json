@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "author": "Corca <contact@corca.ai>",
   "description": "JavaScript SDK for ADCIO",
-  "main": "dist/index.js",
+  "main": "dist/index.es.js",
   "scripts": {
     "build": "vite build"
   },
@@ -25,13 +25,15 @@
     "react-query": "^3.39.3",
     "react-textarea-autosize": "^8.5.3",
     "swiper": "8.4.4",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "i18next": "^22.4.9"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.200",
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
     "@types/uuid": "^9.0.6",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "@vitejs/plugin-react": "^4.3.0"
   }
 }

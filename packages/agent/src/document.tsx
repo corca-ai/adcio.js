@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 
-import AdcioAgent from "./app";
+import { AdcioAgent } from "./app";
 import { App } from "./types/setting.types";
 import { AgentPath } from "./types/route.types";
 
@@ -73,3 +73,5 @@ export function renderAgent({ ...config }: App) {
     />,
   );
 }
+
+export type { App };
