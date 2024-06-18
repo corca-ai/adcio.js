@@ -5,7 +5,6 @@ import {
 import { useState } from "react";
 import { QueryClientProvider } from "react-query";
 
-import "@client/agent/i18n";
 import createCache from "@emotion/cache";
 
 import Route from "./router/Router";
@@ -14,6 +13,7 @@ import { App } from "./types/setting.types";
 import MantineCustomProvider from "./mantine/MantineCustomProvider";
 import { queryClient } from "./hook/query/config";
 import { AgentSettingProvider } from "./context/AgentSettingContext";
+import "./i18n";
 
 interface Props extends App {
   emotionRoot: HTMLDivElement;

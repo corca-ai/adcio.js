@@ -73,3 +73,5 @@ export function renderAgent({ ...config }: App) {
     />,
   );
 }
+
+export type { App };
