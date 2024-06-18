@@ -36,7 +36,7 @@ export default defineConfig({
       output: [
         {
           format: "esm",
-          entryFileNames: `index.es.js`,
+          entryFileNames: `index.js`,
           exports: "named",
         },
         {
