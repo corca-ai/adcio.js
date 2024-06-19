@@ -33,6 +33,9 @@
   "dependenciesMeta": {
     "@adcio/core": {
       "injected": true
+    },
+    "@adcio/agent": {
+      "injected": true
     }
   }
 }
