@@ -88,6 +88,7 @@ const Container = styled(FlexBox)`
   align-items: center;
   flex-shrink: 0;
   align-self: stretch;
+  z-index: 1;
 `;
 
 const DropboxContainer = styled.div`
@@ -119,9 +120,9 @@ const BottomSheet = styled(Box)`
   background: ${color.white};
   height: auto;
   padding: 10px 0px;
-  border-radius: 20px;
+  border-radius: 20px 20px 0 0;
   padding: 20px;
-  animation: ${slideUp} 0.1s ease-out;
+  animation: ${slideUp} 0.15s ease-out;
   box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.1);
   gap: 4px;
 `;
