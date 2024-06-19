@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "author": "Corca <contact@corca.ai>",
   "description": "JavaScript SDK for ADCIO",
-  "main": "src/index.ts",
+  "main": "dist/index.es.js",
   "scripts": {
     "build": "vite build"
   },
