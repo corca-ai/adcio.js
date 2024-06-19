@@ -2,6 +2,7 @@
   "name": "@adcio/demo-react",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -32,9 +33,6 @@
   },
   "dependenciesMeta": {
     "@adcio/core": {
-      "injected": true
-    },
-    "@adcio/agent": {
       "injected": true
     }
   }
