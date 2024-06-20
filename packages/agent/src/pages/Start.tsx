@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-import { AgentPath, Page } from "../router/route";
+import { Page } from "../router/route";
 import Start from "../container/Start";
 import { PageContainer } from "../layout/container/PageContainer";
+import { AgentPath } from "../types/route.types";
 
 export default function StartLayout({ routeTo }: Page) {
   const [display, setDisplay] = useState(true);
