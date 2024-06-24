@@ -42,7 +42,9 @@ export type AdcioOnPurchaseParams = AdcioAnalyticsOnPurchaseParams;
 
 export type AdcioObserveImpressionParams = {
   element: Element;
+  onImpression?: () => void;
   filter?: (element: Element) => boolean;
+  once?: boolean;
 };
 
 export type AdcioFetchPlacementsParams = AdcioPlacementFetchPlacementsParams;

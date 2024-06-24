@@ -71,11 +71,13 @@ export class Adcio {
     return this.adcioAnalytics.onPurchase(params);
   }
 
-  // AdcioImpressionDetector
+  // AdcioImpressionObserver
   public observeImpression(params: AdcioObserveImpressionParams) {
-    return new AdcioImpressionObserver({ filter: params.filter }).observe(
-      params.element,
-    );
+    const observer = new AdcioImpressionObserver({ filter: params.filter });
+    if (params.onImpression) {
+      observer.addImpressionListener(params.element, params.onImpression);
+    }
+    return observer.observe(params.element);
   }
 
   // AdcioPlacement
