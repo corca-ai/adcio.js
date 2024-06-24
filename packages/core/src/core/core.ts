@@ -13,23 +13,42 @@ export class AdcioCore {
   private sessionStorage: Storage<string>;
 
   private clientId: StoreId;
+  private serverMode: boolean;
+
   private deviceId: DeviceId;
   private customerId?: CustomerId;
 
-  constructor({ clientId, customerId }: AdcioCoreParams) {
-    this.sessionStorage = createStorage({
-      session: {
-        key: `adcio-session-${clientId}`,
-        expiration: 30 * 60 * 1000, // GA default: 30 mins
-      },
-    });
-    this.sessionStorage.getOrSet(); // initialize sessionId if it's expired
-
-    this.deviceId = createStorage({
-      local: { key: `adcio-device-${clientId}` },
-    }).getOrSet();
-
+  constructor({
+    clientId,
+    customerId,
+    serverMode,
+    deviceId,
+    sessionId,
+  }: AdcioCoreParams) {
     this.clientId = clientId;
+
+    this.serverMode = serverMode || false;
+    if (this.serverMode) {
+      if (!deviceId || !sessionId) {
+        throw new Error("Server mode requires deviceId and sessionId");
+      }
+      this.deviceId = deviceId;
+      this.sessionStorage = createStorage({
+        memory: { initialValue: sessionId },
+      });
+    } else {
+      this.deviceId = createStorage({
+        local: { key: `adcio-device-${clientId}` },
+      }).getOrSet();
+      this.sessionStorage = createStorage({
+        session: {
+          key: `adcio-session-${clientId}`,
+          expiration: 30 * 60 * 1000, // GA default: 30 mins
+        },
+      });
+      this.sessionStorage.getOrSet(); // initialize sessionId if it's expired
+    }
+
     this.customerId = customerId;
   }
 
