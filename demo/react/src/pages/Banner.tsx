@@ -7,7 +7,6 @@ import {
   Adcio,
   AdcioCreateRecommendationBannersResponse,
 } from "@adcio.js/core";
-import { SuggestionTestId } from "../../../../mock/constants";
 import { Banner } from "src/component/banner";
 
 interface Props {
@@ -22,7 +21,7 @@ export default function BannerPage({ adcioInstance }: Props) {
   useEffect(() => {
     adcioInstance
       .createRecommendationBanners({
-        placementId: SuggestionTestId.BANNER_PLACEMENT,
+        placementId: "a7504fc7-e62a-4a0e-a262-95cbe4c11982",
       })
       .then((response) => {
         setRecommendation(response);
