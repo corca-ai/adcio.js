@@ -20,6 +20,9 @@ import {
 export interface AdcioParams {
   clientId: StoreId;
   customerId?: CustomerId;
+  serverMode?: boolean;
+  deviceId?: string;
+  sessionId?: string;
 }
 
 export interface AdcioConfig extends AdcioParams {

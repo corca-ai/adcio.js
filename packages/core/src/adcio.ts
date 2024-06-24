@@ -34,6 +34,9 @@ export class Adcio {
     this.adcioCore = new AdcioCore({
       clientId: this.config.clientId,
       customerId: this.config.customerId,
+      serverMode: this.config.serverMode,
+      deviceId: this.config.deviceId,
+      sessionId: this.config.sessionId,
     });
 
     this.adcioPlacement = new AdcioPlacement({
