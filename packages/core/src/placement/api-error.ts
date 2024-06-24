@@ -1,3 +1,14 @@
+export class APIError extends Error {
+  statusCode: number;
+  message: string;
+
+  constructor(statusCode: number, message: string) {
+    super();
+    this.statusCode = statusCode;
+    this.message = message;
+  }
+}
+
 export const ERROR_CODE = {
   SUGGESTION: {
     PLACEMENT_NOT_FOUND: 12_001,

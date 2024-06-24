@@ -5,12 +5,17 @@ import {
   AdcioAnalyticsOnClickParams,
   AdcioAnalyticsOnPurchaseParams,
   AdcioAnalyticsOnImpressionParams,
-} from "@adcio.js/lib/analytics";
+} from "./analytics";
 import {
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateRecommendationProductsParams,
   AdcioPlacementCreateRecommendationBannersParams,
-} from "@adcio.js/lib/placement";
+} from "./placement";
+import {
+  AdcioPlacementCreateRecommendationBannersResponse,
+  AdcioPlacementCreateRecommendationProductsResponse,
+  AdcioPlacementFetchPlacementsResponse,
+} from "./placement/placement.interface";
 
 export interface AdcioParams {
   clientId: StoreId;
@@ -41,9 +46,15 @@ export type AdcioObserveImpressionParams = {
 };
 
 export type AdcioFetchPlacementsParams = AdcioPlacementFetchPlacementsParams;
+export type AdcioFetchPlacementsResponse =
+  AdcioPlacementFetchPlacementsResponse;
 
 export type AdcioCreateRecommendationProductsParams =
   AdcioPlacementCreateRecommendationProductsParams;
+export type AdcioCreateRecommendationProductsResponse =
+  AdcioPlacementCreateRecommendationProductsResponse;
 
 export type AdcioCreateRecommendationBannersParams =
   AdcioPlacementCreateRecommendationBannersParams;
+export type AdcioCreateRecommendationBannersResponse =
+  AdcioPlacementCreateRecommendationBannersResponse;

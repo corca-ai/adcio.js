@@ -5,8 +5,7 @@
   "description": "JavaScript SDK for ADCIO",
   "main": "dist/index.js",
   "dependencies": {
-    "@adcio.js/api": "workspace:*",
-    "@adcio.js/lib": "workspace:*"
+    "@adcio.js/api": "workspace:*"
   },
   "scripts": {
     "start:dev": "vite build --watch",

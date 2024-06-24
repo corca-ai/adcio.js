@@ -18,10 +18,10 @@ import {
   ProductSuggestionRequestDto,
 } from "../packages/api/controller/v1";
 import {
+  APIError,
   ERROR_CODE,
   PLACEMENT_ERROR_MESSAGE,
-} from "../packages/lib/constants/error";
-import { APIError } from "../packages/lib/error";
+} from "../packages/core/src/placement/api-error";
 
 const RECEIVER_API_BASE_URL = "https://receiver.adcio.ai";
 const ADCIO_API_BASE_URL = "https://api.adcio.ai";
