@@ -3,8 +3,10 @@ import "swiper/css/pagination";
 import "src/styles/banner.css";
 
 import { useEffect, useState } from "react";
-import { Adcio } from "@adcio.js/core";
-import { BannerSuggestionDto } from "@adcio.js/api/controller/v1/api";
+import {
+  Adcio,
+  AdcioCreateRecommendationBannersResponse,
+} from "@adcio.js/core";
 import { SuggestionTestId } from "../../../../mock/constants";
 import { Banner } from "src/component/banner";
 
@@ -14,20 +16,19 @@ interface Props {
 
 export default function BannerPage({ adcioInstance }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [suggestionData, setSuggestionData] = useState<BannerSuggestionDto[]>(
-    [],
-  );
+  const [recommendation, setRecommendation] =
+    useState<AdcioCreateRecommendationBannersResponse>();
 
   useEffect(() => {
-    async function fetchMyAPI() {
-      const response = await adcioInstance.createRecommendationBanners({
+    adcioInstance
+      .createRecommendationBanners({
         placementId: SuggestionTestId.BANNER_PLACEMENT,
+      })
+      .then((response) => {
+        setRecommendation(response);
+        setIsLoading(false);
       });
-      setSuggestionData(response.suggestions);
-      setIsLoading(false);
-    }
-    fetchMyAPI();
-  }, []);
+  }, [adcioInstance]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -37,12 +38,12 @@ export default function BannerPage({ adcioInstance }: Props) {
     <div className="container">
       <div className="title">[PC] Banner Test</div>
       <Banner
-        suggestionData={suggestionData}
+        recommendation={recommendation}
         impressSlide={(currentSlideData) => {
-          adcioInstance.onImpression(currentSlideData.logOptions);
+          adcioInstance.onImpression(currentSlideData);
         }}
         clickSlide={(currentSlideData) => {
-          adcioInstance.onClick(currentSlideData.logOptions);
+          adcioInstance.onClick(currentSlideData);
         }}
       />
     </div>
