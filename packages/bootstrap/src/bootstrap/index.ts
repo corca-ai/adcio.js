@@ -9,19 +9,24 @@ export class AdcioBootstrap {
   private clientApi: ClientAPI;
   private adcioInstance: Adcio;
 
-  constructor(config: { clientId?: string } = {}) {
+  private suppressPlacement: boolean;
+
+  constructor(config: { clientId?: string; suppressPlacement?: boolean } = {}) {
     const clientId = config.clientId || this.getClientId();
     if (!clientId) {
       throw new AdcioError("Client ID is not found");
     }
     this.clientId = clientId;
-    this.adcioInstance = new Adcio({ clientId });
 
     const clientApi = createClientAPI();
     if (!clientApi) {
       throw new AdcioError("Client API is not found");
     }
     this.clientApi = clientApi;
+
+    this.suppressPlacement = config.suppressPlacement || false;
+
+    this.adcioInstance = new Adcio({ clientId });
   }
 
   public static async run() {
@@ -41,7 +46,7 @@ export class AdcioBootstrap {
     }
 
     return Promise.allSettled([
-      this.loadPlacements(),
+      ...(this.suppressPlacement ? [this.loadPlacements()] : []),
       this.handleView(),
       this.handleCarts(),
       this.handleOrder(),
