@@ -651,6 +651,7 @@ export const widgetRecommendationProductsResponse = {
             fontWeight: 400,
           },
           price: {
+            show: true,
             fontSize: 12,
             fontColor: "#999999",
             fontWeight: 400,

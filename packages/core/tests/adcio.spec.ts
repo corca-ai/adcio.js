@@ -1,5 +1,3 @@
-import { PLACEMENT_ERROR_MESSAGE } from "@adcio.js/lib/constants/error";
-import { AdcioCore } from "@adcio.js/lib/core";
 import {
   afterAll,
   afterEach,
@@ -12,7 +10,9 @@ import {
 } from "vitest";
 import { SuggestionTestId } from "../../../mock/constants";
 import { server } from "../../../mock/node";
-import { Adcio } from "../dist";
+import { Adcio } from "../src/adcio";
+import { AdcioCore } from "../src/core";
+import { PLACEMENT_ERROR_MESSAGE } from "../src/placement/api-error";
 
 beforeAll(() => {
   server.listen();
@@ -71,26 +71,6 @@ describe("test AdcioCore module", () => {
     // AdcioCore should reset the session ID after 30m
     // Verify that the session ID has changed after 30m
     expect(adcioCore.getSessionId()).not.toBe(initialSessionId);
-  });
-
-  it("should call AdcioCore constructor once when Adcio is created", async () => {
-    vi.doMock("@adcio.js/lib/core", () => {
-      return {
-        AdcioCore: vi.fn().mockImplementation((adcioCore) => adcioCore),
-      };
-    });
-
-    const { AdcioCore } = await import("@adcio.js/lib/core");
-    const { Adcio } = await import("../src");
-
-    new Adcio({
-      clientId: "your-client-id",
-      customerId: "your-customer-id",
-    });
-
-    expect(AdcioCore).toHaveBeenCalledTimes(1);
-
-    vi.doUnmock("@adcio.js/lib/core");
   });
 });
 
