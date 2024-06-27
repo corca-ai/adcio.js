@@ -1,4 +1,4 @@
-import { Adcio, getMeta } from "@adcio.js/core";
+import { Adcio, getMeta, waitForDOM } from "@adcio.js/core";
 import { CartsStorage } from "./cart-storage";
 import { AdcioPlacementBootstrap } from "./placement";
 import { ClientAPI, createClientAPI } from "../client-api";
@@ -30,10 +30,15 @@ export class AdcioBootstrap {
   }
 
   public static async run() {
-    return new AdcioBootstrap().run();
+    return await new AdcioBootstrap().run();
   }
 
   public async run() {
+    await waitForDOM();
+    return await this.bootstrap();
+  }
+
+  public async bootstrap() {
     await this.clientApi.init();
 
     try {
@@ -51,6 +56,10 @@ export class AdcioBootstrap {
       this.handleCarts(),
       this.handleOrder(),
     ]);
+  }
+
+  public getInstance() {
+    return this.adcioInstance;
   }
 
   private getClientId(): string | null {

@@ -31,7 +31,7 @@ export const getConfig = (entry: string, emptyOutDir = false): UserConfig => ({
     lib: {
       entry: resolve(__dirname, `./src/${entry}.ts`),
       formats: ["es", "cjs", "iife"],
-      name: "AdcioBootstrap",
+      name: "adcio",
       fileName: entry,
     },
   },
