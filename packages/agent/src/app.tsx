@@ -1,18 +1,16 @@
+import createCache from "@emotion/cache";
 import {
   EmotionCache,
   CacheProvider as EmotionCacheProvider,
 } from "@emotion/react";
 import { useState } from "react";
 import { QueryClientProvider } from "react-query";
-
-import createCache from "@emotion/cache";
-
+import { AgentSettingProvider } from "./context/AgentSettingContext";
+import { queryClient } from "./hook/query/config";
+import MantineCustomProvider from "./mantine/MantineCustomProvider";
 import Route from "./router/Router";
 import { PathState } from "./router/route";
 import { App } from "./types/setting.types";
-import MantineCustomProvider from "./mantine/MantineCustomProvider";
-import { queryClient } from "./hook/query/config";
-import { AgentSettingProvider } from "./context/AgentSettingContext";
 import "./i18n";
 
 interface AdcioAgentProps extends App {

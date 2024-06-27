@@ -1,7 +1,5 @@
+import { TalkResponseMessage } from "@adcio.js/api/messenger/v1";
 import styled from "@emotion/styled";
-
-import { TalkResponseMessage } from "@adcio/api/messenger/v1";
-
 import { AgentChatBubble } from "./agentChatBubble";
 
 interface Props {

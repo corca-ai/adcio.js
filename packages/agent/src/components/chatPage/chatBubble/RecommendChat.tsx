@@ -1,12 +1,9 @@
-import { useTranslation } from "react-i18next";
-
+import { Product } from "@adcio.js/api/controller/v1";
+import { TalkResponseMessage } from "@adcio.js/api/messenger/v1";
 import styled from "@emotion/styled";
-
-import { Product } from "@adcio/api/controller/v1";
-import { TalkResponseMessage } from "@adcio/api/messenger/v1";
-
-import { ProductListSwiper } from "../productListSwiper";
+import { useTranslation } from "react-i18next";
 import { AgentChatBubble } from "./agentChatBubble";
+import { ProductListSwiper } from "../productListSwiper";
 
 interface Props {
   message: TalkResponseMessage;

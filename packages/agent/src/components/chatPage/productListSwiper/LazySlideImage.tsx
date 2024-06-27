@@ -1,22 +1,21 @@
-import { CSSProperties } from 'react';
-import { useInView } from 'react-intersection-observer';
-
-import { color } from '@corca-ai/design-system';
-import styled from '@emotion/styled';
+import { color } from "@corca-ai/design-system";
+import styled from "@emotion/styled";
+import { CSSProperties } from "react";
+import { useInView } from "react-intersection-observer";
 
 type CommonImageType = {
-  width?: CSSProperties['width'];
-  height?: CSSProperties['height'];
+  width?: CSSProperties["width"];
+  height?: CSSProperties["height"];
 };
 
-interface Props extends Pick<HTMLImageElement, 'src' | 'alt'> {
+interface Props extends Pick<HTMLImageElement, "src" | "alt"> {
   size: CommonImageType;
 }
 
 export function LazySlideImage({
   src,
   alt,
-  size: { width = '100%', height = '100%' },
+  size: { width = "100%", height = "100%" },
 }: Props) {
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -38,7 +37,7 @@ const ImageWrapper = styled.div<CommonImageType & { inView?: boolean }>`
   height: ${({ height }) => height};
   transition: background-color 0.5s;
   background-color: ${({ inView }) =>
-    inView ? 'transparent' : color['grey-20']};
+    inView ? "transparent" : color["grey-20"]};
 `;
 
 const Image = styled.img<CommonImageType>`

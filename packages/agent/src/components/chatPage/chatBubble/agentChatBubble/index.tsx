@@ -1,13 +1,11 @@
-import { keyframes } from '@emotion/react';
-import { PropsWithChildren } from 'react';
-import { useTranslation } from 'react-i18next';
-
-import { B3, B5, color } from '@corca-ai/design-system';
-import styled from '@emotion/styled';
-
-import { Skeleton } from '../../../../styles/skeleton';
-import { Profile } from '../../../icon/Profile';
-import { BaseChatBubbleContents } from '../../style';
+import { B3, B5, color } from "@corca-ai/design-system";
+import { keyframes } from "@emotion/react";
+import styled from "@emotion/styled";
+import { PropsWithChildren } from "react";
+import { useTranslation } from "react-i18next";
+import { Skeleton } from "../../../../styles/skeleton";
+import { Profile } from "../../../icon/Profile";
+import { BaseChatBubbleContents } from "../../style";
 
 type QuestionChip = {
   questions: string[];
@@ -35,7 +33,7 @@ export function AgentChatBubble({ loading, children, chip }: Props) {
       ) : (
         <>
           <Contents>
-            <B3>{typeof children === 'string' ? t(children) : children}</B3>
+            <B3>{typeof children === "string" ? t(children) : children}</B3>
           </Contents>
           <ChipListContainer>
             {chip?.showQuestions && (
@@ -115,7 +113,7 @@ const Chip = styled.button<{ disabled: boolean }>`
   align-items: center;
   gap: 10px;
   border-radius: 10px;
-  border: 1px solid ${color['grey-40']};
+  border: 1px solid ${color["grey-40"]};
   background: ${color.white};
   cursor: pointer;
 `;

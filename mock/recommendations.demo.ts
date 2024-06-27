@@ -633,34 +633,37 @@ export const widgetRecommendationProductsResponse = {
       values: {
         widget: { tableSize: { columns: 4, rows: 1 } },
         title: {
-          hasTitle: true,
-          text: "당신을 위한 추천 상품",
-          fontSize: 20,
-          fontColor: "#363636",
-          fontWeight: 400,
+          title: {
+            show: true,
+            text: "당신을 위한 추천 상품",
+            fontSize: 20,
+            fontColor: "#363636",
+            fontWeight: 400,
+          },
         },
         product: {
           image: { borderRadius: 12, ratio: "1:1" },
           name: { fontSize: 14, fontColor: "#4d4d4d", fontWeight: 500 },
           summary: {
-            hasSummary: true,
+            show: true,
             fontSize: 12,
             fontColor: "#999999",
             fontWeight: 400,
           },
           price: {
+            show: true,
             fontSize: 12,
             fontColor: "#999999",
             fontWeight: 400,
           },
           discountPrice: {
-            hasDiscountPrice: true,
+            show: true,
             fontSize: 14,
             fontColor: "#363636",
             fontWeight: 700,
           },
           discountRate: {
-            hasDiscountRate: true,
+            show: true,
             fontSize: 14,
             fontColor: "#f95d5d",
             fontWeight: 700,

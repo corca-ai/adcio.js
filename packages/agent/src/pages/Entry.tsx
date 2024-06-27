@@ -1,9 +1,4 @@
-import { IconX } from "@tabler/icons-react";
-import { useCallback, useState } from "react";
-import { isMobile } from "react-device-detect";
-import { useTranslation } from "react-i18next";
-import { getKoreanWordSegment } from "../utils/entry";
-
+import { B1, B2 } from "@corca-ai/design-system";
 import {
   ActionIcon,
   Flex,
@@ -11,13 +6,16 @@ import {
   keyframes,
   useMantineTheme,
 } from "@mantine/core";
-
-import { B1, B2 } from "@corca-ai/design-system";
-import { Page } from "../router/route";
+import { IconX } from "@tabler/icons-react";
+import { useCallback, useState } from "react";
+import { isMobile } from "react-device-detect";
+import { useTranslation } from "react-i18next";
+import { ChatIcon } from "../components/icon/ChatIcon";
 import { useAgentSettingState } from "../context/AgentSettingContext";
 import { EntryContainer } from "../layout/container/EntryContainer";
-import { ChatIcon } from "../components/icon/ChatIcon";
+import { Page } from "../router/route";
 import { AgentPath } from "../types/route.types";
+import { getKoreanWordSegment } from "../utils/entry";
 
 const show = keyframes({
   // TODO: need to animation

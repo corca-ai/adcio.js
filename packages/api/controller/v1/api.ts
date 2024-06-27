@@ -60,6 +60,483 @@ export type AccessTokenClientTypeEnum = typeof AccessTokenClientTypeEnum[keyof t
 /**
  * 
  * @export
+ * @interface AdGroup
+ */
+export interface AdGroup {
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'type': AdGroupTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AdGroup
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AdGroup
+     */
+    'totalBudgetInPeriod': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'budgetType': AdGroupBudgetTypeEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof AdGroup
+     */
+    'dailyUsedBudget': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AdGroup
+     */
+    'totalUsedBudget': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AdGroup
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'sellerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'campaignId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroup
+     */
+    'deletedAt': string | null;
+}
+
+export const AdGroupTypeEnum = {
+    Grid: 'GRID'
+} as const;
+
+export type AdGroupTypeEnum = typeof AdGroupTypeEnum[keyof typeof AdGroupTypeEnum];
+export const AdGroupBudgetTypeEnum = {
+    DailyBudget: 'DAILY_BUDGET',
+    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
+    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
+} as const;
+
+export type AdGroupBudgetTypeEnum = typeof AdGroupBudgetTypeEnum[keyof typeof AdGroupBudgetTypeEnum];
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const AdGroupBudgetType = {
+    DailyBudget: 'DAILY_BUDGET',
+    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
+    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
+} as const;
+
+export type AdGroupBudgetType = typeof AdGroupBudgetType[keyof typeof AdGroupBudgetType];
+
+
+/**
+ * 
+ * @export
+ * @interface AdGroupControllerFetchAdGroupProducts200Response
+ */
+export interface AdGroupControllerFetchAdGroupProducts200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof AdGroupControllerFetchAdGroupProducts200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<Product>}
+     * @memberof AdGroupControllerFetchAdGroupProducts200Response
+     */
+    'items'?: Array<Product>;
+}
+/**
+ * 
+ * @export
+ * @interface AdGroupControllerFetchAdGroups200Response
+ */
+export interface AdGroupControllerFetchAdGroups200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof AdGroupControllerFetchAdGroups200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchAdGroupListItemResponseDto>}
+     * @memberof AdGroupControllerFetchAdGroups200Response
+     */
+    'items'?: Array<FetchAdGroupListItemResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface AdGroupTargetKey
+ */
+export interface AdGroupTargetKey {
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKey
+     */
+    'id': string;
+    /**
+     * 
+     * @type {Client}
+     * @memberof AdGroupTargetKey
+     */
+    'store': Client;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKey
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKey
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKey
+     */
+    'label': string;
+    /**
+     * 
+     * @type {Array<AdGroupTargetValue>}
+     * @memberof AdGroupTargetKey
+     */
+    'selectValues': Array<AdGroupTargetValue>;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKey
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKey
+     */
+    'deletedAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface AdGroupTargetKeyValueResponse
+ */
+export interface AdGroupTargetKeyValueResponse {
+    /**
+     * 
+     * @type {AdGroupTargetKey}
+     * @memberof AdGroupTargetKeyValueResponse
+     */
+    'key': AdGroupTargetKey;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKeyValueResponse
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKeyValueResponse
+     */
+    'label': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKeyValueResponse
+     */
+    'value': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKeyValueResponse
+     */
+    'keyId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKeyValueResponse
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetKeyValueResponse
+     */
+    'deletedAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface AdGroupTargetValue
+ */
+export interface AdGroupTargetValue {
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetValue
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetValue
+     */
+    'label': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetValue
+     */
+    'value': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetValue
+     */
+    'keyId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetValue
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupTargetValue
+     */
+    'deletedAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface AdGroupWithSellerAndCampaign
+ */
+export interface AdGroupWithSellerAndCampaign {
+    /**
+     * 
+     * @type {Array<AdGroupTargetKeyValueResponse>}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'targets': Array<AdGroupTargetKeyValueResponse>;
+    /**
+     * 
+     * @type {Client}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'seller': Client;
+    /**
+     * 
+     * @type {Campaign}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'campaign': Campaign;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'type': AdGroupWithSellerAndCampaignTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'totalBudgetInPeriod': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'budgetType': AdGroupWithSellerAndCampaignBudgetTypeEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'dailyUsedBudget': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'totalUsedBudget': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'sellerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'campaignId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'deletedAt': string | null;
+}
+
+export const AdGroupWithSellerAndCampaignTypeEnum = {
+    Grid: 'GRID'
+} as const;
+
+export type AdGroupWithSellerAndCampaignTypeEnum = typeof AdGroupWithSellerAndCampaignTypeEnum[keyof typeof AdGroupWithSellerAndCampaignTypeEnum];
+export const AdGroupWithSellerAndCampaignBudgetTypeEnum = {
+    DailyBudget: 'DAILY_BUDGET',
+    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
+    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
+} as const;
+
+export type AdGroupWithSellerAndCampaignBudgetTypeEnum = typeof AdGroupWithSellerAndCampaignBudgetTypeEnum[keyof typeof AdGroupWithSellerAndCampaignBudgetTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface AdMetric
+ */
+export interface AdMetric {
+    /**
+     * 
+     * @type {object}
+     * @memberof AdMetric
+     */
+    'average': object;
+}
+/**
+ * 
+ * @export
  * @interface AdminControllerFetchClients200Response
  */
 export interface AdminControllerFetchClients200Response {
@@ -132,89 +609,6 @@ export interface AppendInjector {
      */
     'videoTemplate'?: string;
 }
-/**
- * 
- * @export
- * @interface Audience
- */
-export interface Audience {
-    /**
-     * 
-     * @type {string}
-     * @memberof Audience
-     */
-    'id': string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Audience
-     */
-    'age': Array<AudienceAgeEnum>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Audience
-     */
-    'gender': Array<AudienceGenderEnum>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Audience
-     */
-    'area': Array<AudienceAreaEnum>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Audience
-     */
-    'regularCustomer': Array<AudienceRegularCustomerEnum>;
-    /**
-     * 
-     * @type {string}
-     * @memberof Audience
-     */
-    'campaignId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Audience
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Audience
-     */
-    'updatedAt': string;
-}
-
-export const AudienceAgeEnum = {
-    _10: '10',
-    _20: '20',
-    _30: '30',
-    _40: '40'
-} as const;
-
-export type AudienceAgeEnum = typeof AudienceAgeEnum[keyof typeof AudienceAgeEnum];
-export const AudienceGenderEnum = {
-    Male: 'male',
-    Female: 'female'
-} as const;
-
-export type AudienceGenderEnum = typeof AudienceGenderEnum[keyof typeof AudienceGenderEnum];
-export const AudienceAreaEnum = {
-    NorthernVietnam: 'NorthernVietnam',
-    SouthernVietnam: 'SouthernVietnam'
-} as const;
-
-export type AudienceAreaEnum = typeof AudienceAreaEnum[keyof typeof AudienceAreaEnum];
-export const AudienceRegularCustomerEnum = {
-    _1: '1',
-    _3: '3'
-} as const;
-
-export type AudienceRegularCustomerEnum = typeof AudienceRegularCustomerEnum[keyof typeof AudienceRegularCustomerEnum];
-
 /**
  * 
  * @export
@@ -298,12 +692,6 @@ export interface Banner {
      * @memberof Banner
      */
     'clientId': string;
-    /**
-     * 
-     * @type {Array<Campaign>}
-     * @memberof Banner
-     */
-    'campaigns': Array<Campaign>;
     /**
      * 
      * @type {string}
@@ -509,26 +897,12 @@ export interface BannerSuggestionRequestDto {
      */
     'fromAgent'?: boolean;
     /**
-     * The birth year of the customer.
-     * @type {number}
+     * 
+     * @type {Array<SuggestionRequestTarget>}
      * @memberof BannerSuggestionRequestDto
      */
-    'birthYear'?: number;
-    /**
-     * The gender of the customer.
-     * @type {string}
-     * @memberof BannerSuggestionRequestDto
-     */
-    'gender'?: BannerSuggestionRequestDtoGenderEnum;
+    'targets'?: Array<SuggestionRequestTarget>;
 }
-
-export const BannerSuggestionRequestDtoGenderEnum = {
-    Male: 'male',
-    Female: 'female'
-} as const;
-
-export type BannerSuggestionRequestDtoGenderEnum = typeof BannerSuggestionRequestDtoGenderEnum[keyof typeof BannerSuggestionRequestDtoGenderEnum];
-
 /**
  * 
  * @export
@@ -547,6 +921,12 @@ export interface BannerSuggestionResponseDto {
      * @memberof BannerSuggestionResponseDto
      */
     'placement': SuggestionResponsePlacementType;
+    /**
+     * 
+     * @type {object}
+     * @memberof BannerSuggestionResponseDto
+     */
+    'metadata': object;
 }
 /**
  * 
@@ -572,12 +952,6 @@ export interface BannerWithCreative {
      * @memberof BannerWithCreative
      */
     'clientId': string;
-    /**
-     * 
-     * @type {Array<Campaign>}
-     * @memberof BannerWithCreative
-     */
-    'campaigns': Array<Campaign>;
     /**
      * 
      * @type {string}
@@ -691,12 +1065,6 @@ export interface BannerWithCreativeDto {
     'clientId': string;
     /**
      * 
-     * @type {Array<Campaign>}
-     * @memberof BannerWithCreativeDto
-     */
-    'campaigns': Array<Campaign>;
-    /**
-     * 
      * @type {string}
      * @memberof BannerWithCreativeDto
      */
@@ -785,52 +1153,84 @@ export type BannerWithCreativeDtoTypeEnum = typeof BannerWithCreativeDtoTypeEnum
 /**
  * 
  * @export
- * @interface BudgetUsage
+ * @interface BudgetCharge
  */
-export interface BudgetUsage {
+export interface BudgetCharge {
     /**
      * 
      * @type {string}
-     * @memberof BudgetUsage
+     * @memberof BudgetCharge
      */
-    'id': string;
-    /**
-     * 
-     * @type {Campaign}
-     * @memberof BudgetUsage
-     */
-    'campaign': Campaign;
+    'requestId': string;
     /**
      * 
      * @type {string}
-     * @memberof BudgetUsage
+     * @memberof BudgetCharge
+     */
+    'adsetId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BudgetCharge
+     */
+    'adsetType': BudgetChargeAdsetTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof BudgetCharge
      */
     'campaignId': string;
     /**
      * 
+     * @type {string}
+     * @memberof BudgetCharge
+     */
+    'adGroupId': string;
+    /**
+     * 
      * @type {number}
-     * @memberof BudgetUsage
+     * @memberof BudgetCharge
      */
-    'amount': number;
+    'bidPrice': number;
     /**
      * 
      * @type {string}
-     * @memberof BudgetUsage
+     * @memberof BudgetCharge
      */
-    'startsAt': string;
+    'storeId': string;
     /**
      * 
      * @type {string}
-     * @memberof BudgetUsage
+     * @memberof BudgetCharge
      */
-    'endsAt': string;
+    'sellerId': string;
     /**
      * 
-     * @type {string}
-     * @memberof BudgetUsage
+     * @type {number}
+     * @memberof BudgetCharge
      */
-    'createdAt': string;
+    'advertiseTimestamp': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof BudgetCharge
+     */
+    'actionTimestamp': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof BudgetCharge
+     */
+    'timestamp': number;
 }
+
+export const BudgetChargeAdsetTypeEnum = {
+    Grid: 'GRID',
+    Banner: 'BANNER'
+} as const;
+
+export type BudgetChargeAdsetTypeEnum = typeof BudgetChargeAdsetTypeEnum[keyof typeof BudgetChargeAdsetTypeEnum];
+
 /**
  * 
  * @export
@@ -915,78 +1315,6 @@ export interface Campaign {
     'title': string;
     /**
      * 
-     * @type {Placement}
-     * @memberof Campaign
-     */
-    'placement': Placement;
-    /**
-     * 
-     * @type {string}
-     * @memberof Campaign
-     */
-    'placementId': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof Campaign
-     */
-    'maxBudgetPerDay': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Campaign
-     */
-    'totalBudgetInPeriod': number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Campaign
-     */
-    'budgetType': CampaignBudgetTypeEnum;
-    /**
-     * 
-     * @type {number}
-     * @memberof Campaign
-     */
-    'usedBudget': number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Campaign
-     */
-    'activated': boolean;
-    /**
-     * 
-     * @type {Array<Product>}
-     * @memberof Campaign
-     */
-    'products': Array<Product>;
-    /**
-     * 
-     * @type {Array<Banner>}
-     * @memberof Campaign
-     */
-    'banners': Array<Banner>;
-    /**
-     * 
-     * @type {Array<BudgetUsage>}
-     * @memberof Campaign
-     */
-    'budgetUsage': Array<BudgetUsage>;
-    /**
-     * 
-     * @type {string}
-     * @memberof Campaign
-     */
-    'startsAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Campaign
-     */
-    'endsAt': string | null;
-    /**
-     * 
      * @type {Client}
      * @memberof Campaign
      */
@@ -999,10 +1327,10 @@ export interface Campaign {
     'clientId': string;
     /**
      * 
-     * @type {Audience}
+     * @type {Array<AdGroup>}
      * @memberof Campaign
      */
-    'audience': Audience;
+    'adGroups': Array<AdGroup>;
     /**
      * 
      * @type {number}
@@ -1033,49 +1361,6 @@ export interface Campaign {
      * @memberof Campaign
      */
     'deletedAt': string | null;
-}
-
-export const CampaignBudgetTypeEnum = {
-    DailyBudget: 'DAILY_BUDGET',
-    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
-    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
-} as const;
-
-export type CampaignBudgetTypeEnum = typeof CampaignBudgetTypeEnum[keyof typeof CampaignBudgetTypeEnum];
-
-/**
- * 
- * @export
- * @enum {string}
- */
-
-export const CampaignBudgetType = {
-    DailyBudget: 'DAILY_BUDGET',
-    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
-    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
-} as const;
-
-export type CampaignBudgetType = typeof CampaignBudgetType[keyof typeof CampaignBudgetType];
-
-
-/**
- * 
- * @export
- * @interface CampaignControllerFetchCampaignProducts200Response
- */
-export interface CampaignControllerFetchCampaignProducts200Response {
-    /**
-     * 
-     * @type {number}
-     * @memberof CampaignControllerFetchCampaignProducts200Response
-     */
-    'count'?: number;
-    /**
-     * 
-     * @type {Array<Product>}
-     * @memberof CampaignControllerFetchCampaignProducts200Response
-     */
-    'items'?: Array<Product>;
 }
 /**
  * 
@@ -1096,130 +1381,6 @@ export interface CampaignControllerFetchMany200Response {
      */
     'items'?: Array<FetchManyCampaignsResponseDto>;
 }
-/**
- * 
- * @export
- * @interface CampaignWithClientAndAudience
- */
-export interface CampaignWithClientAndAudience {
-    /**
-     * 
-     * @type {Client}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'client': Client;
-    /**
-     * 
-     * @type {Audience}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'audience': Audience;
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'title': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'placementId': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'maxBudgetPerDay': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'totalBudgetInPeriod': number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'budgetType': CampaignWithClientAndAudienceBudgetTypeEnum;
-    /**
-     * 
-     * @type {number}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'usedBudget': number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'activated': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'startsAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'endsAt': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'clientId': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'clickLookbackWindowDays': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'impressionLookbackWindowDays': number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'updatedAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignWithClientAndAudience
-     */
-    'deletedAt': string | null;
-}
-
-export const CampaignWithClientAndAudienceBudgetTypeEnum = {
-    DailyBudget: 'DAILY_BUDGET',
-    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
-    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
-} as const;
-
-export type CampaignWithClientAndAudienceBudgetTypeEnum = typeof CampaignWithClientAndAudienceBudgetTypeEnum[keyof typeof CampaignWithClientAndAudienceBudgetTypeEnum];
-
 /**
  * 
  * @export
@@ -1437,10 +1598,16 @@ export interface ChatDialogueResponseDto {
     'content': string;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof ChatDialogueResponseDto
      */
-    'parsedContent': object;
+    'error': string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ChatDialogueResponseDto
+     */
+    'questions': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -1656,6 +1823,12 @@ export interface Client {
     'deletedAt': string | null;
     /**
      * 
+     * @type {Array<AdGroupTargetKey>}
+     * @memberof Client
+     */
+    'adGroupTargetKeys': Array<AdGroupTargetKey>;
+    /**
+     * 
      * @type {string}
      * @memberof Client
      */
@@ -1832,6 +2005,12 @@ export interface ClientWithBusinessLicenseDto {
      * @memberof ClientWithBusinessLicenseDto
      */
     'deletedAt': string | null;
+    /**
+     * 
+     * @type {Array<AdGroupTargetKey>}
+     * @memberof ClientWithBusinessLicenseDto
+     */
+    'adGroupTargetKeys': Array<AdGroupTargetKey>;
     /**
      * 
      * @type {string}
@@ -2363,6 +2542,296 @@ export interface CountCostAmount {
 /**
  * 
  * @export
+ * @interface CreateAdGroupDataDto
+ */
+export interface CreateAdGroupDataDto {
+    /**
+     * 기한이 있는 캠페인의 경우 일 예산을 저장하고, 기한이 없는 캠페인의 경우 하루 최대 예산을 저장
+     * @type {number}
+     * @memberof CreateAdGroupDataDto
+     */
+    'maxBudgetPerDay'?: number;
+    /**
+     * 기한이 있는 캠페인에 대해 총 예산을 저장
+     * @type {number}
+     * @memberof CreateAdGroupDataDto
+     */
+    'totalBudgetInPeriod'?: number;
+    /**
+     * 
+     * @type {AdGroupBudgetType}
+     * @memberof CreateAdGroupDataDto
+     */
+    'budgetType': AdGroupBudgetType;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupDataDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupDataDto
+     */
+    'type': CreateAdGroupDataDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupDataDto
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateAdGroupDataDto
+     */
+    'productIds'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateAdGroupDataDto
+     */
+    'bannerIds'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupDataDto
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupDataDto
+     */
+    'endsAt'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateAdGroupDataDto
+     */
+    'targetValueIds': Array<string>;
+}
+
+export const CreateAdGroupDataDtoTypeEnum = {
+    Grid: 'GRID'
+} as const;
+
+export type CreateAdGroupDataDtoTypeEnum = typeof CreateAdGroupDataDtoTypeEnum[keyof typeof CreateAdGroupDataDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateAdGroupDto
+ */
+export interface CreateAdGroupDto {
+    /**
+     * 기한이 있는 캠페인의 경우 일 예산을 저장하고, 기한이 없는 캠페인의 경우 하루 최대 예산을 저장
+     * @type {number}
+     * @memberof CreateAdGroupDto
+     */
+    'maxBudgetPerDay'?: number;
+    /**
+     * 기한이 있는 캠페인에 대해 총 예산을 저장
+     * @type {number}
+     * @memberof CreateAdGroupDto
+     */
+    'totalBudgetInPeriod'?: number;
+    /**
+     * 
+     * @type {AdGroupBudgetType}
+     * @memberof CreateAdGroupDto
+     */
+    'budgetType': AdGroupBudgetType;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupDto
+     */
+    'type': CreateAdGroupDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupDto
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateAdGroupDto
+     */
+    'productIds'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateAdGroupDto
+     */
+    'bannerIds'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupDto
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupDto
+     */
+    'endsAt'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateAdGroupDto
+     */
+    'targetValueIds': Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupDto
+     */
+    'campaignId': string;
+}
+
+export const CreateAdGroupDtoTypeEnum = {
+    Grid: 'GRID'
+} as const;
+
+export type CreateAdGroupDtoTypeEnum = typeof CreateAdGroupDtoTypeEnum[keyof typeof CreateAdGroupDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateAdGroupTargetKeyRequestDto
+ */
+export interface CreateAdGroupTargetKeyRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetKeyRequestDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetKeyRequestDto
+     */
+    'label': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateAdGroupTargetKeyResponseDto
+ */
+export interface CreateAdGroupTargetKeyResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetKeyResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetKeyResponseDto
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetKeyResponseDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetKeyResponseDto
+     */
+    'label': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetKeyResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetKeyResponseDto
+     */
+    'deletedAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateAdGroupTargetValueRequestDto
+ */
+export interface CreateAdGroupTargetValueRequestDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetValueRequestDto
+     */
+    'value': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetValueRequestDto
+     */
+    'label': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateAdGroupTargetValueResponseDto
+ */
+export interface CreateAdGroupTargetValueResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetValueResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetValueResponseDto
+     */
+    'label': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetValueResponseDto
+     */
+    'value': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetValueResponseDto
+     */
+    'keyId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetValueResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAdGroupTargetValueResponseDto
+     */
+    'deletedAt': string;
+}
+/**
+ * 
+ * @export
  * @interface CreateAutoChargeDto
  */
 export interface CreateAutoChargeDto {
@@ -2527,24 +2996,6 @@ export interface CreateBusinessLicenseResponseDto {
  */
 export interface CreateCampaignDto {
     /**
-     * 기한이 있는 캠페인의 경우 일 예산을 저장하고, 기한이 없는 캠페인의 경우 하루 최대 예산을 저장
-     * @type {number}
-     * @memberof CreateCampaignDto
-     */
-    'maxBudgetPerDay'?: number;
-    /**
-     * 기한이 있는 캠페인에 대해 총 예산을 저장
-     * @type {number}
-     * @memberof CreateCampaignDto
-     */
-    'totalBudgetInPeriod'?: number;
-    /**
-     * 
-     * @type {CampaignBudgetType}
-     * @memberof CreateCampaignDto
-     */
-    'budgetType': CampaignBudgetType;
-    /**
      * 
      * @type {string}
      * @memberof CreateCampaignDto
@@ -2552,46 +3003,10 @@ export interface CreateCampaignDto {
     'title': string;
     /**
      * 
-     * @type {string}
+     * @type {CreateAdGroupDataDto}
      * @memberof CreateCampaignDto
      */
-    'placementId': string;
-    /**
-     * 
-     * @type {Array<Product>}
-     * @memberof CreateCampaignDto
-     */
-    'products'?: Array<Product>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof CreateCampaignDto
-     */
-    'productIds'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof CreateCampaignDto
-     */
-    'bannerIds'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateCampaignDto
-     */
-    'startsAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateCampaignDto
-     */
-    'endsAt'?: string;
-    /**
-     * 
-     * @type {object}
-     * @memberof CreateCampaignDto
-     */
-    'audience'?: object;
+    'adGroup': CreateAdGroupDataDto;
     /**
      * 
      * @type {number}
@@ -2605,38 +3020,12 @@ export interface CreateCampaignDto {
      */
     'impressionLookbackWindowDays': number | null;
 }
-
-
 /**
  * 
  * @export
  * @interface CreateCampaignResponseDto
  */
 export interface CreateCampaignResponseDto {
-    /**
-     * 
-     * @type {Audience}
-     * @memberof CreateCampaignResponseDto
-     */
-    'audience': Audience;
-    /**
-     * 
-     * @type {Array<Product>}
-     * @memberof CreateCampaignResponseDto
-     */
-    'products': Array<Product>;
-    /**
-     * 
-     * @type {Array<Banner>}
-     * @memberof CreateCampaignResponseDto
-     */
-    'banners': Array<Banner>;
-    /**
-     * 
-     * @type {Placement}
-     * @memberof CreateCampaignResponseDto
-     */
-    'placement': Placement;
     /**
      * 
      * @type {string}
@@ -2649,54 +3038,6 @@ export interface CreateCampaignResponseDto {
      * @memberof CreateCampaignResponseDto
      */
     'title': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateCampaignResponseDto
-     */
-    'placementId': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateCampaignResponseDto
-     */
-    'maxBudgetPerDay': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateCampaignResponseDto
-     */
-    'totalBudgetInPeriod': number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateCampaignResponseDto
-     */
-    'budgetType': CreateCampaignResponseDtoBudgetTypeEnum;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateCampaignResponseDto
-     */
-    'usedBudget': number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateCampaignResponseDto
-     */
-    'activated': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateCampaignResponseDto
-     */
-    'startsAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateCampaignResponseDto
-     */
-    'endsAt': string | null;
     /**
      * 
      * @type {string}
@@ -2734,15 +3075,6 @@ export interface CreateCampaignResponseDto {
      */
     'deletedAt': string | null;
 }
-
-export const CreateCampaignResponseDtoBudgetTypeEnum = {
-    DailyBudget: 'DAILY_BUDGET',
-    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
-    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
-} as const;
-
-export type CreateCampaignResponseDtoBudgetTypeEnum = typeof CreateCampaignResponseDtoBudgetTypeEnum[keyof typeof CreateCampaignResponseDtoBudgetTypeEnum];
-
 /**
  * 
  * @export
@@ -2776,10 +3108,16 @@ export interface CreateChatDialogueDto {
     'role': CreateChatDialogueDtoRoleEnum;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof CreateChatDialogueDto
      */
-    'parsedContent'?: object;
+    'error'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateChatDialogueDto
+     */
+    'questions'?: Array<string>;
     /**
      * 
      * @type {string}
@@ -2854,10 +3192,16 @@ export interface CreateChatDialogueResponseDto {
     'content': string;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof CreateChatDialogueResponseDto
      */
-    'parsedContent': object;
+    'error': string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateChatDialogueResponseDto
+     */
+    'questions': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -3356,6 +3700,25 @@ export interface CreateProductIndicesRequestDto {
 /**
  * 
  * @export
+ * @interface CreateSellerCreditDecreaseRequestDto
+ */
+export interface CreateSellerCreditDecreaseRequestDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateSellerCreditDecreaseRequestDto
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSellerCreditDecreaseRequestDto
+     */
+    'reason': string;
+}
+/**
+ * 
+ * @export
  * @interface CreateSellerDto
  */
 export interface CreateSellerDto {
@@ -3438,6 +3801,12 @@ export interface CreateSellerResponseDto {
      * @memberof CreateSellerResponseDto
      */
     'deletedAt': string | null;
+    /**
+     * 
+     * @type {Array<AdGroupTargetKey>}
+     * @memberof CreateSellerResponseDto
+     */
+    'adGroupTargetKeys': Array<AdGroupTargetKey>;
     /**
      * 
      * @type {string}
@@ -4014,6 +4383,63 @@ export interface Credit {
 /**
  * 
  * @export
+ * @interface CreditControllerFetchManySellerCreditDecreaseRequest200Response
+ */
+export interface CreditControllerFetchManySellerCreditDecreaseRequest200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreditControllerFetchManySellerCreditDecreaseRequest200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchManySellerCreditDecreaseRequestResponseDto>}
+     * @memberof CreditControllerFetchManySellerCreditDecreaseRequest200Response
+     */
+    'items'?: Array<FetchManySellerCreditDecreaseRequestResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface CreditControllerFetchManySellerCreditInfo200Response
+ */
+export interface CreditControllerFetchManySellerCreditInfo200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreditControllerFetchManySellerCreditInfo200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchManySellerCreditInfoResponseDto>}
+     * @memberof CreditControllerFetchManySellerCreditInfo200Response
+     */
+    'items'?: Array<FetchManySellerCreditInfoResponseDto>;
+}
+/**
+ * 
+ * @export
+ * @interface CreditControllerFetchSellerCreditUpdateHistory200Response
+ */
+export interface CreditControllerFetchSellerCreditUpdateHistory200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreditControllerFetchSellerCreditUpdateHistory200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<FetchSellerCreditUpdateHistoryResponseDto>}
+     * @memberof CreditControllerFetchSellerCreditUpdateHistory200Response
+     */
+    'items'?: Array<FetchSellerCreditUpdateHistoryResponseDto>;
+}
+/**
+ * 
+ * @export
  * @interface CreditDecreaseRequest
  */
 export interface CreditDecreaseRequest {
@@ -4025,22 +4451,10 @@ export interface CreditDecreaseRequest {
     'id': string;
     /**
      * 
-     * @type {Client}
-     * @memberof CreditDecreaseRequest
-     */
-    'store': Client;
-    /**
-     * 
      * @type {string}
      * @memberof CreditDecreaseRequest
      */
     'storeId': string;
-    /**
-     * 
-     * @type {Client}
-     * @memberof CreditDecreaseRequest
-     */
-    'seller': Client;
     /**
      * 
      * @type {string}
@@ -4083,12 +4497,6 @@ export interface CreditDecreaseRequest {
      * @memberof CreditDecreaseRequest
      */
     'processedAt': string | null;
-    /**
-     * 
-     * @type {CreditHistory}
-     * @memberof CreditDecreaseRequest
-     */
-    'creditHistory': CreditHistory | null;
 }
 
 export const CreditDecreaseRequestStatusEnum = {
@@ -4098,6 +4506,35 @@ export const CreditDecreaseRequestStatusEnum = {
 } as const;
 
 export type CreditDecreaseRequestStatusEnum = typeof CreditDecreaseRequestStatusEnum[keyof typeof CreditDecreaseRequestStatusEnum];
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const CreditDecreaseRequestAction = {
+    Approve: 'APPROVE',
+    Reject: 'REJECT'
+} as const;
+
+export type CreditDecreaseRequestAction = typeof CreditDecreaseRequestAction[keyof typeof CreditDecreaseRequestAction];
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const CreditDecreaseRequestStatus = {
+    Pending: 'PENDING',
+    Approved: 'APPROVED',
+    Rejected: 'REJECTED'
+} as const;
+
+export type CreditDecreaseRequestStatus = typeof CreditDecreaseRequestStatus[keyof typeof CreditDecreaseRequestStatus];
+
 
 /**
  * 
@@ -4183,6 +4620,21 @@ export type CreditHistoryAdjustmentTypeEnum = typeof CreditHistoryAdjustmentType
 /**
  * 
  * @export
+ * @enum {string}
+ */
+
+export const CreditType = {
+    SellerSelfPaid: 'SELLER_SELF_PAID',
+    StorePaid: 'STORE_PAID',
+    Free: 'FREE'
+} as const;
+
+export type CreditType = typeof CreditType[keyof typeof CreditType];
+
+
+/**
+ * 
+ * @export
  * @interface CustomerChatGroupDto
  */
 export interface CustomerChatGroupDto {
@@ -4218,10 +4670,16 @@ export interface CustomerChatGroupDto {
     'lastChatAt'?: string;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof CustomerChatGroupDto
      */
-    'parsedContent': object;
+    'error'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CustomerChatGroupDto
+     */
+    'questions'?: Array<string>;
     /**
      * 
      * @type {string}
@@ -4356,30 +4814,6 @@ export interface DashboardCampaign {
      * @memberof DashboardCampaign
      */
     'title': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof DashboardCampaign
-     */
-    'activated': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof DashboardCampaign
-     */
-    'startsAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DashboardCampaign
-     */
-    'endsAt': string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof DashboardCampaign
-     */
-    'maxBudgetPerDay': number;
 }
 /**
  * 
@@ -4542,6 +4976,409 @@ export interface FetchActivePlacementsResponseDto {
 /**
  * 
  * @export
+ * @interface FetchAdGroupBudgetResponseDto
+ */
+export interface FetchAdGroupBudgetResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupBudgetResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchAdGroupBudgetResponseDto
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchAdGroupBudgetResponseDto
+     */
+    'dailyUsedBudget': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupBudgetResponseDto
+     */
+    'timezone': FetchAdGroupBudgetResponseDtoTimezoneEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupBudgetResponseDto
+     */
+    'currency': FetchAdGroupBudgetResponseDtoCurrencyEnum;
+}
+
+export const FetchAdGroupBudgetResponseDtoTimezoneEnum = {
+    Kst: 'KST',
+    Ict: 'ICT',
+    Est: 'EST',
+    Cst: 'CST',
+    Mst: 'MST',
+    Pst: 'PST',
+    Akst: 'AKST',
+    Hst: 'HST'
+} as const;
+
+export type FetchAdGroupBudgetResponseDtoTimezoneEnum = typeof FetchAdGroupBudgetResponseDtoTimezoneEnum[keyof typeof FetchAdGroupBudgetResponseDtoTimezoneEnum];
+export const FetchAdGroupBudgetResponseDtoCurrencyEnum = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type FetchAdGroupBudgetResponseDtoCurrencyEnum = typeof FetchAdGroupBudgetResponseDtoCurrencyEnum[keyof typeof FetchAdGroupBudgetResponseDtoCurrencyEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchAdGroupListItemResponseDto
+ */
+export interface FetchAdGroupListItemResponseDto {
+    /**
+     * 
+     * @type {Placement}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'placement': Placement;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'type': FetchAdGroupListItemResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'totalBudgetInPeriod': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'budgetType': FetchAdGroupListItemResponseDtoBudgetTypeEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'dailyUsedBudget': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'totalUsedBudget': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'sellerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'campaignId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupListItemResponseDto
+     */
+    'deletedAt': string | null;
+}
+
+export const FetchAdGroupListItemResponseDtoTypeEnum = {
+    Grid: 'GRID'
+} as const;
+
+export type FetchAdGroupListItemResponseDtoTypeEnum = typeof FetchAdGroupListItemResponseDtoTypeEnum[keyof typeof FetchAdGroupListItemResponseDtoTypeEnum];
+export const FetchAdGroupListItemResponseDtoBudgetTypeEnum = {
+    DailyBudget: 'DAILY_BUDGET',
+    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
+    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
+} as const;
+
+export type FetchAdGroupListItemResponseDtoBudgetTypeEnum = typeof FetchAdGroupListItemResponseDtoBudgetTypeEnum[keyof typeof FetchAdGroupListItemResponseDtoBudgetTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchAdGroupResponseDto
+ */
+export interface FetchAdGroupResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'type': FetchAdGroupResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'placementId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'totalBudgetInPeriod': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'budgetType': FetchAdGroupResponseDtoBudgetTypeEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'dailyUsedBudget': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'totalUsedBudget': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'activated': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'sellerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'campaignId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {Array<AdGroupTargetKeyValueResponse>}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'targets': Array<AdGroupTargetKeyValueResponse>;
+    /**
+     * 
+     * @type {Placement}
+     * @memberof FetchAdGroupResponseDto
+     */
+    'placement': Placement;
+}
+
+export const FetchAdGroupResponseDtoTypeEnum = {
+    Grid: 'GRID'
+} as const;
+
+export type FetchAdGroupResponseDtoTypeEnum = typeof FetchAdGroupResponseDtoTypeEnum[keyof typeof FetchAdGroupResponseDtoTypeEnum];
+export const FetchAdGroupResponseDtoBudgetTypeEnum = {
+    DailyBudget: 'DAILY_BUDGET',
+    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
+    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
+} as const;
+
+export type FetchAdGroupResponseDtoBudgetTypeEnum = typeof FetchAdGroupResponseDtoBudgetTypeEnum[keyof typeof FetchAdGroupResponseDtoBudgetTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchAdGroupTargetKeysResponseDto
+ */
+export interface FetchAdGroupTargetKeysResponseDto {
+    /**
+     * 
+     * @type {Array<FetchAdGroupTargetKeysResponseItemsDto>}
+     * @memberof FetchAdGroupTargetKeysResponseDto
+     */
+    'items': Array<FetchAdGroupTargetKeysResponseItemsDto>;
+}
+/**
+ * 
+ * @export
+ * @interface FetchAdGroupTargetKeysResponseItemsDto
+ */
+export interface FetchAdGroupTargetKeysResponseItemsDto {
+    /**
+     * 
+     * @type {Array<AdGroupTargetValue>}
+     * @memberof FetchAdGroupTargetKeysResponseItemsDto
+     */
+    'selectValues': Array<AdGroupTargetValue>;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupTargetKeysResponseItemsDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupTargetKeysResponseItemsDto
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupTargetKeysResponseItemsDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupTargetKeysResponseItemsDto
+     */
+    'label': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupTargetKeysResponseItemsDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupTargetKeysResponseItemsDto
+     */
+    'deletedAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface FetchAdGroupTitleResponseDto
+ */
+export interface FetchAdGroupTitleResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupTitleResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupTitleResponseDto
+     */
+    'title': string;
+}
+/**
+ * 
+ * @export
  * @interface FetchBannerResponseDto
  */
 export interface FetchBannerResponseDto {
@@ -4557,12 +5394,6 @@ export interface FetchBannerResponseDto {
      * @memberof FetchBannerResponseDto
      */
     'clientId': string;
-    /**
-     * 
-     * @type {Array<Campaign>}
-     * @memberof FetchBannerResponseDto
-     */
-    'campaigns': Array<Campaign>;
     /**
      * 
      * @type {string}
@@ -4677,37 +5508,6 @@ export type FetchBannerResponseDtoTypeEnum = typeof FetchBannerResponseDtoTypeEn
 /**
  * 
  * @export
- * @interface FetchBudgetUsageResponseDto
- */
-export interface FetchBudgetUsageResponseDto {
-    /**
-     * 
-     * @type {Campaign}
-     * @memberof FetchBudgetUsageResponseDto
-     */
-    'campaign': Campaign;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchBudgetUsageResponseDto
-     */
-    'endsAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchBudgetUsageResponseDto
-     */
-    'startsAt': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchBudgetUsageResponseDto
-     */
-    'amount': number;
-}
-/**
- * 
- * @export
  * @interface FetchByLicenseNumberResponseDto
  */
 export interface FetchByLicenseNumberResponseDto {
@@ -4772,278 +5572,15 @@ export type FetchByLicenseNumberResponseDtoInspectionStatusEnum = typeof FetchBy
 /**
  * 
  * @export
- * @interface FetchCampaignBudgetResponseDto
- */
-export interface FetchCampaignBudgetResponseDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignBudgetResponseDto
-     */
-    'id': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchCampaignBudgetResponseDto
-     */
-    'maxBudgetPerDay': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchCampaignBudgetResponseDto
-     */
-    'usedBudget': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignBudgetResponseDto
-     */
-    'timezone': FetchCampaignBudgetResponseDtoTimezoneEnum;
-}
-
-export const FetchCampaignBudgetResponseDtoTimezoneEnum = {
-    Kst: 'KST',
-    Ict: 'ICT',
-    Est: 'EST',
-    Cst: 'CST',
-    Mst: 'MST',
-    Pst: 'PST',
-    Akst: 'AKST',
-    Hst: 'HST'
-} as const;
-
-export type FetchCampaignBudgetResponseDtoTimezoneEnum = typeof FetchCampaignBudgetResponseDtoTimezoneEnum[keyof typeof FetchCampaignBudgetResponseDtoTimezoneEnum];
-
-/**
- * 
- * @export
- * @interface FetchCampaignPlacementDto
- */
-export interface FetchCampaignPlacementDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'placementFormatRatio': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'title': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'type': FetchCampaignPlacementDtoTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'suggestionType': FetchCampaignPlacementDtoSuggestionTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'bannerPlacementType': FetchCampaignPlacementDtoBannerPlacementTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'supportEnvironment': FetchCampaignPlacementDtoSupportEnvironmentEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'developEnvironment': FetchCampaignPlacementDtoDevelopEnvironmentEnum;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'displayCount': number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'minDisplayCount': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'maxDisplayCount': number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'activated': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'pageName': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'clientId': string;
-    /**
-     * 
-     * @type {Injector}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'injector': Injector | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'screenShot': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'displayFormatWidth': number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'displayFormatHeight': number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'property': FetchCampaignPlacementDtoPropertyEnum;
-    /**
-     * 
-     * @type {Array<number>}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'displayPositions': Array<number> | null;
-    /**
-     * 
-     * @type {Array<number>}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'tableSize': Array<number> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'widgetValueId': string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'productDetailDataColumns': Array<string> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'updatedAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'deletedAt': string | null;
-    /**
-     * 
-     * @type {FetchPageClientDto}
-     * @memberof FetchCampaignPlacementDto
-     */
-    'page': FetchPageClientDto;
-}
-
-export const FetchCampaignPlacementDtoTypeEnum = {
-    Grid: 'GRID',
-    Banner: 'BANNER'
-} as const;
-
-export type FetchCampaignPlacementDtoTypeEnum = typeof FetchCampaignPlacementDtoTypeEnum[keyof typeof FetchCampaignPlacementDtoTypeEnum];
-export const FetchCampaignPlacementDtoSuggestionTypeEnum = {
-    Recommend: 'RECOMMEND',
-    Advertise: 'ADVERTISE'
-} as const;
-
-export type FetchCampaignPlacementDtoSuggestionTypeEnum = typeof FetchCampaignPlacementDtoSuggestionTypeEnum[keyof typeof FetchCampaignPlacementDtoSuggestionTypeEnum];
-export const FetchCampaignPlacementDtoBannerPlacementTypeEnum = {
-    Static: 'STATIC',
-    Slide: 'SLIDE'
-} as const;
-
-export type FetchCampaignPlacementDtoBannerPlacementTypeEnum = typeof FetchCampaignPlacementDtoBannerPlacementTypeEnum[keyof typeof FetchCampaignPlacementDtoBannerPlacementTypeEnum];
-export const FetchCampaignPlacementDtoSupportEnvironmentEnum = {
-    Web: 'WEB',
-    WebMobile: 'WEB_MOBILE',
-    App: 'APP'
-} as const;
-
-export type FetchCampaignPlacementDtoSupportEnvironmentEnum = typeof FetchCampaignPlacementDtoSupportEnvironmentEnum[keyof typeof FetchCampaignPlacementDtoSupportEnvironmentEnum];
-export const FetchCampaignPlacementDtoDevelopEnvironmentEnum = {
-    Widget: 'WIDGET',
-    SelfDeveloped: 'SELF_DEVELOPED',
-    CodeInjector: 'CODE_INJECTOR'
-} as const;
-
-export type FetchCampaignPlacementDtoDevelopEnvironmentEnum = typeof FetchCampaignPlacementDtoDevelopEnvironmentEnum[keyof typeof FetchCampaignPlacementDtoDevelopEnvironmentEnum];
-export const FetchCampaignPlacementDtoPropertyEnum = {
-    New: 'NEW',
-    Hot: 'HOT',
-    Personal: 'PERSONAL',
-    SameGoods: 'SAME_GOODS',
-    DiffGoods: 'DIFF_GOODS'
-} as const;
-
-export type FetchCampaignPlacementDtoPropertyEnum = typeof FetchCampaignPlacementDtoPropertyEnum[keyof typeof FetchCampaignPlacementDtoPropertyEnum];
-
-/**
- * 
- * @export
  * @interface FetchCampaignResponseDto
  */
 export interface FetchCampaignResponseDto {
     /**
      * 
-     * @type {FetchCampaignPlacementDto}
+     * @type {number}
      * @memberof FetchCampaignResponseDto
      */
-    'placement': FetchCampaignPlacementDto;
-    /**
-     * 
-     * @type {Audience}
-     * @memberof FetchCampaignResponseDto
-     */
-    'audience': Audience;
+    'adGroupsTotalUsedBudget': number;
     /**
      * 
      * @type {string}
@@ -5056,54 +5593,6 @@ export interface FetchCampaignResponseDto {
      * @memberof FetchCampaignResponseDto
      */
     'title': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignResponseDto
-     */
-    'placementId': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchCampaignResponseDto
-     */
-    'maxBudgetPerDay': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchCampaignResponseDto
-     */
-    'totalBudgetInPeriod': number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignResponseDto
-     */
-    'budgetType': FetchCampaignResponseDtoBudgetTypeEnum;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchCampaignResponseDto
-     */
-    'usedBudget': number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FetchCampaignResponseDto
-     */
-    'activated': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignResponseDto
-     */
-    'startsAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchCampaignResponseDto
-     */
-    'endsAt': string | null;
     /**
      * 
      * @type {string}
@@ -5141,15 +5630,6 @@ export interface FetchCampaignResponseDto {
      */
     'deletedAt': string | null;
 }
-
-export const FetchCampaignResponseDtoBudgetTypeEnum = {
-    DailyBudget: 'DAILY_BUDGET',
-    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
-    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
-} as const;
-
-export type FetchCampaignResponseDtoBudgetTypeEnum = typeof FetchCampaignResponseDtoBudgetTypeEnum[keyof typeof FetchCampaignResponseDtoBudgetTypeEnum];
-
 /**
  * 
  * @export
@@ -5268,9 +5748,11 @@ export const FetchChatDashboardDialogueResponseDtoRoleEnum = {
 
 export type FetchChatDashboardDialogueResponseDtoRoleEnum = typeof FetchChatDashboardDialogueResponseDtoRoleEnum[keyof typeof FetchChatDashboardDialogueResponseDtoRoleEnum];
 export const FetchChatDashboardDialogueResponseDtoTypeEnum = {
-    Talk: 'talk',
-    Recommend: 'recommend',
-    Error: 'error'
+    Chat: 'CHAT',
+    Recommend: 'RECOMMEND',
+    SearchItemInfo: 'SEARCH_ITEM_INFO',
+    ExplainHistory: 'EXPLAIN_HISTORY',
+    Error: 'ERROR'
 } as const;
 
 export type FetchChatDashboardDialogueResponseDtoTypeEnum = typeof FetchChatDashboardDialogueResponseDtoTypeEnum[keyof typeof FetchChatDashboardDialogueResponseDtoTypeEnum];
@@ -5476,6 +5958,12 @@ export interface FetchClientAdminResponseDto {
      * @memberof FetchClientAdminResponseDto
      */
     'deletedAt': string | null;
+    /**
+     * 
+     * @type {Array<AdGroupTargetKey>}
+     * @memberof FetchClientAdminResponseDto
+     */
+    'adGroupTargetKeys': Array<AdGroupTargetKey>;
     /**
      * 
      * @type {string}
@@ -5758,6 +6246,12 @@ export interface FetchClientResponseDto {
     'deletedAt': string | null;
     /**
      * 
+     * @type {Array<AdGroupTargetKey>}
+     * @memberof FetchClientResponseDto
+     */
+    'adGroupTargetKeys': Array<AdGroupTargetKey>;
+    /**
+     * 
      * @type {string}
      * @memberof FetchClientResponseDto
      */
@@ -6012,12 +6506,6 @@ export interface FetchManyBannersResponseDto {
     'clientId': string;
     /**
      * 
-     * @type {Array<Campaign>}
-     * @memberof FetchManyBannersResponseDto
-     */
-    'campaigns': Array<Campaign>;
-    /**
-     * 
      * @type {string}
      * @memberof FetchManyBannersResponseDto
      */
@@ -6111,10 +6599,10 @@ export type FetchManyBannersResponseDtoTypeEnum = typeof FetchManyBannersRespons
 export interface FetchManyCampaignsResponseDto {
     /**
      * 
-     * @type {Placement}
+     * @type {number}
      * @memberof FetchManyCampaignsResponseDto
      */
-    'placement': Placement;
+    'adGroupsTotalUsedBudget': number;
     /**
      * 
      * @type {string}
@@ -6127,54 +6615,6 @@ export interface FetchManyCampaignsResponseDto {
      * @memberof FetchManyCampaignsResponseDto
      */
     'title': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchManyCampaignsResponseDto
-     */
-    'placementId': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchManyCampaignsResponseDto
-     */
-    'maxBudgetPerDay': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchManyCampaignsResponseDto
-     */
-    'totalBudgetInPeriod': number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchManyCampaignsResponseDto
-     */
-    'budgetType': FetchManyCampaignsResponseDtoBudgetTypeEnum;
-    /**
-     * 
-     * @type {number}
-     * @memberof FetchManyCampaignsResponseDto
-     */
-    'usedBudget': number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FetchManyCampaignsResponseDto
-     */
-    'activated': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchManyCampaignsResponseDto
-     */
-    'startsAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FetchManyCampaignsResponseDto
-     */
-    'endsAt': string | null;
     /**
      * 
      * @type {string}
@@ -6212,15 +6652,6 @@ export interface FetchManyCampaignsResponseDto {
      */
     'deletedAt': string | null;
 }
-
-export const FetchManyCampaignsResponseDtoBudgetTypeEnum = {
-    DailyBudget: 'DAILY_BUDGET',
-    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
-    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
-} as const;
-
-export type FetchManyCampaignsResponseDtoBudgetTypeEnum = typeof FetchManyCampaignsResponseDtoBudgetTypeEnum[keyof typeof FetchManyCampaignsResponseDtoBudgetTypeEnum];
-
 /**
  * 
  * @export
@@ -6497,6 +6928,113 @@ export type FetchManyPlacementsResponseDtoPropertyEnum = typeof FetchManyPlaceme
 /**
  * 
  * @export
+ * @interface FetchManySellerCreditDecreaseRequestResponseDto
+ */
+export interface FetchManySellerCreditDecreaseRequestResponseDto {
+    /**
+     * 
+     * @type {Client}
+     * @memberof FetchManySellerCreditDecreaseRequestResponseDto
+     */
+    'seller': Client;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditDecreaseRequestResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditDecreaseRequestResponseDto
+     */
+    'storeId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditDecreaseRequestResponseDto
+     */
+    'sellerId': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchManySellerCreditDecreaseRequestResponseDto
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditDecreaseRequestResponseDto
+     */
+    'requestedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditDecreaseRequestResponseDto
+     */
+    'reason': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditDecreaseRequestResponseDto
+     */
+    'rejectionReason': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditDecreaseRequestResponseDto
+     */
+    'status': FetchManySellerCreditDecreaseRequestResponseDtoStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditDecreaseRequestResponseDto
+     */
+    'processedAt': string | null;
+}
+
+export const FetchManySellerCreditDecreaseRequestResponseDtoStatusEnum = {
+    Pending: 'PENDING',
+    Approved: 'APPROVED',
+    Rejected: 'REJECTED'
+} as const;
+
+export type FetchManySellerCreditDecreaseRequestResponseDtoStatusEnum = typeof FetchManySellerCreditDecreaseRequestResponseDtoStatusEnum[keyof typeof FetchManySellerCreditDecreaseRequestResponseDtoStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface FetchManySellerCreditInfoResponseDto
+ */
+export interface FetchManySellerCreditInfoResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditInfoResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditInfoResponseDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchManySellerCreditInfoResponseDto
+     */
+    'remainingCredit': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditInfoResponseDto
+     */
+    'recentlyUpdatedAt': string;
+}
+/**
+ * 
+ * @export
  * @interface FetchManySellersResponseDto
  */
 export interface FetchManySellersResponseDto {
@@ -6554,6 +7092,12 @@ export interface FetchManySellersResponseDto {
      * @memberof FetchManySellersResponseDto
      */
     'deletedAt': string | null;
+    /**
+     * 
+     * @type {Array<AdGroupTargetKey>}
+     * @memberof FetchManySellersResponseDto
+     */
+    'adGroupTargetKeys': Array<AdGroupTargetKey>;
     /**
      * 
      * @type {string}
@@ -6741,6 +7285,25 @@ export interface FetchMetricsOnDashboardResponseDto {
      * @memberof FetchMetricsOnDashboardResponseDto
      */
     'graph': Array<DailyMetric>;
+}
+/**
+ * 
+ * @export
+ * @interface FetchMetricsOnSellerAdGroupDashboardResponseDto
+ */
+export interface FetchMetricsOnSellerAdGroupDashboardResponseDto {
+    /**
+     * 
+     * @type {AdMetric}
+     * @memberof FetchMetricsOnSellerAdGroupDashboardResponseDto
+     */
+    'summary': AdMetric;
+    /**
+     * 
+     * @type {Array<TimeSeriesAdMetric>}
+     * @memberof FetchMetricsOnSellerAdGroupDashboardResponseDto
+     */
+    'metrics': Array<TimeSeriesAdMetric>;
 }
 /**
  * 
@@ -6998,10 +7561,10 @@ export interface FetchPlacementResponseDto {
     'banners'?: Array<BannerWithCreative>;
     /**
      * 
-     * @type {Array<CampaignWithClientAndAudience>}
+     * @type {Array<AdGroupWithSellerAndCampaign>}
      * @memberof FetchPlacementResponseDto
      */
-    'campaigns'?: Array<CampaignWithClientAndAudience>;
+    'adGroups'?: Array<AdGroupWithSellerAndCampaign>;
 }
 
 export const FetchPlacementResponseDtoTypeEnum = {
@@ -7214,6 +7777,63 @@ export interface FetchProductResponseDto {
 /**
  * 
  * @export
+ * @interface FetchSellerCreditUpdateHistoryResponseDto
+ */
+export interface FetchSellerCreditUpdateHistoryResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerCreditUpdateHistoryResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerCreditUpdateHistoryResponseDto
+     */
+    'storeId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerCreditUpdateHistoryResponseDto
+     */
+    'sellerId': string | null;
+    /**
+     * 
+     * @type {object}
+     * @memberof FetchSellerCreditUpdateHistoryResponseDto
+     */
+    'creditType': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerCreditUpdateHistoryResponseDto
+     */
+    'adjustmentType': FetchSellerCreditUpdateHistoryResponseDtoAdjustmentTypeEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof FetchSellerCreditUpdateHistoryResponseDto
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerCreditUpdateHistoryResponseDto
+     */
+    'createdAt': string;
+}
+
+export const FetchSellerCreditUpdateHistoryResponseDtoAdjustmentTypeEnum = {
+    Increase: 'INCREASE',
+    Decrease: 'DECREASE'
+} as const;
+
+export type FetchSellerCreditUpdateHistoryResponseDtoAdjustmentTypeEnum = typeof FetchSellerCreditUpdateHistoryResponseDtoAdjustmentTypeEnum[keyof typeof FetchSellerCreditUpdateHistoryResponseDtoAdjustmentTypeEnum];
+
+/**
+ * 
+ * @export
  * @interface FetchSellerResponseDto
  */
 export interface FetchSellerResponseDto {
@@ -7271,6 +7891,12 @@ export interface FetchSellerResponseDto {
      * @memberof FetchSellerResponseDto
      */
     'deletedAt': string | null;
+    /**
+     * 
+     * @type {Array<AdGroupTargetKey>}
+     * @memberof FetchSellerResponseDto
+     */
+    'adGroupTargetKeys': Array<AdGroupTargetKey>;
     /**
      * 
      * @type {string}
@@ -8131,6 +8757,19 @@ export interface ImpressionObserver {
 /**
  * 
  * @export
+ * @interface IncreaseSellerCreditDto
+ */
+export interface IncreaseSellerCreditDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof IncreaseSellerCreditDto
+     */
+    'amount': number;
+}
+/**
+ * 
+ * @export
  * @interface Injector
  */
 export interface Injector {
@@ -8804,6 +9443,33 @@ export interface PlacementInjectorDto {
 /**
  * 
  * @export
+ * @interface ProcessSellerCreditDecreaseRequestDto
+ */
+export interface ProcessSellerCreditDecreaseRequestDto {
+    /**
+     * 
+     * @type {CreditDecreaseRequestAction}
+     * @memberof ProcessSellerCreditDecreaseRequestDto
+     */
+    'action': CreditDecreaseRequestAction;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProcessSellerCreditDecreaseRequestDto
+     */
+    'amount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProcessSellerCreditDecreaseRequestDto
+     */
+    'rejectionReason'?: string;
+}
+
+
+/**
+ * 
+ * @export
  * @interface Product
  */
 export interface Product {
@@ -9114,18 +9780,6 @@ export interface ProductSuggestionRequestDto {
      */
     'fromAgent'?: boolean;
     /**
-     * The birth year of the customer.
-     * @type {number}
-     * @memberof ProductSuggestionRequestDto
-     */
-    'birthYear'?: number;
-    /**
-     * The gender of the customer.
-     * @type {string}
-     * @memberof ProductSuggestionRequestDto
-     */
-    'gender'?: ProductSuggestionRequestDtoGenderEnum;
-    /**
      * Identifier for the request client.
      * @type {string}
      * @memberof ProductSuggestionRequestDto
@@ -9149,15 +9803,13 @@ export interface ProductSuggestionRequestDto {
      * @memberof ProductSuggestionRequestDto
      */
     'filters'?: Array<{ [key: string]: ProductFilterOperationDto; }>;
+    /**
+     * 
+     * @type {Array<SuggestionRequestTarget>}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'targets'?: Array<SuggestionRequestTarget>;
 }
-
-export const ProductSuggestionRequestDtoGenderEnum = {
-    Male: 'male',
-    Female: 'female'
-} as const;
-
-export type ProductSuggestionRequestDtoGenderEnum = typeof ProductSuggestionRequestDtoGenderEnum[keyof typeof ProductSuggestionRequestDtoGenderEnum];
-
 /**
  * 
  * @export
@@ -9176,6 +9828,12 @@ export interface ProductSuggestionResponseDto {
      * @memberof ProductSuggestionResponseDto
      */
     'placement': SuggestionResponsePlacementType;
+    /**
+     * 
+     * @type {object}
+     * @memberof ProductSuggestionResponseDto
+     */
+    'metadata': object;
 }
 /**
  * 
@@ -10342,6 +11000,25 @@ export type SubscriptionPlanType = typeof SubscriptionPlanType[keyof typeof Subs
 /**
  * 
  * @export
+ * @interface SuggestionRequestTarget
+ */
+export interface SuggestionRequestTarget {
+    /**
+     * The name of the target.
+     * @type {string}
+     * @memberof SuggestionRequestTarget
+     */
+    'keyName': string;
+    /**
+     * The value of the target.
+     * @type {Array<string>}
+     * @memberof SuggestionRequestTarget
+     */
+    'values': Array<string>;
+}
+/**
+ * 
+ * @export
  * @interface SuggestionResponsePlacementType
  */
 export interface SuggestionResponsePlacementType {
@@ -10581,6 +11258,19 @@ export interface SystemSetting {
      * @memberof SystemSetting
      */
     'createdAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface TimeSeriesAdMetric
+ */
+export interface TimeSeriesAdMetric {
+    /**
+     * 
+     * @type {string}
+     * @memberof TimeSeriesAdMetric
+     */
+    'date': string;
 }
 /**
  * 
@@ -10934,49 +11624,65 @@ export type TutorialRequestDtoCategoryEnum = typeof TutorialRequestDtoCategoryEn
 /**
  * 
  * @export
- * @interface UpdateAudienceDto
+ * @interface UpdateAdGroupDto
  */
-export interface UpdateAudienceDto {
+export interface UpdateAdGroupDto {
+    /**
+     * 기한이 있는 캠페인의 경우 일 예산을 저장하고, 기한이 없는 캠페인의 경우 하루 최대 예산을 저장
+     * @type {number}
+     * @memberof UpdateAdGroupDto
+     */
+    'maxBudgetPerDay'?: number;
+    /**
+     * 기한이 있는 캠페인에 대해 총 예산을 저장
+     * @type {number}
+     * @memberof UpdateAdGroupDto
+     */
+    'totalBudgetInPeriod'?: number;
+    /**
+     * 
+     * @type {AdGroupBudgetType}
+     * @memberof UpdateAdGroupDto
+     */
+    'budgetType'?: AdGroupBudgetType;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAdGroupDto
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateAdGroupDto
+     */
+    'activated'?: boolean;
     /**
      * 
      * @type {Array<string>}
-     * @memberof UpdateAudienceDto
+     * @memberof UpdateAdGroupDto
      */
-    'age'?: Array<UpdateAudienceDtoAgeEnum>;
+    'productIds'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAdGroupDto
+     */
+    'startsAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAdGroupDto
+     */
+    'endsAt'?: string | null;
     /**
      * 
      * @type {Array<string>}
-     * @memberof UpdateAudienceDto
+     * @memberof UpdateAdGroupDto
      */
-    'gender'?: Array<UpdateAudienceDtoGenderEnum>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof UpdateAudienceDto
-     */
-    'regularCustomer'?: Array<UpdateAudienceDtoRegularCustomerEnum>;
+    'targetValueIds'?: Array<string>;
 }
 
-export const UpdateAudienceDtoAgeEnum = {
-    _10: '10',
-    _20: '20',
-    _30: '30',
-    _40: '40'
-} as const;
-
-export type UpdateAudienceDtoAgeEnum = typeof UpdateAudienceDtoAgeEnum[keyof typeof UpdateAudienceDtoAgeEnum];
-export const UpdateAudienceDtoGenderEnum = {
-    Male: 'male',
-    Female: 'female'
-} as const;
-
-export type UpdateAudienceDtoGenderEnum = typeof UpdateAudienceDtoGenderEnum[keyof typeof UpdateAudienceDtoGenderEnum];
-export const UpdateAudienceDtoRegularCustomerEnum = {
-    _1: '1',
-    _3: '3'
-} as const;
-
-export type UpdateAudienceDtoRegularCustomerEnum = typeof UpdateAudienceDtoRegularCustomerEnum[keyof typeof UpdateAudienceDtoRegularCustomerEnum];
 
 /**
  * 
@@ -11060,85 +11766,16 @@ export interface UpdateBannerDto {
 /**
  * 
  * @export
- * @interface UpdateCampaignBudgetUsageDto
- */
-export interface UpdateCampaignBudgetUsageDto {
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateCampaignBudgetUsageDto
-     */
-    'usedBudget': number;
-}
-/**
- * 
- * @export
  * @interface UpdateCampaignDto
  */
 export interface UpdateCampaignDto {
-    /**
-     * 기한이 있는 캠페인의 경우 일 예산을 저장하고, 기한이 없는 캠페인의 경우 하루 최대 예산을 저장
-     * @type {number}
-     * @memberof UpdateCampaignDto
-     */
-    'maxBudgetPerDay'?: number;
-    /**
-     * 기한이 있는 캠페인에 대해 총 예산을 저장
-     * @type {number}
-     * @memberof UpdateCampaignDto
-     */
-    'totalBudgetInPeriod'?: number;
-    /**
-     * 
-     * @type {CampaignBudgetType}
-     * @memberof UpdateCampaignDto
-     */
-    'budgetType'?: CampaignBudgetType;
     /**
      * 
      * @type {string}
      * @memberof UpdateCampaignDto
      */
     'title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateCampaignDto
-     */
-    'placementId'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateCampaignDto
-     */
-    'activated'?: boolean;
-    /**
-     * 
-     * @type {Array<Product>}
-     * @memberof UpdateCampaignDto
-     */
-    'products'?: Array<Product>;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateCampaignDto
-     */
-    'startsAt'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateCampaignDto
-     */
-    'endsAt'?: string | null;
-    /**
-     * 
-     * @type {UpdateAudienceDto}
-     * @memberof UpdateCampaignDto
-     */
-    'audience'?: UpdateAudienceDto;
 }
-
-
 /**
  * 
  * @export
@@ -11535,12 +12172,6 @@ export interface UpdatePlacementResponseDto {
     'deletedAt': string | null;
     /**
      * 
-     * @type {Array<Campaign>}
-     * @memberof UpdatePlacementResponseDto
-     */
-    'campaigns': Array<Campaign>;
-    /**
-     * 
      * @type {boolean}
      * @memberof UpdatePlacementResponseDto
      */
@@ -11674,6 +12305,19 @@ export interface UpdateProductDto {
      * @memberof UpdateProductDto
      */
     'caption'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateUsedBudgetDto
+ */
+export interface UpdateUsedBudgetDto {
+    /**
+     * 
+     * @type {Array<BudgetCharge>}
+     * @memberof UpdateUsedBudgetDto
+     */
+    'budgetCharges': Array<BudgetCharge>;
 }
 /**
  * 
@@ -12402,6 +13046,920 @@ export interface WithdrawClientDto {
      */
     'reason': string;
 }
+
+/**
+ * AdGroupApi - axios parameter creator
+ * @export
+ */
+export const AdGroupApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CreateAdGroupDto} createAdGroupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerCreate: async (createAdGroupDto: CreateAdGroupDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createAdGroupDto' is not null or undefined
+            assertParamExists('adGroupControllerCreate', 'createAdGroupDto', createAdGroupDto)
+            const localVarPath = `/ad-group`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createAdGroupDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('adGroupControllerDelete', 'id', id)
+            const localVarPath = `/ad-group/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerFetchAdGroupProducts: async (id: string, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('adGroupControllerFetchAdGroupProducts', 'id', id)
+            const localVarPath = `/ad-group/{id}/products`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} campaignId 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerFetchAdGroups: async (campaignId: string, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'campaignId' is not null or undefined
+            assertParamExists('adGroupControllerFetchAdGroups', 'campaignId', campaignId)
+            const localVarPath = `/ad-group`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (campaignId !== undefined) {
+                localVarQueryParameter['campaignId'] = campaignId;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerFetchAllBudget: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/ad-group/all/budget`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Array<string>} [campaignIds] 
+         * @param {string} [title] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerFetchManyAdGroupTitles: async (campaignIds?: Array<string>, title?: string, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/ad-group/all/titles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (campaignIds) {
+                localVarQueryParameter['campaignIds'] = campaignIds;
+            }
+
+            if (title !== undefined) {
+                localVarQueryParameter['title'] = title;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerFetchOne: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('adGroupControllerFetchOne', 'id', id)
+            const localVarPath = `/ad-group/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateAdGroupDto} updateAdGroupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerUpdate: async (id: string, updateAdGroupDto: UpdateAdGroupDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('adGroupControllerUpdate', 'id', id)
+            // verify required parameter 'updateAdGroupDto' is not null or undefined
+            assertParamExists('adGroupControllerUpdate', 'updateAdGroupDto', updateAdGroupDto)
+            const localVarPath = `/ad-group/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateAdGroupDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UpdateUsedBudgetDto} updateUsedBudgetDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerUpdateBudget: async (updateUsedBudgetDto: UpdateUsedBudgetDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'updateUsedBudgetDto' is not null or undefined
+            assertParamExists('adGroupControllerUpdateBudget', 'updateUsedBudgetDto', updateUsedBudgetDto)
+            const localVarPath = `/ad-group/budget`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateUsedBudgetDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateAdGroupTargetKeyRequestDto} createAdGroupTargetKeyRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupTargetControllerCreateAdGroupTargetKeys: async (createAdGroupTargetKeyRequestDto: CreateAdGroupTargetKeyRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createAdGroupTargetKeyRequestDto' is not null or undefined
+            assertParamExists('adGroupTargetControllerCreateAdGroupTargetKeys', 'createAdGroupTargetKeyRequestDto', createAdGroupTargetKeyRequestDto)
+            const localVarPath = `/ad-group/target/keys`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createAdGroupTargetKeyRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {CreateAdGroupTargetValueRequestDto} createAdGroupTargetValueRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupTargetControllerCreateAdGroupTargetValue: async (id: string, createAdGroupTargetValueRequestDto: CreateAdGroupTargetValueRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('adGroupTargetControllerCreateAdGroupTargetValue', 'id', id)
+            // verify required parameter 'createAdGroupTargetValueRequestDto' is not null or undefined
+            assertParamExists('adGroupTargetControllerCreateAdGroupTargetValue', 'createAdGroupTargetValueRequestDto', createAdGroupTargetValueRequestDto)
+            const localVarPath = `/ad-group/target/keys/{id}/values`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createAdGroupTargetValueRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} storeId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupTargetControllerFetchAdGroupTargetKeys: async (storeId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'storeId' is not null or undefined
+            assertParamExists('adGroupTargetControllerFetchAdGroupTargetKeys', 'storeId', storeId)
+            const localVarPath = `/ad-group/target/keys`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (storeId !== undefined) {
+                localVarQueryParameter['storeId'] = storeId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AdGroupApi - functional programming interface
+ * @export
+ */
+export const AdGroupApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AdGroupApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateAdGroupDto} createAdGroupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupControllerCreate(createAdGroupDto: CreateAdGroupDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdGroup>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupControllerCreate(createAdGroupDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupControllerDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupControllerDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupControllerFetchAdGroupProducts(id: string, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdGroupControllerFetchAdGroupProducts200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupControllerFetchAdGroupProducts(id, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} campaignId 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupControllerFetchAdGroups(campaignId: string, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdGroupControllerFetchAdGroups200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupControllerFetchAdGroups(campaignId, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupControllerFetchAllBudget(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchAdGroupBudgetResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupControllerFetchAllBudget(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Array<string>} [campaignIds] 
+         * @param {string} [title] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupControllerFetchManyAdGroupTitles(campaignIds?: Array<string>, title?: string, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchAdGroupTitleResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupControllerFetchManyAdGroupTitles(campaignIds, title, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupControllerFetchOne(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchAdGroupResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupControllerFetchOne(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateAdGroupDto} updateAdGroupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupControllerUpdate(id: string, updateAdGroupDto: UpdateAdGroupDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupControllerUpdate(id, updateAdGroupDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {UpdateUsedBudgetDto} updateUsedBudgetDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupControllerUpdateBudget(updateUsedBudgetDto: UpdateUsedBudgetDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupControllerUpdateBudget(updateUsedBudgetDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {CreateAdGroupTargetKeyRequestDto} createAdGroupTargetKeyRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupTargetControllerCreateAdGroupTargetKeys(createAdGroupTargetKeyRequestDto: CreateAdGroupTargetKeyRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateAdGroupTargetKeyResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupTargetControllerCreateAdGroupTargetKeys(createAdGroupTargetKeyRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {CreateAdGroupTargetValueRequestDto} createAdGroupTargetValueRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupTargetControllerCreateAdGroupTargetValue(id: string, createAdGroupTargetValueRequestDto: CreateAdGroupTargetValueRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateAdGroupTargetValueResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupTargetControllerCreateAdGroupTargetValue(id, createAdGroupTargetValueRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} storeId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adGroupTargetControllerFetchAdGroupTargetKeys(storeId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchAdGroupTargetKeysResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupTargetControllerFetchAdGroupTargetKeys(storeId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * AdGroupApi - factory interface
+ * @export
+ */
+export const AdGroupApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AdGroupApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateAdGroupDto} createAdGroupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerCreate(createAdGroupDto: CreateAdGroupDto, options?: any): AxiosPromise<AdGroup> {
+            return localVarFp.adGroupControllerCreate(createAdGroupDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerDelete(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.adGroupControllerDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerFetchAdGroupProducts(id: string, limit?: number, offset?: number, options?: any): AxiosPromise<AdGroupControllerFetchAdGroupProducts200Response> {
+            return localVarFp.adGroupControllerFetchAdGroupProducts(id, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} campaignId 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerFetchAdGroups(campaignId: string, limit?: number, offset?: number, options?: any): AxiosPromise<AdGroupControllerFetchAdGroups200Response> {
+            return localVarFp.adGroupControllerFetchAdGroups(campaignId, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerFetchAllBudget(options?: any): AxiosPromise<Array<FetchAdGroupBudgetResponseDto>> {
+            return localVarFp.adGroupControllerFetchAllBudget(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<string>} [campaignIds] 
+         * @param {string} [title] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerFetchManyAdGroupTitles(campaignIds?: Array<string>, title?: string, limit?: number, offset?: number, options?: any): AxiosPromise<Array<FetchAdGroupTitleResponseDto>> {
+            return localVarFp.adGroupControllerFetchManyAdGroupTitles(campaignIds, title, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerFetchOne(id: string, options?: any): AxiosPromise<FetchAdGroupResponseDto> {
+            return localVarFp.adGroupControllerFetchOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateAdGroupDto} updateAdGroupDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerUpdate(id: string, updateAdGroupDto: UpdateAdGroupDto, options?: any): AxiosPromise<void> {
+            return localVarFp.adGroupControllerUpdate(id, updateAdGroupDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UpdateUsedBudgetDto} updateUsedBudgetDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupControllerUpdateBudget(updateUsedBudgetDto: UpdateUsedBudgetDto, options?: any): AxiosPromise<void> {
+            return localVarFp.adGroupControllerUpdateBudget(updateUsedBudgetDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateAdGroupTargetKeyRequestDto} createAdGroupTargetKeyRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupTargetControllerCreateAdGroupTargetKeys(createAdGroupTargetKeyRequestDto: CreateAdGroupTargetKeyRequestDto, options?: any): AxiosPromise<CreateAdGroupTargetKeyResponseDto> {
+            return localVarFp.adGroupTargetControllerCreateAdGroupTargetKeys(createAdGroupTargetKeyRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {CreateAdGroupTargetValueRequestDto} createAdGroupTargetValueRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupTargetControllerCreateAdGroupTargetValue(id: string, createAdGroupTargetValueRequestDto: CreateAdGroupTargetValueRequestDto, options?: any): AxiosPromise<CreateAdGroupTargetValueResponseDto> {
+            return localVarFp.adGroupTargetControllerCreateAdGroupTargetValue(id, createAdGroupTargetValueRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} storeId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adGroupTargetControllerFetchAdGroupTargetKeys(storeId: string, options?: any): AxiosPromise<FetchAdGroupTargetKeysResponseDto> {
+            return localVarFp.adGroupTargetControllerFetchAdGroupTargetKeys(storeId, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AdGroupApi - object-oriented interface
+ * @export
+ * @class AdGroupApi
+ * @extends {BaseAPI}
+ */
+export class AdGroupApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateAdGroupDto} createAdGroupDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupControllerCreate(createAdGroupDto: CreateAdGroupDto, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupControllerCreate(createAdGroupDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupControllerDelete(id: string, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupControllerDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupControllerFetchAdGroupProducts(id: string, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupControllerFetchAdGroupProducts(id, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} campaignId 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupControllerFetchAdGroups(campaignId: string, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupControllerFetchAdGroups(campaignId, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupControllerFetchAllBudget(options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupControllerFetchAllBudget(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<string>} [campaignIds] 
+     * @param {string} [title] 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupControllerFetchManyAdGroupTitles(campaignIds?: Array<string>, title?: string, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupControllerFetchManyAdGroupTitles(campaignIds, title, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupControllerFetchOne(id: string, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupControllerFetchOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateAdGroupDto} updateAdGroupDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupControllerUpdate(id: string, updateAdGroupDto: UpdateAdGroupDto, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupControllerUpdate(id, updateAdGroupDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UpdateUsedBudgetDto} updateUsedBudgetDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupControllerUpdateBudget(updateUsedBudgetDto: UpdateUsedBudgetDto, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupControllerUpdateBudget(updateUsedBudgetDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateAdGroupTargetKeyRequestDto} createAdGroupTargetKeyRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupTargetControllerCreateAdGroupTargetKeys(createAdGroupTargetKeyRequestDto: CreateAdGroupTargetKeyRequestDto, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupTargetControllerCreateAdGroupTargetKeys(createAdGroupTargetKeyRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {CreateAdGroupTargetValueRequestDto} createAdGroupTargetValueRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupTargetControllerCreateAdGroupTargetValue(id: string, createAdGroupTargetValueRequestDto: CreateAdGroupTargetValueRequestDto, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupTargetControllerCreateAdGroupTargetValue(id, createAdGroupTargetValueRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} storeId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdGroupApi
+     */
+    public adGroupTargetControllerFetchAdGroupTargetKeys(storeId: string, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupTargetControllerFetchAdGroupTargetKeys(storeId, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
 
 /**
  * AdminApi - axios parameter creator
@@ -13662,45 +15220,6 @@ export const CampaignApiAxiosParamCreator = function (configuration?: Configurat
     return {
         /**
          * 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        budgetUsageControllerFetchMany: async (limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/budget-usage`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            if (offset !== undefined) {
-                localVarQueryParameter['offset'] = offset;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {CreateCampaignDto} createCampaignDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13728,78 +15247,6 @@ export const CampaignApiAxiosParamCreator = function (configuration?: Configurat
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(createCampaignDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignControllerFetchBudget: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/campaign/budget`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignControllerFetchCampaignProducts: async (id: string, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('campaignControllerFetchCampaignProducts', 'id', id)
-            const localVarPath = `/campaign/{id}/products`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            if (offset !== undefined) {
-                localVarQueryParameter['offset'] = offset;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -13955,45 +15402,6 @@ export const CampaignApiAxiosParamCreator = function (configuration?: Configurat
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateCampaignBudgetUsageDto} updateCampaignBudgetUsageDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignControllerUpdateBudgetUsage: async (id: string, updateCampaignBudgetUsageDto: UpdateCampaignBudgetUsageDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('campaignControllerUpdateBudgetUsage', 'id', id)
-            // verify required parameter 'updateCampaignBudgetUsageDto' is not null or undefined
-            assertParamExists('campaignControllerUpdateBudgetUsage', 'updateCampaignBudgetUsageDto', updateCampaignBudgetUsageDto)
-            const localVarPath = `/campaign/{id}/budget/usage`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateCampaignBudgetUsageDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -14006,44 +15414,12 @@ export const CampaignApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async budgetUsageControllerFetchMany(limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchBudgetUsageResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.budgetUsageControllerFetchMany(limit, offset, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {CreateCampaignDto} createCampaignDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async campaignControllerCreate(createCampaignDto: CreateCampaignDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaignResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerCreate(createCampaignDto, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async campaignControllerFetchBudget(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchCampaignBudgetResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerFetchBudget(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async campaignControllerFetchCampaignProducts(id: string, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CampaignControllerFetchCampaignProducts200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerFetchCampaignProducts(id, limit, offset, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -14089,17 +15465,6 @@ export const CampaignApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerUpdate(id, updateCampaignDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateCampaignBudgetUsageDto} updateCampaignBudgetUsageDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async campaignControllerUpdateBudgetUsage(id: string, updateCampaignBudgetUsageDto: UpdateCampaignBudgetUsageDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignControllerUpdateBudgetUsage(id, updateCampaignBudgetUsageDto, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
     }
 };
 
@@ -14112,41 +15477,12 @@ export const CampaignApiFactory = function (configuration?: Configuration, baseP
     return {
         /**
          * 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        budgetUsageControllerFetchMany(limit?: number, offset?: number, options?: any): AxiosPromise<Array<FetchBudgetUsageResponseDto>> {
-            return localVarFp.budgetUsageControllerFetchMany(limit, offset, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {CreateCampaignDto} createCampaignDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         campaignControllerCreate(createCampaignDto: CreateCampaignDto, options?: any): AxiosPromise<CreateCampaignResponseDto> {
             return localVarFp.campaignControllerCreate(createCampaignDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignControllerFetchBudget(options?: any): AxiosPromise<Array<FetchCampaignBudgetResponseDto>> {
-            return localVarFp.campaignControllerFetchBudget(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignControllerFetchCampaignProducts(id: string, limit?: number, offset?: number, options?: any): AxiosPromise<CampaignControllerFetchCampaignProducts200Response> {
-            return localVarFp.campaignControllerFetchCampaignProducts(id, limit, offset, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -14187,16 +15523,6 @@ export const CampaignApiFactory = function (configuration?: Configuration, baseP
         campaignControllerUpdate(id: string, updateCampaignDto: UpdateCampaignDto, options?: any): AxiosPromise<void> {
             return localVarFp.campaignControllerUpdate(id, updateCampaignDto, options).then((request) => request(axios, basePath));
         },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateCampaignBudgetUsageDto} updateCampaignBudgetUsageDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignControllerUpdateBudgetUsage(id: string, updateCampaignBudgetUsageDto: UpdateCampaignBudgetUsageDto, options?: any): AxiosPromise<void> {
-            return localVarFp.campaignControllerUpdateBudgetUsage(id, updateCampaignBudgetUsageDto, options).then((request) => request(axios, basePath));
-        },
     };
 };
 
@@ -14209,18 +15535,6 @@ export const CampaignApiFactory = function (configuration?: Configuration, baseP
 export class CampaignApi extends BaseAPI {
     /**
      * 
-     * @param {number} [limit] 
-     * @param {number} [offset] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CampaignApi
-     */
-    public budgetUsageControllerFetchMany(limit?: number, offset?: number, options?: AxiosRequestConfig) {
-        return CampaignApiFp(this.configuration).budgetUsageControllerFetchMany(limit, offset, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @param {CreateCampaignDto} createCampaignDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -14228,29 +15542,6 @@ export class CampaignApi extends BaseAPI {
      */
     public campaignControllerCreate(createCampaignDto: CreateCampaignDto, options?: AxiosRequestConfig) {
         return CampaignApiFp(this.configuration).campaignControllerCreate(createCampaignDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CampaignApi
-     */
-    public campaignControllerFetchBudget(options?: AxiosRequestConfig) {
-        return CampaignApiFp(this.configuration).campaignControllerFetchBudget(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {number} [limit] 
-     * @param {number} [offset] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CampaignApi
-     */
-    public campaignControllerFetchCampaignProducts(id: string, limit?: number, offset?: number, options?: AxiosRequestConfig) {
-        return CampaignApiFp(this.configuration).campaignControllerFetchCampaignProducts(id, limit, offset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -14298,18 +15589,6 @@ export class CampaignApi extends BaseAPI {
      */
     public campaignControllerUpdate(id: string, updateCampaignDto: UpdateCampaignDto, options?: AxiosRequestConfig) {
         return CampaignApiFp(this.configuration).campaignControllerUpdate(id, updateCampaignDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {UpdateCampaignBudgetUsageDto} updateCampaignBudgetUsageDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CampaignApi
-     */
-    public campaignControllerUpdateBudgetUsage(id: string, updateCampaignBudgetUsageDto: UpdateCampaignBudgetUsageDto, options?: AxiosRequestConfig) {
-        return CampaignApiFp(this.configuration).campaignControllerUpdateBudgetUsage(id, updateCampaignBudgetUsageDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -16015,6 +17294,260 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @param {CreateSellerCreditDecreaseRequestDto} createSellerCreditDecreaseRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerCreateSellerCreditDecreaseRequest: async (createSellerCreditDecreaseRequestDto: CreateSellerCreditDecreaseRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createSellerCreditDecreaseRequestDto' is not null or undefined
+            assertParamExists('creditControllerCreateSellerCreditDecreaseRequest', 'createSellerCreditDecreaseRequestDto', createSellerCreditDecreaseRequestDto)
+            const localVarPath = `/credits/decrease-requests`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createSellerCreditDecreaseRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreditDecreaseRequestStatus} [status] 
+         * @param {Array<string>} [orderBy] SellerCreditDecreaseRequestSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchManySellerCreditDecreaseRequest: async (status?: CreditDecreaseRequestStatus, orderBy?: Array<string>, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/credits/decrease-requests`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (orderBy) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Array<string>} [orderBy] SellerCreditInfoSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchManySellerCreditInfo: async (orderBy?: Array<string>, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/credits/sellers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (orderBy) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} sellerId 
+         * @param {CreditType} [creditType] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchSellerCreditUpdateHistory: async (sellerId: string, creditType?: CreditType, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'sellerId' is not null or undefined
+            assertParamExists('creditControllerFetchSellerCreditUpdateHistory', 'sellerId', sellerId)
+            const localVarPath = `/credits/sellers/{sellerId}/histories`
+                .replace(`{${"sellerId"}}`, encodeURIComponent(String(sellerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (creditType !== undefined) {
+                localVarQueryParameter['creditType'] = creditType;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} sellerId 
+         * @param {IncreaseSellerCreditDto} increaseSellerCreditDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerIncreaseSellerCredit: async (sellerId: string, increaseSellerCreditDto: IncreaseSellerCreditDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'sellerId' is not null or undefined
+            assertParamExists('creditControllerIncreaseSellerCredit', 'sellerId', sellerId)
+            // verify required parameter 'increaseSellerCreditDto' is not null or undefined
+            assertParamExists('creditControllerIncreaseSellerCredit', 'increaseSellerCreditDto', increaseSellerCreditDto)
+            const localVarPath = `/credits/sellers/{sellerId}`
+                .replace(`{${"sellerId"}}`, encodeURIComponent(String(sellerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(increaseSellerCreditDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} decreaseRequestId 
+         * @param {ProcessSellerCreditDecreaseRequestDto} processSellerCreditDecreaseRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerProcessSellerCreditDecreaseRequest: async (decreaseRequestId: string, processSellerCreditDecreaseRequestDto: ProcessSellerCreditDecreaseRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'decreaseRequestId' is not null or undefined
+            assertParamExists('creditControllerProcessSellerCreditDecreaseRequest', 'decreaseRequestId', decreaseRequestId)
+            // verify required parameter 'processSellerCreditDecreaseRequestDto' is not null or undefined
+            assertParamExists('creditControllerProcessSellerCreditDecreaseRequest', 'processSellerCreditDecreaseRequestDto', processSellerCreditDecreaseRequestDto)
+            const localVarPath = `/credits/decrease-requests/{decreaseRequestId}`
+                .replace(`{${"decreaseRequestId"}}`, encodeURIComponent(String(decreaseRequestId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(processSellerCreditDecreaseRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {UpsertPaymentCardDto} upsertPaymentCardDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -16291,6 +17824,76 @@ export const ClientApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {CreateSellerCreditDecreaseRequestDto} createSellerCreditDecreaseRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creditControllerCreateSellerCreditDecreaseRequest(createSellerCreditDecreaseRequestDto: CreateSellerCreditDecreaseRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreditDecreaseRequest>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creditControllerCreateSellerCreditDecreaseRequest(createSellerCreditDecreaseRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {CreditDecreaseRequestStatus} [status] 
+         * @param {Array<string>} [orderBy] SellerCreditDecreaseRequestSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creditControllerFetchManySellerCreditDecreaseRequest(status?: CreditDecreaseRequestStatus, orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreditControllerFetchManySellerCreditDecreaseRequest200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creditControllerFetchManySellerCreditDecreaseRequest(status, orderBy, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Array<string>} [orderBy] SellerCreditInfoSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creditControllerFetchManySellerCreditInfo(orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreditControllerFetchManySellerCreditInfo200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creditControllerFetchManySellerCreditInfo(orderBy, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} sellerId 
+         * @param {CreditType} [creditType] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creditControllerFetchSellerCreditUpdateHistory(sellerId: string, creditType?: CreditType, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreditControllerFetchSellerCreditUpdateHistory200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creditControllerFetchSellerCreditUpdateHistory(sellerId, creditType, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} sellerId 
+         * @param {IncreaseSellerCreditDto} increaseSellerCreditDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creditControllerIncreaseSellerCredit(sellerId: string, increaseSellerCreditDto: IncreaseSellerCreditDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creditControllerIncreaseSellerCredit(sellerId, increaseSellerCreditDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} decreaseRequestId 
+         * @param {ProcessSellerCreditDecreaseRequestDto} processSellerCreditDecreaseRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creditControllerProcessSellerCreditDecreaseRequest(decreaseRequestId: string, processSellerCreditDecreaseRequestDto: ProcessSellerCreditDecreaseRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creditControllerProcessSellerCreditDecreaseRequest(decreaseRequestId, processSellerCreditDecreaseRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {UpsertPaymentCardDto} upsertPaymentCardDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -16485,6 +18088,70 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
          */
         clientControllerWithdrawClient(withdrawClientDto: WithdrawClientDto, options?: any): AxiosPromise<Client> {
             return localVarFp.clientControllerWithdrawClient(withdrawClientDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateSellerCreditDecreaseRequestDto} createSellerCreditDecreaseRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerCreateSellerCreditDecreaseRequest(createSellerCreditDecreaseRequestDto: CreateSellerCreditDecreaseRequestDto, options?: any): AxiosPromise<CreditDecreaseRequest> {
+            return localVarFp.creditControllerCreateSellerCreditDecreaseRequest(createSellerCreditDecreaseRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreditDecreaseRequestStatus} [status] 
+         * @param {Array<string>} [orderBy] SellerCreditDecreaseRequestSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchManySellerCreditDecreaseRequest(status?: CreditDecreaseRequestStatus, orderBy?: Array<string>, limit?: number, offset?: number, options?: any): AxiosPromise<CreditControllerFetchManySellerCreditDecreaseRequest200Response> {
+            return localVarFp.creditControllerFetchManySellerCreditDecreaseRequest(status, orderBy, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<string>} [orderBy] SellerCreditInfoSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchManySellerCreditInfo(orderBy?: Array<string>, limit?: number, offset?: number, options?: any): AxiosPromise<CreditControllerFetchManySellerCreditInfo200Response> {
+            return localVarFp.creditControllerFetchManySellerCreditInfo(orderBy, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} sellerId 
+         * @param {CreditType} [creditType] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchSellerCreditUpdateHistory(sellerId: string, creditType?: CreditType, limit?: number, offset?: number, options?: any): AxiosPromise<CreditControllerFetchSellerCreditUpdateHistory200Response> {
+            return localVarFp.creditControllerFetchSellerCreditUpdateHistory(sellerId, creditType, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} sellerId 
+         * @param {IncreaseSellerCreditDto} increaseSellerCreditDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerIncreaseSellerCredit(sellerId: string, increaseSellerCreditDto: IncreaseSellerCreditDto, options?: any): AxiosPromise<void> {
+            return localVarFp.creditControllerIncreaseSellerCredit(sellerId, increaseSellerCreditDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} decreaseRequestId 
+         * @param {ProcessSellerCreditDecreaseRequestDto} processSellerCreditDecreaseRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerProcessSellerCreditDecreaseRequest(decreaseRequestId: string, processSellerCreditDecreaseRequestDto: ProcessSellerCreditDecreaseRequestDto, options?: any): AxiosPromise<void> {
+            return localVarFp.creditControllerProcessSellerCreditDecreaseRequest(decreaseRequestId, processSellerCreditDecreaseRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -16715,6 +18382,82 @@ export class ClientApi extends BaseAPI {
      */
     public clientControllerWithdrawClient(withdrawClientDto: WithdrawClientDto, options?: AxiosRequestConfig) {
         return ClientApiFp(this.configuration).clientControllerWithdrawClient(withdrawClientDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateSellerCreditDecreaseRequestDto} createSellerCreditDecreaseRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public creditControllerCreateSellerCreditDecreaseRequest(createSellerCreditDecreaseRequestDto: CreateSellerCreditDecreaseRequestDto, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).creditControllerCreateSellerCreditDecreaseRequest(createSellerCreditDecreaseRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreditDecreaseRequestStatus} [status] 
+     * @param {Array<string>} [orderBy] SellerCreditDecreaseRequestSortOption
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public creditControllerFetchManySellerCreditDecreaseRequest(status?: CreditDecreaseRequestStatus, orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).creditControllerFetchManySellerCreditDecreaseRequest(status, orderBy, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<string>} [orderBy] SellerCreditInfoSortOption
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public creditControllerFetchManySellerCreditInfo(orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).creditControllerFetchManySellerCreditInfo(orderBy, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} sellerId 
+     * @param {CreditType} [creditType] 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public creditControllerFetchSellerCreditUpdateHistory(sellerId: string, creditType?: CreditType, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).creditControllerFetchSellerCreditUpdateHistory(sellerId, creditType, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} sellerId 
+     * @param {IncreaseSellerCreditDto} increaseSellerCreditDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public creditControllerIncreaseSellerCredit(sellerId: string, increaseSellerCreditDto: IncreaseSellerCreditDto, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).creditControllerIncreaseSellerCredit(sellerId, increaseSellerCreditDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} decreaseRequestId 
+     * @param {ProcessSellerCreditDecreaseRequestDto} processSellerCreditDecreaseRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public creditControllerProcessSellerCreditDecreaseRequest(decreaseRequestId: string, processSellerCreditDecreaseRequestDto: ProcessSellerCreditDecreaseRequestDto, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).creditControllerProcessSellerCreditDecreaseRequest(decreaseRequestId, processSellerCreditDecreaseRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -18196,6 +19939,71 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @param {string} campaignId 
+         * @param {Array<string>} adGroupIds 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchMetricsOnSellerAdGroupDashboard: async (campaignId: string, adGroupIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'campaignId' is not null or undefined
+            assertParamExists('dashboardControllerFetchMetricsOnSellerAdGroupDashboard', 'campaignId', campaignId)
+            // verify required parameter 'adGroupIds' is not null or undefined
+            assertParamExists('dashboardControllerFetchMetricsOnSellerAdGroupDashboard', 'adGroupIds', adGroupIds)
+            // verify required parameter 'startDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchMetricsOnSellerAdGroupDashboard', 'startDate', startDate)
+            // verify required parameter 'endDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchMetricsOnSellerAdGroupDashboard', 'endDate', endDate)
+            // verify required parameter 'timezone' is not null or undefined
+            assertParamExists('dashboardControllerFetchMetricsOnSellerAdGroupDashboard', 'timezone', timezone)
+            const localVarPath = `/dashboard/campaigns/{campaignId}/ad-groups/metric`
+                .replace(`{${"campaignId"}}`, encodeURIComponent(String(campaignId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (adGroupIds) {
+                localVarQueryParameter['adGroupIds'] = adGroupIds;
+            }
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString() :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString() :
+                    endDate;
+            }
+
+            if (timezone !== undefined) {
+                localVarQueryParameter['timezone'] = timezone;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {'STORE' | 'SELLER' | 'ADMIN'} requestClientType 
          * @param {string} from 
@@ -18509,6 +20317,20 @@ export const DashboardApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} campaignId 
+         * @param {Array<string>} adGroupIds 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId: string, adGroupIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchMetricsOnSellerAdGroupDashboardResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId, adGroupIds, startDate, endDate, timezone, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {'STORE' | 'SELLER' | 'ADMIN'} requestClientType 
          * @param {string} from 
@@ -18702,6 +20524,19 @@ export const DashboardApiFactory = function (configuration?: Configuration, base
          */
         dashboardControllerFetchMetricsOnProductDashboard(placementIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', productIds?: Array<string>, options?: any): AxiosPromise<FetchMetricsOnDashboardResponseDto> {
             return localVarFp.dashboardControllerFetchMetricsOnProductDashboard(placementIds, startDate, endDate, timezone, productIds, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} campaignId 
+         * @param {Array<string>} adGroupIds 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId: string, adGroupIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options?: any): AxiosPromise<FetchMetricsOnSellerAdGroupDashboardResponseDto> {
+            return localVarFp.dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId, adGroupIds, startDate, endDate, timezone, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -18918,6 +20753,21 @@ export class DashboardApi extends BaseAPI {
      */
     public dashboardControllerFetchMetricsOnProductDashboard(placementIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', productIds?: Array<string>, options?: AxiosRequestConfig) {
         return DashboardApiFp(this.configuration).dashboardControllerFetchMetricsOnProductDashboard(placementIds, startDate, endDate, timezone, productIds, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} campaignId 
+     * @param {Array<string>} adGroupIds 
+     * @param {string} startDate 
+     * @param {string} endDate 
+     * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId: string, adGroupIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId, adGroupIds, startDate, endDate, timezone, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

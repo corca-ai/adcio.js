@@ -1,20 +1,28 @@
-import { CustomerId, StoreId } from "@adcio/api/dto/session.dto";
+import { CustomerId, StoreId } from "@adcio.js/api/dto/session.dto";
 import {
   AdcioAnalyticsOnPageViewParams,
   AdcioAnalyticsOnAddToCartParams,
   AdcioAnalyticsOnClickParams,
   AdcioAnalyticsOnPurchaseParams,
   AdcioAnalyticsOnImpressionParams,
-} from "@adcio/lib/analytics";
+} from "./analytics";
 import {
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateRecommendationProductsParams,
   AdcioPlacementCreateRecommendationBannersParams,
-} from "@adcio/lib/placement";
+} from "./placement";
+import {
+  AdcioPlacementCreateRecommendationBannersResponse,
+  AdcioPlacementCreateRecommendationProductsResponse,
+  AdcioPlacementFetchPlacementsResponse,
+} from "./placement/placement.interface";
 
 export interface AdcioParams {
   clientId: StoreId;
   customerId?: CustomerId;
+  serverMode?: boolean;
+  deviceId?: string;
+  sessionId?: string;
 }
 
 export interface AdcioConfig extends AdcioParams {
@@ -37,13 +45,21 @@ export type AdcioOnPurchaseParams = AdcioAnalyticsOnPurchaseParams;
 
 export type AdcioObserveImpressionParams = {
   element: Element;
+  onImpression?: () => void;
   filter?: (element: Element) => boolean;
+  once?: boolean;
 };
 
 export type AdcioFetchPlacementsParams = AdcioPlacementFetchPlacementsParams;
+export type AdcioFetchPlacementsResponse =
+  AdcioPlacementFetchPlacementsResponse;
 
 export type AdcioCreateRecommendationProductsParams =
   AdcioPlacementCreateRecommendationProductsParams;
+export type AdcioCreateRecommendationProductsResponse =
+  AdcioPlacementCreateRecommendationProductsResponse;
 
 export type AdcioCreateRecommendationBannersParams =
   AdcioPlacementCreateRecommendationBannersParams;
+export type AdcioCreateRecommendationBannersResponse =
+  AdcioPlacementCreateRecommendationBannersResponse;

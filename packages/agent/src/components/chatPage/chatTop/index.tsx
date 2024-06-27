@@ -1,8 +1,8 @@
 import { Icon, IconButton } from "@corca-ai/design-system";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { FlexBox, FlexProps } from "../../../styles/layout";
 import { BottomSheet } from "./BottomSheet";
+import { FlexBox, FlexProps } from "../../../styles/layout";
 
 interface Props extends FlexProps {
   onBack: () => void;

@@ -4,20 +4,24 @@ import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "src/styles/banner.css";
-import { BannerSuggestionDto } from "@adcio/api/controller/v1/api";
+import {
+  AdcioCreateRecommendationBannersResponse,
+  AdcioOnClickParams,
+  AdcioOnImpressionParams,
+} from "@adcio.js/core";
 
 interface Props {
-  suggestionData: BannerSuggestionDto[];
-  impressSlide: (currentSlideData: BannerSuggestionDto) => void;
-  clickSlide: (currentSlideData: BannerSuggestionDto) => void;
+  recommendation: AdcioCreateRecommendationBannersResponse;
+  impressSlide: (currentSlideData: AdcioOnImpressionParams) => void;
+  clickSlide: (currentSlideData: AdcioOnClickParams) => void;
 }
 
-export function Banner({ suggestionData, impressSlide, clickSlide }: Props) {
+export function Banner({ recommendation, impressSlide, clickSlide }: Props) {
   const handleSlideChange = (swiper: SwiperClass) => {
     const activeIndex = swiper.activeIndex;
-    const currentSlideData = suggestionData[activeIndex];
+    const currentSlideData = recommendation.suggestions[activeIndex];
     if (currentSlideData) {
-      impressSlide(currentSlideData);
+      impressSlide(currentSlideData.logOptions);
     }
   };
 
@@ -31,14 +35,14 @@ export function Banner({ suggestionData, impressSlide, clickSlide }: Props) {
       pagination={{ clickable: true }}
       onSlideChange={handleSlideChange}
     >
-      {suggestionData.map((currentSlideData) => {
+      {recommendation.suggestions.map((currentSlideData) => {
         const { banner } = currentSlideData;
 
         return (
           <SwiperSlide
             key={banner.id}
             onClick={() => {
-              clickSlide(currentSlideData);
+              clickSlide(currentSlideData.logOptions);
               alert(`click slide ${banner.id}`);
             }}
           >

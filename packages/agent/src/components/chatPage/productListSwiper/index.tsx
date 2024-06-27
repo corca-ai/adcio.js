@@ -1,15 +1,12 @@
+import { Product } from "@adcio.js/api/controller/v1";
+import { TalkResponseMessageProduct } from "@adcio.js/api/messenger/v1";
+import { color } from "@corca-ai/design-system";
+import styled from "@emotion/styled";
+import _ from "lodash";
 import {
   Swiper as ReactSwiper,
   SwiperSlide as ReactSwiperSlide,
 } from "swiper/react";
-
-import { color } from "@corca-ai/design-system";
-import styled from "@emotion/styled";
-import _ from "lodash";
-
-import { Product } from "@adcio/api/controller/v1";
-import { TalkResponseMessageProduct } from "@adcio/api/messenger/v1";
-
 import { ActionButtonList } from "./ActionButtonList";
 import { LazySlideImage } from "./LazySlideImage";
 import { ProductInfo } from "./ProductInfo";

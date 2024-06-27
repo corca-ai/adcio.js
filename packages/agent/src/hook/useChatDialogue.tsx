@@ -1,7 +1,5 @@
+import { TalkResponseMessage } from "@adcio.js/api/messenger/v1";
 import { useCallback, useReducer } from "react";
-
-import { TalkResponseMessage } from "@adcio/api/messenger/v1";
-
 import { AppType } from "../types/setting.types";
 
 enum ChatDialogueAction {

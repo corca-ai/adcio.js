@@ -1,15 +1,12 @@
-import { useCallback, useRef, useState } from "react";
-
-import { Spinner } from "@corca-ai/design-system";
-import styled from "@emotion/styled";
-
-import { Product } from "@adcio/api/controller/v1";
+import { Product } from "@adcio.js/api/controller/v1";
 import {
   ChatRole,
   ChatType,
   TalkResponseMessage,
-} from "@adcio/api/messenger/v1";
-
+} from "@adcio.js/api/messenger/v1";
+import { Spinner } from "@corca-ai/design-system";
+import styled from "@emotion/styled";
+import { useCallback, useRef, useState } from "react";
 import { ChatInput } from "../components/chatPage/ChatInput";
 import { ChatList } from "../components/chatPage/ChatList";
 import { ChatTop } from "../components/chatPage/ChatTop";
@@ -23,9 +20,9 @@ import {
 import { useChatDialogue } from "../hook/useChatDialogue";
 import { FlexBox, PageSection } from "../styles/layout";
 import { BaseScrollContentsWrapper } from "../styles/scrollbar";
+import { AgentPath } from "../types/route.types";
 import { AppType } from "../types/setting.types";
 import { getNewChatGroupPath } from "../utils/route";
-import { AgentPath } from "../types/route.types";
 
 interface Props {
   appType: AppType;

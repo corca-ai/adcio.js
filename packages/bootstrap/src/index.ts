@@ -1,2 +1,2 @@
-export * from "@adcio/core";
+export * from "@adcio.js/core";
 export { AdcioBootstrap } from "./bootstrap";

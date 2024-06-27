@@ -1,8 +1,6 @@
+import { Product } from "@adcio.js/api/controller/v1";
 import { B1, B4, B5, Text, fontStyle } from "@corca-ai/design-system";
 import styled from "@emotion/styled";
-
-import { Product } from "@adcio/api/controller/v1";
-
 import { FlexBox } from "../../../styles/layout";
 
 interface Props {

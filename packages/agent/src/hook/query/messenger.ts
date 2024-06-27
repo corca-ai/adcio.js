@@ -3,7 +3,7 @@ import {
   ChatsApiAxiosParamCreator,
   Configuration,
   TalkResponseMessage,
-} from "@adcio/api/messenger/v1";
+} from "@adcio.js/api/messenger/v1";
 import { useMutation, useQuery } from "react-query";
 
 export const useFetchChatDialogue = (

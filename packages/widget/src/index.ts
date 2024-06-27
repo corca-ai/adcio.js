@@ -8,6 +8,6 @@ export {
   getElementAtDepth,
   getCssSelector,
   dfs,
-} from "@adcio/lib/selectors";
+} from "./selectors";
 
 export * as renderers from "./renderer";

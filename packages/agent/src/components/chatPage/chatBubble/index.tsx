@@ -1,12 +1,10 @@
-import { Fragment } from "react";
-
-import { Product } from "@adcio/api/controller/v1";
+import { Product } from "@adcio.js/api/controller/v1";
 import {
   ChatRole,
   ChatType,
   TalkResponseMessage,
-} from "@adcio/api/messenger/v1";
-
+} from "@adcio.js/api/messenger/v1";
+import { Fragment } from "react";
 import { RecommendChat } from "./RecommendChat";
 import { SearchItemInfoChat } from "./SearchItemInfoChat";
 import { AgentChatBubble } from "./agentChatBubble";

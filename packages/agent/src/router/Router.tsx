@@ -1,9 +1,8 @@
 import { Suspense, useEffect, useReducer, useState } from "react";
 import { useTranslation, withTranslation } from "react-i18next";
-
-import { Layout } from "../layout/Layout";
 import { AGENT_PATH, PathAction, PathState } from "./route";
 import { useUserSetting } from "../hook/useUserSetting";
+import { Layout } from "../layout/Layout";
 import { getInitPath } from "../utils/route";
 
 interface Props {

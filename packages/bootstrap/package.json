@@ -1,14 +1,13 @@
 {
-  "name": "@adcio/bootstrap",
-  "version": "0.2.0",
+  "name": "@adcio.js/bootstrap",
+  "version": "0.3.0",
   "author": "Corca <contact@corca.ai>",
   "description": "JavaScript SDK for ADCIO",
   "main": "dist/index.js",
   "dependencies": {
-    "@adcio/core": "workspace:*",
-    "@adcio/widget": "workspace:*",
-    "@adcio/api": "workspace:*",
-    "@adcio/lib": "workspace:*"
+    "@adcio.js/core": "workspace:*",
+    "@adcio.js/widget": "workspace:*",
+    "@adcio.js/api": "workspace:*"
   },
   "scripts": {
     "start:dev": "vite build --watch",

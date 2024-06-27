@@ -1,9 +1,7 @@
-import { PropsWithChildren } from 'react';
-
-import { B3, color } from '@corca-ai/design-system';
-import styled from '@emotion/styled';
-
-import { BaseChatBubbleContents } from '../../style';
+import { B3, color } from "@corca-ai/design-system";
+import styled from "@emotion/styled";
+import { PropsWithChildren } from "react";
+import { BaseChatBubbleContents } from "../../style";
 
 export function UserChatBubble({ children }: PropsWithChildren) {
   return (
@@ -24,6 +22,6 @@ const Container = styled.div`
 `;
 
 const Contents = styled(BaseChatBubbleContents)`
-  background: ${color['main-black']};
+  background: ${color["main-black"]};
   color: ${color.white};
 `;

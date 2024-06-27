@@ -1,15 +1,14 @@
 import { B1, Icon, color } from "@corca-ai/design-system";
 import styled from "@emotion/styled";
-
 import { IntroductionText } from "../components/startPage/IntroductionText";
 import { StartTop } from "../components/startPage/StartTop";
 import { ChatHistory } from "../components/startPage/chatHistory";
 import { useAgentSettingState } from "../context/AgentSettingContext";
 import { useFetchChatGroups } from "../hook/query/chat";
 import { FlexBox, PageSection } from "../styles/layout";
+import { AgentPath } from "../types/route.types";
 import { AppType } from "../types/setting.types";
 import { getNewChatGroupPath } from "../utils/route";
-import { AgentPath } from "../types/route.types";
 
 interface Props {
   routeTo: (url: string) => void | Promise<boolean>;

@@ -1,7 +1,6 @@
+import { Product } from "@adcio.js/api/controller/v1";
 import { color } from "@corca-ai/design-system";
 import styled from "@emotion/styled";
-
-import { Product } from "@adcio/api/controller/v1";
 
 interface Props {
   product: Product;

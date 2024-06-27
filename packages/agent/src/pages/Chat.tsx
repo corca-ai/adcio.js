@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-
+import Chat from "../container/Chat";
 import { PageContainer } from "../layout/container/PageContainer";
 import { Page } from "../router/route";
-import { removeActiveGroupId, setActiveGroupId } from "../utils/route";
-import Chat from "../container/Chat";
 import { AgentPath } from "../types/route.types";
+import { removeActiveGroupId, setActiveGroupId } from "../utils/route";
 
 interface Props extends Page {
   id: string;

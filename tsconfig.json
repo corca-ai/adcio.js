@@ -13,6 +13,6 @@
     "rootDir": ".",
     "baseUrl": "./packages"
   },
-  "include": ["packages/**/*.ts"],
+  "include": ["packages/**/*.ts", "packages/**/*.tsx", "mock/**/*.ts"],
   "exclude": ["node_modules"]
 }

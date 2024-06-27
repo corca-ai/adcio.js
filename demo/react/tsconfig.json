@@ -11,7 +11,7 @@
     "incremental": true,
     "types": ["node"],
     "jsx": "preserve",
-    "baseUrl": ".",
+    "baseUrl": "."
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

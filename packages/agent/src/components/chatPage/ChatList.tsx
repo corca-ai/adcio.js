@@ -1,13 +1,10 @@
-import { forwardRef, useEffect } from "react";
-
+import { Product } from "@adcio.js/api/controller/v1";
+import { TalkResponseMessage } from "@adcio.js/api/messenger/v1";
 import styled from "@emotion/styled";
-
-import { Product } from "@adcio/api/controller/v1";
-import { TalkResponseMessage } from "@adcio/api/messenger/v1";
-
+import { forwardRef, useEffect } from "react";
+import { ChatBubble } from "./chatBubble";
 import { FlexBox } from "../../styles/layout";
 import { BaseScrollContentsWrapper, Scrollbar } from "../../styles/scrollbar";
-import { ChatBubble } from "./chatBubble";
 
 interface Props {
   chatDialogue: TalkResponseMessage[];

@@ -1,8 +1,7 @@
 import { Box, createStyles } from "@mantine/core";
 import { Transition } from "@mantine/core";
-
-import { AgentPath } from "../types/route.types";
 import { useAgentSettingState } from "../context/AgentSettingContext";
+import { AgentPath } from "../types/route.types";
 
 interface Props {
   path: AgentPath;

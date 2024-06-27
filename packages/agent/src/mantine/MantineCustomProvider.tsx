@@ -3,9 +3,8 @@ import {
   MantineProvider,
   createEmotionCache,
 } from "@mantine/core";
-
-import { useAgentSettingState } from "../context/AgentSettingContext";
 import { AGENT_THEME_COLOR } from "../constant/styles";
+import { useAgentSettingState } from "../context/AgentSettingContext";
 
 export default function MantineCustomProvider({
   children,
