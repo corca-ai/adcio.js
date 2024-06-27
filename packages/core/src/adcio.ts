@@ -1,19 +1,11 @@
-import type {
-  BannerSuggestionResponseDto,
-  FetchActivePlacementsResponseDto,
-  ProductSuggestionResponseDto,
-} from "@adcio.js/api/controller/v1";
-import { AdcioAnalytics } from "@adcio.js/lib/analytics/analytics";
-import { ClientAPI } from "@adcio.js/lib/client-api";
-import { AdcioCore } from "@adcio.js/lib/core";
-import { AdcioImpressionObserver } from "@adcio.js/lib/impression-observer/impression-observer";
-import { AdcioPlacement } from "@adcio.js/lib/placement/placement";
-import { CartsStorage } from "@adcio.js/lib/storage/tracker-storage";
 import {
   AdcioConfig,
   AdcioCreateRecommendationBannersParams,
+  AdcioCreateRecommendationBannersResponse,
   AdcioCreateRecommendationProductsParams,
+  AdcioCreateRecommendationProductsResponse,
   AdcioFetchPlacementsParams,
+  AdcioFetchPlacementsResponse,
   AdcioObserveImpressionParams,
   AdcioOnAddToCartParams,
   AdcioOnClickParams,
@@ -22,6 +14,10 @@ import {
   AdcioOnPurchaseParams,
   AdcioParams,
 } from "./adcio.interface";
+import { AdcioAnalytics } from "./analytics/analytics";
+import { AdcioCore } from "./core";
+import { AdcioImpressionObserver } from "./impression-observer/impression-observer";
+import { AdcioPlacement } from "./placement/placement";
 
 export class Adcio {
   private readonly config: AdcioConfig;
@@ -38,6 +34,9 @@ export class Adcio {
     this.adcioCore = new AdcioCore({
       clientId: this.config.clientId,
       customerId: this.config.customerId,
+      serverMode: this.config.serverMode,
+      deviceId: this.config.deviceId,
+      sessionId: this.config.sessionId,
     });
 
     this.adcioPlacement = new AdcioPlacement({
@@ -75,17 +74,19 @@ export class Adcio {
     return this.adcioAnalytics.onPurchase(params);
   }
 
-  // AdcioImpressionDetector
+  // AdcioImpressionObserver
   public observeImpression(params: AdcioObserveImpressionParams) {
-    return new AdcioImpressionObserver({ filter: params.filter }).observe(
-      params.element,
-    );
+    const observer = new AdcioImpressionObserver({ filter: params.filter });
+    if (params.onImpression) {
+      observer.addImpressionListener(params.element, params.onImpression);
+    }
+    return observer.observe(params.element);
   }
 
   // AdcioPlacement
   public async fetchPlacements(
     params: AdcioFetchPlacementsParams,
-  ): Promise<FetchActivePlacementsResponseDto[] | undefined> {
+  ): Promise<AdcioFetchPlacementsResponse> {
     return this.adcioPlacement.fetchPlacements(params);
   }
 
@@ -94,98 +95,19 @@ export class Adcio {
    */
   public async createSuggestionProducts(
     params: AdcioCreateRecommendationProductsParams,
-  ): Promise<ProductSuggestionResponseDto | undefined> {
+  ): Promise<AdcioCreateRecommendationProductsResponse> {
     return this.adcioPlacement.createRecommendationProducts(params);
   }
 
   public async createRecommendationProducts(
     params: AdcioCreateRecommendationProductsParams,
-  ): Promise<ProductSuggestionResponseDto | undefined> {
+  ): Promise<AdcioCreateRecommendationProductsResponse> {
     return this.adcioPlacement.createRecommendationProducts(params);
   }
 
   public async createRecommendationBanners(
     params: AdcioCreateRecommendationBannersParams,
-  ): Promise<BannerSuggestionResponseDto | undefined> {
+  ): Promise<AdcioCreateRecommendationBannersResponse> {
     return this.adcioPlacement.createRecommendationBanners(params);
-  }
-
-  public async collectLogs(clientApi: ClientAPI) {
-    await clientApi.init();
-
-    try {
-      const client = await clientApi.getCustomer();
-      if (client) {
-        this.adcioCore.setCustomerId(client.id);
-      }
-    } catch (e) {
-      console.warn("Failed to get customer id: ", e);
-    }
-
-    return Promise.allSettled([
-      ...(await this.handleView(clientApi)),
-      ...(await this.handleCarts(clientApi)),
-      ...(await this.handleOrder(clientApi)),
-    ]);
-  }
-
-  private async handleView(clientApi: ClientAPI): Promise<Promise<void>[]> {
-    const product = await clientApi.getProduct();
-    const category = await clientApi.getCategory();
-    if (!product?.idOnStore && !category?.idOnStore) {
-      return [];
-    }
-    return [
-      this.onPageView({
-        productIdOnStore: product?.idOnStore,
-        categoryIdOnStore: category?.idOnStore,
-      }),
-    ];
-  }
-
-  private async handleCarts(clientApi: ClientAPI): Promise<Promise<void>[]> {
-    const carts = await clientApi.getCarts();
-    if (!carts) {
-      return [];
-    }
-
-    const storage = new CartsStorage({
-      key: `adcio-carts-${this.adcioCore.getClientId()}`,
-    });
-    const existing = storage.getOrSet();
-    storage.set(carts);
-
-    const newCarts = carts.filter(
-      (cart) => !existing.find((c) => c.id === cart.id),
-    );
-    if (newCarts.length === 0) {
-      return [];
-    }
-
-    return newCarts.map((cart) =>
-      this.onAddToCart({
-        cartId: cart.id,
-        productIdOnStore: cart.productIdOnStore,
-        quantity: cart.quantity,
-      }),
-    );
-  }
-
-  private async handleOrder(clientApi: ClientAPI): Promise<Promise<void>[]> {
-    const order = await clientApi.getOrder();
-    if (!order) {
-      return [];
-    }
-
-    return order.products.map((product) =>
-      this.onPurchase({
-        orderId: order.id,
-        amount: Number(
-          product.subTotalPrice || product.price * product.quantity,
-        ),
-        quantity: product.quantity,
-        productIdOnStore: product.idOnStore,
-      }),
-    );
   }
 }

@@ -1,6 +1,9 @@
 import {
   BannerSuggestionRequestDto,
   ProductSuggestionRequestDto,
+  FetchActivePlacementsResponseDto,
+  ProductSuggestionResponseDto,
+  BannerSuggestionResponseDto,
 } from "@adcio.js/api/controller/v1";
 import { AdcioCore } from "../core";
 
@@ -13,6 +16,9 @@ export type AdcioPlacementFetchPlacementsParams = {
   pageName: string;
 };
 
+export type AdcioPlacementFetchPlacementsResponse =
+  FetchActivePlacementsResponseDto[];
+
 export type AdcioPlacementCreateRecommendationProductsParams = Pick<
   ProductSuggestionRequestDto,
   | "placementId"
@@ -20,10 +26,13 @@ export type AdcioPlacementCreateRecommendationProductsParams = Pick<
   | "placementPositionY"
   | "birthYear"
   | "gender"
-  | "area"
   | "categoryId"
   | "excludingProductIds"
+  | "filters"
 >;
+
+export type AdcioPlacementCreateRecommendationProductsResponse =
+  ProductSuggestionResponseDto;
 
 export type AdcioPlacementCreateRecommendationBannersParams = Pick<
   BannerSuggestionRequestDto,
@@ -32,5 +41,7 @@ export type AdcioPlacementCreateRecommendationBannersParams = Pick<
   | "placementPositionY"
   | "birthYear"
   | "gender"
-  | "area"
 >;
+
+export type AdcioPlacementCreateRecommendationBannersResponse =
+  BannerSuggestionResponseDto;

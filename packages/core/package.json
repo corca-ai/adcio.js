@@ -1,12 +1,11 @@
 {
   "name": "@adcio.js/core",
-  "version": "0.2.0",
+  "version": "0.3.2",
   "author": "Corca <contact@corca.ai>",
   "description": "JavaScript SDK for ADCIO",
   "main": "dist/index.js",
   "dependencies": {
-    "@adcio.js/api": "workspace:*",
-    "@adcio.js/lib": "workspace:*"
+    "@adcio.js/api": "workspace:*"
   },
   "scripts": {
     "start:dev": "vite build --watch",

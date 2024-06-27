@@ -1,6 +1,7 @@
 export interface StorageParams {
   local?: LocalStorageParams;
   session?: SessionStorageParams;
+  memory?: MemoryStorageParams;
 }
 export interface Storage<T> {
   set(data: T): void;
@@ -17,6 +18,6 @@ export interface SessionStorageParams {
   expiration?: number;
 }
 
-export interface CartsStorageParams {
-  key: string;
+export interface MemoryStorageParams {
+  initialValue?: string;
 }

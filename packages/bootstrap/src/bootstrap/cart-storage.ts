@@ -1,11 +1,10 @@
 import { Cart } from "../client-api/client-api.interface";
-import { CartsStorageParams, Storage } from "../storage/storage.interface";
 
-export class CartsStorage implements Storage<Cart[]> {
+export class CartsStorage {
   private key: string = "";
   private carts: Cart[];
 
-  constructor(config: CartsStorageParams) {
+  constructor(config: { key: string }) {
     const { key } = config;
     this.key = key;
     this.carts = [];

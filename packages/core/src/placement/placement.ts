@@ -4,15 +4,17 @@ import {
   SuggestionApi,
 } from "@adcio.js/api/controller/v1";
 import { isAxiosError } from "axios";
+import { ERROR_CODE, PLACEMENT_ERROR_MESSAGE, APIError } from "./api-error";
 import type {
   AdcioPlacementParams,
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateRecommendationProductsParams,
   AdcioPlacementCreateRecommendationBannersParams,
+  AdcioPlacementFetchPlacementsResponse,
+  AdcioPlacementCreateRecommendationProductsResponse,
+  AdcioPlacementCreateRecommendationBannersResponse,
 } from "./placement.interface";
-import { ERROR_CODE, PLACEMENT_ERROR_MESSAGE } from "../constants/error";
 import { AdcioCore } from "../core";
-import { APIError } from "../error";
 
 export class AdcioPlacement {
   private adcioCore: AdcioCore;
@@ -51,7 +53,9 @@ export class AdcioPlacement {
     }
   }
 
-  public async fetchPlacements(params: AdcioPlacementFetchPlacementsParams) {
+  public async fetchPlacements(
+    params: AdcioPlacementFetchPlacementsParams,
+  ): Promise<AdcioPlacementFetchPlacementsResponse> {
     try {
       const { data } = await new PageApi(
         this.apiConfig,
@@ -59,16 +63,16 @@ export class AdcioPlacement {
         params.pageName,
         this.adcioCore.getClientId(),
       );
-
       return data;
     } catch (error) {
       this.handleError(error);
+      throw error;
     }
   }
 
   public async createRecommendationProducts(
     params: AdcioPlacementCreateRecommendationProductsParams,
-  ) {
+  ): Promise<AdcioPlacementCreateRecommendationProductsResponse> {
     try {
       const { data } = await new SuggestionApi(
         this.apiConfig,
@@ -82,12 +86,13 @@ export class AdcioPlacement {
       return data;
     } catch (error) {
       this.handleError(error);
+      throw error;
     }
   }
 
   public async createRecommendationBanners(
     params: AdcioPlacementCreateRecommendationBannersParams,
-  ) {
+  ): Promise<AdcioPlacementCreateRecommendationBannersResponse> {
     try {
       const { data } = await new SuggestionApi(
         this.apiConfig,
@@ -100,6 +105,7 @@ export class AdcioPlacement {
       return data;
     } catch (error) {
       this.handleError(error);
+      throw error;
     }
   }
 }

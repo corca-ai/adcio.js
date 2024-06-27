@@ -18,11 +18,6 @@ export class AdcioAnalytics {
     this.adcioCore = params.adcioCore;
     this.apiConfig = new Configuration({
       basePath: params.receiverEndpoint,
-      baseOptions: {
-        headers: {
-          Authorization: "",
-        },
-      },
     });
   }
 
