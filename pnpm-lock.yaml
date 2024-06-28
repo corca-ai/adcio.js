@@ -133,6 +133,9 @@ importers:
       '@adcio.js/api':
         specifier: workspace:*
         version: link:../api
+      '@adcio.js/core':
+        specifier: workspace:*
+        version: link:../core
       '@corca-ai/design-system':
         specifier: latest
         version: 0.0.19(csstype@3.1.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)

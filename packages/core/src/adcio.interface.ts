@@ -27,6 +27,7 @@ export interface AdcioParams {
 
 export interface AdcioConfig extends AdcioParams {
   apiEndpoint: string;
+  messengerEndpoint: string;
   receiverEndpoint: string;
 }
 

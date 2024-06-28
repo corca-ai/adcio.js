@@ -1,6 +1,6 @@
 {
   "name": "@adcio.js/agent",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Corca <contact@corca.ai>",
   "description": "JavaScript SDK for ADCIO",
   "main": "dist/index.es.js",
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@adcio.js/api": "workspace:*",
+    "@adcio.js/core": "workspace:*",
     "@corca-ai/design-system": "latest",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.10.5",

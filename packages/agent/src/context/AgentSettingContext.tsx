@@ -1,4 +1,7 @@
-import { Configuration as ApiConfiguration } from "@adcio.js/api/controller/v1";
+import {
+  Configuration as ApiConfiguration,
+  ChatProfile,
+} from "@adcio.js/api/controller/v1";
 import { Configuration as MessengerConfiguration } from "@adcio.js/api/messenger/v1";
 import {
   createContext,
@@ -8,13 +11,15 @@ import {
   ReactNode,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { App } from "../types/setting.types";
 
-interface AgentSettingProviderProps extends App {
+interface AgentSettingProviderProps {
+  agentProfile: ChatProfile;
+  messengerEndpoint: string;
+  apiEndpoint: string;
   children: ReactNode;
 }
 
-interface AgentSettingProvider extends App {
+interface AgentSettingProvider {
   apiConfig: ApiConfiguration;
   messengerConfig: MessengerConfiguration;
 }

@@ -1,9 +1,21 @@
+import { ChatApi } from "@adcio.js/api/controller/v1";
+import { Configuration } from "@adcio.js/api/messenger/v1";
+import { Adcio } from "@adcio.js/core";
 import { createRoot } from "react-dom/client";
 import { AdcioAgent } from "./app";
 import { AgentPath } from "./types/route.types";
-import { App } from "./types/setting.types";
+import { AppType } from "./types/setting.types";
 
-export function renderAgent({ ...config }: App) {
+interface App {
+  adcioInstance: Adcio;
+  platform?: AppType;
+}
+
+export function renderAgent({ adcioInstance, platform }: App) {
+  if (typeof document === "undefined") {
+    // TODO : 서버사이드 렌더링 지원
+    return;
+  }
   const element = document.createElement("div");
   element.style.setProperty("position", "fixed", "important");
   element.style.setProperty("hidden", "hidden", "important");
@@ -57,20 +69,43 @@ export function renderAgent({ ...config }: App) {
 
   document.body.appendChild(element);
 
-  const root = createRoot(mountPoint);
-  root.render(
-    <AdcioAgent
-      emotionRoot={emotionRoot}
-      onRoute={(route) => {
-        if (route.path === AgentPath.Entry) {
-          element.style.setProperty("z-index", `${1_000_000}`, "important");
-        } else {
-          element.style.setProperty("z-index", `${100_000_000}`, "important");
-        }
-      }}
-      {...config}
-    />,
-  );
+  const clientId = adcioInstance.getClientId();
+  new ChatApi(
+    new Configuration({
+      basePath: adcioInstance.getConfig().apiEndpoint,
+    }),
+  )
+    .chatControllerFetchChatProfile(clientId)
+    .then((res) => {
+      const agentProfile = res.data;
+      const root = createRoot(mountPoint);
+      root.render(
+        <AdcioAgent
+          emotionRoot={emotionRoot}
+          onRoute={(route) => {
+            if (route.path === AgentPath.Entry) {
+              element.style.setProperty("z-index", `${1_000_000}`, "important");
+            } else {
+              element.style.setProperty(
+                "z-index",
+                `${100_000_000}`,
+                "important",
+              );
+            }
+          }}
+          clientId={clientId}
+          deviceId={adcioInstance.getDeviceId()}
+          customerId={adcioInstance.getCustomerId()}
+          agentProfile={agentProfile}
+          messengerEndpoint={adcioInstance.getConfig().messengerEndpoint}
+          apiEndpoint={adcioInstance.getConfig().apiEndpoint}
+          platform={platform}
+        />,
+      );
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 export type { App };

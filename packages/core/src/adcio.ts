@@ -28,6 +28,7 @@ export class Adcio {
   constructor(config: AdcioParams) {
     this.config = {
       apiEndpoint: "https://api.adcio.ai",
+      messengerEndpoint: "https://messenger.adcio.ai",
       receiverEndpoint: "https://receiver.adcio.ai",
       ...config,
     };
@@ -47,6 +48,22 @@ export class Adcio {
       adcioCore: this.adcioCore,
       receiverEndpoint: this.config.receiverEndpoint,
     });
+  }
+
+  public getConfig() {
+    return this.config;
+  }
+
+  public getClientId() {
+    return this.adcioCore.getClientId();
+  }
+
+  public getDeviceId() {
+    return this.adcioCore.getDeviceId();
+  }
+
+  public getCustomerId() {
+    return this.adcioCore.getCustomerId();
   }
 
   public setCustomerId(customerId: string) {

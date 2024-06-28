@@ -1,3 +1,4 @@
+import { ChatProfile } from "@adcio.js/api/controller/v1";
 import createCache from "@emotion/cache";
 import {
   EmotionCache,
@@ -10,12 +11,18 @@ import { queryClient } from "./hook/query/config";
 import MantineCustomProvider from "./mantine/MantineCustomProvider";
 import Route from "./router/Router";
 import { PathState } from "./router/route";
-import { App } from "./types/setting.types";
 import "./i18n";
 
-interface AdcioAgentProps extends App {
+interface AdcioAgentProps {
   emotionRoot: HTMLDivElement;
   onRoute?: (route: PathState) => void;
+  clientId: string;
+  deviceId: string;
+  customerId: string | null;
+  agentProfile: ChatProfile;
+  messengerEndpoint: string;
+  apiEndpoint: string;
+  platform: string | null;
 }
 
 export function AdcioAgent({
