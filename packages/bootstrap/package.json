@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start:dev": "vite build --watch",
-    "build": "vite build && vite build -c vite.config.run.ts",
+    "build": "vite build",
     "prepare": "pnpm build"
   }
 }

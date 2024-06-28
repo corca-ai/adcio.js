@@ -24,8 +24,6 @@ export type AdcioPlacementCreateRecommendationProductsParams = Pick<
   | "placementId"
   | "placementPositionX"
   | "placementPositionY"
-  | "birthYear"
-  | "gender"
   | "categoryId"
   | "excludingProductIds"
   | "filters"
@@ -36,11 +34,7 @@ export type AdcioPlacementCreateRecommendationProductsResponse =
 
 export type AdcioPlacementCreateRecommendationBannersParams = Pick<
   BannerSuggestionRequestDto,
-  | "placementId"
-  | "placementPositionX"
-  | "placementPositionY"
-  | "birthYear"
-  | "gender"
+  "placementId" | "placementPositionX" | "placementPositionY"
 >;
 
 export type AdcioPlacementCreateRecommendationBannersResponse =

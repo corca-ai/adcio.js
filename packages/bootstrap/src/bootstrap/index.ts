@@ -11,7 +11,13 @@ export class AdcioBootstrap {
 
   private suppressPlacement: boolean;
 
-  constructor(config: { clientId?: string; suppressPlacement?: boolean } = {}) {
+  constructor(
+    config: {
+      clientId?: string;
+      clientApi?: string;
+      suppressPlacement?: boolean;
+    } = {},
+  ) {
     const clientId = config.clientId || this.getClientId();
     if (!clientId) {
       throw new AdcioError("Client ID is not found");
@@ -35,23 +41,28 @@ export class AdcioBootstrap {
 
   public async run() {
     await waitForDOM();
-    return await this.bootstrap();
+    const results = await this.bootstrap();
+    const failed = results.filter((result) => result.status === "rejected");
+    if (failed.length > 0) {
+      console.warn("Some failed while bootstrapping Adcio: ", failed);
+    }
+    return this.adcioInstance;
   }
 
   public async bootstrap() {
     await this.clientApi.init();
 
     try {
-      const client = await this.clientApi.getCustomer();
-      if (client) {
-        this.adcioInstance.setCustomerId(client.id);
+      const customer = await this.clientApi.getCustomer();
+      if (customer) {
+        this.adcioInstance.setCustomerId(customer.id);
       }
     } catch (e) {
       console.warn("Failed to get customer id: ", e);
     }
 
-    return Promise.allSettled([
-      ...(this.suppressPlacement ? [this.loadPlacements()] : []),
+    return await Promise.allSettled([
+      ...(this.suppressPlacement ? [] : [this.loadPlacements()]),
       this.handleView(),
       this.handleCarts(),
       this.handleOrder(),

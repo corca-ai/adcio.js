@@ -10,3 +10,5 @@ export {
 } from "@adcio.js/core";
 
 export { AdcioBootstrap } from "./bootstrap";
+
+document.dispatchEvent(new CustomEvent("adcio:loaded"));
