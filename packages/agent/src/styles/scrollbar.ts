@@ -2,7 +2,7 @@ import { color } from "@corca-ai/design-system";
 import styled from "@emotion/styled";
 import { FlexBox } from "./layout";
 
-export const BaseScrollContentsWrapper = styled(FlexBox)`
+export const BaseScrollContentsWrapper: React.FC = styled(FlexBox)`
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
@@ -20,7 +20,7 @@ export const BaseScrollContentsWrapper = styled(FlexBox)`
   }
 `;
 
-export const Scrollbar = styled.div`
+export const Scrollbar: React.FC = styled.div`
   height: 100%;
   position: absolute;
   top: 0;

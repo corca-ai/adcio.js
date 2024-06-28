@@ -1,8 +1,7 @@
-import styled from '@emotion/styled';
-
-import { FlexBox } from '../../../styles/layout';
-import { ChatHistoryContents } from './ChatHistoryContents';
-import { ChatHistoryProps } from './type';
+import styled from "@emotion/styled";
+import { ChatHistoryContents } from "./ChatHistoryContents";
+import { ChatHistoryProps } from "./type";
+import { FlexBox } from "../../../styles/layout";
 
 // TODO: 추후 해당 UI를 container로 이동
 export function ChatHistory({ chatList }: ChatHistoryProps) {

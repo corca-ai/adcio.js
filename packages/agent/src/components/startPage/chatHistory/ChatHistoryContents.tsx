@@ -1,10 +1,9 @@
-import { B1, Spinner, fontStyle } from '@corca-ai/design-system';
-import styled from '@emotion/styled';
-
-import { FlexBox } from '../../../styles/layout';
-import { ChatList } from './chatList';
-import { ChatContentsContainer } from './style';
-import { ChatHistoryProps } from './type';
+import { B1, Spinner, fontStyle } from "@corca-ai/design-system";
+import styled from "@emotion/styled";
+import { ChatList } from "./chatList";
+import { ChatContentsContainer } from "./style";
+import { ChatHistoryProps } from "./type";
+import { FlexBox } from "../../../styles/layout";
 
 export function ChatHistoryContents({ chatList }: ChatHistoryProps) {
   const { data, isLoading } = chatList;

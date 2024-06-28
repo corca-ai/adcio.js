@@ -1,12 +1,9 @@
-import { useTranslation } from "react-i18next";
-
+import { CustomerChatGroupDto } from "@adcio.js/api/controller/v1";
+import { ChatType } from "@adcio.js/api/messenger/v1";
 import { B3, Text, color } from "@corca-ai/design-system";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
-
-import { CustomerChatGroupDto } from "@adcio/api/controller/v1";
-import { ChatType } from "@adcio/api/messenger/v1";
-
+import { useTranslation } from "react-i18next";
 import { Box, FlexBox } from "../../../../styles/layout";
 import { Profile } from "../../../icon/Profile";
 

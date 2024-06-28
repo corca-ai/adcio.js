@@ -1,17 +1,15 @@
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
-
-import { B1, Spinner } from '@corca-ai/design-system';
-import styled from '@emotion/styled';
-
-import { FlexBox } from '../../../../styles/layout';
+import { B1, Spinner } from "@corca-ai/design-system";
+import styled from "@emotion/styled";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { Chat } from "./Chat";
+import { FlexBox } from "../../../../styles/layout";
 import {
   BaseScrollContentsWrapper,
   Scrollbar,
-} from '../../../../styles/scrollbar';
-import { ChatContentsContainer } from '../style';
-import { ChatHistoryProps } from '../type';
-import { Chat } from './Chat';
+} from "../../../../styles/scrollbar";
+import { ChatContentsContainer } from "../style";
+import { ChatHistoryProps } from "../type";
 
 export function ChatList({ chatList }: ChatHistoryProps) {
   const { ref, inView } = useInView();
