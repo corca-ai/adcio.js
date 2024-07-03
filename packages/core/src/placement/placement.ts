@@ -13,6 +13,10 @@ import type {
   AdcioPlacementFetchPlacementsResponse,
   AdcioPlacementCreateRecommendationProductsResponse,
   AdcioPlacementCreateRecommendationBannersResponse,
+  AdcioPlacementCreateAdvertisementBannersParams,
+  AdcioPlacementCreateAdvertisementProductsParams,
+  AdcioPlacementCreateAdvertisementBannersResponse,
+  AdcioPlacementCreateAdvertisementProductsResponse,
 } from "./placement.interface";
 import { AdcioCore } from "../core";
 
@@ -97,6 +101,45 @@ export class AdcioPlacement {
       const { data } = await new SuggestionApi(
         this.apiConfig,
       ).suggestionControllerRecommendBanners({
+        customerId: this.adcioCore.getCustomerId(),
+        sessionId: this.adcioCore.getSessionId(),
+        deviceId: this.adcioCore.getDeviceId(),
+        ...params,
+      });
+      return data;
+    } catch (error) {
+      this.handleError(error);
+      throw error;
+    }
+  }
+
+  public async createAdvertisementProducts(
+    params: AdcioPlacementCreateAdvertisementProductsParams,
+  ): Promise<AdcioPlacementCreateAdvertisementProductsResponse> {
+    try {
+      const { data } = await new SuggestionApi(
+        this.apiConfig,
+      ).suggestionControllerAdvertiseProducts({
+        clientId: this.adcioCore.getClientId(),
+        customerId: this.adcioCore.getCustomerId(),
+        sessionId: this.adcioCore.getSessionId(),
+        deviceId: this.adcioCore.getDeviceId(),
+        ...params,
+      });
+      return data;
+    } catch (error) {
+      this.handleError(error);
+      throw error;
+    }
+  }
+
+  public async createAdvertisementBanners(
+    params: AdcioPlacementCreateAdvertisementBannersParams,
+  ): Promise<AdcioPlacementCreateAdvertisementBannersResponse> {
+    try {
+      const { data } = await new SuggestionApi(
+        this.apiConfig,
+      ).suggestionControllerAdvertiseBanners({
         customerId: this.adcioCore.getCustomerId(),
         sessionId: this.adcioCore.getSessionId(),
         deviceId: this.adcioCore.getDeviceId(),

@@ -39,3 +39,24 @@ export type AdcioPlacementCreateRecommendationBannersParams = Pick<
 
 export type AdcioPlacementCreateRecommendationBannersResponse =
   BannerSuggestionResponseDto;
+
+export type AdcioPlacementCreateAdvertisementProductsParams = Pick<
+  ProductSuggestionRequestDto,
+  | "placementId"
+  | "placementPositionX"
+  | "placementPositionY"
+  | "categoryId"
+  | "excludingProductIds"
+  | "filters"
+>;
+
+export type AdcioPlacementCreateAdvertisementProductsResponse =
+  ProductSuggestionResponseDto;
+
+export type AdcioPlacementCreateAdvertisementBannersParams = Pick<
+  BannerSuggestionRequestDto,
+  "placementId" | "placementPositionX" | "placementPositionY"
+>;
+
+export type AdcioPlacementCreateAdvertisementBannersResponse =
+  BannerSuggestionResponseDto;

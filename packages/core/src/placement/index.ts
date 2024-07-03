@@ -4,4 +4,6 @@ export type {
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateRecommendationProductsParams,
   AdcioPlacementCreateRecommendationBannersParams,
+  AdcioPlacementCreateAdvertisementProductsResponse,
+  AdcioPlacementCreateAdvertisementBannersResponse,
 } from "./placement.interface";

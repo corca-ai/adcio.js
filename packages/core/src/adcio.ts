@@ -1,5 +1,9 @@
 import {
   AdcioConfig,
+  AdcioCreateAdvertisementBannersParams,
+  AdcioCreateAdvertisementBannersResponse,
+  AdcioCreateAdvertisementProductsParams,
+  AdcioCreateAdvertisementProductsResponse,
   AdcioCreateRecommendationBannersParams,
   AdcioCreateRecommendationBannersResponse,
   AdcioCreateRecommendationProductsParams,
@@ -126,5 +130,17 @@ export class Adcio {
     params: AdcioCreateRecommendationBannersParams,
   ): Promise<AdcioCreateRecommendationBannersResponse> {
     return this.adcioPlacement.createRecommendationBanners(params);
+  }
+
+  public async createAdvertisementProducts(
+    params: AdcioCreateAdvertisementProductsParams,
+  ): Promise<AdcioCreateAdvertisementProductsResponse> {
+    return this.adcioPlacement.createAdvertisementProducts(params);
+  }
+
+  public async createAdvertisementBanners(
+    params: AdcioCreateAdvertisementBannersParams,
+  ): Promise<AdcioCreateAdvertisementBannersResponse> {
+    return this.adcioPlacement.createAdvertisementBanners(params);
   }
 }

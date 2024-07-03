@@ -12,6 +12,10 @@ import {
   AdcioPlacementCreateRecommendationBannersParams,
 } from "./placement";
 import {
+  AdcioPlacementCreateAdvertisementBannersParams,
+  AdcioPlacementCreateAdvertisementBannersResponse,
+  AdcioPlacementCreateAdvertisementProductsParams,
+  AdcioPlacementCreateAdvertisementProductsResponse,
   AdcioPlacementCreateRecommendationBannersResponse,
   AdcioPlacementCreateRecommendationProductsResponse,
   AdcioPlacementFetchPlacementsResponse,
@@ -64,3 +68,13 @@ export type AdcioCreateRecommendationBannersParams =
   AdcioPlacementCreateRecommendationBannersParams;
 export type AdcioCreateRecommendationBannersResponse =
   AdcioPlacementCreateRecommendationBannersResponse;
+
+export type AdcioCreateAdvertisementProductsParams =
+  AdcioPlacementCreateAdvertisementProductsParams;
+export type AdcioCreateAdvertisementProductsResponse =
+  AdcioPlacementCreateAdvertisementProductsResponse;
+
+export type AdcioCreateAdvertisementBannersParams =
+  AdcioPlacementCreateAdvertisementBannersParams;
+export type AdcioCreateAdvertisementBannersResponse =
+  AdcioPlacementCreateAdvertisementBannersResponse;
