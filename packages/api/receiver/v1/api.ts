@@ -79,6 +79,12 @@ export interface TrackAddToCartRequestDto {
      */
     'customerId'?: string;
     /**
+     * The version of the SDK
+     * @type {string}
+     * @memberof TrackAddToCartRequestDto
+     */
+    'sdkVersion'?: string;
+    /**
      * Identifier for the suggestion request
      * @type {string}
      * @memberof TrackAddToCartRequestDto
@@ -114,6 +120,12 @@ export interface TrackAddToCartRequestDto {
      * @memberof TrackAddToCartRequestDto
      */
     'quantity'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackAddToCartRequestDto
+     */
+    'userAgent'?: string;
 }
 /**
  * 
@@ -146,6 +158,12 @@ export interface TrackClickRequestDto {
      */
     'customerId'?: string;
     /**
+     * The version of the SDK
+     * @type {string}
+     * @memberof TrackClickRequestDto
+     */
+    'sdkVersion'?: string;
+    /**
      * Identifier for the suggestion request
      * @type {string}
      * @memberof TrackClickRequestDto
@@ -163,6 +181,12 @@ export interface TrackClickRequestDto {
      * @memberof TrackClickRequestDto
      */
     'adsetId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackClickRequestDto
+     */
+    'userAgent'?: string;
 }
 /**
  * 
@@ -195,6 +219,12 @@ export interface TrackImpressionRequestDto {
      */
     'customerId'?: string;
     /**
+     * The version of the SDK
+     * @type {string}
+     * @memberof TrackImpressionRequestDto
+     */
+    'sdkVersion'?: string;
+    /**
      * Identifier for the suggestion request
      * @type {string}
      * @memberof TrackImpressionRequestDto
@@ -212,6 +242,12 @@ export interface TrackImpressionRequestDto {
      * @memberof TrackImpressionRequestDto
      */
     'adsetId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackImpressionRequestDto
+     */
+    'userAgent'?: string;
 }
 /**
  * 
@@ -244,6 +280,12 @@ export interface TrackPageViewRequestDto {
      */
     'customerId'?: string;
     /**
+     * The version of the SDK
+     * @type {string}
+     * @memberof TrackPageViewRequestDto
+     */
+    'sdkVersion'?: string;
+    /**
      * Identifier for the suggestion request
      * @type {string}
      * @memberof TrackPageViewRequestDto
@@ -267,6 +309,12 @@ export interface TrackPageViewRequestDto {
      * @memberof TrackPageViewRequestDto
      */
     'categoryIdOnStore'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackPageViewRequestDto
+     */
+    'userAgent'?: string;
 }
 /**
  * 
@@ -298,6 +346,12 @@ export interface TrackPurchaseRequestDto {
      * @memberof TrackPurchaseRequestDto
      */
     'customerId'?: string;
+    /**
+     * The version of the SDK
+     * @type {string}
+     * @memberof TrackPurchaseRequestDto
+     */
+    'sdkVersion'?: string;
     /**
      * Identifier for the suggestion request
      * @type {string}
@@ -340,6 +394,12 @@ export interface TrackPurchaseRequestDto {
      * @memberof TrackPurchaseRequestDto
      */
     'amount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackPurchaseRequestDto
+     */
+    'userAgent'?: string;
 }
 /**
  * 

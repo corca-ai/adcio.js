@@ -108,6 +108,32 @@ export interface LocationInner {
 /**
  * 
  * @export
+ * @interface SearchParams
+ */
+export interface SearchParams {
+    /**
+     * 
+     * @type {string}
+     * @memberof SearchParams
+     */
+    'query': string;
+}
+/**
+ * 
+ * @export
+ * @interface SearchResponse
+ */
+export interface SearchResponse {
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof SearchResponse
+     */
+    'products': Array<object>;
+}
+/**
+ * 
+ * @export
  * @interface TalkResponseMessage
  */
 export interface TalkResponseMessage {
@@ -396,7 +422,7 @@ export const ChatsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async chatApiV1ChatsClientIdGroupIdPost(clientId: string, groupId: string, chatParams: ChatParams, deviceId?: string, customerId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TalkResponseMessage>> {
+        async chatApiV1ChatsClientIdGroupIdPost(clientId: string, groupId: string, chatParams: ChatParams, deviceId?: string, customerId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.chatApiV1ChatsClientIdGroupIdPost(clientId, groupId, chatParams, deviceId, customerId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -411,7 +437,7 @@ export const ChatsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async explainApiV1ChatsClientIdGroupIdExplainProductPost(clientId: string, groupId: string, explainParams: ExplainParams, deviceId?: string, customerId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TalkResponseMessage>> {
+        async explainApiV1ChatsClientIdGroupIdExplainProductPost(clientId: string, groupId: string, explainParams: ExplainParams, deviceId?: string, customerId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.explainApiV1ChatsClientIdGroupIdExplainProductPost(clientId, groupId, explainParams, deviceId, customerId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -450,7 +476,7 @@ export const ChatsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        chatApiV1ChatsClientIdGroupIdPost(clientId: string, groupId: string, chatParams: ChatParams, deviceId?: string, customerId?: string, options?: any): AxiosPromise<TalkResponseMessage> {
+        chatApiV1ChatsClientIdGroupIdPost(clientId: string, groupId: string, chatParams: ChatParams, deviceId?: string, customerId?: string, options?: any): AxiosPromise<any> {
             return localVarFp.chatApiV1ChatsClientIdGroupIdPost(clientId, groupId, chatParams, deviceId, customerId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -464,7 +490,7 @@ export const ChatsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        explainApiV1ChatsClientIdGroupIdExplainProductPost(clientId: string, groupId: string, explainParams: ExplainParams, deviceId?: string, customerId?: string, options?: any): AxiosPromise<TalkResponseMessage> {
+        explainApiV1ChatsClientIdGroupIdExplainProductPost(clientId: string, groupId: string, explainParams: ExplainParams, deviceId?: string, customerId?: string, options?: any): AxiosPromise<any> {
             return localVarFp.explainApiV1ChatsClientIdGroupIdExplainProductPost(clientId, groupId, explainParams, deviceId, customerId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -547,12 +573,42 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
-         * @summary Get
+         * @summary Get Agent
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAgentGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get Search
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSearchSearchGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/search`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -587,12 +643,22 @@ export const DefaultApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Get
+         * @summary Get Agent
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getGet(options);
+        async getAgentGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAgentGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get Search
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSearchSearchGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSearchSearchGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -607,12 +673,21 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
-         * @summary Get
+         * @summary Get Agent
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGet(options?: any): AxiosPromise<any> {
-            return localVarFp.getGet(options).then((request) => request(axios, basePath));
+        getAgentGet(options?: any): AxiosPromise<any> {
+            return localVarFp.getAgentGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get Search
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSearchSearchGet(options?: any): AxiosPromise<any> {
+            return localVarFp.getSearchSearchGet(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -626,13 +701,154 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 export class DefaultApi extends BaseAPI {
     /**
      * 
-     * @summary Get
+     * @summary Get Agent
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getGet(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getGet(options).then((request) => request(this.axios, this.basePath));
+    public getAgentGet(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getAgentGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get Search
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getSearchSearchGet(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getSearchSearchGet(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * SearchApi - axios parameter creator
+ * @export
+ */
+export const SearchApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Search
+         * @param {string} clientId 
+         * @param {SearchParams} searchParams 
+         * @param {string} [deviceId] 
+         * @param {string} [customerId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchApiV1SearchClientIdPost: async (clientId: string, searchParams: SearchParams, deviceId?: string, customerId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'clientId' is not null or undefined
+            assertParamExists('searchApiV1SearchClientIdPost', 'clientId', clientId)
+            // verify required parameter 'searchParams' is not null or undefined
+            assertParamExists('searchApiV1SearchClientIdPost', 'searchParams', searchParams)
+            const localVarPath = `/api/v1/search/{client_id}`
+                .replace(`{${"client_id"}}`, encodeURIComponent(String(clientId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (deviceId !== undefined) {
+                localVarQueryParameter['device_id'] = deviceId;
+            }
+
+            if (customerId !== undefined) {
+                localVarQueryParameter['customer_id'] = customerId;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(searchParams, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SearchApi - functional programming interface
+ * @export
+ */
+export const SearchApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SearchApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Search
+         * @param {string} clientId 
+         * @param {SearchParams} searchParams 
+         * @param {string} [deviceId] 
+         * @param {string} [customerId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchApiV1SearchClientIdPost(clientId: string, searchParams: SearchParams, deviceId?: string, customerId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchApiV1SearchClientIdPost(clientId, searchParams, deviceId, customerId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * SearchApi - factory interface
+ * @export
+ */
+export const SearchApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SearchApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Search
+         * @param {string} clientId 
+         * @param {SearchParams} searchParams 
+         * @param {string} [deviceId] 
+         * @param {string} [customerId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchApiV1SearchClientIdPost(clientId: string, searchParams: SearchParams, deviceId?: string, customerId?: string, options?: any): AxiosPromise<SearchResponse> {
+            return localVarFp.searchApiV1SearchClientIdPost(clientId, searchParams, deviceId, customerId, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SearchApi - object-oriented interface
+ * @export
+ * @class SearchApi
+ * @extends {BaseAPI}
+ */
+export class SearchApi extends BaseAPI {
+    /**
+     * 
+     * @summary Search
+     * @param {string} clientId 
+     * @param {SearchParams} searchParams 
+     * @param {string} [deviceId] 
+     * @param {string} [customerId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SearchApi
+     */
+    public searchApiV1SearchClientIdPost(clientId: string, searchParams: SearchParams, deviceId?: string, customerId?: string, options?: AxiosRequestConfig) {
+        return SearchApiFp(this.configuration).searchApiV1SearchClientIdPost(clientId, searchParams, deviceId, customerId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

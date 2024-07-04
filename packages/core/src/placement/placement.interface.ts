@@ -19,43 +19,43 @@ export type AdcioPlacementFetchPlacementsParams = {
 export type AdcioPlacementFetchPlacementsResponse =
   FetchActivePlacementsResponseDto[];
 
-export type AdcioPlacementCreateRecommendationProductsParams = Pick<
+export type AdcioPlacementCreateRecommendationProductsParams = Omit<
   ProductSuggestionRequestDto,
-  | "placementId"
-  | "placementPositionX"
-  | "placementPositionY"
-  | "categoryId"
-  | "excludingProductIds"
-  | "filters"
+  | "clientId"
+  | "sessionId"
+  | "deviceId"
+  | "sdkVersion"
+  | "fromAgent"
+  | "userAgent"
 >;
 
 export type AdcioPlacementCreateRecommendationProductsResponse =
   ProductSuggestionResponseDto;
 
-export type AdcioPlacementCreateRecommendationBannersParams = Pick<
+export type AdcioPlacementCreateRecommendationBannersParams = Omit<
   BannerSuggestionRequestDto,
-  "placementId" | "placementPositionX" | "placementPositionY"
+  "sessionId" | "deviceId" | "sdkVersion" | "fromAgent" | "userAgent"
 >;
 
 export type AdcioPlacementCreateRecommendationBannersResponse =
   BannerSuggestionResponseDto;
 
-export type AdcioPlacementCreateAdvertisementProductsParams = Pick<
+export type AdcioPlacementCreateAdvertisementProductsParams = Omit<
   ProductSuggestionRequestDto,
-  | "placementId"
-  | "placementPositionX"
-  | "placementPositionY"
-  | "categoryId"
-  | "excludingProductIds"
-  | "filters"
+  | "clientId"
+  | "sessionId"
+  | "deviceId"
+  | "sdkVersion"
+  | "fromAgent"
+  | "userAgent"
 >;
 
 export type AdcioPlacementCreateAdvertisementProductsResponse =
   ProductSuggestionResponseDto;
 
-export type AdcioPlacementCreateAdvertisementBannersParams = Pick<
+export type AdcioPlacementCreateAdvertisementBannersParams = Omit<
   BannerSuggestionRequestDto,
-  "placementId" | "placementPositionX" | "placementPositionY"
+  "sessionId" | "deviceId" | "sdkVersion" | "fromAgent" | "userAgent"
 >;
 
 export type AdcioPlacementCreateAdvertisementBannersResponse =

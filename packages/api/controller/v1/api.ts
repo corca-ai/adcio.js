@@ -50,9 +50,9 @@ export interface AccessToken {
 }
 
 export const AccessTokenClientTypeEnum = {
+    Admin: 'ADMIN',
     Store: 'STORE',
-    Seller: 'SELLER',
-    Admin: 'ADMIN'
+    Seller: 'SELLER'
 } as const;
 
 export type AccessTokenClientTypeEnum = typeof AccessTokenClientTypeEnum[keyof typeof AccessTokenClientTypeEnum];
@@ -529,10 +529,89 @@ export type AdGroupWithSellerAndCampaignBudgetTypeEnum = typeof AdGroupWithSelle
 export interface AdMetric {
     /**
      * 
-     * @type {object}
+     * @type {AmountMetric}
      * @memberof AdMetric
      */
-    'average': object;
+    'creditUsage': AmountMetric;
+    /**
+     * 
+     * @type {AmountMetric}
+     * @memberof AdMetric
+     */
+    'revenue': AmountMetric;
+    /**
+     * 
+     * @type {FigureMetric}
+     * @memberof AdMetric
+     */
+    'roas': FigureMetric;
+    /**
+     * 
+     * @type {CountMetric}
+     * @memberof AdMetric
+     */
+    'impression': CountMetric;
+    /**
+     * 
+     * @type {CountAndFigureMetric}
+     * @memberof AdMetric
+     */
+    'click': CountAndFigureMetric;
+    /**
+     * 
+     * @type {CountAndFigureMetric}
+     * @memberof AdMetric
+     */
+    'purchase': CountAndFigureMetric;
+    /**
+     * 
+     * @type {AdMetricAverage}
+     * @memberof AdMetric
+     */
+    'average': AdMetricAverage;
+}
+/**
+ * 
+ * @export
+ * @interface AdMetricAverage
+ */
+export interface AdMetricAverage {
+    /**
+     * 
+     * @type {AmountMetric}
+     * @memberof AdMetricAverage
+     */
+    'creditUsage': AmountMetric;
+    /**
+     * 
+     * @type {AmountMetric}
+     * @memberof AdMetricAverage
+     */
+    'revenue': AmountMetric;
+    /**
+     * 
+     * @type {FigureMetric}
+     * @memberof AdMetricAverage
+     */
+    'roas': FigureMetric;
+    /**
+     * 
+     * @type {CountMetric}
+     * @memberof AdMetricAverage
+     */
+    'impression': CountMetric;
+    /**
+     * 
+     * @type {CountAndFigureMetric}
+     * @memberof AdMetricAverage
+     */
+    'click': CountAndFigureMetric;
+    /**
+     * 
+     * @type {CountAndFigureMetric}
+     * @memberof AdMetricAverage
+     */
+    'purchase': CountAndFigureMetric;
 }
 /**
  * 
@@ -571,6 +650,19 @@ export interface AdminControllerFetchPlacements200Response {
      * @memberof AdminControllerFetchPlacements200Response
      */
     'items'?: Array<Placement>;
+}
+/**
+ * 
+ * @export
+ * @interface AmountMetric
+ */
+export interface AmountMetric {
+    /**
+     * 
+     * @type {number}
+     * @memberof AmountMetric
+     */
+    'amount': number;
 }
 /**
  * 
@@ -873,6 +965,12 @@ export interface BannerSuggestionRequestDto {
      */
     'customerId'?: string;
     /**
+     * The version of the SDK
+     * @type {string}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'sdkVersion'?: string;
+    /**
      * Identifier for the placement which the suggestion will be placed.
      * @type {string}
      * @memberof BannerSuggestionRequestDto
@@ -902,6 +1000,12 @@ export interface BannerSuggestionRequestDto {
      * @memberof BannerSuggestionRequestDto
      */
     'targets'?: Array<SuggestionRequestTarget>;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'userAgent'?: string;
 }
 /**
  * 
@@ -1150,6 +1254,49 @@ export const BannerWithCreativeDtoTypeEnum = {
 
 export type BannerWithCreativeDtoTypeEnum = typeof BannerWithCreativeDtoTypeEnum[keyof typeof BannerWithCreativeDtoTypeEnum];
 
+/**
+ * 
+ * @export
+ * @interface BaseAdMetric
+ */
+export interface BaseAdMetric {
+    /**
+     * 
+     * @type {AmountMetric}
+     * @memberof BaseAdMetric
+     */
+    'creditUsage': AmountMetric;
+    /**
+     * 
+     * @type {AmountMetric}
+     * @memberof BaseAdMetric
+     */
+    'revenue': AmountMetric;
+    /**
+     * 
+     * @type {FigureMetric}
+     * @memberof BaseAdMetric
+     */
+    'roas': FigureMetric;
+    /**
+     * 
+     * @type {CountMetric}
+     * @memberof BaseAdMetric
+     */
+    'impression': CountMetric;
+    /**
+     * 
+     * @type {CountAndFigureMetric}
+     * @memberof BaseAdMetric
+     */
+    'click': CountAndFigureMetric;
+    /**
+     * 
+     * @type {CountAndFigureMetric}
+     * @memberof BaseAdMetric
+     */
+    'purchase': CountAndFigureMetric;
+}
 /**
  * 
  * @export
@@ -1823,12 +1970,6 @@ export interface Client {
     'deletedAt': string | null;
     /**
      * 
-     * @type {Array<AdGroupTargetKey>}
-     * @memberof Client
-     */
-    'adGroupTargetKeys': Array<AdGroupTargetKey>;
-    /**
-     * 
      * @type {string}
      * @memberof Client
      */
@@ -1851,24 +1992,6 @@ export interface Client {
      * @memberof Client
      */
     'isSeller': boolean;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof Client
-     */
-    'creditHistoriesAsStore': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof Client
-     */
-    'creditHistoriesAsSeller': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditDecreaseRequest>}
-     * @memberof Client
-     */
-    'creditDecreaseRequests': Array<CreditDecreaseRequest>;
     /**
      * 
      * @type {string}
@@ -2007,12 +2130,6 @@ export interface ClientWithBusinessLicenseDto {
     'deletedAt': string | null;
     /**
      * 
-     * @type {Array<AdGroupTargetKey>}
-     * @memberof ClientWithBusinessLicenseDto
-     */
-    'adGroupTargetKeys': Array<AdGroupTargetKey>;
-    /**
-     * 
      * @type {string}
      * @memberof ClientWithBusinessLicenseDto
      */
@@ -2035,24 +2152,6 @@ export interface ClientWithBusinessLicenseDto {
      * @memberof ClientWithBusinessLicenseDto
      */
     'isSeller': boolean;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof ClientWithBusinessLicenseDto
-     */
-    'creditHistoriesAsStore': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof ClientWithBusinessLicenseDto
-     */
-    'creditHistoriesAsSeller': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditDecreaseRequest>}
-     * @memberof ClientWithBusinessLicenseDto
-     */
-    'creditDecreaseRequests': Array<CreditDecreaseRequest>;
     /**
      * 
      * @type {string}
@@ -2498,6 +2597,25 @@ export interface Count {
 /**
  * 
  * @export
+ * @interface CountAndFigureMetric
+ */
+export interface CountAndFigureMetric {
+    /**
+     * 
+     * @type {number}
+     * @memberof CountAndFigureMetric
+     */
+    'count': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CountAndFigureMetric
+     */
+    'figure': number;
+}
+/**
+ * 
+ * @export
  * @interface CountCost
  */
 export interface CountCost {
@@ -2542,17 +2660,30 @@ export interface CountCostAmount {
 /**
  * 
  * @export
+ * @interface CountMetric
+ */
+export interface CountMetric {
+    /**
+     * 
+     * @type {number}
+     * @memberof CountMetric
+     */
+    'count': number;
+}
+/**
+ * 
+ * @export
  * @interface CreateAdGroupDataDto
  */
 export interface CreateAdGroupDataDto {
     /**
-     * 기한이 있는 캠페인의 경우 일 예산을 저장하고, 기한이 없는 캠페인의 경우 하루 최대 예산을 저장
+     * 기한이 있는 광고 그룹의 경우 일 예산을 저장하고, 기한이 없는 광고 그룹의 경우 하루 최대 예산을 저장
      * @type {number}
      * @memberof CreateAdGroupDataDto
      */
     'maxBudgetPerDay'?: number;
     /**
-     * 기한이 있는 캠페인에 대해 총 예산을 저장
+     * 기한이 있는 광고 그룹에 대해 총 예산을 저장
      * @type {number}
      * @memberof CreateAdGroupDataDto
      */
@@ -2626,13 +2757,13 @@ export type CreateAdGroupDataDtoTypeEnum = typeof CreateAdGroupDataDtoTypeEnum[k
  */
 export interface CreateAdGroupDto {
     /**
-     * 기한이 있는 캠페인의 경우 일 예산을 저장하고, 기한이 없는 캠페인의 경우 하루 최대 예산을 저장
+     * 기한이 있는 광고 그룹의 경우 일 예산을 저장하고, 기한이 없는 광고 그룹의 경우 하루 최대 예산을 저장
      * @type {number}
      * @memberof CreateAdGroupDto
      */
     'maxBudgetPerDay'?: number;
     /**
-     * 기한이 있는 캠페인에 대해 총 예산을 저장
+     * 기한이 있는 광고 그룹에 대해 총 예산을 저장
      * @type {number}
      * @memberof CreateAdGroupDto
      */
@@ -3803,12 +3934,6 @@ export interface CreateSellerResponseDto {
     'deletedAt': string | null;
     /**
      * 
-     * @type {Array<AdGroupTargetKey>}
-     * @memberof CreateSellerResponseDto
-     */
-    'adGroupTargetKeys': Array<AdGroupTargetKey>;
-    /**
-     * 
      * @type {string}
      * @memberof CreateSellerResponseDto
      */
@@ -3831,24 +3956,6 @@ export interface CreateSellerResponseDto {
      * @memberof CreateSellerResponseDto
      */
     'isSeller': boolean;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof CreateSellerResponseDto
-     */
-    'creditHistoriesAsStore': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof CreateSellerResponseDto
-     */
-    'creditHistoriesAsSeller': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditDecreaseRequest>}
-     * @memberof CreateSellerResponseDto
-     */
-    'creditDecreaseRequests': Array<CreditDecreaseRequest>;
     /**
      * 
      * @type {string}
@@ -4383,6 +4490,44 @@ export interface Credit {
 /**
  * 
  * @export
+ * @interface CreditControllerFetchCreditHistory200Response
+ */
+export interface CreditControllerFetchCreditHistory200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreditControllerFetchCreditHistory200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<CreditHistory>}
+     * @memberof CreditControllerFetchCreditHistory200Response
+     */
+    'items'?: Array<CreditHistory>;
+}
+/**
+ * 
+ * @export
+ * @interface CreditControllerFetchManyMyDecreaseRequest200Response
+ */
+export interface CreditControllerFetchManyMyDecreaseRequest200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreditControllerFetchManyMyDecreaseRequest200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<CreditDecreaseRequest>}
+     * @memberof CreditControllerFetchManyMyDecreaseRequest200Response
+     */
+    'items'?: Array<CreditDecreaseRequest>;
+}
+/**
+ * 
+ * @export
  * @interface CreditControllerFetchManySellerCreditDecreaseRequest200Response
  */
 export interface CreditControllerFetchManySellerCreditDecreaseRequest200Response {
@@ -4497,6 +4642,12 @@ export interface CreditDecreaseRequest {
      * @memberof CreditDecreaseRequest
      */
     'processedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditDecreaseRequest
+     */
+    'creditHistoryId': string | null;
 }
 
 export const CreditDecreaseRequestStatusEnum = {
@@ -4544,6 +4695,12 @@ export type CreditDecreaseRequestStatus = typeof CreditDecreaseRequestStatus[key
 export interface CreditHistory {
     /**
      * 
+     * @type {CreditType}
+     * @memberof CreditHistory
+     */
+    'creditType': CreditType;
+    /**
+     * 
      * @type {string}
      * @memberof CreditHistory
      */
@@ -4574,12 +4731,6 @@ export interface CreditHistory {
     'sellerId': string | null;
     /**
      * 
-     * @type {object}
-     * @memberof CreditHistory
-     */
-    'creditType': object;
-    /**
-     * 
      * @type {string}
      * @memberof CreditHistory
      */
@@ -4598,16 +4749,34 @@ export interface CreditHistory {
     'createdAt': string;
     /**
      * 
+     * @type {string}
+     * @memberof CreditHistory
+     */
+    'transactionId': string | null;
+    /**
+     * 
      * @type {Transaction}
      * @memberof CreditHistory
      */
     'transaction': Transaction | null;
     /**
      * 
+     * @type {string}
+     * @memberof CreditHistory
+     */
+    'creditDecreaseRequestId': string | null;
+    /**
+     * 
      * @type {CreditDecreaseRequest}
      * @memberof CreditHistory
      */
     'creditDecreaseRequest': CreditDecreaseRequest | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreditHistory
+     */
+    'comment': string | null;
 }
 
 export const CreditHistoryAdjustmentTypeEnum = {
@@ -4620,13 +4789,40 @@ export type CreditHistoryAdjustmentTypeEnum = typeof CreditHistoryAdjustmentType
 /**
  * 
  * @export
+ * @interface CreditInfoResponseDto
+ */
+export interface CreditInfoResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreditInfoResponseDto
+     */
+    'totalCredit': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreditInfoResponseDto
+     */
+    'freeCredit': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreditInfoResponseDto
+     */
+    'paidCredit': number;
+}
+/**
+ * 
+ * @export
  * @enum {string}
  */
 
 export const CreditType = {
     SellerSelfPaid: 'SELLER_SELF_PAID',
     StorePaid: 'STORE_PAID',
-    Free: 'FREE'
+    AdminAdjustPaid: 'ADMIN_ADJUST_PAID',
+    Free: 'FREE',
+    AdminAdjustFree: 'ADMIN_ADJUST_FREE'
 } as const;
 
 export type CreditType = typeof CreditType[keyof typeof CreditType];
@@ -4774,6 +4970,133 @@ export interface DailyMetric {
 /**
  * 
  * @export
+ * @interface DashboardAdGroup
+ */
+export interface DashboardAdGroup {
+    /**
+     * 
+     * @type {BaseAdMetric}
+     * @memberof DashboardAdGroup
+     */
+    'metric': BaseAdMetric;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardAdGroup
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardAdGroup
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardAdGroup
+     */
+    'startsAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardAdGroup
+     */
+    'endsAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardAdGroup
+     */
+    'budgetType': DashboardAdGroupBudgetTypeEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardAdGroup
+     */
+    'maxBudgetPerDay': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardAdGroup
+     */
+    'totalBudgetInPeriod': number | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DashboardAdGroup
+     */
+    'activated': boolean;
+}
+
+export const DashboardAdGroupBudgetTypeEnum = {
+    DailyBudget: 'DAILY_BUDGET',
+    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
+    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
+} as const;
+
+export type DashboardAdGroupBudgetTypeEnum = typeof DashboardAdGroupBudgetTypeEnum[keyof typeof DashboardAdGroupBudgetTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface DashboardAdset
+ */
+export interface DashboardAdset {
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardAdset
+     */
+    'adGroupId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardAdset
+     */
+    'adGroupTitle': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardAdset
+     */
+    'adsetType': DashboardAdsetAdsetTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardAdset
+     */
+    'adsetId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardAdset
+     */
+    'adsetName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DashboardAdset
+     */
+    'adsetMediaUrl': string;
+    /**
+     * 
+     * @type {BaseAdMetric}
+     * @memberof DashboardAdset
+     */
+    'metric': BaseAdMetric;
+}
+
+export const DashboardAdsetAdsetTypeEnum = {
+    Grid: 'GRID',
+    Banner: 'BANNER'
+} as const;
+
+export type DashboardAdsetAdsetTypeEnum = typeof DashboardAdsetAdsetTypeEnum[keyof typeof DashboardAdsetAdsetTypeEnum];
+
+/**
+ * 
+ * @export
  * @interface DashboardBanner
  */
 export interface DashboardBanner {
@@ -4852,6 +5175,25 @@ export interface DashboardControllerFetchListOnProductDashboard200Response {
      * @memberof DashboardControllerFetchListOnProductDashboard200Response
      */
     'items'?: Array<DashboardProduct>;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardControllerFetchListOnSellerAdGroupDashboard200Response
+ */
+export interface DashboardControllerFetchListOnSellerAdGroupDashboard200Response {
+    /**
+     * 
+     * @type {number}
+     * @memberof DashboardControllerFetchListOnSellerAdGroupDashboard200Response
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<DashboardAdGroup>}
+     * @memberof DashboardControllerFetchListOnSellerAdGroupDashboard200Response
+     */
+    'items'?: Array<DashboardAdGroup>;
 }
 /**
  * 
@@ -4985,6 +5327,12 @@ export interface FetchAdGroupBudgetResponseDto {
      * @memberof FetchAdGroupBudgetResponseDto
      */
     'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchAdGroupBudgetResponseDto
+     */
+    'sellerId': string;
     /**
      * 
      * @type {number}
@@ -5375,6 +5723,19 @@ export interface FetchAdGroupTitleResponseDto {
      * @memberof FetchAdGroupTitleResponseDto
      */
     'title': string;
+}
+/**
+ * 
+ * @export
+ * @interface FetchAdsetEfficienciesOnSellerAdGroupDashboardResponseDto
+ */
+export interface FetchAdsetEfficienciesOnSellerAdGroupDashboardResponseDto {
+    /**
+     * 
+     * @type {Array<DashboardAdset>}
+     * @memberof FetchAdsetEfficienciesOnSellerAdGroupDashboardResponseDto
+     */
+    'adsets': Array<DashboardAdset>;
 }
 /**
  * 
@@ -5960,12 +6321,6 @@ export interface FetchClientAdminResponseDto {
     'deletedAt': string | null;
     /**
      * 
-     * @type {Array<AdGroupTargetKey>}
-     * @memberof FetchClientAdminResponseDto
-     */
-    'adGroupTargetKeys': Array<AdGroupTargetKey>;
-    /**
-     * 
      * @type {string}
      * @memberof FetchClientAdminResponseDto
      */
@@ -5988,24 +6343,6 @@ export interface FetchClientAdminResponseDto {
      * @memberof FetchClientAdminResponseDto
      */
     'isSeller': boolean;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof FetchClientAdminResponseDto
-     */
-    'creditHistoriesAsStore': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof FetchClientAdminResponseDto
-     */
-    'creditHistoriesAsSeller': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditDecreaseRequest>}
-     * @memberof FetchClientAdminResponseDto
-     */
-    'creditDecreaseRequests': Array<CreditDecreaseRequest>;
     /**
      * 
      * @type {string}
@@ -6246,12 +6583,6 @@ export interface FetchClientResponseDto {
     'deletedAt': string | null;
     /**
      * 
-     * @type {Array<AdGroupTargetKey>}
-     * @memberof FetchClientResponseDto
-     */
-    'adGroupTargetKeys': Array<AdGroupTargetKey>;
-    /**
-     * 
      * @type {string}
      * @memberof FetchClientResponseDto
      */
@@ -6274,24 +6605,6 @@ export interface FetchClientResponseDto {
      * @memberof FetchClientResponseDto
      */
     'isSeller': boolean;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof FetchClientResponseDto
-     */
-    'creditHistoriesAsStore': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof FetchClientResponseDto
-     */
-    'creditHistoriesAsSeller': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditDecreaseRequest>}
-     * @memberof FetchClientResponseDto
-     */
-    'creditDecreaseRequests': Array<CreditDecreaseRequest>;
     /**
      * 
      * @type {string}
@@ -6991,6 +7304,12 @@ export interface FetchManySellerCreditDecreaseRequestResponseDto {
      * @memberof FetchManySellerCreditDecreaseRequestResponseDto
      */
     'processedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchManySellerCreditDecreaseRequestResponseDto
+     */
+    'creditHistoryId': string | null;
 }
 
 export const FetchManySellerCreditDecreaseRequestResponseDtoStatusEnum = {
@@ -7094,12 +7413,6 @@ export interface FetchManySellersResponseDto {
     'deletedAt': string | null;
     /**
      * 
-     * @type {Array<AdGroupTargetKey>}
-     * @memberof FetchManySellersResponseDto
-     */
-    'adGroupTargetKeys': Array<AdGroupTargetKey>;
-    /**
-     * 
      * @type {string}
      * @memberof FetchManySellersResponseDto
      */
@@ -7122,24 +7435,6 @@ export interface FetchManySellersResponseDto {
      * @memberof FetchManySellersResponseDto
      */
     'isSeller': boolean;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof FetchManySellersResponseDto
-     */
-    'creditHistoriesAsStore': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof FetchManySellersResponseDto
-     */
-    'creditHistoriesAsSeller': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditDecreaseRequest>}
-     * @memberof FetchManySellersResponseDto
-     */
-    'creditDecreaseRequests': Array<CreditDecreaseRequest>;
     /**
      * 
      * @type {string}
@@ -7782,6 +8077,12 @@ export interface FetchProductResponseDto {
 export interface FetchSellerCreditUpdateHistoryResponseDto {
     /**
      * 
+     * @type {CreditType}
+     * @memberof FetchSellerCreditUpdateHistoryResponseDto
+     */
+    'creditType': CreditType;
+    /**
+     * 
      * @type {string}
      * @memberof FetchSellerCreditUpdateHistoryResponseDto
      */
@@ -7800,12 +8101,6 @@ export interface FetchSellerCreditUpdateHistoryResponseDto {
     'sellerId': string | null;
     /**
      * 
-     * @type {object}
-     * @memberof FetchSellerCreditUpdateHistoryResponseDto
-     */
-    'creditType': object;
-    /**
-     * 
      * @type {string}
      * @memberof FetchSellerCreditUpdateHistoryResponseDto
      */
@@ -7822,6 +8117,24 @@ export interface FetchSellerCreditUpdateHistoryResponseDto {
      * @memberof FetchSellerCreditUpdateHistoryResponseDto
      */
     'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerCreditUpdateHistoryResponseDto
+     */
+    'transactionId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerCreditUpdateHistoryResponseDto
+     */
+    'creditDecreaseRequestId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FetchSellerCreditUpdateHistoryResponseDto
+     */
+    'comment': string | null;
 }
 
 export const FetchSellerCreditUpdateHistoryResponseDtoAdjustmentTypeEnum = {
@@ -7893,12 +8206,6 @@ export interface FetchSellerResponseDto {
     'deletedAt': string | null;
     /**
      * 
-     * @type {Array<AdGroupTargetKey>}
-     * @memberof FetchSellerResponseDto
-     */
-    'adGroupTargetKeys': Array<AdGroupTargetKey>;
-    /**
-     * 
      * @type {string}
      * @memberof FetchSellerResponseDto
      */
@@ -7921,24 +8228,6 @@ export interface FetchSellerResponseDto {
      * @memberof FetchSellerResponseDto
      */
     'isSeller': boolean;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof FetchSellerResponseDto
-     */
-    'creditHistoriesAsStore': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditHistory>}
-     * @memberof FetchSellerResponseDto
-     */
-    'creditHistoriesAsSeller': Array<CreditHistory>;
-    /**
-     * 
-     * @type {Array<CreditDecreaseRequest>}
-     * @memberof FetchSellerResponseDto
-     */
-    'creditDecreaseRequests': Array<CreditDecreaseRequest>;
     /**
      * 
      * @type {string}
@@ -8278,6 +8567,19 @@ export interface Figure {
 /**
  * 
  * @export
+ * @interface FigureMetric
+ */
+export interface FigureMetric {
+    /**
+     * 
+     * @type {number}
+     * @memberof FigureMetric
+     */
+    'figure': number;
+}
+/**
+ * 
+ * @export
  * @interface GenerateUploadLinkResponseDto
  */
 export interface GenerateUploadLinkResponseDto {
@@ -8315,9 +8617,9 @@ export interface GetMeResponseDto {
 }
 
 export const GetMeResponseDtoClientTypeEnum = {
+    Admin: 'ADMIN',
     Store: 'STORE',
-    Seller: 'SELLER',
-    Admin: 'ADMIN'
+    Seller: 'SELLER'
 } as const;
 
 export type GetMeResponseDtoClientTypeEnum = typeof GetMeResponseDtoClientTypeEnum[keyof typeof GetMeResponseDtoClientTypeEnum];
@@ -9756,6 +10058,12 @@ export interface ProductSuggestionRequestDto {
      */
     'customerId'?: string;
     /**
+     * The version of the SDK
+     * @type {string}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'sdkVersion'?: string;
+    /**
      * Identifier for the placement which the suggestion will be placed.
      * @type {string}
      * @memberof ProductSuggestionRequestDto
@@ -9792,6 +10100,12 @@ export interface ProductSuggestionRequestDto {
      */
     'excludingProductIds'?: Array<string>;
     /**
+     * Product IDs(on store) that support the fixed baseline suggestion.
+     * @type {Array<string>}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'baselineProductIds'?: Array<string>;
+    /**
      * The category id(on store) for filtering adsets.
      * @type {string}
      * @memberof ProductSuggestionRequestDto
@@ -9809,6 +10123,12 @@ export interface ProductSuggestionRequestDto {
      * @memberof ProductSuggestionRequestDto
      */
     'targets'?: Array<SuggestionRequestTarget>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'userAgent'?: string;
 }
 /**
  * 
@@ -11267,6 +11587,42 @@ export interface SystemSetting {
 export interface TimeSeriesAdMetric {
     /**
      * 
+     * @type {AmountMetric}
+     * @memberof TimeSeriesAdMetric
+     */
+    'creditUsage': AmountMetric;
+    /**
+     * 
+     * @type {AmountMetric}
+     * @memberof TimeSeriesAdMetric
+     */
+    'revenue': AmountMetric;
+    /**
+     * 
+     * @type {FigureMetric}
+     * @memberof TimeSeriesAdMetric
+     */
+    'roas': FigureMetric;
+    /**
+     * 
+     * @type {CountMetric}
+     * @memberof TimeSeriesAdMetric
+     */
+    'impression': CountMetric;
+    /**
+     * 
+     * @type {CountAndFigureMetric}
+     * @memberof TimeSeriesAdMetric
+     */
+    'click': CountAndFigureMetric;
+    /**
+     * 
+     * @type {CountAndFigureMetric}
+     * @memberof TimeSeriesAdMetric
+     */
+    'purchase': CountAndFigureMetric;
+    /**
+     * 
      * @type {string}
      * @memberof TimeSeriesAdMetric
      */
@@ -11628,13 +11984,13 @@ export type TutorialRequestDtoCategoryEnum = typeof TutorialRequestDtoCategoryEn
  */
 export interface UpdateAdGroupDto {
     /**
-     * 기한이 있는 캠페인의 경우 일 예산을 저장하고, 기한이 없는 캠페인의 경우 하루 최대 예산을 저장
+     * 기한이 있는 광고 그룹의 경우 일 예산을 저장하고, 기한이 없는 광고 그룹의 경우 하루 최대 예산을 저장
      * @type {number}
      * @memberof UpdateAdGroupDto
      */
     'maxBudgetPerDay'?: number;
     /**
-     * 기한이 있는 캠페인에 대해 총 예산을 저장
+     * 기한이 있는 광고 그룹에 대해 총 예산을 저장
      * @type {number}
      * @memberof UpdateAdGroupDto
      */
@@ -13132,12 +13488,13 @@ export const AdGroupApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @param {string} id 
+         * @param {Array<string>} [orderBy] AdGroupProductSortOption
          * @param {number} [limit] 
          * @param {number} [offset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adGroupControllerFetchAdGroupProducts: async (id: string, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        adGroupControllerFetchAdGroupProducts: async (id: string, orderBy?: Array<string>, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('adGroupControllerFetchAdGroupProducts', 'id', id)
             const localVarPath = `/ad-group/{id}/products`
@@ -13156,6 +13513,10 @@ export const AdGroupApiAxiosParamCreator = function (configuration?: Configurati
             // authentication accessToken required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (orderBy) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
@@ -13578,13 +13939,14 @@ export const AdGroupApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
+         * @param {Array<string>} [orderBy] AdGroupProductSortOption
          * @param {number} [limit] 
          * @param {number} [offset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adGroupControllerFetchAdGroupProducts(id: string, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdGroupControllerFetchAdGroupProducts200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupControllerFetchAdGroupProducts(id, limit, offset, options);
+        async adGroupControllerFetchAdGroupProducts(id: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdGroupControllerFetchAdGroupProducts200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adGroupControllerFetchAdGroupProducts(id, orderBy, limit, offset, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -13714,13 +14076,14 @@ export const AdGroupApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @param {string} id 
+         * @param {Array<string>} [orderBy] AdGroupProductSortOption
          * @param {number} [limit] 
          * @param {number} [offset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adGroupControllerFetchAdGroupProducts(id: string, limit?: number, offset?: number, options?: any): AxiosPromise<AdGroupControllerFetchAdGroupProducts200Response> {
-            return localVarFp.adGroupControllerFetchAdGroupProducts(id, limit, offset, options).then((request) => request(axios, basePath));
+        adGroupControllerFetchAdGroupProducts(id: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: any): AxiosPromise<AdGroupControllerFetchAdGroupProducts200Response> {
+            return localVarFp.adGroupControllerFetchAdGroupProducts(id, orderBy, limit, offset, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -13844,14 +14207,15 @@ export class AdGroupApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
+     * @param {Array<string>} [orderBy] AdGroupProductSortOption
      * @param {number} [limit] 
      * @param {number} [offset] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AdGroupApi
      */
-    public adGroupControllerFetchAdGroupProducts(id: string, limit?: number, offset?: number, options?: AxiosRequestConfig) {
-        return AdGroupApiFp(this.configuration).adGroupControllerFetchAdGroupProducts(id, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    public adGroupControllerFetchAdGroupProducts(id: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return AdGroupApiFp(this.configuration).adGroupControllerFetchAdGroupProducts(id, orderBy, limit, offset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -15085,14 +15449,14 @@ export const BootstrapApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @param {string} clientId Client ID.
-         * @param {string} [frontApi] 
+         * @param {string} [clientApi] 
          * @param {string} [page] 
          * @param {string} [placements] 
          * @param {boolean} [disableAgent] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bootstrapControllerBootstrap: async (clientId: string, frontApi?: string, page?: string, placements?: string, disableAgent?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bootstrapControllerBootstrap: async (clientId: string, clientApi?: string, page?: string, placements?: string, disableAgent?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'clientId' is not null or undefined
             assertParamExists('bootstrapControllerBootstrap', 'clientId', clientId)
             const localVarPath = `/bootstrap`;
@@ -15111,8 +15475,8 @@ export const BootstrapApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['clientId'] = clientId;
             }
 
-            if (frontApi !== undefined) {
-                localVarQueryParameter['frontApi'] = frontApi;
+            if (clientApi !== undefined) {
+                localVarQueryParameter['clientApi'] = clientApi;
             }
 
             if (page !== undefined) {
@@ -15151,15 +15515,15 @@ export const BootstrapApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} clientId Client ID.
-         * @param {string} [frontApi] 
+         * @param {string} [clientApi] 
          * @param {string} [page] 
          * @param {string} [placements] 
          * @param {boolean} [disableAgent] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bootstrapControllerBootstrap(clientId: string, frontApi?: string, page?: string, placements?: string, disableAgent?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bootstrapControllerBootstrap(clientId, frontApi, page, placements, disableAgent, options);
+        async bootstrapControllerBootstrap(clientId: string, clientApi?: string, page?: string, placements?: string, disableAgent?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bootstrapControllerBootstrap(clientId, clientApi, page, placements, disableAgent, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -15175,15 +15539,15 @@ export const BootstrapApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @param {string} clientId Client ID.
-         * @param {string} [frontApi] 
+         * @param {string} [clientApi] 
          * @param {string} [page] 
          * @param {string} [placements] 
          * @param {boolean} [disableAgent] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bootstrapControllerBootstrap(clientId: string, frontApi?: string, page?: string, placements?: string, disableAgent?: boolean, options?: any): AxiosPromise<string> {
-            return localVarFp.bootstrapControllerBootstrap(clientId, frontApi, page, placements, disableAgent, options).then((request) => request(axios, basePath));
+        bootstrapControllerBootstrap(clientId: string, clientApi?: string, page?: string, placements?: string, disableAgent?: boolean, options?: any): AxiosPromise<string> {
+            return localVarFp.bootstrapControllerBootstrap(clientId, clientApi, page, placements, disableAgent, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -15198,7 +15562,7 @@ export class BootstrapApi extends BaseAPI {
     /**
      * 
      * @param {string} clientId Client ID.
-     * @param {string} [frontApi] 
+     * @param {string} [clientApi] 
      * @param {string} [page] 
      * @param {string} [placements] 
      * @param {boolean} [disableAgent] 
@@ -15206,8 +15570,8 @@ export class BootstrapApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BootstrapApi
      */
-    public bootstrapControllerBootstrap(clientId: string, frontApi?: string, page?: string, placements?: string, disableAgent?: boolean, options?: AxiosRequestConfig) {
-        return BootstrapApiFp(this.configuration).bootstrapControllerBootstrap(clientId, frontApi, page, placements, disableAgent, options).then((request) => request(this.axios, this.basePath));
+    public bootstrapControllerBootstrap(clientId: string, clientApi?: string, page?: string, placements?: string, disableAgent?: boolean, options?: AxiosRequestConfig) {
+        return BootstrapApiFp(this.configuration).bootstrapControllerBootstrap(clientId, clientApi, page, placements, disableAgent, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -17329,6 +17693,199 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @param {string} decreaseRequestId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerDeleteSellerCreditDecreaseRequest: async (decreaseRequestId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'decreaseRequestId' is not null or undefined
+            assertParamExists('creditControllerDeleteSellerCreditDecreaseRequest', 'decreaseRequestId', decreaseRequestId)
+            const localVarPath = `/credits/decrease-requests/{decreaseRequestId}`
+                .replace(`{${"decreaseRequestId"}}`, encodeURIComponent(String(decreaseRequestId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {'INCREASE' | 'DECREASE'} adjustmentType 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {Array<string>} [orderBy] CreditHistorySortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchCreditHistory: async (adjustmentType: 'INCREASE' | 'DECREASE', startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'adjustmentType' is not null or undefined
+            assertParamExists('creditControllerFetchCreditHistory', 'adjustmentType', adjustmentType)
+            // verify required parameter 'startDate' is not null or undefined
+            assertParamExists('creditControllerFetchCreditHistory', 'startDate', startDate)
+            // verify required parameter 'endDate' is not null or undefined
+            assertParamExists('creditControllerFetchCreditHistory', 'endDate', endDate)
+            const localVarPath = `/credits/histories`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (orderBy) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (adjustmentType !== undefined) {
+                localVarQueryParameter['adjustmentType'] = adjustmentType;
+            }
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString() :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString() :
+                    endDate;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchCreditInfo: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/credits`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {Array<string>} [orderBy] DecreaseRequestSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchManyMyDecreaseRequest: async (startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'startDate' is not null or undefined
+            assertParamExists('creditControllerFetchManyMyDecreaseRequest', 'startDate', startDate)
+            // verify required parameter 'endDate' is not null or undefined
+            assertParamExists('creditControllerFetchManyMyDecreaseRequest', 'endDate', endDate)
+            const localVarPath = `/credits/sellers/decrease-requests`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (orderBy) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString() :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString() :
+                    endDate;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {CreditDecreaseRequestStatus} [status] 
          * @param {Array<string>} [orderBy] SellerCreditDecreaseRequestSortOption
          * @param {number} [limit] 
@@ -17834,6 +18391,54 @@ export const ClientApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} decreaseRequestId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creditControllerDeleteSellerCreditDecreaseRequest(decreaseRequestId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creditControllerDeleteSellerCreditDecreaseRequest(decreaseRequestId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {'INCREASE' | 'DECREASE'} adjustmentType 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {Array<string>} [orderBy] CreditHistorySortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creditControllerFetchCreditHistory(adjustmentType: 'INCREASE' | 'DECREASE', startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreditControllerFetchCreditHistory200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creditControllerFetchCreditHistory(adjustmentType, startDate, endDate, orderBy, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creditControllerFetchCreditInfo(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreditInfoResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creditControllerFetchCreditInfo(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {Array<string>} [orderBy] DecreaseRequestSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creditControllerFetchManyMyDecreaseRequest(startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreditControllerFetchManyMyDecreaseRequest200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creditControllerFetchManyMyDecreaseRequest(startDate, endDate, orderBy, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {CreditDecreaseRequestStatus} [status] 
          * @param {Array<string>} [orderBy] SellerCreditDecreaseRequestSortOption
          * @param {number} [limit] 
@@ -18097,6 +18702,50 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
          */
         creditControllerCreateSellerCreditDecreaseRequest(createSellerCreditDecreaseRequestDto: CreateSellerCreditDecreaseRequestDto, options?: any): AxiosPromise<CreditDecreaseRequest> {
             return localVarFp.creditControllerCreateSellerCreditDecreaseRequest(createSellerCreditDecreaseRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} decreaseRequestId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerDeleteSellerCreditDecreaseRequest(decreaseRequestId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.creditControllerDeleteSellerCreditDecreaseRequest(decreaseRequestId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {'INCREASE' | 'DECREASE'} adjustmentType 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {Array<string>} [orderBy] CreditHistorySortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchCreditHistory(adjustmentType: 'INCREASE' | 'DECREASE', startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: any): AxiosPromise<CreditControllerFetchCreditHistory200Response> {
+            return localVarFp.creditControllerFetchCreditHistory(adjustmentType, startDate, endDate, orderBy, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchCreditInfo(options?: any): AxiosPromise<CreditInfoResponseDto> {
+            return localVarFp.creditControllerFetchCreditInfo(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {Array<string>} [orderBy] DecreaseRequestSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creditControllerFetchManyMyDecreaseRequest(startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: any): AxiosPromise<CreditControllerFetchManyMyDecreaseRequest200Response> {
+            return localVarFp.creditControllerFetchManyMyDecreaseRequest(startDate, endDate, orderBy, limit, offset, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -18393,6 +19042,58 @@ export class ClientApi extends BaseAPI {
      */
     public creditControllerCreateSellerCreditDecreaseRequest(createSellerCreditDecreaseRequestDto: CreateSellerCreditDecreaseRequestDto, options?: AxiosRequestConfig) {
         return ClientApiFp(this.configuration).creditControllerCreateSellerCreditDecreaseRequest(createSellerCreditDecreaseRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} decreaseRequestId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public creditControllerDeleteSellerCreditDecreaseRequest(decreaseRequestId: string, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).creditControllerDeleteSellerCreditDecreaseRequest(decreaseRequestId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {'INCREASE' | 'DECREASE'} adjustmentType 
+     * @param {string} startDate 
+     * @param {string} endDate 
+     * @param {Array<string>} [orderBy] CreditHistorySortOption
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public creditControllerFetchCreditHistory(adjustmentType: 'INCREASE' | 'DECREASE', startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).creditControllerFetchCreditHistory(adjustmentType, startDate, endDate, orderBy, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public creditControllerFetchCreditInfo(options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).creditControllerFetchCreditInfo(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} startDate 
+     * @param {string} endDate 
+     * @param {Array<string>} [orderBy] DecreaseRequestSortOption
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public creditControllerFetchManyMyDecreaseRequest(startDate: string, endDate: string, orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return ClientApiFp(this.configuration).creditControllerFetchManyMyDecreaseRequest(startDate, endDate, orderBy, limit, offset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -19362,14 +20063,82 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @param {string} campaignId 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {Array<string>} [orderBy] AdGroupDashboardAdsetSortOption
+         * @param {Array<string>} [adGroupIds] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchAdsetEfficienciesOnSellerAdGroupDashboard: async (campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', orderBy?: Array<string>, adGroupIds?: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'campaignId' is not null or undefined
+            assertParamExists('dashboardControllerFetchAdsetEfficienciesOnSellerAdGroupDashboard', 'campaignId', campaignId)
+            // verify required parameter 'startDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchAdsetEfficienciesOnSellerAdGroupDashboard', 'startDate', startDate)
+            // verify required parameter 'endDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchAdsetEfficienciesOnSellerAdGroupDashboard', 'endDate', endDate)
+            // verify required parameter 'timezone' is not null or undefined
+            assertParamExists('dashboardControllerFetchAdsetEfficienciesOnSellerAdGroupDashboard', 'timezone', timezone)
+            const localVarPath = `/dashboard/campaigns/{campaignId}/ad-group-adset-efficiencies`
+                .replace(`{${"campaignId"}}`, encodeURIComponent(String(campaignId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (orderBy) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (adGroupIds) {
+                localVarQueryParameter['adGroupIds'] = adGroupIds;
+            }
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString() :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString() :
+                    endDate;
+            }
+
+            if (timezone !== undefined) {
+                localVarQueryParameter['timezone'] = timezone;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} id 
-         * @param {'STORE' | 'SELLER' | 'ADMIN'} requestClientType 
+         * @param {'ADMIN' | 'STORE' | 'SELLER'} requestClientType 
          * @param {string} from 
          * @param {string} to 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dashboardControllerFetchCampaign: async (id: string, requestClientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        dashboardControllerFetchCampaign: async (id: string, requestClientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('dashboardControllerFetchCampaign', 'id', id)
             // verify required parameter 'requestClientType' is not null or undefined
@@ -19463,14 +20232,14 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @param {'STORE' | 'SELLER' | 'ADMIN'} clientType 
+         * @param {'ADMIN' | 'STORE' | 'SELLER'} clientType 
          * @param {string} from 
          * @param {string} to 
          * @param {string} [sellerId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dashboardControllerFetchCampaignsGraph: async (clientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, sellerId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        dashboardControllerFetchCampaignsGraph: async (clientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, sellerId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'clientType' is not null or undefined
             assertParamExists('dashboardControllerFetchCampaignsGraph', 'clientType', clientType)
             // verify required parameter 'from' is not null or undefined
@@ -19686,6 +20455,79 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
                     (endDate as any).toISOString() :
                     endDate;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} campaignId 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {Array<string>} [orderBy] AdGroupDashboardSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchListOnSellerAdGroupDashboard: async (campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', orderBy?: Array<string>, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'campaignId' is not null or undefined
+            assertParamExists('dashboardControllerFetchListOnSellerAdGroupDashboard', 'campaignId', campaignId)
+            // verify required parameter 'startDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchListOnSellerAdGroupDashboard', 'startDate', startDate)
+            // verify required parameter 'endDate' is not null or undefined
+            assertParamExists('dashboardControllerFetchListOnSellerAdGroupDashboard', 'endDate', endDate)
+            // verify required parameter 'timezone' is not null or undefined
+            assertParamExists('dashboardControllerFetchListOnSellerAdGroupDashboard', 'timezone', timezone)
+            const localVarPath = `/dashboard/campaigns/{campaignId}/ad-groups`
+                .replace(`{${"campaignId"}}`, encodeURIComponent(String(campaignId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (orderBy) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString() :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString() :
+                    endDate;
+            }
+
+            if (timezone !== undefined) {
+                localVarQueryParameter['timezone'] = timezone;
             }
 
             if (limit !== undefined) {
@@ -19940,18 +20782,16 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @param {string} campaignId 
-         * @param {Array<string>} adGroupIds 
          * @param {string} startDate 
          * @param {string} endDate 
          * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {Array<string>} [adGroupIds] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dashboardControllerFetchMetricsOnSellerAdGroupDashboard: async (campaignId: string, adGroupIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        dashboardControllerFetchMetricsOnSellerAdGroupDashboard: async (campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', adGroupIds?: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'campaignId' is not null or undefined
             assertParamExists('dashboardControllerFetchMetricsOnSellerAdGroupDashboard', 'campaignId', campaignId)
-            // verify required parameter 'adGroupIds' is not null or undefined
-            assertParamExists('dashboardControllerFetchMetricsOnSellerAdGroupDashboard', 'adGroupIds', adGroupIds)
             // verify required parameter 'startDate' is not null or undefined
             assertParamExists('dashboardControllerFetchMetricsOnSellerAdGroupDashboard', 'startDate', startDate)
             // verify required parameter 'endDate' is not null or undefined
@@ -20005,13 +20845,13 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @param {string} id 
-         * @param {'STORE' | 'SELLER' | 'ADMIN'} requestClientType 
+         * @param {'ADMIN' | 'STORE' | 'SELLER'} requestClientType 
          * @param {string} from 
          * @param {string} to 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dashboardControllerFetchSeller: async (id: string, requestClientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        dashboardControllerFetchSeller: async (id: string, requestClientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('dashboardControllerFetchSeller', 'id', id)
             // verify required parameter 'requestClientType' is not null or undefined
@@ -20182,14 +21022,29 @@ export const DashboardApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} campaignId 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {Array<string>} [orderBy] AdGroupDashboardAdsetSortOption
+         * @param {Array<string>} [adGroupIds] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchAdsetEfficienciesOnSellerAdGroupDashboard(campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', orderBy?: Array<string>, adGroupIds?: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchAdsetEfficienciesOnSellerAdGroupDashboardResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchAdsetEfficienciesOnSellerAdGroupDashboard(campaignId, startDate, endDate, timezone, orderBy, adGroupIds, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {string} id 
-         * @param {'STORE' | 'SELLER' | 'ADMIN'} requestClientType 
+         * @param {'ADMIN' | 'STORE' | 'SELLER'} requestClientType 
          * @param {string} from 
          * @param {string} to 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async dashboardControllerFetchCampaign(id: string, requestClientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchDashboardCampaignResponseDto>> {
+        async dashboardControllerFetchCampaign(id: string, requestClientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchDashboardCampaignResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchCampaign(id, requestClientType, from, to, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -20207,14 +21062,14 @@ export const DashboardApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {'STORE' | 'SELLER' | 'ADMIN'} clientType 
+         * @param {'ADMIN' | 'STORE' | 'SELLER'} clientType 
          * @param {string} from 
          * @param {string} to 
          * @param {string} [sellerId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async dashboardControllerFetchCampaignsGraph(clientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, sellerId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchGraphResponseDto>> {
+        async dashboardControllerFetchCampaignsGraph(clientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, sellerId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchGraphResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchCampaignsGraph(clientType, from, to, sellerId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -20259,6 +21114,22 @@ export const DashboardApiFp = function(configuration?: Configuration) {
          */
         async dashboardControllerFetchListOnProductDashboard(placementIds: Array<string>, startDate: string, endDate: string, orderBy?: Array<string>, productIds?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DashboardControllerFetchListOnProductDashboard200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchListOnProductDashboard(placementIds, startDate, endDate, orderBy, productIds, limit, offset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} campaignId 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {Array<string>} [orderBy] AdGroupDashboardSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerFetchListOnSellerAdGroupDashboard(campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DashboardControllerFetchListOnSellerAdGroupDashboard200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchListOnSellerAdGroupDashboard(campaignId, startDate, endDate, timezone, orderBy, limit, offset, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -20318,27 +21189,27 @@ export const DashboardApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} campaignId 
-         * @param {Array<string>} adGroupIds 
          * @param {string} startDate 
          * @param {string} endDate 
          * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {Array<string>} [adGroupIds] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId: string, adGroupIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchMetricsOnSellerAdGroupDashboardResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId, adGroupIds, startDate, endDate, timezone, options);
+        async dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', adGroupIds?: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchMetricsOnSellerAdGroupDashboardResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId, startDate, endDate, timezone, adGroupIds, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} id 
-         * @param {'STORE' | 'SELLER' | 'ADMIN'} requestClientType 
+         * @param {'ADMIN' | 'STORE' | 'SELLER'} requestClientType 
          * @param {string} from 
          * @param {string} to 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async dashboardControllerFetchSeller(id: string, requestClientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchDashboardSellerResponseDto>> {
+        async dashboardControllerFetchSeller(id: string, requestClientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FetchDashboardSellerResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerFetchSeller(id, requestClientType, from, to, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -20402,14 +21273,28 @@ export const DashboardApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
+         * @param {string} campaignId 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {Array<string>} [orderBy] AdGroupDashboardAdsetSortOption
+         * @param {Array<string>} [adGroupIds] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchAdsetEfficienciesOnSellerAdGroupDashboard(campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', orderBy?: Array<string>, adGroupIds?: Array<string>, options?: any): AxiosPromise<FetchAdsetEfficienciesOnSellerAdGroupDashboardResponseDto> {
+            return localVarFp.dashboardControllerFetchAdsetEfficienciesOnSellerAdGroupDashboard(campaignId, startDate, endDate, timezone, orderBy, adGroupIds, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {string} id 
-         * @param {'STORE' | 'SELLER' | 'ADMIN'} requestClientType 
+         * @param {'ADMIN' | 'STORE' | 'SELLER'} requestClientType 
          * @param {string} from 
          * @param {string} to 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dashboardControllerFetchCampaign(id: string, requestClientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, options?: any): AxiosPromise<FetchDashboardCampaignResponseDto> {
+        dashboardControllerFetchCampaign(id: string, requestClientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, options?: any): AxiosPromise<FetchDashboardCampaignResponseDto> {
             return localVarFp.dashboardControllerFetchCampaign(id, requestClientType, from, to, options).then((request) => request(axios, basePath));
         },
         /**
@@ -20425,14 +21310,14 @@ export const DashboardApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @param {'STORE' | 'SELLER' | 'ADMIN'} clientType 
+         * @param {'ADMIN' | 'STORE' | 'SELLER'} clientType 
          * @param {string} from 
          * @param {string} to 
          * @param {string} [sellerId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dashboardControllerFetchCampaignsGraph(clientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, sellerId?: string, options?: any): AxiosPromise<FetchGraphResponseDto> {
+        dashboardControllerFetchCampaignsGraph(clientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, sellerId?: string, options?: any): AxiosPromise<FetchGraphResponseDto> {
             return localVarFp.dashboardControllerFetchCampaignsGraph(clientType, from, to, sellerId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -20474,6 +21359,21 @@ export const DashboardApiFactory = function (configuration?: Configuration, base
          */
         dashboardControllerFetchListOnProductDashboard(placementIds: Array<string>, startDate: string, endDate: string, orderBy?: Array<string>, productIds?: Array<string>, limit?: number, offset?: number, options?: any): AxiosPromise<DashboardControllerFetchListOnProductDashboard200Response> {
             return localVarFp.dashboardControllerFetchListOnProductDashboard(placementIds, startDate, endDate, orderBy, productIds, limit, offset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} campaignId 
+         * @param {string} startDate 
+         * @param {string} endDate 
+         * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {Array<string>} [orderBy] AdGroupDashboardSortOption
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerFetchListOnSellerAdGroupDashboard(campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', orderBy?: Array<string>, limit?: number, offset?: number, options?: any): AxiosPromise<DashboardControllerFetchListOnSellerAdGroupDashboard200Response> {
+            return localVarFp.dashboardControllerFetchListOnSellerAdGroupDashboard(campaignId, startDate, endDate, timezone, orderBy, limit, offset, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -20528,26 +21428,26 @@ export const DashboardApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @param {string} campaignId 
-         * @param {Array<string>} adGroupIds 
          * @param {string} startDate 
          * @param {string} endDate 
          * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+         * @param {Array<string>} [adGroupIds] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId: string, adGroupIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options?: any): AxiosPromise<FetchMetricsOnSellerAdGroupDashboardResponseDto> {
-            return localVarFp.dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId, adGroupIds, startDate, endDate, timezone, options).then((request) => request(axios, basePath));
+        dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', adGroupIds?: Array<string>, options?: any): AxiosPromise<FetchMetricsOnSellerAdGroupDashboardResponseDto> {
+            return localVarFp.dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId, startDate, endDate, timezone, adGroupIds, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
-         * @param {'STORE' | 'SELLER' | 'ADMIN'} requestClientType 
+         * @param {'ADMIN' | 'STORE' | 'SELLER'} requestClientType 
          * @param {string} from 
          * @param {string} to 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dashboardControllerFetchSeller(id: string, requestClientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, options?: any): AxiosPromise<FetchDashboardSellerResponseDto> {
+        dashboardControllerFetchSeller(id: string, requestClientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, options?: any): AxiosPromise<FetchDashboardSellerResponseDto> {
             return localVarFp.dashboardControllerFetchSeller(id, requestClientType, from, to, options).then((request) => request(axios, basePath));
         },
         /**
@@ -20612,15 +21512,31 @@ export class DashboardApi extends BaseAPI {
 
     /**
      * 
+     * @param {string} campaignId 
+     * @param {string} startDate 
+     * @param {string} endDate 
+     * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+     * @param {Array<string>} [orderBy] AdGroupDashboardAdsetSortOption
+     * @param {Array<string>} [adGroupIds] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchAdsetEfficienciesOnSellerAdGroupDashboard(campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', orderBy?: Array<string>, adGroupIds?: Array<string>, options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchAdsetEfficienciesOnSellerAdGroupDashboard(campaignId, startDate, endDate, timezone, orderBy, adGroupIds, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {string} id 
-     * @param {'STORE' | 'SELLER' | 'ADMIN'} requestClientType 
+     * @param {'ADMIN' | 'STORE' | 'SELLER'} requestClientType 
      * @param {string} from 
      * @param {string} to 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DashboardApi
      */
-    public dashboardControllerFetchCampaign(id: string, requestClientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, options?: AxiosRequestConfig) {
+    public dashboardControllerFetchCampaign(id: string, requestClientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, options?: AxiosRequestConfig) {
         return DashboardApiFp(this.configuration).dashboardControllerFetchCampaign(id, requestClientType, from, to, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -20639,7 +21555,7 @@ export class DashboardApi extends BaseAPI {
 
     /**
      * 
-     * @param {'STORE' | 'SELLER' | 'ADMIN'} clientType 
+     * @param {'ADMIN' | 'STORE' | 'SELLER'} clientType 
      * @param {string} from 
      * @param {string} to 
      * @param {string} [sellerId] 
@@ -20647,7 +21563,7 @@ export class DashboardApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DashboardApi
      */
-    public dashboardControllerFetchCampaignsGraph(clientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, sellerId?: string, options?: AxiosRequestConfig) {
+    public dashboardControllerFetchCampaignsGraph(clientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, sellerId?: string, options?: AxiosRequestConfig) {
         return DashboardApiFp(this.configuration).dashboardControllerFetchCampaignsGraph(clientType, from, to, sellerId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -20695,6 +21611,23 @@ export class DashboardApi extends BaseAPI {
      */
     public dashboardControllerFetchListOnProductDashboard(placementIds: Array<string>, startDate: string, endDate: string, orderBy?: Array<string>, productIds?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig) {
         return DashboardApiFp(this.configuration).dashboardControllerFetchListOnProductDashboard(placementIds, startDate, endDate, orderBy, productIds, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} campaignId 
+     * @param {string} startDate 
+     * @param {string} endDate 
+     * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+     * @param {Array<string>} [orderBy] AdGroupDashboardSortOption
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerFetchListOnSellerAdGroupDashboard(campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', orderBy?: Array<string>, limit?: number, offset?: number, options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchListOnSellerAdGroupDashboard(campaignId, startDate, endDate, timezone, orderBy, limit, offset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -20758,29 +21691,29 @@ export class DashboardApi extends BaseAPI {
     /**
      * 
      * @param {string} campaignId 
-     * @param {Array<string>} adGroupIds 
      * @param {string} startDate 
      * @param {string} endDate 
      * @param {'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST'} timezone 
+     * @param {Array<string>} [adGroupIds] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DashboardApi
      */
-    public dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId: string, adGroupIds: Array<string>, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', options?: AxiosRequestConfig) {
-        return DashboardApiFp(this.configuration).dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId, adGroupIds, startDate, endDate, timezone, options).then((request) => request(this.axios, this.basePath));
+    public dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId: string, startDate: string, endDate: string, timezone: 'KST' | 'ICT' | 'EST' | 'CST' | 'MST' | 'PST' | 'AKST' | 'HST', adGroupIds?: Array<string>, options?: AxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerFetchMetricsOnSellerAdGroupDashboard(campaignId, startDate, endDate, timezone, adGroupIds, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} id 
-     * @param {'STORE' | 'SELLER' | 'ADMIN'} requestClientType 
+     * @param {'ADMIN' | 'STORE' | 'SELLER'} requestClientType 
      * @param {string} from 
      * @param {string} to 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DashboardApi
      */
-    public dashboardControllerFetchSeller(id: string, requestClientType: 'STORE' | 'SELLER' | 'ADMIN', from: string, to: string, options?: AxiosRequestConfig) {
+    public dashboardControllerFetchSeller(id: string, requestClientType: 'ADMIN' | 'STORE' | 'SELLER', from: string, to: string, options?: AxiosRequestConfig) {
         return DashboardApiFp(this.configuration).dashboardControllerFetchSeller(id, requestClientType, from, to, options).then((request) => request(this.axios, this.basePath));
     }
 
