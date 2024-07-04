@@ -20,6 +20,10 @@ import {
   AdcioPlacementCreateRecommendationProductsResponse,
   AdcioPlacementFetchPlacementsResponse,
 } from "./placement/placement.interface";
+import {
+  AdcioSearchEngineSearchParams,
+  AdcioSearchEngineSearchResponse,
+} from "./search";
 
 export interface AdcioParams {
   clientId: StoreId;
@@ -78,3 +82,6 @@ export type AdcioCreateAdvertisementBannersParams =
   AdcioPlacementCreateAdvertisementBannersParams;
 export type AdcioCreateAdvertisementBannersResponse =
   AdcioPlacementCreateAdvertisementBannersResponse;
+
+export type AdcioSearchParams = AdcioSearchEngineSearchParams;
+export type AdcioSearchResponse = AdcioSearchEngineSearchResponse;

@@ -17,17 +17,20 @@ import {
   AdcioOnPageViewParams,
   AdcioOnPurchaseParams,
   AdcioParams,
+  AdcioSearchParams,
 } from "./adcio.interface";
-import { AdcioAnalytics } from "./analytics/analytics";
+import { AdcioAnalytics } from "./analytics";
 import { AdcioCore } from "./core";
-import { AdcioImpressionObserver } from "./impression-observer/impression-observer";
-import { AdcioPlacement } from "./placement/placement";
+import { AdcioImpressionObserver } from "./impression-observer";
+import { AdcioPlacement } from "./placement";
+import { AdcioSearchEngine } from "./search";
 
 export class Adcio {
   private readonly config: AdcioConfig;
   private adcioCore: AdcioCore;
   private adcioPlacement: AdcioPlacement;
   private adcioAnalytics: AdcioAnalytics;
+  private adcioSearchEngine: AdcioSearchEngine;
 
   constructor(config: AdcioParams) {
     this.config = {
@@ -48,9 +51,15 @@ export class Adcio {
       adcioCore: this.adcioCore,
       apiEndpoint: this.config.apiEndpoint,
     });
+
     this.adcioAnalytics = new AdcioAnalytics({
       adcioCore: this.adcioCore,
       receiverEndpoint: this.config.receiverEndpoint,
+    });
+
+    this.adcioSearchEngine = new AdcioSearchEngine({
+      adcioCore: this.adcioCore,
+      messengerEndpoint: this.config.messengerEndpoint,
     });
   }
 
@@ -142,5 +151,10 @@ export class Adcio {
     params: AdcioCreateAdvertisementBannersParams,
   ): Promise<AdcioCreateAdvertisementBannersResponse> {
     return this.adcioPlacement.createAdvertisementBanners(params);
+  }
+
+  // AdcioSearchEngine
+  public async search(params: AdcioSearchParams) {
+    return this.adcioSearchEngine.search(params);
   }
 }
