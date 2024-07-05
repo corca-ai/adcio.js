@@ -1,15 +1,19 @@
 {
   "name": "@adcio.js/core",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "author": "Corca <contact@corca.ai>",
   "description": "JavaScript SDK for ADCIO",
   "main": "dist/index.js",
   "dependencies": {
-    "@adcio.js/api": "workspace:*"
+    "@adcio.js/api": "workspace:*",
+    "lodash": "^4.17.21"
   },
   "scripts": {
     "start:dev": "vite build --watch",
     "build": "vite build",
     "prepare": "pnpm build"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.200"
   }
 }

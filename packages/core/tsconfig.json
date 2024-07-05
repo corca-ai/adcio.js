@@ -9,6 +9,7 @@
     "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
     "outDir": "./dist",
     "rootDir": "./src"
   },

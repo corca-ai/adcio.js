@@ -233,6 +233,13 @@ importers:
       '@adcio.js/api':
         specifier: workspace:*
         version: link:../api
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+    devDependencies:
+      '@types/lodash':
+        specifier: ^4.14.200
+        version: 4.17.5
 
   packages/widget:
     dependencies:
@@ -4119,6 +4126,7 @@ snapshots:
   '@adcio.js/core@file:packages/core':
     dependencies:
       '@adcio.js/api': link:packages/api
+      lodash: 4.17.21
 
   '@ampproject/remapping@2.2.1':
     dependencies:

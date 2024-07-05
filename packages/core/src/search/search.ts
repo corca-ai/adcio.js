@@ -1,4 +1,5 @@
 import { Configuration, SearchApi } from "@adcio.js/api/messenger/v1";
+import _ from "lodash";
 import type {
   AdcioSearchEngineParams,
   AdcioSearchEngineSearchParams,
@@ -6,35 +7,12 @@ import type {
 } from "./search.interface";
 import { AdcioCore } from "../core";
 
-function camelize(o: any) {
-  let newO, origKey, newKey, value;
-  if (o instanceof Array) {
-    return o.map(function (value) {
-      if (typeof value === "object") {
-        value = camelize(value);
-      }
-      return value;
-    });
-  } else {
-    newO = {};
-    for (origKey in o) {
-      if (o.hasOwnProperty(origKey)) {
-        newKey = (
-          origKey.charAt(0).toLowerCase() + origKey.slice(1) || origKey
-        ).toString();
-        value = o[origKey];
-        if (
-          value instanceof Array ||
-          (value !== null && value.constructor === Object)
-        ) {
-          value = camelize(value);
-        }
-        Object.assign(newO, { [newKey]: value });
-      }
-    }
-  }
-  return newO;
-}
+const camelize = (obj: any) =>
+  _.transform(obj, (acc: any, value, key, target) => {
+    const camelKey = _.isArray(target) ? key : _.camelCase(key.toString());
+    acc[camelKey] = _.isObject(value) ? camelize(value) : value;
+  });
+
 export class AdcioSearchEngine {
   private adcioCore: AdcioCore;
   private apiConfig: Configuration;
