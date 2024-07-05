@@ -6,26 +6,35 @@ import type {
 } from "./search.interface";
 import { AdcioCore } from "../core";
 
-const camelizeString = (str: string) =>
-  str
-    .toLowerCase()
-    .replace(/([-_][a-z])/g, (group) =>
-      group.toUpperCase().replace("-", "").replace("_", ""),
-    );
-
-const camelizeObject = (obj: Record<string, any>) =>
-  Object.keys(obj).reduce((acc, key) => {
-    const value = obj[key];
-    if (typeof value === "object" && value !== null) {
-      Object.assign(acc, {
-        [camelizeString(key)]: camelizeObject(value),
-      });
-    } else {
-      Object.assign(acc, { [camelizeString(key)]: value });
+function camelize(o: any) {
+  let newO, origKey, newKey, value;
+  if (o instanceof Array) {
+    return o.map(function (value) {
+      if (typeof value === "object") {
+        value = camelize(value);
+      }
+      return value;
+    });
+  } else {
+    newO = {};
+    for (origKey in o) {
+      if (o.hasOwnProperty(origKey)) {
+        newKey = (
+          origKey.charAt(0).toLowerCase() + origKey.slice(1) || origKey
+        ).toString();
+        value = o[origKey];
+        if (
+          value instanceof Array ||
+          (value !== null && value.constructor === Object)
+        ) {
+          value = camelize(value);
+        }
+        Object.assign(newO, { [newKey]: value });
+      }
     }
-    return acc;
-  }, {});
-
+  }
+  return newO;
+}
 export class AdcioSearchEngine {
   private adcioCore: AdcioCore;
   private apiConfig: Configuration;
@@ -46,6 +55,6 @@ export class AdcioSearchEngine {
       this.adcioCore.getDeviceId(),
       this.adcioCore.getCustomerId(),
     );
-    return camelizeObject(data) as AdcioSearchEngineSearchResponse;
+    return camelize(data) as AdcioSearchEngineSearchResponse;
   }
 }
