@@ -6,6 +6,19 @@ import type {
 } from "./search.interface";
 import { AdcioCore } from "../core";
 
+const camelizeString = (str: string) =>
+  str
+    .toLowerCase()
+    .replace(/([-_][a-z])/g, (group) =>
+      group.toUpperCase().replace("-", "").replace("_", ""),
+    );
+
+const camelizeObject = (obj: Record<string, any>) =>
+  Object.keys(obj).reduce((acc, key) => {
+    Object.assign(acc, { [camelizeString(key)]: obj[key] });
+    return acc;
+  }, {});
+
 export class AdcioSearchEngine {
   private adcioCore: AdcioCore;
   private apiConfig: Configuration;
@@ -26,6 +39,6 @@ export class AdcioSearchEngine {
       this.adcioCore.getDeviceId(),
       this.adcioCore.getCustomerId(),
     );
-    return data;
+    return camelizeObject(data) as AdcioSearchEngineSearchResponse;
   }
 }
