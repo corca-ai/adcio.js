@@ -18,6 +18,7 @@ import {
   AdcioOnPurchaseParams,
   AdcioParams,
   AdcioSearchParams,
+  AdcioSearchResponse,
 } from "./adcio.interface";
 import { AdcioAnalytics } from "./analytics";
 import { AdcioCore } from "./core";
@@ -154,7 +155,7 @@ export class Adcio {
   }
 
   // AdcioSearchEngine
-  public async search(params: AdcioSearchParams) {
+  public async search(params: AdcioSearchParams): Promise<AdcioSearchResponse> {
     return this.adcioSearchEngine.search(params);
   }
 }

@@ -15,7 +15,14 @@ const camelizeString = (str: string) =>
 
 const camelizeObject = (obj: Record<string, any>) =>
   Object.keys(obj).reduce((acc, key) => {
-    Object.assign(acc, { [camelizeString(key)]: obj[key] });
+    const value = obj[key];
+    if (typeof value === "object" && value !== null) {
+      Object.assign(acc, {
+        [camelizeString(key)]: camelizeObject(value),
+      });
+    } else {
+      Object.assign(acc, { [camelizeString(key)]: value });
+    }
     return acc;
   }, {});
 
