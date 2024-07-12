@@ -31,6 +31,9 @@ export interface AdcioParams {
   serverMode?: boolean;
   deviceId?: string;
   sessionId?: string;
+  apiEndpoint?: string;
+  messengerEndpoint?: string;
+  receiverEndpoint?: string;
 }
 
 export interface AdcioConfig extends AdcioParams {
