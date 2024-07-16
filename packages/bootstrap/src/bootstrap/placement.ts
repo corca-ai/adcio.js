@@ -28,16 +28,16 @@ export class AdcioPlacementBootstrap {
       case PlacementSuggestionTypeEnum.Advertise:
         switch (placement.type) {
           case PlacementTypeEnum.Grid:
-            return this.loadRecommendationProducts(placement.id);
+            return this.loadAdvertisementProducts(placement.id);
           case PlacementTypeEnum.Banner:
-            return this.loadRecommendationBanners(placement.id);
+            return this.loadAdvertisementBanners(placement.id);
         }
       case PlacementSuggestionTypeEnum.Recommend:
         switch (placement.type) {
           case PlacementTypeEnum.Grid:
-            return this.loadAdvertisementProducts(placement.id);
+            return this.loadRecommendationProducts(placement.id);
           case PlacementTypeEnum.Banner:
-            return this.loadAdvertisementBanners(placement.id);
+            return this.loadRecommendationBanners(placement.id);
         }
     }
   }
