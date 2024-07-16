@@ -18,9 +18,10 @@ export abstract class GridRenderer extends AbstractRenderer {
     return {
       ...product,
       price: addCommas(product.price),
-      discountPrice: product.discountPrice
-        ? addCommas(product.discountPrice)
-        : null,
+      discountPrice:
+        product.discountPrice && product.price !== product.discountPrice
+          ? addCommas(product.discountPrice)
+          : null,
       discountRate: product.discountPrice
         ? Math.round(
             ((product.price - product.discountPrice) / product.price) * 100,

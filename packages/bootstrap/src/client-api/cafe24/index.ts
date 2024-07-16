@@ -30,6 +30,10 @@ export class Cafe24API implements ClientAPI {
     }
   }
 
+  isMobile() {
+    return this.data?.MOBILE !== undefined ? this.data.MOBILE : null;
+  }
+
   getCustomer() {
     return new Promise<Customer | null>((resolve, reject) => {
       if (this.authorized) {
