@@ -57,7 +57,7 @@ export class Cafe24API implements ClientAPI {
   }
 
   getPageName() {
-    return getMeta({ property: "path_role" });
+    return getMeta({ name: "path_role" });
   }
 
   getProduct() {

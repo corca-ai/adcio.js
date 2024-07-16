@@ -1,7 +1,4 @@
-import { ProductSuggestionRequestDto } from "@adcio.js/api/controller/v1";
-
-export interface Customer
-  extends Pick<ProductSuggestionRequestDto, "birthYear" | "gender"> {
+export interface Customer {
   id: string;
 }
 
