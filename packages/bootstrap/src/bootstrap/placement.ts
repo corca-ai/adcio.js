@@ -1,5 +1,3 @@
-import { Adcio } from "@adcio.js/core";
-import { renderers } from "@adcio.js/widget";
 import {
   FetchActivePlacementsResponseDto,
   PlacementDevelopEnvironmentEnum,
@@ -7,6 +5,8 @@ import {
   PlacementSupportEnvironmentEnum,
   PlacementTypeEnum,
 } from "@adcio.js/api/controller/v1";
+import { Adcio } from "@adcio.js/core";
+import { renderers } from "@adcio.js/widget";
 import { AdcioError } from "../errors";
 
 export class AdcioPlacementBootstrap {
