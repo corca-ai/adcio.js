@@ -45,7 +45,28 @@ export abstract class GridRenderer extends AbstractRenderer {
     });
   }
 
-  render(recommendation: ProductSuggestionResponseDto): Element {
-    return createElementFromHTML(this.renderHtml(recommendation));
+  render(
+    recommendation: ProductSuggestionResponseDto,
+    adcioInstance: any,
+  ): Element {
+    const root = createElementFromHTML(this.renderHtml(recommendation));
+    root.querySelectorAll("[data-adcio-product-id]").forEach((element) => {
+      const productId = element.getAttribute("data-adcio-product-id");
+      const logOptions = recommendation.suggestions.find(
+        (s) => s.product.id === productId,
+      )?.logOptions;
+      if (!logOptions) {
+        console.warn("logOptions not found for product:", productId);
+      }
+      element.addEventListener("click", () => {
+        adcioInstance.onClick(logOptions);
+      });
+      adcioInstance.observeImpression({
+        element,
+        onImpression: () => adcioInstance.onImpression(logOptions),
+        once: true,
+      });
+    });
+    return root;
   }
 }

@@ -78,7 +78,7 @@ export class AdcioPlacementBootstrap {
       }
       const element = renderers
         .getRenderer(recommendation.placement.widgetValue.widgetId)
-        .render(recommendation);
+        .render(recommendation, this.adcioInstance);
       container.appendChild(element);
     } else {
       throw new AdcioError(
