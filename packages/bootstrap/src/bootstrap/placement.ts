@@ -82,7 +82,7 @@ export class AdcioPlacementBootstrap {
       container.appendChild(element);
     } else {
       throw new AdcioError(
-        `boostrap does not support develop environment for placement ${placementId}: ${recommendation.placement.developEnvironment}`,
+        `bootstrap does not support develop environment for placement ${placementId}: ${recommendation.placement.developEnvironment}`,
       );
     }
   }
