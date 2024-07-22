@@ -1,31 +1,6 @@
-<style>
-  ul.swiper-corca {
-    gap: 12px 15px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-</style>
-<div class="kd-bp-wrap" style="margin-top: 20px">
-  <div class="kd-main-title kd-contents">
-    <h2>${widgetValue.title.title.text}</h2>
-  </div>
-  <div class="kd-prd-bp">
-    <div class="kd-contents">
-      <div
-        id="tab-bp-7"
-        class="xans-element- xans-product xans-product-listmain-41 xans-product-listmain xans-product-41"
-      >
-        <div
-          class="swiper-container swiper-initialized swiper-horizontal swiper-grid swiper-grid-column"
-          aria-live="polite"
-        >
-          <ul class="kd-prd-list swiper-wrapper swiper-corca">
-            ${items}
-          </ul>
-          <div class="swiper-bp-page swiper-bp7-pagination"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<ul
+  class="kd-prd-list swiper-wrapper swiper-corca"
+  style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px"
+>
+  ${items}
+</ul>
