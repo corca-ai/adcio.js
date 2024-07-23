@@ -60,7 +60,7 @@
           :
         </strong>
         <span style="font-size: 17px; color: #333333; font-weight: bold">
-          ${discountPrice ? ${discountPrice} : ${price}}원
+          ${price}원
         </span>
         <span id="span_product_tax_type_text"> </span>
       </li>
@@ -75,7 +75,7 @@
         <span
           style="font-size: 16px; color: #999999; text-decoration: line-through"
         >
-          ${price}원
+          ${discountPrice ? ${discountPrice} : ${price}}원
         </span>
       </li>
       <li rel="목록 브랜드 및 아티스트" class="xans-record-">
