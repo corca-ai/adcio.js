@@ -14,9 +14,6 @@ export abstract class AbstractRenderer {
       }
       value = value[key];
     }
-    if (value === undefined) {
-      throw new Error(`Value not found for path: ${path}`);
-    }
     return value;
   }
 
