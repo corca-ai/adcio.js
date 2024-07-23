@@ -1332,6 +1332,12 @@ export interface ConnectProductsToPlacementResponseDto {
     'displayPositions': Array<number> | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'fixedProductIds': Array<string> | null;
+    /**
+     * 
      * @type {Array<number>}
      * @memberof ConnectProductsToPlacementResponseDto
      */
@@ -1348,6 +1354,18 @@ export interface ConnectProductsToPlacementResponseDto {
      * @memberof ConnectProductsToPlacementResponseDto
      */
     'productDetailDataColumns': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'includingCategoryIds': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ConnectProductsToPlacementResponseDto
+     */
+    'excludingCategoryIds': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -2231,6 +2249,12 @@ export interface FetchManyPlacementsResponseDto {
     'displayPositions': Array<number> | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof FetchManyPlacementsResponseDto
+     */
+    'fixedProductIds': Array<string> | null;
+    /**
+     * 
      * @type {Array<number>}
      * @memberof FetchManyPlacementsResponseDto
      */
@@ -2247,6 +2271,18 @@ export interface FetchManyPlacementsResponseDto {
      * @memberof FetchManyPlacementsResponseDto
      */
     'productDetailDataColumns': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FetchManyPlacementsResponseDto
+     */
+    'includingCategoryIds': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FetchManyPlacementsResponseDto
+     */
+    'excludingCategoryIds': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -2474,6 +2510,12 @@ export interface FetchPlacementResponseDto {
     'displayPositions': Array<number> | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof FetchPlacementResponseDto
+     */
+    'fixedProductIds': Array<string> | null;
+    /**
+     * 
      * @type {Array<number>}
      * @memberof FetchPlacementResponseDto
      */
@@ -2490,6 +2532,18 @@ export interface FetchPlacementResponseDto {
      * @memberof FetchPlacementResponseDto
      */
     'productDetailDataColumns': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FetchPlacementResponseDto
+     */
+    'includingCategoryIds': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FetchPlacementResponseDto
+     */
+    'excludingCategoryIds': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -2678,6 +2732,12 @@ export interface FetchProductResponseDto {
      * @memberof FetchProductResponseDto
      */
     'decorationImages': Array<string> | null;
+    /**
+     * 
+     * @type {Array<ProductIconImage>}
+     * @memberof FetchProductResponseDto
+     */
+    'iconImages': Array<ProductIconImage> | null;
     /**
      * 
      * @type {string}
@@ -3012,6 +3072,12 @@ export interface Placement {
     'displayPositions': Array<number> | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof Placement
+     */
+    'fixedProductIds': Array<string> | null;
+    /**
+     * 
      * @type {Array<number>}
      * @memberof Placement
      */
@@ -3028,6 +3094,18 @@ export interface Placement {
      * @memberof Placement
      */
     'productDetailDataColumns': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Placement
+     */
+    'includingCategoryIds': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Placement
+     */
+    'excludingCategoryIds': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -3251,6 +3329,12 @@ export interface Product {
     'decorationImages': Array<string> | null;
     /**
      * 
+     * @type {Array<ProductIconImage>}
+     * @memberof Product
+     */
+    'iconImages': Array<ProductIconImage> | null;
+    /**
+     * 
      * @type {string}
      * @memberof Product
      */
@@ -3330,6 +3414,31 @@ export interface ProductFilterOperationDto {
      * @memberof ProductFilterOperationDto
      */
     'contains'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ProductIconImage
+ */
+export interface ProductIconImage {
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductIconImage
+     */
+    'startsAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductIconImage
+     */
+    'endsAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductIconImage
+     */
+    'image': string;
 }
 /**
  * 
@@ -3576,6 +3685,12 @@ export interface ProductWithSeller {
     'decorationImages': Array<string> | null;
     /**
      * 
+     * @type {Array<ProductIconImage>}
+     * @memberof ProductWithSeller
+     */
+    'iconImages': Array<ProductIconImage> | null;
+    /**
+     * 
      * @type {string}
      * @memberof ProductWithSeller
      */
@@ -3819,6 +3934,12 @@ export interface SuggestionResponsePlacementType {
     'displayPositions': Array<number> | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'fixedProductIds': Array<string> | null;
+    /**
+     * 
      * @type {Array<number>}
      * @memberof SuggestionResponsePlacementType
      */
@@ -3841,6 +3962,18 @@ export interface SuggestionResponsePlacementType {
      * @memberof SuggestionResponsePlacementType
      */
     'productDetailDataColumns': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'includingCategoryIds': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof SuggestionResponsePlacementType
+     */
+    'excludingCategoryIds': Array<string> | null;
     /**
      * 
      * @type {string}
@@ -4165,6 +4298,12 @@ export interface UpdatePlacementResponseDto {
     'displayPositions': Array<number> | null;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'fixedProductIds': Array<string> | null;
+    /**
+     * 
      * @type {Array<number>}
      * @memberof UpdatePlacementResponseDto
      */
@@ -4181,6 +4320,18 @@ export interface UpdatePlacementResponseDto {
      * @memberof UpdatePlacementResponseDto
      */
     'productDetailDataColumns': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'includingCategoryIds': Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdatePlacementResponseDto
+     */
+    'excludingCategoryIds': Array<string> | null;
     /**
      * 
      * @type {string}
