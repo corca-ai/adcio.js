@@ -10,13 +10,25 @@ export abstract class GridRenderer extends AbstractRenderer {
   abstract templateItem: string;
   abstract templateList: string;
 
-  refineProduct(product: Product): Omit<Product, "price" | "discountPrice"> & {
+  refineProduct(product: Product): Omit<
+    Product,
+    "price" | "discountPrice" | "iconImages"
+  > & {
     price: string;
     discountPrice: string | null;
     discountRate: number | null;
+    iconImages: string[];
   } {
     return {
       ...product,
+      iconImages:
+        product.iconImages
+          ?.filter(
+            (icon) =>
+              (!icon.startsAt || new Date(icon.startsAt) <= new Date()) &&
+              (!icon.endsAt || new Date(icon.endsAt) >= new Date()),
+          )
+          .map((icon) => icon.image) || [],
       price: addCommas(product.price),
       discountPrice:
         product.discountPrice && product.price !== product.discountPrice
