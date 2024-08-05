@@ -1,6 +1,6 @@
 {
   "name": "@adcio.js/api",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Corca <contact@corca.ai>",
   "description": "JavaScript SDK for ADCIO",
   "main": "dist/index.js",

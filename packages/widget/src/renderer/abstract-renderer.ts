@@ -1,3 +1,8 @@
+import {
+  ProductSuggestionResponseDto,
+  BannerSuggestionResponseDto,
+} from "@adcio.js/api/controller/v1";
+
 export abstract class AbstractRenderer {
   protected resolveValueFromPath(path: string, data: any): string {
     const keys = path.split(".");
@@ -8,9 +13,6 @@ export abstract class AbstractRenderer {
         break;
       }
       value = value[key];
-    }
-    if (value === undefined) {
-      throw new Error(`Value not found for path: ${path}`);
     }
     return value;
   }
@@ -51,4 +53,9 @@ export abstract class AbstractRenderer {
         })
     );
   }
+
+  abstract render(
+    recommendation: ProductSuggestionResponseDto | BannerSuggestionResponseDto,
+    adcioInstance: any, // import Adcio from @adcio.js/core
+  ): Element;
 }

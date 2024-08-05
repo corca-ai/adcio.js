@@ -1,0 +1,108 @@
+<li
+  id="anchorBoxId_${idOnStore}"
+  data-type="C"
+  class="swiper-slide xans-record-"
+  data-adcio-product-id="${id}"
+>
+  <div class="thumbnail">
+    <div class="prdImg">
+      <a href="${url}" name="anchorBoxName_${idOnStore}">
+        <div class="kd-thumb-icon">
+          <span
+            class="xans-element- xans-product xans-product-imagestyle-1 xans-product-imagestyle xans-product-1 xans-record- ${decorationImages.0 ? - : displaynone}"
+            ><span
+              class="prdIcon ec-product-bgLT"
+              style="background-image: url(&quot;${decorationImages.0}&quot;)"
+            ></span>
+          </span>
+        </div>
+        <img
+          src="${image}"
+          id="eListPrdImage${idOnStore}_42"
+          alt="${name}"
+          class="kd-tumb-img"
+      /></a>
+      <span class="soldout"></span>
+      <div class="likeButton likePrd likePrd_${idOnStore}">
+        <button type="button">
+          <img
+            src="https://cafe24.poxo.com/ec01/artish597/UVTjSep0dwP4/wX7AtHyXMtObcrbxPOhPpC6jIE7NktPrtgKkfFn2Ve28snkQmbUZHZgAA4xWrL2KowF3+rqIw==/_/web/upload/icon_202211181456433100.png"
+            class="likePrdIcon"
+            product_no="${idOnStore}"
+            category_no="1"
+            icon_status="off"
+            alt="좋아요 등록 전"
+          /><strong></strong>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="description">
+    <span class="kd-source">${custom.artist}</span>
+    <strong class="name">
+      <a href="${url}" class="">
+        <span class="title displaynone"> :</span>
+        ${name}
+      </a>
+    </strong>
+    <ul
+      class="xans-element- xans-product xans-product-listitem-41 xans-product-listitem xans-product-41 spec"
+    >
+      <li rel="상품 요약설명" class="xans-record-">
+        <strong class="title displaynone">
+          <span style="font-size: 15px; color: #999999">상품 요약설명</span>
+          :
+        </strong>
+        <span style="font-size: 15px; color: #999999">${summary}</span>
+      </li>
+      <li rel="판매가" class="xans-record-">
+        <strong class="title displaynone">
+          <span style="font-size: 17px; color: #333333; font-weight: bold">
+            판매가
+          </span>
+          :
+        </strong>
+        <span style="font-size: 17px; color: #333333; font-weight: bold">
+          ${price}원
+        </span>
+        <span id="span_product_tax_type_text"> </span>
+      </li>
+      <li
+        rel="소비자가"
+        class="xans-record- ${discountPrice ? price : displaynone}"
+      >
+        <strong class="title displaynone">
+          <span style="font-size: 16px; color: #999999">소비자가</span>
+          :
+        </strong>
+        <span
+          style="font-size: 16px; color: #999999; text-decoration: line-through"
+        >
+          ${discountPrice ? ${discountPrice} : ${price}}원
+        </span>
+      </li>
+      <li rel="목록 브랜드 및 아티스트" class="xans-record-">
+        <strong class="title displaynone">
+          <span style="font-size: 12px; color: #555555">
+            목록 브랜드 및 아티스트
+          </span>
+          :
+        </strong>
+        <span style="font-size: 12px; color: #555555">${custom.artist}</span>
+      </li>
+    </ul>
+    <!-- 알파리뷰 개수 연동 -->
+    <div
+      class="alpha_module_count_container"
+      style="display: none; font-size: 12px; color: #5ca1ef; padding-top: 5px"
+    >
+      리뷰 <span class="alpha_module_count" value="${idOnStore}"></span>
+    </div>
+    <!-- /알파리뷰 -->
+  </div>
+  <div class="icon">
+    <div class="promotion">
+      <img src="${iconImages.0}" class="${iconImages.0 ? - : displaynone}" />
+    </div>
+  </div>
+</li>

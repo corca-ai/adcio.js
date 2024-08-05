@@ -4,6 +4,7 @@ import {
   FetchActivePlacementsResponseDto,
   ProductSuggestionResponseDto,
   BannerSuggestionResponseDto,
+  PlacementSupportEnvironmentEnum,
 } from "@adcio.js/api/controller/v1";
 import { AdcioCore } from "../core";
 
@@ -14,6 +15,7 @@ export type AdcioPlacementParams = {
 
 export type AdcioPlacementFetchPlacementsParams = {
   pageName: string;
+  supportEnvironment?: PlacementSupportEnvironmentEnum;
 };
 
 export type AdcioPlacementFetchPlacementsResponse =
