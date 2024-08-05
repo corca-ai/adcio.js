@@ -105,6 +105,10 @@ export class Adcio {
     return this.adcioAnalytics.onPurchase(params);
   }
 
+  public onSearch(params: AdcioOnPurchaseParams) {
+    return this.adcioAnalytics.onSearch(params);
+  }
+
   // AdcioImpressionObserver
   public observeImpression(params: AdcioObserveImpressionParams) {
     const observer = new AdcioImpressionObserver({ filter: params.filter });

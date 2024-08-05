@@ -7,6 +7,7 @@ import {
   AdcioAnalyticsOnClickParams,
   AdcioAnalyticsOnAddToCartParams,
   AdcioAnalyticsOnPurchaseParams,
+  AdcioAnalyticsOnSearchParams,
 } from "./analytics.interface";
 import { AdcioCore } from "../core";
 
@@ -51,6 +52,13 @@ export class AdcioAnalytics {
 
   async onPurchase(params: AdcioAnalyticsOnPurchaseParams) {
     await new EventsApi(this.apiConfig).eventsControllerOnPurchase({
+      ...params,
+      ...this.adcioCore.getSessionDto(),
+    });
+  }
+
+  async onSearch(params: AdcioAnalyticsOnSearchParams) {
+    await new EventsApi(this.apiConfig).eventsControllerOnSearch({
       ...params,
       ...this.adcioCore.getSessionDto(),
     });
