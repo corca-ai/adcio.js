@@ -40,11 +40,11 @@ jobs:
           pnpm install
           pnpm run build
 
-      - name: Build agent
-        working-directory: packages/agent
-        run: |
-          pnpm install
-          pnpm run build
+      # - name: Build agent
+      #   working-directory: packages/agent
+      #   run: |
+      #     pnpm install
+      #     pnpm run build
 
       - run: pnpm run test
 

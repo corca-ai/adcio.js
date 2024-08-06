@@ -13,6 +13,9 @@ export class AdcioBootstrap {
 
   constructor(
     config: {
+      apiEndpoint?: string;
+      receiverEndpoint?: string;
+      messengerEndpoint?: string;
       clientId?: string;
       clientApi?: string;
       suppressPlacement?: boolean;
@@ -32,7 +35,16 @@ export class AdcioBootstrap {
 
     this.suppressPlacement = config.suppressPlacement || false;
 
-    this.adcioInstance = new Adcio({ clientId });
+    this.adcioInstance = new Adcio({
+      clientId,
+      ...(config.apiEndpoint ? { apiEndpoint: config.apiEndpoint } : {}),
+      ...(config.receiverEndpoint
+        ? { receiverEndpoint: config.receiverEndpoint }
+        : {}),
+      ...(config.messengerEndpoint
+        ? { messengerEndpoint: config.messengerEndpoint }
+        : {}),
+    });
   }
 
   public static async run() {
@@ -90,14 +102,19 @@ export class AdcioBootstrap {
     );
   }
 
+  private isMobile(): boolean | null {
+    return this.clientApi.isMobile();
+  }
+
   private async loadPlacements() {
     const pageName = this.getPageName();
     if (!pageName) {
       throw new AdcioError("pageName is not found");
     }
+    const isMobile = this.isMobile();
     return new AdcioPlacementBootstrap({
       adcioInstance: this.adcioInstance,
-    }).loadPlacements(pageName);
+    }).loadPlacements(pageName, isMobile);
   }
 
   private async handleView(): Promise<void> {

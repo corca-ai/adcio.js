@@ -1,9 +1,12 @@
-import { Adcio } from "@adcio.js/core";
 import {
   FetchActivePlacementsResponseDto,
+  PlacementDevelopEnvironmentEnum,
   PlacementSuggestionTypeEnum,
+  PlacementSupportEnvironmentEnum,
   PlacementTypeEnum,
-} from "api/controller/v1";
+} from "@adcio.js/api/controller/v1";
+import { Adcio } from "@adcio.js/core";
+import { renderers } from "@adcio.js/widget";
 import { AdcioError } from "../errors";
 
 export class AdcioPlacementBootstrap {
@@ -13,9 +16,15 @@ export class AdcioPlacementBootstrap {
     this.adcioInstance = config.adcioInstance;
   }
 
-  public async loadPlacements(pageName: string) {
+  public async loadPlacements(pageName: string, isMobile: boolean | null) {
     const placements = await this.adcioInstance.fetchPlacements({
       pageName,
+      supportEnvironment:
+        isMobile === null
+          ? undefined
+          : isMobile === true
+            ? PlacementSupportEnvironmentEnum.WebMobile
+            : PlacementSupportEnvironmentEnum.Web,
     });
     if (!placements || placements.length === 0) {
       throw new AdcioError("no placements fetched");
@@ -43,13 +52,37 @@ export class AdcioPlacementBootstrap {
   }
 
   private async loadRecommendationProducts(placementId: string) {
-    const recommendations =
+    const recommendation =
       await this.adcioInstance.createRecommendationProducts({
         placementId,
       });
-    if (!recommendations) {
+    if (!recommendation) {
       throw new AdcioError(
         `no recommendations fetched for placement ${placementId}`,
+      );
+    }
+    if (
+      recommendation.placement.developEnvironment ===
+      PlacementDevelopEnvironmentEnum.Widget
+    ) {
+      const container = document.getElementById(`adcio:${placementId}`);
+      if (!container) {
+        throw new AdcioError(
+          `container not found for placement ${placementId}`,
+        );
+      }
+      if (!recommendation.placement.widgetValue) {
+        throw new AdcioError(
+          `widget value not found for placement ${placementId}`,
+        );
+      }
+      const element = renderers
+        .getRenderer(recommendation.placement.widgetValue.widgetId)
+        .render(recommendation, this.adcioInstance);
+      container.appendChild(element);
+    } else {
+      throw new AdcioError(
+        `bootstrap does not support develop environment for placement ${placementId}: ${recommendation.placement.developEnvironment}`,
       );
     }
   }

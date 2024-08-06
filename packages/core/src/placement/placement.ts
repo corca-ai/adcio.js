@@ -66,6 +66,7 @@ export class AdcioPlacement {
       ).pageControllerFetchActivePlacements(
         params.pageName,
         this.adcioCore.getClientId(),
+        params.supportEnvironment,
       );
       return data;
     } catch (error) {

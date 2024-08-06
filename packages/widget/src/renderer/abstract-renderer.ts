@@ -1,3 +1,8 @@
+import {
+  ProductSuggestionResponseDto,
+  BannerSuggestionResponseDto,
+} from "@adcio.js/api/controller/v1";
+
 export abstract class AbstractRenderer {
   protected resolveValueFromPath(path: string, data: any): string {
     const keys = path.split(".");
@@ -8,9 +13,6 @@ export abstract class AbstractRenderer {
         break;
       }
       value = value[key];
-    }
-    if (value === undefined) {
-      throw new Error(`Value not found for path: ${path}`);
     }
     return value;
   }
@@ -25,10 +27,19 @@ export abstract class AbstractRenderer {
           return value || "";
         })
         // ternary operator
-        .replace(/\${[A-Za-z0-9_.]*\s*\?.*\:.*}/g, (match: string) => {
+        .replace(/\${[A-Za-z0-9_.!=\s]*\s*\?.*\:.*}/g, (match: string) => {
           const expression = match.replace("${", "").replace("}", "");
-          const [path, trueValue, falseValue] = expression.split(/\?|:/);
-          const value = this.resolveValueFromPath(path.trim(), data);
+          const [condition, trueValue, falseValue] = expression.split(/\?|:/);
+          let value: boolean;
+          if (condition.includes("==")) {
+            const [path, compare] = condition.split("==").map((c) => c.trim());
+            value = this.resolveValueFromPath(path, data) == compare;
+          } else if (condition.includes("!=")) {
+            const [path, compare] = condition.split("!=").map((c) => c.trim());
+            value = this.resolveValueFromPath(path, data) != compare;
+          } else {
+            value = !!this.resolveValueFromPath(condition.trim(), data);
+          }
           return value ? trueValue.trim() : falseValue.trim();
         })
         // string multiplication
@@ -51,4 +62,9 @@ export abstract class AbstractRenderer {
         })
     );
   }
+
+  abstract render(
+    recommendation: ProductSuggestionResponseDto | BannerSuggestionResponseDto,
+    adcioInstance: any, // import Adcio from @adcio.js/core
+  ): Element;
 }
