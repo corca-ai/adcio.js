@@ -42,4 +42,5 @@ export interface ClientAPI {
   getCategory(): NullableAwaitable<Category>;
   getOrder(): NullableAwaitable<Order>;
   getCarts(): NullableAwaitable<Cart[]>;
+  getSearchQuery(): NullableAwaitable<string>;
 }

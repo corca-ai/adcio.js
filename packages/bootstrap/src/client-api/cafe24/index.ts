@@ -124,4 +124,12 @@ export class Cafe24API implements ClientAPI {
       }
     });
   }
+
+  getSearchQuery() {
+    const query = getQuery("keyword");
+    if (!query) {
+      return null;
+    }
+    return query;
+  }
 }
