@@ -414,6 +414,55 @@ export interface TrackResponseDto {
      */
     'success': boolean;
 }
+/**
+ * 
+ * @export
+ * @interface TrackSearchRequestDto
+ */
+export interface TrackSearchRequestDto {
+    /**
+     * ADCIO Client ID of the store.
+     * @type {string}
+     * @memberof TrackSearchRequestDto
+     */
+    'storeId': string;
+    /**
+     * The session starts when the customer visits the store. It persists until the customer closes the tab, browser or app.
+     * @type {string}
+     * @memberof TrackSearchRequestDto
+     */
+    'sessionId': string;
+    /**
+     * The device identifier should be unique for each device. A customer can have multiple devices.
+     * @type {string}
+     * @memberof TrackSearchRequestDto
+     */
+    'deviceId': string;
+    /**
+     * The customer identifier which is generated and managed by the store. The store should configure `frontApi` parameter of ADCIO SDK so that the `customerId` can be sent to ADCIO API.
+     * @type {string}
+     * @memberof TrackSearchRequestDto
+     */
+    'customerId'?: string;
+    /**
+     * The version of the SDK
+     * @type {string}
+     * @memberof TrackSearchRequestDto
+     */
+    'sdkVersion'?: string;
+    /**
+     * The search query.
+     * @type {string}
+     * @memberof TrackSearchRequestDto
+     */
+    'query': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackSearchRequestDto
+     */
+    'userAgent'?: string;
+}
 
 /**
  * DefaultApi - axios parameter creator
@@ -888,6 +937,113 @@ export class EventsApi extends BaseAPI {
      */
     public eventsControllerOnPurchase(trackPurchaseRequestDto: TrackPurchaseRequestDto, options?: AxiosRequestConfig) {
         return EventsApiFp(this.configuration).eventsControllerOnPurchase(trackPurchaseRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * LogsApi - axios parameter creator
+ * @export
+ */
+export const LogsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Log when the customer searches.
+         * @summary 
+         * @param {TrackSearchRequestDto} trackSearchRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logsControllerOnSearch: async (trackSearchRequestDto: TrackSearchRequestDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'trackSearchRequestDto' is not null or undefined
+            assertParamExists('logsControllerOnSearch', 'trackSearchRequestDto', trackSearchRequestDto)
+            const localVarPath = `/logs/search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(trackSearchRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * LogsApi - functional programming interface
+ * @export
+ */
+export const LogsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LogsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Log when the customer searches.
+         * @summary 
+         * @param {TrackSearchRequestDto} trackSearchRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logsControllerOnSearch(trackSearchRequestDto: TrackSearchRequestDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logsControllerOnSearch(trackSearchRequestDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * LogsApi - factory interface
+ * @export
+ */
+export const LogsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LogsApiFp(configuration)
+    return {
+        /**
+         * Log when the customer searches.
+         * @summary 
+         * @param {TrackSearchRequestDto} trackSearchRequestDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logsControllerOnSearch(trackSearchRequestDto: TrackSearchRequestDto, options?: any): AxiosPromise<object> {
+            return localVarFp.logsControllerOnSearch(trackSearchRequestDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * LogsApi - object-oriented interface
+ * @export
+ * @class LogsApi
+ * @extends {BaseAPI}
+ */
+export class LogsApi extends BaseAPI {
+    /**
+     * Log when the customer searches.
+     * @summary 
+     * @param {TrackSearchRequestDto} trackSearchRequestDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogsApi
+     */
+    public logsControllerOnSearch(trackSearchRequestDto: TrackSearchRequestDto, options?: AxiosRequestConfig) {
+        return LogsApiFp(this.configuration).logsControllerOnSearch(trackSearchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
