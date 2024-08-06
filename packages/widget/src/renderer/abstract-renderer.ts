@@ -27,10 +27,19 @@ export abstract class AbstractRenderer {
           return value || "";
         })
         // ternary operator
-        .replace(/\${[A-Za-z0-9_.]*\s*\?.*\:.*}/g, (match: string) => {
+        .replace(/\${[A-Za-z0-9_.!=\s]*\s*\?.*\:.*}/g, (match: string) => {
           const expression = match.replace("${", "").replace("}", "");
-          const [path, trueValue, falseValue] = expression.split(/\?|:/);
-          const value = this.resolveValueFromPath(path.trim(), data);
+          const [condition, trueValue, falseValue] = expression.split(/\?|:/);
+          let value: boolean;
+          if (condition.includes("==")) {
+            const [path, compare] = condition.split("==").map((c) => c.trim());
+            value = this.resolveValueFromPath(path, data) == compare;
+          } else if (condition.includes("!=")) {
+            const [path, compare] = condition.split("!=").map((c) => c.trim());
+            value = this.resolveValueFromPath(path, data) != compare;
+          } else {
+            value = !!this.resolveValueFromPath(condition.trim(), data);
+          }
           return value ? trueValue.trim() : falseValue.trim();
         })
         // string multiplication
