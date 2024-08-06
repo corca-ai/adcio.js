@@ -9,6 +9,7 @@
     "lodash": "^4.17.21"
   },
   "scripts": {
+    "prebuild": "node -p \"'export const PACKAGE_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts",
     "start:dev": "vite build --watch",
     "build": "vite build",
     "prepare": "pnpm build"

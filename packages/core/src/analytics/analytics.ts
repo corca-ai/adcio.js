@@ -1,5 +1,5 @@
 import { Configuration } from "@adcio.js/api/controller/v1";
-import { EventsApi } from "@adcio.js/api/receiver/v1";
+import { EventsApi, LogsApi } from "@adcio.js/api/receiver/v1";
 import {
   AdcioAnalyticsParams,
   AdcioAnalyticsOnPageViewParams,
@@ -10,6 +10,9 @@ import {
   AdcioAnalyticsOnSearchParams,
 } from "./analytics.interface";
 import { AdcioCore } from "../core";
+import { PACKAGE_VERSION } from "../version";
+
+const sdkVersion = `js ${PACKAGE_VERSION}`;
 
 export class AdcioAnalytics {
   private adcioCore: AdcioCore;
@@ -22,45 +25,56 @@ export class AdcioAnalytics {
     });
   }
 
+  commonParams() {
+    return {
+      ...this.adcioCore.getSessionDto(),
+      sdkVersion,
+      userAgent:
+        typeof navigator !== "undefined" && navigator.userAgent
+          ? navigator.userAgent
+          : "",
+    };
+  }
+
   async onPageView(params: AdcioAnalyticsOnPageViewParams) {
     await new EventsApi(this.apiConfig).eventsControllerOnPageView({
       ...params,
-      ...this.adcioCore.getSessionDto(),
+      ...this.commonParams(),
     });
   }
 
   async onImpression(params: AdcioAnalyticsOnImpressionParams) {
     await new EventsApi(this.apiConfig).eventsControllerOnImpression({
       ...params,
-      ...this.adcioCore.getSessionDto(),
+      ...this.commonParams(),
     });
   }
 
   async onClick(params: AdcioAnalyticsOnClickParams) {
     await new EventsApi(this.apiConfig).eventsControllerOnClick({
       ...params,
-      ...this.adcioCore.getSessionDto(),
+      ...this.commonParams(),
     });
   }
 
   async onAddToCart(params: AdcioAnalyticsOnAddToCartParams) {
     await new EventsApi(this.apiConfig).eventsControllerOnAddToCart({
       ...params,
-      ...this.adcioCore.getSessionDto(),
+      ...this.commonParams(),
     });
   }
 
   async onPurchase(params: AdcioAnalyticsOnPurchaseParams) {
     await new EventsApi(this.apiConfig).eventsControllerOnPurchase({
       ...params,
-      ...this.adcioCore.getSessionDto(),
+      ...this.commonParams(),
     });
   }
 
   async onSearch(params: AdcioAnalyticsOnSearchParams) {
-    await new EventsApi(this.apiConfig).eventsControllerOnSearch({
+    await new LogsApi(this.apiConfig).logsControllerOnSearch({
       ...params,
-      ...this.adcioCore.getSessionDto(),
+      ...this.commonParams(),
     });
   }
 }

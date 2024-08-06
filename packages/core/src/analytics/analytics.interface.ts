@@ -15,7 +15,12 @@ export interface AdcioAnalyticsParams {
 
 type OmitSessionFields<T> = Omit<
   T,
-  "storeId" | "sessionId" | "deviceId" | "customerId"
+  | "storeId"
+  | "sessionId"
+  | "deviceId"
+  | "customerId"
+  | "sdkVersion"
+  | "userAgent"
 >;
 
 type OmitSuggestionFields<T> = Omit<T, "requestId" | "adsetId">;

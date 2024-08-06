@@ -6,6 +6,7 @@ import {
   AdcioAnalyticsOnPurchaseParams,
   AdcioAnalyticsOnImpressionParams,
 } from "./analytics";
+import { AdcioAnalyticsOnSearchParams } from "./analytics/analytics.interface";
 import {
   AdcioPlacementFetchPlacementsParams,
   AdcioPlacementCreateRecommendationProductsParams,
@@ -54,6 +55,8 @@ export type AdcioOnClickParams = AdcioAnalyticsOnClickParams;
 export type AdcioOnAddToCartParams = AdcioAnalyticsOnAddToCartParams;
 
 export type AdcioOnPurchaseParams = AdcioAnalyticsOnPurchaseParams;
+
+export type AdcioOnSearchParams = AdcioAnalyticsOnSearchParams;
 
 export type AdcioObserveImpressionParams = {
   element: Element;
