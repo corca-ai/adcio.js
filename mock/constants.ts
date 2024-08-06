@@ -27,6 +27,8 @@ export const impressionField: ReceiverAPIField<TrackImpressionRequestDto> = [
   { name: "storeId", isRequired: true },
   { name: "requestId", isRequired: true },
   { name: "adsetId", isRequired: true },
+  { name: "sdkVersion", isRequired: true },
+  { name: "userAgent", isRequired: false },
 ];
 
 export const clickField: ReceiverAPIField<TrackClickRequestDto> = [
@@ -36,6 +38,8 @@ export const clickField: ReceiverAPIField<TrackClickRequestDto> = [
   { name: "storeId", isRequired: true },
   { name: "requestId", isRequired: true },
   { name: "adsetId", isRequired: true },
+  { name: "sdkVersion", isRequired: true },
+  { name: "userAgent", isRequired: false },
 ];
 
 export const viewField: ReceiverAPIField<TrackPageViewRequestDto> = [
@@ -45,6 +49,8 @@ export const viewField: ReceiverAPIField<TrackPageViewRequestDto> = [
   { name: "storeId", isRequired: true },
   { name: "productIdOnStore", isRequired: false },
   { name: "categoryIdOnStore", isRequired: false },
+  { name: "sdkVersion", isRequired: true },
+  { name: "userAgent", isRequired: false },
 ];
 
 export const addToCartField: ReceiverAPIField<TrackAddToCartRequestDto> = [
@@ -54,6 +60,8 @@ export const addToCartField: ReceiverAPIField<TrackAddToCartRequestDto> = [
   { name: "cartId", isRequired: false },
   { name: "storeId", isRequired: true },
   { name: "productIdOnStore", isRequired: true },
+  { name: "sdkVersion", isRequired: true },
+  { name: "userAgent", isRequired: false },
 ];
 
 export const purchaseField: ReceiverAPIField<TrackPurchaseRequestDto> = [
@@ -65,4 +73,6 @@ export const purchaseField: ReceiverAPIField<TrackPurchaseRequestDto> = [
   { name: "productIdOnStore", isRequired: true },
   { name: "quantity", isRequired: false },
   { name: "amount", isRequired: true },
+  { name: "sdkVersion", isRequired: true },
+  { name: "userAgent", isRequired: false },
 ];
