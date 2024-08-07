@@ -41,7 +41,10 @@ describe("test SimpleGridRenderer", () => {
       return;
     }
 
-    const element = new renderers.SimpleGridRenderer().render(recommendation);
+    const element = new renderers.SimpleGridRenderer().render(
+      recommendation,
+      adcio,
+    );
     expect(element).toBeDefined();
   });
 });
