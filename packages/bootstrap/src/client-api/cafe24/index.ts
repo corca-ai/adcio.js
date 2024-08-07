@@ -125,11 +125,13 @@ export class Cafe24API implements ClientAPI {
     });
   }
 
-  getSearchQuery() {
+  getSearch() {
     const query = getQuery("keyword");
     if (!query) {
       return null;
     }
-    return query;
+    const found = !!document.querySelector(".xans-search-result");
+
+    return { query, found };
   }
 }

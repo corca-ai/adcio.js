@@ -181,11 +181,11 @@ export class AdcioBootstrap {
   }
 
   private async handleSearch(): Promise<void> {
-    const query = await this.clientApi.getSearchQuery();
-    if (!query) {
+    const search = await this.clientApi.getSearch();
+    if (!search) {
       return;
     }
 
-    await this.adcioInstance.onSearch({ query });
+    await this.adcioInstance.onSearch(search);
   }
 }
