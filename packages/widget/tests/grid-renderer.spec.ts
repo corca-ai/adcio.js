@@ -12,6 +12,15 @@ import { renderers } from "widget/src";
 import { SuggestionTestId } from "../../../mock/constants";
 import { server } from "../../../mock/node";
 
+const IntersectionObserverMock = vi.fn(() => ({
+  disconnect: vi.fn(),
+  observe: vi.fn(),
+  takeRecords: vi.fn(),
+  unobserve: vi.fn(),
+}));
+
+vi.stubGlobal("IntersectionObserver", IntersectionObserverMock);
+
 beforeAll(() => {
   server.listen();
 });
