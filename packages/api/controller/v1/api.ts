@@ -26,129 +26,6 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 /**
  * 
  * @export
- * @interface AdGroup
- */
-export interface AdGroup {
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'title': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'type': AdGroupTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'placementId': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof AdGroup
-     */
-    'maxBudgetPerDay': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AdGroup
-     */
-    'totalBudgetInPeriod': number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'budgetType': AdGroupBudgetTypeEnum;
-    /**
-     * 
-     * @type {number}
-     * @memberof AdGroup
-     */
-    'dailyUsedBudget': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AdGroup
-     */
-    'totalUsedBudget': number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof AdGroup
-     */
-    'activated': boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'startsAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'endsAt': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'sellerId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'campaignId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'updatedAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdGroup
-     */
-    'deletedAt': string | null;
-}
-
-export const AdGroupTypeEnum = {
-    Grid: 'GRID'
-} as const;
-
-export type AdGroupTypeEnum = typeof AdGroupTypeEnum[keyof typeof AdGroupTypeEnum];
-export const AdGroupBudgetTypeEnum = {
-    DailyBudget: 'DAILY_BUDGET',
-    TotalBudgetInPeriod: 'TOTAL_BUDGET_IN_PERIOD',
-    MaxBudgetPerDay: 'MAX_BUDGET_PER_DAY'
-} as const;
-
-export type AdGroupBudgetTypeEnum = typeof AdGroupBudgetTypeEnum[keyof typeof AdGroupBudgetTypeEnum];
-
-/**
- * 
- * @export
  * @interface AdGroupTargetKey
  */
 export interface AdGroupTargetKey {
@@ -394,6 +271,12 @@ export interface AdGroupWithSellerAndCampaign {
      * @type {string}
      * @memberof AdGroupWithSellerAndCampaign
      */
+    'storeId': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
     'sellerId': string;
     /**
      * 
@@ -401,6 +284,12 @@ export interface AdGroupWithSellerAndCampaign {
      * @memberof AdGroupWithSellerAndCampaign
      */
     'campaignId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'latestReviewStatus': AdGroupWithSellerAndCampaignLatestReviewStatusEnum;
     /**
      * 
      * @type {string}
@@ -433,6 +322,13 @@ export const AdGroupWithSellerAndCampaignBudgetTypeEnum = {
 } as const;
 
 export type AdGroupWithSellerAndCampaignBudgetTypeEnum = typeof AdGroupWithSellerAndCampaignBudgetTypeEnum[keyof typeof AdGroupWithSellerAndCampaignBudgetTypeEnum];
+export const AdGroupWithSellerAndCampaignLatestReviewStatusEnum = {
+    Pending: 'PENDING',
+    Approved: 'APPROVED',
+    Rejected: 'REJECTED'
+} as const;
+
+export type AdGroupWithSellerAndCampaignLatestReviewStatusEnum = typeof AdGroupWithSellerAndCampaignLatestReviewStatusEnum[keyof typeof AdGroupWithSellerAndCampaignLatestReviewStatusEnum];
 
 /**
  * 
@@ -979,22 +875,10 @@ export interface Campaign {
     'title': string;
     /**
      * 
-     * @type {Client}
-     * @memberof Campaign
-     */
-    'client': Client;
-    /**
-     * 
      * @type {string}
      * @memberof Campaign
      */
     'clientId': string;
-    /**
-     * 
-     * @type {Array<AdGroup>}
-     * @memberof Campaign
-     */
-    'adGroups': Array<AdGroup>;
     /**
      * 
      * @type {number}

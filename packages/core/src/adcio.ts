@@ -16,6 +16,7 @@ import {
   AdcioOnImpressionParams,
   AdcioOnPageViewParams,
   AdcioOnPurchaseParams,
+  AdcioOnSearchParams,
   AdcioParams,
   AdcioSearchParams,
   AdcioSearchResponse,
@@ -103,6 +104,10 @@ export class Adcio {
 
   public onPurchase(params: AdcioOnPurchaseParams) {
     return this.adcioAnalytics.onPurchase(params);
+  }
+
+  public onSearch(params: AdcioOnSearchParams) {
+    return this.adcioAnalytics.onSearch(params);
   }
 
   // AdcioImpressionObserver

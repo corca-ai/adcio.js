@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@adcio.js/agent": "workspace:*",
     "@adcio.js/core": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

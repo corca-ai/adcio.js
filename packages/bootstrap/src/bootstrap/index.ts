@@ -78,6 +78,7 @@ export class AdcioBootstrap {
       this.handleView(),
       this.handleCarts(),
       this.handleOrder(),
+      this.handleSearch(),
     ]);
   }
 
@@ -177,5 +178,14 @@ export class AdcioBootstrap {
         }),
       ),
     );
+  }
+
+  private async handleSearch(): Promise<void> {
+    const search = await this.clientApi.getSearch();
+    if (!search) {
+      return;
+    }
+
+    await this.adcioInstance.onSearch(search);
   }
 }

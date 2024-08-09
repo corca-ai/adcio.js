@@ -29,6 +29,11 @@ export interface Category {
   idOnStore: string;
 }
 
+export interface Search {
+  query: string;
+  found?: boolean;
+}
+
 type Nullable<T> = T | null;
 type Awaitable<T> = Promise<T> | T;
 type NullableAwaitable<T> = Awaitable<Nullable<T>>;
@@ -42,4 +47,5 @@ export interface ClientAPI {
   getCategory(): NullableAwaitable<Category>;
   getOrder(): NullableAwaitable<Order>;
   getCarts(): NullableAwaitable<Cart[]>;
+  getSearch(): NullableAwaitable<Search>;
 }

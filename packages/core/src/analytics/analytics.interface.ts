@@ -4,6 +4,7 @@ import {
   TrackImpressionRequestDto,
   TrackPageViewRequestDto,
   TrackPurchaseRequestDto,
+  TrackSearchRequestDto,
 } from "@adcio.js/api/receiver/v1";
 import { AdcioCore } from "../core";
 
@@ -14,7 +15,12 @@ export interface AdcioAnalyticsParams {
 
 type OmitSessionFields<T> = Omit<
   T,
-  "storeId" | "sessionId" | "deviceId" | "customerId"
+  | "storeId"
+  | "sessionId"
+  | "deviceId"
+  | "customerId"
+  | "sdkVersion"
+  | "userAgent"
 >;
 
 type OmitSuggestionFields<T> = Omit<T, "requestId" | "adsetId">;
@@ -34,4 +40,8 @@ export type AdcioAnalyticsOnAddToCartParams = OmitSuggestionFields<
 
 export type AdcioAnalyticsOnPurchaseParams = OmitSuggestionFields<
   OmitSessionFields<TrackPurchaseRequestDto>
+>;
+
+export type AdcioAnalyticsOnSearchParams = OmitSuggestionFields<
+  OmitSessionFields<TrackSearchRequestDto>
 >;
