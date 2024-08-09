@@ -81,9 +81,6 @@ importers:
 
   demo/react:
     dependencies:
-      '@adcio.js/agent':
-        specifier: workspace:*
-        version: link:../../packages/agent
       '@adcio.js/core':
         specifier: workspace:*
         version: file:packages/core
