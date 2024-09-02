@@ -133,7 +133,8 @@ export class Cafe24API implements ClientAPI {
       return null;
     }
     const found = !!document.querySelector(".xans-search-result");
+    const pathname = new URL(window.location.href).pathname;
 
-    return { query, found };
+    return { query, found, pathname };
   }
 }
