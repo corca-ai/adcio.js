@@ -8,12 +8,14 @@ const CORCA_CAFE24_API_VERSION = "2023-06-01";
 export class Cafe24API implements ClientAPI {
   private authorized: boolean;
   private api: ICAFE24API;
-  private data: ICAFE24;
 
   constructor() {
     this.api = (window as any).CAFE24API;
-    this.data = (window as any).CAFE24;
     this.authorized = false;
+  }
+
+  get data(): ICAFE24 {
+    return (window as any).CAFE24;
   }
 
   init() {

@@ -27,7 +27,7 @@ export class AdcioBootstrap {
     }
     this.clientId = clientId;
 
-    const clientApi = createClientAPI();
+    const clientApi = createClientAPI(config.clientApi);
     if (!clientApi) {
       throw new AdcioError("Client API is not found");
     }
