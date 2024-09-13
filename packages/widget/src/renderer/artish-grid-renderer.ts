@@ -15,8 +15,15 @@ export class ArtishGridRenderer extends GridRenderer {
     const artist = (
       product.additionalInformation as { key: string; value: string }[]
     )?.find((i) => i.key === "custom_option8")?.value;
+    const discountRate = Math.round(
+      (((product as any).detail.data.retail_price - product.price) /
+        (product as any).detail.data.retail_price) *
+        100,
+    );
     return {
       ...super.refineProduct(product),
+      discountRate:
+        isFinite(discountRate) && discountRate > 0 ? discountRate : null,
       image,
       custom: { artist },
     };
