@@ -1,0 +1,127 @@
+<li id="anchorBoxId_${idOnStore}" class="swiper-slide xans-record- checked">
+  <div class="thumbnail">
+    <div class="button eff">
+      <span class="wtooltip" data-title="간단보기">
+        <img
+          src="/web/upload/icon_201804292347389100.png"
+          onclick="zoom('${idOnStore}', '1', '3','', '');"
+          style="cursor: pointer"
+          alt="상품 큰 이미지 보기"
+        />
+      </span>
+      <span class="wtooltip" data-title="관심상품">
+        <img
+          src="/web/upload/icon_201804292347530900.png"
+          class="icon_img ec-product-listwishicon"
+          alt="관심상품 등록 전"
+          productno="${idOnStore}"
+          categoryno="1"
+          icon_status="off"
+          login_status="T"
+          individual-set="F"
+        />
+      </span>
+      <span class="wtooltip" data-title="장바구니">
+        <img
+          src="/web/upload/icon_201804292347427700.png"
+          onclick="CAPP_SHOP_NEW_PRODUCT_OPTIONSELECT.selectOptionCommon(${idOnStore},  1, 'basket', '')"
+          alt="장바구니 담기"
+          class="ec-admin-icon cart"
+        />
+      </span>
+      <span class="wtooltip" data-title="옵션보기">
+        <a onclick="optionPreview(this,'listmain-2',${idOnStore},'T')">
+          <img
+            src="/web/upload/icon_201804292347487000.png"
+            id="btn_preview_listmain-25874"
+            class="option_preview"
+            alt=""
+          />
+        </a>
+      </span>
+    </div>
+    <div class="likeButton eff likePrd likePrd_${idOnStore}">
+      <button type="button">
+        <img
+          src="/web/upload/icon_201804292348025600.png"
+          class="likePrdIcon"
+          product_no="${idOnStore}"
+          category_no="1"
+          icon_status="off"
+          alt="좋아요 등록 전"
+        />
+        <strong>
+          <span class="likePrdCount likePrdCount_${idOnStore}"></span>
+        </strong>
+      </button>
+    </div>
+    <a
+      href="/product/detail.html?product_no=${idOnStore}&amp;cate_no=1&amp;display_group=3"
+      name="anchorBoxName_${idOnStore}"
+      class="_evt_tracker0"
+    >
+      <img
+        src="${image}"
+        id="eListPrdImage${idOnStore}_3"
+        alt="${name}"
+        class="thumb"
+      />
+    </a>
+    <span
+      class="xans-element- xans-product xans-product-imagestyle-2 xans-product-imagestyle xans-product-2 xans-record-"
+    >
+      <span
+        class="prdIcon ec-product-bgRB"
+        style="background-image: url(&quot;${}&quot;)"
+      ></span>
+    </span>
+  </div>
+  <div
+    class="description"
+    ec-data-custom="${price}원"
+    ec-data-price="${detail.data.retail_price != 0.00 ? price : }"
+  >
+    <div class="simple_desc"></div>
+    <span
+      class="snap_review_count"
+      snap_item_id="${idOnStore}"
+      style="
+        position: absolute;
+        top: 15px;
+        right: 6.3px;
+        background: rgb(0, 0, 0);
+        width: 40px;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        display: block;
+      "
+    ></span>
+    <ul class="spec">
+      <li class="name">
+        <a
+          href="/product/풍기인견100-로즈맘제작-한정수량예지풍기인견원피스/${idOnStore}/category/1/display/3/"
+          class="checkTop _evt_tracker0"
+          ><span style="font-size: 12px; color: #555555">${name}</span></a
+        >
+      </li>
+      <li
+        class="${detail.data.retail_price != 0.00 ? price : displaynone} strike"
+        name="판매가"
+      >
+        <span class="">${detail.data.retail_price}원</span
+        ><span class="displaynone"></span>
+      </li>
+      <li class="price priceWrap" name="할인판매가">
+        <span class="ec-sale-rate"> ${discountRate}%</span>${price}원
+      </li>
+    </ul>
+    <div class="icon">
+      <div class="promotion">
+        <img
+          src="/web/upload/benefit/benefit_shop1_98080763ec86d6eca370.22484746.gif"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</li>
