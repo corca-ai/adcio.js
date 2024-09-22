@@ -25,4 +25,19 @@ export class RosemomGridRenderer extends GridRenderer {
       custom: {},
     };
   }
+
+  postRender(element: Element): Element {
+    new (window as any).Swiper("div#adcio-rosemom-main-grid", {
+      slidesPerView: 4,
+      slidesPerGroup: 4,
+      grid: {
+        rows: 2,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+    return element;
+  }
 }

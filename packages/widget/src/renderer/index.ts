@@ -13,7 +13,7 @@ export const getRenderer = (id: string) => {
       return new ArtishGridRenderer();
     case "390e516a-5f97-4c93-ba50-daca4b1222b9":
       return new ArtishMoGridRenderer();
-    case "61a5bb9a-b053-4802-8bee-6b88b51b3f1d":
+    case "4585084e-4098-4695-9ee0-c0b39018e2aa":
       return new RosemomGridRenderer();
     default:
       throw new Error(`Renderer with id ${id} not found`);
