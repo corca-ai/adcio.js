@@ -76,10 +76,12 @@ export class AdcioPlacementBootstrap {
           `widget value not found for placement ${placementId}`,
         );
       }
-      const element = renderers
-        .getRenderer(recommendation.placement.widgetValue.widgetId)
-        .render(recommendation, this.adcioInstance);
-      container.appendChild(element);
+      const renderer = renderers.getRenderer(
+        recommendation.placement.widgetValue.widgetId,
+      );
+      const element = renderer.render(recommendation, this.adcioInstance);
+      container.replaceWith(element);
+      renderer.postRender(element);
     } else {
       throw new AdcioError(
         `bootstrap does not support develop environment for placement ${placementId}: ${recommendation.placement.developEnvironment}`,
