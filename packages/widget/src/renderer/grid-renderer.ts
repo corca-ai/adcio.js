@@ -57,6 +57,10 @@ export abstract class GridRenderer extends AbstractRenderer {
     });
   }
 
+  postRender(element: Element): Element {
+    return element;
+  }
+
   render(
     recommendation: ProductSuggestionResponseDto,
     adcioInstance: any,

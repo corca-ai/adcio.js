@@ -1,0 +1,68 @@
+<li
+  id="anchorBoxId_${idOnStore}"
+  class="swiper-slide xans-record-"
+  data-adcio-product-id="${id}"
+>
+  <div class="thumbnail">
+    <a
+      href="/product/detail.html?product_no=${idOnStore}&amp;cate_no=1&amp;display_group=35"
+      class="checkTop"
+    >
+      <img src="${image}" id="" alt="${name}" />
+      <span
+        class="xans-element- xans-product xans-product-imagestyle-34 xans-product-imagestyle xans-product-34 xans-record-"
+      >
+        <!-- <span
+          class="prdIcon ec-product-bgLB"
+          style="
+            background-image: url(&quot;/web/upload/image_custom_317163670914827.png&quot;);
+          "
+        ></span> -->
+      </span>
+    </a>
+    <div class="icon">
+      <!-- <div class="${detail.data.benefits.0 ? promotion : displaynone}">
+        <img src="${detail.data.benefits.0.icon_url}" alt="" />
+      </div> -->
+    </div>
+  </div>
+  <div
+    class="description"
+    ec-data-custom="${price}원"
+    ec-data-price="${detail.data.retail_price != 0.00 ? price : }"
+  >
+    <ul class="spec">
+      <li class="name">
+        <a
+          href="/product/detail.html?product_no=${idOnStore}&amp;cate_no=1&amp;display_group=35"
+          class="checkTop"
+        >
+          ${name}
+        </a>
+      </li>
+      <li
+        class="${discountRate ? price : displaynone} strike mPriceStrike"
+        name="판매가"
+      >
+        <span class="">${price}원</span>
+        <span class="displaynone"></span>
+      </li>
+      <li class="price priceWrap sale" name="할인판매가">
+        <span class="${discountRate ? ec-sale-rate : displaynone}">
+          ${discountRate}%</span
+        >
+        ${discountPrice ? ${discountPrice} : ${price}}원
+      </li>
+    </ul>
+    <div class="review">
+      <span
+        class="snap_review_count noset"
+        snap_item_id="${idOnStore}"
+        data-product-no="${idOnStore}"
+      ></span>
+    </div>
+    <div class="simple_desc">
+      <!-- ${summary} -->
+    </div>
+  </div>
+</li>
