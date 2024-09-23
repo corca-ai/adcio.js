@@ -1,6 +1,7 @@
 import { ArtishGridRenderer } from "./artish-grid-renderer";
 import { ArtishMoGridRenderer } from "./artish-mo-grid-renderer";
 import { RosemomGridRenderer } from "./rosemom-grid-renderer";
+import { RosemomMoGridRenderer } from "./rosemom-mo-grid-renderer";
 import { SimpleGridRenderer } from "./simple-grid-renderer";
 
 export { SimpleGridRenderer, ArtishGridRenderer, RosemomGridRenderer };
@@ -15,6 +16,8 @@ export const getRenderer = (id: string) => {
       return new ArtishMoGridRenderer();
     case "4585084e-4098-4695-9ee0-c0b39018e2aa":
       return new RosemomGridRenderer();
+    case "cfd453db-0de7-40c8-a274-a08706d8e4e7":
+      return new RosemomMoGridRenderer();
     default:
       throw new Error(`Renderer with id ${id} not found`);
   }

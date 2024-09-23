@@ -1,9 +1,9 @@
 import { Product } from "@adcio.js/api/controller/v1";
 import { GridRenderer } from "./grid-renderer";
-import item from "../assets/templates/rosemom-grid/item.html?raw";
-import list from "../assets/templates/rosemom-grid/list.html?raw";
+import item from "../assets/templates/rosemom-grid/item-mo.html?raw";
+import list from "../assets/templates/rosemom-grid/list-mo.html?raw";
 
-export class RosemomGridRenderer extends GridRenderer {
+export class RosemomMoGridRenderer extends GridRenderer {
   templateItem = item;
   templateList = list;
 
@@ -39,15 +39,18 @@ export class RosemomGridRenderer extends GridRenderer {
 
   postRender(element: Element): Element {
     new (window as any).Swiper(element.querySelector(".swiper-container"), {
-      slidesPerView: 4,
-      slidesPerGroup: 4,
+      slidesPerView: 2,
+      spaceBetween: 10,
       grid: {
         fill: "row",
         rows: 2,
       },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      freeMode: {
+        enabled: true,
       },
     });
     return element;
