@@ -37,7 +37,7 @@
         <a onclick="optionPreview(this,'listmain-2',${idOnStore},'T')">
           <img
             src="/web/upload/icon_201804292347487000.png"
-            id="btn_preview_listmain-25874"
+            id="btn_preview_listmain-2${idOnStore}"
             class="option_preview"
             alt=""
           />
@@ -55,7 +55,7 @@
           alt="좋아요 등록 전"
         />
         <strong>
-          <span class="likePrdCount likePrdCount_${idOnStore}"></span>
+          <!-- TODO <span class="likePrdCount likePrdCount_${idOnStore}">${likeCount}</span> -->
         </strong>
       </button>
     </div>
@@ -85,8 +85,8 @@
     ec-data-custom="${price}원"
     ec-data-price="${detail.data.retail_price != 0.00 ? price : }"
   >
-    <div class="simple_desc"></div>
-    <span
+    <div class="simple_desc">${summary}</div>
+    <!-- <span
       class="snap_review_count"
       snap_item_id="${idOnStore}"
       style="
@@ -99,7 +99,7 @@
         text-align: center;
         display: block;
       "
-    ></span>
+    ></span> -->
     <ul class="spec">
       <li class="name">
         <a
@@ -109,23 +109,18 @@
           <span style="font-size: 12px; color: #555555">${name}</span>
         </a>
       </li>
-      <li
-        class="${detail.data.retail_price != 0.00 ? price : displaynone} strike"
-        name="판매가"
-      >
-        <span class="">${detail.data.retail_price}원</span
-        ><span class="displaynone"></span>
+      <li class="${discountRate ? price : displaynone} strike" name="판매가">
+        <span class="">${price}원</span><span class="displaynone"></span>
       </li>
       <li class="price priceWrap" name="할인판매가">
-        <span class="ec-sale-rate"> ${discountRate}%</span>${price}원
+        <span class="${discountRate ? ec-sale-rate : displaynone}">
+          ${discountRate}% </span
+        >${discountPrice ? ${discountPrice} : ${price}}원
       </li>
     </ul>
     <div class="icon">
-      <div class="promotion">
-        <img
-          src="/web/upload/benefit/benefit_shop1_98080763ec86d6eca370.22484746.gif"
-          alt=""
-        />
+      <div class="${detail.data.benefits.0 ? promotion : displaynone}">
+        <img src="${detail.data.benefits.0.icon_url}" alt="" />
       </div>
     </div>
   </div>

@@ -12,22 +12,33 @@ export class RosemomGridRenderer extends GridRenderer {
       product.additionalImages?.find((i) =>
         i.includes("/web/product/medium"),
       ) || product.image;
-    const discountRate = Math.round(
-      (((product as any).detail.data.retail_price - product.price) /
-        (product as any).detail.data.retail_price) *
-        100,
+
+    const retailPrice =
+      (product as any).detail.data.retail_price !== "0.00"
+        ? (product as any).detail.data.retail_price
+        : undefined;
+
+    product.price = Math.max(
+      product.discountPrice ?? product.price,
+      product.price,
+      retailPrice ?? product.price,
     );
+
+    product.discountPrice = Math.min(
+      product.discountPrice ?? product.price,
+      product.price,
+      retailPrice ?? product.price,
+    );
+
     return {
       ...super.refineProduct(product),
-      discountRate:
-        isFinite(discountRate) && discountRate > 0 ? discountRate : null,
       image,
       custom: {},
     };
   }
 
   postRender(element: Element): Element {
-    new (window as any).Swiper("div#adcio-rosemom-main-grid", {
+    new (window as any).Swiper(element.querySelector(".swiper-container"), {
       slidesPerView: 4,
       slidesPerGroup: 4,
       grid: {
