@@ -37,17 +37,28 @@ export class RosemomGridRenderer extends GridRenderer {
     };
   }
 
-  postRender(element: Element): Element {
+  postRender(element: Element, widgetValue: any): Element {
+    const slidesPerView = widgetValue.widget.tableSize.columns;
+    const rows = widgetValue.widget.tableSize.rows;
+    const freeModeEnabled = widgetValue.widget.freeMode.enabled;
+
     new (window as any).Swiper(element.querySelector(".swiper-container"), {
-      slidesPerView: 4,
-      slidesPerGroup: 4,
+      slidesPerView,
+      slidesPerGroup: freeModeEnabled ? undefined : slidesPerView,
+      spaceBetween: 10,
       grid: {
         fill: "row",
-        rows: 2,
+        rows,
       },
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      freeMode: {
+        enabled: freeModeEnabled,
       },
     });
     return element;

@@ -57,7 +57,7 @@ export abstract class GridRenderer extends AbstractRenderer {
     });
   }
 
-  postRender(element: Element): Element {
+  postRender(element: Element, widgetValue: any): Element {
     return element;
   }
 
