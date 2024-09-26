@@ -38,6 +38,10 @@ export class RosemomGridRenderer extends GridRenderer {
   }
 
   postRender(element: Element, widgetValue: any): Element {
+    if (!widgetValue.widget.swiper.enabled) {
+      return element;
+    }
+
     const slidesPerView = widgetValue.widget.tableSize.columns;
     const rows = widgetValue.widget.tableSize.rows;
     const freeModeEnabled = widgetValue.widget.freeMode.enabled;

@@ -1,11 +1,19 @@
 <div class="section section01 wrapper">
+  <style>
+    .corca-rosemom-grid .grid6 > li {
+      width: 16%;
+    }
+    .corca-rosemom-grid .fixed-grid .thumbnail {
+      height: 100%;
+    }
+  </style>
   <h2 class="main_title">
     ${widgetValue.title.title.text} <i class="xi-angle-right"></i>
   </h2>
   <div
     class="xans-element- xans-product xans-product-listmain-2 xans-product-listmain xans-product-2 wixmi-product swiper-container corca-rosemom-grid"
   >
-    <ul class="prdList grid4 swiper-wrapper">
+    <ul class="prdList swiper-wrapper ${widgetValue.widget.swiper.enabled ? grid4 : fixed-grid grid${widgetValue.widget.tableSize.columns}}">
       ${items}
     </ul>
   </div>
