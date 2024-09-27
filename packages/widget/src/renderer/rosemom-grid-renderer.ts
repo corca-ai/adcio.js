@@ -46,20 +46,24 @@ export class RosemomGridRenderer extends GridRenderer {
     const rows = widgetValue.widget.tableSize.rows;
     const freeModeEnabled = widgetValue.widget.freeMode.enabled;
 
-    new (window as any).Swiper(".corca-rosemom-grid", {
+    new (window as any).Swiper(element.querySelector(".swiper-container"), {
       slidesPerView,
       slidesPerGroup: freeModeEnabled ? 1 : slidesPerView,
       spaceBetween: 10,
-      grid: {
-        fill: "row",
-        rows,
-      },
+      grid:
+        rows > 1
+          ? {
+              fill: "row",
+              rows,
+            }
+          : undefined,
+      loop: false,
       navigation: {
-        nextEl: ".corca-rosemom-grid.swiper-button-next",
-        prevEl: ".corca-rosemom-grid.swiper-button-prev",
+        nextEl: element.querySelector(".swiper-button-next"),
+        prevEl: element.querySelector(".swiper-button-prev"),
       },
       pagination: {
-        el: ".corca-rosemom-grid.swiper-pagination",
+        el: element.querySelector(".swiper-pagination"),
       },
       freeMode: {
         enabled: freeModeEnabled,

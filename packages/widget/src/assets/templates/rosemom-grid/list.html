@@ -1,5 +1,34 @@
-<div class="section section01 wrapper">
+<div class="section section01 wrapper corca-rosemom-grid-wrapper">
   <style>
+    .corca-rosemom-grid-wrapper {
+      position: relative;
+    }
+    .corca-rosemom-grid-wrapper .swiper-container {
+      overflow: hidden;
+    }
+    .corca-rosemom-grid-wrapper .swiper-button-prev,
+    .corca-rosemom-grid-wrapper .swiper-button-next {
+      display: ${widgetValue.widget.swiper.enabled ? block : none};
+      width: 140px;
+      height: 140px;
+      margin-top: -70px;
+    }
+    .corca-rosemom-grid-wrapper .swiper-button-next::after,
+    .corca-rosemom-grid-wrapper .swiper-button-prev::after {
+      display: none;
+    }
+    .corca-rosemom-grid-wrapper .swiper-button-prev {
+      left: -100px;
+      background: url(/SkinImg/assets/images/main/btn_prev_new.png) no-repeat 0
+        0;
+      background-size: 140px;
+    }
+    .corca-rosemom-grid-wrapper .swiper-button-next {
+      right: -100px;
+      background: url(/SkinImg/assets/images/main/btn_next_new.png) no-repeat 0
+        0;
+      background-size: 140px;
+    }
     .corca-rosemom-grid .grid6 > li {
       width: 16%;
     }
@@ -13,10 +42,12 @@
   <div
     class="xans-element- xans-product xans-product-listmain-2 xans-product-listmain xans-product-2 wixmi-product swiper-container corca-rosemom-grid"
   >
-    <ul class="prdList swiper-wrapper ${widgetValue.widget.swiper.enabled ? grid4 : fixed-grid grid${widgetValue.widget.tableSize.columns}}">
+    <ul
+      class="prdList swiper-wrapper ${widgetValue.widget.swiper.enabled ? grid4 : fixed-grid grid${widgetValue.widget.tableSize.columns}}"
+    >
       ${items}
     </ul>
   </div>
-  <div class="corca-rosemom-grid swiper-button-prev"></div>
-  <div class="corca-rosemom-grid swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
 </div>
