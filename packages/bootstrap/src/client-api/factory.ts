@@ -6,6 +6,8 @@ export const createClientAPI = (clientApi?: string): ClientAPI | null => {
     switch (clientApi) {
       case "cafe24":
         return new Cafe24API();
+      case "cdp-cafe24":
+        return new Cafe24API();
       default:
         return null;
     }
