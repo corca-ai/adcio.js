@@ -1,10 +1,27 @@
-<div class="product_wrap">
-  <div
-    class="xans-element- xans-product xans-product-listmain-2 xans-product-listmain xans-product-2 ec-base-product main_best_item_swiper typeThumb swiper-container"
+<div class="main_new_item corca-rosemom-grid-wrapper">
+  <h2
+    class="main_title"
+    style="
+      text-align: ${widgetValue.title.title.textAlign};
+      margin-bottom: ${widgetValue.title.title.marginBottom}px;
+    "
   >
-    <ul class="prdList swiper-wrapper">
-      ${items}
-    </ul>
-    <div class="swiper-pagination"></div>
+    ${widgetValue.title.title.text}
+    <a
+      href="${widgetValue.title.showAll.link}"
+      class="${widgetValue.title.showAll.enabled ? more : displaynone}"
+    >
+      전체보기
+    </a>
+  </h2>
+  <div class="product_wrap">
+    <div
+      class="xans-element- xans-product xans-product-listmain-2 xans-product-listmain xans-product-2 ec-base-product main_best_item_swiper typeThumb swiper-container"
+    >
+      <ul class="prdList swiper-wrapper">
+        ${items}
+      </ul>
+      <!-- <div class="swiper-pagination"></div> -->
+    </div>
   </div>
 </div>

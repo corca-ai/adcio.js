@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "color": {
+      "description": "color타입은 #1a3b5f 형식의 string을 가집니다.",
+      "$comment": "color",
+      "type": "string",
+      "pattern": "^#(?:[0-9a-fA-F]{3}){1,2}$",
+      "title": "Color"
+    },
+    "ratio": {
+      "description": "ratio타입은 1:1 형식의 string을 가집니다.",
+      "$comment": "ratio",
+      "type": "string",
+      "pattern": "^[0-9]+:[0-9]+$",
+      "title": "Ratio"
+    },
+    "fontWeightEnum": {
+      "description": "fontWeightEnum타입은 regular, medium, semibold, bold 중 하나의 string을 가집니다.",
+      "$comment": "fontWeightEnum",
+      "type": "number",
+      "oneOf": [
+        { "const": 400, "title": "regular" },
+        { "const": 500, "title": "medium" },
+        { "const": 600, "title": "semibold" },
+        { "const": 700, "title": "bold" }
+      ],
+      "default": 400,
+      "title": "Font Weight"
+    }
+  },
+  "type": "object",
+  "required": ["widget", "title", "product"],
+  "properties": {
+    "widget": {
+      "properties": {
+        "tableSize": {
+          "properties": {
+            "columns": {
+              "default": 4,
+              "title": "Columns",
+              "type": "number"
+            },
+            "rows": {
+              "default": 1,
+              "title": "Rows",
+              "type": "number"
+            }
+          },
+          "required": ["columns", "rows"],
+          "title": "Table Size",
+          "type": "object"
+        },
+        "freeMode": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "title": "Enabled",
+              "type": "boolean"
+            }
+          },
+          "required": ["enabled"],
+          "title": "Free Mode",
+          "type": "object"
+        }
+      },
+      "required": ["tableSize", "freeMode"],
+      "title": "Widget",
+      "type": "object"
+    },
+    "title": {
+      "type": "object",
+      "title": "Title",
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "object",
+          "title": "Title",
+          "required": ["show", "text"],
+          "properties": {
+            "show": { "type": "boolean", "default": true },
+            "text": {
+              "type": "string",
+              "title": "Text",
+              "default": "이런 상품 좋아하실 것 같아요"
+            }
+          }
+        }
+      }
+    }
+  }
+}

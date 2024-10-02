@@ -38,7 +38,23 @@ export const getConfig = (entry: string, emptyOutDir = false): UserConfig => ({
   resolve: {
     preserveSymlinks: true,
   },
-  plugins: [dts(), tsconfigPaths(), banner(sdkBanner)],
+  plugins: [
+    dts(),
+    tsconfigPaths(),
+    banner(sdkBanner),
+    {
+      name: "override-browser",
+      closeBundle: async () => {
+        fs.copyFileSync(
+          resolve(__dirname, "./dist/index.iife.js"),
+          resolve(
+            __dirname,
+            "../../overrides/cdn.adcio.ai/sdk/v1/bootstrap.js",
+          ),
+        );
+      },
+    },
+  ],
 });
 
 export default defineConfig(getConfig("index", true));
