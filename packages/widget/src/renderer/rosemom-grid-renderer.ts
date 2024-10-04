@@ -18,17 +18,11 @@ export class RosemomGridRenderer extends GridRenderer {
         ? (product as any).detail.data.retail_price
         : undefined;
 
-    product.price = Math.max(
-      product.discountPrice ?? product.price,
-      product.price,
-      retailPrice ?? product.price,
-    );
+    // product.price = Math.max(product.price, retailPrice ?? product.price);
 
-    product.discountPrice = Math.min(
-      product.discountPrice ?? product.price,
-      product.price,
-      retailPrice ?? product.price,
-    );
+    // product.discountPrice =
+    //   product.discountPrice ??
+    //   Math.min(product.price, retailPrice ?? product.price);
 
     return {
       ...super.refineProduct(product),
