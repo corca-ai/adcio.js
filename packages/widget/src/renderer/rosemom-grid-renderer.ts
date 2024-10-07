@@ -32,6 +32,14 @@ export class RosemomGridRenderer extends GridRenderer {
   }
 
   postRender(element: Element, widgetValue: any): Element {
+    if (widgetValue.product?.review?.enabled) {
+      try {
+        (window as any).snapinstanceindependent.init().then();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
     if (!widgetValue.widget.swiper.enabled) {
       return element;
     }

@@ -77,12 +77,13 @@
     ec-data-custom="${price}원"
     ec-data-price="${detail.data.retail_price != 0.00 ? price : }"
   >
-    <div class="simple_desc">
-      <!-- ${summary} -->
+    <div class="${detail.data.simple_description ? simple_desc : displaynone}">
+      ${detail.data.simple_description}
     </div>
-    <!-- <span
-      class="snap_review_count"
+    <span
+      class="snap_review_count noset"
       snap_item_id="${idOnStore}"
+      data-product-no="${idOnStore}"
       style="
         position: absolute;
         top: 15px;
@@ -91,9 +92,9 @@
         width: 40px;
         color: rgb(255, 255, 255);
         text-align: center;
-        display: block;
       "
-    ></span> -->
+      >0</span
+    >
     <ul class="spec">
       <li class="name">
         <a

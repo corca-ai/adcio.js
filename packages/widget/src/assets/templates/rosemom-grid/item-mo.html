@@ -61,8 +61,8 @@
         data-product-no="${idOnStore}"
       ></span>
     </div>
-    <div class="simple_desc">
-      <!-- ${summary} -->
+    <div class="${detail.data.simple_description ? simple_desc : displaynone}">
+      ${detail.data.simple_description}
     </div>
   </div>
 </li>
