@@ -244,12 +244,6 @@ export interface AdGroupWithSellerAndCampaign {
     'dailyUsedBudget': number;
     /**
      * 
-     * @type {number}
-     * @memberof AdGroupWithSellerAndCampaign
-     */
-    'totalUsedBudget': number;
-    /**
-     * 
      * @type {boolean}
      * @memberof AdGroupWithSellerAndCampaign
      */
@@ -290,6 +284,12 @@ export interface AdGroupWithSellerAndCampaign {
      * @memberof AdGroupWithSellerAndCampaign
      */
     'latestReviewStatus': AdGroupWithSellerAndCampaignLatestReviewStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdGroupWithSellerAndCampaign
+     */
+    'latestReviewId': string | null;
     /**
      * 
      * @type {string}
@@ -607,6 +607,12 @@ export interface BannerSuggestionRequestDto {
      * @memberof BannerSuggestionRequestDto
      */
     'userAgent'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BannerSuggestionRequestDto
+     */
+    'appVersion'?: string;
 }
 /**
  * 
@@ -967,6 +973,18 @@ export interface CategoryWithPath {
 export interface Client {
     /**
      * 
+     * @type {Currency}
+     * @memberof Client
+     */
+    'currency': Currency;
+    /**
+     * 
+     * @type {Timezone}
+     * @memberof Client
+     */
+    'timezone': Timezone;
+    /**
+     * 
      * @type {string}
      * @memberof Client
      */
@@ -977,18 +995,6 @@ export interface Client {
      * @memberof Client
      */
     'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Client
-     */
-    'currency': ClientCurrencyEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof Client
-     */
-    'timezone': ClientTimezoneEnum;
     /**
      * 
      * @type {number}
@@ -1045,25 +1051,6 @@ export interface Client {
     'createdAt': string;
 }
 
-export const ClientCurrencyEnum = {
-    Krw: 'KRW',
-    Usd: 'USD',
-    Vnd: 'VND'
-} as const;
-
-export type ClientCurrencyEnum = typeof ClientCurrencyEnum[keyof typeof ClientCurrencyEnum];
-export const ClientTimezoneEnum = {
-    Kst: 'KST',
-    Ict: 'ICT',
-    Est: 'EST',
-    Cst: 'CST',
-    Mst: 'MST',
-    Pst: 'PST',
-    Akst: 'AKST',
-    Hst: 'HST'
-} as const;
-
-export type ClientTimezoneEnum = typeof ClientTimezoneEnum[keyof typeof ClientTimezoneEnum];
 export const ClientTypeEnum = {
     PlatformAndSeller: 'PLATFORM_AND_SELLER',
     OwnWebsiteAndSeller: 'OWN_WEBSITE_AND_SELLER',
@@ -1682,6 +1669,21 @@ export interface Creative {
      */
     'deletedAt': string | null;
 }
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const Currency = {
+    Krw: 'KRW',
+    Usd: 'USD',
+    Vnd: 'VND'
+} as const;
+
+export type Currency = typeof Currency[keyof typeof Currency];
+
+
 /**
  * 
  * @export
@@ -3439,6 +3441,12 @@ export interface ProductSuggestionRequestDto {
      * @memberof ProductSuggestionRequestDto
      */
     'userAgent'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductSuggestionRequestDto
+     */
+    'appVersion'?: string;
 }
 /**
  * 
@@ -3919,6 +3927,26 @@ export const SuggestionResponsePlacementTypePropertyEnum = {
 } as const;
 
 export type SuggestionResponsePlacementTypePropertyEnum = typeof SuggestionResponsePlacementTypePropertyEnum[keyof typeof SuggestionResponsePlacementTypePropertyEnum];
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const Timezone = {
+    Kst: 'KST',
+    Ict: 'ICT',
+    Est: 'EST',
+    Cst: 'CST',
+    Mst: 'MST',
+    Pst: 'PST',
+    Akst: 'AKST',
+    Hst: 'HST'
+} as const;
+
+export type Timezone = typeof Timezone[keyof typeof Timezone];
+
 
 /**
  * 

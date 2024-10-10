@@ -126,6 +126,12 @@ export interface TrackAddToCartRequestDto {
      * @memberof TrackAddToCartRequestDto
      */
     'userAgent'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackAddToCartRequestDto
+     */
+    'appVersion'?: string;
 }
 /**
  * 
@@ -187,6 +193,12 @@ export interface TrackClickRequestDto {
      * @memberof TrackClickRequestDto
      */
     'userAgent'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackClickRequestDto
+     */
+    'appVersion'?: string;
 }
 /**
  * 
@@ -248,6 +260,12 @@ export interface TrackImpressionRequestDto {
      * @memberof TrackImpressionRequestDto
      */
     'userAgent'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackImpressionRequestDto
+     */
+    'appVersion'?: string;
 }
 /**
  * 
@@ -315,6 +333,12 @@ export interface TrackPageViewRequestDto {
      * @memberof TrackPageViewRequestDto
      */
     'userAgent'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackPageViewRequestDto
+     */
+    'appVersion'?: string;
 }
 /**
  * 
@@ -400,6 +424,12 @@ export interface TrackPurchaseRequestDto {
      * @memberof TrackPurchaseRequestDto
      */
     'userAgent'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackPurchaseRequestDto
+     */
+    'appVersion'?: string;
 }
 /**
  * 
@@ -457,11 +487,29 @@ export interface TrackSearchRequestDto {
      */
     'query': string;
     /**
+     * Whether the search query found any results.
+     * @type {boolean}
+     * @memberof TrackSearchRequestDto
+     */
+    'found'?: boolean;
+    /**
+     * The pathname of the search page.
+     * @type {string}
+     * @memberof TrackSearchRequestDto
+     */
+    'pathname'?: string;
+    /**
      * 
      * @type {string}
      * @memberof TrackSearchRequestDto
      */
     'userAgent'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TrackSearchRequestDto
+     */
+    'appVersion'?: string;
 }
 
 /**
