@@ -78,6 +78,7 @@ export class AdcioBootstrap {
       this.handleView(),
       this.handleCarts(),
       this.handleOrder(),
+      ...(this.isMobile() ? [this.handleSearch()] : []), // TODO tmp
     ]);
   }
 
