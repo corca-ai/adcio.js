@@ -1,6 +1,6 @@
 {
   "name": "@adcio.js/bootstrap",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "Corca <contact@corca.ai>",
   "description": "JavaScript SDK for ADCIO",
   "main": "dist/index.js",
