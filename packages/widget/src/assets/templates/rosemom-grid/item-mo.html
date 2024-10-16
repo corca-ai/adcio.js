@@ -61,7 +61,16 @@
         data-product-no="${idOnStore}"
       ></span>
     </div>
-    <div class="${detail.data.simple_description ? simple_desc : displaynone}">
+    <div
+      class="${detail.data.simple_description ? simple_desc : displaynone}"
+      style="
+        color: #999;
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      "
+    >
       ${detail.data.simple_description}
     </div>
   </div>
